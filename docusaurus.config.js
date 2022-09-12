@@ -43,11 +43,11 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/fluencelabs/docs",
+          editUrl: "https://github.com/fluencelabs/docs/tree/main",
         },
         blog: {
           showReadingTime: true,
-          editUrl: "https://github.com/fluencelabs/docs",
+          editUrl: "https://github.com/fluencelabs/docs/tree/main",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.scss"),
