@@ -1,0 +1,51 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #e41c5c;
+  --ifm-color-primary-dark: #AF1A4E;
+  --ifm-color-primary-darker: #A7194B;
+  --ifm-color-primary-darkest: #901540;
+  --ifm-color-primary-light: #C71E59;
+  --ifm-color-primary-lighter: #D31F5E;
+  --ifm-color-primary-lightest: #DF2A69;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-menu-color: #232529;
+  --ifm-toc-link-color: #232529;
+
+  &[data-theme='dark'] {
+    --ifm-color-primary: #e41c5c;
+    --ifm-color-primary-dark: #BF2450;
+    --ifm-color-primary-darker: #B8224C;
+    --ifm-color-primary-darkest: #9B1D41;
+    --ifm-color-primary-light: #D93664;
+    --ifm-color-primary-lighter: #DB3D6A;
+    --ifm-color-primary-lightest: #E05A80;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+    --ifm-menu-color: #dadde1;
+    --ifm-toc-link-color: #dadde1;
+  }
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #16181c;
+
+  [data-theme='dark'] & {
+    --ifm-footer-background-color: #0a0a0a;
+  }
+}
+
+.shiki {
+  [data-theme="light"] &.min-dark {
+    display: none;
+  }
+  
+  [data-theme="dark"] &.min-light {
+    display: none;
+  }
+}

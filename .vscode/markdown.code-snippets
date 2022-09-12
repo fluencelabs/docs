@@ -1,0 +1,27 @@
+{
+  "Tabs imports": {
+    "prefix": "import-tabs",
+    "body": [
+      "import Tabs from \"@theme/Tabs\";",
+      "import TabItem from \"@theme/TabItem\";"
+    ],
+    "description": "Import tabs"
+  },
+  "Tabs": {
+    "prefix": "tabs",
+    "body": [
+      "<Tabs>",
+      "<TabItem value=\"$1\" label=\"$1\" default>",
+      "",
+      "",
+      "",
+      "</TabItem>",
+      "<TabItem value=\"$2\" label=\"$2\" default>",
+      "",
+      "",
+      "",
+      "</TabItem>",
+      "</Tabs>",
+    ]
+  }
+}
