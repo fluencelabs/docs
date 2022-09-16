@@ -20,7 +20,7 @@ export default function Home() {
           <p className={clsx("hero__subtitle", styles.heroSubtitle)}>
             {siteConfig.tagline}
           </p>
-          <Link className={styles.button} to="/docs/fluence-docs/introduction">
+          <Link className={styles.button} to="/docs/learn/overview">
             Get started
           </Link>
         </div>

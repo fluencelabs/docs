@@ -8,7 +8,7 @@ With the shift towards to the world of decentralized data, where applications do
 
 ## Aqua: P2P programming language
 
-[Aqua](../fluence-docs/aquamarine/aqua.md) is the new programming language specifically created for writing P2P workflows and scenarios. Aqua simplifies programming of business logic across distributed peers and allows to decouple network algorithms from computations. It is Turing-complete, based on [process-calculus](https://en.wikipedia.org/wiki/Process_calculus), and allows to implement algorithms for any network topology.
+[Aqua](../build/aquamarine/aqua.md) is the new programming language specifically created for writing P2P workflows and scenarios. Aqua simplifies programming of business logic across distributed peers and allows to decouple network algorithms from computations. It is Turing-complete, based on [process-calculus](https://en.wikipedia.org/wiki/Process_calculus), and allows to implement algorithms for any network topology.
 
 ```aqua
 -- ask a remote peer to say hello to us
@@ -18,13 +18,13 @@ func sayHello(remotePeer: PeerId, relayPeer: PeerId) -> string:
     <- res
 ```
 
-Compared to traditional programming languages, Aqua code is not fully "executed" at the computer where it was deployed. Instead, the code processed into a bunch of [particles](../fluence-docs/concepts/concepts.md#particles): programmable requests. Particles travel over the network following the programmed scenario, and triggering functions on remote peers over the route. Essentially the runtime of Aqua language is represented by a particle messaging protocol, where messages are cryptographically secure, verifiable data structures containing remote computation results.
+Compared to traditional programming languages, Aqua code is not fully "executed" at the computer where it was deployed. Instead, the code processed into a bunch of [particles](../build/concepts/concepts.md#particles): programmable requests. Particles travel over the network following the programmed scenario, and triggering functions on remote peers over the route. Essentially the runtime of Aqua language is represented by a particle messaging protocol, where messages are cryptographically secure, verifiable data structures containing remote computation results.
 
 This allows to program any network algorithms: from simple browser-to-browser communication via relay peers to comprehensive consensus engines where multiple peers select a leader and then gather certain amount of cryptographic signatures for a piece of data. Such algorithms were [complex](https://github.com/etcd-io/etcd) pieces of software and are now commoditized as language libraries. With Aqua, peer discovery, routing, data sharing, replication, computation consensus are easily added to any application.
 
 ## Marine: portable runtime
 
-[Marine](../fluence-docs/aquamarine/marine/marine.md) is Fluence's universal WebAssembly runtime that executes computations triggered by Aqua programs. Computations are executed as lightweight and portable WebAssembly services, that may provide both pure computation and proxy to external legacy APIs or binaries.
+[Marine](../build/aquamarine/marine/marine.md) is Fluence's universal WebAssembly runtime that executes computations triggered by Aqua programs. Computations are executed as lightweight and portable WebAssembly services, that may provide both pure computation and proxy to external legacy APIs or binaries.
 
 Marine provides secure code sandbox, which guarantees that hosted code can't access the node system without explicit permission. Services are lightweight and fast, which allows to achieve high atomicity of computations, and effectively compose a distributed serverless engine.
 

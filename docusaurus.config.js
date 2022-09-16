@@ -84,14 +84,14 @@ const config = {
           {
             type: "doc",
             position: "left",
-            docId: "fluence-docs/introduction",
-            label: "Docs",
+            docId: "learn/overview",
+            label: "Learn",
           },
           {
             type: "doc",
             position: "left",
-            docId: "faq/overview",
-            label: "FAQ",
+            docId: "build/introduction",
+            label: "Build",
           },
           {
             type: "doc",
@@ -120,12 +120,12 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Docs",
-                to: "/docs/fluence-docs/introduction",
+                label: "Learn",
+                to: "/docs/learn/overview",
               },
               {
-                label: "FAQ",
-                to: "/docs/faq/overview",
+                label: "Build",
+                to: "/docs/build/introduction",
               },
               {
                 label: "Aqua Book",
