@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://fluence.dev/docs/learn/overview",
+      "permanent": true
+    }
+  ]
+}
