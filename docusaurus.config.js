@@ -1,132 +1,181 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+const fs = require("fs");
+const path = require("path");
+const process = require("process");
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const getFluenceLanguageConfig = (langName) => ({
+  id: langName,
+  scopeName: `source.${langName}`,
+  grammar: JSON.parse(
+    fs.readFileSync(
+      path.join(
+        process.cwd(),
+        "node_modules",
+        "aqua-vscode",
+        "syntaxes",
+        `${langName}.tmLanguage.json`
+      ),
+      {
+        encoding: "utf-8",
+      }
+    )
+  ),
+});
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
-
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
+  title: "Fluence Docs",
+  tagline:
+    "Peer-to-peer compute protocol that frees computation from centralized cloud providers",
+  url: "https://doc.fluence.dev",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
-
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/fluencelabs/docs/tree/main",
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: "https://github.com/fluencelabs/docs/tree/main",
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.scss"),
         },
       }),
     ],
+    [
+      "docusaurus-preset-shiki-twoslash",
+      {
+        themes: ["min-light", "min-dark"],
+        langs: [
+          "typescript",
+          "javascript",
+          "json",
+          "rust",
+          "shell",
+          "toml",
+          getFluenceLanguageConfig("aqua"),
+          getFluenceLanguageConfig("air"),
+        ],
+      },
+    ],
   ],
-
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: "Fluence",
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: "Fluence Logo",
+          src: "img/logo.svg",
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
+            type: "doc",
+            position: "left",
+            docId: "learn/overview",
+            label: "Learn",
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
+            type: "doc",
+            position: "left",
+            docId: "build/introduction",
+            label: "Build",
+          },
+          {
+            type: "doc",
+            position: "left",
+            docId: "aqua-book/introduction",
+            label: "Aqua Book",
+          },
+          {
+            type: "doc",
+            position: "left",
+            docId: "marine-book/introduction",
+            label: "Marine Book",
+          },
+          { to: "/blog", label: "Blog", position: "left" },
+          {
+            href: "https://github.com/fluencelabs",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Docs",
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: "Learn",
+                to: "/docs/learn/overview",
+              },
+              {
+                label: "Build",
+                to: "/docs/build/introduction",
+              },
+              {
+                label: "Aqua Book",
+                to: "/docs/aqua-book/introduction",
+              },
+              {
+                label: "Marine Book",
+                to: "/docs/marine-book/introduction",
               },
             ],
           },
           {
-            title: 'Community',
+            title: "Community",
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: "Telegram",
+                href: "https://t.me/fluence_project",
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: "Discord",
+                href: "https://discord.com/invite/5qSnPZKh7u",
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: "Telegram (ru)",
+                href: "https://t.me/fluenceru",
               },
             ],
           },
           {
-            title: 'More',
+            title: "More",
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: "Blog",
+                to: "/blog",
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: "GitHub",
+                href: "https://github.com/fluencelabs",
+              },
+              {
+                label: "Telegram Updates",
+                href: "https://t.me/fluencedev",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        copyright: `Copyright © ${new Date().getFullYear()} Fluence Labs`,
       },
     }),
+  plugins: ["docusaurus-plugin-sass"],
 };
 
 module.exports = config;

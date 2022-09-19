@@ -1,0 +1,3 @@
+# Testing & Debugging
+
+Since we are compiling to a wasm32-wasi target with `mtype` constraints, the basic `cargo test` is not all that useful or even usable for our purposes. To alleviate that limitation, Fluence has introduced the `[marine-test]` macro that does a lot of the heavy lifting to allow developers to use `cargo test` as intended. That is, the `[marine-test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module, not the native code.
