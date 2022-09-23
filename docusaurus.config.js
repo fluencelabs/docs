@@ -74,6 +74,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        appId: "LDLCNV5Z6K",
+        apiKey: "8536d4a05a0bddd56f5345c1519ae8ec",
+        indexName: "fluence",
+      },
       navbar: {
         title: "Fluence",
         logo: {
