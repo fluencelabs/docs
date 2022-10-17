@@ -107,7 +107,7 @@ const sidebars = {
         "aqua-book/language/closures",
         {
           type: "category",
-          label: "Execution flow",
+          label: "Imports and Exports",
           link: { id: "aqua-book/language/header/header", type: "doc" },
           items: ["aqua-book/language/header/control-scope-and-visibility"],
         },
