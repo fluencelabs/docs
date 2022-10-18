@@ -7,6 +7,21 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.7.7](https://github.com/fluencelabs/aqua/releases/tag/0.7.7) – October 18, 2022
+* Fix timeout in aqua run
+* AIR: add null and never modes to fold instruction
+* AIR: Canonicalize streams in service calls and if statements
+* AIR: Stream canonicalization
+* bug fixes
+* bump fluence-js to v0.26.3-snapshot-3
+
+### [0.7.6](https://github.com/fluencelabs/aqua/releases/tag/0.7.6) – September 22, 2022
+* Run builtin services directly from aqua run without any input
+* Run services in aqua run
+* Restrict streams in structures. Restrict assignment with empty streams and arrays
+* bump fluence-js to v0.25.1
+* a lot of bugs fixed
+
 ### [0.7.5](https://github.com/fluencelabs/aqua/releases/tag/0.7.5) – August 22, 2022
 
 * added AIR validation on Aqua compilation
@@ -14,7 +29,6 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * plugins feature added. Read here for more details
 * improvements in go-to definition feature in VSCode
 * a lot of bugs fixed
-
 
 ### [0.7.4](https://github.com/fluencelabs/aqua/releases/tag/0.7.4) – June 24, 2022
 
