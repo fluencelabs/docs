@@ -8,7 +8,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
 ### [0.7.7](https://github.com/fluencelabs/aqua/releases/tag/0.7.7) – October 18, 2022
-* Fix timeout in aqua run
+* Fix timeout in `aqua run`
 * AIR: add null and never modes to fold instruction
 * AIR: Canonicalize streams in service calls and if statements
 * AIR: Stream canonicalization
