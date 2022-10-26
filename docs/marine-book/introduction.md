@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 
 Fluence is a peer-to-peer application platform which allows the creation of applications free of proprietary cloud providers or centralized APIs. Fluence provides a peer-to-peer development stack so that you can program p2p applications, workflows, and compose services, APIs without relying on centralized intermediaries. The Fluence stack is 100% open source and maintained and governed by a community of developers.
 
-The Fluence platform allows developers to create distributed services from Wasm Interface Type (IT) modules which can be deployed to one or more peers and composed into protocols and applications with Fluence's [Aqua](https://doc.fluence.dev/aqua-book/) language.
+The Fluence platform allows developers to create distributed services from Wasm Interface Type (IT) modules which can be deployed to one or more peers and composed into protocols and applications with Fluence's [Aqua](../aqua-book/introduction.md) language.
 
 We've chosen Wasm in the Fluence Labs as the main building mechanism for services because of:
 

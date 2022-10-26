@@ -2,7 +2,7 @@
 
 ## Aqua Command Line Tool
 
-Please see the [Aqua CLI](https://doc.fluence.dev/aqua-book/aqua-cli) documentation.
+Please see the [Aqua CLI](../aqua-book/aqua-cli/aqua-cli.md) documentation.
 
 ## Fluence JS
 

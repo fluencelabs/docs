@@ -27,7 +27,7 @@ const config = {
   title: "Fluence Docs",
   tagline:
     "Peer-to-peer compute protocol that frees computation from centralized cloud providers",
-  url: "https://doc.fluence.dev",
+  url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
