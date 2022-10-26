@@ -14,7 +14,7 @@ Figure 1: Decentralized Applications Composed From Distributed Services On P2P N
 
 As a complement to the protocol, Fluence provides the open source Aquamarine stack aimed at enabling developers to build high-quality, high-performance decentralized applications. Specifically, Aquamarine is purpose-built to ease the design and programming demands commonly encountered in distributed, and especially peer-to-peer, development. The Aquamarine stack is comprised of Aqua and Marine.
 
-[Aqua](https://doc.fluence.dev/aqua-book/), is a new generation programming language allowing developers to program peer-to-peer networks and compose distributed services hosted on peer-to-peer nodes into decentralized applications and backends. [Marine](https://github.com/fluencelabs/marine), on the other hand, provides the necessary Wasm runtime environment on peers to facilitate the execution of compiled Aqua code.
+[Aqua](../../aqua-book/introduction.md), is a new generation programming language allowing developers to program peer-to-peer networks and compose distributed services hosted on peer-to-peer nodes into decentralized applications and backends. [Marine](https://github.com/fluencelabs/marine), on the other hand, provides the necessary Wasm runtime environment on peers to facilitate the execution of compiled Aqua code.
 
 A major contribution of Aquamarine is that network and application layer, i.e., [Layer 3 and Layer 7](https://en.wikipedia.org/wiki/OSI_model), programming is accessible to developers as a seamless and ergonomic composition-from-services experience in Aqua, thereby greatly reducing, if not eliminating, the high barriers to entry when it comes to the design and development of distributed and decentralized applications.
 

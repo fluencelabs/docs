@@ -10,4 +10,4 @@ We have released the Aqua compiler 0.3.
 Now Aqua compiler runs natively in the javascript environment and distributed as [@fluencelabs/aqua](https://www.npmjs.com/package/@fluencelabs/aqua) NPM package. 
 
 The next milestone is to call Aqua functions from the Aqua itself: we're building Aqua REPL.
-See the [changelog](https://doc.fluence.dev/aqua-book/changelog#0.3.0-september-8-2021).
+See the [changelog](../docs/aqua-book/changelog#030-–-september-8-2021).
