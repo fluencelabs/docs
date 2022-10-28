@@ -8,17 +8,17 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
 ### [0.7.7](https://github.com/fluencelabs/aqua/releases/tag/0.7.7) – October 18, 2022
-* Fix timeout in `aqua run`
-* AIR: add null and never modes to fold instruction
-* AIR: Canonicalize streams in service calls and if statements
-* AIR: Stream canonicalization
+* Fix `--timeout` flag in `aqua run`, which didn't work
+* AquaVM: add null and never modes to fold instruction
+* AquaVM: Canonicalize streams in service calls and if statements
+* AquaVM: Stream canonicalization
 * bug fixes
-* bump fluence-js to v0.26.3-snapshot-3
+* bump fluence-js to latest version
 
 ### [0.7.6](https://github.com/fluencelabs/aqua/releases/tag/0.7.6) – September 22, 2022
-* Run builtin services directly from aqua run without any input
-* Run services in aqua run
-* Restrict streams in structures. Restrict assignment with empty streams and arrays
+* Run builtin services directly from aqua run without any input ([docs](https://fluence.dev/docs/aqua-book/aqua-cli/#run))
+* Run services in aqua run ([docs](https://fluence.dev/docs/aqua-book/aqua-cli/#run))
+* Forbid streams in structures. Restrict assignment with empty streams and arrays
 * bump fluence-js to v0.25.1
 * a lot of bugs fixed
 
