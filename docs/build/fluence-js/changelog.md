@@ -6,78 +6,79 @@ Fluence JS versioning scheme is the following: `0.BREAKING.ENHANCING`
 - `BREAKING` part is incremented for each breaking API change
 - `ENHANCING` part is incremented for every fix and update which is compatible on API level
 
-## [0.26.3](https://github.com/fluencelabs/fluence-js/releases/tag/0.26.3) - Oct 26, 2022
+## [0.26.3](https://github.com/fluencelabs/fluence-js/releases/tag/v0.26.3) - Oct 26, 2022
 
 **Fluence Peer:**
 
 Implement new builtin to work with JSON-like structures ([#195](https://github.com/fluencelabs/fluence-js/pull/195))
 
-## [0.26.2](https://github.com/fluencelabs/fluence-js/releases/tag/0.26.2) - Oct 9, 2022
+## [0.26.2](https://github.com/fluencelabs/fluence-js/releases/tag/v0.26.2) - Oct 9, 2022
 
 Update AVM to 0.30.11 ([#191](https://github.com/fluencelabs/fluence-js/pull/191))
 
-## [0.26.1](https://github.com/fluencelabs/fluence-js/releases/tag/0.26.1) - Oct 9, 2022
+## [0.26.1](https://github.com/fluencelabs/fluence-js/releases/tag/v0.26.1) - Oct 9, 2022
 
 **Compiler support:**
 
-Add v4 version of compiler support. It makes possible to use any name for functions and data structures in aqua without colliding with variable names in FluenceJS ([#190](https://github.com/fluencelabs/fluence-js/pull/190))
+Add v4 of compiler support. It makes it possible to use any name for functions and data structures in aqua without collisions with variable names in FluenceJS ([#190](https://github.com/fluencelabs/fluence-js/pull/190))
+tag/v0
 
-## [0.26.0](https://github.com/fluencelabs/fluence-js/releases/tag/0.26.0) - Oct 7, 2022
+## [0.26.0](https://github.com/fluencelabs/fluence-js/releases/tag/v0.26.0) - Oct 7, 2022
 
 Update AVM to version 0.30.10 ([#189](https://github.com/fluencelabs/fluence-js/pull/189))
 
-## [0.25.2](https://github.com/fluencelabs/fluence-js/releases/tag/0.25.2) - Sep 30, 2022
+## [0.25.2](https://github.com/fluencelabs/fluence-js/releases/tag/v0.25.2) - Sep 30, 2022
 
 Update AVM to version 0.30.5 and MarineJS to version 0.3.18 ([#187](https://github.com/fluencelabs/fluence-js/pull/187))
 
-## [0.25.1](https://github.com/fluencelabs/fluence-js/releases/tag/0.25.1) - Sep 23, 2022
+## [0.25.1](https://github.com/fluencelabs/fluence-js/releases/tag/v0.25.1) - Sep 23, 2022
 
 Accommodate new marine-js and avm interface ([#181](https://github.com/fluencelabs/fluence-js/pull/181))
 fix(sig): update Sig guards according to new registry API ([#185](https://github.com/fluencelabs/fluence-js/pull/185))
 
-## [0.24.1](https://github.com/fluencelabs/fluence-js/releases/tag/0.24.1) - Sep 06, 2022
+## [0.24.1](https://github.com/fluencelabs/fluence-js/releases/tag/v0.24.1) - Sep 06, 2022
 
 Update @fluencelabs/avm to v0.27.8 and @fluencelabs/marine-js to v0.3.10 ([#180](https://github.com/fluencelabs/fluence-js/pull/180))
 
-## [0.24.0](https://github.com/fluencelabs/fluence-js/releases/tag/0.24.0) - Sep 05, 2022
+## [0.24.0](https://github.com/fluencelabs/fluence-js/releases/tag/v0.24.0) - Sep 05, 2022
 
 **Fluence Peer:**
 
 Rename toB58String to getPeerId ([#178](https://github.com/fluencelabs/fluence-js/pull/178))
 
-## [0.23.8](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.8) - Sep 05, 2022
+## [0.23.8](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.8) - Sep 05, 2022
 
 **Fluence Peer:**
 
 Fix issue when FluenceJS was not working in webpack-based web projects ([#176](https://github.com/fluencelabs/fluence-js/pull/176))
 
-## [0.23.7](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.7) - Sep 01, 2022
+## [0.23.7](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.7) - Sep 01, 2022
 
 **Marine JS:**
 
 Update Marine JS to v0.3.9 ([#173](https://github.com/fluencelabs/fluence-js/pull/173))
 
-## [0.23.6](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.6) - Sep 01, 2022
+## [0.23.6](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.6) - Sep 01, 2022
 
 **AVM:**
 
 Update AVM to 0.27.0 ([#169](https://github.com/fluencelabs/fluence-js/pull/169))
 
-## [0.23.5](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.5) - Aug 25, 2022
+## [0.23.5](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.5) - Aug 25, 2022
 
 Migrated to monorepo and pnpm ([#163](https://github.com/fluencelabs/fluence-js/pull/163))
 
-## [0.23.4](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.4) - Aug 05, 2022
+## [0.23.4](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.4) - Aug 05, 2022
 
 **Fluence Peer:**
 
 Ephemeral networks core implementation. Please note that the API is till in beta and is intended for internal use only ([#160](https://github.com/fluencelabs/fluence-js/pull/160))
 
-## [0.23.2](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.2) - Aug 04, 2022
+## [0.23.2](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.2) - Aug 04, 2022
 
 Expose parse ast method from AVM ([#161](https://github.com/fluencelabs/fluence-js/pull/161))
 
-## [0.23.1](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.1) - Jul 07, 2022
+## [0.23.1](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.1) - Jul 07, 2022
 
 **Fluence Peer:**
 
@@ -86,7 +87,7 @@ Minor updates to Fluence Peer:
 - FluenceConnection: update libp2p to v0.36.2 ([#155](https://github.com/fluencelabs/fluence-js/pull/155))
 - Pass logging level to AVM correctly ([#158](https://github.com/fluencelabs/fluence-js/pull/158))
 
-## [0.23.0](https://github.com/fluencelabs/fluence-js/releases/tag/0.23.0) - Apr 26, 2022
+## [0.23.0](https://github.com/fluencelabs/fluence-js/releases/tag/v0.23.0) - Apr 26, 2022
 
 **Marine JS:**
 
@@ -108,13 +109,13 @@ Related changes:
 
 Passing updated RunParameters structure and support AVM v0.24.2 ([#152](https://github.com/fluencelabs/fluence-js/pull/152))
 
-## [0.22.0](https://github.com/fluencelabs/fluence-js/releases/tag/0.22.0) - Apr 13, 2022
+## [0.22.0](https://github.com/fluencelabs/fluence-js/releases/tag/v0.22.0) - Apr 13, 2022
 
 **SIG:**
 
 Following the update in version _0.21.2_ changed the name of `get_key_bytes` function to `get_route_bytes` in tetraplet definition ([#148](https://github.com/fluencelabs/fluence-js/pull/148))
 
-## [0.21.8](https://github.com/fluencelabs/fluence-js/releases/tag/0.21.8) - Apr 06, 2022
+## [0.21.8](https://github.com/fluencelabs/fluence-js/releases/tag/v0.21.8) - Apr 06, 2022
 
 **Fluence Peer:**
 
@@ -132,19 +133,19 @@ await peer.start({
 
 ([#147](https://github.com/fluencelabs/fluence-js/pull/147))
 
-## [0.21.7](https://github.com/fluencelabs/fluence-js/releases/tag/0.21.7) - Apr 01, 2022
+## [0.21.7](https://github.com/fluencelabs/fluence-js/releases/tag/v0.21.7) - Apr 01, 2022
 
 **Fluence Peer:**
 
 Throwing human-readable error for unsupported node.js versions ([#145](https://github.com/fluencelabs/fluence-js/pull/145))
 
-## [0.21.6](https://github.com/fluencelabs/fluence-js/releases/tag/0.21.6) - Mar 23, 2022
+## [0.21.6](https://github.com/fluencelabs/fluence-js/releases/tag/v0.21.6) - Mar 23, 2022
 
 **SIG:**
 
 Compile signing service definition using the latest Aqua compiler ([#141](https://github.com/fluencelabs/fluence-js/pull/141))
 
-## [0.21.4](https://github.com/fluencelabs/fluence-js/releases/tag/0.21.4) - Mar 17, 2022
+## [0.21.4](https://github.com/fluencelabs/fluence-js/releases/tag/v0.21.4) - Mar 17, 2022
 
 **Compiler support:**
 
