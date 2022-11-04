@@ -7,12 +7,12 @@
     },
     {
       "source": "/docs",
-      "destination": "/docs/learn/overview",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/docs/",
-      "destination": "/docs/learn/overview",
+      "destination": "/",
       "permanent": true
     }
   ]
