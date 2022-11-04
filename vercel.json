@@ -9,6 +9,11 @@
       "source": "/docs",
       "destination": "https://fluence.dev/docs/learn/overview",
       "permanent": true
+    },
+    {
+      "source": "/docs/",
+      "destination": "https://fluence.dev/docs/learn/overview",
+      "permanent": true
     }
   ]
 }
