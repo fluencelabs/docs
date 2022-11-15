@@ -1,5 +1,9 @@
 # Setting Up Your Environment
 
+:::info
+The environment will be setup for you automatically if you use [Fluence CLI](../fluence-cli)
+:::
+
 In order to develop within the Fluence solution, [Node](https://nodejs.org/en/), [Rust](https://www.rust-lang.org/tools/install) and small number of tools are required.
 
 ## Node.js
