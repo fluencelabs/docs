@@ -37,7 +37,7 @@ Immutable collection with 0..N values: `[]`
 
 Immutable collection with 0 or 1 value: `?`
 
-Appendable collection with 0..N values: `*`
+Appendable collection (More about it here: [CRDT Streams](crdt-streams.md)) with 0..N values: `*` 
 
 Any data type can be prepended with a quantifier, e.g. `*u32`, `[][]string`, `?ProductType` are all correct type specifications.
 
