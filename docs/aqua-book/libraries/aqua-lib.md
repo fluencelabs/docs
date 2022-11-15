@@ -30,13 +30,13 @@ The most up-to-date documentation of the API is in the code, please [check it ou
 Add `@fluencelabs/aqua-lib` to your dependencies as described in [Libraries doc](./libraries.md), and then import it in your Aqua script:
 
 ```aqua
-import "@fluencelabs/aqua-lib"
+import "@fluencelabs/aqua-lib/builtin.aqua"
 
 -- gather Peer.identify from all nodes in the neighborhood
 func getPeersInfo() -> []Info:
     infos: *Info
-    nodes <- Kademlia.neighborhood(%init_peer_id%, nil, nil)
-    for node in nodes:
+    nodes <- Kademlia.neighborhood(INIT_PEER_ID, nil, nil)
+    for node <- nodes:
         on node:
             infos <- Peer.identify()
     <- infos
