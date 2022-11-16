@@ -9,7 +9,7 @@ npm i -g @fluencelabs/cli
 ```
 
 :::info
-We will be updating [Quickstart](./quick-start/quick-start) and [examples](https://github.com/fluencelabs/examples) to use Fluence CLI but for now you can try using it following instructions in the [README of Fluence CLI repository](https://github.com/fluencelabs/fluence-cli)
+We will be updating [Quickstart](./quick-start) and [examples](https://github.com/fluencelabs/examples) to use Fluence CLI but for now you can try using it following instructions in the [README of Fluence CLI repository](https://github.com/fluencelabs/fluence-cli)
 :::
 
 At this point Fluence CLI consolidates some of the functionality of lower level tools such as:
