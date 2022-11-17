@@ -6,6 +6,7 @@ const sidebars = {
     "build/introduction",
     "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
+    "build/fluence-cli",
     {
       type: "category",
       label: "Quick Start",
@@ -56,6 +57,7 @@ const sidebars = {
     {
       type: "category",
       label: "Tutorials",
+      link: { type: "generated-index" },
       items: [
         "build/tutorials/setting-up-your-environment",
         "build/tutorials/deploy-a-local-fluence-node",
