@@ -70,7 +70,7 @@
     "wasmer"
   ],
   "cSpell.ignoreRegExpList": ["/dns4/[a-zA-Z0-9/\\-\\.]*", "12d[a-zA-Z0-9]*"],
-  "markdown.experimental.updateLinksOnFileMove.enabled": "always",
+  "markdown.updateLinksOnFileMove.enabled": "always",
   "markdown.validate.enabled": true,
   "markdown.validate.fileLinks.enabled": "error",
   "markdown.validate.fileLinks.markdownFragmentLinks": "error",
