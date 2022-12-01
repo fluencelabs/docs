@@ -2,7 +2,7 @@
 
 ## `data`
 
-[Product type](../types.md#products) definition. See [Types](../types.md) for details.
+[Structure type](../types.md#structures) definition. See [Types](../types.md) for details.
 
 ```aqua
 data SomeType:
