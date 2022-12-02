@@ -32,7 +32,7 @@ data SomeStruct:
 func getStruct(i: []u32) -> SomeStruct:
   <- SomeObj(str = "some str",
              num = 4,
-             inner = InnerObj(arr = ["a", "b", "c"], num = i[2])
+             inner = Inner(arr = ["a", "b", "c"], num = i[2])
              )
 ```
 
