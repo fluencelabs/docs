@@ -29,7 +29,7 @@ data SomeStruct:
     inner: InnerStruct
 
 -- structures can be filled with elements in aqua code
-func getStruct(i: []u32) -> SomeStruct:
+func createStruct(i: []u32) -> SomeStruct:
   <- SomeStruct(str = "some str",
              num = 4,
              inner = Inner(arr = ["a", "b", "c"], num = i[2])
