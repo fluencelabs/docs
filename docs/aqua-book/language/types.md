@@ -30,10 +30,11 @@ data SomeStruct:
 
 -- Structures can be created in aqua code
 func createStruct(i: []u32) -> SomeStruct:
-  <- SomeStruct(str = "some str",
-             num = 4,
-             inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
-             )
+    <- SomeStruct(
+        str = "some str",
+        num = 4,
+        inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
+    )
 ```
 
 Fields are accessible with the dot operator `.` , e.g. `product.field`.
