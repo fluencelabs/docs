@@ -8,7 +8,7 @@ By default, `.aqua` file exports and declares everything it contains. With `aqua
 
 ```aqua
 -- `aqua` expression may be only on the very first line of the file
-aqua AquaName declares *
+aqua FileName declares *
 ```
 
 `Aqua.Name` may contain dots.
