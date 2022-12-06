@@ -8,15 +8,15 @@ When header is omitted, `.aqua` file exports and declares everything it contains
 
 ```aqua
 -- `aqua` expression may be only on the very first line of the file
-aqua FileName declares *
+aqua AquaFile declares *
 ```
 
-`Aqua.Name` may contain dots.
+`Aqua.File` may contain dots.
 
-`AquaName` can be used as the aqua's name when this file is `use`d. In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
+`AquaFile` can be used as the aqua's name when this file is `use`d. In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
 
 ```aqua
-aqua AquaName declares CONST_NAME, ServiceName, MyType, fn
+aqua AquaFile declares CONST_NAME, ServiceName, MyType, fn
 
 const CONST_NAME = "something"
 
