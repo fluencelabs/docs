@@ -28,11 +28,11 @@ data SomeStruct:
     num: u64
     inner: InnerStruct
 
--- structures can be filled with elements in aqua code
+-- Structures can be created in aqua code
 func createStruct(i: []u32) -> SomeStruct:
   <- SomeStruct(str = "some str",
              num = 4,
-             inner = Inner(arr = ["a", "b", "c"], num = i[2])
+             inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
              )
 ```
 
@@ -76,7 +76,7 @@ func foo(a: ?string, b: []u32, c: *bool): ...
 foo(nil, [], *[])
 -- Nil fits into any collection
 
--- Arrays can be filled with elements in aqua code
+-- Arrays can be instantiated in aqua code
 func getArray(arr: []string) -> []string:
   <- ["some string", Serv.getString(), arr[1], "some string 2"]
 ```

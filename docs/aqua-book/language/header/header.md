@@ -2,21 +2,21 @@
 
 An Aqua source file has a head and a body. The body contains function definitions, services, types, constants. The header manages what is imported from other files and what is exported.
 
-## Module
+## Aqua component
 
 By default, `.aqua` file exports and declares everything it contains. With `aqua` header you can describe the `.aqua` file's interface.
 
 ```aqua
--- Module expression may be only on the very first line of the file
-aqua ModuleName declares *
+-- `aqua` expression may be only on the very first line of the file
+aqua AquaName declares *
 ```
 
-`Module.Name` may contain dots.
+`Aqua.Name` may contain dots.
 
-`ModuleName` can be used as the module's name when this file is `use`d. In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
+`AquaName` can be used as the aqua's name when this file is `use`d. In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
 
 ```aqua
-aqua ModuleName declares CONST_NAME, ServiceName, MyType, fn
+aqua AquaName declares CONST_NAME, ServiceName, MyType, fn
 
 const CONST_NAME = "something"
 
@@ -69,11 +69,11 @@ func foo():
   BuiltIn.Op.noop()
 ```
 
-If the imported file has a `module` header, `from` and `as` sections of `use` may be omitted.
+If the imported file has a `aqua` header, `from` and `as` sections of `use` may be omitted.
 
 ```aqua
 use "@fluencelabs/aqua-lib/builtin.aqua"
--- Assume that builtin.aqua's header is `module BuiltIn declares *`
+-- Assume that builtin.aqua's header is `aqua BuiltIn declares *`
 
 func foo():
   BuiltIn.Op.noop()

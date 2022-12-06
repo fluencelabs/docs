@@ -8,11 +8,11 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
 ### [0.8.0](https://github.com/fluencelabs/aqua/releases/tag/0.8.0) – November 30, 2022
-* Structure objects can be created right in the code ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures))
-* `module` key word changed to `aqua` ([docs](https://fluence.dev/docs/aqua-book/language/header/header.md#module))
-* Syntax checking has been disabled in generated JS/TS files
-* a lot of bug fixes
-* bump fluence-js to latest version
+* Structures can be instantiated right in the code ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures))
+* `module` key word was renamed to `aqua` ([docs](https://fluence.dev/docs/aqua-book/language/header/header.md#module))
+* Syntax checking has been disabled in generated JS/TS files ([#585](https://github.com/fluencelabs/aqua/pull/585))
+* a lot of bug fixes ([#590](https://github.com/fluencelabs/aqua/pull/590), [#584](https://github.com/fluencelabs/aqua/pull/584), [#582](https://github.com/fluencelabs/aqua/pull/582), [#581](https://github.com/fluencelabs/aqua/pull/581), [#580](https://github.com/fluencelabs/aqua/pull/580), [#578](https://github.com/fluencelabs/aqua/pull/578), [#579](https://github.com/fluencelabs/aqua/pull/579))
+* bump fluence-js to version 0.27.3
 
 ### [0.7.7](https://github.com/fluencelabs/aqua/releases/tag/0.7.7) – October 18, 2022
 * Fix `--timeout` flag in `aqua run`, which didn't work
