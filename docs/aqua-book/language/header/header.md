@@ -4,7 +4,7 @@ An Aqua source file has a head and a body. The body contains function definition
 
 ## Aqua source file header
 
-By default, `.aqua` file exports and declares everything it contains. With `aqua` header you can describe the `.aqua` file's interface.
+When header is omitted, `.aqua` file exports and declares everything it contains. With `aqua` header you can control what gets exported from the aqua file.
 
 ```aqua
 -- `aqua` expression may be only on the very first line of the file
