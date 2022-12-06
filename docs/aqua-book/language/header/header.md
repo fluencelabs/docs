@@ -1,6 +1,6 @@
 # Imports And Exports
 
-An Aqua source file has a head and a body. The body contains function definitions, services, types, constants. The header manages what is imported from other files and what is exported.
+An Aqua source file has a header and a body. The body contains function definitions, services, types, constants. The header manages what is imported from other files and what is exported.
 
 ## Aqua source file header
 
