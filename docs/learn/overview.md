@@ -8,7 +8,7 @@ Fluence is a peer-to-peer application platform which allows the creation of appl
 At the core of Fluence is the open-source language Aqua that allows for the programming of peer-to-peer scenarios separately from the computations on peers. Applications are turned into hostless workflows over distributed function calls, which enables various levels of decentralization: from handling by a limited set of servers to completely peer-to-peer architecture by connecting user devices directly.
 Applications can run computations on nodes maintained by other network members and compensate the node operators as they would at any other cloud platform. The hosting payments are executed using cryptocurrency, creating an open, decentralized application hosting market.
 
-<ReactPlayer controls url="https://youtu.be/65LQsPmi4vM" />
+<ReactPlayer controls url="https://youtu.be/JrWw-0CZDaU" />
 
 ## Why P2P?
 
