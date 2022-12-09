@@ -16,15 +16,25 @@ Scalar types follow the Wasm IT notation.
 
 You can pass booleans (true, false), numbers, double-quoted strings as literals.
 
-## Products
+## Structures
 
 ```aqua
-data ProductName:
-  field_name: string
+data InnerStruct:
+    arr: []string
+    num: u32
 
-data OtherProduct:
-  product: ProductName
-  flag: bool
+data SomeStruct:
+    str: string
+    num: u64
+    inner: InnerStruct
+
+-- Structures can be created in aqua code
+func createStruct(i: []u32) -> SomeStruct:
+    <- SomeStruct(
+        str = "some str",
+        num = 4,
+        inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
+    )
 ```
 
 Fields are accessible with the dot operator `.` , e.g. `product.field`.
@@ -66,6 +76,10 @@ func foo(a: ?string, b: []u32, c: *bool): ...
 -- To call that function with empty collection, use nil, [], ?[], or *[]:
 foo(nil, [], *[])
 -- Nil fits into any collection
+
+-- Arrays can be instantiated in aqua code
+func getArray(arr: []string) -> []string:
+  <- ["some string", Serv.getString(), arr[1], "some string 2"]
 ```
 
 ## Arrow Types
