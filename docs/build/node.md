@@ -26,7 +26,7 @@ It comes with IPFS, Registry and TrustGraph bundled.
 Just a simple docker run:
 
 ```
-docker run --rm -e RUST_LOG="info" -p 7777:7777 -p 9999:9999 fluencelabs/fluence
+docker run --rm -e RUST_LOG="info" -p 7777:7777 -p 9999:9999 fluencelabs/rust-peer
 ```
 
 Or take a look at the [docker-compose.yml](https://github.com/fluencelabs/node-distro/blob/main/docker-compose.yml) in the node-distro repository. It starts node with a web dashboard to explore deployed services.
