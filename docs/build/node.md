@@ -17,7 +17,7 @@ To find out how to create your own builtin service, see the [Add Your Own Builti
 <!-- cSpell:ignore distro -->
 All infrastructure-related information is kept in [fluencelabs/node-distro](https://github.com/fluencelabs/node-distro) repository on GitHub.
 
-Node is distributed as a docker container [fluencelabs/fluence](https://hub.docker.com/r/fluencelabs/fluence). Version information can be found on the [releases page](https://github.com/fluencelabs/node-distro/releases) in GitHub.
+Node is distributed as a docker container [fluencelabs/rust-peer](https://hub.docker.com/r/fluencelabs/rust-peer). Version information can be found on the [releases page](https://github.com/fluencelabs/node-distro/releases) in GitHub.
 
 It comes with IPFS, Registry and TrustGraph bundled.
 
