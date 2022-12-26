@@ -5,7 +5,7 @@ A significant chunk of developing and testing of Fluence services can be accompl
 The fastest way to get a Fluence node up and running is to use [docker](https://docs.docker.com/get-docker/):
 
 ```sh
-docker run -d --name fluence -e RUST_LOG="info" -p 7777:7777 -p 9999:9999 -p 5001:5001 -p 18080 fluencelabs/fluence
+docker run -d --name fluence -e RUST_LOG="info" -p 7777:7777 -p 9999:9999 -p 5001:5001 -p 18080 fluencelabs/rust-peer
 ```
 
 where the `-d` flag runs the container in detached mode, `-e` flag sets the environment variables, `-p` flag exposes the ports: 7777 is the tcp port, 9999 the websocket port, 5001 the ipfs port and, 18080 the Prometheus port. Note that Prometheus is called with  /`metrics` , e.g., `http://127.0.0.1:18080/metrics` .
@@ -24,7 +24,7 @@ Which gives os the logged output:
     | Hello from the Fluence Team. If you encounter   |
     | any troubles with node operation, please update |
     | the node via                                    |
-    |     docker pull fluencelabs/fluence:latest      |
+    |     docker pull fluencelabs/rust-peer:latest    |
     |                                                 |
     | or contact us at                                |
     | github.com/fluencelabs/fluence/discussions      |
@@ -238,6 +238,6 @@ And check from the bottom up:
 [2021-03-12T02:42:51.046652Z INFO  particle_node::network_api] Sent particle 14db3aff-b1a9-439e-8890-d0cdc9a0bacd to 12D3KooWLFqJwuHNe2kWF8SMgX6cm24L83JUADFcbrj5fC1z3b21 @ [/ip4/172.17.0.1/tcp/61636/ws]
 ```
 
-Looks like our node container and logging is up and running and ready for your development use. As the Fluence team is rapidly developing, make sure you stay up to date. Check the repo or [Docker hub](https://hub.docker.com/r/fluencelabs/fluence) and update with `docker pull fluencelabs/fluence:latest`.
+Looks like our node container and logging is up and running and ready for your development use. As the Fluence team is rapidly developing, make sure you stay up to date. Check the repo or [Docker hub](https://hub.docker.com/r/fluencelabs/rust-peer) and update with `docker pull fluencelabs/rust-peer:latest`.
 
 Happy composing!
