@@ -151,7 +151,7 @@ async function main() {
     },
   });
 
-  await sayHello(); // (4)
+  await sayHello(); // (5)
 
   console.log(await tellFortune()); // (6)
 
