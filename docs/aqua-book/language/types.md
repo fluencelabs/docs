@@ -9,7 +9,7 @@ Scalar types follow the Wasm IT notation.
 * Floats: `f32`, `f64`
 * Boolean: `bool`
 * String: `string`
-* Records (product type): see below
+* Structures (product type): see below
 * Arrays: see [Collection Types](types.md#collection-types) below
 
 ## Literals
@@ -35,6 +35,10 @@ func createStruct(i: []u32) -> SomeStruct:
         num = 4,
         inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
     )
+    
+-- Also, structures can be copied with arguments replacing
+func copyStruct(someStruct: SomeStruct) -> SomeStruct:
+    <- someStruct.copy(str = "new string")
 ```
 
 Fields are accessible with the dot operator `.` , e.g. `product.field`.
