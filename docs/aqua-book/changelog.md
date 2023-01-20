@@ -7,6 +7,13 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.9.2](https://github.com/fluencelabs/aqua/releases/tag/0.9.2) – January 20, 2023
+* update dependency @fluencelabs/fluence to v0.28.0
+
+### [0.9.1](https://github.com/fluencelabs/aqua/releases/tag/0.9.1) – January 17, 2023
+* Huge refactoring to make it possible to use compiler API as a JS library. Introduce new JS library ([@fluencelabs/aqua-api](https://www.npmjs.com/package/@fluencelabs/aqua-api)) with API to control Aqua compiler inside JS programs.
+* many Scala and JS libraries updated
+
 ### [0.8.0](https://github.com/fluencelabs/aqua/releases/tag/0.8.0) – November 30, 2022
 * Structures can be instantiated right in the code ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
 * `module` key word was renamed to `aqua` ([docs](https://fluence.dev/docs/aqua-book/language/header/header.md#aqua-source-file-header), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
