@@ -7,7 +7,12 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-### [0.9.2](https://github.com/fluencelabs/aqua/releases/tag/0.9.2) – January 20, 2023
+### [0.9.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.3) – January 20, 2023
+* `copy` method was implemented to modify a structure value ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures), PR: [#646](https://github.com/fluencelabs/aqua/pull/646))
+* bug fix where `nil` cannot be returned from a function properly ([#629](https://github.com/fluencelabs/aqua/pull/629))
+* incorrect number of arguments error message fix ([#645](https://github.com/fluencelabs/aqua/pull/645))
+
+### [0.9.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.2) – January 20, 2023
 * update dependency @fluencelabs/fluence to v0.28.0
 
 ### [0.9.1](https://github.com/fluencelabs/aqua/releases/tag/0.9.1) – January 17, 2023

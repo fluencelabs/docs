@@ -38,7 +38,7 @@ func createStruct(i: []u32) -> SomeStruct:
     
 -- To modify a structure value, there's a method called 'copy'. It creates a copy with values of specified fields changed.
 -- Note that copy operates in an immutable way: it does not modify original structure value.
-func copyStruct(someStruct: SomeStruct) -> SomeStruct:
+func changeStr(someStruct: SomeStruct) -> SomeStruct:
     <- someStruct.copy(str = "new string")
 ```
 
