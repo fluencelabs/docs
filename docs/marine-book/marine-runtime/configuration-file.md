@@ -121,7 +121,7 @@ a map of accessible files and their aliases. Aliases should be normally used in 
 
 describes the environment variables accessible by a particular module with standard Rust [env](https://doc.rust-lang.org/std/env/index.html) API like this `std::env::var(IPFS_ADDR_ENV_NAME)`. Please note that Marine adds three additional environment variables.
 
-Module environment variables could be examined with mrepl, see the guide here.
+Module environment variables could be examined with mrepl, see the guide [here](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl#envs-show-environment-variables-of-a-module).
 
 ### Module types
 
