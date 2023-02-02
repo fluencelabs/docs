@@ -152,7 +152,7 @@ const sidebars = {
       ],
     },
     "aqua-book/aqua-js-api",
-    "aqua-book/changelog"
+    "aqua-book/changelog",
   ],
   "marine-book": [
     {
