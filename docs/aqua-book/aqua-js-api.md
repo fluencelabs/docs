@@ -79,5 +79,5 @@ export class CompilationResult {
 }
 ```
 
-Example using it with Fluence JS:
-**TBD**
+# Usage example
+https://github.com/fluencelabs/aqua/tree/main/api/aqua-api-example/
