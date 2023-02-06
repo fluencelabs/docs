@@ -2,15 +2,15 @@
 
 Fluence is live. There are several networks maintained by the community.
 
-### Kras
+## Kras
 
 The main network. Fluence Labs maintains ten free permissionless nodes on this network, each node is on a separate physical host. Explore [all nodes](https://dash.fluence.dev/nodes).
 
-### Stage
+## Stage
 
 Unstable network for development tests and deployments, has low capacity.
 
-### TestNet
+## TestNet
 
 Relatively stable network, used for QA of new releases, has higher capacity
 

@@ -1,6 +1,6 @@
 # Fluence Comparison
 
-### Fluence vs Cloud platforms
+## Fluence vs Cloud platforms
 
 Proprietary cloud platforms have a clear economic incentive to create closed ecosystems of software services to make switching so hard that customers are effectively locked in within the platform. If a customer needs multiple cloud services, it is easier to buy from the same provider because the cost of integration between providers for typical tasks is usually quite high. Additionally, providers attempt to capture customers by setting up data pricing barriers: cheap inbound bandwidth but expensive outbound bandwidth to make the lock in even stronger.
 
@@ -10,7 +10,7 @@ The Fluence protocol frees developers from this proprietary tooling and allows a
 
 Unlike traditional clouds, Fluence provides infrastructure that is manageable via Web3 native organizations like DAOs. Digital organizations can pay using their multisig wallets, update their codebase via collective voting, and invite their community members to contribute into providing infrastructure for their project via the Fluence network.
 
-### Fluence vs Blockchain app platforms
+## Fluence vs Blockchain app platforms
 
 Blockchain application platforms are based on replicated ledgers of transactions and require a consensus algorithm to update the ledger. This design, which prevents adversarial ledger updates and protects the information from tampering, is very useful for “digital value” use cases such as cryptocurrencies, decentralized finance, NFTs, or DAOs. However, the consensus model which requires verification of multiple network nodes is suited to relatively simple, deterministic computations on limited data. Additionally, blockchains add a new per transaction pricing model, where users have to pay gas for every on-chain operation.
 
@@ -21,7 +21,7 @@ Also Fluence accounts for the complexity of computations in a gas analogy as blo
 Similarly to decentralized storage protocols (e.g. Filecoin) which store data off chain but use blockchain to track, validate and compensate the storage, the computation on Fluence happens off chain on the network nodes while proofs, and payments are submitted and validated on-chain.
 
 
-### Fluence vs Rollups (optimistic and zk)
+## Fluence vs Rollups (optimistic and zk)
 
 Rollups provide a scaling mechanism for blockchains by creating additional blockspace and transaction processing capacity outside of L1s. To be compatible with wallets and L1 apps, rollups also use blocks and transactions and employ the same execution model (e.g. EVM). Rollups generate proofs of its chain state and these proofs (merkle or zero-knowledge) are validated on the relevant L1 to ensure roll-up validity at certain points in time.
 
