@@ -2,30 +2,44 @@ import ReactPlayer from "react-player";
 
 # Overview
 
-## Fluence
+## What is Fluence
 
-Fluence is a peer-to-peer application platform which allows the creation of applications free of proprietary cloud providers or centralized APIs. Fluence provides a peer-to-peer development stack so that you can program p2p applications, workflows, and compose services, APIs without relying on centralized intermediaries. The Fluence stack is 100% open source, is maintained and governed by a community of developers.
-At the core of Fluence is the open-source language Aqua that allows for the programming of peer-to-peer scenarios separately from the computations on peers. Applications are turned into hostless workflows over distributed function calls, which enables various levels of decentralization: from handling by a limited set of servers to completely peer-to-peer architecture by connecting user devices directly.
-Applications can run computations on nodes maintained by other network members and compensate the node operators as they would at any other cloud platform. The hosting payments are executed using cryptocurrency, creating an open, decentralized application hosting market.
+Fluence is a decentralized serverless platform & computing marketplace powered by blockchain economics. Fluence is a global, permissionless, scalable, and secure alternative to centralized cloud computing platforms.
+
+Using Fluence, developers build and deploy applications to a network of compute providers, where providers can range from professional data centers to home computers. Providers compete on price and performance and, to be paid and earn rewards, they constantly prove that they are serving applications.
+
+Fluence is powered by a cryptographic token which is used by providers as collateral for participation and as a monetary incentive. Providers earn both the Fluence token and payment (usually stablecoin) for serving applications.
 
 <ReactPlayer controls url="https://youtu.be/JrWw-0CZDaU" />
 
-## Why P2P?
+## For Developers
 
-The internet is dominated by a handful of tech giants who control both user data and infrastructure. The position of "data totalitarians" allows them to use and misuse personal user data while also threatening other businesses continuity with single points of failure and the ability to simply turn off entire software ecosystems. Such centralized data ownership presents a single point of failure and an easy target for censorship and government manipulation. This threat is reaching a national sovereignty level, as nations become dependent upon large foreign corporations for their software operation.
-This ownership concentration has been enabled by the client-server model, which tends to reward the largest companies that can operate tremendous numbers of servers most economically. By leveraging open source software, such companies attracted customers into their proprietary software ecosystems, generating billions in revenues and [returning nothing](https://www.zdnet.com/article/hard-work-and-poor-pay-stresses-out-open-source-maintainers/) to the open source community. The gap between the enhanced cloud offerings and more basic open alternatives increases, eliminating the opportunity to build competitive applications outside of the few leading cloud platforms.
-Such power concentration is [fundamentally dangerous](https://archive.fosdem.org/2019/schedule/event/cloud_is_another_sun/) not only for open source but it also makes the whole internet fragile. As the digitization of our lives constantly increases, the client-server model fails to provide a safe and reliable way of creating applications as it always gravitates to centralized control.
-Compared to Web 2 tools, Fluence provides much more flexibility with regard to application design, higher security, and greater scale. P2P architecture allows applications to connect users directly to each other, to keep sensitive data under user control, it can tolerate network downtimes, it allows applications to be developed easier, managed and owned by a community of users rather than a centralized development company. The data "stays" with its owners. Single points of failure are essentially eliminated, access is democratized, IT operations are freed from the risk of dependence on a single cloud provider, and business continuity is improved.
-The Web 3 world is presented by various projects working towards decentralized identity, storage, domain names, cryptocurrencies. Fluence adds the missing P2P compute layer to make these systems interoperable without introducing trusted parties, and enable the whole new set of applications.
+Developers can use Fluence to build and deploy applications, backends, APIs, and other digital services. Fluence’s serverless platform provides a developer experience similar to the traditional serverless cloud but additionally allows developers to manage an application’s execution over the distributed network; choose providers and switch them at will.
 
-## Comparison with
+Unlike on cloud platforms, when using Fluence, developers may verify that their applications are served as intended and computations executed correctly by checking proofs posted by providers on-chain.
 
-### Cloud platforms
+Fluence integrates both Web2 and Web3 data storage and management platforms to plug data inputs and outputs for application execution. While Fluence isn’t designed for large scale data persistence, it perfectly fits for data caching, indexing, processing, and querying.
 
-Modern cloud computing platforms provide many useful services and tools that facilitate application building. However, the reliance on cloud-vendor specific tooling and processes trap customers in walled ecosystems resulting in costly and risky vendor-lock in. And as many companies already have realized, switching an application to another cloud provider or to your own infrastructure requires significant time and resources.
-The Fluence stack frees developers from proprietary tooling by replacing it with open-source alternatives and turning the cloud platform into a “dumb” hardware provider that can be changed at will.
+|                       |                   Fluence Component                   |             Web 2 Analogy            |
+|-----------------------|:-----------------------------------------------------:|:------------------------------------:|
+| Cloud Functions       | Marine                                                | AWS Lambda, Google Cloud Functions   |
+| Distributed Workflows | Aqua                                                  | AWS Step functions, Google Workflows |
+| Cloud services        | Aqua libs                                             | Route53, ELB, Consul                 |
+| Data services         | Subnets of Ethereum, IPFS, Filecoin, Arweave, Ceramic | S3, RDS, DynamoDB, MongoDB           |
 
-### Blockchain
+## For Compute Providers
 
-Blockchain application platforms are based on replicated ledgers of transactions and the network consensus algorithm to update the ledger. This design, which prevents the adversarial ledger updates and protects the information from tampering, is very useful for “digital value” use cases such as cryptocurrencies, decentralized finance, NFTs, or DAOs.
-The Fluence protocol doesn’t have a global network consensus or ledger at its core. It exists lower at the protocol layer stack and operates in terms of peers and their relationships, allowing the programming of any kind of distributed systems, including consensus algorithms and blockchains. Also, Fluence complements blockchain platforms with off-chain capabilities: it enables data oracles, computations offloading from the chain, better connectivity between blockchain nodes.
+Compute providers earn rewards for offering their capacity for rent on the marketplace.
+
+Providers can offer for rent any device connected to a network including a professional rig or data center or even a personal computing device (even a laptop or raspberry pi). The Fluence protocol rewards providers only for useful work: serving customers applications and contributing to improving network performance and latency.
+
+It is easy to become a provider; providers are not required to establish complex setups for fault tolerance. Instead, reliability is provided by the protocol. Performance though depends on the provider's hardware and internet connection, so professional server hardware would most likely be favored by customers in most cases.
+
+Providers also don’t need to specifically advertise their services as the marketplace connects them to customers interested in their services.
+
+
+## For DAO/Communities
+
+Fluence enables the infrastructure needed to host applications governed by DAOs. Typical applications living in the cloud are unmanageable by digital organizations because they depend on centralized admin accounts and fiat payments.
+
+Building on Fluence, DAOs can deploy their applications to the decentralized network, pay for hosting and compute services in crypto, or even restrict hosting to only providers run by the DAO community members and can be rewarded in the native DAO token.

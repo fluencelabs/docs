@@ -26,7 +26,7 @@ const getFluenceLanguageConfig = (langName) => ({
 const config = {
   title: "Fluence Docs",
   tagline:
-    "Peer-to-peer compute protocol that frees computation from centralized cloud providers",
+    "Decentralized Serverless Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",

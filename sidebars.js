@@ -69,7 +69,9 @@ const sidebars = {
   ],
   learn: [
     "learn/overview",
-    "learn/features",
+    "learn/how-it-works",
+    "learn/why-fluence",
+    "learn/fluence-comparison",
     "learn/use-cases",
     "learn/technology",
     "learn/networks",

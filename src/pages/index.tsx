@@ -11,8 +11,8 @@ export default function Home() {
 
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Peer-to-peer application platform free of proprietary cloud providers or centralized APIs"
+      title={`${siteConfig.title}`}
+      description="Decentralized Serverless Platform"
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
