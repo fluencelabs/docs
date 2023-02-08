@@ -54,13 +54,13 @@ export class Call {
 
 ```typescript
 export class AquaConfig {
-    // compiler log level
+    // compiler log level. Default: info
     logLevel?: string
     // constants can be defined or overrided by this option
     constants?: string[]
-    // switches off error bubbling to initiator 
+    // switches off error bubbling to initiator. Default: false
     noXor?: boolean
-    // switches off first hop to relay peer
+    // switches off first hop to relay peer. Default: false
     noRelay?: boolean
 }
 ```
