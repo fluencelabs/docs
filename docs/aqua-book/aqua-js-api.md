@@ -1,6 +1,6 @@
 # Aqua JS API
 
-Aqua JS API allows you to manage all aspects of [Aqua](../introduction.md) development from your JS projects.
+Aqua JS API allows you to manage all aspects of [Aqua](introduction.md) development from your JS projects.
 
 To install the Aqua API package:
 
