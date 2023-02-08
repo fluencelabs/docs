@@ -29,7 +29,8 @@ export class Input {
 }
 ```
 
-- Path to `.aqua` file or directory with `.aqua` files. Note: right now supported only absolute paths. 
+- Path to `.aqua` file or directory with `.aqua` files. 
+- Note: paths must be absolute
 
 ```typescript
 export class Path {
