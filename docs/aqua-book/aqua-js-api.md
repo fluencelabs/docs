@@ -1,6 +1,6 @@
 # Aqua JS API
 
-Aqua JS API allows you to manage all aspects of [Aqua](../introduction.md) development from your JS projects.
+Aqua JS API allows you to manage all aspects of [Aqua](introduction.md) development from your JS projects.
 
 To install the Aqua API package:
 
@@ -49,7 +49,7 @@ export class Call {
 }
 ```
 
-- `imports` is a path to files that is necessary for compilation but not needed to be compiled into AIR functions. More information [here](language/header/header).
+- `imports` is a path to files that is necessary for compilation but not needed to be compiled into AIR functions. More information [here](language/header/header.md).
 - `config` is the following `AquaConfig` data structure
 
 ```typescript
@@ -64,7 +64,7 @@ export class AquaConfig {
     noRelay?: boolean
 }
 ```
-More info about overridable constants [here](language/expressions/overridable-constants).
+More info about overridable constants [here](language/expressions/overridable-constants.md).
 
 Compilation result:
 ```typescript
