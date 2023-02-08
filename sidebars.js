@@ -153,6 +153,7 @@ const sidebars = {
         "aqua-book/aqua-cli/peer-state-info",
       ],
     },
+    "aqua-book/aqua-js-api",
     "aqua-book/changelog",
   ],
   "marine-book": [

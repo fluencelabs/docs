@@ -7,6 +7,10 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.9.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.4) – February 1, 2023
+* bug fix: Canonicalize variable in an object creation or a copy if a variable is a stream ([#649](https://github.com/fluencelabs/aqua/issues/649)) ([fedd743](https://github.com/fluencelabs/aqua/commit/fedd743721c33ccee51b2b6b8efff2b032586329))
+* performance: Unfold variables in parallel where it is possible ([#656](https://github.com/fluencelabs/aqua/issues/656)) ([439f2cd](https://github.com/fluencelabs/aqua/commit/439f2cde03b5bca99b072bf7cad389168b8ad0fa))
+
 ### [0.9.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.3) – January 20, 2023
 * Add `copy` method to modify a structure field while preserving immutability ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures), PR: [#646](https://github.com/fluencelabs/aqua/pull/646))
 * bug fix: sometimes `nil` cannot be returned from a function properly ([#629](https://github.com/fluencelabs/aqua/pull/629))
