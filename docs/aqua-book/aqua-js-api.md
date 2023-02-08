@@ -9,7 +9,7 @@ npm install --save @fluencelabs/aqua-api
 ```
 
 # API
-API compiles high-level Aqua code into AIR language that can be used with Fluence JS client to make peer-to-peer calls.
+API compiles high-level Aqua code into low-level AIR instructions that can be used with Fluence JS client to make peer-to-peer calls.
 
 API has only one function:
 
