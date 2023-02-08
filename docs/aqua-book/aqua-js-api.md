@@ -64,7 +64,7 @@ export class AquaConfig {
     noRelay?: boolean
 }
 ```
-More info about overridable constants [here](language/expressions/overridable-constants).
+More info about overridable constants [here](language/expressions/overridable-constants.md).
 
 Compilation result:
 ```typescript
