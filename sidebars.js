@@ -41,17 +41,9 @@ const sidebars = {
     "build/node",
     {
       type: "category",
-      label: "Fluence JS",
-      link: { id: "build/fluence-js/fluence-js", type: "doc" },
-      items: [
-        "build/fluence-js/concepts",
-        "build/fluence-js/basics",
-        "build/fluence-js/run-in-node",
-        "build/fluence-js/run-in-browser",
-        "build/fluence-js/in-depth",
-        "build/fluence-js/api-reference",
-        "build/fluence-js/changelog",
-      ],
+      label: "Fluence JS Client",
+      link: { id: "build/js-client/about", type: "doc" },
+      items: ["build/js-client/about"],
     },
     "build/security",
     {
