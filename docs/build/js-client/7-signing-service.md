@@ -1,3 +1,5 @@
+# Signing service (plugin?)
+
 # TODO: adapt to JS Client
 
 Signing service is useful when you want to sign arbitrary data and pass it further inside a single aqua script. Signing service allows to restrict its usage for security reasons: e.g you don't want to sign anything except it comes from a trusted source. The aqua side API is the following:

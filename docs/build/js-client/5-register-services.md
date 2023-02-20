@@ -1,3 +1,5 @@
+# Register Aqua services (as plugins?)
+
 # TODO: adapt to JS Client
 
 # TODO: mention aqua arrays and their types convertion

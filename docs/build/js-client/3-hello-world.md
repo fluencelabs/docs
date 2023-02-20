@@ -1,6 +1,6 @@
-# TODO: adapt to JS Client
+# Hello world example
 
-# Basics
+# TODO: adapt to JS Client
 
 ## Intro
 
