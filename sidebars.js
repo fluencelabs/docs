@@ -42,8 +42,19 @@ const sidebars = {
     {
       type: "category",
       label: "Fluence JS Client",
-      link: { id: "build/js-client/about", type: "doc" },
-      items: ["build/js-client/about"],
+      link: { id: "build/js-client/1-js-client", type: "doc" },
+      items: [
+        "build/js-client/1-js-client",
+        "build/js-client/2-installation",
+        "build/js-client/3-hello-world",
+        "build/js-client/4-call-functions",
+        "build/js-client/5-register-services",
+        "build/js-client/6-call-params",
+        "build/js-client/7-signing-service",
+        "build/js-client/8-marine-js",
+        "build/js-client/9-internals",
+        "build/js-client/99-changelog",
+      ],
     },
     "build/security",
     {
