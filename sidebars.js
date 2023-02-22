@@ -66,6 +66,7 @@ const sidebars = {
       ],
     },
     "build/research-papers-and-references",
+    "build/glossary",
   ],
   learn: [
     "learn/overview",
