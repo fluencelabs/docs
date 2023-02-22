@@ -157,6 +157,10 @@ Allows you to call the specified module's function. Please note that from Aqua o
 1> call greeting greeting "Fluence"
 result: String("Hi, Fluence")
  elapsed time: 160.923µs
+```
+
+As an unrelated example, here is how the AquaVM invocation might look like:
+```
 2> call avm invoke ["(null)", [], [], {"init_peer_id": "init", "current_peer_id": "some", "timestamp": 1500000000000, "ttl": 120000}, [123, 125]]
 result: ...
  elapsed time: 45.712375ms
