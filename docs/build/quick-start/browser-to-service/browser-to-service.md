@@ -11,7 +11,6 @@ npm install
 And run the application with:
 
 ```sh
-npm run compile-aqua
 npm start
 ```
 

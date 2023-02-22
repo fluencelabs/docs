@@ -12,7 +12,6 @@ npm install
 Run the app with `npm start` :
 
 ```sh
-npm run compile-aqua
 npm start
 ```
 
@@ -62,8 +61,9 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
 
-import { Fluence } from "@fluencelabs/fluence";
-import { krasnodar } from "@fluencelabs/fluence-network-environment";
+import { Fluence } from "@fluencelabs/js-client.api";
+import type { ConnectionState } from "@fluencelabs/js-client.api";
+import { kras } from "@fluencelabs/fluence-network-environment";
 import { sayHello, registerHelloPeer } from "./_aqua/getting-started";
 ```
 
@@ -74,8 +74,8 @@ The local (browser) service `HelloPeer` is also implemented in the `App.tsx` fil
 ```typescript
 const connect = async (relayPeerId: string) => {
   try {
-    await Fluence.start({ connectTo: relayPeerId });
-    setIsConnected(true);
+    await Fluence.connect(relayPeerId);
+
     // Register handler for this call in aqua:
     // HelloPeer.hello(%init_peer_id%)
     registerHelloPeer({
@@ -85,7 +85,7 @@ const connect = async (relayPeerId: string) => {
       },
     });
   } catch (err) {
-    console.log("Peer initialization failed", err);
+    console.log("Client could not connect", err);
   }
 };
 ```
