@@ -1,12 +1,21 @@
 # Tools
 
+## Fluence CLI
+
+[Fluence CLI](fluence-cli.md) is designed to be the only tool that you need to manage the life cycle of applications written on Fluence. It provides project scaffolding, compilation, service deployment, dependency management and installation, storage of keys and ids, etc.
+
 ## Aqua Command Line Tool
 
 Please see the [Aqua CLI](../aqua-book/aqua-cli/aqua-cli.md) documentation.
 
-## Fluence JS
+## Fluence JS Client
 
-The [Fluence JS](https://github.com/fluencelabs/fluence-js) supports developers to build full-fledged applications for a variety of targets ranging from browsers to backend apps and greatly expands on the `cli` capabilities with respect to creating a local client peer.
+Fluence JS Client is a limited implementation of the Fluence Peer in JS.
+It runs in Node.js and browser, has Marine-JS inside to execute Webassembly, runs AquaVM as a Marine-driven Wasm as well as other Fluence protocol-level services.
+Fluence JS Client is embedded into Fluence CLI.
+Aqua compiler has JS and TS targets that uses Fluence JS Client to actually run compiled AIR code, and provides relevant types.
+
+Please see [Fluence JS Client Github](https://github.com/fluencelabs/js-client) for more details.
 
 ## Marine Tools
 
