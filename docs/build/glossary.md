@@ -9,7 +9,7 @@ AIR contains a very limited set of instructions, like `(seq A B)` or `(par A B)`
 
 Aqua is a language for distributed systems and peer-to-peer networks.
 Aqua describes distributed control flow in developer-friendly terms, and delegates computations to [Service](#Service)s on particular [Peer](#Peer)s.
-Aqua follows [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Service](#service)s. Read more in [Aqua Book](/docs/aqua-book/).
+Aqua follows [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Service](#service)s. Read more in [Aqua Book](/docs/aqua-book/introduction.md).
 
 ## AquaVM
 
