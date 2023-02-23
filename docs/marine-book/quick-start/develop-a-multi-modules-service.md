@@ -19,18 +19,18 @@ First, create an empty directory with the `url-downloader` name (further, we wil
 mkdir url-downloader & cd url-downloader
 
 # create three new Rust projects for modules
-cargo new curl --bin
+cargo new curl-adapter --bin
 cargo new local-storage --bin
 cargo new facade --bin
 ```
 
-Then add `marine-rs-sdk` to the `dependencies` section of each `Cargo.toml` file.
+Then add `marine-rs-sdk = 0.7.1` to the `dependencies` section of each `Cargo.toml` file.
 
 ### Curl module
 
 The main purpose of this module is to simply provide a wrapper for the `curl` CLI tool. This is done by importing the `curl` function from the host (in the same way as described in [mounted binaries](../marine-runtime/mounted-binaries.md) section and exporting the function called `get`.
 
-Open the `curl/src/main.rs` file in an editor and paste the code of the `curl` module there:
+Open the `curl-adapter/src/main.rs` file in an editor and paste the code of the `curl` module there:
 
 ```rust
 use marine_rs_sdk::marine;
@@ -80,7 +80,7 @@ pub fn get(file_name: String) -> Vec<u8> {
 
 ### Facade module
 
-The `facade` module combines the logic of the previous modules in one exported function: `get_n_save`. This function downloads the site with the specified name using the `get` function from the `curl_adapter` module and then saves it into a file on the file system using the `put` function from the `local-storage` module. To import functions from another module, their signatures must be declared in an extern block wrapped with the `[marine]` procedure macro.
+The `facade` module combines the logic of the previous modules in one exported function: `get_n_save`. This function downloads the site with the specified name using the `get` function from the `curl_adapter` module and then saves it into a file on the file system using the `put` function from the `local-storage` module. To import functions from another module, their signatures must be declared in an extern block wrapped with the `#[marine]` procedure macro.
 
 Open the `facade/src/main.rs` file in an editor and paste the code of the `facade` module there:
 

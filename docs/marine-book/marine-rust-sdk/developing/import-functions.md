@@ -41,7 +41,7 @@ extern "C" {
 <TabItem value="Example 2" label="Example 2" default>
 
 ```rust
-[marine]
+#[marine]
 #[link(wasm_import_module = "some_module")]
 extern "C" {
   pub fn foo(arg: Vec<Vec<Vec<Vec<u8>>>>) -> Vec<Vec<Vec<Vec<u8>>>>;

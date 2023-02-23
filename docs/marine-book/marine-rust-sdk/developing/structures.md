@@ -98,7 +98,7 @@ fn some_function() -> Data {
         name: "example".into(),
         data: 1.0,
     }
-}t
+}
 ```
 
 </TabItem>
