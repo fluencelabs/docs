@@ -39,7 +39,7 @@ Adding the Fluence JS client for your web application is very easy.
 
 **Prerequisites:**
 
-Fluence JS Client only supports ESM module format. This implies that following must be configured:
+The Fluence JS Client only supports the ES module format. This implies that some preliminary steps are necessary:
 
 - Add `"type": "module"` to your package.json.
 - Replace `"main": "index.js"` with `"exports": "./index.js"` in your package.json.
