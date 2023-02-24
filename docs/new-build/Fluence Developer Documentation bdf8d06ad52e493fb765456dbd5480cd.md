@@ -142,7 +142,7 @@ Figure ?:
 
 Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet. 
 
-Finally, head over to the Fluence faucet, [https://faucet.fluence.dev](https://faucet.fluence.dev/) :
+Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
 
 Figure ?:
 
