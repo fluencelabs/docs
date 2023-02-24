@@ -5,24 +5,25 @@
 Learning
 
 Let's create a vastly improve *hello world* implementation to something a little more informative: we want a function that takes a city name and returns a greeting with the local time, e.g., "Hello, New York. It is 23:01:14."
+
 In order to get the time, we write an adapter using the hosting peers curl binary to make a call to [WorldTimeAPI](https://worldtimeapi.org/). For our purposes, we shift some work on the user and limit our wordly greeting to the following [cities](https://worldtimeapi.org/timezones).
 
 Let's create a new Fluence project with Fluence CLI:
 
 ```
-fluence init hello-world-with-time
+$ fluence init hello-world-with-time
 ? Select template minimal
 
 Successfully initialized Fluence project template at ~/localdev/documentation-examples/hello-world-with-time
 
-cd hello-world-with-time
+$ cd hello-world-with-time
 
 ```
 
 And let's create a new service:
 
 ```
-fluence service new
+$ fluence service new
 ? Enter service path services
 ? Do you want to use services as the name of your new service? No
 ? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores) hello_world
@@ -33,15 +34,12 @@ Successfully generated template for new service at services
    Compiling hello_world v0.1.0 (/Users/bebo/localdev/documentation-examples/hello-world-with-time/services/modules/hello_world)
     Finished release [optimized] target(s) in 20.15s
 Added hello_world to fluence.yaml
-? Do you want to add service hello_world to a default worker defaultWorker Yes
-Added hello_world to defaultWorker
-
 ```
 
 In the newly created *services* directory, you find the services.yaml configuration file:
 
 ```
-# services/services.yaml
+$ cat services/services.yaml
 version: 0
 name: hello_world
 modules:
@@ -53,7 +51,7 @@ modules:
 Which drives the configuration of the modules comprising the service; in this case, it's just the *hello_world* module, which itself is defined in the services/modules/hello_world/module.yaml:
 
 ```
-# services/modules/hello_world/module.yaml
+$ cat services/modules/hello_world/module.yaml
 
 version: 0
 type: rust
@@ -77,7 +75,6 @@ In essence, we need to link to the curl binary available on the host system and 
 extern "C" {
     fn curl(cmd: Vec<String>) -> MountedBinaryResult;
 }
-
 ```
 
 Which basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
@@ -96,10 +93,9 @@ In essence, this struct encapsulates a return code, an error string and the stdo
 Now we need some finishing touches to the adapter code and configuration file. Let's start by adding a new module to the already existing hello_world service:
 
 ```
- fluence module new
+$ fluence module new
 ? Enter module path services/modules/curl_adapter
 Successfully generated template for new module at services/modules/curl_adapter
-
 ```
 
 In our new curl_adapter module template, replace the example code with the following:
@@ -119,10 +115,9 @@ pub fn curl_request(cmd: Vec<String>) -> MountedBinaryResult {
 extern "C" {
     fn curl(cmd: Vec<String>) -> MountedBinaryResult;
 }
-
 ```
 
-In addition to our FFI code, we write a wrapper, *curl_request* or whatever name you want to give it, which is the only public method of this module. Recall that the curl function in the FFI section exposes the link to the binary to the module but not beyond. We need to do one more thing to make this module usable and that is to update its configuration file, which currently reads:
+In addition to our FFI code, we write a wrapper, *curl_request* or whatever name you want to give it, which is the only public method of this module. Recall that the curl function in the FFI section exposes the link to the binary to the module but not beyond. We need to do one more thing to make this module usable and that is to update its configuration file at `services/modules/curl_adapter/module.yaml`, which currently reads:
 
 ```
 version: 0
@@ -150,10 +145,10 @@ Back to the contrived problem at hand: given a city, return a greeting with the 
 
 ```
 #[marine]
- #[link(wasm_import_module = "curl_adapter")]
- extern "C" {
-     pub fn curl_request(cmd: Vec<String>) -> MountedBinaryResult;
- }
+#[link(wasm_import_module = "curl_adapter")]
+extern "C" {
+   pub fn curl_request(cmd: Vec<String>) -> MountedBinaryResult;
+}
 
 ```
 
@@ -166,7 +161,7 @@ Finally, it's time to implement our business logic. For the purpose of this disc
 Just using curl from your command line, we can preview our response:
 
 ```
-curl -H "Accept: application/json"  "<http://worldtimeapi.org/api/timezone/Europe/Amsterdam>"
+curl -H "Accept: application/json"  "http://worldtimeapi.org/api/timezone/Europe/Amsterdam"
 
 ```
 
@@ -179,7 +174,7 @@ Returns this json document:
 
 And the *datetime* key looks just what we want!
 
-Go to your *services/modules/hello_world/main.rs* file and replace the template code with the following code and make sure you add the dependencies per the *Cargo.toml* file in the module directory.
+Go to your *services/modules/hello_world/src/main.rs* file and replace the template code with the following code, and make sure you add the `chrono` and `serde_json` dependencies to the *Cargo.toml* file in the module directory.
 
 ```
 use chrono;
@@ -188,7 +183,7 @@ use serde_json;
 
 pub fn main() {}
 
-const WTAPI: &str = "<http://worldtimeapi.org/api/timezone/>";
+const WTAPI: &str = "http://worldtimeapi.org/api/timezone/";
 
 fn get_timezone(name: String) -> MountedBinaryResult {
     let url = format!("{}{}", WTAPI, name);
@@ -234,8 +229,9 @@ extern "C" {
 We split our business logic into two functions: the *get_timezone* function, which calls the WTAPI with the "region/city" using our curl adapter and just passes on the results struct and the *hello_world* function, which basically turns the ATAPI response in to a string. Let's test the code with the Marine REPL:
 
 ```
-fluence service repl services
-
+$ fluence module add services/modules/curl_adapter
+? Enter service name from fluence.yaml or path to the service directory hello_world
+$ fluence service repl services
 ```
 
 Compiles our code and loads our modules and linking configuration right into the REPL:
@@ -269,9 +265,9 @@ data MountedBinaryResult:
 
 exported functions:
 curl_adapter:
-  fn curl_request(cmd: []string) -> MountedBinaryResult
+  func curl_request(cmd: []string) -> MountedBinaryResult
 hello_world:
-  fn hello_world(name: string) -> string
+  func hello_world(name: string) -> string
 
 ```
 
@@ -323,7 +319,7 @@ func hello_world(city: string) -> string:
 ```
 
 ```
-fluence run
+$ fluence run
 ? Enter a function call that you want to execute hello_world("Europe/Amsterdam")
 "Hello, Amsterdam it's 01:12:34.418336"        <- Expected result
 Running:
