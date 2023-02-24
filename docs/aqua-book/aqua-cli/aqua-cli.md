@@ -28,7 +28,7 @@ Of course, we can be more specific and name a filename:
 aqua --input src/aqua/some_file.aqua --output src/generated
 ```
 
-As mentioned in the intro, the Aqua compiler generates `.js` with `.d.ts` TypeScript files by default. Output files will contain functions exported from `.aqua` files and methods for registering defined services. You can read more about calling functions and service registration in the [FluenceJS documentation](../../build/fluence-js/in-depth.md).
+As mentioned in the intro, the Aqua compiler generates `.js` with `.d.ts` TypeScript files by default. Output files will contain functions exported from `.aqua` files and methods for registering defined services. You can read more about calling functions and service registration in the [FluenceJS documentation](https://github.com/fluencelabs/js-client).
 
 Additional compiler options are:
 

@@ -4,15 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="making links local">
+    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="images renamed">
+      <change afterPath="$PROJECT_DIR$/docs/build/working-with-data.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/old-build/introduction.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/get-started.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/1-mumbai-faucet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 2.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/2-fluence-faucet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 3.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/3-fluence-faucet-tx.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 4.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/4-connect-cli-wallet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 5.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/5-cli-wallet-connected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/0-add-mumbai.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/aqua-book/aqua-cli/aqua-cli.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/aqua-book/aqua-cli/aqua-cli.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/aqua-book/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/aqua-book/changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/aqua.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/aqua.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/aquamarine.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/aquamarine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/marine/marine-cli.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/marine/marine-cli.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/marine/marine-repl.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/marine/marine-repl.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/marine/marine-rs-sdk.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/marine/marine-rs-sdk.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/aquamarine/marine/marine.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/aquamarine/marine/marine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/concepts/concepts.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/concepts/concepts.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-cli.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-cli.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/api-reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/api-reference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/basics.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/basics.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/concepts.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/concepts.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/fluence-js.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/fluence-js.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/in-depth.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/in-depth.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/run-in-browser.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/run-in-browser.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/fluence-js/run-in-node.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/fluence-js/run-in-node.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/introduction.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/introduction.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/node.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/node.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-browser/Connection-confirmation-to-network.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-browser/Connection-confirmation-to-network.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-browser/Peer-to-peer-communication-between-two-browser-client-peers.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-browser/Peer-to-peer-communication-between-two-browser-client-peers.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-browser/Relay-Selection.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-browser/Relay-Selection.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-browser/browser-to-browser.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-browser/browser-to-browser.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-browser/getting-started.aqua.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-browser/getting-started.aqua.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-service/Browser-To-Service-Implementation.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-service/Browser-To-Service-Implementation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/browser-to-service/browser-to-service.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/browser-to-service/browser-to-service.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/decentralized-oracles/Decentralized-Timestamp-Oracle.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/decentralized-oracles/Decentralized-Timestamp-Oracle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/decentralized-oracles/Stylized-Decentralized-Oracle.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/decentralized-oracles/Stylized-Decentralized-Oracle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/decentralized-oracles/decentralized-oracles.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/decentralized-oracles/decentralized-oracles.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/hosted-services/HelloWorld-service-deployed-to-peer.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/hosted-services/HelloWorld-service-deployed-to-peer.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/hosted-services/hosted-services.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/hosted-services/hosted-services.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/quick-start.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/quick-start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/service-composition-and-reuse/Service-execution.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/service-composition-and-reuse/Service-execution.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/service-composition-and-reuse/Stylized-service-deployment.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/service-composition-and-reuse/Stylized-service-deployment.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/quick-start/service-composition-and-reuse/service-composition-and-reuse.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/quick-start/service-composition-and-reuse/service-composition-and-reuse.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/research-papers-and-references.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/research-papers-and-references.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/thinking-in-aqua-marine/thinking-in-aqua-marine.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/thinking-in-aqua-marine/thinking-in-aqua-marine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/tutorials/add-your-own-builtins.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/tutorials/add-your-own-builtins.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/tutorials/curl-as-a-service.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/tutorials/curl-as-a-service.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/tutorials/deploy-a-local-fluence-node.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/tutorials/deploy-a-local-fluence-node.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/tutorials/setting-up-your-environment.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/old-build/tutorials/setting-up-your-environment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/learn/technology.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/learn/technology.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/marine-book/quick-start/setting-up-the-development-environment.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/marine-book/quick-start/setting-up-the-development-environment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/cli-keys-management.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/cli-keys-management.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/data-acquisition.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/data-acquisition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/develop-distributed-algos.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/develop-distributed-algos.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/develop-services.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/develop-services.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/fundamentals.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/fundamentals.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/get-started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/0-add-mumbai.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/0-add-mumbai.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/1-mumbai-faucet.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/1-mumbai-faucet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/2-fluence-faucet.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/2-fluence-faucet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/3-fluence-faucet-tx.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/3-fluence-faucet-tx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/4-connect-cli-wallet.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/4-connect-cli-wallet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/5-cli-wallet-connected.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/images/5-cli-wallet-connected.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/index.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/limits.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/limits.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/local-data-storage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/local-data-storage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/overview.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/quickstarts.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/quickstarts.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/reference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/remote-data-storage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/remote-data-storage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sidebars.js" beforeDir="false" afterPath="$PROJECT_DIR$/sidebars.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +118,13 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.sourceCode.Markdown",
+    "ts.external.directory.path": "/Users/office/IdeaProjects/docs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/build" />
       <recent name="$PROJECT_DIR$/docs/new-build" />
     </key>
   </component>
@@ -91,7 +153,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677227595744</updated>
-      <workItem from="1677227598146" duration="8806000" />
+      <workItem from="1677227598146" duration="10950000" />
     </task>
     <task id="LOCAL-00001" summary="newdoc splitting wip">
       <created>1677228440267</created>
@@ -135,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677246531342</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="images renamed">
+      <created>1677247006412</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1677247006412</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +217,7 @@
     <MESSAGE value="Overview.md" />
     <MESSAGE value="Fixed links in get-started.md" />
     <MESSAGE value="making links local" />
-    <option name="LAST_COMMIT_MESSAGE" value="making links local" />
+    <MESSAGE value="images renamed" />
+    <option name="LAST_COMMIT_MESSAGE" value="images renamed" />
   </component>
 </project>

@@ -347,7 +347,7 @@ Tetraplets have the form of:
 }
 ```
 
-To learn more about tetraplets and application security see [Security](../security.md)
+To learn more about tetraplets and application security see [Security](docs/build/security.md)
 
 To see full specification of `CallParams` type see [API reference](https://fluence.one/fluence-js/)
 

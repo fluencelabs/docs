@@ -1,11 +1,11 @@
-## **Get started (with CLI)**
+## Get started (with CLI)
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
 
 
 > 👉 Note that Fluence CLI is currently only available for *nix* systems including OSX and Windows Subsystem for Linux (WSL). Moreover, Fluence CLI installs all the required dependencies not already installed on your system including Rust.
 
-### **Install Fluence CLI**
+### Install Fluence CLI
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a *npm* package requiring node and npm to be available on your device. See [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), for example, for installation instructions. With npm readily available, we can install the Fluence CLI:
 
@@ -73,7 +73,7 @@ And that concludes the installation section as you are ready!
 ---
 
 
-### **Start a new project**
+### Start a new project
 
 As mentioned at the outset, Fluence CLI is your Swiss army knife to all things Fluence. To keep things familiar, let’s start with the obligatory *Hello World* example to introduce Fluence and Fluence CLI.
 

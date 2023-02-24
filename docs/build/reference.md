@@ -1,4 +1,4 @@
-## **Reference**
+# Reference**
 
 ### **Fluence CLI reference**
 
@@ -17,3 +17,8 @@ Aqua is a very lean language optimized to bring accessible and ergonomic peer-to
 ## **Glossary**
 
 [Glossary](/docs/build/glossary.md)
+
+# Research, Papers And References
+
+* [Fluence Manifesto](https://fluence.network/manifesto.html)
+* [Fluence Protocol](https://github.com/fluencelabs/rfcs/blob/main/0-overview.md)

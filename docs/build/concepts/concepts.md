@@ -28,7 +28,7 @@ Figure 5: From Aqua Script To Particle Execution
 
 ![Figure 5: From Aqua Script To Particle Execution](./From-Aqua-Script-To-Particle-Execution.png)
 
-Currently, compiled Aqua scripts can be executed from Typescript clients based on [Fluence SDK](https://github.com/fluencelabs/fluence-js). For more information about Aqua, see the [Aqua book](../../aqua-book/introduction.md).
+Currently, compiled Aqua scripts can be executed from Typescript clients based on [Fluence SDK](https://github.com/fluencelabs/fluence-js). For more information about Aqua, see the [Aqua book](docs/aqua-book/introduction.md).
 
 ### Marine
 

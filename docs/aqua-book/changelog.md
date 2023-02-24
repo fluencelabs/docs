@@ -12,7 +12,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * performance: Unfold variables in parallel where it is possible ([#656](https://github.com/fluencelabs/aqua/issues/656)) ([439f2cd](https://github.com/fluencelabs/aqua/commit/439f2cde03b5bca99b072bf7cad389168b8ad0fa))
 
 ### [0.9.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.3) – January 20, 2023
-* Add `copy` method to modify a structure field while preserving immutability ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures), PR: [#646](https://github.com/fluencelabs/aqua/pull/646))
+* Add `copy` method to modify a structure field while preserving immutability ([example](/docs/aqua-book/language/types.md#structures), PR: [#646](https://github.com/fluencelabs/aqua/pull/646))
 * bug fix: sometimes `nil` cannot be returned from a function properly ([#629](https://github.com/fluencelabs/aqua/pull/629))
 * bug fix: incorrect number of arguments error message ([#645](https://github.com/fluencelabs/aqua/pull/645))
 
@@ -24,8 +24,8 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * many Scala and JS libraries updated
 
 ### [0.8.0](https://github.com/fluencelabs/aqua/releases/tag/0.8.0) – November 30, 2022
-* Structures can be instantiated right in the code ([example](https://fluence.dev/docs/aqua-book/language/types.md#structures), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
-* `module` key word was renamed to `aqua` ([docs](https://fluence.dev/docs/aqua-book/language/header/header.md#aqua-source-file-header), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
+* Structures can be instantiated right in the code ([example](/docs/aqua-book/language/types.md#structures), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
+* `module` key word was renamed to `aqua` ([docs](/docs/aqua-book/language/header/header.md#aqua-source-file-header), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
 * Syntax checking has been disabled in generated JS/TS files ([#585](https://github.com/fluencelabs/aqua/pull/585))
 * a lot of bug fixes ([#590](https://github.com/fluencelabs/aqua/pull/590), [#584](https://github.com/fluencelabs/aqua/pull/584), [#582](https://github.com/fluencelabs/aqua/pull/582), [#581](https://github.com/fluencelabs/aqua/pull/581), [#580](https://github.com/fluencelabs/aqua/pull/580), [#578](https://github.com/fluencelabs/aqua/pull/578), [#579](https://github.com/fluencelabs/aqua/pull/579))
 * bump fluence-js to version 0.27.3
@@ -39,8 +39,8 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * bump fluence-js to latest version
 
 ### [0.7.6](https://github.com/fluencelabs/aqua/releases/tag/0.7.6) – September 22, 2022
-* Run builtin services directly from aqua run without any input ([docs](https://fluence.dev/docs/aqua-book/aqua-cli/#run))
-* Run services in aqua run ([docs](https://fluence.dev/docs/aqua-book/aqua-cli/#run))
+* Run builtin services directly from aqua run without any input ([docs](/docs/aqua-book/aqua-cli/#run))
+* Run services in aqua run ([docs](/docs/aqua-book/aqua-cli/#run))
 * Forbid streams in structures. Restrict assignment with empty streams and arrays
 * bump fluence-js to v0.25.1
 * a lot of bugs fixed
@@ -146,7 +146,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * Breaking semantic change: [Stream restrictions](language/crdt-streams.md#stream-restrictions). This fixes many obscure bugs which happened when using streams inside `for` cycles ([#321](https://github.com/fluencelabs/aqua/issues/321))
 * This version of Aqua is not compatible with `fldist` so far (cannot run the emitted `AIR` via `fldist`). Use `aqua run` to run Aqua instead ([#358](https://github.com/fluencelabs/aqua/pull/358))
 * Added timeout parameter support for `aqua run` ([#360](https://github.com/fluencelabs/aqua/pull/360))
-* You need to update [FluenceJS to 0.15.0](../build/fluence-js/changelog.md#0150httpsgithubcomfluencelabsfluence-jsreleasestagv0150-–-november-17-2021)+ and [Fluence Node to v0.0.23](https://github.com/fluencelabs/node-distro/releases/tag/v0.0.23)+ for Aqua 0.5 support, previous versions will not work.
+* You need to update _FluenceJS to 0.15.0_+ and [Fluence Node to v0.0.23](https://github.com/fluencelabs/node-distro/releases/tag/v0.0.23)+ for Aqua 0.5 support, previous versions will not work.
 
 ### [0.4.1](https://github.com/fluencelabs/aqua/releases/tag/0.4.1) – November 10, 2021
 
@@ -158,7 +158,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.4.0](https://github.com/fluencelabs/aqua/releases/tag/0.4.0) – October 25, 2021
 
-* Now Aqua compiler emits JS/TS code for [Fluence JS 0.14](https://www.npmjs.com/package/@fluencelabs/fluence). The new JS/TS SDK is heavily rewritten to [support async service functions declaration](../build/fluence-js/in-depth.md#using-asynchronous-code-in-callbacks). It also embeds a deeply refactored [AquaVM](https://github.com/fluencelabs/aquavm). ([#334](https://github.com/fluencelabs/aqua/pull/334))
+* Now Aqua compiler emits JS/TS code for [Fluence JS 0.14](https://www.npmjs.com/package/@fluencelabs/fluence). The new JS/TS SDK is heavily rewritten to _support async service functions declaration_. It also embeds a deeply refactored [AquaVM](https://github.com/fluencelabs/aquavm). ([#334](https://github.com/fluencelabs/aqua/pull/334))
 * Various bugfixes for AIR generation and the compiler behavior ([#328](https://github.com/fluencelabs/aqua/pull/328), [#335](https://github.com/fluencelabs/aqua/pull/335), [#336](https://github.com/fluencelabs/aqua/pull/336), [#338](https://github.com/fluencelabs/aqua/pull/338))
 
 ### [0.3.2](https://github.com/fluencelabs/aqua/releases/tag/0.3.2) – October 13, 2021

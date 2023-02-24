@@ -170,7 +170,7 @@ where the *volumes* section contains the mapping of the actual directory to the 
 
 For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
 
-Now that we have our [effector module](/docs/marine-book/basic-concepts/) in place, let's code our [facade module](/docs/build/glossary.md#facade-module), which in our case consists of simple read and write methods essentially wrapping the effector methods with a little convenience: instead of byte arrays we can use human readable strings to write and read our file content.
+Now that we have our [effector module](/docs/marine-book/basic-concepts/) in place, let's code our [facade module](https://fluence.dev/docs/build/glossary.md#facade-module), which in our case consists of simple read and write methods essentially wrapping the effector methods with a little convenience: instead of byte arrays we can use human readable strings to write and read our file content.
 
 Recall that Wasm IT modules are shared nothing and that we need to explicitly link dependencies. Before we code our facade, let's have a look at what we need to do to link our effector, aka adapter, module:
 
@@ -298,7 +298,7 @@ modules:
 
 ```
 
-Now we can use our service, aptly called *local_storage*, even without deployment to the network in the [Marine REPL](/docs/marine-book/marine-tooling-reference/marine-repl.md):
+Now we can use our service, aptly called *local_storage*, even without deployment to the network in the [Marine REPL](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl.md):
 
 ```bash
 fluence service repl
