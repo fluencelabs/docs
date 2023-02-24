@@ -61,13 +61,13 @@ name: hello_world
 
 ```
 
-Note that the hello_world module is the [facade module](https://fluence.dev/docs/marine-book/marine-runtime/module-types/), i.e., the module that provides the public access API to all modules comprising the service. Let's add another module to clarify the distinction.
+Note that the hello_world module is the [facade module](/docs/marine-book/marine-runtime/module-types/), i.e., the module that provides the public access API to all modules comprising the service. Let's add another module to clarify the distinction.
 
 In order to be able to interact with the WorldTimeApi from our Wasm module and Aqua, we need to provide some socket capability for the HTTP call. Since Wasm modules are single threaded without a socket, we need to literally look outside the (Wasm) sandbox. In fact, we are going to write and *adapter* to the service host peer's curl binary! Of course, the host needs to agree to provide the curl resource at the time of accepting to host your service.
 
-Let's write our curl adapter, which is in Fluence parlance called an [effector module](https://fluence.dev/docs/marine-book/marine-runtime/module-types/). Why? Because they can access resources outside the Wasi sandbox, such as host filesystems and binaries.
+Let's write our curl adapter, which is in Fluence parlance called an [effector module](/docs/marine-book/marine-runtime/module-types/). Why? Because they can access resources outside the Wasi sandbox, such as host filesystems and binaries.
 
-To access a host's binaries, we need to make use of Rust's [FFI](https://doc.rust-lang.org/nomicon/ffi.html) and Marine supports tis with the [MountedBinary type](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries).
+To access a host's binaries, we need to make use of Rust's [FFI](https://doc.rust-lang.org/nomicon/ffi.html) and Marine supports tis with the [MountedBinary type](/docs/marine-book/marine-runtime/mounted-binaries).
 
 In essence, we need to link to the curl binary available on the host system and expose its cli interface to the Wasm module:
 
@@ -80,7 +80,7 @@ extern "C" {
 
 ```
 
-Which basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries):
+Which basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
 
 ```
 struct MountedBinaryResult:
@@ -142,7 +142,7 @@ mountedBinaries:
 
 ```
 
-Which provides the actual location of the curl command on the host system to MountedBinary. For more detailed information see the corresponding [Marine book](https://fluence.dev/docs/build/concepts/#modules) and [Fluence CLI](https://github.com/fluencelabs/fluence-cli/blob/main/docs/configs/module.md) sections.
+Which provides the actual location of the curl command on the host system to MountedBinary. For more detailed information see the corresponding [Marine book](/docs/build/concepts/#modules) and [Fluence CLI](https://github.com/fluencelabs/fluence-cli/blob/main/docs/configs/module.md) sections.
 
 Now we have a functioning curl adapter (effector) module ready to be used by *any* other Wasm module in need of HTTP calling capabilities!
 
@@ -365,7 +365,12 @@ Imagine that you wanted to power multiple timezone clocks in your DAO frontend a
 
 While our current *hello_world* function isn't optimal, it is certainly usable in our parallelization use case.
 
-The details of Aqua's parallel execution flow is discussed in the [Aqua book](https://fluence.dev/docs/aqua-book/language/flow/parallel). Most simplistically, for each parallel branch we ant to execute, we need to have a corresponding service deploy. That is, for a list of, say, five timezones, we want to have five deployed services to provide true parallelization of the requests. Now, the services may be deployed to five different peers or just one peer. From an availability and failover perspective, you want to deploy to different peers to avoid a single source of failure and we'll discuss that in more detail in the [???](notion://www.notion.so/fluencenetwork/section).
+The details of Aqua's parallel execution flow is discussed in the [Aqua book](/docs/aqua-book/language/flow/parallel). 
+Most simplistically, for each parallel branch we ant to execute, we need to have a corresponding service deploy. 
+That is, for a list of, say, five timezones, we want to have five deployed services to provide true parallelization
+of the requests. Now, the services may be deployed to five different peers or just one peer. 
+From an availability and failover perspective, you want to deploy to different peers to avoid a single source
+of failure, and we'll discuss that in more detail _below_.
 
 Let's say we want to power three different timezones for our "world" clocks, so let's deploy two more service instances.
 

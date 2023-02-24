@@ -9,7 +9,7 @@ I~~f you have followed the introduction or even played with the some of the exam
 
 ### **Marine**
 
-~~The Marine stack includes the Marine VM, the Wasm runtime installed on every Rust reference peer, marine-sdks, the ?? you use to develop and test your Rust code, Marine REPL, the run time you …, and the marine cli. Note that both the REPL and the CLI are available to you through Fluence CLI. A detailed account of all things Marine can be found in the [Marine book](https://fluence.dev/docs/marine-book/introduction).~~
+~~The Marine stack includes the Marine VM, the Wasm runtime installed on every Rust reference peer, marine-sdks, the ?? you use to develop and test your Rust code, Marine REPL, the run time you …, and the marine cli. Note that both the REPL and the CLI are available to you through Fluence CLI. A detailed account of all things Marine can be found in the [Marine book](/docs/marine-book/introduction).~~
 
 ### **Aqua**
 
