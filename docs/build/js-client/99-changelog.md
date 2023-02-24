@@ -93,7 +93,7 @@ Minor updates to Fluence Peer:
 
 This is made possible thanks to Marine-JS (milestone 2). The provided API allows hosting marine services on js peer and making them accessible from aqua code. This feature blurs the line between two types of peers and enables service reuse between them.
 
-Please note that a little upgrade is required to switch to v0.23.0: https://doc.fluence.dev/docs/fluence-js/4_run_in_browser-1#configuring-application-to-run-in-browser
+Please note that a little upgrade is required to switch to v0.23.0: <!-- https://doc.fluence.dev/docs/fluence-js/4_run_in_browser-1#configuring-application-to-run-in-browser -->
 If you want to learn more check out the documentation and the demo project:
 
 https://doc.fluence.dev/docs/fluence-js/3_in_depth#using-marine-services-in-fluence-js
@@ -213,7 +213,7 @@ FluencePeer: Update AvmRunner to 0.1.2 (fix issue with incorrect baseUrl) ([#119
 
 ## [0.17.0](https://github.com/fluencelabs/fluence-js/releases/tag/v0.17.0) – December 28, 2021
 
-JS Peer does not embed AVM interpreter any more. Instead [AVM Runner](https://github.com/fluencelabs/avm-runner-background) is used to run AVM in background giving huge performance boost. This is a **breaking change**: all browser applications now not need to bundle `avm.wasm` file and the runner script. See [documentation](./run-in-browser.md) for more info.
+JS Peer does not embed AVM interpreter any more. Instead [AVM Runner](https://github.com/fluencelabs/avm-runner-background) is used to run AVM in background giving huge performance boost. This is a **breaking change**: all browser applications now not need to bundle `avm.wasm` file and the runner script. See [documentation](./2-installation.md) for more info.
 
 ([#111](https://github.com/fluencelabs/fluence-js/pull/120))
 
