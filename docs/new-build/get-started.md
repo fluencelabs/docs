@@ -24,7 +24,7 @@ fluence --version
 
 ### Install Other Prerequisites
 
-In addition to Fluence CLI, you need a [WalletConnect]([https://walletconnect.com/](https://walletconnect.com/)) compatible wallet, such as [MetaMask]([https://metamask.io/](https://metamask.io/)) to be able to fund your distributed services with (testnet) USDC.
+In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund your distributed services with (testnet) USDC.
 
 Our on-chain testnet is Polygon Mumbai:
 
@@ -38,37 +38,37 @@ The Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fl
 
 In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Polygon Mumbai as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
 
-Figure ?:
+Figure 1:
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled.png)
+![Figure 1: Adding Mumbai Testnet to Metamask](images/Untitled.png)
 
 With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/) and have your account address ready:
 
-Figure ?:
+Figure 2:
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%201.png)
+![Figure 2: Get MATIC on the Mumbai Faucet](images/Untitled%201.png)
 
 Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet.
 
 Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
 
-Figure ?:
+Figure 3:
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%202.png)
+![Untitled](images/Untitled%202.png)
 
 which not only allows you to request testnet USDC but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should see:
 
-Figure ?:
+Figure 4:
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%203.png)
+![Untitled](images/Untitled%203.png)
 
-and have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and FakeUSDC transfers into your account, head over to the [explorer]([https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/)).
+and have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and FakeUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
 
 And that concludes the installation section as you are ready!
 
 ---
 
-> Consider reading: [Keys management with Fluence CLI](./cli-keys-management.md)
+> Consider reading: [Keys management with Fluence CLI](cli-keys-management.md)
 
 ---
 
@@ -119,7 +119,7 @@ A this point, you see various config (yaml) files and a *src/aqua* dir with a *m
 
 ```
 
-For more information about all things Aqua, see the [Aqua book]([https://fluence.dev/docs/aqua-book/introduction](https://fluence.dev/docs/aqua-book/introduction)).
+For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
 **Scaffolding Options**
 
@@ -149,11 +149,25 @@ pub fn hello_world() -> String {       // 4
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](https://www.notion.so/Marine-Rust-Runtime-1a48fb4500bf48eb9c5b5ca981169fae), which allows us to compile Rust code to wasm32-wasi compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk*  and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
+Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), 
+which allows us to compile Rust code to wasm32-wasi compatible with Fluence’s Marine runtime. 
+The `#[marine]` macro, (3), is part of the *marine-rust-sdk*  and exports marked types as publicly visible and 
+callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
 
-In (1), we implement a main function which is not marked with the *#[marine]* procedural macro. We discuss modules and module configuration further below. Also note that WASM IT has type limits, which are explained in detail in the [Marine book](https://fluence.dev/docs/marine-book/marine-runtime/i-value-and-i-type). The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal but you do not have generics, traits, etc. Moreover, everything is passed by value and lifetimes are not needed in your Rust code.
+In (1), we implement a main function which is not marked with the *#[marine]* procedural macro. 
+We discuss modules and module configuration further below. Also note that WASM IT has type limits, 
+which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type). 
+The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
+but you do not have generics, traits, etc. Moreover, everything is passed by value and lifetimes are not needed in 
+your Rust code.
 
-Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts. As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with them. If your business logic results in only a single module, like our *hello_world* code, then this module is also the service. Hence, we instruct Fluecne CLI to scaffold a new service for our project.
+Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project 
+with the `fluence service new` command. Let’s unbundle this command before we follow the prompts. 
+As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. 
+You then “package” these modules, with help of Fluence CLI, into a *service*. 
+Eventually you deploy this service to one or more peers and use Aqua to interact with them.  
+If your business logic results in only a single module, like our *hello_world* code, then this module is also the service.
+Hence, we instruct Fluecne CLI to scaffold a new service for our project.
 
 Now we follow the prompts to complete the setup:
 
@@ -173,8 +187,10 @@ Added hello_world to fluence.yaml
 Added hello_world to defaultWorker
 ```
 
-So what just happened?  We instructed the CLI to create a path *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
-**
+So what just happened?  
+We instructed the CLI to create a path *hello-world* in which we want our *hello_world* module to live. 
+Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, 
+which allows Fluence CLI to find what it needs to fulfill command requirements:
 
 ```bash
 # fluence.yaml
@@ -214,9 +230,14 @@ hello-world
 └── service.yaml
 ```
 
-Recall, a service is comprised of one or more Wasm modules and associated configuration and each molule, such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of the modules comprising the service including is the entry, aka facade, module into the service.
+Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
+such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify
+the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of 
+the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module), 
+module into the service.
 
-Looking at the *main.rs* file, you see that it is populated with a greeting example. Replace that code with our code from above so that:
+Looking at the *main.rs* file, you see that it is populated with a greeting example. 
+Replace that code with our code from above so that:
 
 ```bash
 // main.rs
@@ -230,7 +251,8 @@ pub fn hello_fluence() -> String {
 }
 ```
 
-With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module. In your project root directory:
+With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module. 
+In your project root directory:
 
 ```rust
 fluence build
@@ -239,7 +261,8 @@ Making sure all services are downloaded... done
 Making sure all modules are downloaded and built... done
 ```
 
-Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies including Rust. In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
+Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies
+including Rust. In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
 
 ```bash
 ls target/wasm32-wasi/release|grep hello_world.wasm
@@ -248,7 +271,11 @@ hello_world.wasm
 
 ### Test our code
 
-Before we deploy our code to the network, we may wan to run some tests. One way to interact with our Wasm module is to use the [Marine Repl]([https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl#run-repl](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl#run-repl)), which is a tool to run our Wasm modules locally as if they were deployed to the network. Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
+Before we deploy our code to the network, we may wan to run some tests. 
+One way to interact with our Wasm module is to use the 
+[Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
+which is a tool to run our Wasm modules locally as if they were deployed to the network. 
+Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
 
 ```bash
 fluence service repl
@@ -277,7 +304,9 @@ elapsed time 34.081026ms
 1>
 ```
 
-Note that we provided the name of the *path* to our service and thanks to the information in the *fluence.yaml, service.yaml and module.yaml* files, the CLI is able to resolve our input and load the REPL with the correct configuration.  For help with the REPL, just type *help* and to list public structs and functions, type *i* :
+Note that we provided the name of the *path* to our service and thanks to the information in the *fluence.yaml,
+service.yaml and module.yaml* files, the CLI is able to resolve our input and load the REPL with the
+correct configuration.  For help with the REPL, just type *help* and to list public structs and functions, type *i* :
 
 ```bash
 1> i
@@ -290,7 +319,9 @@ hello_world:
   func hello_fluence() -> string
 ```
 
-As expected, our only public function is the *hello_fluence* function in the *hello_world*  namespace. In order to run *hello_fluence*  we use the cll command follow by the namespace, the function and the function arguments:
+As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace. 
+In order to run *hello_fluence*  we use the cll command follow by the namespace, 
+the function and the function arguments:
 
 ```bash
 > call hello_world hello_fluence []
@@ -300,7 +331,10 @@ result: "Hello, Fluence"
 
 Well done!
 
-An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code. Rust comes with a very nice [testing framework]([https://doc.rust-lang.org/cargo/commands/cargo-test.html](https://doc.rust-lang.org/cargo/commands/cargo-test.html)) widely used to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules. With the [marine rust test dsk]([https://crates.io/crates/marine-rs-sdk-test](https://crates.io/crates/marine-rs-sdk-test)), you can do that!
+An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code. 
+Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/commands/cargo-test.html) widely used 
+to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules. 
+With the [marine rust test dsk](https://crates.io/crates/marine-rs-sdk-test), you can do that!
 
 Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 
@@ -322,7 +356,11 @@ mod tests {
 }
 ```
 
-Marine tests fundamentally follows [cargo test]([https://doc.rust-lang.org/cargo/commands/cargo-test.html](https://doc.rust-lang.org/cargo/commands/cargo-test.html)) with the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module. In order to make that work, you need to use the [marine-rs-sdk]([https://crates.io/crates/marine-rs-sdk-test](https://crates.io/crates/marine-rs-sdk-test)) (1). Moreover, we need to provide the paths  to Config.tom and the Wasm module (2). Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
+Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
+the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module. 
+In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1). 
+Moreover, we need to provide the paths  to Config.tom and the Wasm module (2). 
+Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
 
@@ -340,7 +378,8 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 All is well with our module!
 
-If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`  and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
+If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());` 
+and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
 
 ```bash
 cargo test --workspace
@@ -367,11 +406,15 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; 
 error: test failed, to rerun pass `--bin hello_world`
 ```
 
-We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and need to recompile the changed code for the tests to have the most recent module(s). Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
+We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and 
+need to recompile the changed code for the tests to have the most recent module(s). 
+Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
 ### Deploy service
 
-There a basically two types of host for your services: public or private peer. Deploying to the public network requires the deployment of your service(s) to be tightly coupled with the on-chain marketplace.
+There a basically two types of host for your services: public or private peer. 
+Deploying to the public network requires the deployment of your service(s) to be tightly coupled with 
+the on-chain marketplace.
 
 **Deploying to the public network**
 
@@ -398,11 +441,11 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%204.png)
+![Login with web3 wallet](images/Untitled%204.png)
 
 …
 
-![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%205.png)
+![Connect the wallet with CLI](images/Untitled%205.png)
 
 Which, when successful, closes the CLI client.
 

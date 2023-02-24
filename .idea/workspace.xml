@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Separated cli-keys-management.md">
+    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Overview.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/overview.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled 1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled 2.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled 2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled 3.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled 3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled 4.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled 4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled 5.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled 5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/Fluence Developer Documentation bdf8d06ad52e493fb765456dbd5480cd/Untitled.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/Untitled.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/get-started.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,23 @@
       <recent name="$PROJECT_DIR$/docs/new-build" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,7 +91,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677227595744</updated>
-      <workItem from="1677227598146" duration="4655000" />
+      <workItem from="1677227598146" duration="5655000" />
     </task>
     <task id="LOCAL-00001" summary="newdoc splitting wip">
       <created>1677228440267</created>
@@ -91,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677239126936</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Overview.md">
+      <created>1677240628384</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1677240628384</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +131,7 @@
     <MESSAGE value="newdoc splitting wip" />
     <MESSAGE value="Separated get-started.md, index.md" />
     <MESSAGE value="Separated cli-keys-management.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separated cli-keys-management.md" />
+    <MESSAGE value="Overview.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Overview.md" />
   </component>
 </project>
