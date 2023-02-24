@@ -19,7 +19,7 @@ We can check our installation success (note that your cli and node versions migh
 
 ```
 fluence --version
-@fluencelabs/cli/0.2.46 darwin-x64 node-v16.19.0
+@fluencelabs/cli/0.3.1 darwin-x64 node-v16.19.0
 ```
 
 ### Install Other Prerequisites
@@ -98,32 +98,78 @@ Change into your new *hello-world* directory and have a look around:
 
 ```bash
 tree -L 2 -a
+
 .
 ├── .fluence             # this is where Fluence CLI internals are kept including project secrets
 │   ├── aqua
 │   └── schemas
-├── .gitignore
-├── .vscode
-│   ├── extensions.json
-│   └── settings.json
-├── deals.yaml
 ├── fluence.yaml         # this is where the project metadata, including service references, are kept
-├── src
-│   └── aqua             # this is where where distributed servcie choreograpy and composition scripts reside
-└── workers.yaml
+├── .gitignore
+├── src                  # this is where where distributed servcie choreograpy and composition scripts reside
+│   └── aqua
+└── .vscode
+    ├── extensions.json
+    └── settings.json
 ```
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples:
 
-```aqua
+```
+aqua Main
 
+import "@fluencelabs/aqua-lib/builtin.aqua"
+import "@fluencelabs/registry/subnetwork.aqua"
+import Registry from "@fluencelabs/registry/registry-service.aqua"
+import "@fluencelabs/spell/spell_service.aqua"
+
+import "deals.aqua"
+import "services.aqua"
+
+-- import App from "deployed.app.aqua"
+-- export App, addOne
+
+
+
+-- IMPORTANT: Add exports for all functions that you want to run
+export helloWorld, helloWorldRemote, getInfo, getInfos, getInfosInParallel
+
+-- DOCUMENTATION:
+-- https://fluence.dev
+
+
+-- export status
+
+-- service Console("run-console"):
+    -- print(any: ⊤)
+
+-- func status():
+    -- workersInfo <- getWorkersInfo()
+    -- dealId = workersInfo.defaultWorker.dealId
+    -- print = (answer: string, peer: string):
+      -- Console.print([answer, peer])
+
+    -- answers: *string
+    -- on HOST_PEER_ID:
+        -- workers <- resolveSubnetwork(dealId)
+        -- for w <- workers! par:
+            -- on w.metadata.peer_id via w.metadata.relay_id:
+                -- answer <- MyService.greeting("fluence")
+                -- answers <<- answer
+                -- print(answer, w.metadata.peer_id)
+
+    -- Console.print("getting answers...")
+    -- join answers[workers!.length - 1]
+    -- par Peer.timeout(PARTICLE_TTL / 2, "TIMED OUT")
+    -- Console.print("done")
 ```
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
 **Scaffolding Options**
 
-Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. That is, you have no use for HTTP clients but need some client peer to interact with the peers hosting your service(s) such as instructing them to execute one of your functions with some parameters. Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a potentially long-running client using [Fluence js-client](https://github.com/fluencelabs/js-client) as well as the TS/JS artifacts.
+Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: 
+
+> All communication with distributed services is over libp2p. That is, you have no use for HTTP clients but need some client peer to interact with the peers hosting your service(s) such as instructing them to execute one of your functions with some parameters. Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a potentially long-running client using [Fluence js-client](https://github.com/fluencelabs/js-client) as well as the TS/JS artifacts.
 
 Table ?: Client peer from scaffolding
 
@@ -198,22 +244,28 @@ version: 2
 aquaInputPath: src/aqua/main.aqua
 dependencies:
   npm:
+    "@fluencelabs/aqua": 0.10.1
     "@fluencelabs/aqua-lib": 0.6.0
+    "@fluencelabs/spell": 0.4.0
+    "@fluencelabs/registry": 0.7.1
   cargo:
     marine: 0.12.6
+    mrepl: 0.19.1
+workers:
+  defaultWorker:
+    services: [ hello_world ]
+deals:
+  defaultWorker:
+    minWorkers: 1
+    targetWorkers: 3
+hosts:
+  defaultWorker:
+    peerIds:
+      - 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA
 services:                 # we added these three lines by choosing Y at the prompt
   hello_world:
     get: hello-world
-```
 
-We did the same for *worker.yaml*, which we’ll discuss in detail a little later:
-
-```bash
-# workers.yaml
-version: 0
-workers:
-  defaultWorker:
-    services: [ hello_world ].  # we added 'hello_world' to the array
 ```
 
 Using this information, the CLI scaffolded our Rust (sub-)project:
@@ -449,15 +501,19 @@ wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletco
 
 Which, when successful, closes the CLI client.
 
+> 🆘 Metamask sometimes misses the first API call, so you might need to click Disconnect and then click Connect again.
+
 **Deploying to a private peer or network**
 
 coming soon with worker deploy
 
 ### Use deployed services
 
+#### From command line
 
+First of all lets test if your deployment worked correctly and the service workers were populated. In order to do that you can lauch the status() function, which was scaffolded with the example.
 
-From the command line
+Let's open `src/aqua/main.aqua`...
 
 From node app
 
