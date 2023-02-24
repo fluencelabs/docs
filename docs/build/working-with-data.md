@@ -1,4 +1,4 @@
-## Working with data
+# Working with data
 
 Fluence services, aka serverless Functions as a Service (FaaS), are stateless in nature. In order to handle state, services can be equipped to read from/write to local or remote data storage solutions. For the purpose of our discussion, local data storage solutions are provided by the peer hosting the service and remote data sources are independent of the Fluence service hosting environment, e.g., Filecoin or some MariaDB cluster.
 

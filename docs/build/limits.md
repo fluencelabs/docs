@@ -1,4 +1,4 @@
-## **Limits**
+# Limits
 
 - Network size limits: none according to mike
 - Particle data limits: none according to mike

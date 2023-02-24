@@ -1,4 +1,4 @@
-## Data Acquisition
+# Data Acquisition
 
 Your compute services may need real time price pairs from a DeFi exchange, want to index NFTs or  generate analytics over real time steaming windows. Regardless of the purpose, chances are you need to interact with one or more provider solutions outside the Fluence network by accessing their API. In Fluence you do that by writing one or more Wasm module to wrap the API functions, thereby allowing you to use capabilities outside the Fluence network across the entire web * chasm.
 

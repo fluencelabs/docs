@@ -1,4 +1,4 @@
-### **Develop distributed algos**
+# Develop distributed algos
 
 - ...
 

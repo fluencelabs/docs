@@ -1,7 +1,6 @@
-## Quickstarts
+# Quickstarts
 
 Fluence CLI allows you to add ready to use Wasm modules to your project either from a path or “packaged” as an archive in form of a gzipped tar package. Reusing your own or other collaborators’ Wasm modules vastly accelerates your project development by facilitating reuse.
-
 
 
 **Greeting redux**

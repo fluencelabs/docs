@@ -1,4 +1,4 @@
-## **Learning**
+# Learning Fundamentals
 
 I~~f you have followed the introduction or even played with the some of the examples, you know that ... If you haven't read through the [Getting Started](https://hackmd+.vscode-resource.vscode-cdn.net/Fluence%20Developer%20Documentation.md#Getting-Started) section, this is w good time to do so.~~
 
