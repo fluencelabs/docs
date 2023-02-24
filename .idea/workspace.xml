@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Separated get-started.md, index.md">
-      <change afterPath="$PROJECT_DIR$/docs/new-build/cli-keys-management.md" afterDir="false" />
+    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Separated cli-keys-management.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/get-started.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/new-build/overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/overview.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677227595744</updated>
-      <workItem from="1677227598146" duration="3156000" />
+      <workItem from="1677227598146" duration="4655000" />
     </task>
     <task id="LOCAL-00001" summary="newdoc splitting wip">
       <created>1677228440267</created>
@@ -86,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677238202446</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Separated cli-keys-management.md">
+      <created>1677239126936</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677239126936</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,6 +100,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="newdoc splitting wip" />
     <MESSAGE value="Separated get-started.md, index.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separated get-started.md, index.md" />
+    <MESSAGE value="Separated cli-keys-management.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated cli-keys-management.md" />
   </component>
 </project>
