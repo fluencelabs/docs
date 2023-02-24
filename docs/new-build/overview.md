@@ -21,7 +21,7 @@ D ->> D: Compile to Wasm
 D ->> C: Create Deal
 D ->> I: Deploy Wasm module(s)
 alt
-	P ->> D: Agree to host module(s) based on Deal
+	P ->> C: Agree to host module(s) based on Deal
 	P ->> I: Fetch module(s)
 	P ->> P: Deploy module(s)
 	P ->> P: Wait for request

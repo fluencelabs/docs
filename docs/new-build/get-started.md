@@ -1,11 +1,9 @@
 ## **Get started (with CLI)**
 
-[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
+[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
 
-<aside>
-👉 Note that Fluence CLI is currently only available for *nix* systems including OSX and Windows Subsystem for Linux (WSL). Moreover, Fluence CLI installs all the required dependencies not already installed on your system including Rust.
 
-</aside>
+> 👉 Note that Fluence CLI is currently only available for *nix* systems including OSX and Windows Subsystem for Linux (WSL). Moreover, Fluence CLI installs all the required dependencies not already installed on your system including Rust.
 
 ### **Install Fluence CLI**
 
@@ -15,10 +13,7 @@
 npm -g install @fluencelabs/cli@latest
 ```
 
-<aside>
-👉 At the time of this writing, you need to set your node version to 16 LTS (16.19.0).
-
-</aside>
+> 👉 At the time of this writing, you need to set your node version to 16 LTS (16.19.0).
 
 We can check our installation success (note that your cli and node versions might be different):
 
@@ -71,85 +66,12 @@ and have 16 FakeUSDC in your account!  To see the transaction data info for both
 
 And that concludes the installation section as you are ready!
 
-### **Manage keys**
+---
 
-In order for Fluence CLI to be able to communicate with peers in Fluence’s peer-to-peer network a local, one-shot client peer is created. In order to be able to facilitate secure communication with other peers using end-to-end encryption over libp2p or optionally secure service API functions, a client needs a pair of cryptographic keys just like any other (libp2p) peer. Also note that a peer’s *peer id* is derived from the public key of its key pair.
+> Consider reading: [Keys management with Fluence CLI](./cli-keys-management.md)
 
-Fluence CLI maintains a `users-secret.yaml` file in its global `~/.fluence` directory with a key pair as the default for all your projects:
+---
 
-```bash
-cat user-secrets.yaml
-# yaml-language-server: $schema=schemas/user-secrets.yaml.json
-
-# Defines user's secret keys that can be used across different Fluence projects. You can manage user's keys using commands from `fluence key` group of commands with `--user` flag
-
-# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/user-secrets.md
-
-version: 0
-keyPairs:
-  - peerId: 12D3KooWDJ7XQBqy6rwPseEAQhaRKX6ZWjpLUcDcBoEQ1Lmdbnvb
-    secretKey: Rdm8roRWsNqwN/4trrvkHcAhhmv9oaXFIxmhj+Wsa7U=
-    publicKey: CAESIDOuw/xI1AD9K/wcqd/92SX2vsAe9+eDdFDTKZnadZpI
-    name: auto-generated
-defaultKeyPairName: auto-generated
-```
-
-If you want or need to, you can create project-specific keys which are stored in the `/<your cli project>/.fluence/project-secrets.yaml`.  In your Fluence CLI project directory:
-
-```bash
-fluence key new
-
-? Enter key-pair name to generate at ~/localdev/hello-world/.fluence/project-secrets.yaml
-? Enter key-pair name to generate at ~/localdev/hello-world/.fluence/project-secrets.yaml
-? Do you want to set  as default key-pair for ~/localdev/hello-world/.fluence/project-secrets.yaml Yes
-Key-pair with name  successfully generated and saved to ~/localdev/hello-world/.fluence/project-secrets.yaml
-```
-
-Let’s check the config file for the update:
-
-```bash
-cat .fluence/project-secrets.yaml
-# yaml-language-server: $schema=schemas/project-secrets.yaml.json
-
-# Defines project's secret keys that are used only in the scope of this particular Fluence project. You can manage project's keys using commands from `fluence key` group of commands
-
-# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/project-secrets.md
-
-version: 0
-keyPairs:
-  [
-    {
-        peerId: 12D3KooWDNii7w41s7tULorD5MgeZLK87v92nTvSC8dDNopj56Hx,
-        secretKey: gpiGaGhXitP4S0AZEC9E0n09hb87sSSgEX68HvcQZOM=,
-        publicKey: CAESIDTc31ZSsdl+iwCX2dbmADhRr23edTGRszDxXWY/K98r,
-        name: ""
-      }
-  ]
-defaultKeyPairName: ""
-```
-
-Of course, you can also a key pair:
-
-```bash
-fluence key remove
- ›   Warning: Key-pair name must be selected
-? Do you want to remove ? Yes
-Key-pair with name  successfully removed from ~/localdev/hello-world/.fluence/project-secrets.yaml
-```
-
-Let’s check:
-
-```bash
-cat .fluence/project-secrets.yaml
-# yaml-language-server: $schema=schemas/project-secrets.yaml.json
-
-# Defines project's secret keys that are used only in the scope of this particular Fluence project. You can manage project's keys using commands from `fluence key` group of commands
-
-# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/project-secrets.md
-
-version: 0
-keyPairs: []
-```
 
 ### **Start a new project**
 
@@ -193,7 +115,7 @@ tree -L 2 -a
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples:
 
-```rust
+```aqua
 
 ```
 
@@ -213,7 +135,7 @@ Node app |
 
 ### Write code
 
-We setup our project and are left with creating our *hello_world* function, which we implement in Rust:
+We set up our project and are left with creating our *hello_world* function, which we implement in Rust:
 
 ```rust
 // hello_fluence.rs
@@ -294,7 +216,7 @@ hello-world
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each molule, such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of the modules comprising the service including is the entry, aka facade, module into the service.
 
-Looking at the *[main.rs](http://main.rs)* file, you see that it is populated with a greeting example. Replace that code with our code from above so that:
+Looking at the *main.rs* file, you see that it is populated with a greeting example. Replace that code with our code from above so that:
 
 ```bash
 // main.rs
@@ -380,9 +302,9 @@ Well done!
 
 An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code. Rust comes with a very nice [testing framework]([https://doc.rust-lang.org/cargo/commands/cargo-test.html](https://doc.rust-lang.org/cargo/commands/cargo-test.html)) widely used to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules. With the [marine rust test dsk]([https://crates.io/crates/marine-rs-sdk-test](https://crates.io/crates/marine-rs-sdk-test)), you can do that!
 
-Let’s add the testing code for our *hello-world* module in our *[main.rs](http://main.rs)* file:
+Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 
-```bash
+```rust
 //  main.rs
 // <...>
 #[cfg(test)]

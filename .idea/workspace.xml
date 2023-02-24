@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="newdoc splitting wip">
+    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Separated get-started.md, index.md">
+      <change afterPath="$PROJECT_DIR$/docs/new-build/cli-keys-management.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/get-started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/overview.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +53,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Markdown",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677227595744</updated>
-      <workItem from="1677227598146" duration="2071000" />
+      <workItem from="1677227598146" duration="3156000" />
     </task>
     <task id="LOCAL-00001" summary="newdoc splitting wip">
       <created>1677228440267</created>
@@ -75,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677228440267</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Separated get-started.md, index.md">
+      <created>1677238202446</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677238202446</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,6 +94,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="newdoc splitting wip" />
-    <option name="LAST_COMMIT_MESSAGE" value="newdoc splitting wip" />
+    <MESSAGE value="Separated get-started.md, index.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated get-started.md, index.md" />
   </component>
 </project>
