@@ -45,7 +45,7 @@ end
 
 ```
 
-Now that we have our business logic deployed to one or more peers of the Fluence peer-to-peer network, we need to implement our application workflow with Aqua. Aqua, as you may recall, is your distributed choreography and composition tool and necessary since your distributed services are not callable by REST or JSON-RPC but over the networks peer-to-peer layer. Once you implemented your workflow and service composition, tooling is available to create the previously discussed particle, i.e., compiled Aqua, data and metadata, and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer, aka relay peer, in the network. See Figure 2.
+Now that we have our business logic deployed to one or more peers of the Fluence peer-to-peer network, we need to implement our application workflow with Aqua. [Aqua](https://github.com/fluencelabs/aqua), as you may recall, is your distributed choreography and composition tool necessary since your distributed services are not callable by REST or JSON-RPC but over the networks peer-to-peer layer. Once you implemented your workflow and service composition, tooling is available to create the previously discussed particle, i.e., compiled Aqua, data and metadata, and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer, aka relay peer, in the network. See Figure 2.
 
 ```mermaid
 sequenceDiagram
@@ -87,7 +87,7 @@ stateDiagram
 
 ## **Get started (with CLI)**
 
-[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
+[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
 
 <aside>
 👉 Note that Fluence CLI is currently only available for *nix* systems including OSX and Windows Subsystem for Linux (WSL). Moreover, Fluence CLI installs all the required dependencies not already installed on your system including Rust.
@@ -134,7 +134,7 @@ Figure ?:
 
 ![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled.png)
 
-With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g..[https://mumbaifaucet.com/](https://mumbaifaucet.com/) and have your account address ready:
+With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/) and have your account address ready:
 
 Figure ?:
 
