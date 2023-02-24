@@ -40,13 +40,13 @@ In your wallet, you may want to create a new account, e.g., Fluence Account, or 
 
 Figure 1:
 
-![Figure 1: Adding Mumbai Testnet to Metamask](images/Untitled.png)
+![Figure 1: Adding Mumbai Testnet to Metamask](images/0-add-mumbai.png)
 
 With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/) and have your account address ready:
 
 Figure 2:
 
-![Figure 2: Get MATIC on the Mumbai Faucet](images/Untitled%201.png)
+![Figure 2: Get MATIC on the Mumbai Faucet](images/1-mumbai-faucet.png)
 
 Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet.
 
@@ -54,13 +54,13 @@ Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
 
 Figure 3:
 
-![Untitled](images/Untitled%202.png)
+![Fluence Faucet](images/2-fluence-faucet.png)
 
 which not only allows you to request testnet USDC but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should see:
 
 Figure 4:
 
-![Untitled](images/Untitled%203.png)
+![Fluence Faucet Transaction](images/3-fluence-faucet-tx.png)
 
 and have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and FakeUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
 
@@ -441,11 +441,11 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Login with web3 wallet](images/Untitled%204.png)
+![Login with web3 wallet](images/4-connect-cli-wallet.png)
 
 …
 
-![Connect the wallet with CLI](images/Untitled%205.png)
+![Connect the wallet with CLI](images/5-cli-wallet-connected.png)
 
 Which, when successful, closes the CLI client.
 

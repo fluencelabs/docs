@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="Fixed links in get-started.md">
+    <list default="true" id="33406828-f5e1-4053-a83d-ca05bd2f59e8" name="Changes" comment="making links local">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/develop-distributed-algos.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/develop-distributed-algos.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/local-data-storage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/local-data-storage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/new-build/remote-data-storage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/remote-data-storage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/get-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/get-started.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/1-mumbai-faucet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 2.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/2-fluence-faucet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 3.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/3-fluence-faucet-tx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 4.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/4-connect-cli-wallet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled 5.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/5-cli-wallet-connected.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/new-build/images/Untitled.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/new-build/images/0-add-mumbai.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +91,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677227595744</updated>
-      <workItem from="1677227598146" duration="8053000" />
+      <workItem from="1677227598146" duration="8806000" />
     </task>
     <task id="LOCAL-00001" summary="newdoc splitting wip">
       <created>1677228440267</created>
@@ -124,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677241650426</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="making links local">
+      <created>1677246531342</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677246531342</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +147,7 @@
     <MESSAGE value="Separated cli-keys-management.md" />
     <MESSAGE value="Overview.md" />
     <MESSAGE value="Fixed links in get-started.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed links in get-started.md" />
+    <MESSAGE value="making links local" />
+    <option name="LAST_COMMIT_MESSAGE" value="making links local" />
   </component>
 </project>
