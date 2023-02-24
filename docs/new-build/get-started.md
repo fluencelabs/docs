@@ -1,90 +1,3 @@
-# Fluence Developer Documentation
-
-based on structure outline [https://www.notion.so/fluencenetwork/Developer-Docs-83d1cf23ed9947689feb1cd8578f55fa](https://www.notion.so/Developer-Docs-83d1cf23ed9947689feb1cd8578f55fa)
-
-**WIP**
-
-# **Overview**
-
-Fluence decentralized FaaS is a Web3 alternative to FaaS provided by centralized cloud providers such as AWS Lambda or Google Cloud Functions. Fluence decentralized FaaS allows developers to benefit not only from verifiable service execution, high availability and easily portable code but also highly competitive pricing.
-
-Fluence decentralized FaaS, aka services, are implemented as Webassembly Interface Types (Wasm IT) modules and executed by hardware providers, aka peers, in a public, permissionless peer-to-peer network with global reach. Your code, i.e., Wasm modules, and peer(s) are linked by an on-chain marketplace that allows you, the developer, to specify your willingness to pay in stablecoin, such as USDC, and for peers to decide which payloads to host and execute based on their economic rationale.
-
-Before we dive in, let’s get a bird’s eye view of the anatomy of decentralized serverless built on the Fluence protocol.
-
-Business logic is implemented in Rust and compiled to Wasm. The resulting Wasm module(s) with associated linking and host resource access request specifications are deployed to one or more peers willing to host said modules. ***Note that we call the linked modules a service***. If all goes as planned, you now have your business logic distributed to the peer-to-per network and available to be called. See Figure 1.
-
-```mermaid
-sequenceDiagram
-
-participant D as Developer
-participant C as Blockchain
-participant I as IPFS
-participant P as Peer(s)
-
-D ->> D: Implement business logic
-D ->> D: Compile to Wasm
-D ->> C: Create Deal
-D ->> I: Deploy Wasm module(s)
-alt
-	P ->> D: Agree to host module(s) based on Deal
-	P ->> I: Fetch module(s)
-	P ->> P: Deploy module(s)
-	P ->> P: Wait for request
-	alt received and executed request
-		P ->> D: return result
-		P ->> C: Request payment from Deal
-	end
-else
-	P ->> D: Reject hosting of modules
-end
-alt
-	D -->> P: Remove modules request
-	P -->> P: Remove modules
-end
-
-```
-
-Now that we have our business logic deployed to one or more peers of the Fluence peer-to-peer network, we need to implement our application workflow with Aqua. [Aqua](https://github.com/fluencelabs/aqua), as you may recall, is your distributed choreography and composition tool necessary since your distributed services are not callable by REST or JSON-RPC but over the networks peer-to-peer layer. Once you implemented your workflow and service composition, tooling is available to create the previously discussed particle, i.e., compiled Aqua, data and metadata, and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer, aka relay peer, in the network. See Figure 2.
-
-```mermaid
-sequenceDiagram
-
-participant D as Developer
-participant N as P2P Network
-
-D ->> D: Create workflow in Aqua
-D ->> D: Create particle
-D ->> N: Deploy particle to network via (any) relay peer
-N ->> N: Execute specified worklflow step(s)
-```
-
-Your go-to tool for accomplishing almost all tasks except for coding business logic is Fluence CLI. See Figure 3.
-
-```mermaid
-stateDiagram
-    
-    state "Rust Marine Code" as Code
-    state "Build wasm32-wasi Module" as Build
-    state "Test Wasm App With Cargo" as Test
-    state "REPL Locally Interact With Modules" as Repl
-    state "Module Configuration" as Config
-    state "Service Configuration" as Service
-    state "Deploy Service To Network" as Deploy
-	  state "Remove Service From Network" as Remove
-
-    Code -->  Build
-		state FluenceCLI {
-	    Build --> Repl
-	    Config --> Repl
-	    Config --> Test
-	    Build --> Test
-	    Build --> Deploy
-	    Service --> Deploy
-	    Remove
-	  }
-```
-
 ## **Get started (with CLI)**
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
@@ -107,7 +20,7 @@ npm -g install @fluencelabs/cli@latest
 
 </aside>
 
-We can check our installation success (note that your cli and node versions might be different): 
+We can check our installation success (note that your cli and node versions might be different):
 
 ```
 fluence --version
@@ -118,9 +31,9 @@ fluence --version
 
 In addition to Fluence CLI, you need a [WalletConnect]([https://walletconnect.com/](https://walletconnect.com/)) compatible wallet, such as [MetaMask]([https://metamask.io/](https://metamask.io/)) to be able to fund your distributed services with (testnet) USDC.
 
-Our on-chain testnet is Polygon Mumbai: 
+Our on-chain testnet is Polygon Mumbai:
 
-RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai) 
+RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai)
 
 Faucet: [https://mumbaifaucet.com/](https://mumbaifaucet.com/) or [https://faucet.polygon.technology/](https://faucet.polygon.technology/)
 
@@ -130,7 +43,7 @@ The Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fl
 
 In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Polygon Mumbai as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
 
-Figure ?: 
+Figure ?:
 
 ![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled.png)
 
@@ -140,7 +53,7 @@ Figure ?:
 
 ![Untitled](Fluence%20Developer%20Documentation%20bdf8d06ad52e493fb765456dbd5480cd/Untitled%201.png)
 
-Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet. 
+Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet.
 
 Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
 
@@ -160,7 +73,7 @@ And that concludes the installation section as you are ready!
 
 ### **Manage keys**
 
-In order for Fluence CLI to be able to communicate with peers in Fluence’s peer-to-peer network a local, one-shot client peer is created. In order to be able to facilitate secure communication with other peers using end-to-end encryption over libp2p or optionally secure service API functions, a client needs a pair of cryptographic keys just like any other (libp2p) peer. Also note that a peer’s *peer id* is derived from the public key of its key pair.  
+In order for Fluence CLI to be able to communicate with peers in Fluence’s peer-to-peer network a local, one-shot client peer is created. In order to be able to facilitate secure communication with other peers using end-to-end encryption over libp2p or optionally secure service API functions, a client needs a pair of cryptographic keys just like any other (libp2p) peer. Also note that a peer’s *peer id* is derived from the public key of its key pair.
 
 Fluence CLI maintains a `users-secret.yaml` file in its global `~/.fluence` directory with a key pair as the default for all your projects:
 
@@ -240,7 +153,7 @@ keyPairs: []
 
 ### **Start a new project**
 
-As mentioned at the outset, Fluence CLI is your Swiss army knife to all things Fluence. To keep things familiar, let’s start with the obligatory *Hello World* example to introduce Fluence and Fluence CLI. 
+As mentioned at the outset, Fluence CLI is your Swiss army knife to all things Fluence. To keep things familiar, let’s start with the obligatory *Hello World* example to introduce Fluence and Fluence CLI.
 
 We scaffold a new project with `fluence init` , which gives us a couple scaffolding choices:
 
@@ -314,11 +227,11 @@ pub fn hello_world() -> String {       // 4
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](https://www.notion.so/Marine-Rust-Runtime-1a48fb4500bf48eb9c5b5ca981169fae), which allows us to compile Rust code to wasm32-wasi compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk*  and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around. 
+Before we do anything, (1) we need to import the [Marine Rust SDK](https://www.notion.so/Marine-Rust-Runtime-1a48fb4500bf48eb9c5b5ca981169fae), which allows us to compile Rust code to wasm32-wasi compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk*  and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
 
 In (1), we implement a main function which is not marked with the *#[marine]* procedural macro. We discuss modules and module configuration further below. Also note that WASM IT has type limits, which are explained in detail in the [Marine book](https://fluence.dev/docs/marine-book/marine-runtime/i-value-and-i-type). The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal but you do not have generics, traits, etc. Moreover, everything is passed by value and lifetimes are not needed in your Rust code.
 
-Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts. As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with them. If your business logic results in only a single module, like our *hello_world* code, then this module is also the service. Hence, we instruct Fluecne CLI to scaffold a new service for our project. 
+Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts. As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with them. If your business logic results in only a single module, like our *hello_world* code, then this module is also the service. Hence, we instruct Fluecne CLI to scaffold a new service for our project.
 
 Now we follow the prompts to complete the setup:
 
@@ -355,7 +268,7 @@ services:                 # we added these three lines by choosing Y at the prom
     get: hello-world
 ```
 
- We did the same for *worker.yaml*, which we’ll discuss in detail a little later:
+We did the same for *worker.yaml*, which we’ll discuss in detail a little later:
 
 ```bash
 # workers.yaml
@@ -379,7 +292,7 @@ hello-world
 └── service.yaml
 ```
 
-Recall, a service is comprised of one or more Wasm modules and associated configuration and each molule, such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of the modules comprising the service including is the entry, aka facade, module into the service. 
+Recall, a service is comprised of one or more Wasm modules and associated configuration and each molule, such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of the modules comprising the service including is the entry, aka facade, module into the service.
 
 Looking at the *[main.rs](http://main.rs)* file, you see that it is populated with a greeting example. Replace that code with our code from above so that:
 
@@ -546,7 +459,7 @@ Paying for services
     - epoch: 5 minutes
     - Price per epoch 0.083 USDC == 1 USDC/per hour ??
 
-Fluence CLI makes it rather easy to deploy with 
+Fluence CLI makes it rather easy to deploy with
 
 ```bash
 fluence deal deploy
@@ -577,7 +490,7 @@ coming soon with worker deploy
 
 ### Use deployed services
 
- 
+
 
 From the command line
 
@@ -586,29 +499,3 @@ From node app
 ### Manage deployments
 
 soon
-
-
-## Learn
-
-- [Quickstarts](./quickstarts.md)
-- [Fundamentals](./fundamentals.md)
-- [Develop Services](./develop-services.md)
-- [Develop Distributed Algos](./develop-distributed-algos.md)
-
-## Working with data
-
-Fluence services, aka serverless Functions as a Service (FaaS), are stateless in nature. In order to handle state, services can be equipped to read from/write to local or remote data storage solutions. For the purpose of our discussion, local data storage solutions are provided by the peer hosting the service and remote data sources are independent of the Fluence service hosting environment, e.g., Filecoin or some MariaDB cluster.
-
-Of course, compute services also want realtime access to data from a variety of (streaming) sources, which is quite often provided through some API hosted outside the Fluence network, such as the [Ethereum JSON-RPC API](notion://www.notion.so/fluencenetwork/Fluence-Developer-Documentation-bdf8d06ad52e493fb765456dbd5480cd). You can do integrate such data sources quite easily by writing *adapters*, i.e., Wasm wrappers, for the target API.
-
-
-- [Local Data Storage](./local-data-storage.md)
-- [Remote Data Storage](./remote-data-storage.md)
-- [Data Acquisition](./data-acquisition.md)
-
----
-
-## Misc
-
-- [Limits](./limits.md)
-- [Reference](./reference.md)
