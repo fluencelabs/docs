@@ -2,7 +2,7 @@
 
 # TODO: adapt to JS Client
 
-Signing service is useful when you want to sign arbitrary data and pass it further inside a single aqua script. Signing service allows to restrict its usage for security reasons: e.g you don't want to sign anything except it comes from a trusted source. The aqua side API is the following:
+Signing service is useful when you want to sign arbitrary data and pass it further inside a single Aqua script. Signing service allows one to restrict its usage for security reasons: e.g., if you don't want to sign anything except it comes from a trusted source. The Aqua side API is the following:
 
 ```aqua
 data SignResult:
@@ -83,7 +83,7 @@ export class Sig implements SigDef {
 }
 ```
 
-`securityGuard` specifies the way the `sign` method checks where the incoming data is allowed to be signed or not. It accepts one argument: call params (see "Call params and tetraplets") and must return either true or false. Any predicate can be specified. Also, FluenceJS is shipped with a set of useful predicates:
+`securityGuard` specifies the way the `sign` method checks whether the incoming data is allowed to be signed or not. It accepts one argument: call params (see "Call params and tetraplets") and must return either true or false. Any predicate can be specified. Also, FluenceJS is shipped with a set of useful predicates:
 
 ```typescript
 /**
@@ -122,7 +122,7 @@ export const or = (...predicates: SigSecurityGuard[]): SigSecurityGuard => {/*..
 
 Predicates as well as the `Sig` definition can be found in `@fluencelabs/fluence/dist/services`
 
-`Sig` class is accompanied by `registerSig` which allows registering different signing services with different keys. The mechanism is exactly the same as with ordinary aqua services e.g:
+The `Sig` class is accompanied by `registerSig`, which allows registering different signing services with different keys. The mechanism is exactly the same as with ordinary aqua services, e.g.:
 
 ```typescript
 // create a key per from pk bytes
@@ -138,7 +138,7 @@ customSig.securityGuard = allowServiceFn("my_service", "my_function");
 registerSig("CustomSig", customSig);
 ```
 
-for a [non-default peer](in-depth.md#using-multiple-peers-in-one-application), the instance has to be specified:
+For a [non-default peer](in-depth.md#using-multiple-peers-in-one-application), the instance has to be specified:
 
 ```typescript
 const peer = new FluencePeer();
@@ -157,7 +157,7 @@ registerSig(peer, "CustomSig", customSig);
   - trust-graph.get_revocation_bytes
   - registry.get_key_bytes
   - registry.get_record_bytes
-  - Argument: data - byte array to sign
+  - Argument: data, a byte array to sign.
 
 The default signing service class can be accessed in the following way:
 

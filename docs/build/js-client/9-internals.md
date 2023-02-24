@@ -1,6 +1,6 @@
 # Deep dive into internals:
 
-- JS Peer underneeth
+- JS Peer underneath
 - What is relay
-- Difference betwen Rust Peer and JS Peer
+- Difference between Rust Peer and JS Peer
 - Architecture

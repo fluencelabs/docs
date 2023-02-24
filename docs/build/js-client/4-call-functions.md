@@ -13,11 +13,11 @@
 
 ## Understanding the compiler output
 
-For every exported function definition in aqua the compiler generated two overloads. One accepting the `FluencePeer` instance as the first argument, and one without it. Otherwise arguments are the same and correspond to the arguments of aqua functions. The last argument is always an optional config object with the following properties:
+For every exported function definition in Aqua, the compiler generated two overloads. One accepting the `FluencePeer` instance as the first argument, and one without it. Otherwise, arguments are the same and correspond to the arguments of Aqua functions. The last argument is always an optional config object with the following properties:
 
-- `ttl`: Optional parameter which specify TTL (time to live) of particle with execution logic for the function
+- `ttl`: an optional parameter which specifies TTL (time to live) of a particle with execution logic for the function
 
-The return type is always a promise of the aqua function return type. If the function does not return anything, the return type will be `Promise<void>`.
+The return type is always a promise of the Aqua function return type. If the function does not return anything, the return type will be `Promise<void>`.
 
 Consider the following example:
 
@@ -45,15 +45,15 @@ export async function callMeBack(
 
 ### Type conversion
 
-Basic types conversion is pretty much straightforward:
+Basic type conversion is pretty straightforward:
 
 - `string` is converted to `string` in typescript
 - `bool` is converted to `boolean` in typescript
-- All number types (`u8`, `u16`, `u32`, `u64`, `s8`, `s16`, `s32`, `s64`, `f32`, `f64`) are converted to `number` in typescript
+- All number types (`u8`, `u16`, `u32`, `u64`, `s8`, `s16`, `s32`, `s64`, `f32`, `f64`) are converted to `number` in typescript.
 
-Arrow types translate to functions in typescript which have their arguments translated to typescript types. In addition to arguments defined in aqua, typescript counterparts have an additional argument for call params. For the majority of use cases this parameter is not needed and can be omitted.
+Arrow types translate to functions in typescript which have their arguments translated to typescript types. In addition to arguments defined in Aqua, typescript counterparts have an additional argument for call params. For the majority of use cases, this parameter is not needed and can be omitted.
 
-The type conversion works the same way for `service` and `func` definitions. For example a `func` with a callback might look like this:
+The type conversion works the same way for `service` and `func` definitions. For example, a `func` with a callback might look like this:
 
 ```aqua
 func callMeBack(callback: string, i32 -> ()):

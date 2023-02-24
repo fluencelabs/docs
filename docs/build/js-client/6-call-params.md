@@ -1,8 +1,8 @@
-# Security andd call params
+# Security and call parameters
 
-# Call params, tetraplets and security
+# Call parameters, tetraplets and security
 
-Each service call is accompanied by additional information specific to Fluence Protocol. Including `initPeerId` - the peer which initiated the particle execution, particle signature and most importantly security tetraplets. All this data is contained inside the last `callParams` argument in every generated function definition. These data is passed to the handler on each function call can be used in the application.
+Each service call is accompanied by additional information specific to the Fluence Protocol, including `initPeerId` (the peer which initiated the particle execution), a particle signature and most importantly security tetraplets. All this data is contained inside the last `callParams` argument in every generated function definition. This data is passed to the handler on each function call can be used in the application.
 
 Tetraplets have the form of:
 
@@ -14,6 +14,6 @@ Tetraplets have the form of:
 }
 ```
 
-To learn more about tetraplets and application security see [Security](../security.md)
+To learn more about tetraplets and application security, see [Security](../security.md).
 
-To see full specification of `CallParams` type see [API reference](https://fluence.one/fluence-js/)
+To see full specification of `CallParams` type, see [API reference](https://fluence.one/fluence-js/).
