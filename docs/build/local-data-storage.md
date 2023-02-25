@@ -1,10 +1,11 @@
-# Local Data Storage
 
-A peer hosting services may agree to provide access to their filesystem or allocate additional RAM. However, such persistence provisioning generally comes with no guarantees of availability. For example, a peer reboot will wipe a SQLite in-memory data base. Moreover, by the very nature of their local provisioning, such data sources are only available through the "sponsoring" service: there is no direct data access and when the service ceases to exist so does the data.While local data persistence has its use cases, developers need to be aware of their limitations.
+## Local Data Storage
+
+A peer hosting services may agree to provide access to their filesystem or allocate additional RAM to store data in memory. However, such persistence provisioning generally comes with no guarantees of availability. For example, a peer reboot will wipe a SQLite database stored in memory. Moreover, by the very nature of their local provisioning, such data sources are only available through the "sponsoring" service: there is no direct data access and when the service ceases to exist so does the data.While local data persistence has its use cases, developers need to be aware of their limitations.
 
 ### Local Filesystem
 
-While Wasm modules in general are sandboxed to not have access to host resources, Marine Wasm modules may be granted access to a variety of host resources iff the host peer agrees to such access. The request for resource access and allocation come in form of deployment parameters, which we'll see very soon
+While Wasm modules in general are sandboxed so that the modules do not have access to host resources, Marine Wasm modules may be granted access to a variety of host resources iff the host peer agrees to such access. The request for resource access and allocation come in form of deployment parameters, which we'll see very soon
 
 The [accompanying repo](notion://www.notion.so/fluencenetwork/Fluence-Developer-Documentation-bdf8d06ad52e493fb765456dbd5480cd).
 
@@ -29,31 +30,25 @@ fluence service new
 ? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
 filesys_adapter
 Successfully generated template for new service at services
-? Do you want add filesys_adapter to fluence.yaml? Yes
-    Updating crates.io index
-
+...
+Added filesys_adapter to fluence.yaml
+? Do you want to add service filesys_adapter to a default worker defaultWorker Yes
+Added filesys_adapter to defaultWorker
 ```
 
-Which gives us the project scaffold:
+Which gives us project scaffold:
 
 ```
 tree services -L 4 -I target
 services
-├── modules
-│   ├── filesys_adapter
-│   │   ├── Cargo.lock
-│   │   ├── Cargo.toml
-│   │   ├── module.yaml
-│   │   └── src
-│   │       └── main.rs
-│   └── use_filesys
-│       ├── Cargo.lock
-│       ├── Cargo.toml
-│       ├── module.yaml
-│       └── src
-│           └── main.rs
-└── service.yaml
-
+|-- modules
+|   `-- filesys_adapter
+|       |-- Cargo.lock
+|       |-- Cargo.toml
+|       |-- module.yaml
+|       `-- src
+|           `-- main.rs
+`-- service.yaml
 ```
 
 And the Rust template:
@@ -79,17 +74,44 @@ Which we'll have to modify. In addition to the adapter, which handles the access
 
 ```bash
 fluence module new
-? Enter service path services
-? Do you want to use services as the name of your new service? No
-? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores) use_filesys
-Successfully generated template for new service at services
-? Do you want add use_filesys to fluence.yaml? Yes
-    Finished release [optimized] target(s) in 0.19s
-Added use_filesys to fluence.yaml
-
+? Enter module path services/modules/use_filesys
+Successfully generated template for new module at services/modules/use_filesys
 ```
 
-With the scaffolding out of the way, let's code our modules. First, we create our general-purpose, reusable "adapter" module to handle the put/get operations to/from the local, i.e., host peer, filesystem and add a file removal method, `rm`, as well:
+```Shell
+fluence service new
+? Enter service path services
+? Do you want to use services as the name of your new service? No
+? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
+use_filesys
+Successfully generated template for new service at services
+...
+Added use_filesys to fluence.yaml
+? Do you want to add service use_filesys to a default worker defaultWorker Yes
+Added use_filesys to defaultWorker
+```
+
+Here is the project scaffold again after adding the second service:
+
+```
+tree services -L 4 -I target
+services
+|-- modules
+|   |-- filesys_adapter
+|   |   |-- Cargo.lock
+|   |   |-- Cargo.toml
+|   |   |-- module.yaml
+|   |   `-- src
+|   |       `-- main.rs
+|   `-- use_filesys
+|       |-- Cargo.toml
+|       |-- module.yaml
+|       `-- src
+|           `-- main.rs
+`-- service.yaml
+```
+
+With the scaffolding out of the way, let's code our modules. First, we create our general-purpose, reusable "adapter" module to handle the put/get operations to/from the local, i.e., host peer, filesystem and add a file removal method, `rm`, as well. Here is the "adapter" code from the services/modules/filesys_adapter/src/main.rs file:
 
 ```rust
 use marine_rs_sdk::marine;
@@ -127,9 +149,10 @@ pub fn rm(name: String) -> String {
         Ok(_) => "OK".to_string(),
         Err(e) => e.to_string(),
     }
-}```
+}
+```
 
-The code is pretty straight forward read/write but a few lines are noteworthy: The `const SITES_DIR` is the *alias* to the local path and needs to match up with the mapping in `modules.yaml`.
+The code is pretty straight forward read/write but a few lines are noteworthy: The `const SITES_DIR` is the *alias* to the local path and needs to match up with the mapping in `module.yaml`.
 
 The scaffolded default file looks like this:
 
@@ -140,7 +163,7 @@ name: filesys_adapter
 
 ```
 
-Which is not enough. We need to specify that we want this module to be able to access the hosts filesystem via some specified directory and we do this my mounting a named directory mapped to the SITES_DIR alias:
+This is not enough. We need to specify that we want this module to be able to access the hosts filesystem via some specified directory and we do this my mounting a named directory mapped to the SITES_DIR alias:
 
 ```
 //services/modules/filesys_adapter/module.yaml
@@ -152,7 +175,11 @@ volumes:
 
 ```
 
-For more information on import functions see the [Marine book](/docs/marine-book/marine-runtime/configuration-file) and the [configuration properties](https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/module.md) provided by Fluence CLI.
+where the *volumes* section contains the mapping of the actual directory to the alias we set as in the  . For more information on configuring Marine modules, see the [Marine book](https://fluence.dev/docs/marine-book/marine-runtime/configuration-file).
+
+For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
+
+For more information on import functions see the [Marine book](https://fluence.dev/docs/marine-book/marine-runtime/configuration-file) and the [configuration properties](https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/module.md) provided by Fluence CLI.
 
 With our configuration in place, let's build our adapter:
 
@@ -166,11 +193,7 @@ Making sure all modules are downloaded and built... done
 
 ```
 
-where the *volumes* section contains the mapping of the actual directory to the alias we set as in the  . For more information on configuring Marine modules, see the [Marine book](/docs/marine-book/marine-runtime/configuration-file).
-
-For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
-
-Now that we have our [effector module](/docs/marine-book/basic-concepts/) in place, let's code our [facade module](https://fluence.dev/docs/build/glossary.md#facade-module), which in our case consists of simple read and write methods essentially wrapping the effector methods with a little convenience: instead of byte arrays we can use human readable strings to write and read our file content.
+Now that we have our [effector module](https://fluence.dev/docs/marine-book/basic-concepts/) in place, let's code our [facade module](https://fluence.dev/docs/build/fluence-js/concepts#facade-api), which in our case consists of simple read and write methods essentially wrapping the effector methods with a little convenience: instead of byte arrays we can use human readable strings to write and read our file content.
 
 Recall that Wasm IT modules are shared nothing and that we need to explicitly link dependencies. Before we code our facade, let's have a look at what we need to do to link our effector, aka adapter, module:
 
@@ -187,7 +210,7 @@ extern "C" {
 
 ```
 
-- (1): here we use [Rust's FFI](https://doc.rust-lang.org/nomicon/ffi.html) to specify the module name we want to [import](/docs/marine-book/marine-rust-sdk/developing/import-functions)
+- (1): here we use [Rust's FFI](https://doc.rust-lang.org/nomicon/ffi.html) to specify the module name we want to [import](https://fluence.dev/docs/marine-book/marine-rust-sdk/developing/import-functions)
 - (2): for each (public) method in our effector module, we create a link reference and assign a link name, i.e. *get* or *put*, which are now available to the facade module.
 
 Let's put it all together:
@@ -270,7 +293,7 @@ extern "C" {
 
 ```
 
-Now that our business logic is in place we can compile our code to the Wasm modules:
+Now that our business logic is in place we can compile our code into Wasm modules:
 
 ```
 fluence build
@@ -283,9 +306,9 @@ Making sure all modules are downloaded and built... done
 
 ```
 
-All looks good and we now have two Wasm module we'd like to use as a service. See the respective `target\\wasm32-wasi\\release` directories for the *.wasm files.
+All looks good and we now have two Wasm module we'd like to use as a service. See the respective `target\\wasm32-wasi\\release` directories for the corresponding *.wasm files.
 
-We have one more step to complete the create a service from our Wasm modules: specify the linking configuration in the `services/services.yaml` file by naming the appropriate facade and linked module(s). Update your *services.yaml* to:
+We are one step away from creating a service that uses our Wasm modules. We need to specify the linking configuration in the `services/services.yaml` file by naming the appropriate facade and linked module(s). Update your *services.yaml* to:
 
 ```yaml
 version: 0
@@ -298,7 +321,7 @@ modules:
 
 ```
 
-Now we can use our service, aptly called *local_storage*, even without deployment to the network in the [Marine REPL](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl.md):
+Now we can use our service, aptly called *local_storage*, even without deployment to the network in the [Marine REPL](notion://www.notion.so/fluencenetwork/Fluence-Developer-Documentation-bdf8d06ad52e493fb765456dbd5480cd):
 
 ```bash
 fluence service repl
@@ -380,71 +403,6 @@ result: Object {"stderr": String("error reading file"), "stdout": String("")}
 ```
 
 **todo**: worker deploy
-
-- * delete old deploy: **
-
-```bash
-fluence deploy
-Making sure all services are downloaded... done
-    Blocking waiting for file lock on package cache
-    <...>
-Making sure all modules are downloaded and built... done
-
-Going to deploy services described in ~/localdev/documentation-examples/write-to-file/fluence.yaml:
-
-filesys_adapter:
-  get: services
-  deploy:
-    - deployId: default
-use_filesys:
-  get: services
-  deploy:
-    - deployId: default
-
-? Do you want to deploy all of these services? Yes
-Going to upload module: filesys_adapter
-Going to upload module: use_filesys
-Module 'filesys_adapter' was uploaded
-Module 'use_filesys' was uploaded
-Now time to make the blueprint...
-{
-  "blueprint_id": "5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d",
-  "service_id": "b1adf912-abbe-45e8-9b2f-ac26158ba7db"
-}
-Deploying:
-  service: filesys_adapter
-  deployId: default
-  on: 12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm... done
-Going to upload module: filesys_adapter
-Going to upload module: use_filesys
-Module 'filesys_adapter' was uploaded
-Module 'use_filesys' was uploaded
-Now time to make the blueprint...
-{
-  "blueprint_id": "5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d",
-  "service_id": "2a6b3077-67ad-43d8-a181-0d24e8683d08"
-}
-Deploying:
-  service: use_filesys
-  deployId: default
-  on: 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA... done
-
-Currently deployed services listed in ~/localdev/documentation-examples/write-to-file/.fluence/app.yaml:
-
-filesys_adapter:
-  default:
-    - blueprintId: 5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d
-      serviceId: b1adf912-abbe-45e8-9b2f-ac26158ba7db
-      peerId: 12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm
-      keyPairName: auto-generated
-use_filesys:
-  default:
-    - blueprintId: 5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d
-      serviceId: 2a6b3077-67ad-43d8-a181-0d24e8683d08
-      peerId: 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA
-      keyPairName: auto-generated
-
-```
 
 Now that we have our services deployed, we can turn our focus on writing the necessary Aqua code. First, we clear out the template code in the `src/aqua/main.aqua` file and start from scratch:
 
@@ -549,4 +507,288 @@ All looks in order, well done! You now have the basic effector module for to wri
 
 ### SQLite
 
-coming soon.
+Let us make an example of a simple SQL REPL service that leverages:
+- pre-built SQLite library Wasm module. You can find  the module code  and build instructions [here](https://github.com/fluencelabs/sqlite)
+- marine-sqlite-connector Rust crate that is a fork for sqlite-connector modified to use SQLite Wasm module mentioned previously
+
+```
+fluence init sql-repl
+? Select template minimal
+
+Successfully initialized Fluence project template at ~/localdev/sql-repl
+
+cd sql-repl
+
+```
+
+In the new project directory, we scaffold a new service:
+
+```
+fluence service new
+? Enter service path services
+? Do you want to use services as the name of your new service? No
+? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
+sql_repl
+Successfully generated template for new service at services
+...
+Added sql_repl to fluence.yaml
+? Do you want to add service sql_repl to a default worker defaultWorker Yes
+Added sql_repl to defaultWorker
+```
+
+Which gives us project scaffold:
+
+```
+tree services -L 4 -I target
+services
+|-- modules
+|   `-- sql_repl
+|       |-- Cargo.toml
+|       |-- module.yaml
+|       `-- src
+|           `-- main.rs
+`-- service.yaml
+```
+
+And the Rust template:
+
+```rust
+// services/modules/sql_repl/src/main.rs
+#![allow(non_snake_case)]
+use marine_rs_sdk::marine;
+use marine_rs_sdk::module_manifest;
+
+module_manifest!();
+
+pub fn main() {}
+
+#[marine]
+pub fn greeting(name: String) -> String {
+    format!("Hi, {}", name)
+}
+```
+
+We will change this main.rs later adding REPL functionality.  Now we add a pre-built SQLite module. Plz note that tar archive both contains Wasm module itself and module.yaml file that describes the module and its properties. You can find a yaml schema with available options for module.yaml in ./.fluence/schemas in this project's directory.
+```bash
+$fluence module add
+? Enter path to a module or url to .tar.gz archive https://github.com/fluencelabs/sqlite/releases/download/v0.18.0_w/sqlite3.wasm.tar.gz
+? Enter service name from fluence.yaml or path to the service directory services
+Added sqlite3 to /git/some/sql-repl/services
+```
+
+With the scaffolding out of the way, let's code the module. Let us add marine-sqlite-connector dependency into sql_repl module's Cargo.toml.
+
+```rust
+// services/modules/sql_repl/Cargo.toml
+[package]
+name = "sql_repl"
+version = "0.1.0"
+edition = "2018"
+
+[[bin]]
+name = "sql_repl"
+path = "src/main.rs"
+
+[dependencies]
+marine-rs-sdk = "0.7.1"
+marine-sqlite-connector = "0.5.1"
+
+[dev-dependencies]
+marine-rs-sdk-test = "0.8.1"
+
+```
+
+Next let code the module itself.
+
+
+```rust
+// services/modules/sql_repl/src/main.rs
+
+use marine_rs_sdk::marine;
+use marine_rs_sdk::module_manifest;
+use std::io::{self, Write};
+
+use marine_sqlite_connector;
+use marine_sqlite_connector::Value;
+
+module_manifest!();
+
+pub fn main() {}
+
+#[marine]
+pub fn sql_repl() {
+    let connection = marine_sqlite_connector::open(":memory:").unwrap();
+    let delimiter = ';';
+    println!("For exit type QUIT;");
+    loop {
+        print!("SQL> ");
+        io::stdout().flush().unwrap();
+
+        let mut input_lines = io::stdin().lines();
+        let mut sql_string: String = String::new();
+        while let Some(line) = input_lines.next() {
+            let l = line.unwrap();
+            let l_no_spaces = l.trim();
+            if let Some(pos) = l_no_spaces.find(delimiter) {
+                sql_string.push_str(&l_no_spaces[..pos]);
+                break;
+            }
+            sql_string.push_str(l_no_spaces);
+            sql_string.push(' ');
+        }
+
+        println!("{}", sql_string);
+        if let Some(first_word) = sql_string.split_whitespace().next() {
+            match first_word.to_uppercase().as_str() {
+                "SELECT" => {
+                    let mut cursor = connection.prepare(sql_string).unwrap().cursor();
+                    while let Some(row) = cursor.next().unwrap() {
+                        for column in row.iter() {
+                            match column {
+                                Value::Binary(_) => print!(
+                                    "{:} ",
+                                    String::from_utf8_lossy(column.as_binary().unwrap())
+                                ),
+                                Value::Float(_) => print!("{} ", column.as_float().unwrap()),
+                                Value::Integer(_) => print!("{} ", column.as_integer().unwrap()),
+                                Value::String(_) => print!("{} ", column.as_string().unwrap()),
+                                Value::Null => print!("NULL "),
+                            }
+                        }
+                    }
+                    println!();
+                }
+                "QUIT" => break,
+                _ => connection.execute(sql_string).unwrap(),
+            };
+        }
+
+        println!();
+    }
+}
+
+```
+
+Having everything in place let us build our SQL REPL Wasm module:
+
+```bash
+# in the project root directory
+Fluence build
+Making sure all services are downloaded... done
+   Compiling getrandom v0.2.8
+   Compiling marine-rs-sdk-main v0.6.15
+   Compiling marine-timestamp-macro v0.6.15
+   Compiling uuid v0.8.2
+   Compiling marine-macro-impl v0.6.15
+   Compiling marine-macro v0.6.15
+   Compiling polyplets v0.2.0
+   Compiling marine-rs-sdk v0.6.15
+   Compiling marine-sqlite-connector v0.5.2
+   Compiling sql_repl v0.1.0 (/git/some/sql-repl/services/modules/sql_repl)
+    Finished release [optimized] target(s) in 2.67s
+
+```
+
+All looks good and we now have two Wasm module we'd like to use as a service. One is built by us and second is taken from a list of released SQLite Wasm module.
+
+Now we can use our sql_repl service, even without deployment to the network in the [Marine REPL](https://fluence.dev/docs/marine-book/marine-tooling-reference/marine-repl.md):
+
+```bash
+fluence service repl
+? Enter service name from fluence.yaml, path to a service or url to .tar.gz archive services
+Making sure service and modules are downloaded and built... ⣾
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: sql_repl
+Call sql_repl service functions in repl like this:
+
+call sql_repl <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = 92b60dee-a786-42cf-bff7-c4166a283027
+elapsed time 1.161987582s
+
+1>
+
+```
+
+Let us take a look at the list of exported functions:
+
+```Shell
+1> interface
+Loaded modules interface:
+exported data types (combined from all modules):
+data DBPrepareDescriptor:
+  ret_code: i32
+  stmt_handle: u32
+  tail: u32
+data DBExecDescriptor:
+  ret_code: i32
+  err_msg: string
+data DBOpenDescriptor:
+  ret_code: i32
+  db_handle: u32
+
+exported functions:
+sql_repl:
+  func sql_repl()
+sqlite3:
+  func sqlite3_close(db_handle: u32) -> i32
+  func sqlite3_bind_blob(stmt_handle: u32, pos: i32, blob: []u8, xDel: i32) -> i32
+  func sqlite3_bind_null(stmt_handle: u32, pos: i32) -> i32
+  func sqlite3_column_name(stmt_handle: u32, N: u32) -> string
+  func sqlite3_changes(db_handle: u32) -> i32
+  func sqlite3_hard_heap_limit64(size: i64) -> i64
+  func sqlite3_bind_double(stmt_handle: u32, pos: i32, value: f64) -> i32
+  func sqlite3_column_int64(stmt_handle: u32, icol: u32) -> i64
+  func sqlite3_busy_timeout(db_handle: u32, ms: u32) -> i32
+  func sqlite3_column_type(stmt_handle: u32, icol: u32) -> i32
+  func sqlite3_total_changes(db_handle: u32) -> i32
+  func sqlite3_bind_text(stmt_handle: u32, pos: i32, text: string, xDel: i32) -> i32
+  func sqlite3_column_count(stmt_handle: u32) -> i32
+  func sqlite3_open_v2(filename: string, flags: i32, vfs: string) -> DBOpenDescriptor
+  func sqlite3_column_bytes(stmt_handle: u32, icol: u32) -> i32
+  func sqlite3_bind_int64(stmt_handle: u32, pos: i32, value: i64) -> i32
+  func sqlite3_reset(stmt_handle: u32) -> i32
+  func sqlite3_libversion_number() -> i32
+  func sqlite3_prepare_v2(db_handle: u32, sql: string) -> DBPrepareDescriptor
+  func sqlite3_exec(db_handle: u32, sql: string, callback_id: i32, callback_arg: i32) -> DBExecDescriptor
+  func sqlite3_step(stmt_handle: u32) -> i32
+  func sqlite3_column_double(stmt_handle: u32, icol: i32) -> f64
+  func sqlite3_finalize(stmt_handle: u32) -> i32
+  func sqlite3_column_text(stmt_handle: u32, icol: u32) -> string
+  func sqlite3_errcode(db: u32) -> i32
+  func sqlite3_column_blob(stmt_handle: u32, icol: i32) -> []u8
+  func sqlite3_errmsg(db_handle: u32) -> string
+  func sqlite3_soft_heap_limit64(size: i64) -> i64
+```
+
+As you can sqlite3 module exposes SQLite API functions whilst the facade sql_repl module has a single function sql_repl. Let us try SQL REPL.
+
+```Shell
+2> call sql_repl sql_repl []
+For exit type QUIT;
+SQL> CREATE TABLE tab1(i bigint);
+CREATE TABLE tab1(i bigint)
+
+SQL> INSERT INTO tab1 VALUES(42);
+INSERT INTO tab1 VALUES(42)
+
+SQL> SELECT * FROM tab1;
+SELECT * FROM tab1
+42
+
+SQL>
+```
+
+
+**todo**: deploy, aqua and run
