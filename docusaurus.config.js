@@ -25,8 +25,7 @@ const getFluenceLanguageConfig = (langName) => ({
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Fluence Docs",
-  tagline:
-    "Decentralized Serverless Platform",
+  tagline: "Decentralized Serverless Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -53,7 +52,7 @@ const config = {
           customCss: require.resolve("./src/css/custom.scss"),
         },
         gtag: {
-          trackingID: 'G-Z28T4R4T7P',
+          trackingID: "G-Z28T4R4T7P",
           anonymizeIP: true,
         },
       }),

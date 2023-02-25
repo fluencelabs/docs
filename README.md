@@ -12,6 +12,27 @@ Fluence Docs are built using [Docusaurus 2](https://docusaurus.io/), a modern st
 - [Here](https://github.com/fluencelabs/docs/blob/9c6e5a257f453b6dbffb856fc236917908e80602/docusaurus.config.js#L61) is where you can add syntax highlight for other programming languages. Use \`\`\`aqua and \`\`\`air for codeblocks in these languages. Use \`\`\`sh for something that you intend to type in a shell. Maybe don't put \$ signs and execution results right inside  \`\`\`sh code-blocks for the following reasons: \$ signs and commands output mixed with all of it make it harder to copy and use the code from the docs and also some of the commands output will be changed by us and will have to be maintained in the docs as well which is very inconvenient.
 - Headings are not just a stylistic tool but also semantic one. Headings are used to give document a structure which is especially important for page navigation for certain people and also for generating valid quick navigation tree that is displayed on the right side of the docs. So basically the main rule is to not skip heading levels (e.g. don't do #Heading followed immediately by ###Heading - use ##Heading instead)
 - For the lack of maintainer, Blog is currently removed from `sidebars.js` but we can add it back. It's still available and working
+- For using mermaid charts on your page do the following:
+  1. Add import statement at the absolute top of your .md file 
+      ```tsx
+      import Mermaid from "/src/components/Mermaid.tsx";
+      ```
+  1. Make sure there is a new line after the import statement!
+      ```tsx
+      import Mermaid from "/src/components/Mermaid.tsx";
+
+      # Your page title
+      ```
+  1. Use `Mermaid` component like this (basically copy-paste top and bottom lines and insert your chart code between them): 
+      ```tsx
+      <Mermaid chart={`
+      graph TD;
+          A-->B;
+          A-->C;
+          B-->D;
+          C-->D;
+      `}/>
+      ```
 - TODO: would be cool to have docs near the code (e.g. put Marine docs to Marine repo) - I think it can be done with CI build process but I think there unfortunately is no out-of-the-box solution. If it would be possible - changelogs from github and fluence-js docs, etc. could be included in these docs
 
 ## Installation
