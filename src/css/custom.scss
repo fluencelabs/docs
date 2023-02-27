@@ -57,10 +57,10 @@
 
 .mermaid {
   [data-theme="light"] & {
-    filter: hue-rotate(94deg) saturate(2.5);
+    filter: hue-rotate(100deg) saturate(5) contrast(1.1);
   }
 
   [data-theme="dark"] & {
-    filter: invert(1) brightness(2.5) hue-rotate(272deg);
+    filter: invert(1) brightness(5) hue-rotate(276deg);
   }
 }
