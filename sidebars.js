@@ -20,10 +20,21 @@ const sidebars = {
       label: "Working with data",
       link: {id: "build/working-with-data", type: "doc"},
       items: [
-          "build/local-data-storage",
-          "build/remote-data-storage",
-          "build/data-acquisition"
+        "build/local-data-storage",
+        "build/remote-data-storage",
+        "build/data-acquisition"
       ]
+    },
+    {
+      type: "category",
+      label: "Fluence JS Client",
+      link: { id: "build/js-client/js-client",type: "doc" },
+      items: [
+        "build/js-client/js-client",
+        "build/js-client/installation",
+        "build/js-client/hello-world",
+        "build/js-client/changelog",
+      ],
     },
     "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
