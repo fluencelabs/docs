@@ -4,73 +4,44 @@
 const sidebars = {
   build: [
     "build/introduction",
-    "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
-    "build/concepts/concepts",
-    "build/fluence-cli",
+    "build/get-started",
     {
       type: "category",
-      label: "Quick Start",
-      link: { id: "build/quick-start/quick-start", type: "doc" },
+      label: "Quickstart",
       items: [
-        "build/quick-start/browser-to-browser/browser-to-browser",
-        "build/quick-start/hosted-services/hosted-services",
-        "build/quick-start/browser-to-service/browser-to-service",
-        "build/quick-start/service-composition-and-reuse/service-composition-and-reuse",
-        "build/quick-start/decentralized-oracles/decentralized-oracles",
-      ],
+          "build/quickstarts",
+          "build/fundamentals",
+          "build/develop-services",
+          "build/develop-distributed-algos"
+      ]
     },
     {
       type: "category",
-      label: "Aquamarine",
-      link: { id: "build/aquamarine/aquamarine", type: "doc" },
+      label: "Working with data",
+      link: {id: "build/working-with-data", type: "doc"},
       items: [
-        "build/aquamarine/aqua",
-        {
-          type: "category",
-          label: "Marine",
-          link: { id: "build/aquamarine/marine/marine", type: "doc" },
-          items: [
-            "build/aquamarine/marine/marine-cli",
-            "build/aquamarine/marine/marine-repl",
-            "build/aquamarine/marine/marine-rs-sdk",
-          ],
-        },
-      ],
+        "build/local-data-storage",
+        "build/remote-data-storage",
+        "build/data-acquisition"
+      ]
     },
-    "build/tools",
-    "build/node",
     {
       type: "category",
       label: "Fluence JS Client",
-      link: { id: "build/js-client/js-client", type: "doc" },
+      link: { id: "build/js-client/js-client",type: "doc" },
       items: [
         "build/js-client/js-client",
         "build/js-client/installation",
         "build/js-client/hello-world",
-        // TODO: fix the doc sections to reflect the current API of JS Client
-        // "build/js-client/call-functions",
-        // "build/js-client/register-services",
-        // "build/js-client/call-params",
-        // "build/js-client/signing-service",
-        // "build/js-client/marine-js",
-        // "build/js-client/internals",
         "build/js-client/changelog",
       ],
     },
+    "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
+    "build/concepts/concepts",
     "build/security",
-    {
-      type: "category",
-      label: "Tutorials",
-      link: { type: "generated-index" },
-      items: [
-        "build/tutorials/setting-up-your-environment",
-        "build/tutorials/deploy-a-local-fluence-node",
-        "build/tutorials/curl-as-a-service",
-        "build/tutorials/add-your-own-builtins",
-      ],
-    },
-    "build/research-papers-and-references",
+    "build/limits",
     "build/glossary",
+    "build/reference"
   ],
   learn: [
     "learn/overview",
