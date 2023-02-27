@@ -5,24 +5,24 @@ const sidebars = {
   build: [
     "build/introduction",
     "build/get-started",
-    {
-      type: "category",
-      label: "Quickstart",
-      items: [
-          "build/quickstarts",
-          "build/fundamentals",
-          "build/develop-services",
-          "build/develop-distributed-algos"
-      ]
-    },
+    // {
+    //   type: "category",
+    //   label: "Quickstart",
+    //   items: [
+    //       "build/quickstarts",
+    //       "build/fundamentals",
+    //       "build/develop-services",
+    //       "build/develop-distributed-algos"
+    //   ]
+    // },
     {
       type: "category",
       label: "Working with data",
       link: {id: "build/working-with-data", type: "doc"},
       items: [
         "build/local-data-storage",
-        "build/remote-data-storage",
-        "build/data-acquisition"
+//        "build/remote-data-storage",
+//        "build/data-acquisition"
       ]
     },
     {
@@ -39,9 +39,9 @@ const sidebars = {
     "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
     "build/security",
-    "build/limits",
+//    "build/limits",
     "build/glossary",
-    "build/reference"
+//    "build/reference"
   ],
   learn: [
     "learn/overview",
