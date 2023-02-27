@@ -173,3 +173,130 @@ result: {
 }
  elapsed time: 211.125µs
  ```
+
+ ### Function imports
+ A service can consist of more than one module. A module can import functions from other modules. This is done using `extern "C"`  block wrapped with marine macro, and some attribute. Lets try:
+
+ First, create a new module:
+ ```
+ fluence module new services/some_service/modules/new_module
+ ```
+ Then, add it to service.yaml of previously created `some_service`
+ ```yaml
+ # yaml-language-server: $schema=../../.fluence/schemas/service.yaml.json
+
+# Defines a [Marine service](https://fluence.dev/docs/build/concepts/#services), most importantly the modules that the service consists of. For Fluence CLI, **service** - is a directory which contains this config. You can use `fluence service new` command to generate a template for new service
+
+# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/service.md
+
+version: 0
+name: some_service
+modules:
+  facade:
+    get: modules/some_service 
+  other:                      # new line. "other" is an arbitrary chosen name, just make it unique
+    get: modules/new_module   # new line. here is the path to the dir with module.yaml
+ ```
+
+Update new module's to make it more meaningful:
+```rust
+#![allow(non_snake_case)]
+use marine_rs_sdk::marine;
+use marine_rs_sdk::module_manifest;
+
+module_manifest!();
+
+pub fn main() {}
+
+#[marine]
+pub fn get_hello() -> String {
+    format!("Hello")
+}
+```
+
+And import and use this function in facade module:
+```rust
+#![allow(non_snake_case)]
+use marine_rs_sdk::marine;
+use marine_rs_sdk::module_manifest;
+
+module_manifest!();
+
+pub fn main() {}
+
+#[marine]
+pub struct SomeStruct {
+    number: i32,
+    string: String,
+    vector: Vec<i32>
+}
+
+#[marine]
+pub fn process_struct(arg: SomeStruct) -> SomeStruct {
+    SomeStruct {
+        number: arg.number + 1,
+        string: format!("{} {}", arg.string, 1),
+        vector: vec![arg.vector[0]; 2],
+    }
+}
+
+#[marine]
+pub fn greeting(name: String) -> String {
+    let hello = get_hello();
+    format!("{}, {}",  hello, name)
+}
+
+#[marine] 
+#[link(wasm_import_module = "new_module")] // use the name of .wasm file. In this case it is from [[bin]] section of Cargo.toml of module. "host" is reserved here.
+extern "C" {
+    fn get_hello() -> String; 
+}
+```
+
+Now check using repl:
+```
+$ fluence service repl some_service
+Making sure service and modules are downloaded and built... ⣽
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: some_service
+Call some_service service functions in repl like this:
+
+call some_service <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = cdc9af5b-3931-48fe-a7d4-f18f695b01bb
+elapsed time 95.499791ms
+
+1> i
+Loaded modules interface:
+exported data types (combined from all modules):
+data SomeStruct:
+  number: i32
+  string: string
+  vector: []i32
+
+exported functions:
+new_module:
+  func get_hello() -> string
+some_service:
+  func process_struct(arg: SomeStruct) -> SomeStruct
+  func greeting(name: string) -> string
+
+2> c some_service greeting "fluence"
+result: "Hello, fluence"
+ elapsed time: 10.474334ms
+
+3> 
+```
+## Mounted binaries
+To unlock some features not provided for wasm, exists a mounted binaries API - a way to call programs on host machine from wasm services.  TODO
