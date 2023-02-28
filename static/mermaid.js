@@ -6,36 +6,29 @@ const loadMermaid = () => {
 
 // @ts-check
 
-const replaceElWithMermaid = (el) => {
-  const pre = document.createElement("pre");
-  pre.classList.add("mermaid");
-  pre.textContent = el.children[0].children[0].textContent;
-  el.replaceWith(pre);
-  return el;
-};
+const getShikiElements = () =>
+  Array.from(document.getElementsByClassName("shiki"));
 
 setInterval(() => {
-  const shikiElements = Array.from(document.getElementsByClassName("shiki"));
-
-  shikiElements
-    .filter((el) => !el.classList.contains("visible"))
-    .forEach((el) => el.classList.add("visible"));
-
-  const replacedElements = shikiElements
+  const replacedElements = getShikiElements()
     .filter((el) => !el.children[0].classList.contains("language-id"))
     .map((el) => {
       if (el.classList.contains("min-dark")) {
         return el.remove();
       }
 
-      return replaceElWithMermaid(el);
+      const pre = document.createElement("pre");
+      pre.classList.add("mermaid");
+      pre.textContent = el.children[0].children[0].textContent;
+      el.replaceWith(pre);
+      return el;
     });
-
-  Array.from(document.getElementsByClassName("mermaid"))
-    .filter((el) => el.children?.[0]?.classList?.contains("code-container"))
-    .forEach((el) => replaceElWithMermaid(el));
 
   if (replacedElements.length > 0) {
     loadMermaid();
   }
+
+  requestAnimationFrame(() => {
+    getShikiElements().forEach((el) => el.classList.add("visible"));
+  });
 }, 60);
