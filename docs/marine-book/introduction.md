@@ -20,7 +20,6 @@ Overview of using Wasm at Fluence:
 
 <ReactPlayer controls url="https://www.youtube.com/watch?t=1s&v=ObHRZ6MxUDA" width="100%" />
 <br />
-<br />
 <ReactPlayer controls url="https://youtu.be/DeU9e69DeHo?t=1430" width="100%" />
 
 <br />

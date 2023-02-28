@@ -8,7 +8,6 @@ At the core of Fluence is the open-source language **Aqua** that allows for the 
 
 <ReactPlayer controls url="https://youtu.be/dIUXgdEcUPg" width="100%" />
 <br />
-<br />
 <ReactPlayer controls url="https://youtu.be/M_u-EnWrMOQ" width="100%" />
 <br />
 
