@@ -299,4 +299,71 @@ result: "Hello, fluence"
 3> 
 ```
 ## Mounted binaries
-To unlock some features not provided for wasm, exists a mounted binaries API - a way to call programs on host machine from wasm services.  TODO
+To unlock some options not possuble in pure wasm, exists a mounted binaries API - a way to call programs on host machine from wasm services. It is similar to the importing functions, the only differences are that `wasm_import_module` must be `"host"` and signatures are predefined.
+
+Lets use the `curl` tool from the host system in our project. First, add import the binary and use it:
+```rust
+use marine_rs_sdk::MountedBinaryStringResult;
+
+/*... skipped code from previous snippets ...*/  
+
+#[marine]
+pub fn call_curl(url: String) -> MountedBinaryStringResult {
+  curl(vec![url])
+}
+
+#[marine]
+#[link(wasm_import_module = "host")]
+extern "C" {
+    fn curl(cmd: Vec<String>) -> MountedBinaryStringResult;
+  
+}
+```
+
+Function name should match the name in the config, arguments should be `Vec<String>` and return value either `MountedBinaryStringResult` or `MountedBinaryStringResult`. The difference is that the latter transform stdin/stdout to `String` internally, while the other keeps it `Vec<u8>`
+
+
+Then add the mounted binary to the config `<project_root>/services/some_service/modules/some_service/module.yaml`:
+```yaml
+version: 0
+type: rust
+name: some_service
+mountedBinaries:
+    curl: /usr/bin/curl
+```
+
+And now it is runnable:
+```
+$ fluence service repl some_service
+Making sure service and modules are downloaded and built... ⣽
+Making sure service and modules are downloaded and built... ⢿
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: some_service
+Call some_service service functions in repl like this:
+
+call some_service <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = c3c4f345-c5e9-492c-bf58-4c2424d710c6
+elapsed time 90.803042ms
+
+1> c some_service call_curl "google.com"
+result: {
+  "error": "",
+  "ret_code": 0,
+  "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   219  100   219    0     0   1269      0 --:--:-- --:--:-- --:--:--  1351\n",
+  "stdout": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>301 Moved</TITLE></HEAD><BODY>\n<H1>301 Moved</H1>\nThe document has moved\n<A HREF=\"http://www.google.com/\">here</A>.\r\n</BODY></HTML>\r\n"
+}
+ elapsed time: 198.43175ms
+
+```
