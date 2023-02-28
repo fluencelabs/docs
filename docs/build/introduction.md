@@ -1,5 +1,3 @@
-import Mermaid from "/src/components/Mermaid.tsx";
-
 # Introduction
 
 Fluence decentralized FaaS is a Web3 alternative to FaaS provided by centralized cloud providers 
@@ -23,7 +21,7 @@ are deployed to one or more peers willing to host said modules.
 If all goes as planned, you now have your business logic distributed to the peer-to-per network and available to be called.
 See Figure 1.
 
-<Mermaid chart={`
+```mermaid
 sequenceDiagram
 participant D as Developer
 participant P as Peer(s)
@@ -50,7 +48,7 @@ alt
 	C -->> P: Deal cancelled
 	P -->> P: Remove modules
 end
-`}/>
+```
 
 Now that we have our business logic deployed to one or more peers of the Fluence peer-to-peer network,
 we need to implement our application workflow with [Aqua](/docs/build/glossary.md#aqua).
@@ -62,19 +60,19 @@ tooling is available to create the previously discussed [particle](/docs/build/g
 and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer,
 aka [relay peer](/docs/build/glossary.md#relay), in the network. See Figure 2.
 
-<Mermaid chart={`
-sequenceDiagram
-participant D as Developer
-participant N as P2P Network
-D ->> D: Create workflow in Aqua
-D ->> D: Create particle
-D ->> N: Send particle to network via (any) relay peer
-N ->> N: Execute specified worklflow step(s)
-`}/>
+```mermaid
+	sequenceDiagram
+	participant D as Developer
+	participant N as P2P Network
+	D ->> D: Create workflow in Aqua
+	D ->> D: Create particle
+	D ->> N: Send particle to network via (any) relay peer
+	N ->> N: Execute specified worklflow step(s)
+```
 
 Your go-to tool for accomplishing almost all tasks except for coding business logic is Fluence CLI. See Figure 3.
 
-<Mermaid chart={`
+```mermaid
 stateDiagram
 state "Rust Marine Code" as Code
 state "Build wasm32-wasi Module" as Build
@@ -94,4 +92,4 @@ Code -->  Build
 	Service --> Deploy
 	Remove
   }
-`}/>
+```
