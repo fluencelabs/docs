@@ -42,6 +42,8 @@
 
 .shiki {
   visibility: hidden;
+  pointer-events: none;
+
   [data-theme="light"] &.min-dark {
     display: none;
   }
@@ -52,6 +54,7 @@
 
   &.visible {
     visibility: visible;
+    pointer-events: all;
   }
 }
 
