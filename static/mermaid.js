@@ -20,7 +20,9 @@ setInterval(() => {
       pre.classList.add("mermaid");
       pre.textContent = el.children[0].children[0].textContent;
       el.after(pre);
-      el.remove();
+      requestAnimationFrame(() => {
+        el.remove();
+      });
       return el;
     });
 
