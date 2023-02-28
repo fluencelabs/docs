@@ -6,11 +6,10 @@ const loadMermaid = () => {
 
 // @ts-check
 
-const getShikiElements = () =>
-  Array.from(document.getElementsByClassName("shiki"));
-
 setInterval(() => {
-  const replacedElements = getShikiElements()
+  const shikiElements = Array.from(document.getElementsByClassName("shiki"));
+  shikiElements.forEach((el) => el.classList.add("visible"));
+  const replacedElements = shikiElements
     .filter((el) => !el.children[0].classList.contains("language-id"))
     .map((el) => {
       if (el.classList.contains("min-dark")) {
@@ -20,15 +19,12 @@ setInterval(() => {
       const pre = document.createElement("pre");
       pre.classList.add("mermaid");
       pre.textContent = el.children[0].children[0].textContent;
-      el.replaceWith(pre);
+      el.after(pre);
+      el.remove();
       return el;
     });
 
   if (replacedElements.length > 0) {
     loadMermaid();
   }
-
-  requestAnimationFrame(() => {
-    getShikiElements().forEach((el) => el.classList.add("visible"));
-  });
 }, 60);
