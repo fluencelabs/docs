@@ -6,9 +6,10 @@ Fluence is an open protocol and a framework for internet or private cloud applic
 
 At the core of Fluence is the open-source language **Aqua** that allows for the programming of peer-to-peer scenarios separately from the computations on peers. Applications are turned into hostless workflows over distributed function calls, which enables various levels of decentralization: from handling by a limited set of servers to complete peer-to-peer architecture by connecting user devices directly.
 
-<ReactPlayer controls url="https://youtu.be/dIUXgdEcUPg" />
+<ReactPlayer controls url="https://youtu.be/dIUXgdEcUPg" width="100%" />
 <br />
-<ReactPlayer controls url="https://youtu.be/M_u-EnWrMOQ" />
+<br />
+<ReactPlayer controls url="https://youtu.be/M_u-EnWrMOQ" width="100%" />
 <br />
 
 This book is dedicated to all things Aqua and currently in its **alpha** version and we expect to expand both Aqua's breadth and depth coverage over the coming weeks.

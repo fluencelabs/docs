@@ -10,7 +10,7 @@ Using Fluence, developers build and deploy applications to a network of compute 
 
 Fluence is powered by a cryptographic token which is used by providers as collateral for participation and as a monetary incentive. Providers earn both the Fluence token and payment (usually stablecoin) for serving applications.
 
-<ReactPlayer controls url="https://youtu.be/JrWw-0CZDaU" />
+<ReactPlayer controls url="https://youtu.be/JrWw-0CZDaU" width="100%"/>
 
 ## For Developers
 
