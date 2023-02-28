@@ -31,13 +31,11 @@ setInterval(() => {
       return replaceElWithMermaid(el);
     });
 
-  const incorrectlyRenderedMermaid = Array.from(
-    document.getElementsByClassName("mermaid")
-  )
+  Array.from(document.getElementsByClassName("mermaid"))
     .filter((el) => el.children?.[0]?.classList?.contains("code-container"))
-    .map((el) => replaceElWithMermaid(el));
+    .forEach((el) => replaceElWithMermaid(el));
 
-  if (replacedElements.length > 0 || incorrectlyRenderedMermaid > 0) {
+  if (replacedElements.length > 0) {
     loadMermaid();
   }
 }, 60);
