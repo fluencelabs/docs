@@ -30,7 +30,7 @@ setInterval(() => {
   });
   const setOfDiagrams = new Set();
   Array.from(document.getElementsByClassName("mermaid"))
-    .filter((el) => el.children[0]?.classList?.has("code-container"))
+    .filter((el) => el.children[0]?.classList.contains("code-container"))
     .forEach((el) => {
       const textContent = el.children[0].children[0].textContent;
       if (setOfDiagrams.has(textContent)) {
