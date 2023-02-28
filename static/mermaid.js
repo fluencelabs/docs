@@ -1,7 +1,18 @@
 mermaid.initialize({ startOnLoad: true });
-const loadMermaid = () => mermaid.contentLoaded();
+const loadMermaid = () => {
+  console.log("load mermaid");
+  mermaid.contentLoaded();
+};
 
 // @ts-check
+
+const replaceElWithMermaid = (el) => {
+  const pre = document.createElement("pre");
+  pre.classList.add("mermaid");
+  pre.textContent = el.children[0].children[0].textContent;
+  el.replaceWith(pre);
+  return el;
+};
 
 setInterval(() => {
   const shikiElements = Array.from(document.getElementsByClassName("shiki"));
@@ -16,14 +27,17 @@ setInterval(() => {
       if (el.classList.contains("min-dark")) {
         return el.remove();
       }
-      const pre = document.createElement("pre");
-      pre.classList.add("mermaid");
-      pre.textContent = el.children[0].children[0].textContent;
-      el.replaceWith(pre);
-      return el;
+
+      return replaceElWithMermaid(el);
     });
 
-  if (replacedElements.length > 0) {
+  const incorrectlyRenderedMermaid = Array.from(
+    document.getElementsByClassName("mermaid")
+  )
+    .filter((el) => el.children?.[0]?.classList?.contains("code-container"))
+    .map((el) => replaceElWithMermaid(el));
+
+  if (replacedElements.length > 0 || incorrectlyRenderedMermaid > 0) {
     loadMermaid();
   }
 }, 60);
