@@ -99,7 +99,7 @@ const config = {
           {
             type: "doc",
             position: "left",
-            docId: "build/introduction",
+            docId: "build/under_construction",
             label: "Build",
           },
           {
