@@ -1,8 +1,5 @@
 mermaid.initialize({ startOnLoad: true });
-const loadMermaid = () => {
-  console.log("load mermaid");
-  mermaid.contentLoaded();
-};
+const loadMermaid = () => mermaid.contentLoaded();
 
 // @ts-check
 
@@ -17,10 +14,11 @@ setInterval(() => {
   const shikiElements = Array.from(document.getElementsByClassName("shiki"));
   shikiElements.forEach((el) => el.classList.add("visible"));
   const elementsToReplace = shikiElements.filter(
-    (el) => !el.children[0].classList.contains("language-id")
+    (el) => el.previousElementSibling.textContent === "mermaid"
   );
 
   elementsToReplace.forEach((el) => {
+    el.previousElementSibling.remove();
     if (el.classList.contains("min-dark")) {
       el.remove();
       return;
