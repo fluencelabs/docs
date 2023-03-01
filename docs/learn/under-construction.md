@@ -1,3 +1,3 @@
-# Under construction
+# Under Construction
 
 This section of our documentation is currently undergoing a significant updates to reflect the roll-out of [Fluence CLI](https://github.com/fluencelabs/fluence-cli) and demand-side economics and will be back shortly. For hackathoners and other adventurers, have a look at the [fRPC Substrate](https://github.com/fluencelabs/fRPC-Substrate) repo for a cursory introduction to the new tooling and features.
