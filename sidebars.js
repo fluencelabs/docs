@@ -3,54 +3,7 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   build: [
-    "build/introduction",
-    "build/get-started",
-    // {
-    //   type: "category",
-    //   label: "Quickstart",
-    //   items: [
-    //       "build/quickstarts",
-    //       "build/fundamentals",
-    //       "build/develop-services",
-    //       "build/develop-distributed-algos"
-    //   ]
-    // },
-    {
-      type: "category",
-      label: "Working with data",
-      link: {id: "build/working-with-data", type: "doc"},
-      items: [
-        "build/local-data-storage",
-//        "build/remote-data-storage",
-//        "build/data-acquisition"
-      ]
-    },
-    {
-      type: "category",
-      label: "Fluence JS Client",
-      link: { id: "build/js-client/js-client",type: "doc" },
-      items: [
-        "build/js-client/js-client",
-        "build/js-client/installation",
-        "build/js-client/hello-world",
-        "build/js-client/changelog",
-      ],
-    },
-    "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
-    "build/concepts/concepts",
-    "build/security",
-//    "build/limits",
-    "build/glossary",
-//    "build/reference"
-  ],
-  learn: [
-    "learn/overview",
-    "learn/how-it-works",
-    "learn/why-fluence",
-    "learn/fluence-comparison",
-    "learn/use-cases",
-    "learn/technology",
-    "learn/networks",
+    "build/under_construction.md
   ],
   "aqua-book": [
     "aqua-book/introduction",
