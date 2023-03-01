@@ -64,6 +64,7 @@ const config = {
         langs: [
           "typescript",
           "javascript",
+          "html",
           "json",
           "rust",
           "shell",

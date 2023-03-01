@@ -21,6 +21,7 @@ are deployed to one or more peers willing to host said modules.
 If all goes as planned, you now have your business logic distributed to the peer-to-per network and available to be called.
 See Figure 1.
 
+mermaid
 ```mermaid
 sequenceDiagram
 participant D as Developer
@@ -60,6 +61,7 @@ tooling is available to create the previously discussed [particle](/docs/build/g
 and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer,
 aka [relay peer](/docs/build/glossary.md#relay), in the network. See Figure 2.
 
+mermaid
 ```mermaid
 	sequenceDiagram
 	participant D as Developer
@@ -72,6 +74,7 @@ aka [relay peer](/docs/build/glossary.md#relay), in the network. See Figure 2.
 
 Your go-to tool for accomplishing almost all tasks except for coding business logic is Fluence CLI. See Figure 3.
 
+mermaid
 ```mermaid
 stateDiagram
 state "Rust Marine Code" as Code
