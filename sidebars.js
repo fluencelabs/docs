@@ -3,7 +3,7 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   build: [
-    "build/under_construction.md"
+    "build/under_construction"
   ],
   "aqua-book": [
     "aqua-book/introduction",
