@@ -93,14 +93,8 @@ const config = {
           {
             type: "doc",
             position: "left",
-            docId: "learn/overview",
+            docId: "learn/under-construction",
             label: "Learn",
-          },
-          {
-            type: "doc",
-            position: "left",
-            docId: "build/under_construction",
-            label: "Build",
           },
           {
             type: "doc",
