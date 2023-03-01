@@ -64,6 +64,7 @@ const config = {
         langs: [
           "typescript",
           "javascript",
+          "html",
           "json",
           "rust",
           "shell",
@@ -184,6 +185,16 @@ const config = {
       },
     }),
   plugins: ["docusaurus-plugin-sass"],
+  scripts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/mermaid@9.4.0/dist/mermaid.min.js",
+      defer: true,
+    },
+    {
+      src: "/mermaid.js",
+      defer: true,
+    },
+  ],
 };
 
 module.exports = config;

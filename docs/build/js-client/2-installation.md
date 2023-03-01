@@ -22,13 +22,13 @@ Adding the Fluence JS client for your web application is very easy.
 
 2. Install the following packages:
 
-   ```
+   ```sh
    npm i @fluencelabs/js-client.api @fluencelabs/fluence-network-environment
    ```
 
 3. Add the following lines at the beginning of your code:
 
-   ```
+   ```js
    import { Fluence } from "@fluencelabs/js-client.api";
    import { randomKras } from '@fluencelabs/fluence-network-environment';
 
@@ -59,13 +59,13 @@ If you are using TypeScript:
 
 1. Install the following packages:
 
-   ```
-   npm i @fluencelabs/js-client.api"@fluencelabs/js-client.node @fluencelabs/fluence-network-environment
+   ```sh
+   npm i @fluencelabs/js-client.api @fluencelabs/js-client.node @fluencelabs/fluence-network-environment
    ```
 
 2. Add the following lines at the beginning of your code:
 
-   ```
+   ```js
    import '@fluencelabs/js-client.node';
    import { Fluence } from "@fluencelabs/js-client.api";
    import { randomKras } from '@fluencelabs/fluence-network-environment';
