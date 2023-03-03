@@ -367,3 +367,89 @@ result: {
  elapsed time: 198.43175ms
 
 ```
+
+## Call Parameters
+Peers provide additional information about what's happening to services. This includes where the service is, who initiated the call, where are arguments from. It is known as call parameters and structure definitions are here:
+```rust
+pub struct CallParameters {
+    /// Peer id of the AIR script initiator.
+    pub init_peer_id: String,
+
+    /// Id of the current service.
+    pub service_id: String,
+
+    /// Id of the service creator.
+    pub service_creator_peer_id: String,
+
+    /// PeerId of the peer who hosts this service.
+    pub host_id: String,
+
+    /// Id of the particle which execution resulted a call this service.
+    pub particle_id: String,
+
+    /// Security tetraplets which described origin of the arguments.
+    pub tetraplets: Vec<Vec<SecurityTetraplet>>,
+}
+
+pub struct SecurityTetraplet {
+    /// Id of a peer where corresponding value was set.
+    pub peer_pk: String,
+
+    /// Id of a service that set corresponding value.
+    pub service_id: String,
+
+    /// Name of a function that returned corresponding value.
+    pub function_name: String,
+
+    /// Value was produced by applying this `json_path` to the output from `call_service`.
+    pub json_path: String,
+}
+```
+
+It is accessible through `marine_rs_sdk::get_call_parameters` function. Here is an example:
+```rust
+#[marine]
+pub fn call_parameters() -> String {
+    let cp = marine_rs_sdk::get_call_parameters();
+    format!(
+        "init_peer_id: {}, service_id: {}, service_creator_peer_id: {}, host_id: {}, particle_id: {}, tetraplets: {:?}",
+        cp.init_peer_id,
+        cp.service_id,
+        cp.service_creator_peer_id,
+        cp.host_id,
+        cp.particle_id,
+        cp.tetraplets
+    )
+}
+
+```
+
+After adding it to a service, it can be tested. Call parameters can be set manually in repl, as a second json value after arguments:
+```
+# fluence service repl some_service
+Making sure service and modules are downloaded and built... ⣾
+Making sure service and modules are downloaded and built... ⣾
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: some_service
+Call some_service service functions in repl like this:
+
+call some_service <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = c35b8c5f-a903-4676-8d72-0fd7b2277cf0
+elapsed time 95.512125ms
+
+1> c some_service call_parameters [] ["a", "b", "c", "d", "e", []]
+result: "init_peer_id: a, service_id: b, service_creator_peer_id: c, host_id: d, particle_id: e, tetraplets: []"
+ elapsed time: 6.426833ms
+```
