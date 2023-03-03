@@ -4,9 +4,9 @@
 
 Learning
 
-Let's create a vastly improve *hello world* implementation to something a little more informative: we want a function that takes a city name and returns a greeting with the local time, e.g., "Hello, New York. It is 23:01:14."
+Let's turn the *hello_world* implementation to something more informative: we want a function that takes a city name and returns a greeting with the local time, e.g., "Hello, New York. It is 23:01:14."
 
-In order to get the time, we write an adapter using the hosting peers curl binary to make a call to [WorldTimeAPI](https://worldtimeapi.org/). For our purposes, we shift some work on the user and limit our wordly greeting to the following [cities](https://worldtimeapi.org/timezones).
+In order to get the time, we write an adapter using the hosting peer's curl binary to make a call to [WorldTimeAPI](https://worldtimeapi.org/). For our purposes, we shift some work on the user and limit our wordly greeting to the following [cities](https://worldtimeapi.org/timezones).
 
 Let's create a new Fluence project with Fluence CLI:
 
@@ -36,7 +36,7 @@ Successfully generated template for new service at services
 Added hello_world to fluence.yaml
 ```
 
-In the newly created *services* directory, you find the services.yaml configuration file:
+In the newly created `services` directory, you find the services.yaml configuration file:
 
 ```
 $ cat services/services.yaml
@@ -48,7 +48,7 @@ modules:
 
 ```
 
-Which drives the configuration of the modules comprising the service; in this case, it's just the *hello_world* module, which itself is defined in the services/modules/hello_world/module.yaml:
+that drives the configuration of the modules comprising the service; in this case, it's just the `hello_world` module, which itself is defined in the `services/modules/hello_world/module.yaml`:
 
 ```
 $ cat services/modules/hello_world/module.yaml
@@ -77,7 +77,7 @@ extern "C" {
 }
 ```
 
-Which basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
+that basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
 
 ```
 struct MountedBinaryResult:
@@ -85,7 +85,6 @@ struct MountedBinaryResult:
   error: String
   stdout: Vec<u8>
   stderr: Vec<u8>
-
 ```
 
 In essence, this struct encapsulates a return code, an error string and the stdout and stderr sinks you expect from calling a binary. We revisit the use of *MountedBinaryResult* once we start running our code.
@@ -152,7 +151,7 @@ extern "C" {
 
 ```
 
-This may look rather familiar but the keen observer notices critical differences to the linking code in our *curl_adapter*: our import module is not "host" but the actual *curl_adapter* module, as define in the *services.yaml* configuration file. Moreover, we import the exposed *curl_request* function to our (import) module, which is what we'll use to interact with the host's curl binary.
+This may look rather familiar but the keen observer notices critical differences to the linking code in our *curl_adapter*: our import module is not "host" but the actual *curl_adapter* module, as define in the `services.yaml` configuration file. Moreover, we import the exposed *curl_request* function to our (import) module, which is what we'll use to interact with the host's curl binary.
 
 Just to recap: In the *curl_adapter* module, we used Rust's FFI to link to some yet-to-be determined host's curl binary with the *curl* function. We mapped the *curl* function (alias) in the corresponding module.yaml config file to the actual location of the binary, `/usr/bin/curl`, and wrapped the *curl* function with the *curl_request* function, which is the publicly exposed function for the *curl_adapter* module. We then linked the imported *curl_adapter* module and exposed *curl_request* function to our facade module and now can use *curl_request* to make our HTTP calls.
 
@@ -174,7 +173,7 @@ Returns this json document:
 
 And the *datetime* key looks just what we want!
 
-Go to your *services/modules/hello_world/src/main.rs* file and replace the template code with the following code, and make sure you add the `chrono` and `serde_json` dependencies to the *Cargo.toml* file in the module directory.
+Go to your `services/modules/hello_world/src/main.rs` file and replace the template code with the following code, and make sure you add the `chrono` and `serde_json` dependencies to the *Cargo.toml* file in the module directory.
 
 ```
 use chrono;
@@ -226,15 +225,20 @@ extern "C" {
 
 ```
 
-We split our business logic into two functions: the *get_timezone* function, which calls the WTAPI with the "region/city" using our curl adapter and just passes on the results struct and the *hello_world* function, which basically turns the ATAPI response in to a string. Let's test the code with the Marine REPL:
+To use the module in the project, we should add it to the `service.yaml`:
 
 ```
 $ fluence module add services/modules/curl_adapter
 ? Enter service name from fluence.yaml or path to the service directory hello_world
+```
+
+We split our business logic into two functions: the *get_timezone* function, which calls the WTAPI with the "region/city" using our curl adapter and just passes on the results struct and the *hello_world* function, which basically turns the ATAPI response in to a string. Let's test the code with the Marine REPL:
+
+```
 $ fluence service repl services
 ```
 
-Compiles our code and loads our modules and linking configuration right into the REPL:
+compiles our code and loads our modules and linking configuration right into the REPL:
 
 ```
 Blocking waiting for file lock on package cache
@@ -300,7 +304,7 @@ Next, we need to deploy our service to one or more peers.
 
 Now that we have deployed our service, it's time to tackle our Aqua script to interact with our distributed service.
 
-In the project root, navigate to the *src/aqua.main* file and replace the template code with the following:
+In the project root, navigate to the `src/aqua.main` file and replace the template code with the following:
 
 ```
 aqua Main
@@ -372,8 +376,8 @@ Let's say we want to power three different timezones for our "world" clocks, so 
 
 - *todo*: more deal deploy
 
-With that out of the way, we can turn our attention to Aqua. Add the following to your *src/aqua.main* file:
+With that out of the way, we can turn our attention to Aqua. Add the following to your `src/aqua.main` file:
 
-to be completed
+*todo* to be completed
 
 - parallelized run
