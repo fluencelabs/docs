@@ -48,7 +48,7 @@ modules:
 
 ```
 
-that drives the configuration of the modules comprising the service; in this case, it's just the `hello_world` module, which itself is defined in the `services/modules/hello_world/module.yaml`:
+which drives the configuration of the modules comprising the service; in this case, it's just the `hello_world` module, which itself is defined in the `services/modules/hello_world/module.yaml`:
 
 ```
 $ cat services/modules/hello_world/module.yaml
@@ -77,7 +77,7 @@ extern "C" {
 }
 ```
 
-that basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
+which basically says: the host's curl binary is linked and exposed as an import to the Wasm module and can be called with the `curl` function call, which takes an array of strings as its only argument and returns the [MountedBinaryResult](/docs/marine-book/marine-runtime/mounted-binaries):
 
 ```
 struct MountedBinaryResult:
