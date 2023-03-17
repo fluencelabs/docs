@@ -21,8 +21,8 @@ const sidebars = {
       link: {id: "build/working-with-data", type: "doc"},
       items: [
         "build/local-data-storage",
-        "build/remote-data-storage",
-        "build/data-acquisition"
+        // "build/remote-data-storage",
+        // "build/data-acquisition"
       ]
     },
     {
@@ -36,7 +36,7 @@ const sidebars = {
         "build/js-client/changelog",
       ],
     },
-    "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
+    // s"build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
     "build/security",
     "build/limits",
