@@ -11,13 +11,9 @@ A Marine service is a bunch of wasm modules linked together by a config. It is t
 ## Basic example
 
 To create a sample service, use `fluence service new`, like that:
-<<<<<<< Updated upstream
 
-```sh
-=======
 ```bash
->>>>>>> Stashed changes
-fluence service new services/some_service --name some_service
+$ fluence service new services/some_service --name some_service
 ```
 
 This will create a service structure at `services/some_service`:
@@ -57,7 +53,7 @@ This service `some_service` now consists of only one module. You can run this se
 Run repl using fluence CLI. It accepts service name or path to the directory with `service.yaml` 
 
 ```sh
-fluence service repl some_service
+$ fluence service repl some_service
 ```
 
 You will see some hints and setup information, as well as prompt to execute a command:
@@ -470,8 +466,8 @@ pub fn call_parameters() -> String {
 
 After adding it to a service, it can be tested. Call parameters can be set manually in repl, as a second json value after arguments:
 
-```bash
-# fluence service repl some_service
+```sh
+$ fluence service repl some_service
 Making sure service and modules are downloaded and built... ⣾
 Making sure service and modules are downloaded and built... ⣾
 Making sure service and modules are downloaded and built... done
