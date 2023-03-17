@@ -299,4 +299,157 @@ result: "Hello, fluence"
 3> 
 ```
 ## Mounted binaries
-To unlock some features not provided for wasm, exists a mounted binaries API - a way to call programs on host machine from wasm services.  TODO
+To unlock some options not possuble in pure wasm, exists a mounted binaries API - a way to call programs on host machine from wasm services. It is similar to the importing functions, the only differences are that `wasm_import_module` must be `"host"` and signatures are predefined.
+
+Lets use the `curl` tool from the host system in our project. First, add import the binary and use it:
+```rust
+use marine_rs_sdk::MountedBinaryStringResult;
+
+/*... skipped code from previous snippets ...*/  
+
+#[marine]
+pub fn call_curl(url: String) -> MountedBinaryStringResult {
+  curl(vec![url])
+}
+
+#[marine]
+#[link(wasm_import_module = "host")]
+extern "C" {
+    fn curl(cmd: Vec<String>) -> MountedBinaryStringResult;
+  
+}
+```
+
+Function name should match the name in the config, arguments should be `Vec<String>` and return value either `MountedBinaryStringResult` or `MountedBinaryStringResult`. The difference is that the latter transform stdin/stdout to `String` internally, while the other keeps it `Vec<u8>`
+
+
+Then add the mounted binary to the config `<project_root>/services/some_service/modules/some_service/module.yaml`:
+```yaml
+version: 0
+type: rust
+name: some_service
+mountedBinaries:
+    curl: /usr/bin/curl
+```
+
+And now it is runnable:
+```
+$ fluence service repl some_service
+Making sure service and modules are downloaded and built... ⣽
+Making sure service and modules are downloaded and built... ⢿
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: some_service
+Call some_service service functions in repl like this:
+
+call some_service <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = c3c4f345-c5e9-492c-bf58-4c2424d710c6
+elapsed time 90.803042ms
+
+1> c some_service call_curl "google.com"
+result: {
+  "error": "",
+  "ret_code": 0,
+  "stderr": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   219  100   219    0     0   1269      0 --:--:-- --:--:-- --:--:--  1351\n",
+  "stdout": "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>301 Moved</TITLE></HEAD><BODY>\n<H1>301 Moved</H1>\nThe document has moved\n<A HREF=\"http://www.google.com/\">here</A>.\r\n</BODY></HTML>\r\n"
+}
+ elapsed time: 198.43175ms
+
+```
+
+## Call Parameters
+Peers provide additional information about what's happening to services. This includes where the service is, who initiated the call, where are arguments from. It is known as call parameters and structure definitions are here:
+```rust
+pub struct CallParameters {
+    /// Peer id of the AIR script initiator.
+    pub init_peer_id: String,
+
+    /// Id of the current service.
+    pub service_id: String,
+
+    /// Id of the service creator.
+    pub service_creator_peer_id: String,
+
+    /// PeerId of the peer who hosts this service.
+    pub host_id: String,
+
+    /// Id of the particle which execution resulted a call this service.
+    pub particle_id: String,
+
+    /// Security tetraplets which described origin of the arguments.
+    pub tetraplets: Vec<Vec<SecurityTetraplet>>,
+}
+
+pub struct SecurityTetraplet {
+    /// Id of a peer where corresponding value was set.
+    pub peer_pk: String,
+
+    /// Id of a service that set corresponding value.
+    pub service_id: String,
+
+    /// Name of a function that returned corresponding value.
+    pub function_name: String,
+
+    /// Value was produced by applying this `json_path` to the output from `call_service`.
+    pub json_path: String,
+}
+```
+
+It is accessible through `marine_rs_sdk::get_call_parameters` function. Here is an example:
+```rust
+#[marine]
+pub fn call_parameters() -> String {
+    let cp = marine_rs_sdk::get_call_parameters();
+    format!(
+        "init_peer_id: {}, service_id: {}, service_creator_peer_id: {}, host_id: {}, particle_id: {}, tetraplets: {:?}",
+        cp.init_peer_id,
+        cp.service_id,
+        cp.service_creator_peer_id,
+        cp.host_id,
+        cp.particle_id,
+        cp.tetraplets
+    )
+}
+
+```
+
+After adding it to a service, it can be tested. Call parameters can be set manually in repl, as a second json value after arguments:
+```
+# fluence service repl some_service
+Making sure service and modules are downloaded and built... ⣾
+Making sure service and modules are downloaded and built... ⣾
+Making sure service and modules are downloaded and built... done
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Execute help inside repl to see available commands.
+Current service <module_name> is: some_service
+Call some_service service functions in repl like this:
+
+call some_service <function_name> [<arg1>, <arg2>]
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+Welcome to the Marine REPL (version 0.19.1)
+Minimal supported versions
+  sdk: 0.6.0
+  interface-types: 0.20.0
+
+app service was created with service id = c35b8c5f-a903-4676-8d72-0fd7b2277cf0
+elapsed time 95.512125ms
+
+1> c some_service call_parameters [] ["a", "b", "c", "d", "e", []]
+result: "init_peer_id: a, service_id: b, service_creator_peer_id: c, host_id: d, particle_id: e, tetraplets: []"
+ elapsed time: 6.426833ms
+```
