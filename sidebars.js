@@ -36,7 +36,7 @@ const sidebars = {
         "build/js-client/changelog",
       ],
     },
-    // s"build/thinking-in-aqua-marine/thinking-in-aqua-marine",
+    // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
     "build/security",
     "build/limits",
