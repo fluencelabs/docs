@@ -1,33 +1,18 @@
 # Introduction
 
-Fluence decentralized FaaS is a Web3 alternative to FaaS provided by centralized cloud providers 
-such as AWS Lambda or Google Cloud Functions.
-Fluence decentralized FaaS allows developers to benefit not only from verifiable service execution, 
-high availability and easily portable code but also highly competitive pricing.
+Fluence's decentralized serverless protocol, marketplace and solution stack allows developers to quickly create decentralized protocols and applications by distributing services across a peer-to-peer network. The Fluence protocol is implemented as an open, permissionless peer-to-peer network with global reach allowing developers to distribute their business logic in form of Wasm modules to one or more peers for execution. Fluence's distributed choregraphy and composition engine [Aqua](/docs/build/glossary.md#aqua) allows developers to use and re-use their distributed services into powerful decentralized protocols and applications. An on-chain marketplace efficiently matches developers wanting to host their services with peers interested to host services by creating [Deal](/docs/build/glossary.md#deal)s.
 
-Fluence decentralized FaaS, aka services, are implemented as Webassembly Interface Types (Wasm IT) modules 
-and executed by hardware providers, aka peers, in a public, permissionless peer-to-peer network with global reach.
-Your code, i.e., Wasm [modules](/docs/build/glossary.md#marine-module), and peer(s) are linked by an on-chain 
-marketplace that allows you, the developer, 
-to specify your willingness to pay in stablecoin, such as USDC, and for peers to decide which payloads 
-to host and execute based on their economic rationale.
-
-Before we dive in, let’s get a bird’s eye view of the anatomy of decentralized serverless built on the [Fluence protocol](/docs/build/glossary.md#fluence-protocol).
-
-Business logic is implemented in Rust and compiled to Wasm.
-The resulting Wasm module(s) with associated linking and host resource access request specifications
-are deployed to one or more peers willing to host said modules.
-***Note that we call the linked modules a [service](/docs/build/glossary.md#service)***. 
-If all goes as planned, you now have your business logic distributed to the peer-to-per network and available to be called.
-See Figure 1.
+Let’s get a bird’s eye view of the anatomy of decentralized serverless built on the [Fluence protocol](/docs/build/glossary.md#fluence-protocol):  Business logic is implemented in Rust, and soon Python and Javascript, and compiled to Wasm. The resulting Wasm module(s) with associated linking and host resource access request specifications are deployed to one or more peers willing to host said service(s). Note that we call the linked modules a [service](/docs/build/glossary.md#service). If all goes as planned, you now have your business logic distributed across the peer-to-peer network and ready for execution. See Figure 1.
 
 mermaid
 ```mermaid
 sequenceDiagram
+
 participant D as Developer
 participant P as Peer(s)
 participant C as Blockchain
 participant I as IPFS
+
 D ->> D: Implement business logic
 D ->> D: Compile to Wasm
 D ->> I: Upload Wasm module(s)
@@ -49,50 +34,9 @@ alt
 	C -->> P: Deal cancelled
 	P -->> P: Remove modules
 end
+
 ```
 
-Now that we have our business logic deployed to one or more peers of the Fluence peer-to-peer network,
-we need to implement our application workflow with [Aqua](/docs/build/glossary.md#aqua).
-[Aqua](https://github.com/fluencelabs/aqua), as you may recall,
-is your distributed choreography and composition tool necessary since your distributed services 
-are not callable by REST or JSON-RPC but over the networks peer-to-peer layer.
-Once you implemented your workflow and service composition, 
-tooling is available to create the previously discussed [particle](/docs/build/glossary.md#particle), i.e., compiled Aqua, data and metadata,
-and deploy it to the network. Note that the entry point of your workflow program can be any publicly accessible peer,
-aka [relay peer](/docs/build/glossary.md#relay), in the network. See Figure 2.
+Now that your services are deployed and ready to be put to work, you are ready to implement your application workflow with Aqua.With the help of a client-peer, such as provided by [Fluence CLI](https://github.com/fluencelabs/fluence-cli) or [js-client](https://github.com/fluencelabs/js-client), you can initiate the execution of your Aqua workflow by connecting to any publicly accessible peer, aka [relay peer](/docs/build/glossary.md#relay), in the network.
 
-mermaid
-```mermaid
-	sequenceDiagram
-	participant D as Developer
-	participant N as P2P Network
-	D ->> D: Create workflow in Aqua
-	D ->> D: Create particle
-	D ->> N: Send particle to network via (any) relay peer
-	N ->> N: Execute specified worklflow step(s)
-```
-
-Your go-to tool for accomplishing almost all tasks except for coding business logic is Fluence CLI. See Figure 3.
-
-mermaid
-```mermaid
-stateDiagram
-state "Rust Marine Code" as Code
-state "Build wasm32-wasi Module" as Build
-state "Test Wasm App With Cargo" as Test
-state "REPL Locally Interact With Modules" as Repl
-state "Module Configuration" as Config
-state "Service Configuration" as Service
-state "Deploy Service To Network" as Deploy
-state "Remove Service From Network" as Remove
-Code -->  Build
-	state FluenceCLI {
-	Build --> Repl
-	Config --> Repl
-	Config --> Test
-	Build --> Test
-	Build --> Deploy
-	Service --> Deploy
-	Remove
-  }
-```
+With the overview out of the way, let's get strted with Fluence CLI.
