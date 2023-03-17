@@ -12,7 +12,7 @@ const sidebars = {
           "build/quickstarts",
           "build/fundamentals",
           "build/develop-services",
-          "build/develop-distributed-algos"
+          // "build/develop-distributed-algos"
       ]
     },
     {
