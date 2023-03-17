@@ -1,11 +1,32 @@
 # Get started (with CLI)
 
-[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network. Moreover, it provides scaffolding that frees you from writing your favorite boilerplate code.
-
+[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network.
 
 > 👉 Note that Fluence CLI is currently only available for *nix* systems including OSX and Windows Subsystem for Linux (WSL). Moreover, Fluence CLI installs all the required dependencies not already installed on your system including Rust.
 
-### Install Fluence CLI
+From scaffolding your project, services and modules to [Deal](/docs/build/glossary.md#deal) creation and service deployment, Fluence CLI has you covered. Moreover, Fluence CLI can scaffold JS projects using [js-client](/docs/build/js-client/1-js-client.md) allowing you integrate Fluence CLI projects in the browser or node app. See Figure 1 for a quick overview of workflows managed by Fluence CLI and the associated commands. If you have Fluence CLI installed, use *fluence --help* to get a more complete overview of topics and commands.
+
+Figure 1: Stylized Project Creation And Deployment Workflow With Fluence CLI
+mermaid
+```mermaid
+
+    stateDiagram
+    
+    [*] --> InitProject: fluence init
+    InitProject --> CreateNewService: fluence service new
+    InitProject --> AddExistingService: fluence service add
+    CreateNewService --> Service
+    AddExistingService --> Service
+    Service --> AddNewModules: fluence module new
+    Service --> AddExistingModules: fluence module add
+    Service --> LocalTesting: fluence service repl, cargo test
+    Service --> DeployedService: fluence deal deploy
+    DeployedService --> RunService: fluence run
+```
+
+Fluence CLI uses multiple yaml config files and you can find their schemas in the *.fluence/schemas* directory. Note that Fluence CLI creates config files lazily, i.e., as needed, and at project initialization time not all config files exist. For more information, see the [Fluence CLI Readme](https://github.com/fluencelabs/fluence-cli).
+
+## Install Fluence CLI
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a *npm* package requiring node and npm to be available on your device. See [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), for example, for installation instructions. With npm readily available, we can install the Fluence CLI:
 
@@ -19,22 +40,22 @@ We can check our installation success (note that your cli and node versions migh
 
 ```
 fluence --version
-@fluencelabs/cli/0.3.1 darwin-x64 node-v16.19.0
+@fluencelabs/cli/x.y.z darwin-x64 node-v16.19.0
 ```
 
 ### Install Other Prerequisites
 
-In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund your distributed services with (testnet) USDC.
+In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
 
-Our on-chain testnet is Polygon Mumbai:
+The on-chain testnet is Polygon Mumbai:
 
-RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai)
+Mumbai Chainlist RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai)
 
-Faucet: [https://mumbaifaucet.com/](https://mumbaifaucet.com/) or [https://faucet.polygon.technology/](https://faucet.polygon.technology/)
+MATIC Faucet: [https://mumbaifaucet.com/](https://mumbaifaucet.com/) or [https://faucet.polygon.technology/](https://faucet.polygon.technology/)
 
-Explorer: [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/)
+Mumbai Explorer: [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/)
 
-The Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fluence.dev/)
+Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fluence.dev/)
 
 In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Polygon Mumbai as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
 
@@ -42,7 +63,7 @@ Figure 1:
 
 ![Figure 1: Adding Mumbai Testnet to Metamask](images/0-add-mumbai.png)
 
-With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/) and have your account address ready:
+With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/), with your account address ready:
 
 Figure 2:
 
@@ -56,15 +77,9 @@ Figure 3:
 
 ![Fluence Faucet](images/2-fluence-faucet.png)
 
-which not only allows you to request testnet USDC but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should see:
+which not only allows you to request testnet USDC (tUSDC) but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
 
-Figure 4:
-
-![Fluence Faucet Transaction](images/3-fluence-faucet-tx.png)
-
-and have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and FakeUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
-
-And that concludes the installation section as you are ready!
+And that concludes the installation section!
 
 ---
 
@@ -73,9 +88,9 @@ And that concludes the installation section as you are ready!
 ---
 
 
-### Start a new project
+## Start a new project
 
-As mentioned at the outset, Fluence CLI is your Swiss army knife to all things Fluence. To keep things familiar, let’s start with the obligatory *Hello World* example to introduce Fluence and Fluence CLI.
+As mentioned at the outset, Fluence CLI is your Swiss army knife to handle all things Fluence. To keep things familiar, let’s start with the obligatory *Hello World* example to introduce Fluence and Fluence CLI.
 
 We scaffold a new project with `fluence init` , which gives us a couple scaffolding choices:
 
@@ -89,7 +104,7 @@ fluence init
 
 Press return to select the default *minimal* scaffolding option and enter *hello_world* as the project path when prompted:
 
-```rust
+```bash
 ? Enter project path or press enter to init in the current directory: hello-world
 Successfully initialized Fluence project template at ~/localdev/hello-world
 ```
@@ -100,21 +115,21 @@ Change into your new *hello-world* directory and have a look around:
 tree -L 2 -a
 
 .
-├── .fluence             # this is where Fluence CLI internals are kept including project secrets
+├── .fluence             # this is where Fluence CLI internals are kept including schemas and project secrets
 │   ├── aqua
 │   └── schemas
-├── fluence.yaml         # this is where the project metadata, including service references, are kept
 ├── .gitignore
-├── src                  # this is where where distributed servcie choreograpy and composition scripts reside
-│   └── aqua
-└── .vscode
-    ├── extensions.json
-    └── settings.json
+├── .vscode
+│   ├── extensions.json
+│   └── settings.json
+├── fluence.yaml         # this is where the project metadata, including service references, are kept
+└── src                  # this is where the Aqua distributed service choreography and composition scripts reside
+    └── aqua
 ```
 
-A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples:
+A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports:
 
-```
+```aqua
 aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
@@ -122,7 +137,7 @@ import "@fluencelabs/registry/subnetwork.aqua"
 import Registry from "@fluencelabs/registry/registry-service.aqua"
 import "@fluencelabs/spell/spell_service.aqua"
 
-import "deals.aqua"
+import "workers.aqua"
 import "services.aqua"
 
 -- import App from "deployed.app.aqua"
@@ -142,9 +157,12 @@ export helloWorld, helloWorldRemote, getInfo, getInfos, getInfosInParallel
 -- service Console("run-console"):
     -- print(any: ⊤)
 
+-- -- example of running a service deployed using 'fluence deal deploy'
+-- -- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
+
 -- func status():
     -- workersInfo <- getWorkersInfo()
-    -- dealId = workersInfo.defaultWorker.dealId
+    -- dealId = workersInfo.deals.defaultWorker.dealId
     -- print = (answer: string, peer: string):
       -- Console.print([answer, peer])
 
@@ -161,23 +179,70 @@ export helloWorld, helloWorldRemote, getInfo, getInfos, getInfosInParallel
     -- join answers[workers!.length - 1]
     -- par Peer.timeout(PARTICLE_TTL / 2, "TIMED OUT")
     -- Console.print("done")
+
+
+
+-- func addOne(x: u64) -> u64:
+    -- services <- App.services()
+    -- on services.adder.default!.peerId:
+        -- Adder services.adder.default!.serviceId
+        -- res <- Adder.add_one(x)
+    -- <- res
+
+
+
+-- local
+func helloWorld(name: string) -> string:
+    <- Op.concat_strings("Hello, ", name)
+
+-- remote
+func helloWorldRemote(name: string) -> string:
+    on HOST_PEER_ID:
+        hello_msg <- helloWorld(name)
+        from_msg <- Op.concat_strings(hello_msg, "! From ")
+        from_peer_msg <- Op.concat_strings(from_msg, HOST_PEER_ID)
+    <- from_peer_msg
+
+-- request response
+func getInfo() -> Info, PeerId:
+    on HOST_PEER_ID:
+        info <- Peer.identify()
+    <- info, HOST_PEER_ID
+
+-- iterate through several peers
+func getInfos(peers: []PeerId) -> []Info:
+    infos: *Info
+    for p <- peers:
+        on p:
+            infos <- Peer.identify()
+    <- infos
+
+-- parallel computation
+func getInfosInParallel(peers: []PeerId) -> []Info:
+    infos: *Info
+    for p <- peers par:
+        on p:
+            infos <- Peer.identify()
+
+    join infos[Op.array_length(peers) - 1] -- "-1" because it's 0-based
+    par Peer.timeout(PARTICLE_TTL / 2, "")
+
+    <- infos
 ```
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
-**Scaffolding Options**
+**Scaffolding Options
 
-Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: 
+Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s). Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
 
-> All communication with distributed services is over libp2p. That is, you have no use for HTTP clients but need some client peer to interact with the peers hosting your service(s) such as instructing them to execute one of your functions with some parameters. Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a potentially long-running client using [Fluence js-client](https://github.com/fluencelabs/js-client) as well as the TS/JS artifacts.
+Table 1: Client peer options from scaffolding
 
-Table ?: Client peer from scaffolding
-
-|  | Client Type | Client Provider |
-| --- | --- | --- |
+| | Client Type | Client Provider |
+|:---|:---:|---:|
 | minimal | one-shot | Fluence CLI |
-| TS/JS | long running | Browser 
-Node app |
+| TS/JS | one-shot | Browser |
+| TS/JS | long running | Node App |
 
 ### Write code
 
@@ -196,61 +261,59 @@ pub fn hello_world() -> String {       // 4
 ```
 
 Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), 
-which allows us to compile Rust code to wasm32-wasi compatible with Fluence’s Marine runtime. 
-The `#[marine]` macro, (3), is part of the *marine-rust-sdk*  and exports marked types as publicly visible and 
-callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
+which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk* and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
 
-In (1), we implement a main function which is not marked with the *#[marine]* procedural macro. 
+In (2), we implement a main function which is not marked with the *#[marine]* procedural macro. 
 We discuss modules and module configuration further below. Also note that WASM IT has type limits, 
 which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type). 
 The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
-but you do not have generics, traits, etc. Moreover, everything is passed by value and lifetimes are not needed in 
-your Rust code.
+but you do not have generics, lifetimes, etc.
 
-Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project 
-with the `fluence service new` command. Let’s unbundle this command before we follow the prompts. 
-As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. 
-You then “package” these modules, with help of Fluence CLI, into a *service*. 
-Eventually you deploy this service to one or more peers and use Aqua to interact with them.  
-If your business logic results in only a single module, like our *hello_world* code, then this module is also the service.
-Hence, we instruct Fluecne CLI to scaffold a new service for our project.
+Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).  If your business logic results in only a single module, like our *hello_world* code, then this module is also the service.
 
-Now we follow the prompts to complete the setup:
+Now we follow the prompts to `fluence service new` and complete the setup:
 
-```rust
+```bash
 fluence service new
-? Enter service path hello-world
-? Do you want to use helloworld as the name of your new service? No
-? Enter service name (must start with a lowercase letter and contain only letters, numbers, and
-underscores) hello_world
-Successfully generated template for new service at hello-world
+? Enter service path service
+? Do you want to use service as the name of your new service? No
+? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
+hello_world
+Successfully generated template for new service at service
+# Making sure all services are downloaded...
+# Making sure all services are built...
     Updating crates.io index
+   Compiling proc-macro2 v1.0.52
    <...>
-   Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/hello-world/modules/hello_world)
-    Finished release [optimized] target(s) in 17.51s
+Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world-3/service/modules/hello_world)
+    Finished release [optimized] target(s) in 24.40s
 Added hello_world to fluence.yaml
 ? Do you want to add service hello_world to a default worker defaultWorker Yes
 Added hello_world to defaultWorker
 ```
 
-So what just happened?  
-We instructed the CLI to create a path *hello-world* in which we want our *hello_world* module to live. 
-Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, 
-which allows Fluence CLI to find what it needs to fulfill command requirements:
+So what just happened?
+We instructed the CLI to create a path *service* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
 
 ```bash
 # fluence.yaml
+# yaml-language-server: $schema=.fluence/schemas/fluence.yaml.json
+
+# Defines Fluence Project, most importantly - what exactly you want to deploy and how. You can use `fluence init` command to generate a template for new Fluence project
+
+# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/fluence.md
+
 version: 2
 aquaInputPath: src/aqua/main.aqua
-dependencies:
+dependencies:                                #
   npm:
-    "@fluencelabs/aqua": 0.10.1
+    "@fluencelabs/aqua": 0.10.3
     "@fluencelabs/aqua-lib": 0.6.0
-    "@fluencelabs/spell": 0.4.0
-    "@fluencelabs/registry": 0.7.1
+    "@fluencelabs/spell": 0.5.4
+    "@fluencelabs/registry": 0.8.2
   cargo:
-    marine: 0.12.6
-    mrepl: 0.19.1
+    marine: 0.14.0
+    mrepl: 0.21.0
 workers:
   defaultWorker:
     services: [ hello_world ]
@@ -261,11 +324,11 @@ deals:
 hosts:
   defaultWorker:
     peerIds:
-      - 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA
-services:                 # we added these three lines by choosing Y at the prompt
+      - 12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf
+relays: kras
+services:
   hello_world:
-    get: hello-world
-
+    get: service
 ```
 
 Using this information, the CLI scaffolded our Rust (sub-)project:

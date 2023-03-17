@@ -11,8 +11,12 @@ A Marine service is a bunch of wasm modules linked together by a config. It is t
 ## Basic example
 
 To create a sample service, use `fluence service new`, like that:
+<<<<<<< Updated upstream
 
 ```sh
+=======
+```bash
+>>>>>>> Stashed changes
 fluence service new services/some_service --name some_service
 ```
 
