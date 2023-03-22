@@ -7,6 +7,7 @@
 From scaffolding your project, services and modules to [Deal](/docs/build/glossary.md#deal) creation and service deployment, Fluence CLI has you covered. Moreover, Fluence CLI can scaffold JS projects using [js-client](/docs/build/js-client/1-js-client.md) allowing you integrate Fluence CLI projects in the browser or node app. See Figure 1 for a quick overview of workflows managed by Fluence CLI and the associated commands. If you have Fluence CLI installed, use *fluence --help* to get a more complete overview of topics and commands.
 
 Figure 1: Stylized Project Creation And Deployment Workflow With Fluence CLI
+
 mermaid
 ```mermaid
 
