@@ -54,6 +54,10 @@
   &.visible {
     visibility: visible;
   }
+  
+  .mermaid + & {
+    display: none;
+  }
 }
 
 .mermaid {
