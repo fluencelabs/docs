@@ -475,7 +475,7 @@ mod tests {
 Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
 the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module. 
 In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1). 
-Moreover, we need to provide the paths  to Config.tom and the Wasm module (2). 
+Moreover, we need to provide the paths  to Config.toml and the Wasm module (2). 
 Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
