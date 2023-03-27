@@ -1,6 +1,6 @@
 # Structures
 
-The `[marine]` macro can also wrap a `struct` making it possible to use it as a function argument or return type. Note that
+The `#[marine]` macro can also wrap a `struct` making it possible to use it as a function argument or return type. Note that
 
 * only macro-wrapped structures can be used as function arguments and return types
 * all fields of the wrapped structure must be public and of the `mtype`
@@ -8,7 +8,7 @@ The `[marine]` macro can also wrap a `struct` making it possible to use it as a 
 
 ## Structure passing requirements
 
-* wrap a structure with the `[marine]` macro
+* wrap a structure with the `#[marine]` macro
 * all structures fields must be of the `mtype`
 * the structure must be pointed to without preceding package import in a function signature, i.e. `StructureName` but not `package_name::module_name::StructureName`
 * wrapped structures can be imported from crates

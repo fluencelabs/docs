@@ -7,11 +7,11 @@ The [marine-rs-sdk](https://github.com/fluencelabs/marine-rs-sdk) empowers devel
 
 ## API
 
-The procedural macros `[marine]` and `[marine_test]` are the two primary features provided by the SDK. The `[marine]` macro can be applied to a function, external block or structure. The `[marine_test]` macro, on the other hand, allows the use of the familiar `cargo test` to execute tests over the actual Wasm module generated from the service code.
+The procedural macros `#[marine]` and `#[marine_test]` are the two primary features provided by the SDK. The `#[marine]` macro can be applied to a function, external block or structure. The `#[marine_test]` macro, on the other hand, allows the use of the familiar `cargo test` to execute tests over the actual Wasm module generated from the service code.
 
 ### Function Export
 
-Applying the `[marine]` macro to a function results in its export, which means that it can be called from other modules or AIR scripts. For the function to be compatible with this macro, its arguments must be of the `ftype`, which is defined as follows:
+Applying the `#[marine]` macro to a function results in its export, which means that it can be called from other modules or AIR scripts. For the function to be compatible with this macro, its arguments must be of the `ftype`, which is defined as follows:
 
 `ftype` = `bool`, `u8`, `u16`, `u32`, `u64`, `i8`, `i16`, `i32`, `i64`, `f32`, `f64`, `String`
 
@@ -51,14 +51,14 @@ pub fn foo(arg_1: Vec<Vec<Vec<Vec<TestRecord>>>>, arg_2: String) -> Vec<Vec<Vec<
 :::info
 Function Export Requirements
 
-- wrap a target function with the `[marine]` macro
+- wrap a target function with the `#[marine]` macro
 - function arguments must by of `ftype`
 - the function return type also must be of `ftype`
 :::
 
 ### Function Import
 
-The `[marine]` macro can also wrap an [`extern`](https://doc.rust-lang.org/std/keyword.extern.html) block. In this case, all functions declared in it are considered imported functions. If there are imported functions in some module, say, module A, then:
+The `#[marine]` macro can also wrap an [`extern`](https://doc.rust-lang.org/std/keyword.extern.html) block. In this case, all functions declared in it are considered imported functions. If there are imported functions in some module, say, module A, then:
 
 - There should be another module, module B, that exports the same functions. The name of module B is indicated in the `link` macro (see examples below).
 - Module B should be loaded to `Marine` by the moment the loading of module A starts. Module A cannot be loaded if at least one imported function is absent in `Marine`.
@@ -101,14 +101,14 @@ extern "C" {
 :::info
 **Function import requirements**
 
-- wrap an extern block with the function(s) to be imported with the `[marine]` macro
+- wrap an extern block with the function(s) to be imported with the `#[marine]` macro
 - all function(s) arguments must be of the `ftype` type
 - the return type of the function(s) must be `ftype`
 :::
 
 ### Structures
 
-Finally, the `[marine]` macro can wrap a `struct` making possible to use it as a function argument or return type. Note that
+Finally, the `#[marine]` macro can wrap a `struct` making possible to use it as a function argument or return type. Note that
 
 - only macro-wrapped structures can be used as function arguments and return types
 - all fields of the wrapped structure must be public and of the `ftype`.
@@ -206,7 +206,7 @@ fn some_function() -> Data {
 :::info
 **Structure passing requirements**
 
-- wrap a structure with the `[marine]` macro
+- wrap a structure with the `#[marine]` macro
 - all structure fields must be of the `ftype`
 - the structure must be pointed to without preceding package import in a function signature, i.e`StructureName` but not `package_name::module_name::StructureName`
 - wrapped structs can be imported from crates
@@ -288,7 +288,7 @@ extern "C" {
 }
 ```
 
-The above code creates a "curl adapter", i.e., a Wasm module that allows other Wasm modules to use the the `curl_request` function, which calls the imported _curl_ binary in this case, to make http calls. Please note that we are wrapping the `extern` block with the `[marine]`macro and introduce a Marine-native data structure [MountedBinaryResult](https://github.com/fluencelabs/marine/blob/master/examples/url-downloader/curl_adapter/src/main.rs) as the linked-function return value.
+The above code creates a "curl adapter", i.e., a Wasm module that allows other Wasm modules to use the the `curl_request` function, which calls the imported _curl_ binary in this case, to make http calls. Please note that we are wrapping the `extern` block with the `#[marine]`macro and introduce a Marine-native data structure [MountedBinaryResult](https://github.com/fluencelabs/marine/blob/master/examples/url-downloader/curl_adapter/src/main.rs) as the linked-function return value.
 
 Please not that if you want to use `curl_request` with testing, see below, the curl call needs to be marked unsafe, e.g.:
 
@@ -322,9 +322,9 @@ MountedBinaryResult then can be used on a variety of match or conditional tests.
 
 ### Testing
 
-Since we are compiling to a wasm32-wasi target with `ftype` constrains, the basic `cargo test` is not all that useful or even usable for our purposes. To alleviate that limitation, Fluence has introduced the [`[marine-test]` macro ](https://github.com/fluencelabs/marine-rs-sdk-test/tree/master/crates/marine-test-macro)that does a lot of the heavy lifting to allow developers to use `cargo test` as intended. That is, `[marine-test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module not the native code.
+Since we are compiling to a wasm32-wasi target with `ftype` constrains, the basic `cargo test` is not all that useful or even usable for our purposes. To alleviate that limitation, Fluence has introduced the [`#[marine-test]` macro ](https://github.com/fluencelabs/marine-rs-sdk-test/tree/master/crates/marine-test-macro)that does a lot of the heavy lifting to allow developers to use `cargo test` as intended. That is, `#[marine-test]` macro generates the necessary code to call Marine, one instance per test function, based on the Wasm module and associated configuration file so that the actual test function is run against the Wasm module not the native code.
 
-To use the `[marine-test]` macro please add `marine-rs-sdk-test` crate to the `[dev-dependencies]` section of `Config.toml`:
+To use the `#[marine-test]` macro please add `marine-rs-sdk-test` crate to the `[dev-dependencies]` section of `Config.toml`:
 
 ```rust
 [dev-dependencies]
@@ -364,9 +364,9 @@ mod tests {
 }
 ```
 
-1. We wrap a basic _greeting_ function with the `[marine]` macro which results in the greeting.wasm module
+1. We wrap a basic _greeting_ function with the `#[marine]` macro which results in the greeting.wasm module
 2. We wrap our tests as usual with `[cfg(test)]` and import the marine _test crate._ Do **not** import _super_ or the _local crate_.
-3. Instead, we apply the `[marine_test]` macro to each of the test functions by providing the path to the config file, e.g., Config.toml, and the directory containing the Wasm module we obtained after compiling our project with `marine build`. Moreover, we add the type of the test as an argument in the function signature. It is imperative that project build precedes the test runner otherwise the required Wasm file will be missing.
+3. Instead, we apply the `#[marine_test]` macro to each of the test functions by providing the path to the config file, e.g., Config.toml, and the directory containing the Wasm module we obtained after compiling our project with `marine build`. Moreover, we add the type of the test as an argument in the function signature. It is imperative that project build precedes the test runner otherwise the required Wasm file will be missing.
 4. The target of our tests is the `pub fn greeting` function. Since we are calling the function from the Wasm module we must prefix the function name with the module namespace -- `greeting` in this example case as specified in the function argument.
 
 Now that we have our Wasm module and tests in place, we can proceed with `cargo test --release.` Note that using the `release`flag vastly improves the import speed of the necessary Wasm modules.

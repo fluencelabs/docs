@@ -4,7 +4,7 @@ This section deep dives into the architecture of the Marine runtime component.
 
 ## Interface-types
 
-Marine uses Wasmer under the hood and this [crate](https://github.com/fluencelabs/interface-types) for interface types V1 implementation. By V1 we mean the interface-types proposal before November 2020:
+Marine uses a generic Wasm backend interface defined in this [crate](https://github.com/fluencelabs/marine/tree/master/crates/wasm-backend-traits) under the hood. There is only [implementation for Wasmtime](https://github.com/fluencelabs/marine/tree/master/crates/wasmtime-backend) at the moment. And uses this [crate](https://github.com/fluencelabs/interface-types) for interface types V1 implementation. By V1 we mean the interface-types proposal before November 2020:
 
 ![marine using interface types V1](./marine-using-interface-types-V1.png)
 
@@ -20,7 +20,7 @@ Let's consider a passing scheme between three modules in the [curl service](./..
 
 Here the `gen_n_save` function from the `facade` module calls the `download` function from the `curl` module and `put` from the `local_storage` module (more info about how these modules are structured and used could be found [here](./../../../quick-start/develop-a-multi-modules-service.md)).
 
-For each module `Marine` creates corresponding Wasmer instance and for each import and export function, it creates a special interface-types adapter with an interpreter. In the picture below you could see the scheme with Wasmer instances for each module and adapters for each import and export linked together.
+For each module `Marine` creates corresponding Wasmtime instance and for each import and export function, it creates a special interface-types adapter with an interpreter. In the picture below you could see the scheme with Wasmtime instances for each module and adapters for each import and export linked together.
 
 ![scheme with Wasmer instances](./scheme-with-Wasmer-instances.png)
 

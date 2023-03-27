@@ -134,7 +134,7 @@ struct MemoryStats<'module_name>(pub Vec<ModuleMemoryStat<'module_name>>);
 
 /// Contains module name and a size of its linear memory in bytes.
 /// Please note that linear memory contains not only heap, but globals, shadow stack and so on.
-/// Although it doesn't contain operand stack, additional runtime (Wasmer) structures,
+/// Although it doesn't contain operand stack, additional runtime (Wasmtime) structures,
 /// and some other stuff, that should be count separately.
 struct ModuleMemoryStat<'module_name> {
     pub name: &'module_name str,
