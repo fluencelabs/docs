@@ -4,7 +4,7 @@ Adding the Fluence JS client for your web application is very easy.
 
 ## Browser-based Apps
 
-1. Add a script tag with the JS Client bundle to your `index.html`. The easiest way to do this is using a CDN (like [JSDELIVR](https://www.jsdelivr.com/) or [UNPKG](https://unpkg.com/)). The script is large, thus we highly recommend to use the `async` attribute.
+1. Add a script tag with the JS Client bundle to your `index.html`. The easiest way to do this is using a CDN such as [JSDELIVR](https://www.jsdelivr.com/) or [UNPKG](https://unpkg.com/)). Since the script is large, we recommend using the `async` attribute.
 
    Here is an example using the JSDELIVR CDN:
 
@@ -18,11 +18,11 @@ Adding the Fluence JS client for your web application is very easy.
    </head>
    ```
 
-   If you cannot or don't want to use a CDN, feel free to get the script directly from the [npm package](https://www.npmjs.com/package/@fluencelabs/js-client.web.standalone) and host it yourself. You can find the script in the `/dist` directory of the package. (Note: this option means that developers understand what they are doing and know how to serve this file from their own web server.)
+   If you cannot, or don't want to, use a CDN, feel free to get the script directly from the [npm package](https://www.npmjs.com/package/@fluencelabs/js-client.web.standalone) and host it yourself. You can find the script in the `/dist` directory of the package.
 
 2. Install the following packages:
 
-   ```sh
+   ```bash
    npm i @fluencelabs/js-client.api @fluencelabs/fluence-network-environment
    ```
 
@@ -30,10 +30,12 @@ Adding the Fluence JS client for your web application is very easy.
 
    ```js
    import { Fluence } from "@fluencelabs/js-client.api";
-   import { randomKras } from '@fluencelabs/fluence-network-environment';
+   import { randomKras } from '@fluencelabs/fluence-network-environment';           // 1
 
-   Fluence.connect(randomKras());
+   Fluence.connect(randomKras());                                                   // 2
    ```
+
+Fluence has multiple networks including *testnet*, *stage* and *kras*, with *kras* being the stable, default developer network. Fluence networks and associate metadata are encapsulated in the *@fluencelabs/fluence-network-environment* package, which includes a shortcut for random peer selection, such as *randomKras* for the *kras* network. Once imported (1), we can use the *randomKras* function as an import in our connection (2), our web client is ready to go. Note the return of the *randomKras* function is the multiaddr of a relay, i.e. a publicly accessible peer to the network **and** from the network back to the web peer, if needed.
 
 ## Node.js Apps
 
