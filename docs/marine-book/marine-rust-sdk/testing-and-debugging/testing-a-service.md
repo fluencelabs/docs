@@ -3,7 +3,7 @@ import TabItem from "@theme/TabItem";
 
 # Testing a service
 
-The `[marine_test]` macro also allows testing data flow between multiple services, so you do not need to deploy anything to the network and write an Aqua app just for basic testing. Let's look at an example:
+The `#[marine_test]` macro also allows testing data flow between multiple services, so you do not need to deploy anything to the network and write an Aqua app just for basic testing. Let's look at an example:
 
 <Tabs>
 <TabItem value="test.rs" label="test.rs" default>

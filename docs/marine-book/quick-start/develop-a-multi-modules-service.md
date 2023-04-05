@@ -80,7 +80,7 @@ pub fn get(file_name: String) -> Vec<u8> {
 
 ### Facade module
 
-The `facade` module combines the logic of the previous modules in one exported function: `get_n_save`. This function downloads the site with the specified name using the `get` function from the `curl_adapter` module and then saves it into a file on the file system using the `put` function from the `local-storage` module. To import functions from another module, their signatures must be declared in an extern block wrapped with the `[marine]` procedure macro.
+The `facade` module combines the logic of the previous modules in one exported function: `get_n_save`. This function downloads the site with the specified name using the `get` function from the `curl_adapter` module and then saves it into a file on the file system using the `put` function from the `local-storage` module. To import functions from another module, their signatures must be declared in an extern block wrapped with the `#[marine]` procedure macro.
 
 Open the `facade/src/main.rs` file in an editor and paste the code of the `facade` module there:
 
