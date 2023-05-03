@@ -161,7 +161,14 @@ func getFlag(maybeFlagA: ?bool, maybeFlagB: ?bool, default: bool) -> bool:
   <- res!
 ```
 
-As of Aqua `0.6.3`, it is not possible to get an element by index directly from the collection creation expression.
+The length of an array can be obtained using the `.length` command.
+
+```aqua
+func getLength(arr: []string) -> u32:
+  <- arr.length
+```
+
+As of Aqua `0.6.3`, it is not possible to get an element by index directly from the collection creation expression or get a length.
 
 ## Getters
 
