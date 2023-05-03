@@ -1,4 +1,6 @@
-# Aqua CLI
+# Aqua CLI (DEPRECATED)
+
+# NOTE: Use [Fluence CLI](../../build/get-started.md) for Aqua compilation and network management 
 
 Aqua CLI allows you to manage all aspects of [Aqua](../introduction.md) development and includes:
 

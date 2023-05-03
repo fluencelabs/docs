@@ -7,6 +7,34 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.10.6](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.6) – May 3, 2023
+* bug fix: click-to-definition for modules and abilities ([LNG-144](https://linear.app/fluence/issue/LNG-144)) ([#705](https://github.com/fluencelabs/aqua/issues/705))
+* refactoring: move LSP compiler code to LSP package ([LNG-141](https://linear.app/fluence/issue/LNG-141)) ([#705](https://github.com/fluencelabs/aqua/issues/705))
+* refactoring: move struct/service definitions logic to separate algebra, create locations algebra for LSP ([LNG-143](https://linear.app/fluence/issue/LNG-143)) ([#705](https://github.com/fluencelabs/aqua/issues/705))
+
+### [0.10.5](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.5) – April 17, 2023
+* return arrows from functions ([LNG-131](https://linear.app/fluence/issue/LNG-131)) ([#693](https://github.com/fluencelabs/aqua/issues/693))
+* dependency updates
+
+### [0.10.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.4) – April 10, 2023
+* add aqua native compilation ([#681](https://github.com/fluencelabs/aqua/issues/681))
+* multiline collections and objects creation ([#684](https://github.com/fluencelabs/aqua/issues/684))
+* remove bangs in lambdas in AIR ([#688](https://github.com/fluencelabs/aqua/issues/688))
+* bug fix: check if expression can be added to a block. Fix returning arrow in inner blocks ([#685](https://github.com/fluencelabs/aqua/issues/685))
+* dependency updates
+
+### [0.10.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.3) – February 28, 2023
+* bug fix: fix type resolving for functors ([LNG-119](https://linear.app/fluence/issue/LNG-119)) ([#677](https://github.com/fluencelabs/aqua/issues/677))
+
+### [0.10.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.2) – February 25, 2023
+* bug fix: name uniquness in stream gates in AIR ([#676](https://github.com/fluencelabs/aqua/issues/676))
+
+### [0.10.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.1) – February 16, 2023
+* bug fix: parse long strings JSON ([#672](https://github.com/fluencelabs/aqua/issues/672))
+
+### [0.10.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.0) – February 16, 2023
+* BREAKING CHANGE: support new JS client ([DXJ-283](https://linear.app/fluence/issue/DXJ-283)) ([#668](https://github.com/fluencelabs/aqua/issues/668))
+
 ### [0.9.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.9.4) – February 1, 2023
 * bug fix: Canonicalize variable in an object creation or a copy if a variable is a stream ([#649](https://github.com/fluencelabs/aqua/issues/649)) ([fedd743](https://github.com/fluencelabs/aqua/commit/fedd743721c33ccee51b2b6b8efff2b032586329))
 * performance: Unfold variables in parallel where it is possible ([#656](https://github.com/fluencelabs/aqua/issues/656)) ([439f2cd](https://github.com/fluencelabs/aqua/commit/439f2cde03b5bca99b072bf7cad389168b8ad0fa))
