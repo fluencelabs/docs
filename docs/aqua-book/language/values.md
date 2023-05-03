@@ -161,7 +161,7 @@ func getFlag(maybeFlagA: ?bool, maybeFlagB: ?bool, default: bool) -> bool:
   <- res!
 ```
 
-The length of an array can be obtained using the `.length` command.
+The length of a collection can be obtained using the `.length` command.
 
 ```aqua
 func getLength(arr: []string) -> u32:
