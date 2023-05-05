@@ -14,6 +14,6 @@ and to make the Aqua library available to Typescript applications:
 npm -g install @fluencelabs/aqua-lib
 ```
 
-Moreover, a VSCode syntax-highlighting extension is available. In VSCode, click on the Extensions button, search for `aqua`and install the extension.
+Moreover, a VSCode syntax-highlighting extension is available. In VSCode, click on the Extensions button, search for `aqua` and install the extension.
 
 ![Aqua Extension for VSCode](./Aqua-Extension-for-VSCode.png)
