@@ -79,7 +79,7 @@ func otherFunc():
 
 ## Literals
 
-Aqua supports just a few literals: numbers, quoted strings, booleans, and `nil`. You [cannot init a structure](https://github.com/fluencelabs/aqua/issues/167) in Aqua, only obtain it as a result of a function call.
+Aqua supports just a few literals: numbers, quoted strings, booleans, and `nil`.
 
 ```aqua
 -- String literals cannot contain double quotes
@@ -168,7 +168,7 @@ func getLength(arr: []string) -> u32:
   <- arr.length
 ```
 
-As of Aqua `0.6.3`, it is not possible to get an element by index directly from the collection creation expression or get a length.
+As of Aqua `0.6.3`, it is not possible to get an element by index or get a length directly from the collection creation expression.
 
 ## Getters
 
@@ -212,7 +212,7 @@ To access an index with non-literal, use the brackets index: `[x]`.
 
 ## Assignments
 
-Assignments, `=`, only give a name to a value with an applied getter or to a literal.
+Assignments (`=`) could be used to give an alias to the result of an expression (e.g. literal, applied getter, math expression).
 
 ```aqua
 func foo(arg: bool, e: Example):
@@ -222,6 +222,8 @@ func foo(arg: bool, e: Example):
   b = e.child
   -- Create a named literal
   c = "just string value"
+  -- Assign the name to the result of a multiplication
+  d = e.field * 2
 ```
 
 ## Constants
