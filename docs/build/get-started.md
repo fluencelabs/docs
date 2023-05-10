@@ -46,15 +46,14 @@ fluence --version
 
 ## Prepare your Environment
 
-In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
+In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/), to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
 
-The on-chain testnet is Aurora:
+Resources:
 
 - [Aurora Chainlist RPC](https://chainlist.org/?testnets=true&search=aurora)
 - [Aurora Faucet](https://aurora.dev/faucet)
 - [Aurora Explorer](https://explorer.aurora.dev/)
-
-Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
+- Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
 
 ### Adding Aurora Testnet to MetaMask
 
