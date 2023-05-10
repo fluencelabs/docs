@@ -44,50 +44,229 @@ fluence --version
 @fluencelabs/cli/x.y.z darwin-x64 node-v16.19.0
 ```
 
-### Install Other Prerequisites
+## Prepare your Environment
 
-In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
+In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/), to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
 
-The on-chain testnet is Polygon Mumbai:
+Resources:
 
-Mumbai Chainlist RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai)
+- [Aurora Chainlist RPC](https://chainlist.org/?testnets=true&search=aurora)
+- [Aurora Faucet](https://aurora.dev/faucet)
+- [Aurora Explorer](https://explorer.aurora.dev/)
+- Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
 
-MATIC Faucet: [https://mumbaifaucet.com/](https://mumbaifaucet.com/) or [https://faucet.polygon.technology/](https://faucet.polygon.technology/)
+### Adding Aurora Testnet to MetaMask
 
-Mumbai Explorer: [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/)
+#### 1. Open MetaMask and click on the network menu at the top and select "Add Network".
 
-Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fluence.dev/)
+> The Aurora network that automatically pops up in the list of networks is mainnet; we'll be adding the Aurora testnet.
 
-In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Polygon Mumbai as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask-add-network.png" alt="Add Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Figure 1: Add Network on MetaMask</p>
+</div>
 
-Figure 1:
+#### 2. Scroll down and click on "Add a network manually"
 
-![Figure 1: Adding Mumbai Testnet to Metamask](images/0-add-mumbai.png)
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask-add-manually.png" alt="Add Manual Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Figure 2: Add Manual Network on MetaMask</p>
+</div>
 
-With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/), with your account address ready:
+#### 3. Fill in the following information and click "Save"
 
-Figure 2:
+- **Network Name**: Aurora Testnet
+- **New RPC URL**: https://testnet.aurora.dev/
+- **Chain ID**: 1313161555
+- **Symbol**: AETH
+- **Block Explorer URL**: https://testnet.aurora.dev/
 
-![Figure 2: Get MATIC on the Mumbai Faucet](images/1-mumbai-faucet.png)
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/metamask-aurora-chain-info.png"
+    alt="Populate Aurora Testnet Information on MetaMask"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 3: Populate Aurora Testnet Information on MetaMask</p>
+</div>
 
-Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet.
+Now that we have enabled the Aurora testnet on our wallet, visit to the Aurora Faucet, located [here](https://aurora.dev/faucet).
 
-Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
+### Requesting AETH Tokens from Aurora Faucet
 
-Figure 3:
+#### 1. Head over to the [Aurora Faucet](https://aurora.dev/faucet)
+#### 2. Connect your account to the Faucet using MetaMask
 
-![Fluence Faucet](images/2-fluence-faucet.png)
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-connect-faucet.png"
+    alt="Connect MetaMask to Aurora Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 4: Connect MetaMask to Aurora Faucet</p>
+</div>
 
-which not only allows you to request testnet USDC (tUSDC) but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
+Ensure you are connecting the right account.
 
-And that concludes the installation section!
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-faucet-connect-metamask.png"
+    alt="Connect MetaMask to Aurora Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 5: Connect MetaMask to Aurora Faucet</p>
+</div>
+    
+
+#### 3. Request testnet AETH tokens
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-request-eth.png"
+    alt="Request testnet AETH"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 6: Request testnet AETH</p>
+</div>
+
+#### 4. Wait for a few moments until you see the delivery message
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-request-success.png"
+    alt="Request testnet AETH"
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+  />
+  <p>Figure 7: Request testnet AETH</p>
+</div>
+
+#### 5. Check your account to confirm that you have received the requested tokens
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/metamask-updated-aeth-balance.png"
+    alt="MetaMask wallet with AETH balance"
+    style={{ display: "block", margin: "auto", maxWidth: "90%" }}
+  />
+  <p>Figure 8: MetaMask wallet with AETH balance</p>
+</div>
+
+Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.dev/).
+
+### Fluence Faucet
+
+#### 1. Head over to the [Fluence faucet](https://faucet.fluence.dev/)
+#### 2. Click the "Login" button at the centre of the page
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-login.png"
+    alt="Login into the Fluence Interface"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 9: Login into the Fluence Interface</p>
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-sign-up.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 10: Create an account or Login</p>
+</div>
+
+### 3. After logging in, click on the "Add tUSDC to metamask" button
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 11: Fluence Interface for Adding tUSDC to Account</p>
+</div>
+
+MetaMask will automatically populate the token symbol and decimals of precision fields.
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC-metamask.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 12: Adding Suggested tUSDC Token on MetaMask</p>
+</div>
+
+### 4. Verify that you've successfully added tUSDC to your account
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 13: Verify Addition of tUSDC on MetaMask</p>
+</div>
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-confirm-tUSDC-added.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 14: Confirm tUSDC Addition to Account</p>
+</div>
+
+### 5. Navigate back to the Fluence Faucet. In the "Token Contract Address" field, enter your account address and click "Get tUSDC"
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-request-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 15: Request tUSDC using Account Address</p>
+</div>
+
+The faucet will confirm the transfer with the following information:
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-tUSDC-transfer-update.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 16: Metadata for tUSDC Faucet Transfer</p>
+</div>
+
+### 6. Confirm the tUSDC tokens were received.
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-confirm-fluence-transfer.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 17: Check tUSDC Account Balance</p>
+</div>
+
+### 7. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the [explorer](https://explorer.testnet.aurora.dev/)
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-explorer-inspect-transfers.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 18: Inspect Transfers via Aurora Faucet</p>
+</div>
 
 ---
 
 > Consider reading: [Keys management with Fluence CLI](cli-keys-management.md)
 
 ---
-
 
 ## Start a new project
 
@@ -557,11 +736,11 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Login with web3 wallet](images/4-connect-cli-wallet.png)
+![Login with web3 wallet](../../static/img/metamask-add-network.png)
 
 …
 
-![Connect the wallet with CLI](images/5-cli-wallet-connected.png)
+![Connect the wallet with CLI](../../static/img/metamask-add-network.png)
 
 Which, when successful, closes the CLI client.
 
