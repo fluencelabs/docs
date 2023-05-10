@@ -48,35 +48,80 @@ fluence --version
 
 In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com/) compatible wallet, such as [MetaMask](https://metamask.io/) to be able to fund the hosting and execution of your distributed services with (testnet) USDC.
 
-The on-chain testnet is Polygon Mumbai:
+The on-chain testnet is Aurora:
 
-Mumbai Chainlist RPC: [https://chainlist.org/?testnets=true&search=mumbai](https://chainlist.org/?testnets=true&search=mumbai)
+- [Aurora Chainlist RPC](https://chainlist.org/?testnets=true&search=aurora)
+- [Aurora Faucet](https://aurora.dev/faucet)
+- [Aurora Explorer](https://explorer.aurora.dev/)
 
-MATIC Faucet: [https://mumbaifaucet.com/](https://mumbaifaucet.com/) or [https://faucet.polygon.technology/](https://faucet.polygon.technology/)
+Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
 
-Mumbai Explorer: [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/)
+In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Aurora as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
 
-Fluence testnet USDC Faucet: [https://faucet.fluence.dev/](https://faucet.fluence.dev/)
+- **Network Name**: Aurora Testnet
+- **New RPC URL**: https://testnet.aurora.dev/
+- **Chain ID**: 1313161555
+- **Symbol**: AETH
+- **Block Explorer URL**: https://testnet.aurora.dev/
 
-In your wallet, you may want to create a new account, e.g., Fluence Account, or use an existing one. If not set already, add Polygon Mumbai as a network by clicking on the Networks button in the upper right corner and then the Add Network button and provide the following info:
+## Adding Aurora Testnet to MetaMask
 
-Figure 1:
+First, navigate to MetaMask and click on network menu at the top, then "Add network". 
 
-![Figure 1: Adding Mumbai Testnet to Metamask](images/0-add-mumbai.png)
+![Figure 1: Add Network on MetaMask](images/metamask-add-network.png)
 
-With your account and network setups in good shape, head over to one of the Mumbai faucets listed above, e.g., [https://mumbaifaucet.com/](https://mumbaifaucet.com/), with your account address ready:
+While an Aurora network automatically pops up in the list of networks, we'll be adding the Aurora testnet.
+Navigate to the bottom of page and select "Add a network manually"
+
+![Figure 2: Add Manual Network on MetaMask](images/metamask-add-manually.png)
+
+Populate the entries with the following information:
+
+- **Network Name**: Aurora Testnet
+- **New RPC URL**: https://testnet.aurora.dev/
+- **Chain ID**: 1313161555
+- **Symbol**: AETH
+- **Block Explorer URL**: https://testnet.aurora.dev/
+
+Save the changes and follow the prompts to confirm the addition of the new network.
+
+![Figure 3: Populate Aurora Testnet Information on MetaMask](images/metamask-aurora-chain-info.png)
+
+Now that we have enabled the Aurora testnet on our wallet, navigate to the Aurora Faucet, located [here](https://aurora.dev/faucet).
+
+We fist need to connect our wallet to the Faucet.
+
+![Figure 4: Connect MetaMask to Aurora Faucet](images/aurora-connect-faucet.png)
+
+Ensure you are connecting the right account.
+
+![Figure 5: Connect MetaMask to Aurora Faucet](images/aurora-faucet-connect-metamask.png)
+
+You should now be able to request testnet tokens from the Aurora testnet.
+
+![Figure 6: Request testnet AETH](images/aurora-request-eth.png)
+
+Shortly after, you should see a delivery message.
+
+![Figure 7: Request testnet AETH](images/aurora-request-success.png)
+
+After a few minutes, check your account to ensure you have received the requested tokens.
+
+![Figure 9: Confirm AETH transfer](images/metamask-updated-aeth-balance.png)
+
+With your account and network setups in good shape, head over to the Aurora faucet listed above, e.g., https://faucet.aurora.dev/, with your account address ready:
 
 Figure 2:
 
-![Figure 2: Get MATIC on the Mumbai Faucet](images/1-mumbai-faucet.png)
+![Figure 2: Get AETH on the Aurora Faucet](images/metamask-add-network.png)
 
-Follow the instructions and eventually, you’ll have 0.5 (testnet) MATIC in your wallet.
+Follow the instructions and eventually, you’ll have some (testnet) AETH in your wallet.
 
 Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
 
 Figure 3:
 
-![Fluence Faucet](images/2-fluence-faucet.png)
+![Fluence Faucet](images/metamask-add-network.png)
 
 which not only allows you to request testnet USDC (tUSDC) but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
 
@@ -557,11 +602,11 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Login with web3 wallet](images/4-connect-cli-wallet.png)
+![Login with web3 wallet](images/metamask-add-network.png)
 
 …
 
-![Connect the wallet with CLI](images/5-cli-wallet-connected.png)
+![Connect the wallet with CLI](images/metamask-add-network.png)
 
 Which, when successful, closes the CLI client.
 
