@@ -278,8 +278,16 @@ Confirm the tUSDC tokens were received.
   <p>Figure 17: Check tUSDC Account Balance</p>
 </div>
 
-To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the explorer, available [here](https://explorer.testnet.aurora.dev/).
+3. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the explorer, available [here](https://explorer.testnet.aurora.dev/).
 
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-explorer-inspect-transfers.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 18: Inspect Transfers via Aurora Faucet</p>
+</div>
 ---
 
 > Consider reading: [Keys management with Fluence CLI](cli-keys-management.md)
