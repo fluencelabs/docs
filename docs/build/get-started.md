@@ -62,77 +62,229 @@ In your wallet, you may want to create a new account, e.g., Fluence Account, or 
 - **New RPC URL**: https://testnet.aurora.dev/
 - **Chain ID**: 1313161555
 - **Symbol**: AETH
-- **Block Explorer URL**: https://testnet.aurora.dev/
+- **Block Explorer URL**: https://explorer.testnet.aurora.dev/
 
 ## Adding Aurora Testnet to MetaMask
 
-First, navigate to MetaMask and click on network menu at the top, then "Add network". 
+1. Open MetaMask and click on the network menu at the top.
+2. Select "Add Network".
+    > The Aurora network that automatically pops up in the list of networks is mainnet; we'll be adding the Aurora testnet.
+3. Scroll down and click on "Add a network manually".
 
-![Figure 1: Add Network on MetaMask](images/metamask-add-network.png)
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask-add-network.png" alt="Add Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Figure 1: Add Network on MetaMask</p>
+</div>
 
-While an Aurora network automatically pops up in the list of networks, we'll be adding the Aurora testnet.
-Navigate to the bottom of page and select "Add a network manually"
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask-add-manually.png" alt="Add Manual Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Figure 2: Add Manual Network on MetaMask</p>
+</div>
 
-![Figure 2: Add Manual Network on MetaMask](images/metamask-add-manually.png)
+4. Fill in the following information:
+    - **Network Name**: Aurora Testnet
+    - **New RPC URL**: https://testnet.aurora.dev/
+    - **Chain ID**: 1313161555
+    - **Symbol**: AETH
+    - **Block Explorer URL**: https://testnet.aurora.dev/
 
-Populate the entries with the following information:
+5. Click "Save".
 
-- **Network Name**: Aurora Testnet
-- **New RPC URL**: https://testnet.aurora.dev/
-- **Chain ID**: 1313161555
-- **Symbol**: AETH
-- **Block Explorer URL**: https://testnet.aurora.dev/
-
-Save the changes and follow the prompts to confirm the addition of the new network.
-
-![Figure 3: Populate Aurora Testnet Information on MetaMask](images/metamask-aurora-chain-info.png)
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/metamask-aurora-chain-info.png"
+    alt="Populate Aurora Testnet Information on MetaMask"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 3: Populate Aurora Testnet Information on MetaMask</p>
+</div>
 
 Now that we have enabled the Aurora testnet on our wallet, navigate to the Aurora Faucet, located [here](https://aurora.dev/faucet).
 
-We fist need to connect our wallet to the Faucet.
+## Requesting AETH Tokens from Aurora Faucet
 
-![Figure 4: Connect MetaMask to Aurora Faucet](images/aurora-connect-faucet.png)
+1. Go to the [Aurora Faucet](https://aurora.dev/faucet).
+2. Connect your MetaMask wallet to the Faucet.
 
-Ensure you are connecting the right account.
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-connect-faucet.png"
+    alt="Connect MetaMask to Aurora Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 4: Connect MetaMask to Aurora Faucet</p>
+</div>
 
-![Figure 5: Connect MetaMask to Aurora Faucet](images/aurora-faucet-connect-metamask.png)
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-faucet-connect-metamask.png"
+    alt="Connect MetaMask to Aurora Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 5: Connect MetaMask to Aurora Faucet</p>
+</div>
+    
+3. Request testnet AETH tokens.
 
-You should now be able to request testnet tokens from the Aurora testnet.
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-request-eth.png"
+    alt="Request testnet AETH"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 6: Request testnet AETH</p>
+</div>
 
-![Figure 6: Request testnet AETH](images/aurora-request-eth.png)
+4. Wait for a few moments until you see the delivery message.
 
-Shortly after, you should see a delivery message.
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/aurora-request-success.png"
+    alt="Request testnet AETH"
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+  />
+  <p>Figure 7: Request testnet AETH</p>
+</div>
 
-![Figure 7: Request testnet AETH](images/aurora-request-success.png)
+5. Check your MetaMask wallet to confirm that you have received the requested tokens.
 
-After a few minutes, check your account to ensure you have received the requested tokens.
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/metamask-updated-aeth-balance.png"
+    alt="MetaMask wallet with AETH balance"
+    style={{ display: "block", margin: "auto", maxWidth: "90%" }}
+  />
+  <p>Figure 8: MetaMask wallet with AETH balance</p>
+</div>
 
-![Figure 9: Confirm AETH transfer](images/metamask-updated-aeth-balance.png)
+Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.dev/).
 
-With your account and network setups in good shape, head over to the Aurora faucet listed above, e.g., https://faucet.aurora.dev/, with your account address ready:
+## Fluence Faucet
 
-Figure 2:
+Click the "Login" button at the centre of the page.
 
-![Figure 2: Get AETH on the Aurora Faucet](images/metamask-add-network.png)
+---
 
-Follow the instructions and eventually, you’ll have some (testnet) AETH in your wallet.
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-login.png"
+    alt="Login into the Fluence Interface"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 9: Login into the Fluence Interface</p>
+</div>
 
-Finally, head over to the [Fluence faucet](https://faucet.fluence.dev/):
+---
 
-Figure 3:
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-sign-up.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 10: Create an account or Login</p>
+</div>
 
-![Fluence Faucet](images/metamask-add-network.png)
+Once you have your tUSDC, you can add it to your MetaMask wallet by following these steps:
 
-which not only allows you to request testnet USDC (tUSDC) but also provides a convenience function to add the testnet USDC token to your MetaMask wallet. Copy your account address into the form, click the Get button and you should have 16 FakeUSDC in your account!  To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com/).
+3. After logging in, click on the "Add tUSDC to metamask" button.
 
-And that concludes the installation section!
+---
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 11: Fluence Interface for Adding tUSDC to Account</p>
+</div>
+
+---
+
+MetaMask will automatically populate the token symbol and decimals of precision fields.
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC-metamask.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 12: Adding Suggested tUSDC Token on MetaMask</p>
+</div>
+
+Verify that you've successfully added tUSDC to your account.
+
+---
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-add-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 13: Verify Addition of tUSDC on MetaMask</p>
+</div>
+
+---
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-confirm-tUSDC-added.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 14: Confirm tUSDC Addition to Account</p>
+</div>
+
+2. Navigate back to the Fluence Faucet. In the Token Contract Address field, enter your account address and click "Get tUSDC".
+
+---
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-request-tUSDC.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 15: Request tUSDC using Account Address</p>
+</div>
+
+---
+
+The faucet will confirm the transfer with the following information:
+
+---
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-tUSDC-transfer-update.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 16: Metadata for tUSDC Faucet Transfer</p>
+</div>
+
+---
+
+Confirm the tUSDC tokens were received.
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/fluence-faucet-confirm-fluence-transfer.png"
+    alt="Create an account or Login"
+    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+  />
+  <p>Figure 17: Check tUSDC Account Balance</p>
+</div>
+
+To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the explorer, available [here](https://explorer.testnet.aurora.dev/).
 
 ---
 
 > Consider reading: [Keys management with Fluence CLI](cli-keys-management.md)
 
 ---
-
 
 ## Start a new project
 
@@ -602,11 +754,11 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Login with web3 wallet](images/metamask-add-network.png)
+![Login with web3 wallet](../../static/img/metamask-add-network.png)
 
 …
 
-![Connect the wallet with CLI](images/metamask-add-network.png)
+![Connect the wallet with CLI](../../static/img/metamask-add-network.png)
 
 Which, when successful, closes the CLI client.
 
