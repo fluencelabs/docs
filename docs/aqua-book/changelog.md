@@ -7,6 +7,12 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.11.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.0) – May 29, 2023
+* BREAKING CHANGE: add name scopes to if/else/try blocks ([LNG-55](https://linear.app/fluence/issue/LNG-55)) ([#715](https://github.com/fluencelabs/aqua/issues/715))
+* **devcontainer:** Add devcontainer spec ([LNG-148](https://linear.app/fluence/issue/LNG-148)) ([#712](https://github.com/fluencelabs/aqua/issues/712))
+* BREAKING CHANGE: **parser:** Strict indentation ([LNG-135](https://linear.app/fluence/issue/LNG-135)) ([#714](https://github.com/fluencelabs/aqua/issues/714))
+* use new blueprint ([#708](https://github.com/fluencelabs/aqua/issues/708))
+
 ### [0.10.6](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.10.6) – May 3, 2023
 * bug fix: click-to-definition for modules and abilities ([LNG-144](https://linear.app/fluence/issue/LNG-144)) ([#705](https://github.com/fluencelabs/aqua/issues/705))
 * refactoring: move LSP compiler code to LSP package ([LNG-141](https://linear.app/fluence/issue/LNG-141)) ([#705](https://github.com/fluencelabs/aqua/issues/705))
