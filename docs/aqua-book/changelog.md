@@ -7,6 +7,30 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.11.6](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.6) – June 15, 2023
+* **compiler:** Fix SO in Topology ([LNG-149](https://linear.app/fluence/issue/LNG-149)) ([#752](https://github.com/fluencelabs/aqua/issues/752))
+* generate JS in Aqua API properly ([#755](https://github.com/fluencelabs/aqua/issues/755))
+
+### [0.11.5](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.5) – June 14, 2023
+* **compiler:** Fix closure passing ([LNG-92](https://linear.app/fluence/issue/LNG-92)) ([#747](https://github.com/fluencelabs/aqua/issues/747))
+* **parser:** Fix compare ops parsing ([#748](https://github.com/fluencelabs/aqua/issues/748))
+
+### [0.11.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.4) – June 13, 2023
+* **tracing:** Introduce function calls tracing ([LNG-169](https://linear.app/fluence/issue/LNG-169)) ([#732](https://github.com/fluencelabs/aqua/issues/732))
+* **aqua-api:** Compilation to js/ts for file without exports ([LNG-196](https://linear.app/fluence/issue/LNG-196))  ([#744](https://github.com/fluencelabs/aqua/issues/744))
+* **compiler:** Fix closure call compilation ([LNG-193](https://linear.app/fluence/issue/LNG-193)) ([#741](https://github.com/fluencelabs/aqua/issues/741))
+
+### [0.11.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.3) – June 09, 2023
+* **devcontainer:** Add js-client to devcontainer ([#736](https://github.com/fluencelabs/aqua/issues/736))
+* **aqua-api:** Add default constants to Aqua API ([LNG-194](https://linear.app/fluence/issue/LNG-194)) ([#738](https://github.com/fluencelabs/aqua/issues/738))
+
+### [0.11.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.2) – June 07, 2023
+* **aqua-api:** return JS and TS sources from API ([LNG-164](https://linear.app/fluence/issue/LNG-164)) ([#730](https://github.com/fluencelabs/aqua/issues/730))
+* **language-server:** Go-to definition for path in `use` expression ([LNG-187](https://linear.app/fluence/issue/LNG-187)) ([#733](https://github.com/fluencelabs/aqua/issues/733))
+
+### [0.11.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.1) – June 01, 2023
+* **inline:** Fix nullable value in a nested struct ([LNG-160](https://linear.app/fluence/issue/LNG-160)) ([#724](https://github.com/fluencelabs/aqua/issues/724))
+
 ### [0.11.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.0) – May 29, 2023
 * BREAKING CHANGE: add name scopes to if/else/try blocks ([LNG-55](https://linear.app/fluence/issue/LNG-55)) ([#715](https://github.com/fluencelabs/aqua/issues/715))
 * **devcontainer:** Add devcontainer spec ([LNG-148](https://linear.app/fluence/issue/LNG-148)) ([#712](https://github.com/fluencelabs/aqua/issues/712))
