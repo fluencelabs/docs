@@ -7,6 +7,9 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.11.7](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.7) – June 16, 2023
+* **compiler:** Fix incorrect service method renaming ([LNG-199](https://linear.app/fluence/issue/LNG-199)) ([#757](https://github.com/fluencelabs/aqua/issues/757))
+
 ### [0.11.6](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.6) – June 15, 2023
 * **compiler:** Fix SO in Topology ([LNG-149](https://linear.app/fluence/issue/LNG-149)) ([#752](https://github.com/fluencelabs/aqua/issues/752))
 * generate JS in Aqua API properly ([#755](https://github.com/fluencelabs/aqua/issues/755))
