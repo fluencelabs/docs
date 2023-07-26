@@ -1,8 +1,8 @@
 # Marine-JS
 
-Marine-js runs Marine modules in a browser or in a node.js environments. It's based on the `runtime` Marine component to execute Wasm modules with help of interface-types and module linking. This is possible by compiling the [Core](./#core) part of Marine (we'll call it a `control module` then) to Wasm and handle all necessary calls through the JS wrapper.
+Marine-js runs Marine modules in a browser or in a node.js environments. It's based on the `runtime` Marine component which handless interface-types and module linking, and wasm backend implementation for JS environment for executing Wasm. This is possible by compiling the [Core](./#core) part of Marine with JS-based wasm backend (we'll call it a `control module` then) to Wasm and handle all necessary calls through the JS wrapper.
 
-In the marine web environment, each service includes this control module. It handles all the requests made to any loaded module as well as requests to other modules of this service.
+In the marine web environment, each service includes an instance of this control module. It handles all the requests made to any loaded module as well as requests to other modules of this service.
 
 Let's consider the following scheme:
 
