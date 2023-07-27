@@ -102,7 +102,6 @@ const sidebars = {
             "aqua-book/language/expressions/header",
             "aqua-book/language/expressions/functions",
             "aqua-book/language/expressions/services",
-            "aqua-book/language/expressions/type-definitions",
             "aqua-book/language/expressions/overridable-constants",
           ],
         },

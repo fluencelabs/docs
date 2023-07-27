@@ -114,10 +114,12 @@ x <- arrow()
 
 ## Type Alias
 
-For convenience, you can alias a type:
+It is possible to alias a type to a name.
+It may help with self-documented code and refactoring.
 
 ```aqua
-alias MyAlias : ?string
+alias PeerId: string
+alias MyDomain: DomainType
 ```
 
 ## Type Variance
@@ -168,7 +170,21 @@ service MyService:
   foo(arg: string) -> bool
 ```
 
-See [Services](services.md)
+See [services](services.md)
+
+## Ability type
+
+An ability type is a product of arrows, scalars, structures and other abilities.
+
+```aqua
+ability Ability:
+    arrow(x: i32) -> i32
+    field: string
+    struct: SomeStruct
+    ab: AnotherAbility
+```
+
+See [abilities](abilities.md)
 
 ## Type of a file
 
