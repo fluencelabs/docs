@@ -1,6 +1,6 @@
 # Marine-JS API
 
-Web runtime does not support not all features of the Rust Marine side, it supports now only pure services and does not pass call parameters to the service, but supports multi-module services. `MarineService` is the central pillar of the web runtime, it has simplified interface of `FAppService`. In the future on the milestone 4 of the web runtime JS `MarineService` will have a one-to-one correspondence with Rust one.
+Web runtime does not support not all features of the Rust Marine side, it supports now only pure services and does not pass call parameters to the service, but supports multi-module services. `MarineService` is the central pillar of the web runtime, it has simplified interface of `AppService`. In the future on the milestone 4 of the web runtime JS `MarineService` will have a one-to-one correspondence with Rust one.
 
 ## Loading Wasm
 
@@ -120,7 +120,7 @@ Starts this `MarineService` object. This includes instantiating the control modu
 ### calling a service
 
 ```javascript
-call(functionName: string, args: JSONArray | JSONObject, callParams: any): unknown
+call(functionName: string, args: JSONArray | JSONObject, callParams?: CallParameters): unknown
 ```
 
-Invokes a function of a module inside `MarineService` by given function name with given arguments in Json string. The module to call is the last module listed in `modules_config` field of `MarineServiceConfig` -- the facade module. Call parameters are currently ignored. This method will throw an exception in case of module execution error. The return value is the JS object returned by the facade module.
+Invokes a function of a module inside `MarineService` by given function name with given arguments in Json string. The module to call is the last module listed in `modules_config` field of `MarineServiceConfig` -- the facade module. Call parameters is a fluence-related argument, a `defaultCallParameters` constant can be used when call parameters are not needed. This method will throw an exception in case of module execution error. The return value is the JS object returned by the facade module.
