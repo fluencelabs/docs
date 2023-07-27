@@ -1,6 +1,6 @@
 # Services
 
-A Service interfaces functions (often provided via WebAssembly interface) executable on a peer. Example of service definition:
+Services describe what can be called on peers, and how to call it. A service interfaces functions (often provided via WebAssembly interface) executable on a peer. Example of service definition:
 
 ```aqua
 service MyService:
