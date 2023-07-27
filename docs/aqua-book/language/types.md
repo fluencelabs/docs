@@ -14,7 +14,7 @@ Scalar types follow the Wasm IT notation.
 
 ## Literals
 
-You can pass booleans (true, false), numbers, double-quoted strings as literals.
+You can pass booleans (`true`, `false`), numbers, double-quoted strings as literals.
 
 ## Structures
 
@@ -35,9 +35,12 @@ func createStruct(i: []u32) -> SomeStruct:
         num = 4,
         inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
     )
-    
--- To modify a structure value, there's a method called 'copy'. It creates a copy with values of specified fields changed.
--- Note that copy operates in an immutable way: it does not modify original structure value.
+```
+
+To modify a structure value, there's a method called 'copy'. It creates a copy with values of specified fields changed.
+Note that copy operates in an immutable way: it does not modify original structure value.
+
+```aqua
 func changeStr(someStruct: SomeStruct) -> SomeStruct:
     <- someStruct.copy(str = "new string")
 ```
@@ -156,20 +159,20 @@ bar(foo4)
 
 Arrow type `A: D -> C` is a subtype of `A1: D1 -> C1`, if `D1` is a subtype of `D` and `C` is a subtype of `C1`.
 
-## Type Of A Service And A File
+## Service type
 
 A service type is a product of arrows.
 
 ```aqua
 service MyService:
   foo(arg: string) -> bool
-
--- type of this service is:
-data MyServiceType:
-  foo: string -> bool
 ```
 
-The file is a product of all defined constants and functions (treated as arrows). Type definitions in the file do not go to the file type.
+See [Services](services.md)
+
+## Type of a file
+
+A file is a product of all defined constants and functions (treated as arrows). Type definitions in the file do not go to the file type.
 
 ```aqua
 -- MyFile.aqua
@@ -177,12 +180,7 @@ The file is a product of all defined constants and functions (treated as arrows)
 func foo(arg: string) -> bool:
   ...
 
-const FLAG ?= true  
-
--- type of MyFile.aqua
-data MyServiceType:
-  foo: string -> bool
-  flag: bool
+const FLAG ?= true
 ```
 
 See [Imports and Exports](header/header.md#module) for module declarations.
