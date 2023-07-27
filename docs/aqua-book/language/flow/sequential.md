@@ -36,7 +36,7 @@ y <- Peer.identify()
 z <- Op.identity(y)
 ```
 
-When you write `<-`, this means not just "assign results of the function on the right to variable on the left". It means that all the effects are executed: [service](../abilities-and-services.md) may change state, the [topology](../topology.md) may be shifted. But you end up being (semantically) on the same peer where you have called the arrow.
+When you write `<-`, this means not just "assign results of the function on the right to variable on the left". It means that all the effects are executed: [service](../services.md) may change state, the [topology](../topology.md) may be shifted. But you end up being (semantically) on the same peer where you have called the arrow.
 
 ### on
 
