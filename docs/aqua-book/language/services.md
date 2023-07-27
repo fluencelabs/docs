@@ -1,12 +1,4 @@
-# Abilities & Services
-
-While [Execution flow](./flow/flow.md) organizes the flow from peer to peer, Abilities & Services describe what exactly can be called on these peers, and how to call it.
-
-Ability is a concept of "what is possible in this context": like a peer-specific trait or a type class. It will be better explained once abilities passing is implemented.
-
-[Ability Passing Issue](https://github.com/fluencelabs/aqua/issues/33)
-
-## Services
+# Services
 
 A Service interfaces functions (often provided via WebAssembly interface) executable on a peer. Example of service definition:
 
@@ -19,7 +11,7 @@ service MyService:
 
 Service functions in Aqua have no function body. Computations, of any complexity, are implemented with any programming language that fits, and then brought to the Aqua execution context. Aqua calls these functions but does not peak into what's going on inside.
 
-### Built-in Services
+## Built-in Services
 
 Some services may be singletons available on all peers. Such services are called built-ins, and are always available in any scope.
 
@@ -33,7 +25,7 @@ func foo():
   Op.noop()
 ```
 
-### Service Resolution
+## Service Resolution
 
 A peer may host many services of the same type. To distinguish services from each other, Aqua requires Service resolution to be done: that means, the developer must provide an ID of the service to be used on the peer.
 
