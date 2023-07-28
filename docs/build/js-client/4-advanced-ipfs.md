@@ -2,28 +2,28 @@
 
 ## Intro
 
-In this section, we will demonstrate how the Fluence JS Client can be used to create a IPFS client application with the Fluence stack.
+In this section, we will demonstrate how the Fluence JS Client and Aqua can be used to provide an IPFS API to Aqua and use it with the Fluence stack.
 
-We will implement IPFS interface for interacting with IPFS p2p network.
+We will implement given Aqua IPFS interface to interact with IPFS p2p network through the js implementation.
 
 ## Aqua code
 
-Let's start with the Aqua code first:
+Let's start by defining Aqua interface. The signature will tell us about a service behavior a bit:
 
 ```aqua
-alias CID : string                                  -- (1)
+-- Export signature for making our functions visible outside this file.
+export exists, upload_string, remove
 
-service IpfsClient("ipfs client"):                  -- (2)
+-- Alias for making function types closer to IPFS domain definitions.
+alias CID : string
+
+-- Service interface. It is what we're going to implement. Implementation could vary depending on client needs.
+service IpfsClient("ipfs_client"):
     exists(cid: CID) -> bool
-    upload(path: string) -> CID
     upload_string(contents: string) -> CID
-    dag_upload(path: string) -> CID
-    dag_upload_string(contents: string) -> CID
     remove(cid: CID) -> string
 
-func upload_script(path: string) -> CID:            -- (3)
-    <- IpfsClient.upload_string(path)
-
+-- Exported functions. Export declarations defined on the first line of code snippet.
 func exists(cid: CID) -> bool:
     <- IpfsClient.exists(cid)
 
@@ -34,15 +34,6 @@ func remove(cid: CID) -> string:
     <- IpfsClient.remove(cid)
 
 ```
-
-Let's explain numbered definitions below:
-
-(1) Alias for making function types closer to IPFS domain definitions.
-
-(2) Service interface. It is what we're going to implement. Implementation could vary depending on client needs.
-
-(3) Exported functions. They are exported this way for a convenient calling.
-
 
 ## Install dependencies
 
@@ -186,7 +177,7 @@ async function main() {
 
             const c = CID.parse(cid);
 
-            const controller = new AbortController(); // Abort controller to shut down http requests after timeout
+            const controller = new AbortController();
             const content = await timeout(s.get(c, { signal: controller.signal }), 5 /* 5 sec */, controller).catch(noop);
 
             const result = Boolean(content);
@@ -198,7 +189,7 @@ async function main() {
 
             const c = CID.parse(cid);
 
-            const isPinned = await helia.pins.isPinned(c); // Pinning protects data from garbage collector in IPFS
+            const isPinned = await helia.pins.isPinned(c);
 
             if (isPinned) {
                 console.log('Remove pinned entry:', c.toString());
@@ -209,49 +200,12 @@ async function main() {
             await helia.stop();
             return c.toString();
         },
-        async upload(path: string) {
-            const helia = await makeHelia();
-
-            const s = strings(helia);
-
-            const buffer = await readFile(path);
-
-            const cid = await s.add(buffer.toString());
-            await helia.pins.add(cid);
-
-            await helia.stop();
-            return cid.toString();
-        },
         async upload_string(contents: string) {
             const helia = await makeHelia();
 
             const s = strings(helia);
 
             const cid = await s.add(contents);
-            await helia.pins.add(cid);
-
-            await helia.stop();
-            return cid.toString();
-        },
-        async dag_upload(path: string) {
-            const helia = await makeHelia();
-
-            const dj = dagJson(helia);
-
-            const buffer = await readFile(path);
-
-            const cid = await dj.add(buffer.toString());
-            await helia.pins.add(cid);
-
-            await helia.stop();
-            return cid.toString();
-        },
-        async dag_upload_string(contents: string) {
-            const helia = await makeHelia();
-
-            const dj = dagJson(helia);
-
-            const cid = await dj.add(contents);
             await helia.pins.add(cid);
 
             await helia.stop();
@@ -290,7 +244,18 @@ Remove pinned entry: bafkreicdktp5u4gi6djzsg454pkw3s3ot4x4nqbrnurvwy5p5m4ii4nnuq
 Is entry exists: false
 ```
 
-## Notes
+## Conclusion:
+
+Now we have a working service implementation which can be deployed to peer and interacted.
+
+You learned:
+- Basic aqua syntax
+- How to implement a peer
+- Notion of IPFS
+
+You can find remote service call examples [here](https://github.com/fluencelabs/examples)
+
+### Notes
 
 - IPFS local peer stores data in your `./src/temp` folder. You can remove this folder if you want to start to manually clear written data.
 - There is an almost 0% chance to pass something to another IPFS peer as we break connection too soon. You can fix this by rewriting code and omitting `helia.stop()` instructions. The longer you keep connection - the higher chances to exchange data.
