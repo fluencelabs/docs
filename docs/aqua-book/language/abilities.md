@@ -25,7 +25,6 @@ Abilities could be created inside functions just like [structures](types.md#stru
 <!-- TODO: Syntax of creating abilities is a subject to change -->
 ```aqua
 func main():
-
     closure = (x: i8) -> bool:
         <- x > 0
 
@@ -49,7 +48,7 @@ ability Additional:
     value: string
 
 func createComplex{Simple, Additional}(int: i8) -> Complex, string:
-    myComplex = Complex(
+    MyComplex = Complex(
         simple = Simple(
             st = Struct(int = int),
             arrow = Simple.arrow
@@ -57,7 +56,22 @@ func createComplex{Simple, Additional}(int: i8) -> Complex, string:
         field = Additional.value
     )
 
-    <- myComplex, Additional.value
+    <- MyComplex, Additional.value
+
+func main() -> string, string:
+    closure = (x: i8) -> bool:
+        <- x > 0
+
+    MySimple = Simple(
+        st = Struct(int = 0),
+        arrow = closure
+    )
+
+    MyAdditional = Additional(value = "additional")
+
+    MyComplex, value = createComplex{MySimple, MyAdditional}(42)
+
+    <- MyComples.field, value
 ```
 
 <!-- TODO: Add section about structual subtyping -->
