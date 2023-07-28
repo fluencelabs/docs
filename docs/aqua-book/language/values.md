@@ -109,11 +109,10 @@ takesMaybe(nil)
 
 ## Arithmetic operators
 
-Aqua offers a list of arithmetic and logic operators, introduced in Aqua 0.7.1.
+Aqua supports `+`, `-`, `*`, `/`, `**` (power), `%` (reminder) for integer values.
 
 ```aqua
--- Addition
-func foo(a: i32, b: i32) -> i32:
+func arithmetics(a: i32, b: i32) -> i32:
   c = a + b
   d = c - a
   e = d * c
@@ -123,9 +122,78 @@ func foo(a: i32, b: i32) -> i32:
   -- remainder
   e = g % f
   
-  -- Can use arithmetics anywhere
-  -- Better use brackets to enforce ordering
-  <- (a + b) - (c + d * (e - 6 ))
+  -- It is possible to use arithmetics
+  -- anywhere an integer is required
+  <- a + (b - c) + d * (e - 6)
+```
+
+Precedence of operators from highest to lowest:
+- `**`
+- `*`, `/`, `%` (left associative)
+- `+`, `-` (left associative)
+
+## Comparison operators
+
+Aqua supports `<`, `>`, `<=`, `>=` for integer values.
+Result of a comparison operator has type `bool`.
+
+```aqua
+func comparison(a: i32, b: i32) -> bool:
+    c = a < b
+    d = a > b
+    e = a <= b
+    f = a >= b
+
+    <- f
+```
+
+Comparison operators have lower precedence than arithmetic operators.
+
+```aqua
+-- This is equivalent to (a + b) < (c * d)
+v = a + b < c * d
+```
+
+## Logical operators
+
+Aqua supports `!`, `||`, `&&` for boolean values.
+Result of a logical operator has type `bool`.
+
+```aqua
+func logic(a: bool, b: bool) -> bool:
+    c = !a
+    d = a || b
+    e = a && b
+
+    <- (e || c) && d || !!true
+```
+
+Precedence of operators from highest to lowest:
+- `!`
+- `&&`
+- `||`
+
+Logical operators have lower precedence than comparison and arithmetic operators.
+
+```aqua
+-- This is equivalent to (((a + b) >= c) && ((d * e) < f)) || g
+v = a + b >= c && d * e < f || g
+```
+
+:::caution
+Operators `||` and `&&` are short-circuiting, so the right operand is evaluated 
+only if the left operand does not determine the result.
+:::
+
+```aqua
+service Launcher("launcher"):
+    launch(what: string) -> bool
+
+func foo() -> bool:
+    check = 1 < 2
+    -- Launcher.launch won't be called!
+    res = check || Launcher.launch("rockets")
+    <- res
 ```
 
 ## Collections

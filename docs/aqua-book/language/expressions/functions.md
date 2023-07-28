@@ -8,7 +8,7 @@ A function can call other functions, take functions as arguments of [arrow type]
 
 Essentially, a function is an arrow. The function call is an expression that connects named arguments to an arrow, and gives a name to the result.
 
-Finally, all a function does is call its arguments or service functions.
+In essense, all a function does is call its arguments or service functions.
 
 ```aqua
 service MySrv:
@@ -18,11 +18,4 @@ func do_something(): -- arrow of type: -> ()
   MySrv "srv id"
   MySrv.foo()
 ```
-
-:::caution
-TODO:
-
-* list all expressions
-* explain the contract and provide a use case for each,
-:::
 
