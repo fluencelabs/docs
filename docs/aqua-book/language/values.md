@@ -154,6 +154,8 @@ Comparison operators have lower precedence than arithmetic operators.
 v = a + b < c * d
 ```
 
+Aqua also supports `==` and `!=` for any values but only as top level operator in [if statement](flow/conditional.md#if).
+
 ## Logical operators
 
 Aqua supports `!`, `||`, `&&` for boolean values.
