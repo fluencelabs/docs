@@ -176,7 +176,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
   <p>Figure 10: Create an account or Login</p>
 </div>
 
-### 3. After logging in, click on the "Add tUSDC to metamask" button
+#### 3. After logging in, click on the "Add tUSDC to metamask" button
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -198,7 +198,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
   <p>Figure 12: Adding Suggested tUSDC Token on MetaMask</p>
 </div>
 
-### 4. Verify that you've successfully added tUSDC to your account
+#### 4. Verify that you've successfully added tUSDC to your account
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -218,7 +218,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
   <p>Figure 14: Confirm tUSDC Addition to Account</p>
 </div>
 
-### 5. Navigate back to the Fluence Faucet. In the "Token Contract Address" field, enter your account address and click "Get tUSDC"
+#### 5. Navigate back to the Fluence Faucet. In the "Token Contract Address" field, enter your account address and click "Get tUSDC"
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -240,7 +240,7 @@ The faucet will confirm the transfer with the following information:
   <p>Figure 16: Metadata for tUSDC Faucet Transfer</p>
 </div>
 
-### 6. Confirm the tUSDC tokens were received.
+#### 6. Confirm the tUSDC tokens were received.
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -251,7 +251,7 @@ The faucet will confirm the transfer with the following information:
   <p>Figure 17: Check tUSDC Account Balance</p>
 </div>
 
-### 7. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the [explorer](https://explorer.testnet.aurora.dev/)
+#### 7. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the [explorer](https://explorer.testnet.aurora.dev/)
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -566,7 +566,7 @@ hello_world.wasm
 
 ### Test our code
 
-Before we deploy our code to the network, we may wan to run some tests. 
+Before we deploy our code to the network, we may want to run some tests. 
 One way to interact with our Wasm module is to use the 
 [Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
 which is a tool to run our Wasm modules locally as if they were deployed to the network. 
@@ -715,7 +715,7 @@ the on-chain marketplace.
 
 Paying for services
 
-- hardcoded parmas:
+- hardcoded params:
     - epoch: 5 minutes
     - Price per epoch 0.083 USDC == 1 USDC/per hour ??
 

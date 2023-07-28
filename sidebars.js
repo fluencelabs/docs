@@ -33,6 +33,7 @@ const sidebars = {
         "build/js-client/js-client",
         "build/js-client/installation",
         "build/js-client/hello-world",
+        "build/js-client/advanced-ipfs",
         "build/js-client/changelog",
       ],
     },
