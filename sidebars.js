@@ -9,26 +9,26 @@ const sidebars = {
       type: "category",
       label: "Quickstart",
       items: [
-          "build/quickstarts",
-          "build/fundamentals",
-          "build/develop-services",
-          // "build/develop-distributed-algos"
-      ]
+        "build/quickstarts",
+        "build/fundamentals",
+        "build/develop-services",
+        // "build/develop-distributed-algos"
+      ],
     },
     {
       type: "category",
       label: "Working with data",
-      link: {id: "build/working-with-data", type: "doc"},
+      link: { id: "build/working-with-data", type: "doc" },
       items: [
         "build/local-data-storage",
         // "build/remote-data-storage",
         // "build/data-acquisition"
-      ]
+      ],
     },
     {
       type: "category",
       label: "Fluence JS Client",
-      link: { id: "build/js-client/js-client",type: "doc" },
+      link: { id: "build/js-client/js-client", type: "doc" },
       items: [
         "build/js-client/js-client",
         "build/js-client/installation",
@@ -42,7 +42,7 @@ const sidebars = {
     "build/security",
     "build/limits",
     "build/glossary",
-    "build/reference"
+    "build/reference",
   ],
   learn: [
     "learn/overview",
@@ -83,7 +83,6 @@ const sidebars = {
             "aqua-book/language/flow/iterative",
           ],
         },
-        "aqua-book/language/abilities-and-services",
         "aqua-book/language/crdt-streams",
         "aqua-book/language/closures",
         {
@@ -103,10 +102,11 @@ const sidebars = {
             "aqua-book/language/expressions/header",
             "aqua-book/language/expressions/functions",
             "aqua-book/language/expressions/services",
-            "aqua-book/language/expressions/type-definitions",
             "aqua-book/language/expressions/overridable-constants",
           ],
         },
+        "aqua-book/language/services",
+        "aqua-book/language/abilities",
       ],
     },
     {
