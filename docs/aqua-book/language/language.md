@@ -43,7 +43,8 @@ Execution:
 
 Computations:
 
-* [Abilities & Services](abilities-and-services.md)
+* [Services](services.md)
+* [Abilities](abilities.md)
 
 Advanced parallelism:
 
