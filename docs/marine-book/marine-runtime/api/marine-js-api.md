@@ -1,6 +1,6 @@
 # Marine-JS API
 
-Web runtime does not support not all features of the Rust Marine side, it supports now only pure services and does not pass call parameters to the service, but supports multi-module services. `MarineService` is the central pillar of the web runtime, it has simplified interface of `AppService`. In the future on the milestone 4 of the web runtime JS `MarineService` will have a one-to-one correspondence with Rust one.
+Web runtime supports all features of the Rust Marine except a part of WASI features and Mounted Binaries. `MarineService` is the central pillar of the web runtime, it corresponds to `FluenceAppService` from the Rust side but has a simplified interface. In the future, with milestone 4 `MarineService` will have a one-to-one correspondence with the Rust side.
 
 ## Loading Wasm
 
@@ -16,12 +16,13 @@ constructor(
         private readonly serviceId: string,
         private logFunction: LogFunction,
         private serviceConfig: MarineServiceConfig,
+        private modules: { [x: string]: Uint8Array },
         env?: Env,
     ) 
 ```
-Constructs a `MarineService` object that is ready to be started. The 
+Constructs a `MarineService` object that is ready to be started. This function corresponds to to `FluenceAppService::new`, and has the same meaning.
 
-The service module bytes, names and all other possible configuration is passed as `MarineServiceConfig`. Acually used values are `module_bytes`, `import_names` and logger and WASI related ones. 
+The service configuration is passed as `MarineServiceConfig`, while module bytes are passed separately. `ModuleDescriptor.import_name` should match one of the keys in the `modules` argument. Actually used config values `import_names`, logger and WASI related ones. It is impossible to pass host imports to the modules, and WASI will only give access to a per-module sandboxed in-memory filesystem.
 ```javascript
 export interface MarineServiceConfig {
     /**
@@ -36,7 +37,6 @@ export interface MarineServiceConfig {
 }
 
 export interface ModuleDescriptor {
-    wasm_bytes: Uint8Array;
     import_name: string;
     config: MarineModuleConfig;
 }
@@ -96,7 +96,7 @@ export interface MarineWASIConfig {
 }
 
 ```
-A marine service can produce logs during execution. All of its logs will be passed to the `logFunction` argument, which has the following type:
+A marine service can produce logs during execution. All service's logs will be passed to the `logFunction` function which has the following type:
 ```javascript
 export type LogFunction = (message: LogMessage) => void;
 
@@ -120,7 +120,8 @@ Starts this `MarineService` object. This includes instantiating the control modu
 ### calling a service
 
 ```javascript
-call(functionName: string, args: JSONArray | JSONObject, callParams?: CallParameters): unknown
+call(functionName: string, args: JSONArray | JSONObject, callParams: CallParameters): unknown
 ```
 
-Invokes a function of a module inside `MarineService` by given function name with given arguments in Json string. The module to call is the last module listed in `modules_config` field of `MarineServiceConfig` -- the facade module. Call parameters is a fluence-related argument, a `defaultCallParameters` constant can be used when call parameters are not needed. This method will throw an exception in case of module execution error. The return value is the JS object returned by the facade module.
+Invokes a function of a module inside `MarineService` by given function name with given arguments in JSON string. The module to call is the last module listed in `modules_config` field of `MarineServiceConfig` -- the facade module. Call parameters is a fluence-related argument, a `defaultCallParameters` constant can be used when call parameters are not needed. This method will throw an exception in case of module execution error. The return value is the JS object returned by the facade module.
+
