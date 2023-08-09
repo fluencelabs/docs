@@ -7,6 +7,20 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+
+### [0.11.9](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.9) - August 9, 2023
+* **compiler:** Introduce boolean algebra ([LNG-211](https://linear.app/fluence/issue/LNG-211)) ([#814](https://github.com/fluencelabs/aqua/issues/814))
+* **compiler:** Introduce equality operators ([LNG-217](https://linear.app/fluence/issue/LNG-217)) ([#820](https://github.com/fluencelabs/aqua/issues/820))
+* **compiler:** Restrict exporting functions that return arrow types or ability types ([LNG-209](https://linear.app/fluence/issue/LNG-209)) ([#815](https://github.com/fluencelabs/aqua/issues/815))
+* **compiler:** Fix math ops for `u64` ([LNG-204](https://linear.app/fluence/issue/LNG-204)) ([#811](https://github.com/fluencelabs/aqua/issues/811))
+* **compiler:** Add support for nested abilities ([LNG-214](https://linear.app/fluence/issue/LNG-214)) ([#816](https://github.com/fluencelabs/aqua/issues/816))
+
+### [0.11.8](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.8) - July 20, 2023
+* **compiler:** Introduce abilities ([#731](https://github.com/fluencelabs/aqua/issues/731))
+* **compiler:** Find and display link cycles ([#787](https://github.com/fluencelabs/aqua/issues/787))
+* **compiler:** Make `on` propagate errors ([LNG-203](https://linear.app/fluence/issue/LNG-203)) ([#788](https://github.com/fluencelabs/aqua/issues/788))
+* **compiler:** Make topology hop with non-FFI snippet ([LNG-125](https://linear.app/fluence/issue/LNG-123)) ([#764](https://github.com/fluencelabs/aqua/issues/764))
+
 ### [0.11.7](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.7) – June 16, 2023
 * **compiler:** Fix incorrect service method renaming ([LNG-199](https://linear.app/fluence/issue/LNG-199)) ([#757](https://github.com/fluencelabs/aqua/issues/757))
 
