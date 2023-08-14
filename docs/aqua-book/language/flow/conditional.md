@@ -16,7 +16,7 @@ Aqua supports branching, you can:
 
 ### `if`
 
-`if` corresponds to `match`, `mismatch` extension of π-calculus.
+The first branch of the conditional operator, executed only if the condition holds.
 
 ```aqua
 x = true
@@ -33,13 +33,13 @@ if x != false:
   baz()
 ```
 
-Currently, you may only use one `==`, `!=` operator or compare with `true` in the `if` expression.
+Any expression that produces `bool` is acceptable as a condition.
 
-Both operands can be variables.
+`if` corresponds to `match`, `mismatch` extension of π-calculus.
 
 ### `else`
 
-The second branch of `if`, executed only in case the condition did not hold.
+The second branch of `if`, executed only in case the condition does not hold.
 
 ```aqua
 if false:

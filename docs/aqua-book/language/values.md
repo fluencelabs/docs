@@ -154,7 +154,25 @@ Comparison operators have lower precedence than arithmetic operators.
 v = a + b < c * d
 ```
 
-Aqua also supports `==` and `!=` for any values but only as top level operator in [if statement](flow/conditional.md#if).
+## Equality operators
+
+Aqua supports `==`, `!=` for [scalars](types.md#scalars), [collections](types.md#collections), and [structures](types.md#structures).
+Result of an equality operator has type `bool`.
+
+```aqua
+func equality(a: i32, b: i32) -> bool:
+    c = a == b
+    d = a != b
+
+    <- d
+```
+
+Equality operators have lower precedence than comparison operators.
+
+```aqua
+-- This is equivalent to ((a + b) < c) == (d >= (e * f))
+v = a + b < c == d >= e * f
+```
 
 ## Logical operators
 
@@ -175,11 +193,11 @@ Precedence of operators from highest to lowest:
 - `&&`
 - `||`
 
-Logical operators have lower precedence than comparison and arithmetic operators.
+Logical operators have lower precedence than equality operators.
 
 ```aqua
--- This is equivalent to (((a + b) >= c) && ((d * e) < f)) || g
-v = a + b >= c && d * e < f || g
+-- This is equivalent to (((a + b) >= c) && ((d * e) < f)) || (g != h)
+v = a + b >= c && d * e < f || g != h
 ```
 
 :::caution
