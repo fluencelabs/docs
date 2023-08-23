@@ -37,6 +37,6 @@ end
 
 ```
 
-Now that your services are deployed and ready to be put to work, you are ready to implement your application workflow with Aqua.With the help of a client-peer, such as provided by [Fluence CLI](https://github.com/fluencelabs/fluence-cli) or [js-client](https://github.com/fluencelabs/js-client), you can initiate the execution of your Aqua workflow by connecting to any publicly accessible peer, aka [relay peer](/docs/build/glossary.md#relay), in the network.
+Now that your services are deployed and ready to be put to work, you are ready to implement your application workflow with Aqua. With the help of a client-peer, such as provided by [Fluence CLI](https://github.com/fluencelabs/fluence-cli) or [js-client](https://github.com/fluencelabs/js-client), you can initiate the execution of your Aqua workflow by connecting to any publicly accessible peer, aka [relay peer](/docs/build/glossary.md#relay), in the network.
 
 With the overview out of the way, let's get started with Fluence CLI.
