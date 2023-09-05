@@ -8,7 +8,7 @@ With the shift towards to the world of decentralized data, where applications do
 
 ## Aqua: P2P programming language
 
-[Aqua](../build/aquamarine/aqua.md) is the new programming language specifically created for writing P2P workflows and scenarios. Aqua simplifies programming of business logic across distributed peers and allows to decouple network algorithms from computations. It is Turing-complete, based on [process-calculus](https://en.wikipedia.org/wiki/Process_calculus), and allows to implement algorithms for any network topology.
+[Aqua](/docs/build/glossary.md#aqua) is the new programming language specifically created for writing P2P workflows and scenarios. Aqua simplifies programming of business logic across distributed peers and allows to decouple network algorithms from computations. It is Turing-complete, based on [process-calculus](https://en.wikipedia.org/wiki/Process_calculus), and allows to implement algorithms for any network topology.
 
 ```aqua
 -- ask a remote peer to say hello to us
@@ -24,7 +24,7 @@ This allows to program any network algorithms: from simple browser-to-browser co
 
 ## Marine: portable runtime
 
-[Marine](../build/aquamarine/marine/marine.md) is Fluence's universal WebAssembly runtime that executes computations triggered by Aqua programs. Computations are executed as lightweight and portable WebAssembly services, that may provide both pure computation and proxy to external legacy APIs or binaries.
+[Marine](/docs/build/glossary.md#marine) is Fluence's universal WebAssembly runtime that executes computations triggered by Aqua programs. Computations are executed as lightweight and portable WebAssembly services, that may provide both pure computation and proxy to external legacy APIs or binaries.
 
 Marine provides secure code sandbox, which guarantees that hosted code can't access the node system without explicit permission. Services are lightweight and fast, which allows to achieve high atomicity of computations, and effectively compose a distributed serverless engine.
 

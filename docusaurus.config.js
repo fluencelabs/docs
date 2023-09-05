@@ -25,8 +25,7 @@ const getFluenceLanguageConfig = (langName) => ({
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Fluence Docs",
-  tagline:
-    "Decentralized Serverless Platform",
+  tagline: "Decentralized Serverless Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -53,7 +52,7 @@ const config = {
           customCss: require.resolve("./src/css/custom.scss"),
         },
         gtag: {
-          trackingID: 'G-Z28T4R4T7P',
+          trackingID: "G-Z28T4R4T7P",
           anonymizeIP: true,
         },
       }),
@@ -65,6 +64,7 @@ const config = {
         langs: [
           "typescript",
           "javascript",
+          "html",
           "json",
           "rust",
           "shell",
@@ -185,6 +185,16 @@ const config = {
       },
     }),
   plugins: ["docusaurus-plugin-sass"],
+  scripts: [
+    {
+      src: "https://cdn.jsdelivr.net/npm/mermaid@9.4.0/dist/mermaid.min.js",
+      defer: true,
+    },
+    {
+      src: "/mermaid.js",
+      defer: true,
+    },
+  ],
 };
 
 module.exports = config;

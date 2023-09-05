@@ -3,7 +3,7 @@ import TabItem from "@theme/TabItem";
 
 # Export functions
 
-Applying the `[marine]` macro to a function results in its export, which means that it can be called from other modules or AIR scripts.
+Applying the `#[marine]` macro to a function results in its export, which means that it can be called from other modules or AIR scripts.
 
 ## mtype
 
@@ -43,6 +43,7 @@ pub struct TestRecord {
 
 // export foo as a public function bound by the 
 // the IT type constraints 
+
 #[marine]
 pub fn foo(arg_1: Vec<Vec<Vec<Vec<TestRecord>>>>, arg_2: String) -> Vec<Vec<Vec<Vec<TestRecord>>>> { 
     unimplemented!() 

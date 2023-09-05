@@ -8,7 +8,7 @@ Aqua lets developers describe the whole distributed workflow in a single script,
 
 Topology in Aqua is declarative: You just need to say where (on what peer) a piece of code must be executed, and optionally how to get there. The Aqua compiler will add all the required network hops.
 
-## On expression
+## `on` expression
 
 `on` expression moves execution to the specified peer:
 
@@ -17,7 +17,7 @@ on "my peer":
   foo()
 ```
 
-Here, `foo` is instructed to be executed on a peer with id `my peer`. `on` supports variables of type `string` :
+Here, `foo` is instructed to be executed on a peer with id `my peer`. Peer in `on` expression could be specified with variable of type `string`:
 
 ```aqua
 -- foo, bar, baz are instructed to be executed on myPeer
@@ -30,6 +30,49 @@ on myPeer:
 :::danger
 `on` does not add network hops on its own: if there are no service calls inside the `on` scope, the node will not be reached. Use `via` to affect the topology without service calls.
 :::
+
+For example, peer `myPeer` would not be reached in an execution of the next code snippet:
+
+```aqua
+on myPeer:
+  -- There are no calls in this scope,
+  -- so `myPeer` is not reached
+  on myOtherPeer:
+    -- `foo` is executed on `myOtherPeer`
+    foo()
+```
+
+Note also that execution is not obligated to return to previous peer with `on` scope closing. For example, in the next code snippet possible network hops are `myPeer -> myNextPeer -> myLastPeer`:
+
+```aqua
+on myPeer:
+  -- `foo` is executed on `myPeer`
+  foo()
+  on myNextPeer:
+    -- `bar` is executed on `myNextPeer`
+    bar()
+  -- There are no calls here,
+  -- so no need to return to `myPeer`
+  -- We go directly to `myLastPeer`
+  on myLastPeer:
+    -- `baz` is executed on `myLastPeer`
+    baz()
+```
+
+Such an optimization could be done in more complex scenarios too. For example:
+```aqua
+on myPeer:
+  -- `foo` is executed on `myPeer`
+  foo()
+  on myNextPeer:
+    -- `bar` is executed on `myNextPeer`
+    bar()
+-- Execution here transfers directly
+-- from `myNextPeer` to `myLastPeer`
+on myLastPeer:
+  -- `baz` is executed on `myLastPeer`
+  baz()
+```
 
 ## `INIT_PEER_ID`
 
@@ -72,10 +115,10 @@ Take a minute to think about:
 
 Declarative topology definition always works the same way.
 
-* `do_foo` is executed on "peer foo", always.
+* `do_foo` is executed on `"peer foo"`, always.
 * `bar(1)` is executed on the same node where `baz` was running. If `baz` is the first called function, then it's `INIT_PEER_ID`.
-* `bar(2)` is executed on `"peer baz"`, despite the fact that foo does topological transition. `bar(2)` is in the scope of `on "peer baz"`, so it will be executed there
-* `bar(3)` is executed where `bar(1)` was: in the root scope of `baz`, wherever it was called from
+* `bar(2)` is executed on `"peer baz"`, despite the fact that foo does topological transition. `bar(2)` is in the scope of `on "peer baz"`, so it will be executed there.
+* `bar(3)` is executed where `bar(1)` was: in the root scope of `baz`, wherever it was called from.
 
 ## Accessing peers `via` other peers
 

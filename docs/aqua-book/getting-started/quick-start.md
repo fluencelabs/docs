@@ -3,46 +3,85 @@ import TabItem from "@theme/TabItem";
 
 # Quick Start
 
-Every Fluence reference node comes with a set of builtin services that are accessible to Aqua programs. Let's use those readily available services to get the timestamp of a few of our peer-to-peer neighborhood nodes with Aqua.
+Every Fluence reference node comes with a set of builtin services that are accessible to Aqua programs. 
+Let's use those readily available services to get the timestamp of a few of our peer-to-peer neighborhood nodes with Aqua.
 
 ```aqua
 -- timestamp_getter.aqua
--- bring the builtin services into scope
 import "@fluencelabs/aqua-lib/builtin.aqua"
 
--- create an identity service to join our results
-service Op2("op"):
-    identity(s: u64)
-    array(a: string, b: u64) -> string
-
--- function to get ten timestamps from our Kademlia
--- neighborhood peers and return as an array of u64 timestamps
--- the function argument node is our peer id
-func ts_getter(node: string) -> []u64:
-  -- create a streaming variable
+func ts_getter(node: string, num_peers: u32) -> []u64:
   res: *u64
-  -- execute on the specified peer
+
   on node:
-    -- get the base58 representation of the peer id
-    k <- Op.string_to_b58(node)
-    -- find all (default 20) neighborhood peers from k
-    nodes <- Kademlia.neighborhood(k, nil, nil)
-    -- for each peer in our neighborhood and in parallel
+    key <- Op.string_to_b58(node)
+    nodes <- Kademlia.neighborhood(key, nil, [num_peers])
     for n <- nodes par:
       on n:
-        -- try and get the peer's timestamp
         try:
           res <- Peer.timestamp_ms()
-    -- flatten nine of our joined results
-    Op2.identity(res!9)
-  -- return an array of ten timestamps
+          
+    join res[num_peers - 1]
+    
   <- res
 ```
 
-The Aqua script essentially creates a workflow originating from our client peer to enumerate neighbor peers for our reference node, calls on the builtin timestamp service on each peer in parallel, joins the results stream after we collect ten timestamps and return our u64 array of timestamps back to the client peer.
+Let's explain this script line by line. First of all, it brings builtin services (see [aqua-lib](../libraries/aqua-lib.md)) in scope by import:
 
-See the [ts-oracle example](https://github.com/fluencelabs/examples/tree/d52f06dfc3d30799fe6bd8e3e602c8ea1d1b8e8a/aqua-examples/ts-oracle) for the corresponding Aqua files in the `aqua-script` directory. Now that we have our script, 
-let's use [Aqua CLI](../aqua-cli/aqua-cli.md) to run it:
+```aqua
+import "@fluencelabs/aqua-lib/builtin.aqua"
+```
+
+Next it defines a function named `ts_getter` with two parameters: `node` which is peer id and `num_peers` which is how many neighbors to check. 
+That function returns array of obtained timestamps.
+
+```aqua
+func ts_getter(node: string, num_peers: u32) -> []u64:
+```
+
+On the first line it creates stream variable (see [CRDT Streams](../language/crdt-streams.md)) `res`:
+
+```aqua
+res: *u64
+```
+
+Then execution is transfered on peer with id that was passed in `node` (see [`on` expression](../language/topology.md#on-expression)):
+
+```aqua
+on node:
+```
+
+On `node` it obtains no more than `num_peers` neigbour nodes using buitin services:
+
+```aqua
+key <- Op.string_to_b58(node)
+nodes <- Kademlia.neighborhood(key, nil, [num_peers])
+```
+
+After that for each of the obtained nodes in parallel (see [Parallel `for`](../language/flow/iterative.md#parallel-for)) it tries (see [try](../language/flow/conditional#try)) to push local timestamp to `res`:
+
+```aqua
+for n <- nodes par:
+  on n:
+    try:
+      res <- Peer.timestamp_ms()
+```
+
+Back on `node` element `res[num_peers - 1]` is joined (see [`join` expression](../language/flow/parallel.md#explicit-join-expression)) thus making all results available:
+
+```aqua
+join res[num_peers - 1]
+```
+
+Finally, stream is converted to scalar (see [Streams Lifecycle](../language/crdt-streams.md#streams-lifecycle-and-guarantees)) and returned:
+
+```aqua
+<- res
+```
+
+See the [ts-oracle example](https://github.com/fluencelabs/examples/tree/d52f06dfc3d30799fe6bd8e3e602c8ea1d1b8e8a/aqua-examples/ts-oracle) for the corresponding Aqua files in the `aqua-script` directory. 
+
+Now that we have our script, let's use [Aqua CLI](../aqua-cli/aqua-cli.md) to run it:
 
 <Tabs>
 <TabItem value="Run" label="Run" default>
@@ -52,7 +91,7 @@ let's use [Aqua CLI](../aqua-cli/aqua-cli.md) to run it:
 aqua run \
     -a /dns4/kras-02.fluence.dev/tcp/19001/wss/p2p/12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf \
     -i aqua-scripts/timestamp_getter.aqua \
-    -f 'ts_getter("12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf")'
+    -f 'ts_getter("12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf", 10)'
 ```
 
 </TabItem>
@@ -79,4 +118,6 @@ Here we go. Ten timestamps in micro seconds obtained in parallel:
 </TabItem>
 </Tabs>
 
-And that's it. We now have ten timestamps right from our selected peer's neighbors.
+And that's it. We now have ten timestamps right from our selected peer's neighbors. 
+
+Note that if you try to request too many peers, execution could halt. 

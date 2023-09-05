@@ -41,11 +41,31 @@
 }
 
 .shiki {
+  visibility: hidden;
+
   [data-theme="light"] &.min-dark {
     display: none;
   }
   
   [data-theme="dark"] &.min-light {
     display: none;
+  }
+
+  &.visible {
+    visibility: visible;
+  }
+  
+  .mermaid + & {
+    display: none;
+  }
+}
+
+.mermaid {
+  [data-theme="light"] & {
+    filter: hue-rotate(100deg) saturate(5) contrast(1.1);
+  }
+
+  [data-theme="dark"] & {
+    filter: invert(1) brightness(5) hue-rotate(276deg);
   }
 }

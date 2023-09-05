@@ -3,14 +3,14 @@ import TabItem from "@theme/TabItem";
 
 # Import functions
 
-The `[marine]` macro can also wrap a Rust [extern block](https://doc.rust-lang.org/std/keyword.extern.html). In this case, all functions declared in it are considered imported functions. If there are imported functions in some module, say, module A, then
+The `#[marine]` macro can also wrap a Rust [extern block](https://doc.rust-lang.org/std/keyword.extern.html). In this case, all functions declared in it are considered imported functions. If there are imported functions in some module, say, module A, then
 
 * There should be another module, module B, that exports the same functions. The name of module B is indicated in the `link` macro (see examples below)
 * Module B should be loaded into `Marine` by the moment the loading of module A starts. Module A cannot be loaded if at least one imported function is absent in `Marine`.
 
 ## **Function import requirements**
 
-* wrap an extern block with the function(s) to be imported with the `[marine]` macro
+* wrap an extern block with the function(s) to be imported with the `#[marine]` macro
 * all function(s) arguments must be of the mtype type
 * the return type of the function(s) must be mtype
 

@@ -32,28 +32,24 @@ fn load_module(
 Loads a new module with the provided config inside Marine. All modules should have unique names. This config allows you to flexible adjusting of the behavior of the loaded module, it has the following structure:
 
 ```rust
-struct MModuleConfig {
-    /// Maximum number of Wasm memory pages that loaded module can use.
-    /// Each Wasm page is 65536 bytes long.
-    pub max_heap_pages_count: u32,
+pub struct MarineModuleConfig<WB: WasmBackend> {
+    /// Maximum memory size accessible by a module in Wasm pages (64 Kb).
+    pub mem_pages_count: Option<u32>,
 
-    /// Import object that will be used in the module instantiation process.
-    pub raw_imports: ImportObject,
+    /// Maximum memory size for heap of Wasm module in bytes, if it set, mem_pages_count ignored.
+    pub max_heap_size: Option<u64>,
 
-    /// Imports from the host side that will be used in the module instantiation process.
-    pub host_imports: HashMap<String, HostImportDescriptor>,
+    /// Defines whether Marine should provide a special host log_utf8_string function for this module.
+    pub logger_enabled: bool,
 
-    /// Desired WASI version.
-    pub wasi_version: WasiVersion,
+    /// Export from host functions that will be accessible on the Wasm side by provided name.
+    pub host_imports: HashMap<String, HostImportDescriptor<WB>>,
 
-    /// Environment variables for loaded modules.
-    pub wasi_envs: HashMap<Vec<u8>, Vec<u8>>,
+    /// A WASI config.
+    pub wasi: Option<MarineWASIConfig>,
 
-    /// List of available directories for loaded modules.
-    pub wasi_preopened_files: HashSet<PathBuf>,
-
-    /// Mapping between paths.
-    pub wasi_mapped_dirs: HashMap<String, PathBuf>,
+    /// Mask used to filter logs, for details see `log_utf8_string`
+    pub logging_mask: i32,
 }
 ```
 
@@ -68,10 +64,10 @@ Unloads a module from Marine by name. Use it carefully. It could crash service a
 ## Getting a WASI state
 
 ```rust
-fn module_wasi_state(
-        &mut self,
+fn module_wasi_state<'s>(
+        &'s mut self,
         module_name: impl AsRef<str>,
-    ) -> Option<&wasmer_wasi::state::WasiState>
+    ) -> Option<Box<dyn WasiState + 's>>
 ```
 
 Returns a WASI state of a module.
@@ -138,7 +134,7 @@ struct MemoryStats<'module_name>(pub Vec<ModuleMemoryStat<'module_name>>);
 
 /// Contains module name and a size of its linear memory in bytes.
 /// Please note that linear memory contains not only heap, but globals, shadow stack and so on.
-/// Although it doesn't contain operand stack, additional runtime (Wasmer) structures,
+/// Although it doesn't contain operand stack, additional runtime (Wasmtime) structures,
 /// and some other stuff, that should be count separately.
 struct ModuleMemoryStat<'module_name> {
     pub name: &'module_name str,

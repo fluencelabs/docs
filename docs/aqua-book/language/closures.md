@@ -43,10 +43,10 @@ func foo():
     Hello "hello"
     
     -- This closure will execute on HOST_PEER_ID
-    closure = () -> ():
+    closure = ():
       Hello.say_hello() 
       
-    fn = func () -> ():
+    fn = func ():
       Hello.say_hello()
       
   -- Will go to HOST_PEER_ID, where Hello service is resolved, and call say_hello     

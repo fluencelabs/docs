@@ -2,7 +2,10 @@
 
 Aqua is a language for distributed workflow coordination in p2p networks.
 
-It's structured with significant indentation.
+It's structured with significant indentation:
+- Tabs and spaces are allowed simultaneously
+- Indentation of a parent block should be a strict prefix of indentation of a child block
+- First line in a block defines indentation and all consequent lines should have the same indentation
 
 ```aqua
 -- Comments begin with double-dash and end with the line (inline)
@@ -40,7 +43,8 @@ Execution:
 
 Computations:
 
-* [Abilities & Services](abilities-and-services.md)
+* [Services](services.md)
+* [Abilities](abilities.md)
 
 Advanced parallelism:
 

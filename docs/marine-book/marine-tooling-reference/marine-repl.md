@@ -151,12 +151,19 @@ elapsed time: 421.775µs
 
 ### call: call a function
 
-Allows you to call the specified module. Please note that from Aqua only the `facade` module could be called. To provide several arguments to a function make them separated by a space in square brackets
+Allows you to call the specified module's function. Please note that from Aqua only the `facade` module could be called. To provide several arguments to the function, pass them as a JSON array.
 
 ```
 1> call greeting greeting "Fluence"
 result: String("Hi, Fluence")
  elapsed time: 160.923µs
+```
+
+As an unrelated example, here is how the AquaVM invocation might look like:
+```
+2> call avm invoke ["(null)", [], [], {"init_peer_id": "init", "current_peer_id": "some", "timestamp": 1500000000000, "ttl": 120000}, [123, 125]]
+result: ...
+ elapsed time: 45.712375ms
 ```
 
 ### interface: show interfaces

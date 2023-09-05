@@ -1,10 +1,12 @@
-# Aqua CLI
+# Aqua CLI (DEPRECATED)
+
+# NOTE: Use [Fluence CLI](../../build/get-started.md) for Aqua compilation and network management 
 
 Aqua CLI allows you to manage all aspects of [Aqua](../introduction.md) development and includes:
 
-* Compiler
-* Client Peer
-* Utilities
+- Compiler
+- Client Peer
+- Utilities
 
 To install the Aqua CLI package:
 
@@ -28,13 +30,13 @@ Of course, we can be more specific and name a filename:
 aqua --input src/aqua/some_file.aqua --output src/generated
 ```
 
-As mentioned in the intro, the Aqua compiler generates `.js` with `.d.ts` TypeScript files by default. Output files will contain functions exported from `.aqua` files and methods for registering defined services. You can read more about calling functions and service registration in the [FluenceJS documentation](../../build/fluence-js/in-depth.md).
+As mentioned in the intro, the Aqua compiler generates `.js` with `.d.ts` TypeScript files by default. Output files will contain functions exported from `.aqua` files and methods for registering defined services. You can read more about calling functions and service registration in the [Fluence JS Client documentation](../../build/js-client/1-js-client.md).
 
 Additional compiler options are:
 
-* `--js` flag, which generates only `.js` files
-* `--air` or `-a` flag, which generates pure AIR code
-* `--scheduled`, which generates AIR code suitable for script storage
+- `--js` flag, which generates only `.js` files
+- `--air` or `-a` flag, which generates pure AIR code
+- `--scheduled`, which generates AIR code suitable for script storage
 
 Use `aqua --help` for a complete listing of available flags, subcommands and explanations.
 
@@ -56,12 +58,12 @@ For the following Aqua script:
 -- some-dir/hello.aqua
 service Hello("service_id"):
     hello(name:string) -> string
-    
+
 func hello(name: string, node:string, sid: string) -> string:
     on node:
         Hello sid
         res <- Hello.hello(name)
-    <- res    
+    <- res
 ```
 
 We instantiate our aqua client peer:
@@ -72,18 +74,19 @@ aqua run --addr /dns4/.../wss/p2p/12D3 ...aoHI --input some-dir/hello.aqua --fun
 
 The `aqua run` command provides additional features such as:
 
-* `--sk` or `-s`  allows you to provide your secret key (sk) in base64
-* `--addr` or `-a`  allows you to specify a relay in [_multiaddr_](https://github.com/multiformats/multiaddr) format, e.g., `/dns4/kras-04.fluence.dev/tcp/19001/wss/p2p/12D3KooWFEwNWcHqi9rtsmDhsYcDbRUCDXH84RC4FW6UfsFWaoHi` . The `aqua config default_peers <krasnodar, testnet, stage>` command enumerates you the respective network multiaddresses of available Fluence nodes.
+- `--sk` or `-s` allows you to provide your secret key (sk) in base64
+- `--addr` or `-a` allows you to specify a relay in [_multiaddr_](https://github.com/multiformats/multiaddr) format, e.g., `/dns4/kras-04.fluence.dev/tcp/19001/wss/p2p/12D3KooWFEwNWcHqi9rtsmDhsYcDbRUCDXH84RC4FW6UfsFWaoHi` . The `aqua config default_peers <krasnodar, testnet, stage>` command enumerates you the respective network multiaddresses of available Fluence nodes.
 
 `--import` or `-m` allows you to [import functionality](../language/expressions/header.md) from one or more source folders by using the flag repeatedly
 
-*   `--data` or `-d` allows you to specify data arguments as a json map:
+- `--data` or `-d` allows you to specify data arguments as a json map:
 
-    ```sh
-    aqua run --addr /dns4/.../wss/p2p/12D3 ... oHI --input my_code.aqua --func 'my_aqua_func(a, b)' --data '{"a": "some_string", "b": 123}'
-    ```
-* `--data-path` or `p` allows you to specify data arguments, see `--data`, as a file. _Note that `--data` and `--data-path` are mutually exclusive._
-* `--json-service` or `-j` allows you to describe a service that will return a JSON. This service must be described in Aqua. There can be multiple functions strictly without any arguments. Also, you can use this flag multiple times targeting multiple services in different files. There is an example of a service description in Aqua and JSON:
+  ```sh
+  aqua run --addr /dns4/.../wss/p2p/12D3 ... oHI --input my_code.aqua --func 'my_aqua_func(a, b)' --data '{"a": "some_string", "b": 123}'
+  ```
+
+- `--data-path` or `p` allows you to specify data arguments, see `--data`, as a file. _Note that `--data` and `--data-path` are mutually exclusive._
+- `--json-service` or `-j` allows you to describe a service that will return a JSON. This service must be described in Aqua. There can be multiple functions strictly without any arguments. Also, you can use this flag multiple times targeting multiple services in different files. There is an example of a service description in Aqua and JSON:
 
 ```aqua
 -- aqua file
@@ -99,13 +102,15 @@ service ServiceName("some id"):
 {
   "name": "ServiceName",
   "serviceId": "some id",
-  "functions": [{
-    "name": "funcName",
-    "result": {
-      "field1": "result 1",
-      "num2": 5
+  "functions": [
+    {
+      "name": "funcName",
+      "result": {
+        "field1": "result 1",
+        "num2": 5
+      }
     }
-  }]
+  ]
 }
 ```
 
@@ -123,9 +128,9 @@ And produces the following json document:
 
 ```json
 {
-    "peerId": "12D3KooWMC6picJQNruwFMFWqP62FWLtbM94TGYEzCsthsKa46CQ",
-    "secretKey": "QG3Ot2i1kD4Mpw0RpsKtUjbA/0XjZ0WP7dajDBwLQi0=",
-    "publicKey": "CAESIKkB+6eYhFDsEZhn0u+xwIKVhE+1xvgJoV5/csc+CS6R"
+  "peerId": "12D3KooWMC6picJQNruwFMFWqP62FWLtbM94TGYEzCsthsKa46CQ",
+  "secretKey": "QG3Ot2i1kD4Mpw0RpsKtUjbA/0XjZ0WP7dajDBwLQi0=",
+  "publicKey": "CAESIKkB+6eYhFDsEZhn0u+xwIKVhE+1xvgJoV5/csc+CS6R"
 }
 ```
 
@@ -149,8 +154,6 @@ Subcommands:
         Remove service
     ...
 ```
-
-
 
 See the [service management](service-management.md) section for details and examples.
 

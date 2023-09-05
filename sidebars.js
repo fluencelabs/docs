@@ -4,68 +4,45 @@
 const sidebars = {
   build: [
     "build/introduction",
-    "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
+    "build/get-started",
+    {
+      type: "category",
+      label: "Quickstart",
+      items: [
+        "build/quickstarts",
+        "build/fundamentals",
+        "build/develop-services",
+        // "build/develop-distributed-algos"
+      ],
+    },
+    {
+      type: "category",
+      label: "Working with data",
+      link: { id: "build/working-with-data", type: "doc" },
+      items: [
+        "build/local-data-storage",
+        // "build/remote-data-storage",
+        // "build/data-acquisition"
+      ],
+    },
+    {
+      type: "category",
+      label: "Fluence JS Client",
+      link: { id: "build/js-client/js-client", type: "doc" },
+      items: [
+        "build/js-client/js-client",
+        "build/js-client/installation",
+        "build/js-client/hello-world",
+        "build/js-client/advanced-ipfs",
+        "build/js-client/changelog",
+      ],
+    },
+    // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
-    "build/fluence-cli",
-    {
-      type: "category",
-      label: "Quick Start",
-      link: { id: "build/quick-start/quick-start", type: "doc" },
-      items: [
-        "build/quick-start/browser-to-browser/browser-to-browser",
-        "build/quick-start/hosted-services/hosted-services",
-        "build/quick-start/browser-to-service/browser-to-service",
-        "build/quick-start/service-composition-and-reuse/service-composition-and-reuse",
-        "build/quick-start/decentralized-oracles/decentralized-oracles",
-      ],
-    },
-    {
-      type: "category",
-      label: "Aquamarine",
-      link: { id: "build/aquamarine/aquamarine", type: "doc" },
-      items: [
-        "build/aquamarine/aqua",
-        {
-          type: "category",
-          label: "Marine",
-          link: { id: "build/aquamarine/marine/marine", type: "doc" },
-          items: [
-            "build/aquamarine/marine/marine-cli",
-            "build/aquamarine/marine/marine-repl",
-            "build/aquamarine/marine/marine-rs-sdk",
-          ],
-        },
-      ],
-    },
-    "build/tools",
-    "build/node",
-    {
-      type: "category",
-      label: "Fluence JS",
-      link: { id: "build/fluence-js/fluence-js", type: "doc" },
-      items: [
-        "build/fluence-js/concepts",
-        "build/fluence-js/basics",
-        "build/fluence-js/run-in-node",
-        "build/fluence-js/run-in-browser",
-        "build/fluence-js/in-depth",
-        "build/fluence-js/api-reference",
-        "build/fluence-js/changelog",
-      ],
-    },
     "build/security",
-    {
-      type: "category",
-      label: "Tutorials",
-      link: { type: "generated-index" },
-      items: [
-        "build/tutorials/setting-up-your-environment",
-        "build/tutorials/deploy-a-local-fluence-node",
-        "build/tutorials/curl-as-a-service",
-        "build/tutorials/add-your-own-builtins",
-      ],
-    },
-    "build/research-papers-and-references",
+    "build/limits",
+    "build/glossary",
+    "build/reference",
   ],
   learn: [
     "learn/overview",
@@ -106,7 +83,6 @@ const sidebars = {
             "aqua-book/language/flow/iterative",
           ],
         },
-        "aqua-book/language/abilities-and-services",
         "aqua-book/language/crdt-streams",
         "aqua-book/language/closures",
         {
@@ -126,10 +102,11 @@ const sidebars = {
             "aqua-book/language/expressions/header",
             "aqua-book/language/expressions/functions",
             "aqua-book/language/expressions/services",
-            "aqua-book/language/expressions/type-definitions",
             "aqua-book/language/expressions/overridable-constants",
           ],
         },
+        "aqua-book/language/services",
+        "aqua-book/language/abilities",
       ],
     },
     {
