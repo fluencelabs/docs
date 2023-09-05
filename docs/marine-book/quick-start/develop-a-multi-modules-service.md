@@ -19,18 +19,18 @@ First, create an empty directory with the `url-downloader` name (further, we wil
 mkdir url-downloader & cd url-downloader
 
 # create three new Rust projects for modules
-cargo new curl --bin
+cargo new curl-adapter --bin
 cargo new local-storage --bin
 cargo new facade --bin
 ```
 
-Then add `marine-rs-sdk` to the `dependencies` section of each `Cargo.toml` file.
+Then add `marine-rs-sdk = 0.7.1` to the `dependencies` section of each `Cargo.toml` file.
 
 ### Curl module
 
 The main purpose of this module is to simply provide a wrapper for the `curl` CLI tool. This is done by importing the `curl` function from the host (in the same way as described in [mounted binaries](../marine-runtime/mounted-binaries.md) section and exporting the function called `get`.
 
-Open the `curl/src/main.rs` file in an editor and paste the code of the `curl` module there:
+Open the `curl-adapter/src/main.rs` file in an editor and paste the code of the `curl` module there:
 
 ```rust
 use marine_rs_sdk::marine;

@@ -7,7 +7,7 @@ The [Marine CLI](https://github.com/fluencelabs/marine/tree/master/tools/cli) pr
 Install `marine` with:
 
 ```sh
-cargo install marine
+cargo +nightly install marine
 ```
 
 ## List of commands
@@ -17,7 +17,7 @@ The CLI functionality is available with:
 ```sh
 marine --help
 
-Fluence Marine command line tool 0.11.0
+Fluence Marine command line tool 0.12.7
 Fluence Labs
 
 USAGE:
