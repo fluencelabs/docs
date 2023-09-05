@@ -412,7 +412,7 @@ func getInfosInParallel(peers: []PeerId) -> []Info:
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
-**Scaffolding Options
+**Scaffolding Options**
 
 Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s). Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
 
