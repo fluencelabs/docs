@@ -7,11 +7,11 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-### [0.12.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.1)
+### [0.12.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.1) - September 11, 2023
 * **compiler:** Error on not arrow call after `<-` ([#876](https://github.com/fluencelabs/aqua/issues/876))
 * **compiler:** Fix closure stream capture ([LNG-58](https://linear.app/fluence/issue/LNG-58)) ([#857](https://github.com/fluencelabs/aqua/issues/857))
 
-### [0.12.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.0)
+### [0.12.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.0) - August 25, 2023
 * **js-client:** Move to new js-client interface ([#855](https://github.com/fluencelabs/aqua/issues/855))
 * **compiler:** Restrict abilities usage ([LNG-208](https://linear.app/fluence/issue/LNG-208)) ([#854](https://github.com/fluencelabs/aqua/issues/854))
 * **compiler:** Fix nested abilities ([LNG-220](https://linear.app/fluence/issue/LNG-220)) ([#852](https://github.com/fluencelabs/aqua/issues/852))
