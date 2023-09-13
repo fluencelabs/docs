@@ -6,17 +6,17 @@ Fluence is a peer-to-peer application platform which allows the creation of appl
 
 The Fluence platform allows developers to create distributed services from Wasm Interface Type (IT) modules which can be deployed to one or more peers and composed into protocols and applications with Fluence's [Aqua](../aqua-book/introduction.md) language.
 
-We've chosen Wasm in the Fluence Labs as the main building mechanism for services because of:
+We've chosen Wasm as the main building mechanism for services because of:
 
-- flexible resources control
+- flexible resource control
 - sandboxed modules by design
 - heterogeneous runtime with support of any language compiled to wasm
 - simple, but featureful composition between modules
-- life-cycles of modules are independent on each other
+- life-cycles of modules are independent of each other
 
 The Marine ecosystem provides developers with the necessary Wasm development, testing, and runtime tools.
 
-Overview of using Wasm at Fluence:
+## Overview of using Wasm at Fluence
 
 <ReactPlayer controls url="https://www.youtube.com/watch?t=1s&v=ObHRZ6MxUDA" width="100%" />
 <br />
