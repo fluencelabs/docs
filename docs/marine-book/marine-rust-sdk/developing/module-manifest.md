@@ -22,7 +22,7 @@ fn greeting(name: &str) {...}
 Using the Marine CLI, we can inspect a module's manifest with `marine info`:
 
 ```sh
-marine info -i artifacts/greeting.wasm
+marine info artifacts/greeting.wasm
 ```
 ```
 it version:  0.23.0

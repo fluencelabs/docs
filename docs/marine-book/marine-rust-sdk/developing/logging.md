@@ -9,7 +9,7 @@ The `logger` feature allows you to use a special logger that is based at the top
 ```toml
 [dependencies]
 log = "0.4.14"
-marine-rs-sdk = { version = "0.6.15", features = ["logger"] }
+marine-rs-sdk = { version = "0.7.1", features = ["logger"] }
 ```
 
 The logger should be initialized before its usage. This can be done in the `main` function as shown in the example below:
@@ -28,7 +28,7 @@ pub fn main() {
 }
 
 #[marine]
-pub fn put(name: String, file_content: Vec<u8>) -> String {
+pub fn put(file_name: String, _file_content: Vec<u8>) -> String {
     log::info!("put called with file name {}", file_name);
     unimplemented!()
 }
@@ -44,7 +44,9 @@ To play with this logging stuff in REPL you need to
 In addition to the standard log creation features, the Fluence logger allows the so-called target map to be configured during the initialization step. This allows you to filter out logs by `logging_mask`, which can be set for each module in the service configuration. Let's consider an example:
 
 ```rust
-const TARGET_MAP: [(&str, i64); 4] = [
+use marine_rs_sdk::marine;
+
+const TARGET_MAP: [(&str, i32); 4] = [
     ("instruction", 1 << 1),
     ("data_cache", 1 << 2),
     ("next_peer_pks", 1 << 3),
@@ -53,7 +55,6 @@ const TARGET_MAP: [(&str, i64); 4] = [
 
 pub fn main() {
   use std::collections::HashMap;
-  use std::iter::FromIterator;
   
   let target_map = HashMap::from_iter(TARGET_MAP.iter().cloned());
     
