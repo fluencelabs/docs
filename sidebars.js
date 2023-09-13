@@ -134,15 +134,11 @@ const sidebars = {
     "aqua-book/changelog",
   ],
   "marine-book": [
-    {
-      type: "html",
-      value: `<img src="/img/marine.jpg" alt="Marine logo" style="padding: 11px;" />`,
-    },
     "marine-book/introduction",
     "marine-book/basic-concepts/basic-concepts",
     {
       type: "category",
-      label: "🚴 Quick Start",
+      label: "Quick Start",
       link: { id: "marine-book/quick-start/quick-start", type: "doc" },
       items: [
         "marine-book/quick-start/setting-up-the-development-environment",
