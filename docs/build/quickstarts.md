@@ -6,7 +6,7 @@ Fluence's mode of a decentralized cloud allows to deploy WebAssembly functions a
 
 Deal represents a request from Developer to host a set of WebAssembly functions for a specified price. Providers are able to join these deals in order to host functions and receive tokens for that.
 
-In essense, Deal specifies what to deploy, and how much to pay for that.
+In essence, Deal specifies what to deploy, and how much to pay for that.
 
 Among parameters described above, each Deal specifies an `AppCID`. `AppCID` is an IPFS CID that points to the `Worker Definition` data structure stored on IPFS.
 
