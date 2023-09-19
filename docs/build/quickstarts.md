@@ -47,7 +47,7 @@ You can read a more detailed description of Matching process [HERE](https://www.
 
 When Deal is matched against Market Offers, it gets deployed to a number of Compute Peers.
 
-For every deal, a Compute Peer creates a secure samespace to isolate functions of that Deal from other Deals. That secure namespace is called a Worker. After succesful deployment, a Worker holds all Services and Spells.
+For every deal, a Compute Peer creates a secure namespace to isolate functions of that Deal from other Deals. That secure namespace is called a Worker. After successful deployment, a Worker holds all Services and Spells.
 
 Since Workers are isolated from each other, Service and Spells names and aliases will never have a collision with Services and Spells in other Workers.
 
