@@ -145,7 +145,7 @@ created deals:
     timestamp: 2023-08-31T18:07:01.122Z
 ```
 
-That means your Deal was deployed succesfully. After a short while, Providers will catch up and deploy it.
+That means your Deal was deployed successfully. After a short while, Providers will catch up and deploy it.
 
 ### Call a function over the subnet
 
