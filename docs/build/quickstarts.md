@@ -21,7 +21,7 @@ A set of functions defined by a single Rust project or a set of linked WebAssemb
 
 A timer-based recurrent Aqua scripts are called Spells. It's like a cron, but for distributed choreography. You can read more about spells [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
-Developers can group Services and Spells to Deals, and then deploy each deal via `fluence deal deploy` command in `fluence cli`. Before Deal is registered on Chain, its settings and artifacts are uploaded to IPFS to produce `Worker Definition`, which is again stored on IPFS to produce `AppCID`.
+Developers can group Services and Spells to Deals, and then deploy each deal via [`fluence deal deploy`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-deal-deploy-worker-names) command in `fluence cli`. Before Deal is registered on Chain, its settings and artifacts are uploaded to IPFS to produce `Worker Definition`, which is again stored on IPFS to produce `AppCID`.
 
 ### How deals are matched
 
