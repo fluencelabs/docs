@@ -15,7 +15,7 @@ Among parameters described above, each Deal specifies an `AppCID`. `AppCID` is a
 
 As we will see in [`step-by-step`](#deployment-step-by-step) section below, there's a certain structure to the Fluence Projects. That structure is defined by [`fluence`](https://github.com/fluencelabs/cli) cli tool, which provides means to initialize and maintain Fluence Projects.
 
-Fluence Project can hold any number of Rust and WebAssembly -based functions and timer-based recurrent Aqua scripts.
+Fluence Project can hold any number of Rust and WebAssembly -based functions and timer-based recurrent [Aqua](https://github.com/fluencelabs/aqua) scripts.
 
 A set of functions defined by a single Rust project or a set of linked WebAssembly modules is called a `service`. You can read more about services [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
