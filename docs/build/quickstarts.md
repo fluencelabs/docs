@@ -13,7 +13,7 @@ Among parameters described above, each Deal specifies an `AppCID`. `AppCID` is a
 
 ### Where `Worker Definition` comes from
 
-As we will see in `step-by-step` section below, there's a certain structure to the Fluence Projects. That structure is defined by `fluence cli`, which provides means to initialize and maintain Fluence Projects.
+As we will see in [`step-by-step`](#deployment-step-by-step) section below, there's a certain structure to the Fluence Projects. That structure is defined by [`fluence`](https://github.com/fluencelabs/cli) cli tool, which provides means to initialize and maintain Fluence Projects.
 
 Fluence Project can hold any number of Rust and WebAssembly -based functions and timer-based recurrent Aqua scripts.
 
