@@ -66,6 +66,8 @@ So, Subnet unites several Compute Peers of several Providers. A single Subnet co
 Information about Subnet participants is stored on Chain. So it's a public information that's easy to retrieve from Chain knowing a Deal ID. Clients use that information to resolve Subnets to a list of Workers, and access Services and Spells inside these Workers.
 
 ## Deployment step-by-step
+
+
 ### Gathering tokens
 
 - Add Mumbai to Metamask
