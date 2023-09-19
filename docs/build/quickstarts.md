@@ -43,6 +43,12 @@ After match happened, Providers receive an event from Chain that commands them t
 
 You can read a more detailed description of Matching process [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
+## What are Compute Peers
+
+Compute Peers are the Nox instances run by a Provider.
+
+While Provider is a rather ephemeral entity, defined only by its Wallet keys, the Compute Peers are the actual instances of Nox that host Deals.
+
 ## What are workers
 
 When Deal is matched against Market Offers, it gets deployed to a number of Compute Peers.
