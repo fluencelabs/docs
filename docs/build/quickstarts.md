@@ -165,6 +165,7 @@ fluence run -f 'runDeployedServices()'
 You will see a list of Answers printed. Some of them may contain no answer, and `worker_id` will be null. That means that this specific Compute Peer has not deployed the Deal yet. Try again in a while, and it should appear.
 
 ### Inspect deployed deal
+
 ```bash
 fluence run -f 'showSubnet()'`
 ```
