@@ -97,7 +97,7 @@ The project is ready to be deployed right away. However, you may take your time 
 
 You can see that this config defines a single service named `myService`, a worker named `defaultWorker` that holds that single service, and finally a deal called `defaultWorker` that specifies that it needs from 1 to 3 Compute Peers to be hosted.
 
-```yml
+```yaml
 services:
   myService:
     get: src/services/myService
