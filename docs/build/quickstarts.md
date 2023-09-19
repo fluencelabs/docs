@@ -39,7 +39,7 @@ Providers register their Market Offers on chain in a contract called `Matcher`, 
 
 Each match should find at least `target number of workers` Providers whose offers are compatible with a given Deal.
 
-After match happened, Providers recieve an event from Chain that commands them to deploy Deal to their chosen Compute Peer.
+After match happened, Providers receive an event from Chain that commands them to deploy Deal to their chosen Compute Peer.
 
 You can read a more detailed description of Matching process [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
