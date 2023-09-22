@@ -1,6 +1,8 @@
 # Blockchain-based deployments quickstart
 
-Fluence's mode of a decentralized cloud allows to deploy WebAssembly functions and pay with tokens for their execution. Payments go to Providers, who host these functions.
+Fluence is a decentralized, permissionless peer-to-peer protocol that makes a Decentralized Cloud where developers can deploy their WebAssembly functions and pay with tokens for their execution. Payments go to Providers, who host these functions.
+
+While the execution of business logic is off-chain, the market-making and associated settlement is on-chain. Specifically, a set of smart contracts handles the agreement over things like payment and collateral between a Developer and one or more Providers that would host and execute specified functions.
 
 ## What are deals
 
@@ -45,9 +47,13 @@ You can read a more detailed description of Matching process [HERE](https://www.
 
 ## What are Compute Peers
 
-Compute Peers are the Nox instances run by a Provider.
+In order to actually host Services and Spells from Deals, Provider have to run instances of a Fluence-developer Peer implementations.
+
+At the moment, there are two Peer implementations: [one in JS](https://github.com/fluencelabs/js-client), another in Rust. The latter one is called [Nox](https://github.com/fluencelabs/nox), and it plays the role of a Compute Peer.
 
 While Provider is a rather ephemeral entity, defined only by its Wallet keys, the Compute Peers are the actual instances of Nox that host Deals.
+
+Compute peer host Services and Spells from assigned Deals. Services and Spells of the same Deal are grouped into a Worker, thus completely separating business logic of different Deals, allowing them to safely co-exist on a single Compute Peer.
 
 ## What are workers
 
@@ -63,11 +69,11 @@ For purposes of this document, it's enough to know that a Worker is what holds a
 
 ## What are subnets
 
-Subnet is a set of Workers each holding the same Deal.
+Subnet is a set of Workers each hosting Services and Spells from the same Deal.
 
 It's important to diversify where Deal is hosted to provide High Availability. So Workers of a single Deal will always be on different Compute Peers, and most likely these Compute Peers will come from different Providers.
 
-So, Subnet unites several Compute Peers of several Providers. A single Subnet corresponds to a single Deal, so each Compute Peer of a Subnet hosts a Worker which contains all the Services and Spells defined by the Deal's `AppCID`.
+So, Subnet unites one or more Compute Peers of one or more Providers. A single Subnet corresponds to a single Deal, so each Compute Peer of a Subnet hosts a Worker which contains all the Services and Spells defined by the Deal's `AppCID`.
 
 Information about Subnet participants is stored on Chain. So it's a public information that's easy to retrieve from Chain knowing a Deal ID. Clients use that information to resolve Subnets to a list of Workers, and access Services and Spells inside these Workers.
 
@@ -169,7 +175,7 @@ To run it, simply run the following command:
 fluence run -f 'runDeployedServices()'
 ```
 
-You will see a list which may not contain any data and the associated `worker_id` is null. That means that this specific Compute Peer has not deployed the Deal ... yet!  Wait a bit, where bit = blocktime + some additional patience stressor, and re-run the command. 
+You will see a list which may not contain any data and the associated `worker_id` is null. That means that this specific Compute Peer has not deployed the Deal ... yet!  Wait a bit, where bit = blocktime + some additional patience stressor, and re-run the command.
 
 ### Inspect a deployed deal
 
