@@ -162,16 +162,16 @@ That means your Deal was deployed successfully. After a short while, Providers w
 
 ### Call a function over the subnet
 
-In your freshly-initialized project, there's a file `src/aqua/main.aqua`. Among others, it contains a function `runDeployedServices` which resolves a Subnet, and calls a function on each of the Workers in the Subnet.
+In your freshly-initialized project, there's a file `src/aqua/main.aqua` which contains the function `runDeployedServices` which resolves a Subnet and calls a function on each of the Workers in the Subnet.
 
 To run it, simply run the following command:
 ```bash
 fluence run -f 'runDeployedServices()'
 ```
 
-You will see a list of Answers printed. Some of them may contain no answer, and `worker_id` will be null. That means that this specific Compute Peer has not deployed the Deal yet. Try again in a while, and it should appear.
+You will see a list which may not contain any data and the associated `worker_id` is null. That means that this specific Compute Peer has not deployed the Deal ... yet!  Wait a bit, where bit = blocktime + some additional patience stressor, and re-run the command. 
 
-### Inspect deployed deal
+### Inspect a deployed deal
 
 ```bash
 fluence run -f 'showSubnet()'
