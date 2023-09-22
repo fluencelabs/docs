@@ -125,8 +125,9 @@ deals:
 
 See `fluence deal deploy --help` for information on more settings to `deal deploy` command.
 
-As deployment happens through blockchain, you will be prompted to open a URL to sign Transaction with your Metamask wallet.
+As deployment happens through blockchain, you will be prompted to open a URL to sign Transaction with your Metamask wallet. You will have to do that twice.
 
+First, you will see this message in your terminal:
 ```
 To approve transactions to your wallet using metamask, open the following url:
 
@@ -135,7 +136,13 @@ https://cli-connector.fluence.dev/?wc=000000000000000000000%402&relay-protocol=i
 
 Open it, and connect Metamask. After a short while, you will see a Metamask prompt to sign Transaction.
 
-TODO: METAMASK_PROMPT_SCREENSHOT.JPG
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask_tx_prompt.png" alt="Confirm TX with MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Confirm TX with MetaMask</p>
+</div>
+
+
+After you have approved the tx, a similar message will appear, and you have to do open second address, and repeat same actions with metamask as before.
 
 After a short while, you will see a message like this one:
 
@@ -167,7 +174,7 @@ You will see a list of Answers printed. Some of them may contain no answer, and 
 ### Inspect deployed deal
 
 ```bash
-fluence run -f 'showSubnet()'`
+fluence run -f 'showSubnet()'
 ```
 
 ```json
