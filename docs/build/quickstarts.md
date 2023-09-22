@@ -81,7 +81,7 @@ Information about Subnet participants is stored on Chain. So it's a public infor
 
 ### Install Fluence CLI
 
-Fluence CLI is published to NPM Registry, so you can use any compatible tool to install it. `npm` and `yarn` are among the most popular onces.
+Fluence CLI is published to NPM Registry, so you can use any compatible tool to install it. `npm` and `yarn` are among the most popular choices.
 
 ```bash
 yarn global add @fluencelabs/cli@unstable
