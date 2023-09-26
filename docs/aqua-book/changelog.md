@@ -7,7 +7,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-### [0.12.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.2) - September 26, 2023
+### [0.12.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.2) - September 26, 2023
 * **compiler:** Add warnings subsystem ([LNG-117](https://linear.app/fluence/issue/LNG-117)) ([#906](https://github.com/fluencelabs/aqua/issues/906))
 * **compiler:** Fail on internal error ([LNG-229](https://linear.app/fluence/issue/LNG-229)) ([#905](https://github.com/fluencelabs/aqua/issues/905))
 * **compiler:** Services as abilities ([LNG-206](https://linear.app/fluence/issue/LNG-206)) ([#873](https://github.com/fluencelabs/aqua/issues/873))
