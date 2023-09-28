@@ -89,12 +89,6 @@ func spell():
 
 Then lets inspect the spell.yaml file:
 ```yaml
-# yaml-language-server: $schema=../../../.fluence/schemas/spell.json
-
-# Defines a spell. You can use `fluence spell new` command to generate a template for new spell
-
-# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/spell.md
-
 version: 0
 
 aquaFilePath: ./spell.aqua
