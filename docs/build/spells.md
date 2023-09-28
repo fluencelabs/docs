@@ -108,9 +108,12 @@ clock:
 
 It contains the definition of the spell, the name of function that is triggered (in case if you don't like the default name), and the cron-ish timer based trigger configuration.
 
-`periodSec` - How often the spell will be executed. If set to 0, the spell will be executed only once. If this value not provided at all - the spell will never be executed.
+- `periodSec` defines how often the spell will be executed. If set to 0, the spell will be executed only once. If this value is not provided, the spell will never be executed.
+- `endDelaySec` defines how long to wait before the last execution in seconds. If this property or `endTimestamp` is not specified, periodic execution will never end.
 
-and `endDelaySec` How long to wait before the last execution in seconds. If this property or endTimestamp not specified, periodic execution will never end. WARNING! Currently your computer's clock is used to determine a final timestamp that is sent to the server. If it is in the past at the moment of spell creation - the spell will never be executed. This property conflicts with endTimestamp. You can specify only one of them.
+:::info
+Your computer's clock is used to determine a final timestamp sent to the server. If it is in the past at the moment of spell creation - the spell will never be executed. This property conflicts with `endTimestamp`. You can specify only one of them.
+:::
 
 More on the spell.yaml contents can be found in:
 Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/spell.md 
