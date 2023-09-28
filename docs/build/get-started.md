@@ -12,7 +12,7 @@ mermaid
 ```mermaid
 
     stateDiagram
-    
+
     [*] --> InitProject: fluence init
     InitProject --> CreateNewService: fluence service new
     InitProject --> AddExistingService: fluence service add
@@ -116,7 +116,7 @@ Ensure you are connecting the right account.
   />
   <p>Figure 5: Connect MetaMask to Aurora Faucet</p>
 </div>
-    
+
 
 #### 3. Request testnet AETH tokens
 
@@ -440,12 +440,12 @@ pub fn hello_world() -> String {       // 4
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), 
+Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md),
 which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk* and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
 
-In (2), we implement a main function which is not marked with the *#[marine]* procedural macro. 
-We discuss modules and module configuration further below. Also note that WASM IT has type limits, 
-which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type). 
+In (2), we implement a main function which is not marked with the *#[marine]* procedural macro.
+We discuss modules and module configuration further below. Also note that WASM IT has type limits,
+which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
 The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
 but you do not have generics, lifetimes, etc.
 
@@ -527,11 +527,11 @@ hello-world
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
 such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify
-the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of 
-the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module), 
+the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of
+the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module),
 module into the service.
 
-Looking at the *main.rs* file, you see that it is populated with a greeting example. 
+Looking at the *main.rs* file, you see that it is populated with a greeting example.
 Replace that code with our code from above so that:
 
 ```bash
@@ -546,7 +546,7 @@ pub fn hello_fluence() -> String {
 }
 ```
 
-With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module. 
+With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
 
 ```rust
@@ -566,10 +566,10 @@ hello_world.wasm
 
 ### Test our code
 
-Before we deploy our code to the network, we may want to run some tests. 
-One way to interact with our Wasm module is to use the 
+Before we deploy our code to the network, we may want to run some tests.
+One way to interact with our Wasm module is to use the
 [Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
-which is a tool to run our Wasm modules locally as if they were deployed to the network. 
+which is a tool to run our Wasm modules locally as if they were deployed to the network.
 Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
 
 ```bash
@@ -614,8 +614,8 @@ hello_world:
   func hello_fluence() -> string
 ```
 
-As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace. 
-In order to run *hello_fluence*  we use the cll command follow by the namespace, 
+As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace.
+In order to run *hello_fluence*  we use the cll command follow by the namespace,
 the function and the function arguments:
 
 ```bash
@@ -626,9 +626,9 @@ result: "Hello, Fluence"
 
 Well done!
 
-An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code. 
-Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/commands/cargo-test.html) widely used 
-to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules. 
+An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code.
+Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/commands/cargo-test.html) widely used
+to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules.
 With the [marine rust test dsk](https://crates.io/crates/marine-rs-sdk-test), you can do that!
 
 Let’s add the testing code for our *hello-world* module in our *main.rs* file:
@@ -652,9 +652,9 @@ mod tests {
 ```
 
 Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
-the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module. 
-In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1). 
-Moreover, we need to provide the paths  to Config.toml and the Wasm module (2). 
+the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module.
+In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
+Moreover, we need to provide the paths  to Config.toml and the Wasm module (2).
 Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
@@ -673,7 +673,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 All is well with our module!
 
-If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());` 
+If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`
 and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
 
 ```bash
@@ -701,14 +701,14 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; 
 error: test failed, to rerun pass `--bin hello_world`
 ```
 
-We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and 
-need to recompile the changed code for the tests to have the most recent module(s). 
+We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and
+need to recompile the changed code for the tests to have the most recent module(s).
 Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
 ### Deploy service
 
-There a basically two types of host for your services: public or private peer. 
-Deploying to the public network requires the deployment of your service(s) to be tightly coupled with 
+There a basically two types of host for your services: public or private peer.
+Deploying to the public network requires the deployment of your service(s) to be tightly coupled with
 the on-chain marketplace.
 
 **Deploying to the public network**
