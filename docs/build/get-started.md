@@ -789,55 +789,7 @@ So, Subnet unites one or more Compute Peers of one or more Providers. A single S
 
 Information about Subnet participants is stored on Chain. So it's a public information that's easy to retrieve from Chain knowing a Deal ID. Clients use that information to resolve Subnets to a list of Workers, and access Services and Spells inside these Workers.
 
-### Deployment step-by-step
-
-
-#### Gathering tokens
-
-- Add Mumbai to Metamask
-- Gather tokens from Faucet
-
-#### Install Fluence CLI
-
-Fluence CLI is published to NPM Registry, so you can use any compatible tool to install it. `npm` and `yarn` are among the most popular choices.
-
-```bash
-yarn global add @fluencelabs/cli@unstable
-```
-
-#### Project init
-
-First things first, we need to initialize a Fluence Project to hold our Services and Spells.
-
-```bash
-fluence init --template quickstart
-```
-
-It will ask you for a path to store project, and then proceed to install different dependencies. It may take some time, and finally you will see
-
-```
-Successfully initialized Fluence CLI project template at /your/path/to/project
-```
-
-The project is ready to be deployed right away. However, you may take your time to look around, poke at `fluence.yml` which holds the principal configuration of your newly created project.
-
-You can see that this config defines a single service named `myService`, a worker named `defaultWorker` that holds that single service, and finally a deal called `defaultWorker` that specifies that it needs from 1 to 3 Compute Peers to be hosted.
-
-```yaml
-services:
-  myService:
-    get: src/services/myService
-workers:
-  defaultWorker:
-    services: [ myService ]
-    spells: []
-deals:
-  defaultWorker:
-    minWorkers: 1
-    targetWorkers: 3
-```
-
-#### Deal deploy
+### Deal deploy
 
 `fluence deal deploy` will deploy all deals defined in `fluence.yml`.
 
@@ -878,7 +830,7 @@ created deals:
 
 That means your Deal was deployed successfully. After a short while, Providers will catch up and deploy it.
 
-#### Call a function over the subnet
+### Call a function over the subnet
 
 In your freshly-initialized project, there's a file `src/aqua/main.aqua` which contains the function `runDeployedServices` which resolves a Subnet and calls a function on each of the Workers in the Subnet.
 
@@ -889,7 +841,7 @@ fluence run -f 'runDeployedServices()'
 
 You will see a list which may not contain any data and the associated `worker_id` is null. That means that this specific Compute Peer has not deployed the Deal ... yet!  Wait a bit, where bit = blocktime + some additional patience stressor, and re-run the command.
 
-#### Inspect a deployed deal
+### Inspect a deployed deal
 
 ```bash
 fluence run -f 'showSubnet()'
@@ -921,7 +873,7 @@ fluence run -f 'showSubnet()'
 ]
 ```
 
-#### Update deal
+### Update deal
 
 Now, if you want to change something in one of your Services or Spells, you can do that, and simply call `deal deploy` again will update existing Deal in place.
 
