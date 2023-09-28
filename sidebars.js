@@ -40,6 +40,7 @@ const sidebars = {
     // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
     "build/concepts/concepts",
     "build/security",
+    "build/spells",
     "build/limits",
     "build/glossary",
     "build/reference",
