@@ -35,13 +35,13 @@ Fluence CLI uses multiple yaml config files and you can find their schemas in th
 npm -g install @fluencelabs/cli@latest
 ```
 
-> 👉 At the time of this writing, you need to set your node version to 16 LTS (16.19.0).
+> 👉 At the time of this writing, you need to set your node version to 18 LTS (v18.18.0).
 
 We can check our installation success (note that your cli and node versions might be different):
 
 ```
-fluence --version
-@fluencelabs/cli/x.y.z darwin-x64 node-v16.19.0
+% fluence --version
+@fluencelabs/cli/x.y.z darwin-arm64 node-v18.18.0
 ```
 
 ## Prepare your Environment
@@ -50,16 +50,16 @@ In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com
 
 Resources:
 
-- [Aurora Chainlist RPC](https://chainlist.org/?testnets=true&search=aurora)
-- [Aurora Faucet](https://aurora.dev/faucet)
-- [Aurora Explorer](https://explorer.aurora.dev/)
+- [Mumbai Chainlist RPC](https://chainlist.org/?testnets=true&search=mumbai)
+- [Mumbai Faucet](https://faucet.polygon.technology)
+- [Mumbai Explorer](https://mumbai.polygonscan.com)
 - Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
 
-### Adding Aurora Testnet to MetaMask
+### Adding Mumbai Testnet to MetaMask
 
 #### 1. Open MetaMask and click on the network menu at the top and select "Add Network".
 
-> The Aurora network that automatically pops up in the list of networks is mainnet; we'll be adding the Aurora testnet.
+> The Mumbai network that automatically pops up in the list of networks is mainnet; we'll be adding the Mumbai testnet.
 
 <div style={{ textAlign: "center" }}>
     <img src="/img/metamask-add-network.png" alt="Add Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
@@ -75,26 +75,26 @@ Resources:
 
 #### 3. Fill in the following information and click "Save"
 
-- **Network Name**: Aurora Testnet
-- **New RPC URL**: https://testnet.aurora.dev/
-- **Chain ID**: 1313161555
-- **Symbol**: AETH
-- **Block Explorer URL**: https://testnet.aurora.dev/
+- **Network Name**: Mumbai Testnet
+- **New RPC URL**: https://polygon-mumbai-bor.publicnode.com
+- **Chain ID**: 80001
+- **Symbol**: MATIC
+- **Block Explorer URL**: https://mumbai.polygonscan.com
 
 <div style={{ textAlign: "center" }}>
   <img
     src="/img/metamask-aurora-chain-info.png"
-    alt="Populate Aurora Testnet Information on MetaMask"
+    alt="Populate Mumbai Testnet Information on MetaMask"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 3: Populate Aurora Testnet Information on MetaMask</p>
+  <p>Figure 3: Populate Mumbai Testnet Information on MetaMask</p>
 </div>
 
-Now that we have enabled the Aurora testnet on our wallet, visit to the Aurora Faucet, located [here](https://aurora.dev/faucet).
+Now that we have enabled the Mumbai testnet on our wallet, visit the [Mumbai Faucet](https://faucet.polygon.technology) to get some tokens.
 
-### Requesting AETH Tokens from Aurora Faucet
+### Requesting MATIC Tokens from Aurora Faucet
 
-#### 1. Head over to the [Aurora Faucet](https://aurora.dev/faucet)
+#### 1. Head over to the [Mumbai Faucet](https://faucet.polygon.technology)
 #### 2. Connect your account to the Faucet using MetaMask
 
 <div style={{ textAlign: "center" }}>
@@ -118,15 +118,15 @@ Ensure you are connecting the right account.
 </div>
 
 
-#### 3. Request testnet AETH tokens
+#### 3. Request testnet MATIC tokens
 
 <div style={{ textAlign: "center" }}>
   <img
     src="/img/aurora-request-eth.png"
-    alt="Request testnet AETH"
+    alt="Request testnet MATIC"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 6: Request testnet AETH</p>
+  <p>Figure 6: Request testnet MATIC</p>
 </div>
 
 #### 4. Wait for a few moments until you see the delivery message
@@ -134,21 +134,21 @@ Ensure you are connecting the right account.
 <div style={{ textAlign: "center" }}>
   <img
     src="/img/aurora-request-success.png"
-    alt="Request testnet AETH"
+    alt="Request testnet MATIC"
     style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
-  <p>Figure 7: Request testnet AETH</p>
+  <p>Figure 7: Request testnet MATIC</p>
 </div>
 
 #### 5. Check your account to confirm that you have received the requested tokens
 
 <div style={{ textAlign: "center" }}>
   <img
-    src="/img/metamask-updated-aeth-balance.png"
-    alt="MetaMask wallet with AETH balance"
+    src="/img/metamask-updated-MATIC-balance.png"
+    alt="MetaMask wallet with MATIC balance"
     style={{ display: "block", margin: "auto", maxWidth: "90%" }}
   />
-  <p>Figure 8: MetaMask wallet with AETH balance</p>
+  <p>Figure 8: MetaMask wallet with MATIC balance</p>
 </div>
 
 Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.dev/).
@@ -251,7 +251,7 @@ The faucet will confirm the transfer with the following information:
   <p>Figure 17: Check tUSDC Account Balance</p>
 </div>
 
-#### 7. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the [explorer](https://explorer.testnet.aurora.dev/)
+#### 7. To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com).
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -313,62 +313,79 @@ A this point, you see various config (yaml) files and a *src/aqua* dir with a *m
 aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
-import "@fluencelabs/registry/subnetwork.aqua"
-import Registry from "@fluencelabs/registry/registry-service.aqua"
-import "@fluencelabs/spell/spell_service.aqua"
+import "@fluencelabs/aqua-lib/subnet.aqua"
 
-import "workers.aqua"
+use "deals.aqua"
+use "hosts.aqua"
 import "services.aqua"
 
--- import App from "deployed.app.aqua"
--- export App, addOne
-
-
-
 -- IMPORTANT: Add exports for all functions that you want to run
-export helloWorld, helloWorldRemote, getInfo, getInfos, getInfosInParallel
+export helloWorld, helloWorldRemote, getInfo, getInfos
 
 -- DOCUMENTATION:
 -- https://fluence.dev
 
 
--- export status
 
--- service Console("run-console"):
-    -- print(any: ⊤)
+-- example of running services deployed using `fluence deal deploy`
+-- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
 
--- -- example of running a service deployed using 'fluence deal deploy'
--- -- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
+export runDeployedServices, showSubnet
 
--- func status():
-    -- workersInfo <- getWorkersInfo()
-    -- dealId = workersInfo.deals.defaultWorker.dealId
-    -- print = (answer: string, peer: string):
-      -- Console.print([answer, peer])
+data Answer:
+    answer: ?string
+    worker: Worker
 
-    -- answers: *string
-    -- on HOST_PEER_ID:
-        -- workers <- resolveSubnetwork(dealId)
-        -- for w <- workers! par:
-            -- on w.metadata.peer_id via w.metadata.relay_id:
-                -- answer <- MyService.greeting("fluence")
-                -- answers <<- answer
-                -- print(answer, w.metadata.peer_id)
+func runDeployedServices() -> []Answer:
+    deals <- Deals.get()
+    dealId = deals.defaultWorker!.dealIdOriginal
+    answers: *Answer
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
 
-    -- Console.print("getting answers...")
-    -- join answers[workers!.length - 1]
-    -- par Peer.timeout(PARTICLE_TTL / 2, "TIMED OUT")
-    -- Console.print("done")
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            answers <<- Answer(answer=nil, worker=w)
+        else:
+            on w.worker_id! via w.host_id:
+                answer <- MyService.greeting("fluence")
+                answers <<- Answer(answer=?[answer], worker=w)
 
+    <- answers
 
+data WorkerServices:
+    host_id: string
+    worker_id: ?string
+    services: ?[]string
 
--- func addOne(x: u64) -> u64:
-    -- services <- App.services()
-    -- on services.adder.default!.peerId:
-        -- Adder services.adder.default!.serviceId
-        -- res <- Adder.add_one(x)
-    -- <- res
+func showSubnet() -> []WorkerServices:
+    deals <- Deals.get()
+    dealId = deals.defaultWorker!.dealIdOriginal
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
 
+    services: *WorkerServices
+    for w <- subnet.workers:
+        if w.worker_id != nil:
+            on w.worker_id! via w.host_id:
+                -- get list of all services on this worker
+                srvs <- Srv.list()
+
+                -- gather aliases
+                aliases: *string
+                for s <- srvs:
+                    if s.aliases.length != 0:
+                        aliases <<- s.aliases[0]
+
+                    services <<- WorkerServices(host_id=w.host_id, worker_id=w.worker_id, services=?[aliases])
+        else:
+            services <<- WorkerServices(host_id=w.host_id, worker_id=nil, services=nil)
+
+    <- services
 
 
 -- local
@@ -395,18 +412,6 @@ func getInfos(peers: []PeerId) -> []Info:
     for p <- peers:
         on p:
             infos <- Peer.identify()
-    <- infos
-
--- parallel computation
-func getInfosInParallel(peers: []PeerId) -> []Info:
-    infos: *Info
-    for p <- peers par:
-        on p:
-            infos <- Peer.identify()
-
-    join infos[Op.array_length(peers) - 1] -- "-1" because it's 0-based
-    par Peer.timeout(PARTICLE_TTL / 2, "")
-
     <- infos
 ```
 
@@ -705,7 +710,7 @@ We added matching *!* to both the test and the code. What gives? Right, we are t
 need to recompile the changed code for the tests to have the most recent module(s).
 Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
-### Deploy service
+## Deployment to the on-chain marketplace
 
 There a basically two types of host for your services: public or private peer.
 Deploying to the public network requires the deployment of your service(s) to be tightly coupled with
@@ -736,11 +741,6 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
 ```
 
-![Login with web3 wallet](../../static/img/metamask-add-network.png)
-
-…
-
-![Connect the wallet with CLI](../../static/img/metamask-add-network.png)
 
 Which, when successful, closes the CLI client.
 
