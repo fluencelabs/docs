@@ -7,6 +7,24 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.12.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.2) - September 26, 2023
+* **compiler:** Add warnings subsystem ([LNG-117](https://linear.app/fluence/issue/LNG-117)) ([#906](https://github.com/fluencelabs/aqua/issues/906))
+* **compiler:** Fail on internal error ([LNG-229](https://linear.app/fluence/issue/LNG-229)) ([#905](https://github.com/fluencelabs/aqua/issues/905))
+* **compiler:** Services as abilities ([LNG-206](https://linear.app/fluence/issue/LNG-206)) ([#873](https://github.com/fluencelabs/aqua/issues/873))
+* **api:** Export types from aqua-api ([#904](https://github.com/fluencelabs/aqua/issues/904))
+* **language-server:** Pass errors to LSP context ([LNG-243](https://linear.app/fluence/issue/LNG-243)) ([#888](https://github.com/fluencelabs/aqua/issues/888))
+* **api:** Rethrow errors to capture stacktrace ([#907](https://github.com/fluencelabs/aqua/issues/907))
+* **compiler:** Do not restrict stream args when ability is present ([LNG-233](https://linear.app/fluence/issue/LNG-233)) ([#902](https://github.com/fluencelabs/aqua/issues/902))
+* **compiler:** Fix arrows capture in closures ([LNG-242](https://linear.app/fluence/issue/LNG-242)) ([#903](https://github.com/fluencelabs/aqua/issues/903))
+
+### [0.12.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.1) - September 11, 2023
+* **compiler:** Error on not arrow call after `<-` ([#876](https://github.com/fluencelabs/aqua/issues/876))
+* **compiler:** Fix closure stream capture ([LNG-58](https://linear.app/fluence/issue/LNG-58)) ([#857](https://github.com/fluencelabs/aqua/issues/857))
+
+### [0.12.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.0) - August 25, 2023
+* **js-client:** Move to new js-client interface ([#855](https://github.com/fluencelabs/aqua/issues/855))
+* **compiler:** Restrict abilities usage ([LNG-208](https://linear.app/fluence/issue/LNG-208)) ([#854](https://github.com/fluencelabs/aqua/issues/854))
+* **compiler:** Fix nested abilities ([LNG-220](https://linear.app/fluence/issue/LNG-220)) ([#852](https://github.com/fluencelabs/aqua/issues/852))
 
 ### [0.11.9](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.11.9) - August 9, 2023
 * **compiler:** Introduce boolean algebra ([LNG-211](https://linear.app/fluence/issue/LNG-211)) ([#814](https://github.com/fluencelabs/aqua/issues/814))

@@ -43,7 +43,8 @@ pub struct TestRecord {
 
 // export foo as a public function bound by the 
 // the IT type constraints 
-#[marine] 
+
+#[marine]
 pub fn foo(arg_1: Vec<Vec<Vec<Vec<TestRecord>>>>, arg_2: String) -> Vec<Vec<Vec<Vec<TestRecord>>>> { 
     unimplemented!() 
 }
