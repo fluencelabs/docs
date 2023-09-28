@@ -48,7 +48,8 @@ Users should be able to specify the following:
     - when to unsubscribe the spell from timer events,
     - with what period to run the spell.
 - Connection Triggers: run spells on connection/disconnection of some peers to the peer.
-- All other trigger types can be implemented based on the timer triggers & the spell KV storage (blockchain event trigger, database event trigger, HTTP event trigger, etc)
+
+All other trigger types can be implemented based on the timer triggers & the spell KV storage (blockchain event trigger, database event trigger, HTTP event trigger, etc)
 
 ## Creating and updating spells
 
