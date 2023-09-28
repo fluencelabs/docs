@@ -710,15 +710,13 @@ We added matching *!* to both the test and the code. What gives? Right, we are t
 need to recompile the changed code for the tests to have the most recent module(s).
 Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
-## Deployment to the on-chain marketplace
+## Compute Marketplace: Glossary & Background
 
 Fluence is a decentralized, permissionless peer-to-peer protocol that makes a Decentralized Cloud where developers can deploy their WebAssembly functions and pay with tokens for their execution. Payments go to Providers, who host these functions.
 
 While the execution of business logic is off-chain, the market-making and associated settlement is on-chain. Specifically, a set of smart contracts handles the agreement over things like payment and collateral between a Developer and one or more Providers that would host and execute specified functions.
 
-### Glossary and background
-
-#### What are deals
+### What are deals
 
 Deal represents a request from Developer to host a set of WebAssembly functions for a specified price. Providers are able to join these deals in order to host functions and receive tokens for that.
 
@@ -727,7 +725,7 @@ In essence, Deal specifies what to deploy, and how much to pay for that.
 Among parameters described above, each Deal specifies an `AppCID`. `AppCID` is an IPFS CID that points to the `Worker Definition` data structure stored on IPFS.
 
 
-##### Where `Worker Definition` comes from
+#### Where `Worker Definition` comes from
 
 As we will see in [`step-by-step`](#deployment-step-by-step) section below, there's a certain structure to the Fluence Projects. That structure is defined by [`fluence`](https://github.com/fluencelabs/cli) cli tool, which provides means to initialize and maintain Fluence Projects.
 
@@ -739,7 +737,7 @@ A timer-based recurrent Aqua scripts are called Spells. It's like a cron, but fo
 
 Developers can group Services and Spells to Deals, and then deploy each deal via [`fluence deal deploy`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-deal-deploy-worker-names) command in `fluence cli`. Before Deal is registered on Chain, its settings and artifacts are uploaded to IPFS to produce `Worker Definition`, which is again stored on IPFS to produce `AppCID`.
 
-##### How deals are matched
+#### How deals are matched
 
 In order for a Deal to be deployed, there should be Providers willing to host it. That process is governed by the `Matcher` smart contract.
 
@@ -759,7 +757,7 @@ After match happened, Providers receive an event from Chain that commands them t
 
 You can read a more detailed description of Matching process [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
-#### What are Compute Peers
+### What are Compute Peers
 
 In order to actually host Services and Spells from Deals, Provider have to run instances of a Fluence-developer Peer implementations.
 
@@ -769,7 +767,7 @@ While Provider is a rather ephemeral entity, defined only by its Wallet keys, th
 
 Compute peer host Services and Spells from assigned Deals. Services and Spells of the same Deal are grouped into a Worker, thus completely separating business logic of different Deals, allowing them to safely co-exist on a single Compute Peer.
 
-#### What are workers
+### What are workers
 
 When Deal is matched against Market Offers, it gets deployed to a number of Compute Peers.
 
@@ -781,7 +779,7 @@ In order to reach these Services and Spells and call functions on them, it's req
 
 For purposes of this document, it's enough to know that a Worker is what holds a set of Services and Spells for a single Deal.
 
-#### What are subnets
+### What are subnets
 
 Subnet is a set of Workers each hosting Services and Spells from the same Deal.
 
@@ -790,6 +788,8 @@ It's important to diversify where Deal is hosted to provide High Availability. S
 So, Subnet unites one or more Compute Peers of one or more Providers. A single Subnet corresponds to a single Deal, so each Compute Peer of a Subnet hosts a Worker which contains all the Services and Spells defined by the Deal's `AppCID`.
 
 Information about Subnet participants is stored on Chain. So it's a public information that's easy to retrieve from Chain knowing a Deal ID. Clients use that information to resolve Subnets to a list of Workers, and access Services and Spells inside these Workers.
+
+## Deployment to the on-chain marketplace
 
 ### Deal deploy
 
