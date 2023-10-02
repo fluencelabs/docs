@@ -12,7 +12,7 @@ mermaid
 ```mermaid
 
     stateDiagram
-    
+
     [*] --> InitProject: fluence init
     InitProject --> CreateNewService: fluence service new
     InitProject --> AddExistingService: fluence service add
@@ -35,13 +35,13 @@ Fluence CLI uses multiple yaml config files and you can find their schemas in th
 npm -g install @fluencelabs/cli@latest
 ```
 
-> 👉 At the time of this writing, you need to set your node version to 16 LTS (16.19.0).
+> 👉 At the time of this writing, you need to set your node version to 18 LTS (v18.18.0).
 
 We can check our installation success (note that your cli and node versions might be different):
 
 ```
-fluence --version
-@fluencelabs/cli/x.y.z darwin-x64 node-v16.19.0
+% fluence --version
+@fluencelabs/cli/x.y.z darwin-arm64 node-v18.18.0
 ```
 
 ## Prepare your Environment
@@ -50,16 +50,16 @@ In addition to Fluence CLI, you need a [WalletConnect](https://walletconnect.com
 
 Resources:
 
-- [Aurora Chainlist RPC](https://chainlist.org/?testnets=true&search=aurora)
-- [Aurora Faucet](https://aurora.dev/faucet)
-- [Aurora Explorer](https://explorer.aurora.dev/)
-- Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
+- [Mumbai Chainlist RPC](https://chainlist.org/?testnets=true&search=mumbai)
+- [Mumbai Faucet](https://faucet.polygon.technology)
+- [Mumbai Explorer](https://mumbai.polygonscan.com)
+- Fluence testnet [USDC faucet](https://faucet-kras.fluence.dev)
 
-### Adding Aurora Testnet to MetaMask
+### Adding Mumbai Testnet to MetaMask
 
 #### 1. Open MetaMask and click on the network menu at the top and select "Add Network".
 
-> The Aurora network that automatically pops up in the list of networks is mainnet; we'll be adding the Aurora testnet.
+> The Mumbai network that automatically pops up in the list of networks is mainnet; we'll be adding the Mumbai testnet.
 
 <div style={{ textAlign: "center" }}>
     <img src="/img/metamask-add-network.png" alt="Add Network on MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
@@ -75,87 +75,53 @@ Resources:
 
 #### 3. Fill in the following information and click "Save"
 
-- **Network Name**: Aurora Testnet
-- **New RPC URL**: https://testnet.aurora.dev/
-- **Chain ID**: 1313161555
-- **Symbol**: AETH
-- **Block Explorer URL**: https://testnet.aurora.dev/
+- **Network Name**: Mumbai Testnet
+- **New RPC URL**: https://polygon-mumbai-bor.publicnode.com
+- **Chain ID**: 80001
+- **Symbol**: MATIC
+- **Block Explorer URL**: https://mumbai.polygonscan.com
 
 <div style={{ textAlign: "center" }}>
   <img
-    src="/img/metamask-aurora-chain-info.png"
-    alt="Populate Aurora Testnet Information on MetaMask"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 3: Populate Aurora Testnet Information on MetaMask</p>
-</div>
-
-Now that we have enabled the Aurora testnet on our wallet, visit to the Aurora Faucet, located [here](https://aurora.dev/faucet).
-
-### Requesting AETH Tokens from Aurora Faucet
-
-#### 1. Head over to the [Aurora Faucet](https://aurora.dev/faucet)
-#### 2. Connect your account to the Faucet using MetaMask
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-connect-faucet.png"
-    alt="Connect MetaMask to Aurora Faucet"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 4: Connect MetaMask to Aurora Faucet</p>
-</div>
-
-Ensure you are connecting the right account.
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-faucet-connect-metamask.png"
-    alt="Connect MetaMask to Aurora Faucet"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 5: Connect MetaMask to Aurora Faucet</p>
-</div>
-    
-
-#### 3. Request testnet AETH tokens
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-request-eth.png"
-    alt="Request testnet AETH"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 6: Request testnet AETH</p>
-</div>
-
-#### 4. Wait for a few moments until you see the delivery message
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-request-success.png"
-    alt="Request testnet AETH"
+    src="/img/metamask-mumbai-chain-info.png"
+    alt="Populate Mumbai Testnet Information on MetaMask"
     style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
-  <p>Figure 7: Request testnet AETH</p>
+  <p>Figure 3: Populate Mumbai Testnet Information on MetaMask</p>
 </div>
 
-#### 5. Check your account to confirm that you have received the requested tokens
+Now that we have enabled the Mumbai testnet on our wallet, visit the [Mumbai Faucet](https://faucet.polygon.technology) to get some tokens.
+
+### Requesting MATIC Tokens from Polygon Testnet Faucet
+
+#### 1. Head over to the [Mumbai Faucet](https://faucet.polygon.technology)
+#### 2. Connect through Dicsord and paste your wallet address
 
 <div style={{ textAlign: "center" }}>
   <img
-    src="/img/metamask-updated-aeth-balance.png"
-    alt="MetaMask wallet with AETH balance"
-    style={{ display: "block", margin: "auto", maxWidth: "90%" }}
+    src="/img/metamask-request-mumbai-tokens.png"
+    alt="Connect MetaMask to Aurora Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
-  <p>Figure 8: MetaMask wallet with AETH balance</p>
+  <p>Figure 4: Request Mumbai Matic tokens from Polygon Testnet Faucet</p>
 </div>
 
-Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.dev/).
+#### 3. Check your account to confirm that you have received the requested tokens
+
+<div style={{ textAlign: "center" }}>
+  <img
+    src="/img/metamask-updated-MATIC-balance.png"
+    alt="MetaMask wallet with MATIC balance"
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+  />
+  <p>Figure 5: MetaMask wallet with MATIC balance</p>
+</div>
+
+Finally, head over to the Fluence faucet, located [here](https://faucet-kras.fluence.dev).
 
 ### Fluence Faucet
 
-#### 1. Head over to the [Fluence faucet](https://faucet.fluence.dev/)
+#### 1. Head over to the [Fluence faucet](https://faucet-kras.fluence.dev)
 #### 2. Click the "Login" button at the centre of the page
 
 <div style={{ textAlign: "center" }}>
@@ -164,7 +130,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Login into the Fluence Interface"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 9: Login into the Fluence Interface</p>
+  <p>Figure 6: Login into the Fluence Interface</p>
 </div>
 
 <div style={{ textAlign: "center" }}>
@@ -173,7 +139,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 10: Create an account or Login</p>
+  <p>Figure 7: Create an account or Login</p>
 </div>
 
 #### 3. After logging in, click on the "Add tUSDC to metamask" button
@@ -184,7 +150,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 11: Fluence Interface for Adding tUSDC to Account</p>
+  <p>Figure 8: Fluence Interface for Adding tUSDC to Account</p>
 </div>
 
 MetaMask will automatically populate the token symbol and decimals of precision fields.
@@ -195,7 +161,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 12: Adding Suggested tUSDC Token on MetaMask</p>
+  <p>Figure 9: Adding Suggested tUSDC Token on MetaMask</p>
 </div>
 
 #### 4. Verify that you've successfully added tUSDC to your account
@@ -206,7 +172,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 13: Verify Addition of tUSDC on MetaMask</p>
+  <p>Figure 10: Verify Addition of tUSDC on MetaMask</p>
 </div>
 
 <div style={{ textAlign: "center" }}>
@@ -215,7 +181,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 14: Confirm tUSDC Addition to Account</p>
+  <p>Figure 11: Confirm tUSDC Addition to Account</p>
 </div>
 
 #### 5. Navigate back to the Fluence Faucet. In the "Token Contract Address" field, enter your account address and click "Get tUSDC"
@@ -226,7 +192,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 15: Request tUSDC using Account Address</p>
+  <p>Figure 12: Request tUSDC using Account Address</p>
 </div>
 
 The faucet will confirm the transfer with the following information:
@@ -237,7 +203,7 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 16: Metadata for tUSDC Faucet Transfer</p>
+  <p>Figure 13: Metadata for tUSDC Faucet Transfer</p>
 </div>
 
 #### 6. Confirm the tUSDC tokens were received.
@@ -248,10 +214,10 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 17: Check tUSDC Account Balance</p>
+  <p>Figure 14: Check tUSDC Account Balance</p>
 </div>
 
-#### 7. To see the transaction data info for both AETH and tUSDC transfers into your account, head over to the [explorer](https://explorer.testnet.aurora.dev/)
+#### 7. To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com).
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -259,7 +225,7 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 18: Inspect Transfers via Aurora Faucet</p>
+  <p>Figure 15: Inspect Transfers via Aurora Faucet</p>
 </div>
 
 ---
@@ -313,62 +279,79 @@ A this point, you see various config (yaml) files and a *src/aqua* dir with a *m
 aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
-import "@fluencelabs/registry/subnetwork.aqua"
-import Registry from "@fluencelabs/registry/registry-service.aqua"
-import "@fluencelabs/spell/spell_service.aqua"
+import "@fluencelabs/aqua-lib/subnet.aqua"
 
-import "workers.aqua"
+use "deals.aqua"
+use "hosts.aqua"
 import "services.aqua"
 
--- import App from "deployed.app.aqua"
--- export App, addOne
-
-
-
 -- IMPORTANT: Add exports for all functions that you want to run
-export helloWorld, helloWorldRemote, getInfo, getInfos, getInfosInParallel
+export helloWorld, helloWorldRemote, getInfo, getInfos
 
 -- DOCUMENTATION:
 -- https://fluence.dev
 
 
--- export status
 
--- service Console("run-console"):
-    -- print(any: ⊤)
+-- example of running services deployed using `fluence deal deploy`
+-- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
 
--- -- example of running a service deployed using 'fluence deal deploy'
--- -- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
+export runDeployedServices, showSubnet
 
--- func status():
-    -- workersInfo <- getWorkersInfo()
-    -- dealId = workersInfo.deals.defaultWorker.dealId
-    -- print = (answer: string, peer: string):
-      -- Console.print([answer, peer])
+data Answer:
+    answer: ?string
+    worker: Worker
 
-    -- answers: *string
-    -- on HOST_PEER_ID:
-        -- workers <- resolveSubnetwork(dealId)
-        -- for w <- workers! par:
-            -- on w.metadata.peer_id via w.metadata.relay_id:
-                -- answer <- MyService.greeting("fluence")
-                -- answers <<- answer
-                -- print(answer, w.metadata.peer_id)
+func runDeployedServices() -> []Answer:
+    deals <- Deals.get()
+    dealId = deals.defaultWorker!.dealIdOriginal
+    answers: *Answer
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
 
-    -- Console.print("getting answers...")
-    -- join answers[workers!.length - 1]
-    -- par Peer.timeout(PARTICLE_TTL / 2, "TIMED OUT")
-    -- Console.print("done")
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            answers <<- Answer(answer=nil, worker=w)
+        else:
+            on w.worker_id! via w.host_id:
+                answer <- MyService.greeting("fluence")
+                answers <<- Answer(answer=?[answer], worker=w)
 
+    <- answers
 
+data WorkerServices:
+    host_id: string
+    worker_id: ?string
+    services: ?[]string
 
--- func addOne(x: u64) -> u64:
-    -- services <- App.services()
-    -- on services.adder.default!.peerId:
-        -- Adder services.adder.default!.serviceId
-        -- res <- Adder.add_one(x)
-    -- <- res
+func showSubnet() -> []WorkerServices:
+    deals <- Deals.get()
+    dealId = deals.defaultWorker!.dealIdOriginal
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
 
+    services: *WorkerServices
+    for w <- subnet.workers:
+        if w.worker_id != nil:
+            on w.worker_id! via w.host_id:
+                -- get list of all services on this worker
+                srvs <- Srv.list()
+
+                -- gather aliases
+                aliases: *string
+                for s <- srvs:
+                    if s.aliases.length != 0:
+                        aliases <<- s.aliases[0]
+
+                    services <<- WorkerServices(host_id=w.host_id, worker_id=w.worker_id, services=?[aliases])
+        else:
+            services <<- WorkerServices(host_id=w.host_id, worker_id=nil, services=nil)
+
+    <- services
 
 
 -- local
@@ -395,18 +378,6 @@ func getInfos(peers: []PeerId) -> []Info:
     for p <- peers:
         on p:
             infos <- Peer.identify()
-    <- infos
-
--- parallel computation
-func getInfosInParallel(peers: []PeerId) -> []Info:
-    infos: *Info
-    for p <- peers par:
-        on p:
-            infos <- Peer.identify()
-
-    join infos[Op.array_length(peers) - 1] -- "-1" because it's 0-based
-    par Peer.timeout(PARTICLE_TTL / 2, "")
-
     <- infos
 ```
 
@@ -440,12 +411,12 @@ pub fn hello_world() -> String {       // 4
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), 
+Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md),
 which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk* and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
 
-In (2), we implement a main function which is not marked with the *#[marine]* procedural macro. 
-We discuss modules and module configuration further below. Also note that WASM IT has type limits, 
-which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type). 
+In (2), we implement a main function which is not marked with the *#[marine]* procedural macro.
+We discuss modules and module configuration further below. Also note that WASM IT has type limits,
+which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
 The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
 but you do not have generics, lifetimes, etc.
 
@@ -527,11 +498,11 @@ hello-world
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
 such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify
-the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of 
-the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module), 
+the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of
+the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module),
 module into the service.
 
-Looking at the *main.rs* file, you see that it is populated with a greeting example. 
+Looking at the *main.rs* file, you see that it is populated with a greeting example.
 Replace that code with our code from above so that:
 
 ```bash
@@ -546,7 +517,7 @@ pub fn hello_fluence() -> String {
 }
 ```
 
-With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module. 
+With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
 
 ```rust
@@ -566,10 +537,10 @@ hello_world.wasm
 
 ### Test our code
 
-Before we deploy our code to the network, we may want to run some tests. 
-One way to interact with our Wasm module is to use the 
+Before we deploy our code to the network, we may want to run some tests.
+One way to interact with our Wasm module is to use the
 [Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
-which is a tool to run our Wasm modules locally as if they were deployed to the network. 
+which is a tool to run our Wasm modules locally as if they were deployed to the network.
 Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
 
 ```bash
@@ -614,8 +585,8 @@ hello_world:
   func hello_fluence() -> string
 ```
 
-As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace. 
-In order to run *hello_fluence*  we use the cll command follow by the namespace, 
+As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace.
+In order to run *hello_fluence*  we use the cll command follow by the namespace,
 the function and the function arguments:
 
 ```bash
@@ -626,9 +597,9 @@ result: "Hello, Fluence"
 
 Well done!
 
-An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code. 
-Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/commands/cargo-test.html) widely used 
-to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules. 
+An alternative to interactively test a module in the REPL, is to write unit and integration tests for our code.
+Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/commands/cargo-test.html) widely used
+to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules.
 With the [marine rust test dsk](https://crates.io/crates/marine-rs-sdk-test), you can do that!
 
 Let’s add the testing code for our *hello-world* module in our *main.rs* file:
@@ -652,9 +623,9 @@ mod tests {
 ```
 
 Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
-the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module. 
-In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1). 
-Moreover, we need to provide the paths  to Config.toml and the Wasm module (2). 
+the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module.
+In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
+Moreover, we need to provide the paths  to Config.toml and the Wasm module (2).
 Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
@@ -673,7 +644,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 All is well with our module!
 
-If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());` 
+If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`
 and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
 
 ```bash
@@ -701,65 +672,183 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; 
 error: test failed, to rerun pass `--bin hello_world`
 ```
 
-We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and 
-need to recompile the changed code for the tests to have the most recent module(s). 
+We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and
+need to recompile the changed code for the tests to have the most recent module(s).
 Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
-### Deploy service
+## Compute Marketplace: Glossary & Background
 
-There a basically two types of host for your services: public or private peer. 
-Deploying to the public network requires the deployment of your service(s) to be tightly coupled with 
-the on-chain marketplace.
+Fluence is a decentralized, permissionless peer-to-peer protocol that makes a Decentralized Cloud where developers can deploy their WebAssembly functions and pay with tokens for their execution. Payments go to Providers, who host these functions.
 
-**Deploying to the public network**
+While the execution of business logic is off-chain, the market-making and associated settlement is on-chain. Specifically, a set of smart contracts handles the agreement over things like payment and collateral between a Developer and one or more Providers that would host and execute specified functions.
 
-Paying for services
+### What are deals
 
-- hardcoded params:
-    - epoch: 5 minutes
-    - Price per epoch 0.083 USDC == 1 USDC/per hour ??
+Deal represents a request from Developer to host a set of WebAssembly functions for a specified price. Providers are able to join these deals in order to host functions and receive tokens for that.
 
-Fluence CLI makes it rather easy to deploy with
+In essence, Deal specifies what to deploy, and how much to pay for that.
 
-```bash
-fluence deal deploy
-    Finished release [optimized] target(s) in 0.10s
+Among parameters described above, each Deal specifies an `AppCID`. `AppCID` is an IPFS CID that points to the `Worker Definition` data structure stored on IPFS.
 
-Creating deal for worker defaultWorker
 
-To approve transactions with your to your wallet using metamask, open the following url:
+#### Where `Worker Definition` comes from
 
-https://cli-connector.fluence.dev/?wc=277cfad9-d539-450b-87a9-fe55b2602352%401&bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
+As we will see in [`step-by-step`](#deployment-step-by-step) section below, there's a certain structure to the Fluence Projects. That structure is defined by [`fluence`](https://github.com/fluencelabs/cli) cli tool, which provides means to initialize and maintain Fluence Projects.
 
-or go to https://cli-connector.fluence.dev and enter the following connection string there:
+Fluence Project can hold any number of Rust and WebAssembly -based functions and timer-based recurrent [Aqua](https://github.com/fluencelabs/aqua) scripts.
 
-wc:277cfad9-d539-450b-87a9-fe55b2602352@1?bridge=https%3A%2F%2F0.bridge.walletconnect.org&key=22960ca923d833e08483a96a01d92dd9c524814cde1573fcd95362c4188c63a3
+A set of functions defined by a single Rust project or a set of linked WebAssembly modules is called a `service`. You can read more about services [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+
+A timer-based recurrent Aqua scripts are called Spells. It's like a cron, but for distributed choreography. You can read more about spells [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+
+Developers can group Services and Spells to Deals, and then deploy each deal via [`fluence deal deploy`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-deal-deploy-worker-names) command in `fluence cli`. Before Deal is registered on Chain, its settings and artifacts are uploaded to IPFS to produce `Worker Definition`, which is again stored on IPFS to produce `AppCID`.
+
+#### How deals are matched
+
+In order for a Deal to be deployed, there should be Providers willing to host it. That process is governed by the `Matcher` smart contract.
+
+It's important that Matcher makes it possible for a single Deal to be deployed on several hosts to provide High Availability.
+
+A Deal specifies different parameters, like `price per epoch`, `minimum collateral`, `effectors` and `target number of workers`.
+
+These parameters are matched against Providers' Market Offers, which specify `minimum price per epoch`, `maximum collateral` and `available effectors`.
+
+You can read more about effectors [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+
+Providers register their Market Offers on chain in a contract called `Matcher`, and each `deal deploy` calls that contract to find Offers compatible with that Deal. It should match the price, collateral and available `effectors`.
+
+Each match should find at least `target number of workers` Providers whose offers are compatible with a given Deal.
+
+After match happened, Providers receive an event from Chain that commands them to deploy Deal to their chosen Compute Peer.
+
+You can read a more detailed description of Matching process [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+
+### What are Compute Peers
+
+In order to actually host Services and Spells from Deals, Provider have to run instances of a Fluence-developer Peer implementations.
+
+At the moment, there are two Peer implementations: [one in JS](https://github.com/fluencelabs/js-client), another in Rust. The latter one is called [Nox](https://github.com/fluencelabs/nox), and it plays the role of a Compute Peer.
+
+While Provider is a rather ephemeral entity, defined only by its Wallet keys, the Compute Peers are the actual instances of Nox that host Deals.
+
+Compute peer host Services and Spells from assigned Deals. Services and Spells of the same Deal are grouped into a Worker, thus completely separating business logic of different Deals, allowing them to safely co-exist on a single Compute Peer.
+
+### What are workers
+
+When Deal is matched against Market Offers, it gets deployed to a number of Compute Peers.
+
+For every deal, a Compute Peer creates a secure namespace to isolate functions of that Deal from other Deals. That secure namespace is called a Worker. After successful deployment, a Worker holds all Services and Spells.
+
+Since Workers are isolated from each other, Service and Spells names and aliases will never have a collision with Services and Spells in other Workers.
+
+In order to reach these Services and Spells and call functions on them, it's required to know two things: Compute Peer ID and Worker ID.
+
+For purposes of this document, it's enough to know that a Worker is what holds a set of Services and Spells for a single Deal.
+
+### What are subnets
+
+Subnet is a set of Workers each hosting Services and Spells from the same Deal.
+
+It's important to diversify where Deal is hosted to provide High Availability. So Workers of a single Deal will always be on different Compute Peers, and most likely these Compute Peers will come from different Providers.
+
+So, Subnet unites one or more Compute Peers of one or more Providers. A single Subnet corresponds to a single Deal, so each Compute Peer of a Subnet hosts a Worker which contains all the Services and Spells defined by the Deal's `AppCID`.
+
+Information about Subnet participants is stored on Chain. So it's a public information that's easy to retrieve from Chain knowing a Deal ID. Clients use that information to resolve Subnets to a list of Workers, and access Services and Spells inside these Workers.
+
+## Deployment to the on-chain marketplace
+
+### Deal deploy
+
+`fluence deal deploy` will deploy all deals defined in `fluence.yml`.
+
+See `fluence deal deploy --help` for information on more settings to `deal deploy` command.
+
+As deployment happens through blockchain, you will be prompted to open a URL to sign Transaction with your Metamask wallet. You will have to do that twice.
+
+First, you will see this message in your terminal:
+```
+To approve transactions to your wallet using metamask, open the following url:
+
+https://cli-connector.fluence.dev/?wc=000000000000000000000%402&relay-protocol=irn&symKey=000000000000000
 ```
 
-![Login with web3 wallet](../../static/img/metamask-add-network.png)
+Open it, and connect Metamask. After a short while, you will see a Metamask prompt to sign Transaction.
 
-…
+<div style={{ textAlign: "center" }}>
+    <img src="/img/metamask_tx_prompt.png" alt="Confirm TX with MetaMask" style={{ display: "block", margin: "auto", width: "50%" }} />
+    <p>Confirm TX with MetaMask</p>
+</div>
 
-![Connect the wallet with CLI](../../static/img/metamask-add-network.png)
 
-Which, when successful, closes the CLI client.
+After you have approved the tx, a similar message will appear, and you have to do open second address, and repeat same actions with metamask as before.
 
-> 🆘 Metamask sometimes misses the first API call, so you might need to click Disconnect and then click Connect again.
+After a short while, you will see a message like this one:
 
-**Deploying to a private peer or network**
+```
+## Waiting for transaction to be mined......
 
-coming soon with worker deploy
+Success!
 
-### Use deployed services
+created deals:
+  defaultWorker:
+    deal: https://mumbai.polygonscan.com/address/0x00000000000000000000000000000000
+    worker definition: bafkreigu3u3swrzq4tingjbp77ozozacbcsujm3wnnr7x4xbeliwr5zkvi
+    timestamp: 2023-08-31T18:07:01.122Z
+```
 
-#### From command line
+That means your Deal was deployed successfully. After a short while, Providers will catch up and deploy it.
 
-First of all lets test if your deployment worked correctly and the service workers were populated. In order to do that you can lauch the status() function, which was scaffolded with the example.
+### Call a function over the subnet
 
-Let's open `src/aqua/main.aqua`...
+In your freshly-initialized project, there's a file `src/aqua/main.aqua` which contains the function `runDeployedServices` which resolves a Subnet and calls a function on each of the Workers in the Subnet.
 
-From node app
+To run it, simply run the following command:
+```bash
+fluence run -f 'runDeployedServices()'
+```
 
-### Manage deployments
+You will see a list which may not contain any data and the associated `worker_id` is null. That means that this specific Compute Peer has not deployed the Deal ... yet!  Wait a bit, where bit = blocktime + some additional patience stressor, and re-run the command.
 
-soon
+### Inspect a deployed deal
+
+```bash
+fluence run -f 'showSubnet()'
+```
+
+```json
+[
+    {
+        "services": [
+            "myService",
+            "worker-spell"
+        ],
+        "worker_id": "12D3KooLANJSDNdoandjqlwkDNIBNnnao12nWNj0uaJIKSALn"
+    },
+    {
+        "services": [
+            "myService",
+            "worker-spell"
+        ],
+        "worker_id": "12D3KooWKGU8FFyw5Ek7wWREX2KKEs2AjxnaojsndoJOWNSJd"
+    },
+    {
+        "services": [
+            "myService",
+            "worker-spell"
+        ],
+        "worker_id": "12D3KoonONmakW291NlajwyrnbLSAMNpqNAO21NQJWJSnsnwo"
+    }
+]
+```
+
+### Update deal
+
+Now, if you want to change something in one of your Services or Spells, you can do that, and simply call `deal deploy` again will update existing Deal in place.
+
+Try it: modify code in `src/services/myService/modules/myService/src/main.rs` and execute `deal deploy` again.
+
+### Current limitations
+
+Right now, there's no way to remove a Deal once it is deployed. It will be possible shortly!
+
+Also, there's no billing yet, so you won't be charged any tokens and Deals will remain deployed forever. That will be fixed soon, as well.
