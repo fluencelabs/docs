@@ -53,7 +53,7 @@ Resources:
 - [Mumbai Chainlist RPC](https://chainlist.org/?testnets=true&search=mumbai)
 - [Mumbai Faucet](https://faucet.polygon.technology)
 - [Mumbai Explorer](https://mumbai.polygonscan.com)
-- Fluence testnet [USDC faucet](https://faucet.fluence.dev/)
+- Fluence testnet [USDC faucet](https://faucet-kras.fluence.dev)
 
 ### Adding Mumbai Testnet to MetaMask
 
@@ -83,79 +83,45 @@ Resources:
 
 <div style={{ textAlign: "center" }}>
   <img
-    src="/img/metamask-aurora-chain-info.png"
+    src="/img/metamask-mumbai-chain-info.png"
     alt="Populate Mumbai Testnet Information on MetaMask"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
   <p>Figure 3: Populate Mumbai Testnet Information on MetaMask</p>
 </div>
 
 Now that we have enabled the Mumbai testnet on our wallet, visit the [Mumbai Faucet](https://faucet.polygon.technology) to get some tokens.
 
-### Requesting MATIC Tokens from Aurora Faucet
+### Requesting MATIC Tokens from Polygon Testnet Faucet
 
 #### 1. Head over to the [Mumbai Faucet](https://faucet.polygon.technology)
-#### 2. Connect your account to the Faucet using MetaMask
+#### 2. Connect through Dicsord and paste your wallet address
 
 <div style={{ textAlign: "center" }}>
   <img
-    src="/img/aurora-connect-faucet.png"
+    src="/img/metamask-request-mumbai-tokens.png"
     alt="Connect MetaMask to Aurora Faucet"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 4: Connect MetaMask to Aurora Faucet</p>
-</div>
-
-Ensure you are connecting the right account.
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-faucet-connect-metamask.png"
-    alt="Connect MetaMask to Aurora Faucet"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 5: Connect MetaMask to Aurora Faucet</p>
-</div>
-
-
-#### 3. Request testnet MATIC tokens
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-request-eth.png"
-    alt="Request testnet MATIC"
-    style={{ display: "block", margin: "auto", maxWidth: "100%" }}
-  />
-  <p>Figure 6: Request testnet MATIC</p>
-</div>
-
-#### 4. Wait for a few moments until you see the delivery message
-
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/aurora-request-success.png"
-    alt="Request testnet MATIC"
     style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
-  <p>Figure 7: Request testnet MATIC</p>
+  <p>Figure 4: Request Mumbai Matic tokens from Polygon Testnet Faucet</p>
 </div>
 
-#### 5. Check your account to confirm that you have received the requested tokens
+#### 3. Check your account to confirm that you have received the requested tokens
 
 <div style={{ textAlign: "center" }}>
   <img
     src="/img/metamask-updated-MATIC-balance.png"
     alt="MetaMask wallet with MATIC balance"
-    style={{ display: "block", margin: "auto", maxWidth: "90%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
   />
-  <p>Figure 8: MetaMask wallet with MATIC balance</p>
+  <p>Figure 5: MetaMask wallet with MATIC balance</p>
 </div>
 
-Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.dev/).
+Finally, head over to the Fluence faucet, located [here](https://faucet-kras.fluence.dev).
 
 ### Fluence Faucet
 
-#### 1. Head over to the [Fluence faucet](https://faucet.fluence.dev/)
+#### 1. Head over to the [Fluence faucet](https://faucet-kras.fluence.dev)
 #### 2. Click the "Login" button at the centre of the page
 
 <div style={{ textAlign: "center" }}>
@@ -164,7 +130,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Login into the Fluence Interface"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 9: Login into the Fluence Interface</p>
+  <p>Figure 6: Login into the Fluence Interface</p>
 </div>
 
 <div style={{ textAlign: "center" }}>
@@ -173,7 +139,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 10: Create an account or Login</p>
+  <p>Figure 7: Create an account or Login</p>
 </div>
 
 #### 3. After logging in, click on the "Add tUSDC to metamask" button
@@ -184,7 +150,7 @@ Finally, head over to the Fluence faucet, located [here](https://faucet.fluence.
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 11: Fluence Interface for Adding tUSDC to Account</p>
+  <p>Figure 8: Fluence Interface for Adding tUSDC to Account</p>
 </div>
 
 MetaMask will automatically populate the token symbol and decimals of precision fields.
@@ -195,7 +161,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 12: Adding Suggested tUSDC Token on MetaMask</p>
+  <p>Figure 9: Adding Suggested tUSDC Token on MetaMask</p>
 </div>
 
 #### 4. Verify that you've successfully added tUSDC to your account
@@ -206,7 +172,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 13: Verify Addition of tUSDC on MetaMask</p>
+  <p>Figure 10: Verify Addition of tUSDC on MetaMask</p>
 </div>
 
 <div style={{ textAlign: "center" }}>
@@ -215,7 +181,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 14: Confirm tUSDC Addition to Account</p>
+  <p>Figure 11: Confirm tUSDC Addition to Account</p>
 </div>
 
 #### 5. Navigate back to the Fluence Faucet. In the "Token Contract Address" field, enter your account address and click "Get tUSDC"
@@ -226,7 +192,7 @@ MetaMask will automatically populate the token symbol and decimals of precision 
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 15: Request tUSDC using Account Address</p>
+  <p>Figure 12: Request tUSDC using Account Address</p>
 </div>
 
 The faucet will confirm the transfer with the following information:
@@ -237,7 +203,7 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 16: Metadata for tUSDC Faucet Transfer</p>
+  <p>Figure 13: Metadata for tUSDC Faucet Transfer</p>
 </div>
 
 #### 6. Confirm the tUSDC tokens were received.
@@ -248,7 +214,7 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 17: Check tUSDC Account Balance</p>
+  <p>Figure 14: Check tUSDC Account Balance</p>
 </div>
 
 #### 7. To see the transaction data info for both MATIC and tUSDC transfers into your account, head over to the [explorer](https://mumbai.polygonscan.com).
@@ -259,7 +225,7 @@ The faucet will confirm the transfer with the following information:
     alt="Create an account or Login"
     style={{ display: "block", margin: "auto", maxWidth: "100%" }}
   />
-  <p>Figure 18: Inspect Transfers via Aurora Faucet</p>
+  <p>Figure 15: Inspect Transfers via Aurora Faucet</p>
 </div>
 
 ---
