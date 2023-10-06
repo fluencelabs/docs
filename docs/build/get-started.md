@@ -275,14 +275,7 @@ tree -L 2 -a
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports:
 
-<details>
-  <summary>src/aqua/main.aqua will look like this</summary>
-  <div>
-    <div>
-    <CodeBlock
-        language="aqua"
-        showLineNumbers>
-`
+```aqua
 aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
@@ -386,11 +379,7 @@ func getInfos(peers: []PeerId) -> []Info:
         on p:
             infos <- Peer.identify()
     <- infos
-`
-      </CodeBlock>
-    </div>
-  </div>
-</details>
+```
 
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
@@ -517,7 +506,7 @@ module into the service.
 Looking at the *main.rs* file, you see that it is populated with a greeting example.
 Replace that code with our code from above so that:
 
-```bash
+```rust
 // main.rs
 use marine_rs_sdk::marine;
 
@@ -532,7 +521,7 @@ pub fn hello_fluence() -> String {
 With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
 
-```rust
+```
 fluence build
 Making sure all services are downloaded... done
 <...>
