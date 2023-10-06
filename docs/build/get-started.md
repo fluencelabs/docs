@@ -275,8 +275,14 @@ tree -L 2 -a
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports:
 
-```aqua
-aqua Main
+<details>
+  <summary>src/aqua/main.aqua will look like this</summary>
+  <div>
+    <div>
+    <CodeBlock
+        language="aqua"
+        showLineNumbers>
+        {`aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
 import "@fluencelabs/aqua-lib/subnet.aqua"
@@ -379,7 +385,12 @@ func getInfos(peers: []PeerId) -> []Info:
         on p:
             infos <- Peer.identify()
     <- infos
-```
+`}
+      </CodeBlock>
+    </div>
+  </div>
+</details>
+
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
