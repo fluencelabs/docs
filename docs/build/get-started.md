@@ -282,6 +282,7 @@ A this point, you see various config (yaml) files and a *src/aqua* dir with a *m
     <CodeBlock
         language="aqua"
         showLineNumbers>
+`
 aqua Main
 
 import "@fluencelabs/aqua-lib/builtin.aqua"
@@ -385,6 +386,7 @@ func getInfos(peers: []PeerId) -> []Info:
         on p:
             infos <- Peer.identify()
     <- infos
+`
       </CodeBlock>
     </div>
   </div>
