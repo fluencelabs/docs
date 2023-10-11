@@ -273,114 +273,14 @@ tree -L 2 -a
     └── aqua
 ```
 
-A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports:
+A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports.
 
-```aqua
-aqua Main
+It defines several important functions:
 
-import "@fluencelabs/aqua-lib/builtin.aqua"
-import "@fluencelabs/aqua-lib/subnet.aqua"
+- `showSubnet` – a function that resolves subnet participants by DealID stored in `.fluence`, and shows a list of workers.
+- `runDeployedServices` – a function that resolves subnet, and then calls `MyService.greeting` on every worker that participates in your subnet.
 
-use "deals.aqua"
-use "hosts.aqua"
-import "services.aqua"
-
--- IMPORTANT: Add exports for all functions that you want to run
-export helloWorld, helloWorldRemote, getInfo, getInfos
-
--- DOCUMENTATION:
--- https://fluence.dev
-
-
-
--- example of running services deployed using `fluence deal deploy`
--- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
-
-export runDeployedServices, showSubnet
-
-data Answer:
-    answer: ?string
-    worker: Worker
-
-func runDeployedServices() -> []Answer:
-    deals <- Deals.get()
-    dealId = deals.defaultWorker!.dealIdOriginal
-    answers: *Answer
-    on HOST_PEER_ID:
-        subnet <- Subnet.resolve(dealId)
-    if subnet.success == false:
-        Console.print(["Failed to resolve subnet: ", subnet.error])
-
-    for w <- subnet.workers:
-        if w.worker_id == nil:
-            answers <<- Answer(answer=nil, worker=w)
-        else:
-            on w.worker_id! via w.host_id:
-                answer <- MyService.greeting("fluence")
-                answers <<- Answer(answer=?[answer], worker=w)
-
-    <- answers
-
-data WorkerServices:
-    host_id: string
-    worker_id: ?string
-    services: ?[]string
-
-func showSubnet() -> []WorkerServices:
-    deals <- Deals.get()
-    dealId = deals.defaultWorker!.dealIdOriginal
-    on HOST_PEER_ID:
-        subnet <- Subnet.resolve(dealId)
-    if subnet.success == false:
-        Console.print(["Failed to resolve subnet: ", subnet.error])
-
-    services: *WorkerServices
-    for w <- subnet.workers:
-        if w.worker_id != nil:
-            on w.worker_id! via w.host_id:
-                -- get list of all services on this worker
-                srvs <- Srv.list()
-
-                -- gather aliases
-                aliases: *string
-                for s <- srvs:
-                    if s.aliases.length != 0:
-                        aliases <<- s.aliases[0]
-
-                    services <<- WorkerServices(host_id=w.host_id, worker_id=w.worker_id, services=?[aliases])
-        else:
-            services <<- WorkerServices(host_id=w.host_id, worker_id=nil, services=nil)
-
-    <- services
-
-
--- local
-func helloWorld(name: string) -> string:
-    <- Op.concat_strings("Hello, ", name)
-
--- remote
-func helloWorldRemote(name: string) -> string:
-    on HOST_PEER_ID:
-        hello_msg <- helloWorld(name)
-        from_msg <- Op.concat_strings(hello_msg, "! From ")
-        from_peer_msg <- Op.concat_strings(from_msg, HOST_PEER_ID)
-    <- from_peer_msg
-
--- request response
-func getInfo() -> Info, PeerId:
-    on HOST_PEER_ID:
-        info <- Peer.identify()
-    <- info, HOST_PEER_ID
-
--- iterate through several peers
-func getInfos(peers: []PeerId) -> []Info:
-    infos: *Info
-    for p <- peers:
-        on p:
-            infos <- Peer.identify()
-    <- infos
-```
-
+`runDeployedServices` is going to be commented out in `minimal` template, and uncommented in `quickstart` template. It serves as an example of how to call functions on a subnet with multiple workers.
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
@@ -393,6 +293,7 @@ Table 1: Client peer options from scaffolding
 | | Client Type | Client Provider |
 |:---|:---:|---:|
 | minimal | one-shot | Fluence CLI |
+| quickstart | one-shot | Fluence CLI |
 | TS/JS | one-shot | Browser |
 | TS/JS | long running | Node App |
 
@@ -457,15 +358,6 @@ We instructed the CLI to create a path *service* in which we want our *hello_wor
 
 version: 2
 aquaInputPath: src/aqua/main.aqua
-dependencies:                                #
-  npm:
-    "@fluencelabs/aqua": 0.10.3
-    "@fluencelabs/aqua-lib": 0.6.0
-    "@fluencelabs/spell": 0.5.4
-    "@fluencelabs/registry": 0.8.2
-  cargo:
-    marine: 0.14.0
-    mrepl: 0.21.0
 workers:
   defaultWorker:
     services: [ hello_world ]
@@ -677,6 +569,8 @@ We added matching *!* to both the test and the code. What gives? Right, we are t
 need to recompile the changed code for the tests to have the most recent module(s).
 Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
 
+Now, we're ready to talk about Deal deployment and Compute Marketplace.
+
 ## Compute Marketplace: Glossary & Background
 
 Fluence is a decentralized, permissionless peer-to-peer protocol that makes a Decentralized Cloud where developers can deploy their WebAssembly functions and pay with tokens for their execution. Payments go to Providers, who host these functions.
@@ -820,21 +714,21 @@ fluence run -f 'showSubnet()'
 [
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KooLANJSDNdoandjqlwkDNIBNnnao12nWNj0uaJIKSALn"
     },
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KooWKGU8FFyw5Ek7wWREX2KKEs2AjxnaojsndoJOWNSJd"
     },
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KoonONmakW291NlajwyrnbLSAMNpqNAO21NQJWJSnsnwo"
@@ -846,7 +740,7 @@ fluence run -f 'showSubnet()'
 
 Now, if you want to change something in one of your Services or Spells, you can do that, and simply call `deal deploy` again will update existing Deal in place.
 
-Try it: modify code in `src/services/myService/modules/myService/src/main.rs` and execute `deal deploy` again.
+Try it: modify code in `src/services/hello_world/modules/hello_world/src/main.rs` and execute `deal deploy` again.
 
 ### Current limitations
 
