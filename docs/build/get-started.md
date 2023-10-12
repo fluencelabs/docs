@@ -313,14 +313,19 @@ After project initialization, it's time to write some code!
 Let's create a simple `hello_world` function, which will look like this:
 
 ```rust
-// main.rs
-use marine_rs_sdk::marine;             // 1
+use marine_rs_sdk::marine;
 
-pub fn main() {}                       // 2
+#[marine]
+pub struct Hello {
+  pub response: String
+}
 
-#[marine]                              // 3
-pub fn hello_world() -> String {       // 4
-    format!("Hello, Fluence!")
+pub fn main() {}
+
+#[marine]
+pub fn hello_world() -> Hello {
+    let response = format!("Hello, Fluence!");
+    Hello { response }
 }
 ```
 
