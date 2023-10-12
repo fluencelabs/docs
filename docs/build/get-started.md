@@ -425,17 +425,17 @@ pub fn hello_world() -> Hello {        // 5
 }
 ```
 
-Let's review the code.
+#### Let's review the code.
 
-Before anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
+1. Before anything, we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
 
-In (2), we define a `Hello` structure that will hold our greeting message. We could also use just `-> String` for that matter, but this way you learn more. `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is a part of the *marine-rust-sdk*.
+2. (2) defines a `Hello` structure that will hold our greeting message. We could also use just `-> String` for that matter, but this way you learn more. `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is a part of the *marine-rust-sdk*.
 
-In (3), we implement the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation, including first Service creation and following Compute Peer restarts.
+3. (3) implements the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation, including first Service creation and following Compute Peer restarts.
 
-In (4), `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
+4. (4) `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
 
-In (5) and further in `hello_world` body, we implement our business logic, which ain’t much this time around.
+5. (5) and further in `hello_world` body, we implement our business logic, which ain’t much this time around.
 
 We discuss modules and module configuration further below. Also note that WASM IT has type limits,
 which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
