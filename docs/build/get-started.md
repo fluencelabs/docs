@@ -331,6 +331,8 @@ pub fn hello_world() -> Hello {
 
 But we don't yet have a place to put that code. For that, we need to add a Service by using command `fluence service new`.
 
+#### Add a service
+
 Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).
 
 If your business logic results in only a single module, like our *hello_world* code, then you will have a service with a single module.
@@ -425,7 +427,9 @@ pub fn hello_world() -> Hello {        // 5
 }
 ```
 
-#### Let's review the code.
+#### Code review
+
+Let's review the code.
 
 1. Before anything, we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
 
@@ -442,6 +446,7 @@ which are explained in detail in the [Marine book](/docs/marine-book/marine-runt
 The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
 but you do not have generics, lifetimes, etc.
 
+### Build project
 
 With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
