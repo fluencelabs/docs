@@ -243,7 +243,8 @@ We scaffold a new project with `fluence init` , which gives us a couple scaffold
 ```
 fluence init
 ? Select template (Use arrow keys)
-❯ minimal
+❯ quickstart
+  minimal
   ts
   js
 ```
@@ -261,15 +262,17 @@ Change into your new *hello-world* directory and have a look around:
 tree -L 2 -a
 
 .
-├── .fluence             # this is where Fluence CLI internals are kept including schemas and project secrets
+├── .fluence              # this is where Fluence CLI internals are kept including schemas and project secrets
 │   ├── aqua
-│   └── schemas
+│   ├── schemas
+│   └── workers.yaml
 ├── .gitignore
 ├── .vscode
 │   ├── extensions.json
 │   └── settings.json
-├── fluence.yaml         # this is where the project metadata, including service references, are kept
-└── src                  # this is where the Aqua distributed service choreography and composition scripts reside
+├── README.md
+├── fluence.yaml          # this is where the project metadata, including service references, are kept
+└── src                   # this is where the Aqua distributed service choreography and composition scripts reside
     └── aqua
 ```
 
@@ -286,7 +289,13 @@ For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/
 
 **Scaffolding Options**
 
-Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s). Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
+Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript.
+
+Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s).
+
+Choosing the *minimal* scaffolding setup provides you with a setup suitable to start from scratch, write some functions and call them via Fluence CLI. In that sense, that scenario is a "one-shot" one, as opposed to long-running backend or frontend applications.
+
+The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
 
 Table 1: Client peer options from scaffolding
 
