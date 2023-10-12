@@ -359,7 +359,7 @@ So what just happened?
 
 We instructed the CLI to create a service *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
 
-```yml
+```yaml
 # Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
 
 version: 2
@@ -387,15 +387,16 @@ services:
 Using this information, the CLI scaffolded our Rust (sub-)project:
 
 ```bash
-tree hello-world -L 4 -a
-hello-world
-├── modules
-│   └── hello_world
-│       ├── Cargo.toml
-│       ├── module.yaml
-│       └── src
-│           └── main.rs
-└── service.yaml
+tree hello-world/src -L 4 -a
+
+hello-world/src
+├── aqua
+│   └── main.aqua
+└── services
+    └── hello_world
+        ├── modules
+        │   └── hello_world
+        └── service.yaml
 ```
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
