@@ -308,10 +308,12 @@ Table 1: Client peer options from scaffolding
 
 ### Write code
 
-We set up our project and are left with creating our *hello_world* function, which we implement in Rust:
+After project initialization, it's time to write some code!
+
+Let's create a simple `hello_world` function, which will look like this:
 
 ```rust
-// hello_fluence.rs
+// main.rs
 use marine_rs_sdk::marine;             // 1
 
 pub fn main() {}                       // 2
@@ -322,66 +324,59 @@ pub fn hello_world() -> String {       // 4
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md),
-which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk* and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
+But we don't yet have a place to put that code. For that, we need to add a Service by using command `fluence service new`.
 
-In (2), we implement a main function which is not marked with the *#[marine]* procedural macro.
-We discuss modules and module configuration further below. Also note that WASM IT has type limits,
-which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
-The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
-but you do not have generics, lifetimes, etc.
+Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).
 
-Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).  If your business logic results in only a single module, like our *hello_world* code, then this module is also the service.
+If your business logic results in only a single module, like our *hello_world* code, then you will have a service with a single module.
 
-Now we follow the prompts to `fluence service new` and complete the setup:
+Now let’s use Fluence CLI to scaffold our Rust service with the `fluence service new` command.
+
+Follow the prompts and complete the setup:
 
 ```bash
 fluence service new
-? Enter service path service
-? Do you want to use service as the name of your new service? No
-? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
-hello_world
-Successfully generated template for new service at service
+? Enter service path hello_world
+Successfully generated template for new service at /Users/bebo/localdev/hello-world/src/services/hello_world
 # Making sure all services are downloaded...
 # Making sure all services are built...
     Updating crates.io index
    Compiling proc-macro2 v1.0.52
    <...>
-Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world-3/service/modules/hello_world)
+Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/service/modules/hello_world)
     Finished release [optimized] target(s) in 24.40s
-Added hello_world to fluence.yaml
-? Do you want to add service hello_world to a default worker defaultWorker Yes
+Added hello_world to /Users/bebo/localdev/hello-world/fluence.yaml
+? Do you want to add service hello_world to a default worker defaultWorker (Y/n) Yes
 Added hello_world to defaultWorker
 ```
 
 So what just happened?
-We instructed the CLI to create a path *service* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
 
-```bash
-# fluence.yaml
-# yaml-language-server: $schema=.fluence/schemas/fluence.yaml.json
+We instructed the CLI to create a service *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
 
-# Defines Fluence Project, most importantly - what exactly you want to deploy and how. You can use `fluence init` command to generate a template for new Fluence project
-
-# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/fluence.md
+```yml
+# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
 
 version: 2
+
+relays: kras
+
 aquaInputPath: src/aqua/main.aqua
+
 workers:
   defaultWorker:
     services: [ hello_world ]
+    spells: []
+
 deals:
   defaultWorker:
     minWorkers: 1
     targetWorkers: 3
-hosts:
-  defaultWorker:
-    peerIds:
-      - 12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf
-relays: kras
+
 services:
   hello_world:
-    get: service
+    get: src/services/hello_world
+
 ```
 
 Using this information, the CLI scaffolded our Rust (sub-)project:
@@ -400,29 +395,52 @@ hello-world
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
 such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify
-the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of
-the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module),
+the module as well as any host resource dependencies. *service.yaml* contains the service name and a list of
+the modules comprising the service including the entry, aka [facade](/docs/build/glossary.md#facade-module),
 module into the service.
 
-Looking at the *main.rs* file, you see that it is populated with a greeting example.
-Replace that code with our code from above so that:
+Now, lets open `main.rs` file, and replace it's code with the following:
 
 ```rust
 // main.rs
-use marine_rs_sdk::marine;
+use marine_rs_sdk::marine;             // 1
 
-pub fn main() {}
+#[marine]                              // 2
+pub struct Hello {
+  pub response: String
+}
 
-#[marine]
-pub fn hello_fluence() -> String {
-    format!("Hello, Fluence")
+pub fn main() {}                       // 3
+
+#[marine]                              // 4
+pub fn hello_world() -> Hello {        // 5
+    let response = format!("Hello, Fluence!");
+    Hello { response }
 }
 ```
+
+Let's review the code.
+
+Before anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
+
+In (2), we define a `Hello` structure that will hold our greeting message. We could also use just `-> String` for that matter, but this way you learn more. `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is a part of the *marine-rust-sdk*.
+
+In (3), we implement the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation, including first Service creation and following Compute Peer restarts.
+
+In (4), `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
+
+In (5) and further in `hello_world` body, we implement our business logic, which ain’t much this time around.
+
+We discuss modules and module configuration further below. Also note that WASM IT has type limits,
+which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
+The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
+but you do not have generics, lifetimes, etc.
+
 
 With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
 
-```
+```shell
 fluence build
 Making sure all services are downloaded... done
 <...>
