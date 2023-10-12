@@ -447,20 +447,22 @@ Making sure all services are downloaded... done
 Making sure all modules are downloaded and built... done
 ```
 
-Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies
-including Rust. In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
+Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies, including Rust.
+
+In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
 
 ```bash
-ls target/wasm32-wasi/release|grep hello_world.wasm
-hello_world.wasm
+file target/wasm32-wasi/release/hello_world.wasm
+
+target/wasm32-wasi/release/hello_world.wasm: WebAssembly (wasm) binary module version 0x1 (MVP)
 ```
 
 ### Test our code
 
 Before we deploy our code to the network, we may want to run some tests.
-One way to interact with our Wasm module is to use the
-[Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
-which is a tool to run our Wasm modules locally as if they were deployed to the network.
+
+One way to interact with our Wasm module is to use the [Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl), which is a tool to run our Wasm modules locally as if they were deployed to the network.
+
 Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
 
 ```bash
