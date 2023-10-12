@@ -535,6 +535,10 @@ Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/
 to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules.
 With the [marine rust test dsk](https://crates.io/crates/marine-rs-sdk-test), you can do that!
 
+To exit Marine REPL, enter `q` and hit Enter.
+
+#### Unit tests
+
 Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 
 ```rust
@@ -542,49 +546,52 @@ Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 // <...>
 #[cfg(test)]
 mod tests {
-    use marine_rs_sdk_test::marine_test;    // 1
+    use marine_rs_sdk_test::marine_test;                                        // 1
 
-    #[marine_test( //2
-        config_path = "<your path>/hello-world/.fluence/tmp/Config.toml",
-        modules_dir = "<your path>/localdev/hello-world/target/wasm32-wasi/release"
-    )]
-    fn test_hello_world(hw: marine_test_env::hello_world::ModuleInterface) { //3
+    #[marine_test(config_path = "../../../../../../.fluence/tmp/Config.toml")]  // 2
+    fn test_hello_world(hw: marine_test_env::hello_world::ModuleInterface) {    // 3
         let greeting = hw.hello_world();
-        assert_eq!(greeting, "Hello, Fluence".to_string());
+        assert_eq!(greeting.response, "Hello, Fluence!".to_string());
     }
 }
 ```
 
 Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
 the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module.
-In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
-Moreover, we need to provide the paths  to Config.toml and the Wasm module (2).
-Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
+
+1. In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
+2. Then, we need to provide the paths to Config.toml and the Wasm module (2).
+3. Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/hello-world/modules/hello_world)
-    Finished test [unoptimized + debuginfo] target(s) in 1.67s
-     Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
+   Compiling hello_world v0.1.0 (/Users/bebo/hello-world/src/services/hello_world/modules/hello_world)
+    Finished test [unoptimized + debuginfo] target(s) in 1.79s
+     Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
 running 1 test
 test tests::test_hello_world ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.45s
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.46s
 ```
 
 All is well with our module!
 
-If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`
-and add the corresponding *!* the *hello_world* function: `format!("Hello, Fluence!")` and run cargo test again:
+Now it's time to break the test to see if it will catch a bug. Let's intentionally change the expected value to a different one:
+
+```
+assert_eq!(greeting.response, "Buenas días, Fluence!".to_string());
+```
+
+Now, run cargo test again:
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/hello-world/modules/hello_world)
-    Finished test [unoptimized + debuginfo] target(s) in 1.71s
-     Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
+   Compiling hello_world v0.1.0 (/Users/bebo/hello-world/src/services/hello_world/modules/hello_world)
+    Finished test [unoptimized + debuginfo] target(s) in 1.53s
+     Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
 running 1 test
 test tests::test_hello_world ... FAILED
@@ -593,21 +600,29 @@ failures:
 
 ---- tests::test_hello_world stdout ----
 thread 'tests::test_hello_world' panicked at 'assertion failed: `(left == right)`
-  left: `"Hello, Fluence"`,
- right: `"Hello, Fluence!"`', hello-world/modules/hello_world/src/main.rs:20:9
+  left: `"Hello, Fluence!"`,
+ right: `"Buenas días, Fluence!"`', src/services/hello_world/modules/hello_world/src/main.rs:24:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
 
 failures:
     tests::test_hello_world
 
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.46s
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.42s
 
 error: test failed, to rerun pass `--bin hello_world`
 ```
 
-We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and
-need to recompile the changed code for the tests to have the most recent module(s).
-Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
+Now, let's say our test is correct, but our WASM/Rust implementation is wrong. Let's fix the code!
+
+Change the response in `hello_world` function like this:
+```rust
+let response = format!("Buenas días, Fluence!");
+```
+
+And run `fluence build` to rebuild the WASM modules. Without an explicit rebuild, tests will use old WASM modules, because `cargo` doesn't know anything about Fluence CLI and its setup.
+
+After `fluence build`, re-run `cargo test --workspace` and voila, all is well again!
 
 Now, we're ready to talk about Deal deployment and Compute Marketplace.
 
