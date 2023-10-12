@@ -515,15 +515,15 @@ exported data types (combined from all modules):
 
 exported functions:
 hello_world:
-  func hello_fluence() -> string
+  func hello_world() -> string
 ```
 
-As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace.
-In order to run *hello_fluence*  we use the cll command follow by the namespace,
+As expected, our only public function is the *hello_world* function in the *hello_world* namespace.
+In order to run *hello_world*  we use the cll command follow by the namespace,
 the function and the function arguments:
 
 ```bash
-> call hello_world hello_fluence []
+> call hello_world hello_world []
 result: "Hello, Fluence"
  elapsed time: 90.655µs
 ```
@@ -548,8 +548,8 @@ mod tests {
         config_path = "<your path>/hello-world/.fluence/tmp/Config.toml",
         modules_dir = "<your path>/localdev/hello-world/target/wasm32-wasi/release"
     )]
-    fn test_hello_fluence(hw: marine_test_env::hello_world::ModuleInterface) { //3
-        let greeting = hw.hello_fluence();
+    fn test_hello_world(hw: marine_test_env::hello_world::ModuleInterface) { //3
+        let greeting = hw.hello_world();
         assert_eq!(greeting, "Hello, Fluence".to_string());
     }
 }
@@ -570,7 +570,7 @@ cargo test --workspace
      Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
 
 running 1 test
-test tests::test_hello_fluence ... ok
+test tests::test_hello_world ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.45s
 ```
@@ -578,7 +578,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 All is well with our module!
 
 If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`
-and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
+and add the corresponding *!* the *hello_world* function: `format!("Hello, Fluence!")` and run cargo test again:
 
 ```bash
 cargo test --workspace
@@ -587,18 +587,18 @@ cargo test --workspace
      Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
 
 running 1 test
-test tests::test_hello_fluence ... FAILED
+test tests::test_hello_world ... FAILED
 
 failures:
 
----- tests::test_hello_fluence stdout ----
-thread 'tests::test_hello_fluence' panicked at 'assertion failed: `(left == right)`
+---- tests::test_hello_world stdout ----
+thread 'tests::test_hello_world' panicked at 'assertion failed: `(left == right)`
   left: `"Hello, Fluence"`,
  right: `"Hello, Fluence!"`', hello-world/modules/hello_world/src/main.rs:20:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 failures:
-    tests::test_hello_fluence
+    tests::test_hello_world
 
 test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.46s
 
