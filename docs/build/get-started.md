@@ -331,7 +331,7 @@ pub fn hello_world() -> Hello {
 
 But we don't yet have a place to put that code. For that, we need to add a Service by using command `fluence service new`.
 
-#### Add a service
+#### Create a new service
 
 Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).
 
