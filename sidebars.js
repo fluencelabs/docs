@@ -5,16 +5,17 @@ const sidebars = {
   build: [
     "build/introduction",
     "build/get-started",
-    {
-      type: "category",
-      label: "Quickstart",
-      items: [
-        "build/quickstarts",
-        "build/fundamentals",
-        "build/develop-services",
-        // "build/develop-distributed-algos"
-      ],
-    },
+    "build/fundamentals",
+    "build/develop-services",
+    // {
+    //   type: "category",
+    //   label: "Quickstart",
+    //   items: [
+    //     "build/fundamentals",
+    //     "build/develop-services",
+    //     // "build/develop-distributed-algos"
+    //   ],
+    // },
     {
       type: "category",
       label: "Working with data",
