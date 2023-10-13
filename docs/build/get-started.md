@@ -344,15 +344,15 @@ Follow the prompts and complete the setup:
 ```bash
 fluence service new
 ? Enter service path hello_world
-Successfully generated template for new service at /Users/bebo/localdev/hello-world/src/services/hello_world
+Successfully generated template for new service at /tmp/hello-world/src/services/hello_world
 # Making sure all services are downloaded...
 # Making sure all services are built...
     Updating crates.io index
    Compiling proc-macro2 v1.0.52
    <...>
-Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/service/modules/hello_world)
+Compiling hello_world v0.1.0 (/tmp/hello-world/service/modules/hello_world)
     Finished release [optimized] target(s) in 24.40s
-Added hello_world to /Users/bebo/localdev/hello-world/fluence.yaml
+Added hello_world to /tmp/hello-world/fluence.yaml
 ? Do you want to add service hello_world to a default worker defaultWorker (Y/n) Yes
 Added hello_world to defaultWorker
 ```
@@ -576,7 +576,7 @@ Once the test code is in place. you are ready to run *cargo test* :
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/hello-world/src/services/hello_world/modules/hello_world)
+   Compiling hello_world v0.1.0 (/tmp/hello-world/src/services/hello_world/modules/hello_world)
     Finished test [unoptimized + debuginfo] target(s) in 1.79s
      Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
@@ -598,7 +598,7 @@ Now, run cargo test again:
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/hello-world/src/services/hello_world/modules/hello_world)
+   Compiling hello_world v0.1.0 (/tmp/hello-world/src/services/hello_world/modules/hello_world)
     Finished test [unoptimized + debuginfo] target(s) in 1.53s
      Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
