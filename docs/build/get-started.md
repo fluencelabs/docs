@@ -329,11 +329,11 @@ pub fn hello_world() -> Hello {
 }
 ```
 
-But we don't yet have a place to put that code. For that, we need to add a Service by using command `fluence service new`.
+But we don't yet have a place to put that code. For that, we need to create a Service by using command `fluence service new`.
 
 #### Create a new service
 
-Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).
+Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more providers and use Aqua to interact with the deployed service(s).
 
 If your business logic results in only a single module, like our *hello_world* code, then you will have a service with a single module.
 
@@ -442,13 +442,13 @@ Let's review the code.
 
 1. Before anything, we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
 
-2. (2) defines a `Hello` structure that will hold our greeting message. We could also use just `-> String` for that matter, but this way you learn more. `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is a part of the *marine-rust-sdk*.
+2. Defines a `Hello` structure that will hold our greeting message. We could also use just `-> String` but that wouldn't have allowed us to introduce the marine struct concept: `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is part of the *marine-rust-sdk*.
 
-3. (3) implements the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation, including first Service creation and following Compute Peer restarts.
+3. Implements the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation.
 
-4. (4) `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
+4. `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
 
-5. (5) and further in `hello_world` body, we implement our business logic, which ain’t much this time around.
+5.  The `hello_world` body implements our business logic.
 
 We discuss modules and module configuration further below. Also note that WASM IT has type limits,
 which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
@@ -467,7 +467,7 @@ Making sure all services are downloaded... done
 Making sure all modules are downloaded and built... done
 ```
 
-Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies, including Rust.
+Depending on your setup, this may take a while as Fluence CLI will attempt to install missing dependencies, including Rust.
 
 In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
 
