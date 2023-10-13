@@ -656,9 +656,9 @@ As we will see in [`step-by-step`](#deployment-step-by-step) section below, ther
 
 Fluence Project can hold any number of Rust and WebAssembly -based functions and timer-based recurrent [Aqua](https://github.com/fluencelabs/aqua) scripts.
 
-A set of functions defined by a single Rust project or a set of linked WebAssembly modules is called a `service`. You can read more about services [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+A set of functions defined by a single Rust project or a set of linked WebAssembly modules is called a `service`.
 
-A timer-based recurrent Aqua scripts are called Spells. It's like a cron, but for distributed choreography. You can read more about spells [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
+A timer-based recurrent Aqua scripts are called Spells. It's like a cron, but for distributed choreography.
 
 Developers can group Services and Spells to Deals, and then deploy each deal via [`fluence deal deploy`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-deal-deploy-worker-names) command in `fluence cli`. Before Deal is registered on Chain, its settings and artifacts are uploaded to IPFS to produce `Worker Definition`, which is again stored on IPFS to produce `AppCID`.
 
@@ -672,15 +672,11 @@ A Deal specifies different parameters, like `price per epoch`, `minimum collater
 
 These parameters are matched against Providers' Market Offers, which specify `minimum price per epoch`, `maximum collateral` and `available effectors`.
 
-You can read more about effectors [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
-
 Providers register their Market Offers on chain in a contract called `Matcher`, and each `deal deploy` calls that contract to find Offers compatible with that Deal. It should match the price, collateral and available `effectors`.
 
 Each match should find at least `target number of workers` Providers whose offers are compatible with a given Deal.
 
 After match happened, Providers receive an event from Chain that commands them to deploy Deal to their chosen Compute Peer.
-
-You can read a more detailed description of Matching process [HERE](https://www.youtube.com/watch?v=tgTUtfb0Ok8).
 
 ### What are Compute Peers
 
