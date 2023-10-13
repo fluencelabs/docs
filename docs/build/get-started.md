@@ -359,7 +359,9 @@ Added hello_world to defaultWorker
 
 So what just happened?
 
-We instructed the CLI to create a service *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
+We instructed the CLI to create a service *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*.
+
+Here's how `fluence.yml` looks now.
 
 ```yaml
 # Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
@@ -370,23 +372,30 @@ relays: kras
 
 aquaInputPath: src/aqua/main.aqua
 
+services:
+  hello_world:
+    get: src/services/hello_world     # (1)
+
 workers:
   defaultWorker:
-    services: [ hello_world ]
+    services: [ hello_world ]         # (2)
     spells: []
 
 deals:
-  defaultWorker:
+  defaultWorker:                      # (3)
     minWorkers: 1
     targetWorkers: 3
 
-services:
-  hello_world:
-    get: src/services/hello_world
-
 ```
 
-Using this information, the CLI scaffolded our Rust (sub-)project:
+Let's see what this means for our `hello_world` service.
+
+1. The service is configured to be at `src/services/hello_world`. Path is relative to `fluence.yml`.
+2. That service is now included in a worker definition named `defaultWorker`.
+3. `defaultWorker` is a part of a deal, which allows you to use `fluence deal deploy` to deploy it. More on that later.
+
+
+Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
 
 ```bash
 tree hello-world/src -L 4 -a
