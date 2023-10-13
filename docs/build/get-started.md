@@ -337,13 +337,13 @@ Let’s unbundle this command before we follow the prompts: As discussed earlier
 
 If your business logic results in only a single module, like our *hello_world* code, then you will have a service with a single module.
 
-Now let’s use Fluence CLI to scaffold our Rust service with the `fluence service new` command.
+Now let’s use Fluence CLI to scaffold our Rust service.
 
 Follow the prompts and complete the setup:
 
 ```bash
-fluence service new
-? Enter service path hello_world
+fluence service new hello_world
+
 Successfully generated template for new service at /tmp/hello-world/src/services/hello_world
 # Making sure all services are downloaded...
 # Making sure all services are built...
