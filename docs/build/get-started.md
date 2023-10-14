@@ -289,22 +289,18 @@ For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/
 
 **Scaffolding Options**
 
-Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript.
-
-Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s).
-
-Choosing the *minimal* scaffolding setup provides you with a setup suitable to start from scratch, write some functions and call them via Fluence CLI. In that sense, that scenario is a "one-shot" one, as opposed to long-running backend or frontend applications.
+Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript, Javascript or a `quickstart`.
 
 The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
 
 Table 1: Client peer options from scaffolding
 
-| | Client Type | Client Provider |
-|:---|:---:|---:|
-| minimal | one-shot | Fluence CLI |
-| quickstart | one-shot | Fluence CLI |
-| TS/JS | one-shot | Browser |
-| TS/JS | long running | Node App |
+|             | Use-case                                                        | Client Provider |
+|:---         |:---:                                                            |---:             |
+| minimal     | Start from scratch, call functions from terminal                | Fluence CLI     |
+| quickstart  | Start with a pre-defined service, call functions from terminal  | Fluence CLI     |
+| TS          | Build TypeScript front-end application                          | Browser         |
+| JS          | Build JavaScript front-end application                          | Node App        |
 
 ### Write code
 
