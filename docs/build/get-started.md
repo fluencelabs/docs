@@ -53,7 +53,7 @@ Resources:
 - [Mumbai Chainlist RPC](https://chainlist.org/?testnets=true&search=mumbai)
 - [Mumbai Faucet](https://faucet.polygon.technology)
 - [Mumbai Explorer](https://mumbai.polygonscan.com)
-- Fluence testnet [USDC faucet](https://faucet-kras.fluence.dev)
+- Fluence [USDC & FLT faucet](https://faucet-kras.fluence.dev)
 
 ### Adding Mumbai Testnet to MetaMask
 
@@ -89,8 +89,6 @@ Resources:
   />
   <p>Figure 3: Populate Mumbai Testnet Information on MetaMask</p>
 </div>
-
-Now that we have enabled the Mumbai testnet on our wallet, visit the [Mumbai Faucet](https://faucet.polygon.technology) to get some tokens.
 
 ### Requesting MATIC Tokens from Polygon Testnet Faucet
 
@@ -565,7 +563,7 @@ Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/
 the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module.
 
 1. In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
-2. Then, we need to provide the paths to Config.toml and the Wasm module (2).
+2. Then, we need to provide the path to Config.toml (2).
 3. Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
@@ -661,6 +659,8 @@ Developers can group Services and Spells to Deals, and then deploy each deal via
 #### How deals are matched
 
 In order for a Deal to be deployed, there should be Providers willing to host it. That process is governed by the `Matcher` smart contract.
+
+Optionally, Deal can specify Providers on which to deploy. However, by default, Providers are chosen automatically.
 
 It's important that Matcher makes it possible for a single Deal to be deployed on several hosts to provide High Availability.
 
