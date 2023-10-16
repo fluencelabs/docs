@@ -9,6 +9,7 @@ const sidebars = {
       type: "category",
       label: "Quickstart",
       items: [
+        "build/get-started/wallet-management",
         "build/quickstarts",
         "build/fundamentals",
         "build/develop-services",
