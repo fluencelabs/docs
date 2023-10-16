@@ -53,7 +53,7 @@ Resources:
 - [Mumbai Chainlist RPC](https://chainlist.org/?testnets=true&search=mumbai)
 - [Mumbai Faucet](https://faucet.polygon.technology)
 - [Mumbai Explorer](https://mumbai.polygonscan.com)
-- Fluence testnet [USDC faucet](https://faucet-kras.fluence.dev)
+- Fluence [USDC & FLT faucet](https://faucet-kras.fluence.dev)
 
 ### Adding Mumbai Testnet to MetaMask
 
@@ -89,8 +89,6 @@ Resources:
   />
   <p>Figure 3: Populate Mumbai Testnet Information on MetaMask</p>
 </div>
-
-Now that we have enabled the Mumbai testnet on our wallet, visit the [Mumbai Faucet](https://faucet.polygon.technology) to get some tokens.
 
 ### Requesting MATIC Tokens from Polygon Testnet Faucet
 
@@ -243,7 +241,8 @@ We scaffold a new project with `fluence init` , which gives us a couple scaffold
 ```
 fluence init
 ? Select template (Use arrow keys)
-❯ minimal
+❯ quickstart
+  minimal
   ts
   js
 ```
@@ -261,286 +260,223 @@ Change into your new *hello-world* directory and have a look around:
 tree -L 2 -a
 
 .
-├── .fluence             # this is where Fluence CLI internals are kept including schemas and project secrets
+├── .fluence              # this is where Fluence CLI internals are kept including schemas and project secrets
 │   ├── aqua
-│   └── schemas
+│   ├── schemas
+│   └── workers.yaml
 ├── .gitignore
 ├── .vscode
 │   ├── extensions.json
 │   └── settings.json
-├── fluence.yaml         # this is where the project metadata, including service references, are kept
-└── src                  # this is where the Aqua distributed service choreography and composition scripts reside
+├── README.md
+├── fluence.yaml          # this is where the project metadata, including service references, are kept
+└── src                   # this is where the Aqua distributed service choreography and composition scripts reside
     └── aqua
 ```
 
-A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports:
+A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports.
 
-```aqua
-aqua Main
+It defines several important functions:
 
-import "@fluencelabs/aqua-lib/builtin.aqua"
-import "@fluencelabs/aqua-lib/subnet.aqua"
+- `showSubnet` – a function that resolves subnet participants by DealID stored in `.fluence`, and shows a list of workers.
+- `runDeployedServices` – a function that resolves subnet, and then calls `MyService.greeting` on every worker that participates in your subnet.
 
-use "deals.aqua"
-use "hosts.aqua"
-import "services.aqua"
-
--- IMPORTANT: Add exports for all functions that you want to run
-export helloWorld, helloWorldRemote, getInfo, getInfos
-
--- DOCUMENTATION:
--- https://fluence.dev
-
-
-
--- example of running services deployed using `fluence deal deploy`
--- with worker 'defaultWorker' which has service 'MyService' with method 'greeting'
-
-export runDeployedServices, showSubnet
-
-data Answer:
-    answer: ?string
-    worker: Worker
-
-func runDeployedServices() -> []Answer:
-    deals <- Deals.get()
-    dealId = deals.defaultWorker!.dealIdOriginal
-    answers: *Answer
-    on HOST_PEER_ID:
-        subnet <- Subnet.resolve(dealId)
-    if subnet.success == false:
-        Console.print(["Failed to resolve subnet: ", subnet.error])
-
-    for w <- subnet.workers:
-        if w.worker_id == nil:
-            answers <<- Answer(answer=nil, worker=w)
-        else:
-            on w.worker_id! via w.host_id:
-                answer <- MyService.greeting("fluence")
-                answers <<- Answer(answer=?[answer], worker=w)
-
-    <- answers
-
-data WorkerServices:
-    host_id: string
-    worker_id: ?string
-    services: ?[]string
-
-func showSubnet() -> []WorkerServices:
-    deals <- Deals.get()
-    dealId = deals.defaultWorker!.dealIdOriginal
-    on HOST_PEER_ID:
-        subnet <- Subnet.resolve(dealId)
-    if subnet.success == false:
-        Console.print(["Failed to resolve subnet: ", subnet.error])
-
-    services: *WorkerServices
-    for w <- subnet.workers:
-        if w.worker_id != nil:
-            on w.worker_id! via w.host_id:
-                -- get list of all services on this worker
-                srvs <- Srv.list()
-
-                -- gather aliases
-                aliases: *string
-                for s <- srvs:
-                    if s.aliases.length != 0:
-                        aliases <<- s.aliases[0]
-
-                    services <<- WorkerServices(host_id=w.host_id, worker_id=w.worker_id, services=?[aliases])
-        else:
-            services <<- WorkerServices(host_id=w.host_id, worker_id=nil, services=nil)
-
-    <- services
-
-
--- local
-func helloWorld(name: string) -> string:
-    <- Op.concat_strings("Hello, ", name)
-
--- remote
-func helloWorldRemote(name: string) -> string:
-    on HOST_PEER_ID:
-        hello_msg <- helloWorld(name)
-        from_msg <- Op.concat_strings(hello_msg, "! From ")
-        from_peer_msg <- Op.concat_strings(from_msg, HOST_PEER_ID)
-    <- from_peer_msg
-
--- request response
-func getInfo() -> Info, PeerId:
-    on HOST_PEER_ID:
-        info <- Peer.identify()
-    <- info, HOST_PEER_ID
-
--- iterate through several peers
-func getInfos(peers: []PeerId) -> []Info:
-    infos: *Info
-    for p <- peers:
-        on p:
-            infos <- Peer.identify()
-    <- infos
-```
+`runDeployedServices` is going to be commented out in `minimal` template, and uncommented in `quickstart` template. It serves as an example of how to call functions on a subnet with multiple workers.
 
 For more information about all things Aqua, see the [Aqua book](/docs/aqua-book/introduction.md).
 
 **Scaffolding Options**
 
-Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript or Javascript. Before we go exploring, a quick review of how Fluence and Aqua work might be in order: All communication with distributed services is over libp2p. Hence, you need a (p2p) client peer, rather than an HTTP client, to interact with the peers hosting your service(s). Choosing the *minimal* scaffolding setup provides you with a setup suitable to utilize a one-shot client-peer builtin to Fluence CLI. The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
+Instead of the *minimal* scaffold chosen at the outset of this section, we can opt for an extended project setup for either Typescript, Javascript or a `quickstart`.
+
+The TS/JS, setup, on the other hand, provides you with the scaffolding to create a client peer with [Fluence js-client](https://github.com/fluencelabs/js-client) that can run in the browser or as a node app. See Table 1.
 
 Table 1: Client peer options from scaffolding
 
-| | Client Type | Client Provider |
-|:---|:---:|---:|
-| minimal | one-shot | Fluence CLI |
-| TS/JS | one-shot | Browser |
-| TS/JS | long running | Node App |
+|             | Use-case                                                        | Client Provider |
+|:---         |:---:                                                            |---:             |
+| minimal     | Start from scratch, call functions from terminal                | Fluence CLI     |
+| quickstart  | Start with a pre-defined service, call functions from terminal  | Fluence CLI     |
+| TS          | Build TypeScript front-end application                          | Browser         |
+| JS          | Build JavaScript front-end application                          | Node App        |
 
 ### Write code
 
-We set up our project and are left with creating our *hello_world* function, which we implement in Rust:
+After project initialization, it's time to write some code!
+
+Let's create a simple `hello_world` function, which will look like this:
 
 ```rust
-// hello_fluence.rs
-use marine_rs_sdk::marine;             // 1
+use marine_rs_sdk::marine;
 
-pub fn main() {}                       // 2
+#[marine]
+pub struct Hello {
+  pub response: String
+}
 
-#[marine]                              // 3
-pub fn hello_world() -> String {       // 4
-    format!("Hello, Fluence!")
+pub fn main() {}
+
+#[marine]
+pub fn hello_world() -> Hello {
+    let response = format!("Hello, Fluence!");
+    Hello { response }
 }
 ```
 
-Before we do anything, (1) we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md),
-which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime. The `#[marine]` macro, (3), is part of the *marine-rust-sdk* and exports marked types as publicly visible and callable functions and structs. In (4) we implement our business logic, which ain’t much this time around.
+But we don't yet have a place to put that code. For that, we need to create a Service by using command `fluence service new`.
 
-In (2), we implement a main function which is not marked with the *#[marine]* procedural macro.
-We discuss modules and module configuration further below. Also note that WASM IT has type limits,
-which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
-The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
-but you do not have generics, lifetimes, etc.
+#### Create a new service
 
-Now that we know what our code looks like, let’s use Fluence CLI to scaffold our Rust (sub-)project with the `fluence service new` command. Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more peers and use Aqua to interact with the deployed service(s).  If your business logic results in only a single module, like our *hello_world* code, then this module is also the service.
+Let’s unbundle this command before we follow the prompts: As discussed earlier, you write your business logic in Rust and compile it to one or more Wasm modules. You then “package” these modules, with help of Fluence CLI, into a *service*. Eventually you deploy this service to one or more providers and use Aqua to interact with the deployed service(s).
 
-Now we follow the prompts to `fluence service new` and complete the setup:
+If your business logic results in only a single module, like our *hello_world* code, then you will have a service with a single module.
+
+Now let’s use Fluence CLI to scaffold our Rust service.
+
+Follow the prompts and complete the setup:
 
 ```bash
-fluence service new
-? Enter service path service
-? Do you want to use service as the name of your new service? No
-? Enter service name (must start with a lowercase letter and contain only letters, numbers, and underscores)
-hello_world
-Successfully generated template for new service at service
+fluence service new hello_world
+
+Successfully generated template for new service at /tmp/hello-world/src/services/hello_world
 # Making sure all services are downloaded...
 # Making sure all services are built...
     Updating crates.io index
    Compiling proc-macro2 v1.0.52
    <...>
-Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world-3/service/modules/hello_world)
+Compiling hello_world v0.1.0 (/tmp/hello-world/service/modules/hello_world)
     Finished release [optimized] target(s) in 24.40s
-Added hello_world to fluence.yaml
-? Do you want to add service hello_world to a default worker defaultWorker Yes
+Added hello_world to /tmp/hello-world/fluence.yaml
+? Do you want to add service hello_world to a default worker defaultWorker (Y/n) Yes
 Added hello_world to defaultWorker
 ```
 
 So what just happened?
-We instructed the CLI to create a path *service* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*, which allows Fluence CLI to find what it needs to fulfill command requirements:
 
-```bash
-# fluence.yaml
-# yaml-language-server: $schema=.fluence/schemas/fluence.yaml.json
+We instructed the CLI to create a service *hello-world* in which we want our *hello_world* module to live. Moreover, we chose to add this information to the project’s main configuration file *fluence.yaml*.
 
-# Defines Fluence Project, most importantly - what exactly you want to deploy and how. You can use `fluence init` command to generate a template for new Fluence project
+Here's how `fluence.yml` looks now.
 
-# Documentation: https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/fluence.md
+```yaml
+# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
 
 version: 2
-aquaInputPath: src/aqua/main.aqua
-dependencies:                                #
-  npm:
-    "@fluencelabs/aqua": 0.10.3
-    "@fluencelabs/aqua-lib": 0.6.0
-    "@fluencelabs/spell": 0.5.4
-    "@fluencelabs/registry": 0.8.2
-  cargo:
-    marine: 0.14.0
-    mrepl: 0.21.0
-workers:
-  defaultWorker:
-    services: [ hello_world ]
-deals:
-  defaultWorker:
-    minWorkers: 1
-    targetWorkers: 3
-hosts:
-  defaultWorker:
-    peerIds:
-      - 12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf
+
 relays: kras
+
+aquaInputPath: src/aqua/main.aqua
+
 services:
   hello_world:
-    get: service
+    get: src/services/hello_world     # (1)
+
+workers:
+  defaultWorker:
+    services: [ hello_world ]         # (2)
+    spells: []
+
+deals:
+  defaultWorker:                      # (3)
+    minWorkers: 1
+    targetWorkers: 3
+
 ```
 
-Using this information, the CLI scaffolded our Rust (sub-)project:
+Let's see what this means for our `hello_world` service.
+
+1. The service is configured to be at `src/services/hello_world`. Path is relative to `fluence.yml`.
+2. That service is now included in a worker definition named `defaultWorker`.
+3. `defaultWorker` is a part of a deal, which allows you to use `fluence deal deploy` to deploy it. More on that later.
+
+
+Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
 
 ```bash
-tree hello-world -L 4 -a
-hello-world
-├── modules
-│   └── hello_world
-│       ├── Cargo.toml
-│       ├── module.yaml
-│       └── src
-│           └── main.rs
-└── service.yaml
+tree hello-world/src -L 4 -a
+
+hello-world/src
+├── aqua
+│   └── main.aqua
+└── services
+    └── hello_world
+        ├── modules
+        │   └── hello_world
+        └── service.yaml
 ```
 
 Recall, a service is comprised of one or more Wasm modules and associated configuration and each module,
 such as *hello_world*, has its own *module.yaml* which contains all the info necessary to identify
-the module as well as any host resource dependencies. *service.yaml* contains  the service name and a list of
-the modules comprising the service including is the entry, aka [facade](/docs/build/glossary.md#facade-module),
+the module as well as any host resource dependencies. *service.yaml* contains the service name and a list of
+the modules comprising the service including the entry, aka [facade](/docs/build/glossary.md#facade-module),
 module into the service.
 
-Looking at the *main.rs* file, you see that it is populated with a greeting example.
-Replace that code with our code from above so that:
+Now, lets open `main.rs` file, and replace it's code with the following:
 
-```bash
+```rust
 // main.rs
-use marine_rs_sdk::marine;
+use marine_rs_sdk::marine;             // 1
 
-pub fn main() {}
+#[marine]                              // 2
+pub struct Hello {
+  pub response: String
+}
 
-#[marine]
-pub fn hello_fluence() -> String {
-    format!("Hello, Fluence")
+pub fn main() {}                       // 3
+
+#[marine]                              // 4
+pub fn hello_world() -> Hello {        // 5
+    let response = format!("Hello, Fluence!");
+    Hello { response }
 }
 ```
+
+#### Code review
+
+Let's review the code.
+
+1. Before anything, we need to import the [Marine Rust SDK](/docs/marine-book/marine-rust-sdk/marine-rust-sdk.md), which allows us to compile Rust code to wasm32-wasi module compatible with Fluence’s Marine runtime.
+
+2. Defines a `Hello` structure that will hold our greeting message. We could also use just `-> String` but that wouldn't have allowed us to introduce the marine struct concept: `#[marine]` macro marks a struct as publicly visible, and handles serialization/deserialization for you. It is part of the *marine-rust-sdk*.
+
+3. Implements the `main` function which is responsible for the initialization logic of the module. It is called automatically at service instantiation.
+
+4. `#[marine]` marks `hello_world` as publicly visible, so it can be called from Aqua.
+
+5.  The `hello_world` body implements our business logic.
+
+We discuss modules and module configuration further below. Also note that WASM IT has type limits,
+which are explained in detail in the [Marine book](/docs/marine-book/marine-runtime/i-value-and-i-type).
+The short version is: you got strings, ints, floats, bytes, arrays and records at your disposal,
+but you do not have generics, lifetimes, etc.
+
+### Build project
 
 With our code in place, let’s finally build our project, i.e. compile our code to a wasm32-wasi module.
 In your project root directory:
 
-```rust
+```shell
 fluence build
 Making sure all services are downloaded... done
 <...>
 Making sure all modules are downloaded and built... done
 ```
 
-Depending on your setup, this may take a while as Fluence CLI will attempt to install any missing dependencies
-including Rust. In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
+Depending on your setup, this may take a while as Fluence CLI will attempt to install missing dependencies, including Rust.
+
+In the end, you can locate our much anticipated Wasm module in the Rust *target* compile directory:
 
 ```bash
-ls target/wasm32-wasi/release|grep hello_world.wasm
-hello_world.wasm
+file target/wasm32-wasi/release/hello_world.wasm
+
+target/wasm32-wasi/release/hello_world.wasm: WebAssembly (wasm) binary module version 0x1 (MVP)
 ```
 
 ### Test our code
 
 Before we deploy our code to the network, we may want to run some tests.
-One way to interact with our Wasm module is to use the
-[Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl),
-which is a tool to run our Wasm modules locally as if they were deployed to the network.
+
+One way to interact with our Wasm module is to use the [Marine Repl](/docs/marine-book/marine-tooling-reference/marine-repl#run-repl), which is a tool to run our Wasm modules locally as if they were deployed to the network.
+
 Again, depending on your setup, this may take a while as Fluence CLI may need to install missing dependencies:
 
 ```bash
@@ -582,15 +518,15 @@ exported data types (combined from all modules):
 
 exported functions:
 hello_world:
-  func hello_fluence() -> string
+  func hello_world() -> string
 ```
 
-As expected, our only public function is the *hello_fluence* function in the *hello_world* namespace.
-In order to run *hello_fluence*  we use the cll command follow by the namespace,
+As expected, our only public function is the *hello_world* function in the *hello_world* namespace.
+In order to run *hello_world*  we use the cll command follow by the namespace,
 the function and the function arguments:
 
 ```bash
-> call hello_world hello_fluence []
+> call hello_world hello_world []
 result: "Hello, Fluence"
  elapsed time: 90.655µs
 ```
@@ -602,6 +538,10 @@ Rust comes with a very nice [testing framework](https://doc.rust-lang.org/cargo/
 to unit and integration test Rust code. However, we don’t necessarily want to test our Rust code but our Wasm modules.
 With the [marine rust test dsk](https://crates.io/crates/marine-rs-sdk-test), you can do that!
 
+To exit Marine REPL, enter `q` and hit Enter.
+
+#### Unit tests
+
 Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 
 ```rust
@@ -609,72 +549,85 @@ Let’s add the testing code for our *hello-world* module in our *main.rs* file:
 // <...>
 #[cfg(test)]
 mod tests {
-    use marine_rs_sdk_test::marine_test;    // 1
+    use marine_rs_sdk_test::marine_test;                                        // 1
 
-    #[marine_test( //2
-        config_path = "<your path>/hello-world/.fluence/tmp/Config.toml",
-        modules_dir = "<your path>/localdev/hello-world/target/wasm32-wasi/release"
-    )]
-    fn test_hello_fluence(hw: marine_test_env::hello_world::ModuleInterface) { //3
-        let greeting = hw.hello_fluence();
-        assert_eq!(greeting, "Hello, Fluence".to_string());
+    #[marine_test(config_path = "../../../../../../.fluence/tmp/Config.toml")]  // 2
+    fn test_hello_world(hw: marine_test_env::hello_world::ModuleInterface) {    // 3
+        let greeting = hw.hello_world();
+        assert_eq!(greeting.response, "Hello, Fluence!".to_string());
     }
 }
 ```
 
 Marine tests fundamentally follows [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) with
 the exception that you are testing the Wasm modules not the code to be compiled to a Wasm module.
-In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
-Moreover, we need to provide the paths  to Config.toml and the Wasm module (2).
-Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
+
+1. In order to make that work, you need to use the [marine-rs-sdk](https://crates.io/crates/marine-rs-sdk-test) (1).
+2. Then, we need to provide the path to Config.toml (2).
+3. Finally, we need to tap into the Wasm module namespace to be able to call the desired method (3).
 
 Once the test code is in place. you are ready to run *cargo test* :
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/hello-world/modules/hello_world)
-    Finished test [unoptimized + debuginfo] target(s) in 1.67s
-     Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
+   Compiling hello_world v0.1.0 (/tmp/hello-world/src/services/hello_world/modules/hello_world)
+    Finished test [unoptimized + debuginfo] target(s) in 1.79s
+     Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
 running 1 test
-test tests::test_hello_fluence ... ok
+test tests::test_hello_world ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.45s
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.46s
 ```
 
 All is well with our module!
 
-If you change the assert statement to  `assert_eq!(greeting, "Hello, Fluence".to_string());`
-and add the corresponding *!* the *hello_fluence* function: `format!("Hello, Fluence!")` and run cargo test again:
+Now it's time to break the test to see if it will catch a bug. Let's intentionally change the expected value to a different one:
+
+```
+assert_eq!(greeting.response, "Buenas días, Fluence!".to_string());
+```
+
+Now, run cargo test again:
 
 ```bash
 cargo test --workspace
-   Compiling hello_world v0.1.0 (/Users/bebo/localdev/hello-world/hello-world/modules/hello_world)
-    Finished test [unoptimized + debuginfo] target(s) in 1.71s
-     Running unittests src/main.rs (target/debug/deps/hello_world-8c35826dfb97c180)
+   Compiling hello_world v0.1.0 (/tmp/hello-world/src/services/hello_world/modules/hello_world)
+    Finished test [unoptimized + debuginfo] target(s) in 1.53s
+     Running unittests src/main.rs (target/debug/deps/hello_world-cd07bdcb4767b2a3)
 
 running 1 test
-test tests::test_hello_fluence ... FAILED
+test tests::test_hello_world ... FAILED
 
 failures:
 
----- tests::test_hello_fluence stdout ----
-thread 'tests::test_hello_fluence' panicked at 'assertion failed: `(left == right)`
-  left: `"Hello, Fluence"`,
- right: `"Hello, Fluence!"`', hello-world/modules/hello_world/src/main.rs:20:9
+---- tests::test_hello_world stdout ----
+thread 'tests::test_hello_world' panicked at 'assertion failed: `(left == right)`
+  left: `"Hello, Fluence!"`,
+ right: `"Buenas días, Fluence!"`', src/services/hello_world/modules/hello_world/src/main.rs:24:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
-failures:
-    tests::test_hello_fluence
 
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.46s
+failures:
+    tests::test_hello_world
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.42s
 
 error: test failed, to rerun pass `--bin hello_world`
 ```
 
-We added matching *!* to both the test and the code. What gives? Right, we are testing the Wasm module and
-need to recompile the changed code for the tests to have the most recent module(s).
-Run `fluence build` and now re-run `cargo test --workspace` and voila, all is well again!
+Now, let's say our test is correct, but our WASM/Rust implementation is wrong. Let's fix the code!
+
+Change the response in `hello_world` function like this:
+```rust
+let response = format!("Buenas días, Fluence!");
+```
+
+And run `fluence build` to rebuild the WASM modules. Without an explicit rebuild, tests will use old WASM modules, because `cargo` doesn't know anything about Fluence CLI and its setup.
+
+After `fluence build`, re-run `cargo test --workspace` and voila, all is well again!
+
+Now, we're ready to talk about Deal deployment and Compute Marketplace.
 
 ## Compute Marketplace: Glossary & Background
 
@@ -706,6 +659,8 @@ Developers can group Services and Spells to Deals, and then deploy each deal via
 #### How deals are matched
 
 In order for a Deal to be deployed, there should be Providers willing to host it. That process is governed by the `Matcher` smart contract.
+
+Optionally, Deal can specify Providers on which to deploy. However, by default, Providers are chosen automatically.
 
 It's important that Matcher makes it possible for a single Deal to be deployed on several hosts to provide High Availability.
 
@@ -815,21 +770,21 @@ fluence run -f 'showSubnet()'
 [
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KooLANJSDNdoandjqlwkDNIBNnnao12nWNj0uaJIKSALn"
     },
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KooWKGU8FFyw5Ek7wWREX2KKEs2AjxnaojsndoJOWNSJd"
     },
     {
         "services": [
-            "myService",
+            "hello_world",
             "worker-spell"
         ],
         "worker_id": "12D3KoonONmakW291NlajwyrnbLSAMNpqNAO21NQJWJSnsnwo"
@@ -841,7 +796,7 @@ fluence run -f 'showSubnet()'
 
 Now, if you want to change something in one of your Services or Spells, you can do that, and simply call `deal deploy` again will update existing Deal in place.
 
-Try it: modify code in `src/services/myService/modules/myService/src/main.rs` and execute `deal deploy` again.
+Try it: modify code in `src/services/hello_world/modules/hello_world/src/main.rs` and execute `deal deploy` again.
 
 ### Current limitations
 
