@@ -4,68 +4,72 @@ Spells are actors in the Fluence Network designed to perform tasks with user bus
 
 Think of them as of automated jobs, that can be executed when some specific trigger event occurs (time, connection poll, http, blockchain events, etc).
 
-:::info
-Older implementation of Fluence had Scheduled Scripts, stateless AIR scripts which were periodically run by the node. There had rather restricted use cases since:
-- they were stateless
-- they could be triggered only by a timer
-- they were working on behalf of the node
-- they couldn’t communicate with each other
-- they didn’t have a good management interface
-
-Spells are basically Scheduled Scripts done ~~right~~ better.
-:::
-
 Spells can be used for user-defined automation scenarios for service maintenance, periodical data extraction, subnet maintenance, etc. 
 
-A spell is a marine service, the main goal of which is to provide state storage for script execution. It also provides some additional features to ease the spell usage for users and take some responsibility from the node (aka Nox). The service serves as a template and is instantiated on the creation of a new spell.
+A spell is a [Marine](/docs/marine-book/introduction.md) service, the main goal of which is to provide state storage for script execution. It also provides some additional features to ease the spell usage for users and take some responsibility from the node (aka [Nox](https://github.com/fluencelabs/nox)). The service serves as a template and is instantiated on the creation of a new spell.
 
 This service is intended to be used as a template and instantiated by a node on each new spell creation.
 
 ## Managing spells
-Nox provides user API for interacting with spells.
+[Nox](https://github.com/fluencelabs/nox) provides user API for interacting with spells.
 
-Users are able to control their spells' lifecycle: install new ones, update them, and remove them. The developer experience is provided by the means of Fluence CLI. 
+Users are able to control their spells' lifecycle: install new ones, update them, and remove them. The developer experience is provided by the means of [Fluence CLI](https://github.com/fluencelabs/cli). 
 
-Installing spells include providing the following: 
+A spell consists of the following parts: 
 - The spell script, which will be executed
 - The list of trigger events (aka the trigger configuration) on which to run the spell
-- The initial state of the spell (e.g. initial state of spell's KV)
+- The initial state of the spell (e.g. initial state of spell's KV storage)
 
-After installation, the developer is able to update the initial settings: the script, the trigger configuration, and the state KV storage.
+After installation, the developer is able to update the initial settings: the spell script, the trigger configuration, and the state KV storage.
 
 Also, the developer is able to remove their spells, cleaning the state from the peer.
 
-Users can check their spells' state: 
+Developer can check their spells' state: 
 - inspect their internal state (the KV storage, the script, the trigger config)
 - check if they’re currently subscribed to some triggers
 - obtain their peer identity: spell_id and worker_id.
 
 ## Events that can trigger spells
-Nox triggers spells according to their configuration. Currently Nox provides the following event triggers:
+[Nox](https://github.com/fluencelabs/nox) triggers spells according to their configuration. Currently Nox provides the following event triggers:
 - Timer/CRON Triggers: run spells at a specified time or within a specified period.
 Users should be able to specify the following:
     - when to run the spell,
     - when to unsubscribe the spell from timer events,
-    - with what period to run the spell.
+    - how often should the script be run.
 - Connection Triggers: run spells on connection/disconnection of some peers to the peer.
 
 All other trigger types can be implemented based on the timer triggers & the spell KV storage (blockchain event trigger, database event trigger, HTTP event trigger, etc)
 
 ## Creating and updating spells
 
-Spells can be created and managed with Fluence CLI. 
+Spells can be created and managed with [Fluence CLI](https://github.com/fluencelabs/cli). 
 
-Let's create a new spell in a recently scaffolded Fluence CLI project by running `fluence spell new`:
+Let's start from creating a new project with `fluence init` , which gives us a couple scaffolding choices:
+```bash
+fluence init
+? Select template (Use arrow keys)
+❯ quickstart
+  minimal
+  ts
+  js
+```
+
+Press return to select the default quickstart scaffolding option and enter *quickstart* as the project path when prompted:
+```bash
+? Enter project path or press enter to init in the current directory: quickstart
+Successfully initialized Fluence project template at /Users/arete/Documents/fluence/quickstart
+```
+
+Now let's create a new spell in a recently scaffolded Fluence CLI project by running `fluence spell new`:
 ```bash
 quickstart $ fluence spell new
-? Enter spell name 5min_spell
+? Enter spell name 1min_spell
 Successfully generated template for new spell at /Users/arete/Documents/fluence/quickstart/src/spells/1min_spell
-? Do you want to add spell 5min_spell to a default worker defaultWorker Yes
+? Do you want to add spell 1min_spell to a default worker defaultWorker Yes
 Added 1min_spell to defaultWorker
 ```
 
-Lets check what have been generated:
-- a new spell directory was created under src/spells -- 5min_spell:
+Lets check what have been generated: a new spell directory was created under src/spells - 1min_spell:
 ```bash
 .
 └── 1min_spell
@@ -73,9 +77,9 @@ Lets check what have been generated:
     └── spell.yaml
 ```
 
-It contains aqua script that will be executed and the spell.yaml file that specifies the trigger configuration for the spell.
+It contains [Aqua](/docs/aqua-book/introduction.md) script that will be executed and the spell.yaml file that specifies the trigger configuration for the spell.
 
-If we take a look at the spell.aqua file we see the `spell()` function that is executed when the spell is triggered:
+If we take a look at the `spell.aqua` file we see the `spell()` function that is executed when the spell is triggered:
 ```aqua
 import Op, Debug from "@fluencelabs/aqua-lib/builtin.aqua"
 import Spell from "@fluencelabs/spell/spell_service.aqua"
@@ -86,6 +90,53 @@ func spell():
     Spell "worker-spell"
     Spell.list_push_string("logs", str)
 ```
+
+Lets modify it a bit, so that we could redirect the spell logs can be viewed though `fluence deal logs` command:
+```aqua
+import Op, Debug from "@fluencelabs/aqua-lib/builtin.aqua"
+import Spell from "@fluencelabs/spell/spell_service.aqua"
+func spell():
+    msg = "Spell is working!"
+    str <- Debug.stringify(msg)
+    Spell "self"
+    -- also it can be resolved by Spell "spell"
+    Spell.set_string("my_key", str)
+    -- then we will log the same message to installation-spell, so it is discoverable through the CLI's `fluence deal logs` command
+    Spell "worker-spell"
+    Spell.store_log(str)
+```
+
+After that lets also modify the main.aqua file to define a helper function for getting the keys into the spell KV storage:
+```aqua
+aqua Main
+
+import Console, Debug from "@fluencelabs/aqua-lib/builtin.aqua"
+import "@fluencelabs/aqua-lib/subnet.aqua"
+import Spell from "@fluencelabs/spell/spell_service.aqua"
+
+use "deals.aqua"
+
+export get_my_keys
+
+func get_my_keys() -> []string:
+    deals <- Deals.get()
+    dealId = deals.defaultWorker!.dealIdOriginal
+    results: *string
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if !subnet.success:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    for w <- subnet.workers:
+        if w.worker_id != nil:
+            on w.worker_id! via w.host_id:
+                Spell "1min_spell"
+                res <- Spell.get_string("my_key")
+                results <- Debug.stringify([res.str, "on worker ", w.worker_id!, " on host ", w.host_id])
+
+    <- results
+
+``` 
 
 Then lets inspect the spell.yaml file:
 ```yaml
@@ -114,13 +165,33 @@ Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/spell.m
 
 ## Deploying the spell
 
-So, now we've configured our spell to run every minute, so lets try to deploy it by doing `fluence deal deploy`. After the deal is deployed, you can check that the spell is working by running `fluence deal logs`.
+So, now we've configured our spell to run every minute, so lets try to deploy it by doing `fluence deal deploy`. 
+
+**Please note that the deployment process requires some preparation (set up Metamask, get some testnet tokens, etc). You can find more details in the [Getting Started Guide](/docs/build/get-started.md).**
+
+After the deal is deployed, you can check that the spell is working:
+
+```bash
+fluence run -f "get_my_keys()"
+Connecting to kras relay: /dns4/8-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWEFFCZnar1cUJQ3rMWjvPQg6yMV2aXWs2DkJNSRbduBWn
+Connected
+[
+  "[\"\\\"Spell is working!\\\"\",\"on worker \",\"12D3KooWMaEjJ7ren3JvVgAtrzm6aPPtSZMPTcQu8wD9wZ5krQe5\",\" on host \",\"12D3KooWSD5PToNiLQwKDXsu8JSysCwUt8BVUJEqCHcDe7P5h45e\"]",
+  "[\"\\\"Spell is working!\\\"\",\"on worker \",\"12D3KooWPkUpq6U2FpMbviNystGD7qmPa9yM8oR2dv1WkAd4jtkW\",\" on host \",\"12D3KooWR4cv1a8tv7pps4HH6wePNaK6gf1Hww5wcCMzeWxyNw51\"]",
+  "[\"\\\"Spell is working!\\\"\",\"on worker \",\"12D3KooWSY8ZFEoAXmHYkYheSRcDB7FwmtmNz8iHYmZjcArDYhmc\",\" on host \",\"12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf\"]"
+]
+```
+You can also check the logs by running `fluence deal logs`.
 
 ## Updating the spell
 
-If you want to change the spell script or spell definition -- you should change the corresponding files and run `fluence deal deploy` once again to update the spell.
+If you want to change the spell script or spell definition -- you should change the corresponding files and run `fluence deal deploy` once again to update the spell. The deployment process is described in the [Getting Started Guide](/docs/build/get-started.md).
 
 ## Removing the spell
 
-If you want to remove the spell from the node, you should remove the spell definition from the project and run  `fluence deal deploy` to redeploy the workers. This will remove the spell from the subnet and unsubscribe it from all triggers.
+If you want to remove the spell from the node, you should remove the spell definition from the project and run  `fluence deal deploy` to redeploy the workers. This will remove the spell from the subnet and unsubscribe it from all triggers. The deployment process is described in the [Getting Started Guide](/docs/build/get-started.md).
+
+# Reference Link
+
+- [Spell repository on GitHub](https://github.com/fluencelabs/spell)
 
