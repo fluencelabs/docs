@@ -241,13 +241,13 @@ We scaffold a new project with `fluence init` , which gives us a couple scaffold
 ```
 fluence init
 ? Select template (Use arrow keys)
-❯ quickstart
-  minimal
+  quickstart
+❯ minimal
   ts
   js
 ```
 
-Press return to select the default *minimal* scaffolding option and enter *hello_world* as the project path when prompted:
+Choose the *minimal* scaffolding option, and press return. When prompted, enter *hello_world* as the project path.
 
 ```bash
 ? Enter project path or press enter to init in the current directory: hello-world
@@ -481,7 +481,7 @@ Again, depending on your setup, this may take a while as Fluence CLI may need to
 
 ```bash
 fluence service repl
-? Enter service name from fluence.yaml, path to a service or url to .tar.gz archive hello-world
+? Enter service name from fluence.yaml, path to a service or url to .tar.gz archive hello_world
 Making sure service and modules are downloaded and built... ⣻
 Making sure service and modules are downloaded and built... done
 
