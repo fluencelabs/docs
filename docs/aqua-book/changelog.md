@@ -7,6 +7,14 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+## [0.12.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.4) - October 23, 2023
+* **compiler:** Handle error function exit in tracing mode ([LNG-250](https://linear.app/fluence/issue/LNG-250)) ([#921](https://github.com/fluencelabs/aqua/issues/921))
+* **compiler:** Optimize math in compile time ([LNG-245](https://linear.app/fluence/issue/LNG-245)) ([#922](https://github.com/fluencelabs/aqua/issues/922))
+* **compiler:** Fix gate inlining ([LNG-253](https://linear.app/fluence/issue/LNG-253)) ([#924](https://github.com/fluencelabs/aqua/issues/924))
+* **compiler:** Fix topology for adjacent `on`s ([LNG-257](https://linear.app/fluence/issue/LNG-257)) ([#929](https://github.com/fluencelabs/aqua/issues/929))
+* **compiler:** Fix: passed function is not handled correctly ([LNG-260](https://linear.app/fluence/issue/LNG-260)) ([#940](https://github.com/fluencelabs/aqua/issues/940))
+* **compiler:** Fix: return ability arrow ([LNG-258](https://linear.app/fluence/issue/LNG-258)) ([#935](https://github.com/fluencelabs/aqua/issues/935))
+
 ### [0.12.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.3) - September 28, 2023
 * **compiler:** Make `if` propagate errors ([LNG-202](https://linear.app/fluence/issue/LNG-202)) ([#779](https://github.com/fluencelabs/aqua/issues/779))
 * **compiler:** Replace `%last_error%` with `:error:` ([LNG-239](https://linear.app/fluence/issue/LNG-239)) ([#883](https://github.com/fluencelabs/aqua/issues/883))
