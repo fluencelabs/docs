@@ -241,13 +241,13 @@ We scaffold a new project with `fluence init` , which gives us a couple scaffold
 ```
 fluence init
 ? Select template (Use arrow keys)
-❯ quickstart
-  minimal
+  quickstart
+❯ minimal
   ts
   js
 ```
 
-Press return to select the default *minimal* scaffolding option and enter *hello_world* as the project path when prompted:
+Choose a *minimal* scaffolding option and press return, then enter *hello_world* as the project path when prompted:
 
 ```bash
 ? Enter project path or press enter to init in the current directory: hello-world
