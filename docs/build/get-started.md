@@ -247,7 +247,7 @@ fluence init
   js
 ```
 
-Choose the *minimal* scaffolding option and press return. Then enter *hello_world* as the project path when prompted:
+Choose the *minimal* scaffolding option, and press return. When prompted, enter *hello_world* as the project path.
 
 ```bash
 ? Enter project path or press enter to init in the current directory: hello-world
