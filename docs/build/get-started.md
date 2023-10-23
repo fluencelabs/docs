@@ -481,7 +481,7 @@ Again, depending on your setup, this may take a while as Fluence CLI may need to
 
 ```bash
 fluence service repl
-? Enter service name from fluence.yaml, path to a service or url to .tar.gz archive hello-world
+? Enter service name from fluence.yaml, path to a service or url to .tar.gz archive src/services/hello_world
 Making sure service and modules are downloaded and built... ⣻
 Making sure service and modules are downloaded and built... done
 
