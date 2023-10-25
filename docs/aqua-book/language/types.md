@@ -18,6 +18,8 @@ You can pass booleans (`true`, `false`), numbers, double-quoted strings as liter
 
 ## Structures
 
+Structure types are product types of [scalars](types.md#scalars) and other structures. They are defined with the `data` keyword:
+
 ```aqua
 data InnerStruct:
     arr: []string
@@ -27,13 +29,29 @@ data SomeStruct:
     str: string
     num: u64
     inner: InnerStruct
+```
 
--- Structures can be created in aqua code
+Structures could be instantiated with the following syntax:
+
+```aqua
 func createStruct(i: []u32) -> SomeStruct:
     <- SomeStruct(
         str = "some str",
         num = 4,
         inner = InnerStruct(arr = ["a", "b", "c"], num = i[2])
+    )
+```
+
+Note that the order of fields does not matter and it is possible to pass just a variable if it has the same name as a field:
+
+```aqua
+func createStruct(i: []u32) -> SomeStruct:
+    str = "some str"
+    inner = InnerStruct(["a", "b", "c"], i[2])
+    <- SomeStruct(
+      str, -- short for `str = str`
+      num = 4,
+      inner -- short for `inner = inner`
     )
 ```
 
@@ -43,6 +61,14 @@ Note that copy operates in an immutable way: it does not modify original structu
 ```aqua
 func changeStr(someStruct: SomeStruct) -> SomeStruct:
     <- someStruct.copy(str = "new string")
+```
+
+Passing just a variable is also possible with `copy`:
+
+```aqua
+func changeStr(someStruct: SomeStruct) -> SomeStruct:
+    str = "new string"
+    <- someStruct.copy(str) -- short for `str = str`
 ```
 
 Fields are accessible with the dot operator `.` , e.g. `product.field`.
