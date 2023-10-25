@@ -9,7 +9,7 @@ Scalar types follow the Wasm IT notation.
 * Floats: `f32`, `f64`
 * Boolean: `bool`
 * String: `string`
-* Structures (product type): see below
+* Structures (product types): see [Structures](types.md#structures) below
 * Arrays: see [Collection Types](types.md#collection-types) below
 
 ## Literals
@@ -18,7 +18,7 @@ You can pass booleans (`true`, `false`), numbers, double-quoted strings as liter
 
 ## Structures
 
-Structure types are product types of [scalars](types.md#scalars) and other structures. They are defined with the `data` keyword:
+Structure types are product types of [scalars](types.md#scalars). They are defined with the `data` keyword:
 
 ```aqua
 data InnerStruct:
