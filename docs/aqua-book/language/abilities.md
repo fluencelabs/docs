@@ -28,12 +28,14 @@ func main():
     closure = (x: i8) -> bool:
         <- x > 0
 
+    field = "complex"
+
     MyComplex = Complex(
         simple = Simple(
             st = Struct(int = 0),
             arrow = closure
         ),
-        field = "complex"
+        field -- short for `field = field`
     )
 ```
 
