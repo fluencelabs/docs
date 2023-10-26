@@ -46,7 +46,7 @@ npm init
 We will need these three packages for the application runtime: JS Client API, JS Client implementation for Node.js, and the package containing a well-maintained list of relay nodes.
 
 ```sh
-npm install @fluencelabs/js-client.api @fluencelabs/js-client.node @fluencelabs/fluence-network-environment
+npm install @fluencelabs/js-client
 ```
 
 Also, we need some specific packages for implementing IPFS service
@@ -156,83 +156,77 @@ export function noop() {}
 Let's see how to use the generated code in our application. The `index.ts` file looks this way:
 
 ```typescript
-import '@fluencelabs/js-client.node'; // Import the JS Client implementation. Don't forget to add this import!
-import { Fluence } from '@fluencelabs/js-client.api'; // Import the API for JS Client
+import { Fluence, randomTestNet } from '@fluencelabs/js-client'; // Import the API for JS Client
 import { exists, registerIpfsClient, remove, upload_string } from './_aqua/files.js'; // Aqua compiler provides functions which can be directly imported like any normal TypeScript function.
 import { readFile } from 'node:fs/promises';
 import { strings } from '@helia/strings';
 import { CID } from 'multiformats/cid';
 import { dagJson } from '@helia/dag-json';
-import { randomTestNet } from '@fluencelabs/fluence-network-environment';
 import { makeHelia, noop, timeout } from './utils.js';
 
-async function main() {
-    await Fluence.connect(randomTestNet());
+await Fluence.connect(randomTestNet());
 
-    registerIpfsClient({
-        async exists(cid: string) {
-            const helia = await makeHelia();
+registerIpfsClient({
+    async exists(cid: string) {
+        const helia = await makeHelia();
 
-            const s = strings(helia);
+        const s = strings(helia);
 
-            const c = CID.parse(cid);
+        const c = CID.parse(cid);
 
-            const controller = new AbortController();
-            const content = await timeout(s.get(c, { signal: controller.signal }), 5 /* 5 sec */, controller).catch(noop);
+        const controller = new AbortController();
+        const content = await timeout(s.get(c, { signal: controller.signal }), 5 /* 5 sec */, controller).catch(noop);
 
-            const result = Boolean(content);
-            await helia.stop();
-            return result;
-        },
-        async remove(cid: string) {
-            const helia = await makeHelia();
+        const result = Boolean(content);
+        await helia.stop();
+        return result;
+    },
+    async remove(cid: string) {
+        const helia = await makeHelia();
 
-            const c = CID.parse(cid);
+        const c = CID.parse(cid);
 
-            const isPinned = await helia.pins.isPinned(c);
+        const isPinned = await helia.pins.isPinned(c);
 
-            if (isPinned) {
-                console.log('Remove pinned entry:', c.toString());
-                const pin = await helia.pins.rm(c);
-                await helia.gc();
-            }
-
-            await helia.stop();
-            return c.toString();
-        },
-        async upload_string(contents: string) {
-            const helia = await makeHelia();
-
-            const s = strings(helia);
-
-            const cid = await s.add(contents);
-            await helia.pins.add(cid);
-
-            await helia.stop();
-            return cid.toString();
+        if (isPinned) {
+            console.log('Remove pinned entry:', c.toString());
+            const pin = await helia.pins.rm(c);
+            await helia.gc();
         }
-    });
 
-    const cid = await upload_string('Hello world!!!', { ttl: 120000 });
+        await helia.stop();
+        return c.toString();
+    },
+    async upload_string(contents: string) {
+        const helia = await makeHelia();
 
-    console.log('cid:', cid.toString());
+        const s = strings(helia);
 
-    console.log('Is entry exists:', await exists(cid.toString(), { ttl: 120000 }));
+        const cid = await s.add(contents);
+        await helia.pins.add(cid);
 
-    await remove(cid.toString(), { ttl: 120000 });
+        await helia.stop();
+        return cid.toString();
+    }
+});
 
-    console.log('Is entry exists:', await exists(cid.toString(), { ttl: 120000 }));
+const cid = await upload_string('Hello world!!!', { ttl: 120000 });
 
-    await Fluence.disconnect();
-}
+console.log('cid:', cid.toString());
 
-main();
+console.log('Is entry exists:', await exists(cid.toString(), { ttl: 120000 }));
+
+await remove(cid.toString(), { ttl: 120000 });
+
+console.log('Is entry exists:', await exists(cid.toString(), { ttl: 120000 }));
+
+await Fluence.disconnect();
 ```
 
 Let's try running the example:
 
 ```sh
-./node_modules/.bin/ts-node-esm ./src/index.ts
+node --loader ts-node/esm ./src/index.ts
 ```
 
 If everything has been done correctly, you should see the following text in the console:
