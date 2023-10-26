@@ -120,7 +120,7 @@ Let's see how to use the generated code in our application. The `index.ts` file 
 ```typescript
 import { 
     Fluence, // Import the API for JS Client
-    kras // // Import list of possible relay nodes (network environment)
+    randomKras // // Import function for choosing random relay from list of possible relay nodes (network environment)
 } from "@fluencelabs/js-client";  
 import {
   registerHelloWorld,
@@ -129,7 +129,7 @@ import {
   tellFortune,
 } from "./_aqua/hello-world"; // Aqua compiler provides functions which can be directly imported like any normal TypeScript function.
 
-await Fluence.connect(kras[3]); // Connecting to the fourth kras node.
+await Fluence.connect(randomKras()); // Connecting to the fourth kras node.
 
 /*
 For every exported `service XXX` definition in aqua code, the compiler provides a `registerXXX` counterpart. These functions provide a type-safe way of registering callback handlers for the services. The callbacks are executed when the appropriate service is called in Aqua on the current peer. The handlers take the form of an object where keys are names of functions and values are async functions used as the corresponding callbacks. For example, in (3) we are registering handlers for `HelloWorld` service functions which outputs its parameter to the console. Please note that the handlers can be implemented in both synchronous and asynchronous ways. The handler can be made asynchronous like any other function in javascript: either return a Promise or mark it with the async keyword to take advantage of the async-await pattern.
