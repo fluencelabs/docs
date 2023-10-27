@@ -11,7 +11,7 @@ npm init
 We will need JS-client itself
 
 ```sh
-npm install @fluencelabs/js-client
+npm install @fluencelabs/js-client@unstable
 ```
 
 We will need the Fluence CLI to use the Aqua compiler, but only as a development dependency:
