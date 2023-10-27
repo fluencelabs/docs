@@ -31,8 +31,8 @@ const sidebars = {
       label: "Fluence JS Client",
       link: { id: "build/js-client/js-client", type: "doc" },
       items: [
-        "build/js-client/js-client",
         "build/js-client/installation",
+        "build/js-client/setting-up",
         "build/js-client/hello-world",
         "build/js-client/advanced-ipfs",
         "build/js-client/changelog",
