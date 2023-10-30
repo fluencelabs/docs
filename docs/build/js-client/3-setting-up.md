@@ -8,6 +8,14 @@ Initialize an empty `npm` package:
 npm init
 ```
 
+In newly created `package.json` file add module entry
+```json
+{
+  "type": "module",
+  ...
+}
+```
+
 We will need JS-client itself
 
 ```sh
@@ -26,7 +34,20 @@ And last, but not least, we need TypeScript:
 
 ```sh
 npm install --save-dev typescript ts-node
-npx tsc --init
+```
+
+Create `tsconfig.json` file and add following content there
+
+```json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext"
+  }
+}
 ```
 
 ## Compiling aqua

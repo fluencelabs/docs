@@ -49,7 +49,7 @@ npm install helia @helia/strings @helia/dag-json multiformats blockstore-fs data
 
 Put the aqua code above in the `aqua/files.aqua` file and compile it.
 
-We will start with implementing `utils.ts` file:
+We will start with implementing `src/utils.ts` file:
 
 ```typescript
 import { FsBlockstore } from 'blockstore-fs'; // Import block storage
@@ -80,7 +80,7 @@ export async function timeout<T,>(promise: Promise<T>, timeout: number, abort: A
 export function noop() {}
 ```
 
-Let's see how to use the generated code in our application. The `index.ts` file looks this way:
+Let's see how to use the generated code in our application. Place the code below in `src/index.ts` file:
 
 ```typescript
 import { Fluence, randomTestNet } from '@fluencelabs/js-client'; // Import the API for JS Client

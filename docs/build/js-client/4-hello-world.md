@@ -42,7 +42,7 @@ Finally, we have a function (4) which demonstrate how to work with the network. 
 
 Put the aqua code above in the `aqua/hello-world.aqua` file and compile it.
 
-Let's see how to use the generated code in our application. The `index.ts` file looks this way:
+Let's see how to use the generated code in our application. Place the code below in `src/index.ts` file:
 
 ```typescript
 import { 
