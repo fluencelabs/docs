@@ -105,7 +105,7 @@ func spell():
     Spell.store_log(str)
 ```
 
-After that lets also modify the main.aqua file to define a helper function for getting the keys into the spell KV storage:
+After that let's also modify the main.aqua file to define a helper function for getting the keys into the spell KV storage:
 ```aqua
 aqua Main
 
