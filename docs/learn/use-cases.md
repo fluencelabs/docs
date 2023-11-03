@@ -26,8 +26,8 @@ Fluence makes it super easy to build and combine network protocols of any comple
 
 With Fluence, applications could be hosted and fully managed without central admin. Community members may run Fluence nodes with the application backends and coordinate via the incentive model they choose (governance token, DAO, etc). Redundancy and load balancing are programmed using the Aqua language and driven by incentives.
 
-- DAO-managed applications
-- Social media platforms
+- DAO-managed applications  
+- Social media platforms  
 - Creator economy
 
 ## Computations on Decentralized Data
