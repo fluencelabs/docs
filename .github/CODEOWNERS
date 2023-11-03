@@ -1,0 +1,13 @@
+# about codeowners
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# default owner is Artem since he setup up docusaurus
+*  @shamsartem
+
+.github/**  @nahsi
+
+blog/**                   @evgenyponomarev
+docs/learn/**             @evgenyponomarev
+docs/build/**             @boneyard93501
+docs/aqua-book/**         @alari
+docs/marine-book/**       @mikevoronov
