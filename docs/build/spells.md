@@ -6,12 +6,12 @@ Think of them as of automated jobs, that can be executed when some specific trig
 
 Spells can be used for user-defined automation scenarios for service maintenance, periodical data extraction, subnet maintenance, etc. 
 
-A spell is a [Marine](/docs/marine-book/introduction.md) service, the main goal of which is to provide state storage for script execution. It also provides some additional features to ease the spell usage for users and take some responsibility from the node (aka [Nox](https://github.com/fluencelabs/nox)). The service serves as a template and is instantiated on the creation of a new spell.
+A spell is a [Marine](/docs/marine-book/introduction.md) service, that contain and execute AIR scripts. The main goal a spell service is to provide state storage for AIR script execution. It also provides some additional features to ease the spell usage for users and take some responsibility from the node (aka [Nox](https://github.com/fluencelabs/nox)). The service serves as a template and is instantiated on the creation of a new spell.
 
-This service is intended to be used as a template and instantiated by a node on each new spell creation.
+The Spell service is intended to be used as a template and instantiated by a node on each new spell creation.
 
 ## Managing spells
-[Nox](https://github.com/fluencelabs/nox) provides user API for interacting with spells.
+[Nox](https://github.com/fluencelabs/nox) provides user [API](https://github.com/fluencelabs/spell/blob/c3be0974bac507c5d3adfef9ff7b6e6b7511385b/src/aqua/spell/api.aqua#L7) for interacting with spells.
 
 Users are able to control their spells' lifecycle: install new ones, update them, and remove them. The developer experience is provided by the means of [Fluence CLI](https://github.com/fluencelabs/cli). 
 
@@ -20,21 +20,20 @@ A spell consists of the following parts:
 - The list of trigger events (aka the trigger configuration) on which to run the spell
 - The initial state of the spell (e.g. initial state of spell's KV storage)
 
-After installation, the developer is able to update the initial settings: the spell script, the trigger configuration, and the state KV storage.
+After installation, the developer is able to update trigger configuration, and change the state of the KV storage.
 
-Also, the developer is able to remove their spells, cleaning the state from the peer.
 
 Developer can check their spells' state: 
 - inspect their internal state (the KV storage, the script, the trigger config)
-- check if they’re currently subscribed to some triggers
 - obtain their peer identity: spell_id and worker_id.
 
 ## Events that can trigger spells
 [Nox](https://github.com/fluencelabs/nox) triggers spells according to their configuration. Currently Nox provides the following event triggers:
-- Timer/CRON Triggers: run spells at a specified time or within a specified period.
+- Time-based: CRON-like, run spells at a specified time or within a specified period, for a specified amount of time.
+
 Users should be able to specify the following:
-    - when to run the spell,
-    - when to unsubscribe the spell from timer events,
+- Time-based: CRON-like, run spells at a specified time or within a specified period, for a specified amount of time.
+    - when begin running the spell,
     - how often should the script be run.
 - Connection Triggers: run spells on connection/disconnection of some peers to the peer.
 
@@ -57,14 +56,14 @@ fluence init
 Press return to select the default quickstart scaffolding option and enter *quickstart* as the project path when prompted:
 ```bash
 ? Enter project path or press enter to init in the current directory: quickstart
-Successfully initialized Fluence project template at /Users/arete/Documents/fluence/quickstart
+Successfully initialized Fluence project template at /tmp/quickstart
 ```
 
 Now let's create a new spell in a recently scaffolded Fluence CLI project by running `fluence spell new`:
 ```bash
 quickstart $ fluence spell new
 ? Enter spell name 1min_spell
-Successfully generated template for new spell at /Users/arete/Documents/fluence/quickstart/src/spells/1min_spell
+Successfully generated template for new spell at /tmp/quickstart/src/spells/1min_spell
 ? Do you want to add spell 1min_spell to a default worker defaultWorker Yes
 Added 1min_spell to defaultWorker
 ```
@@ -77,7 +76,7 @@ Lets check what have been generated: a new spell directory was created under src
     └── spell.yaml
 ```
 
-It contains [Aqua](/docs/aqua-book/introduction.md) script that will be executed and the spell.yaml file that specifies the trigger configuration for the spell.
+It contains [Aqua](/docs/aqua-book/introduction.md) script that will be executed and the [spell.yaml](https://github.com/fluencelabs/cli/blob/b8d6c5b9476962805a7fcf6bcc0cfb171089c584/docs/configs/spell.md) file that specifies the trigger configuration for the spell.
 
 If we take a look at the `spell.aqua` file we see the `spell()` function that is executed when the spell is triggered:
 ```aqua
@@ -138,20 +137,20 @@ func get_my_keys() -> []string:
 
 ``` 
 
-Then lets inspect the spell.yaml file:
+Then let's inspect the spell.yaml file:
 ```yaml
 version: 0
 
 aquaFilePath: ./spell.aqua
 
-function: spell
+function: spell # name of the function from spell.aqua (set in aquaFilePath) to be executed
 
 clock:
   periodSec: 60
   endDelaySec: 1800
 ```
 
-It contains the definition of the spell, the name of function that is triggered (in case if you don't like the default name), and the cron-ish timer based trigger configuration.
+It contains the definition of the spell, the name of function in `aquaFilePath` aqua file that is triggered (in case if you don't like the default name), and the cron-ish timer based trigger configuration.
 
 - `periodSec` defines how often the spell will be executed. If set to 0, the spell will be executed only once. If this value is not provided, the spell will never be executed.
 - `endDelaySec` defines how long to wait before the last execution in seconds. If this property or `endTimestamp` is not specified, periodic execution will never end.
@@ -189,7 +188,7 @@ If you want to change the spell script or spell definition -- you should change 
 
 ## Removing the spell
 
-If you want to remove the spell from the node, you should remove the spell definition from the project and run  `fluence deal deploy` to redeploy the workers. This will remove the spell from the subnet and unsubscribe it from all triggers. The deployment process is described in the [Getting Started Guide](/docs/build/get-started.md).
+Spell removal is not implemented yet, but will be possible in future releases. 
 
 # Reference Link
 
