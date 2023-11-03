@@ -3,8 +3,8 @@ name: codeowners
 on:
   pull_request:
     paths:
-      - ".github/workflows/**"
-      - ".github/renovate.json"
+      - ".github/workflows/codeowners.yml"
+      - ".github/CODEOWNERS"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
