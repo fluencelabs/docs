@@ -269,9 +269,9 @@ tree -L 2 -a
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
-├── fluence.yaml          # this is where the project metadata, including service references, are kept
-└── src                   # this is where the Aqua distributed service choreography and composition scripts reside
-    └── aqua
+├── fluence.yaml          # project metadata: definitions for deals, services and spells, some build configuration
+└── src                   # all project source code
+    └── aqua              # Aqua distributed service choreography and composition scripts
 ```
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports.
@@ -382,17 +382,39 @@ deals:
 
 ```
 
+```yaml
+# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
+
+version: 5
+
+aquaInputPath: src/aqua/main.aqua
+
+services:
+  hello_world:
+    get: src/services/hello_world     # (1)
+
+deals:
+  dealName:                           # (2)
+    minWorkers: 1
+    targetWorkers: 3
+    services: [ hello_world ]         # (3)
+    spells: []
+
+```
+
 Let's see what this means for our `hello_world` service.
 
 1. The service is configured to be at `src/services/hello_world`. Path is relative to `fluence.yml`.
-2. That service is now included in a worker definition named `defaultWorker`.
-3. `defaultWorker` is a part of a deal, which allows you to use `fluence deal deploy` to deploy it. More on that later.
+2. A Deal with name `dealName` is defined
+3. The service `hello_world` is included in the Deal `dealName`
+
+As a result, when you will do `fluence deal deploy`, it will deploy `hello_world` as a part of the `dealName` Deal. We will go into the details of `deal deploy` in the next part of this tutorial.
 
 
 Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
 
 ```bash
-tree hello-world/src -L 4 -a
+tree hello-world/src -L 5 -a
 
 hello-world/src
 ├── aqua
@@ -401,6 +423,9 @@ hello-world/src
     └── hello_world
         ├── modules
         │   └── hello_world
+        │       ├── Cargo.toml
+        │       ├── module.yaml
+        │       └── src
         └── service.yaml
 ```
 
