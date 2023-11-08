@@ -260,17 +260,17 @@ Change into your new *hello-world* directory and have a look around:
 tree -L 2 -a
 
 .
-├── .fluence              # this is where Fluence CLI internals are kept including schemas and project secrets
-│   ├── aqua
-│   ├── schemas
-│   └── workers.yaml
+├── .fluence              # Fluence CLI internals, including schemas and project secrets
+│   ├── aqua              # Generated Aqua code, including Service APIs and deployment info
+│   ├── schemas           # Schemas for YAML configs, so that editors can highlight errors
+│   └── workers.yaml      # Deployment information about legacy "direct" deploy
 ├── .gitignore
-├── .vscode
+├── .vscode               # Settings for VSCode to support Aqua development
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
-├── fluence.yaml          # project metadata: definitions for deals, services and spells, some build configuration
-└── src                   # all project source code
+├── fluence.yaml          # Project metadata: definitions for deals, services and spells, build configuration
+└── src                   # All project source code
     └── aqua              # Aqua distributed service choreography and composition scripts
 ```
 
