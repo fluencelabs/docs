@@ -262,7 +262,7 @@ tree -L 2 -a
 .
 ├── .fluence              # Fluence CLI internals, including schemas and project secrets
 │   ├── aqua              # Generated Aqua code, including Service APIs and deployment info
-│   ├── schemas           # Schemas for YAML configs, so that editors can highlight errors
+│   ├── schemas           # Schemas for config files supporting your editors linter
 │   └── workers.yaml      # Deployment information about legacy "direct" deploy
 ├── .gitignore
 ├── .vscode               # Settings for VSCode to support Aqua development
@@ -271,7 +271,7 @@ tree -L 2 -a
 ├── README.md
 ├── fluence.yaml          # Project metadata: definitions for deals, services and spells, build configuration
 └── src                   # All project source code
-    └── aqua              # Aqua distributed service choreography and composition scripts
+    └── aqua              # Distributed service choreography and composition scripts
 ```
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports.
@@ -408,7 +408,7 @@ Let's see what this means for our `hello_world` service.
 2. A Deal with name `dealName` is defined
 3. The service `hello_world` is included in the Deal `dealName`
 
-As a result, when you will do `fluence deal deploy`, it will deploy `hello_world` as a part of the `dealName` Deal. We will go into the details of `deal deploy` in the next part of this tutorial.
+As a result, when you `fluence deal deploy`, it will deploy `hello_world` as a part of the `dealName` Deal. We will go into the details of `deal deploy` in the next part of this tutorial.
 
 
 Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
