@@ -19,19 +19,31 @@ In Aqua terminology, data types are types that actually represent value at runti
 
 ## Collection Types
 
-Aqua collections are of two types: immutable and appendable. To denote a collection of a given type, use the quantifier before the type name.
+There are two kinds of collections in Aqua: immutable and appendable. To denote a collection of a given type `T`, use the quantifier before the type name like so:
+- `?T` for an immutable option of `T`, e.g. `?[]i64`, `?string`
+- `[]T` for an immutable array of `T`, e.g. `[]u32`, `[]?Result`
+- `*T` for an appendable stream of `T`, e.g. `*[]Response`, `*?string`
 
 ### Immutable Collections
 
 Aqua has two types of immutable collections: 
-- Arrays containing a fixed number of elements of the same type. The quantifier is `[]`. To access an element of an array, use the square brackets notation, e.g. `arr[10]`, or bang notation, e.g. `arr!10`, `arg!` (the same as `arg!0`).
-- Options containing none or one element of a given type. The quantifier is `?`. To access an element of an option, use the bang notation, e.g. `opt!` or `opt!0`. There is a literal that represents an empty option: `nil`.
+- Arrays containing a fixed number of elements of the same type. The quantifier is `[]`, e.g. `[]string`, `[]?Report`, `[][]i64` are all valid array types. To access an element of an array, use: 
+- - The square brackets notation with any expression of integer type inside, e.g. `arr[10]`, `arr[arr.length - 1]`.
+- - The bang notation, optionally followed by a number or a variable, e.g. `arr!10`, `arr!index`, `arr!` (the same as `arg!0`).
+- Options containing none or one element of a given type. The quantifier is `?`, e.g. `?string`, `?[]Error` are all valid option types. To access an element of an option, use the bang notation, e.g. `opt!` or `opt!0`. There is a literal that represents an empty option: `nil`.
 
 ### Appendable Collections
 
-Aqua has appendable [streams](./crdt-streams.md). The quantifier is `*`. To access an element of a stream, use brackets notation, e.g. `stream[10]`, or bang notation, e.g. `stream!10`, `stream!` (the same as `stream!0`). Note that this could trigger join behavior on the stream.
+Aqua has appendable [streams](./crdt-streams.md). The quantifier is `*`, e.g. `*?string`, `*Result`, `*[]i64` are all valid stream types. To access an element of a stream, use:
+- - The square brackets notation, with any expression of integer type inside, e.g. `stream[10]`, `stream[requests.length - 1]`
+- - The bang notation, optionally followed by a number or a variable, e.g. `stream!5`, `stream!index`, `stream!` (the same as `stream!0`). 
+Note that accessing an element of a stream could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
 
 Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64` are not.
+
+For every collection type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
+
+To see collections usage examples, see [Collections](../language/values.md#collections).
 
 ## Structures
 

@@ -173,7 +173,7 @@ One way is to use a useless stream:
   <- responded
 ```
 
-Actually `useless` stream is useless, we create it just to push the nth element into it. However, it forces waiting for `responded[n`] to be available. When `responded` is returned, it will be at least of length `n+1` or longer.
+Actually `useless` stream is useless, we create it just to push the nth element into it. However, it forces waiting for `responded[n]` to be available. When `responded` is returned, it will be at least of length `n+1` or longer.
 
 To eliminate the need for such workarounds, Aqua has the `join` expression that does nothing except consuming its arguments, hence waiting for them:
 
