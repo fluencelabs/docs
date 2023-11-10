@@ -138,7 +138,9 @@ alias MyDomain: DomainType
 
 Aqua is made for composing data on the open network. That means that you want to compose things if they do compose, even if you don't control its source code.
 
-Therefore Aqua follows the structural typing paradigm: if a type contains all the expected data, then it fits. For example, you can pass `u8` in place of `u16` or `i16`. Or `?bool` in place of `[]bool`. Or `*string` instead of `?string` or `[]string`. The same holds for products.
+Therefore Aqua follows the structural typing paradigm: if a type contains all the expected data, then it fits. For example, you can pass `u8` in place of `u16` or `i16`, `?bool` in place of `[]bool` (or vice-versa), `*string` instead of `?string` or `[]string`. The same holds for products.
+
+But note that [immutable collections](#immutable-collections) could not be used in place of [appendable streams](#appendable-collections), e.g. `[]string` is not a subtype of `*string`.
 
 For arrow types, Aqua checks the variance on arguments and contravariance on the return type.
 
