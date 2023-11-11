@@ -79,7 +79,7 @@ func otherFunc():
 
 ## Literals
 
-Aqua supports just a few literals: numbers, quoted strings, booleans, and `nil`.
+Aqua supports just a few literals: numbers, double-quoted strings, booleans and `nil`.
 
 ```aqua
 -- String literals cannot contain double quotes
@@ -241,7 +241,7 @@ func foo() -> []string, ?bool, *u32:
   <- ["string1", "string2"], ?[true, false], *[1, 3, 5]
 ```
 
-The `?[]` expression takes any number of arguments, but returns an optional value that contains only `0` or `1` value. This is done by trying to yield these values one by one. The first value that yields without an error will be added to the resulting option.
+The `?[]` expression takes any number of arguments, but returns an optional value that contains no more than one value. This is done by trying to yield these values one by one. The first value that yields without an error will be added to the resulting option.
 
 ```aqua
 func getFlag(maybeFlagA: ?bool, maybeFlagB: ?bool, default: bool) -> bool:
@@ -256,7 +256,14 @@ func getLength(arr: []string) -> u32:
   <- arr.length
 ```
 
-As of Aqua `0.6.3`, it is not possible to get an element by index or get a length directly from the collection creation expression.
+It is possible to fill any [immutable collection](./types.md#immutable-collections) with an empty one using `nil`.
+
+```aqua
+func empty() -> []string, ?bool:
+  <- nil, nil
+```
+
+It is not possible yet to get an element by index or get a length directly from the collection creation expression.
 
 ## Getters
 

@@ -2,23 +2,52 @@
 
 ## Scalars
 
-Scalar types follow the Wasm IT notation.
+Scalar types in Aqua follow the Wasm IT notation.
 
 * Unsigned numbers: `u8`, `u16`, `u32`, `u64`
 * Signed numbers: `i8`, `i16`, `i32`, `i64`
 * Floats: `f32`, `f64`
 * Boolean: `bool`
 * String: `string`
-* Structures (product types): see [Structures](types.md#structures) below
-* Arrays: see [Collection Types](types.md#collection-types) below
 
-## Literals
+## Data Types
 
-You can pass booleans (`true`, `false`), numbers, double-quoted strings as literals.
+In Aqua terminology, data types are types that actually represent value at runtime. In other words, it is any type that is an immutable combination of scalars:
+- [Scalars](#scalars)
+- [Immutable Collections](#immutable-collections)
+- [Structures](#structures)
+
+## Collection Types
+
+There are two kinds of collections in Aqua: immutable and appendable. To denote a collection of a given type `T`, use the quantifier before the type name like so:
+- `?T` for an immutable option of `T`, e.g. `?[]i64`, `?string`
+- `[]T` for an immutable array of `T`, e.g. `[]u32`, `[]?Result`
+- `*T` for an appendable stream of `T`, e.g. `*[]Response`, `*?string`
+
+### Immutable Collections
+
+Aqua has two types of immutable collections: 
+- Arrays containing a fixed number of elements of the same type. The quantifier is `[]`, e.g. `[]string`, `[]?Report`, `[][]i64` are all valid array types. To access an element of an array, use: 
+  - The square brackets notation with any expression of integer type inside, e.g. `arr[10]`, `arr[arr.length - 1]`.
+  - The bang notation, optionally followed by a number or a variable, e.g. `arr!10`, `arr!index`, `arr!` (the same as `arg!0`).
+- Options containing none or one element of a given type. The quantifier is `?`, e.g. `?string`, `?[]Error` are all valid option types. To access an element of an option, use the bang notation, e.g. `opt!` or `opt!0`. There is a literal that represents an empty option: `nil`.
+
+### Appendable Collections
+
+Aqua has appendable [streams](./crdt-streams.md). The quantifier is `*`, e.g. `*?string`, `*Result`, `*[]i64` are all valid stream types. To access an element of a stream, use:
+  - The square brackets notation, with any expression of integer type inside, e.g. `stream[10]`, `stream[requests.length - 1]`
+  - The bang notation, optionally followed by a number or a variable, e.g. `stream!5`, `stream!index`, `stream!` (the same as `stream!0`). 
+Note that accessing an element of a stream could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
+
+Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64` are not.
+
+For every collection type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
+
+To see collections usage examples, see [Collections](../language/values.md#collections).
 
 ## Structures
 
-Structure types are product types of [scalars](types.md#scalars). They are defined with the `data` keyword:
+Structure types are product types of [data types](#data-types). They are defined with the `data` keyword:
 
 ```aqua
 data InnerStruct:
@@ -73,49 +102,6 @@ func changeStr(someStruct: SomeStruct) -> SomeStruct:
 
 Fields are accessible with the dot operator `.` , e.g. `product.field`.
 
-## Collection Types
-
-Aqua has three different types with variable length, denoted by quantifiers `[]`, `*`, and `?`.
-
-Immutable collection with 0..N values: `[]`
-
-Immutable collection with 0 or 1 value: `?`
-
-Appendable collection (More about it here: [CRDT Streams](crdt-streams.md)) with 0..N values: `*`
-
-Any data type can be prepended with a quantifier, e.g. `*u32`, `[][]string`, `?ProductType` are all correct type specifications.
-
-You can access a distinct value of a collection with `!` operator, optionally followed by an index.
-
-It is possible to fill any collection with an empty one using `nil`.
-
-Examples:
-
-```aqua
-strict_array: []u32
-array_of_arrays: [][]u32
-element_5 = strict_array!5
-element_0 = strict_array!0
-also_element_0 = strict_array!
-
--- It could be an argument or any other collection
-maybe_value: ?string
--- This ! operator will FAIL if maybe_value is backed by a read-only data structure
--- And will WAIT if maybe_value is backed with a stream (*string)
-value = maybe_value!
-
--- Consider a function that takes a collection as an argument
-func foo(a: ?string, b: []u32, c: *bool): ...
-
--- To call that function with empty collection, use nil, [], ?[], or *[]:
-foo(nil, [], *[])
--- Nil fits into any collection
-
--- Arrays can be instantiated in aqua code
-func getArray(arr: []string) -> []string:
-  <- ["some string", Serv.getString(), arr[1], "some string 2"]
-```
-
 ## Arrow Types
 
 Every function has an arrow type that maps a list of input types to an optional output type.
@@ -152,7 +138,9 @@ alias MyDomain: DomainType
 
 Aqua is made for composing data on the open network. That means that you want to compose things if they do compose, even if you don't control its source code.
 
-Therefore Aqua follows the structural typing paradigm: if a type contains all the expected data, then it fits. For example, you can pass `u8` in place of `u16` or `i16`. Or `?bool` in place of `[]bool`. Or `*string` instead of `?string` or `[]string`. The same holds for products.
+Therefore Aqua follows the structural typing paradigm: if a type contains all the expected data, then it fits. For example, you can pass `u8` in place of `u16` or `i16`, `?bool` in place of `[]bool` (or vice-versa), `*string` instead of `?string` or `[]string`. The same holds for products.
+
+But note that [immutable collections](#immutable-collections) could not be used in place of [appendable streams](#appendable-collections), e.g. `[]string` is not a subtype of `*string`.
 
 For arrow types, Aqua checks the variance on arguments and contravariance on the return type.
 
