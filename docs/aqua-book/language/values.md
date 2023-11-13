@@ -256,14 +256,14 @@ func getLength(arr: []string) -> u32:
   <- arr.length
 ```
 
+It is not possible yet to get an element by index or get a length directly from the collection creation expression, e.g. `?[maybe!].length`, `[1, 2, 3][index]` are not allowed.
+
 It is possible to fill any [immutable collection](./types.md#immutable-collections) with an empty one using `nil`.
 
 ```aqua
 func empty() -> []string, ?bool:
   <- nil, nil
 ```
-
-It is not possible yet to get an element by index or get a length directly from the collection creation expression.
 
 ## Getters
 
