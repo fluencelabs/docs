@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Get started (with CLI)
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network.
@@ -29,13 +32,26 @@ Fluence CLI uses multiple yaml config files and you can find their schemas in th
 
 ## Install Fluence CLI
 
-[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a *npm* package requiring node and npm to be available on your device. See [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), for example, for installation instructions. With npm readily available, we can install the Fluence CLI:
+[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a package providing it's own copy of NodeJS and NPM for better portability.
 
-```
-npm -g install @fluencelabs/cli@latest
-```
+Preferred installation method is through the <code>Installation Script</code>. It will install a self-suficient fcli package that won't depend nor touch your system NodeJS toolchain.
 
-> 👉 At the time of this writing, you need to set your node version to 18 LTS (v18.18.0).
+<Tabs>
+<TabItem value="sh" label="Script: default">
+The easiest and least error-prone way:
+
+    curl -qL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
+
+</TabItem>
+<TabItem value="npm" label="NPM: advanced">
+Alternative and more advanced option is to install via NPM. NodeJS must be >= 18.
+
+    npm -g install @fluencelabs/cli@latest
+
+</TabItem>
+</Tabs>
+
+
 
 We can check our installation success (note that your cli and node versions might be different):
 
@@ -263,6 +279,7 @@ tree -L 2 -a
 ├── .fluence              # Fluence CLI internals, including schemas and project secrets
 │   ├── aqua              # Generated Aqua code, including Service APIs and deployment info
 │   ├── schemas           # Schemas for config files supporting your editors linter
+│   ├── env.yaml          # Specifies which network environment to use
 │   └── workers.yaml      # Deployment information about legacy "direct" deploy
 ├── .gitignore
 ├── .vscode               # Settings for VSCode to support Aqua development
