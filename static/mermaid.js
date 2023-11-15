@@ -14,7 +14,7 @@ setInterval(() => {
   const shikiElements = Array.from(document.getElementsByClassName("shiki"));
   shikiElements.forEach((el) => el.classList.add("visible"));
   const elementsToReplace = shikiElements.filter(
-    (el) => el.previousElementSibling.textContent === "mermaid"
+    (el) => el.previousElementSibling?.textContent === "mermaid"
   );
 
   elementsToReplace.forEach((el) => {

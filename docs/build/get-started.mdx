@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Get started (with CLI)
 
 [Fluence CLI](https://github.com/fluencelabs/fluence-cli) is your one-stop command line interface (CLI) shop to creating, deploying, paying, running, monitoring and removing distributed services to and from the Fluence peer-to-peer network.
@@ -29,13 +32,26 @@ Fluence CLI uses multiple yaml config files and you can find their schemas in th
 
 ## Install Fluence CLI
 
-[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a *npm* package requiring node and npm to be available on your device. See [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), for example, for installation instructions. With npm readily available, we can install the Fluence CLI:
+[Fluence CLI](https://github.com/fluencelabs/fluence-cli) is available as a package providing it's own copy of NodeJS and NPM for better portability.
 
-```
-npm -g install @fluencelabs/cli@latest
-```
+Preferred installation method is through the <code>Installation Script</code>. It will install a self-suficient fcli package that won't depend nor touch your system NodeJS toolchain.
 
-> 👉 At the time of this writing, you need to set your node version to 18 LTS (v18.18.0).
+<Tabs>
+<TabItem value="sh" label="Script: default">
+The easiest and least error-prone way:
+
+    curl -qL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
+
+</TabItem>
+<TabItem value="npm" label="NPM: advanced">
+Alternative and more advanced option is to install via NPM. NodeJS must be >= 18.
+
+    npm -g install @fluencelabs/cli@latest
+
+</TabItem>
+</Tabs>
+
+
 
 We can check our installation success (note that your cli and node versions might be different):
 
@@ -260,18 +276,19 @@ Change into your new *hello-world* directory and have a look around:
 tree -L 2 -a
 
 .
-├── .fluence              # this is where Fluence CLI internals are kept including schemas and project secrets
-│   ├── aqua
-│   ├── schemas
-│   └── workers.yaml
+├── .fluence              # Fluence CLI internals, including schemas and project secrets
+│   ├── aqua              # Generated Aqua code, including Service APIs and deployment info
+│   ├── schemas           # Schemas for config files supporting your editors linter
+│   ├── env.yaml          # Specifies which network environment to use
+│   └── workers.yaml      # Deployment information about legacy "direct" deploy
 ├── .gitignore
-├── .vscode
+├── .vscode               # Settings for VSCode to support Aqua development
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
-├── fluence.yaml          # this is where the project metadata, including service references, are kept
-└── src                   # this is where the Aqua distributed service choreography and composition scripts reside
-    └── aqua
+├── fluence.yaml          # Project metadata: definitions for deals, services and spells, build configuration
+└── src                   # All project source code
+    └── aqua              # Distributed service choreography and composition scripts
 ```
 
 A this point, you see various config (yaml) files and a *src/aqua* dir with a *main.aqua* file that contains a variety of Aqua code examples and the most common dependency imports.
@@ -382,17 +399,39 @@ deals:
 
 ```
 
+```yaml
+# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
+
+version: 5
+
+aquaInputPath: src/aqua/main.aqua
+
+services:
+  hello_world:
+    get: src/services/hello_world     # (1)
+
+deals:
+  dealName:                           # (2)
+    minWorkers: 1
+    targetWorkers: 3
+    services: [ hello_world ]         # (3)
+    spells: []
+
+```
+
 Let's see what this means for our `hello_world` service.
 
 1. The service is configured to be at `src/services/hello_world`. Path is relative to `fluence.yml`.
-2. That service is now included in a worker definition named `defaultWorker`.
-3. `defaultWorker` is a part of a deal, which allows you to use `fluence deal deploy` to deploy it. More on that later.
+2. A Deal with name `dealName` is defined
+3. The service `hello_world` is included in the Deal `dealName`
+
+As a result, when you `fluence deal deploy`, it will deploy `hello_world` as a part of the `dealName` Deal. We will go into the details of `deal deploy` in the next part of this tutorial.
 
 
 Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
 
 ```bash
-tree hello-world/src -L 4 -a
+tree hello-world/src -L 5 -a
 
 hello-world/src
 ├── aqua
@@ -401,6 +440,9 @@ hello-world/src
     └── hello_world
         ├── modules
         │   └── hello_world
+        │       ├── Cargo.toml
+        │       ├── module.yaml
+        │       └── src
         └── service.yaml
 ```
 
