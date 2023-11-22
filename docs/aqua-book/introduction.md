@@ -11,4 +11,4 @@ At the core of Fluence is the open-source language **Aqua** that allows for the 
 <ReactPlayer controls url="https://youtu.be/M_u-EnWrMOQ" width="100%" />
 <br />
 
-This book is dedicated to all things Aqua and currently in its **alpha** version and we expect to expand both Aqua's breadth and depth coverage.
+This book, currently in its alpha version, is dedicated to Aqua, with plans to significantly broaden its scope in the future.
