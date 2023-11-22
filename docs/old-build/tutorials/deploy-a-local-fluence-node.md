@@ -208,11 +208,11 @@ func greeting(name:string, node:string, greeting_service_id: string) -> string:
   <- res
 ```
 
-We run the script with [`aqua`](../../aqua-book/aqua-cli/aqua-cli.md)
+We run the script with `fluence`
 
 ```
-aqua run \
-    -a /ip4/127.0.0.1/tcp/9999/ws/p2p/12D3KooWCXj3BQuV5d4vhgyLFmv7rRYiy9MupFiyEWnqcUAGpS4D \
+fluence run \
+    --relay /ip4/127.0.0.1/tcp/9999/ws/p2p/12D3KooWCXj3BQuV5d4vhgyLFmv7rRYiy9MupFiyEWnqcUAGpS4D \
     -i aqua/ \
     -f 'greeting("Fluence", true, "12D3KooWCXj3BQuV5d4vhgyLFmv7rRYiy9MupFiyEWnqcUAGpS4D", "04ef4459-474a-40b5-ba8d-1e9a697206ab")'
 ```

@@ -4,9 +4,9 @@
 
 [Fluence CLI](fluence-cli.md) is designed to be the only tool that you need to manage the life cycle of applications written on Fluence. It provides project scaffolding, compilation, service deployment, dependency management and installation, storage of keys and ids, etc.
 
-## Aqua Command Line Tool
+## Aqua JS API
 
-Please see the [Aqua CLI](../aqua-book/aqua-cli/aqua-cli.md) documentation.
+Please see the [Aqua JS API](../aqua-book/aqua-js-api.md) documentation.
 
 ## Fluence JS Client
 
