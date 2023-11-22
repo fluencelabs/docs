@@ -11,11 +11,4 @@ At the core of Fluence is the open-source language **Aqua** that allows for the 
 <ReactPlayer controls url="https://youtu.be/M_u-EnWrMOQ" width="100%" />
 <br />
 
-This book is dedicated to all things Aqua and currently in its **alpha** version and we expect to expand both Aqua's breadth and depth coverage over the coming weeks.
-
-Stay in touch or contact us via the following channels:
-
-- [Discord](https://discord.gg)
-- [Telegram](https://t.me/fluence_project)
-- [Aqua Github](https://github.com/fluencelabs/aqua)
-- [Youtube](https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw)
+This book is dedicated to all things Aqua and currently in its **alpha** version and we expect to expand both Aqua's breadth and depth coverage.
