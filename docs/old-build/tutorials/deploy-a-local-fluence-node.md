@@ -208,7 +208,7 @@ func greeting(name:string, node:string, greeting_service_id: string) -> string:
   <- res
 ```
 
-We run the script with `fluence`
+We run the script using [Fluence CLI](https://github.com/fluencelabs/cli)
 
 ```
 fluence run \
