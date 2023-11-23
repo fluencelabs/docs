@@ -15,11 +15,11 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * **compiler:** Allow omitting field name in struct creation ([LNG-261](https://linear.app/fluence/issue/LNG-261)) ([#943](https://github.com/fluencelabs/aqua/issues/943))
 * **compiler:** Always generate `last` argument of `fold` ([LNG-265](https://linear.app/fluence/issue/LNG-265)) ([#947](https://github.com/fluencelabs/aqua/issues/947))
 * **compiler:** Generate empty calls to `responseHandlerSrv` ([LNG-286](https://linear.app/fluence/issue/LNG-286)) ([#979](https://github.com/fluencelabs/aqua/issues/979))
-* **compiler:** Fix generation of wrong stream name in AIR ([LNG-276](https://linear.app/fluence/issue/LNG-276)) ([#958](https://github.com/fluencelabs/aqua/issues/958))
-* **compiler:** Fix incorrect focus on error ([LNG-274](https://linear.app/fluence/issue/LNG-274)) ([#959](https://github.com/fluencelabs/aqua/issues/959))
-* **compiler:** Fix multiple closures in one function ([LNG-262](https://linear.app/fluence/issue/LNG-262)) ([#941](https://github.com/fluencelabs/aqua/issues/941))
-* **compiler:** Fix comparing an alias and a named type with the same name ([LNG-231](https://linear.app/fluence/issue/LNG-231)) ([#946](https://github.com/fluencelabs/aqua/issues/946))
-* **compiler:** Fix that unknown service method call is ignored ([LNG-273](https://linear.app/fluence/issue/LNG-273)) ([#957](https://github.com/fluencelabs/aqua/issues/957))
+* FIX: **compiler:** Generate correct stream name in AIR ([LNG-276](https://linear.app/fluence/issue/LNG-276)) ([#958](https://github.com/fluencelabs/aqua/issues/958))
+* FIX: **compiler:** Do not throw exception on compilation error construction ([LNG-274](https://linear.app/fluence/issue/LNG-274)) ([#959](https://github.com/fluencelabs/aqua/issues/959))
+* FIX: **compiler:** Correctly handle multiple closure returned from function calls ([LNG-262](https://linear.app/fluence/issue/LNG-262)) ([#941](https://github.com/fluencelabs/aqua/issues/941))
+* FIX: **compiler:** Correctly handle incorrect creation of aliased type value ([LNG-231](https://linear.app/fluence/issue/LNG-231)) ([#946](https://github.com/fluencelabs/aqua/issues/946))
+* FIX: **compiler:** Report error on unknown service or ability method call ([LNG-273](https://linear.app/fluence/issue/LNG-273)) ([#957](https://github.com/fluencelabs/aqua/issues/957))
 
 ### [0.12.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.12.4) - October 23, 2023
 * **compiler:** Handle error function exit in tracing mode ([LNG-250](https://linear.app/fluence/issue/LNG-250)) ([#921](https://github.com/fluencelabs/aqua/issues/921))
