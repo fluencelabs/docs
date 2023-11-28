@@ -9,7 +9,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ## [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
 
-* BREAKING CHANGE: **compiler:** Make `nil` of option of bottom type ([LNG-279](https://linear.app/fluence/issue/LNG-279)) ([#968](https://github.com/fluencelabs/aqua/issues/968))
+* BREAKING CHANGE: **compiler:** Change type of `nil` literal from `*⟂` to `?⟂`. Refer to [Literals](./language/values.md#literals) to learn more about `nil`.  ([LNG-279](https://linear.app/fluence/issue/LNG-279)) ([#968](https://github.com/fluencelabs/aqua/issues/968))
 * BREAKING CHANGE: **compiler:** Prohibit mutating options ([LNG-277](https://linear.app/fluence/issue/LNG-277)) ([#960](https://github.com/fluencelabs/aqua/issues/960))
 * **api:** Use `js.UndefOr` for `defaultServiceId` ([#980](https://github.com/fluencelabs/aqua/issues/980))
 * **compiler:** Allow omitting field name in struct creation ([LNG-261](https://linear.app/fluence/issue/LNG-261)) ([#943](https://github.com/fluencelabs/aqua/issues/943))
