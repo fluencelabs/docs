@@ -431,18 +431,18 @@ As a result, when you `fluence deal deploy`, it will deploy `hello_world` as a p
 Let's take a look at the directory structure to see how Fluence CLI scaffolded our Rust (sub-)project:
 
 ```bash
-tree hello-world/src -L 5 -a
+tree src -L 5 -a
 
-hello-world/src
+src
 ├── aqua
-│   └── main.aqua
+│   └── main.aqua
 └── services
     └── hello_world
         ├── modules
-        │   └── hello_world
-        │       ├── Cargo.toml
-        │       ├── module.yaml
-        │       └── src
+        │   └── hello_world
+        │       ├── Cargo.toml
+        │       ├── module.yaml
+        │       └── src
         └── service.yaml
 ```
 
