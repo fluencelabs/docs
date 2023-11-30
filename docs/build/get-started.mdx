@@ -199,31 +199,6 @@ Here's how `fluence.yml` looks now.
 ```yaml
 # Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
 
-version: 2
-
-relays: kras
-
-aquaInputPath: src/aqua/main.aqua
-
-services:
-  hello_world:
-    get: src/services/hello_world     # (1)
-
-workers:
-  defaultWorker:
-    services: [ hello_world ]         # (2)
-    spells: []
-
-deals:
-  defaultWorker:                      # (3)
-    minWorkers: 1
-    targetWorkers: 3
-
-```
-
-```yaml
-# Documentation: https://github.com/fluencelabs/cli/tree/main/docs/configs/fluence.md
-
 version: 5
 
 aquaInputPath: src/aqua/main.aqua
