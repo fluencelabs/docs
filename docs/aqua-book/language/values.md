@@ -110,6 +110,7 @@ takesMaybe(nil)
 ## Operators 
 
 Below is the table of operators in Aqua, sorted by precedence. 
+
 Each operator has a link to the section that describes it in more detail.
 
 | Operators | Notation | Precedence | Associativity | Reference |
@@ -208,7 +209,7 @@ Precedence of operators from highest to lowest:
 - `&&`
 - `||`
 
-Logical operators have lower precedence than equality operators.
+Logical operators have lower precedence than equality operators, except for `!` which has higher precedence than all other operators.
 
 ```aqua
 -- This is equivalent to (((a + b) >= c) && ((d * e) < f)) || (g != h)
