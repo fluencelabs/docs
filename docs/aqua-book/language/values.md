@@ -107,6 +107,21 @@ func takesMaybe(arg: ?string): ...
 takesMaybe(nil)
 ```
 
+## Operators 
+
+Below is the table of operators in Aqua, sorted by precedence. 
+Each operator has a link to the section that describes it in more detail.
+
+| Operators | Notation | Precedence | Associativity | Reference |
+| --------- | -------- | ---------- | ------------- | --------- |
+| Unary logical negation | `!` | 1 |  | [Logical operators](#logical-operators) |
+| Exponentiation | `**` | 2 | Left | [Arithmetic operators](#arithmetic-operators) |
+| Multiplication and division | `*`, `/`, `%` | 3 | Left | [Arithmetic operators](#arithmetic-operators) |
+| Addition and subtraction | `+`, `-` | 4 | Left | [Arithmetic operators](#arithmetic-operators) |
+| Comparison | `<`, `>`, `<=`, `>=` | 5 |  | [Comparison operators](#comparison-operators) |
+| Equality | `==`, `!=` | 6 |  | [Equality operators](#equality-operators) |
+| Binary logical operators | `&&`, `||` | 7 | Left | [Logical operators](#logical-operators) |
+
 ## Arithmetic operators
 
 Aqua supports `+`, `-`, `*`, `/`, `**` (power), `%` (reminder) for integer values.
