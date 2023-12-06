@@ -122,7 +122,7 @@ Each operator has a link to the section that describes it in more detail.
 | Comparison | `<`, `>`, `<=`, `>=` | 5 |  | [Comparison operators](#comparison-operators) |
 | Equality | `==`, `!=` | 6 |  | [Equality operators](#equality-operators) |
 | Logical conjunction | `&&` | 7 | Left | [Logical operators](#logical-operators) |
-| Logical disjunction | `\|\|` | 8 | Left | [Logical operators](#logical-operators) |
+| Logical disjunction | <code> &#124;&#124; </code> | 8 | Left | [Logical operators](#logical-operators) |
 
 
 ### Arithmetic operators
