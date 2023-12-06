@@ -113,16 +113,16 @@ Below is the table of operators in Aqua, sorted by precedence.
 Each operator has a link to the section that describes it in more detail.
 
 | Operators | Notation | Precedence | Associativity | Reference |
-| --------- | -------- | ---------- | ------------- | --------- |
+| :-------- | :------: | :--------: | :-----------: | --------- |
 | Unary logical negation | `!` | 1 |  | [Logical operators](#logical-operators) |
 | Exponentiation | `**` | 2 | Left | [Arithmetic operators](#arithmetic-operators) |
 | Multiplication and division | `*`, `/`, `%` | 3 | Left | [Arithmetic operators](#arithmetic-operators) |
 | Addition and subtraction | `+`, `-` | 4 | Left | [Arithmetic operators](#arithmetic-operators) |
 | Comparison | `<`, `>`, `<=`, `>=` | 5 |  | [Comparison operators](#comparison-operators) |
 | Equality | `==`, `!=` | 6 |  | [Equality operators](#equality-operators) |
-| Binary logical operators | `&&`, `||` | 7 | Left | [Logical operators](#logical-operators) |
+| Binary logical operators | `&&`, `\|\|` | 7 | Left | [Logical operators](#logical-operators) |
 
-## Arithmetic operators
+### Arithmetic operators
 
 Aqua supports `+`, `-`, `*`, `/`, `**` (power), `%` (reminder) for integer values.
 
@@ -147,7 +147,7 @@ Precedence of operators from highest to lowest:
 - `*`, `/`, `%` (left associative)
 - `+`, `-` (left associative)
 
-## Comparison operators
+### Comparison operators
 
 Aqua supports `<`, `>`, `<=`, `>=` for integer values.
 Result of a comparison operator has type `bool`.
@@ -169,7 +169,7 @@ Comparison operators have lower precedence than arithmetic operators.
 v = a + b < c * d
 ```
 
-## Equality operators
+### Equality operators
 
 Aqua supports `==`, `!=` for [scalars](types.md#scalars), [collections](types.md#collections), and [structures](types.md#structures).
 Result of an equality operator has type `bool`.
@@ -189,7 +189,7 @@ Equality operators have lower precedence than comparison operators.
 v = a + b < c == d >= e * f
 ```
 
-## Logical operators
+### Logical operators
 
 Aqua supports `!`, `||`, `&&` for boolean values.
 Result of a logical operator has type `bool`.
