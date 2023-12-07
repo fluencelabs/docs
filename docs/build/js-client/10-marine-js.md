@@ -1,63 +1,79 @@
 # Marine JS
 
-# TODO: adapt to JS Client
+## Using Marine services in JS client
 
-## Using Marine services in Fluence JS
+JS client can host Marine services with Marine JS. Currently only pure single-module services are supported.
 
-Fluence JS can host Marine services with Marine JS. Currently only pure single-module services are supported.
+Before registering the service, the corresponding WASM file must be loaded.
 
-Before registering the service, the corresponding WASM file must be loaded. Fluence JS package exports three helper functions for that.
+Here are the examples of how to load your wasm file in browser or node
 
-**loadWasmFromFileSystem**
+**Node.JS**
 
-Loads the WASM file from the file system. It accepts the path to the file and returns a buffer compatible with the `FluencePeer` API.
+```javascript
+import { readFile } from 'fs/promises';
 
-This function can only be used in nodejs. Trying to call it inside a browser will throw an error.
+const wasm = await readFile('path/to/wasm/file.wasm', 'base64');
+```
 
-**loadWasmFromNpmPackage**
+**Browser**
 
-Locates a WASM file in the specified npm package and loads it. The function accepts two arguments:
+> Need to install additional external package in browser env - `js-base64`
 
-- Name of an npm package
-- Path to a WASM file relative to the npm package
+```javascript
+import { fromUint8Array } from 'js-base64';
 
-This function can only be used in nodejs. Trying to call it inside a browser will result in an error.
+const wasmBinary = await fetch('https://wasm.com/url/to/wasm').then(res => res.arrayBuffer());
+const wasm = fromUint8Array(new Uint8Array(greetingWasm));
+```
 
-**loadWasmFromServer**
-
-Loads a WASM file from the service hosting the application. It accepts the file path on server and returns a buffer compatible with the `FluencePeer` API.
-
-:::info
-The function will try to load a file into SharedArrayBuffer if the site is cross-origin isolated. Otherwise, the return value falls back to Buffer, which is less performant but is still compatible with the `FluencePeer` API.
-
-We strongly recommend to set-up cross-origin headers. For more details, see the [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#security_requirements).
-:::
-
-This function can only be used in a browser. Trying to call it inside nodejs will result in an error.
 
 ### Registering services in FluencePeer
 
-After the file has been loaded, it can be registered in `FluencePeer`. To do so, use the `registerMarineService` function.
+JS client loads wasm content through its own special service called `Srv`.
+You need to add the service definition if you want to use it. 
 
-To remove a service, use the `registerMarineService` function.
+Add the following aqua file in your project near the other aqua files.
 
-You can pick any unique service id. Once the service has been registered it can be referred in Aqua code by the specified id. For example:
+```
+data ServiceCreationResult:
+    success: bool
+    service_id: ?string
+    error: ?string
 
-```typescript
-import { Fluence, loadWasmFromFileSystem } from '@fluencelabs/fluence';
+data RemoveResult:
+    success: bool
+    error: ?string
 
-async function main()
-    await Fluence.start({connectTo: relay});
+alias ListServiceResult: []string
 
-    const path = path.join(__dirname, './service.wasm');
-    const service = await loadWasmFromFileSystem(path);
+service Srv("single_module_srv"):
+    -- Used to create a service on a certain node
+    -- Arguments:
+    --  bytes – a base64 string containing the .wasm module to add.
+    -- Returns: service_id – the service ID of the created service.
+    create(wasm_b64_content: string) -> ServiceCreationResult
+    
+    -- Used to remove a service from a certain node
+    -- Arguments:
+    --  service_id – ID of the service to remove
+    remove(service_id: string) -> RemoveResult
+    
+    -- Returns a list of services ids running on a peer
+    list() -> ListServiceResult
+```
+Also, you need Aqua function which will call the service above.
+Here is an example of what that function could look like in a simple form.
 
-    // to register service
-    await Fluence.registerMarineService(service, 'my_service_id');
-
-    // to remove service
-    Fluence.removeMarineService('my_service_id');
-}
+```
+func hello(name: string, wasm_content: string) -> string:
+    created_service <- Srv.create(wasm_content)
+    Greeting created_service.service_id!
+    <- Greeting.greeting(name)
 ```
 
-See [https://github.com/fluencelabs/marine-js-demo](https://github.com/fluencelabs/marine-js-demo) for a complete demo.
+Then you need to pass `wasm` variable above as a second parameter in the function.
+
+You can write more sophisticated functions by yourself, but let's hope you're got an idea.
+
+There is an additional marine service example in [examples repo](https://github.com/fluencelabs/examples).
