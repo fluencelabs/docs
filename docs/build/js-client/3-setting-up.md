@@ -9,7 +9,7 @@ The best way to initialize the project is by using CLI
 Run the command below and follow instruction.
 
 ```sh
-fluence init -t=ts --env=kras 
+fluence init -t ts --env kras 
 ```
 
 Go to `src/frontend` dir and run `npm install`.
