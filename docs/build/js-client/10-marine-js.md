@@ -1,5 +1,7 @@
 # Marine JS
 
+> This section is experimental as the API is not stable and probably will change.
+
 ## Using Marine services in JS client
 
 JS client can host Marine services with Marine JS. Currently only pure single-module services are supported.
