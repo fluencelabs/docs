@@ -76,6 +76,6 @@ func hello(name: string, wasm_content: string) -> string:
 
 Then you need to pass `wasm` variable above as a second parameter in the function.
 
-You can write more sophisticated functions by yourself, but let's hope you're got an idea.
+You can write more sophisticated functions by yourself, but let's hope you got the idea.
 
 There is an additional marine service example in [examples repo](https://github.com/fluencelabs/examples).
