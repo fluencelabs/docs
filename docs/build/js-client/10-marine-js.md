@@ -1,4 +1,4 @@
-# Marine JS
+# Marine JS (experimental)
 
 > This section is experimental as the API is not stable and probably will change.
 
