@@ -7,6 +7,10 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+## [0.13.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.2) - December 14, 2023
+
+* **api:** Accept structured imports to allow correct resolving of transitive dependencies. See [Aqua JS API](./aqua-js-api.md) for more info. ([LNG-288](https://linear.app/fluence/issue/LNG-288)) ([#989](https://github.com/fluencelabs/aqua/issues/989))
+
 ## [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
 
 * BREAKING CHANGE: **compiler:** Change type of `nil` literal from `*⟂` to `?⟂`. Refer to [Literals](./language/values.md#literals) to learn more about `nil`.  ([LNG-279](https://linear.app/fluence/issue/LNG-279)) ([#968](https://github.com/fluencelabs/aqua/issues/968))
