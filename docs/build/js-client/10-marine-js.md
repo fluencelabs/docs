@@ -30,7 +30,7 @@ In that case, writing your service as WASM more suitable than doing so in JavaSc
 
 > Currently only pure single-module services are supported.
 
-Using Marine services is pretty straight. The First thing to do is to load compiled WASM file into your environment.
+Using Marine services is pretty straight forward. The first thing to do is to load a compiled WASM file into your environment.
 
 ### Loading module binary
 
