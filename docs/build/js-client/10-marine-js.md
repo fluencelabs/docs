@@ -5,6 +5,7 @@
 ## What is Marine JS
 
 ### Intro
+
 When JS client starts up, it starts with initialization Marine JS runtime.
 The runtime hosts wasm services and even allows you to register your own wasm services.
 For example, AquaVM service for processing particles and Air code resides in Marine JS.
@@ -15,12 +16,12 @@ That's why Marine JS is a foundation of JS client.
 > To register your own service, you would usually use JS-client js services as they are simpler to write and implement.
 
 Usually you don't need to interact with Marine JS directly. 
-AquaVM service being registered at JS client startup phase and ready to process your compiled Aqua code.
+AquaVM service is registered at JS client startup phase and ready to process your compiled Aqua code.
 
 So if your needs include any of the following:
 - Cross-platform service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
-- Would prefer to write service in Rust or other language with compilation WASM
+- Would prefer to write service in Rust or other language with compilation to WASM
 
 In that case, writing your service as WASM more suitable than doing so in JavaScript.
 
@@ -114,4 +115,4 @@ Then you need to pass `wasm` variable above as a second parameter in the functio
 
 > You can load and register as many WASM modules as you want. Remember to keep each of them in a separate service.
 
-There is a working marine service example in [examples repo](https://github.com/fluencelabs/examples).
+There is a working marine service example in [examples repo](https://github.com/fluencelabs/examples/tree/main/js-client-examples/marine-service).

@@ -10,7 +10,7 @@ The instruction below will guide you through the process of setting up an enviro
 
 The best way to initialize the project is by using CLI
 
-> You can find an installation guide [here](https://github.com/fluencelabs/cli).
+You can find an installation guide for the [Fluence CLI](https://github.com/fluencelabs/cli?tab=readme-ov-file#installation-and-usage).
 
 Run the command below. The command will create `js-example` folder with the structured project.
 
