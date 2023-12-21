@@ -7,17 +7,17 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-## [0.13.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.2) - December 14, 2023
+### [0.13.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.2) - December 14, 2023
 
 * **api:** Accept structured imports to allow correct resolving of transitive dependencies. See [Aqua JS API](./aqua-js-api.md) for more info. ([LNG-288](https://linear.app/fluence/issue/LNG-288)) ([#989](https://github.com/fluencelabs/aqua/issues/989))
 
-## [0.13.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.1) - December 7, 2023
+### [0.13.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.1) - December 7, 2023
 
 * **language-server:** Pass types of variables tokens to LSP to display them. See [Aqua Extension for VSCode](./getting-started/installation/installation.md). ([LNG-285](https://linear.app/fluence/issue/LNG-285)) ([#999](https://github.com/fluencelabs/aqua/issues/999))
 * **compiler:** Allow returning resolved service as ability. See [Services](./language/types.md#service-type) and [Abilities](./language/types.md#ability-type). ([LNG-266](https://linear.app/fluence/issue/LNG-266)) ([#977](https://github.com/fluencelabs/aqua/issues/977))
 * **compiler:** Support `*[]` (anonymous empty stream) as a function argument. See [Collections](./language/values.md#collections). ([LNG-280](https://linear.app/fluence/issue/LNG-280)) ([#967](https://github.com/fluencelabs/aqua/issues/967)) 
 
-## [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
+### [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
 
 * BREAKING CHANGE: **compiler:** Change type of `nil` literal from `*⟂` to `?⟂`. Refer to [Literals](./language/values.md#literals) to learn more about `nil`.  ([LNG-279](https://linear.app/fluence/issue/LNG-279)) ([#968](https://github.com/fluencelabs/aqua/issues/968))
 * BREAKING CHANGE: **compiler:** Prohibit mutating options ([LNG-277](https://linear.app/fluence/issue/LNG-277)) ([#960](https://github.com/fluencelabs/aqua/issues/960))
