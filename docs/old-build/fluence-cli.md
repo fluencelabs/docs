@@ -13,7 +13,7 @@ We will be updating [Quickstart](./quick-start) and [examples](https://github.co
 :::
 
 At this point Fluence CLI consolidates some of the functionality of lower level tools such as:
-- [aqua](../aqua-book/aqua-cli)
+- [aqua](../aqua-book/aqua-js-api.md)
 - [marine](../marine-book/marine-tooling-reference/marine-cli)
 - [mrepl](../marine-book/marine-tooling-reference/marine-repl)
 - [rustup](https://rustup.rs/)
