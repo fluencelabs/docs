@@ -346,6 +346,6 @@ aqua run -i aqua/caller.aqua -f "callFunc(\"arg1\",\"arg2\")"
 
 * Added `host_peer_id` , a predefined constant that points on the relay if Aqua compilation is configured so, and on `%init_peer_id%` otherwise, see [#218](https://github.com/fluencelabs/aqua/issues/218).
 
-### 0.1.10 – July 26, 2021
+### [0.1.10](https://github.com/fluencelabs/aqua/releases/tag/0.1.10) – July 26, 2021
 
 * Added `<<-` operator to push a value into a stream, see #[214](https://github.com/fluencelabs/aqua/pull/214), [#209](https://github.com/fluencelabs/aqua/issues/209).
