@@ -120,17 +120,6 @@ const sidebars = {
         "aqua-book/libraries/registry",
       ],
     },
-    {
-      type: "category",
-      label: "Aqua CLI",
-      link: { id: "aqua-book/aqua-cli/aqua-cli", type: "doc" },
-      items: [
-        "aqua-book/aqua-cli/service-management",
-        "aqua-book/aqua-cli/scheduling-scripts",
-        "aqua-book/aqua-cli/plugins",
-        "aqua-book/aqua-cli/peer-state-info",
-      ],
-    },
     "aqua-book/aqua-js-api",
     "aqua-book/changelog",
   ],
