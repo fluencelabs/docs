@@ -21,11 +21,10 @@ and the client contains logic to process it.
 
 ### Example 2
 
-AI image library with an ability to execute incoming processing request.
-It sounds more like an application for Node.js,
-but modern web allows you to host the library even in a browser.
+AI image library with an ability to execute incoming processing requests and distribute the work through Fluence network.
+The lib should do some simple processing locally, e.g., directly in a browser and also parallel the work if necessary.
 
-### Example summary
+### Summary
 
 These use cases have something in common—they need to host a logic locally.
 Moreover, sometimes writing a logic in pure JavaScript is not feasible.
@@ -49,9 +48,9 @@ The runtime hosts wasm services and even allows you to register your own wasm se
 For example, AquaVM service for processing particles and Air code resides in Marine JS.
 That's why Marine JS is a foundation of JS client.
 
-## Using Marine services in JS client
+## Extending JS client with Marine services
 
-> Currently only pure single-module services are supported.
+> Currently only [pure](https://fluence.dev/docs/build/glossary#pure-module) single-module services are supported.
 
 Using Marine services is pretty straight forward. The first thing to do is to load a compiled WASM file into your environment.
 
