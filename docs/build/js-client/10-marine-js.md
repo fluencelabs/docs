@@ -2,29 +2,52 @@
 
 > This section is experimental as the API is not stable and probably will change.
 
-## What is Marine JS
+## Intro
 
-### Intro
+As you already know, Fluence carries a notion of serverless decentralized computation.
+In that ecosystem JS client has been presented more like an HTTP gateway pointed to vast Fluence network consisted of Nox relays.
 
-When JS client starts up, it starts with initialization Marine JS runtime.
-The runtime hosts wasm services and even allows you to register your own wasm services.
-For example, AquaVM service for processing particles and Air code resides in Marine JS.
-That's why Marine JS is a foundation of JS client. 
+Nonetheless, there are some cases when you want to host some logic locally.
+Local environment could be Node.js server or browser page.
 
-### Use cases
+### Example 1
 
-> To register your own service, you would usually use JS-client js services as they are simpler to write and implement.
+Text editor application for multiple users.
+For example, 5–10 users open a web page, and they are able to simultaneously edit text, add symbols or remove words.
+Accordingly, each user has its own JS client up and running.
+JS client hosts logic (in a dedicated service or services) for interacting with incoming particles.
+Each particle carries a message of new typed symbol or added exclamation mark and more,
+and the client contains logic to process it.
 
-Usually you don't need to interact with Marine JS directly. 
-AquaVM service is registered at JS client startup phase and ready to process your compiled Aqua code.
+### Example 2
 
-So if your needs include any of the following:
+AI image library with an ability to execute incoming processing request.
+It sounds more like an application for Node.js,
+but modern web allows you to host the library even in a browser.
+
+### Example summary
+
+These use cases have something in common—they need to host a logic locally.
+Moreover, sometimes writing a logic in pure JavaScript is not feasible.
+For example, AI processing logic would be a lot effective if written in low-level language like Rust
+
+## Use cases
+
+> To register your own service, you would usually use JS-client JavaScript services as they are simpler to write and implement.
+
+Usually you don't need to interact with Marine JS directly except the following:
 - Cross-platform service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
 - Would prefer to write service in Rust or other language with compilation to WASM
 
-In that case, writing your service as WASM more suitable than doing so in JavaScript.
+In any matched case, writing your service as WASM more suitable than doing so in JavaScript.
 
+## What is Marine JS
+
+When JS client starts up, it starts with initialization Marine JS runtime.
+The runtime hosts wasm services and even allows you to register your own wasm services.
+For example, AquaVM service for processing particles and Air code resides in Marine JS.
+That's why Marine JS is a foundation of JS client.
 
 ## Using Marine services in JS client
 
