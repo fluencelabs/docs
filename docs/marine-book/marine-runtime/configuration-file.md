@@ -72,7 +72,7 @@ where `?` represents an optional field, `|` divides options and `specificator` i
 * `P`, `Pb` - petabyte
 * `Pi`, `PiB` - pebibyte
 
-Note, that practically the current limit of Wasm memory is limited to 4 GiB, so a service cannot consume more than `modules_number * 4 GiB`. Additionally, all specificators are case-insensitive.
+Note, that practically the current limit of Wasm memory is limited to 4 GiB per module, so a service cannot consume more than `modules_number * 4 GiB`. Additionally, all specificators are case-insensitive.
 
 Wasm modules specify their initial memory size. If a limit is lower than the sum of initial memory sizes, the service will fail to load into runtime. Setting less than `2 MiB` per module will likely cause this kind of error.
 
