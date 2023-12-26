@@ -91,7 +91,7 @@ name = "build_rs_test"
 path = "src/main.rs"
 
 [dependencies]
-marine-rs-sdk = "0.6.11"
+marine-rs-sdk = "0.10.2"
 
 [dev-dependencies]
 marine-rs-sdk-test = "0.5.0"

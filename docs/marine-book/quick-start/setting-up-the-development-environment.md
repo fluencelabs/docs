@@ -15,15 +15,15 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # add Rust tools to the current PATH
 source $HOME/.cargo/env
 
-# install the nightly toolchain (the x86_64 suffix is needed for compatibility with M1, and 2022-09-15 because newer rust generates wasm we temporarily do not support) 
-rustup install nightly-2022-09-15-x86_64
+# install the nightly toolchain 
+rustup install nightly-2023-12-06
 ```
 
 To be able to compile Rust in Wasm, install the `wasm32-wasi` compilation target:
 
 ```sh
 # install wasm32-wasi target for WebAssembly
-rustup +nightly-2022-09-15-x86_64 target add wasm32-wasi
+rustup +nightly-2023-12-06 target add wasm32-wasi
 ```
 <!-- cSpell:enable -->
 
@@ -38,8 +38,8 @@ Then, install `marine` and `mrepl`:
 
 ```sh
 # install marine
-    cargo +nightly-2022-09-15-x86_64 install marine
+    cargo +nightly-2023-12-06 install marine
 
 # install mrepl, it requires nightly toolchain
-cargo +nightly-2022-09-15-x86_64 install mrepl
+cargo +nightly-2023-12-06 install mrepl
 ```
