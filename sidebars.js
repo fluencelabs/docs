@@ -2,49 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  build: [
-    "build/introduction",
-    "build/get-started",
-    "build/fundamentals",
-    "build/develop-services",
-    // {
-    //   type: "category",
-    //   label: "Quickstart",
-    //   items: [
-    //     "build/fundamentals",
-    //     "build/develop-services",
-    //     // "build/develop-distributed-algos"
-    //   ],
-    // },
-    {
-      type: "category",
-      label: "Working with data",
-      link: { id: "build/working-with-data", type: "doc" },
-      items: [
-        "build/local-data-storage",
-        // "build/remote-data-storage",
-        // "build/data-acquisition"
-      ],
-    },
-    {
-      type: "category",
-      label: "Fluence JS Client",
-      link: { id: "build/js-client/js-client", type: "doc" },
-      items: [
-        "build/js-client/installation",
-        "build/js-client/setting-up",
-        "build/js-client/hello-world",
-        "build/js-client/advanced-ipfs",
-      ],
-    },
-    // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
-    "build/concepts/concepts",
-    "build/security",
-    "build/limits",
-    "build/glossary",
-    "build/reference",
-  ],
-  learn: [
+  "learn": [
     "learn/overview",
     "learn/how-it-works",
     "learn/why-fluence",
@@ -52,6 +10,84 @@ const sidebars = {
     "learn/use-cases",
     "learn/technology",
     "learn/networks",
+  ],
+  "build": [
+    {
+      type: "category",
+      label: "Overview",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/overview/fluence_lambda",
+        "build-mvm/overview/getting_started",
+        "build-mvm/overview/roadmap"
+      ]
+    },
+    {
+      type: "category",
+      label: "Quickstart",
+      collapsible: true,
+      collapsed: true,
+     //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/quickstarts/your_first_lambda",
+        "build-mvm/quickstarts/connecting_to_the_world",
+        "build-mvm/quickstarts/connecting_to_a_datasource"
+      ]
+    },
+    {
+      type: "category",
+      label: "Concepts",
+      collapsible: true,
+      collapsed: true,
+     //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/concepts/best_practices",
+        "build-mvm/concepts/fluence_lambda_revisited",
+        "build-mvm/concepts/marketplace",
+        "build-mvm/concepts/http_gateways",
+        "build-mvm/concepts/cronjobs"
+      ]
+    },
+    {
+      type: "category",
+      label: "Tutorials",
+      collapsible: true,
+      collapsed: true,
+    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/tutorials/workflow_fundamentals",
+        "build-mvm/tutorials/browser_based_events"
+      ]
+    },
+    {
+      type: "category",
+      label: "Examples",
+      collapsible: true,
+      collapsed: true,
+    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/examples/frpc"
+      ]
+    },
+    {
+      type: "category",
+      label: "How To Guides",
+      collapsible: true,
+      collapsed: true,
+    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      items: [
+        "build-mvm/how-to/setting_up",
+        "build-mvm/how-to/configure",
+        "build-mvm/how-to/setup_payments",
+        "build-mvm/how-to/develop",
+        "build-mvm/how-to/test",
+        "build-mvm/how-to/deploy",
+        "build-mvm/how-to/monitor",
+        "build-mvm/how-to/migrate"
+      ]
+    }
   ],
   "aqua-book": [
     "aqua-book/introduction",

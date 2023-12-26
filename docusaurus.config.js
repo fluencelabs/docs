@@ -99,8 +99,8 @@ const config = {
           {
             type: "doc",
             position: "left",
-            docId: "build/introduction",
-            label: "Build",
+            docId: "build-mvm/overview/fluence_lambda",
+            label: "Buidl",
           },
           {
             type: "doc",
@@ -134,7 +134,7 @@ const config = {
               },
               {
                 label: "Build",
-                to: "/docs/build/introduction",
+                to: "/docs/build-mvm/introduction",
               },
               {
                 label: "Aqua Book",
