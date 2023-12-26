@@ -76,7 +76,8 @@ Note, that practically the current limit of Wasm memory is limited to 4 GiB per 
 
 Wasm modules specify their initial memory size. If a limit is lower than the sum of initial memory sizes, the service will fail to load into runtime. Setting less than `2 MiB` per module will likely cause this kind of error.
 
-An allocation attempt which reaches the limit will fail, and the allocator compiled into the Wasm module will handle the error. In Rust case, the default behavior is panic. In this case the function call will be interrupted immediately, and the caller - library using the marine-runtime - will be given an error telling that most likely OOM was the cause.
+Allocating memory exceeding the limit triggers a (Rust) panic at runtime time. 
+In this case the function call will be interrupted immediately, and the caller, i.e., the library using the marine-runtime, will be given an error detailing the out-of-memory (OOM) exception.
 
 Let's consider a few examples:
 
