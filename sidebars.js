@@ -87,7 +87,9 @@ const sidebars = {
         "build-mvm/how-to/monitor",
         "build-mvm/how-to/migrate"
       ]
-    }
+    },
+    "build-mvm/glossary",
+    "build-mvm/references"
   ],
   "aqua-book": [
     "aqua-book/introduction",
