@@ -51,7 +51,7 @@ Then execution is transfered on peer with id that was passed in `node` (see [`on
 on node:
 ```
 
-On `node` it obtains no more than `num_peers` neigbour nodes using buitin services:
+On `node` it obtains no more than `num_peers` neighbour nodes using builtin services:
 
 ```aqua
 key <- Op.string_to_b58(node)
@@ -81,15 +81,15 @@ Finally, stream is converted to scalar (see [Streams Lifecycle](../language/crdt
 
 See the [ts-oracle example](https://github.com/fluencelabs/examples/tree/d52f06dfc3d30799fe6bd8e3e602c8ea1d1b8e8a/aqua-examples/ts-oracle) for the corresponding Aqua files in the `aqua-script` directory. 
 
-Now that we have our script, let's use [Aqua CLI](../aqua-cli/aqua-cli.md) to run it:
+Now that we have our script, let's use [Fluence CLI](https://github.com/fluencelabs/cli) to run it:
 
 <Tabs>
 <TabItem value="Run" label="Run" default>
 
 ```sh
-# use `aqua run` as your client with some peer id
-aqua run \
-    -a /dns4/kras-02.fluence.dev/tcp/19001/wss/p2p/12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf \
+# use `fluence run` as your client with some peer id
+fluence run \
+    --relay /dns4/kras-02.fluence.dev/tcp/19001/wss/p2p/12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf \
     -i aqua-scripts/timestamp_getter.aqua \
     -f 'ts_getter("12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf", 10)'
 ```

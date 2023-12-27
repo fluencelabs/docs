@@ -1,18 +1,8 @@
 # Installation
 
-Both the Aqua compiler and support library can be installed natively with `npm`
+To work with Aqua code from command line, install [Fluence CLI](https://github.com/fluencelabs/cli) and use [`fluence aqua`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-aqua) subcommand.
 
-To install the compiler:
-
-```sh
-npm -g install @fluencelabs/aqua
-```
-
-and to make the Aqua library available to Typescript applications:
-
-```sh
-npm -g install @fluencelabs/aqua-lib
-```
+Also, the compiler API is exposed as an npm package, see [Aqua JS API](../../aqua-js-api.md).
 
 Moreover, a VSCode syntax-highlighting extension is available. In VSCode, click on the Extensions button, search for `aqua` and install the extension.
 

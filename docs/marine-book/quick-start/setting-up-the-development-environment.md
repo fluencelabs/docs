@@ -1,7 +1,7 @@
 # Setting up the development environment
 
 :::info
-The environment will be setup for you automatically if you use [Fluence CLI](/docs/build/get-started.md)
+The environment will be setup for you automatically if you use [Fluence CLI](/docs/build/get-started.mdx)
 :::
 
 To build Marine modules you need to install a CLI tool called `marine` that uses the Rust `wasm32-wasi` target and Marine environment to compile Wasm modules.

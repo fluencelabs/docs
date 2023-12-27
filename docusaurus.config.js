@@ -158,6 +158,10 @@ const config = {
                 href: "https://discord.com/invite/5qSnPZKh7u",
               },
               {
+                label: "Youtube",
+                href: "https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw",
+              },
+              {
                 label: "Telegram (ru)",
                 href: "https://t.me/fluenceru",
               },
