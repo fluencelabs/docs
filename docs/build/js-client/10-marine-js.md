@@ -32,8 +32,6 @@ For example, AI processing logic would be a lot effective if written in low-leve
 
 ## Use cases
 
-> To register your own service, you would usually use JS-client JavaScript services as they are simpler to write and implement.
-
 Usually you don't need to interact with Marine JS directly except the following:
 - Cross-platform service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
