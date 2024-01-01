@@ -1,1 +1,1 @@
-# How To Configure FLuence CLI
+# Configure FLuence CLI

@@ -1,12 +1,12 @@
 # Fluence Lambda
 
-Fluence Lambda is a decentralized serverless solution deeply rooted in the decentralized physical infrastructure [(DePin)](https://www.bitstamp.net/learn/web3/what-are-decentralized-physical-infrastructure-networks-depin/) paradigm. Even more than most serverless solutions, Fluence Lambda lets you do more with less code and without having to worry about the underlying infrastructure. Unlike centralized cloud providers, Fluence Lambda lets you select capacity providers, i.e., data centers, a la carte from a [marketplace](http://example.com) allowing you to customize the serverless infrastructure exactly to your applications' performance, SLA and budget needs. By virtue of its DePin roots, Fluence Lambda scales at speed at exceptionally low cost without foregoing performance and service level. Moreover, Fluence Lambda is supported with a proof system concerning Lambda execution, i.e., Proof of Execution (PoE), and correctness of execution, i.e., Proof of Processing (PoP), that revolutionizes
+Fluence Lambda is a decentralized serverless solution deeply rooted in the decentralized physical infrastructure [(DePin)](https://www.bitstamp.net/learn/web3/what-are-decentralized-physical-infrastructure-networks-depin/) paradigm. Even more than most serverless solutions, Fluence Lambda lets you do more with less code and without having to worry about the underlying infrastructure. Unlike centralized cloud providers, Fluence Lambda lets you select capacity providers, i.e., data centers, a la carte from a [marketplace](http://example.com) allowing you to customize the serverless infrastructure exactly to your applications' performance, SLA and budget needs. By virtue of its DePin roots, Fluence Lambda scales at speed at exceptionally low cost without foregoing performance and service level. Moreover, Fluence Lambda is supported with a proof system concerning Lambda execution, i.e., Proof of Execution (PoE), and correctness of execution, i.e., Proof of Processing (PoP), that revolutionizes a broad range of audits and, of course, billing.
 
 ## In A Nutshell
 
 To make Fluence Lambda work for you, you essentially need to complete three distinct steps:
 
-* Code and compile your business logic tom Wasm
+* Code and compile your business logic to Wasm
 * Create and execute your deployment plan
 * Create and manage your payments and billing
 
@@ -58,14 +58,19 @@ Table 1: High Level Serverless Provider Comparison
 |Workflow Engine|Aqua | Step Functions| Durable Functions| Cloud Functions Workflow|
 |Endpoint Access| P2P or HTTP Gateway| HTTP| HTTP| HTTP|
 |Capacity| Transparent & Customizable| Blackbox |  Blackbox |  Blackbox |
-|CLI | Fluence CLI| AWS CLI| Azure CLI, Azure PowerShell | ? |
+|CLI | Fluence CLI| AWS CLI| Azure CLI, Azure PowerShell | gcloud CLI |
 
 Anybody know how to force a new line in a cell in Docusaurus?
 More to do.
 
 ## Use Cases
 
-By virtue of its standby, easy-to-scale and pay-per-execution model, serverless compute is inherently suitable for to enable [event-driven architectures and systems](https://en.wikipedia.org/wiki/Event-driven_architecture). Fluence Lambda enables
+By virtue of its on-demand, easy-to-scale and pay-per-execution model, serverless compute is inherently suitable to enable [event-driven architectures and systems](https://en.wikipedia.org/wiki/Event-driven_architecture). Some of the use cases Fluence Lambda enables are:
+
+
+| | |
+|--- |--- |
+|Data Processing Pipelines | ...|
 
 * data processing pipelines
     * tbd

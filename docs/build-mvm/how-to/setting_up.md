@@ -1,4 +1,4 @@
-# Setting Up Your Development Environment
+# Set Up Your Development Environment
 
 ## Overview
 

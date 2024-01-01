@@ -1,1 +1,1 @@
-# How To Handle Payments And Billing
+# Manage Payments And Billing
