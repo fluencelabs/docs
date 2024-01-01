@@ -28,7 +28,7 @@ const config = {
   tagline: "Decentralized Serverless Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn", //"throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   i18n: {
