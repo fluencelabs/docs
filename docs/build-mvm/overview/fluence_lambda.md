@@ -57,29 +57,33 @@ Table 1: High Level Serverless Provider Comparison
 |Languages| Rust more coming| Multiple| Multiple| Multiple|
 |Workflow Engine|Aqua | Step Functions| Durable Functions| Cloud Functions Workflow|
 |Endpoint Access| P2P or HTTP Gateway| HTTP| HTTP| HTTP|
-|Capacity| Transparent & Customizable| Blackbox |  Blackbox |  Blackbox |
+|Capacity (Data Center)| Transparent & Selectable| Blackbox |  Blackbox |  Blackbox |
+|Security Network| | | | |
+|Security Serverless| | | | 
 |CLI | Fluence CLI| AWS CLI| Azure CLI, Azure PowerShell | gcloud CLI |
 
-Anybody know how to force a new line in a cell in Docusaurus?
-More to do.
+
+Unlike centralized cloud providers, the Fluence protocol enables an open, permisisonless peer-to-peer network that facilitates crowd sourcing of data center capacity. Make no mistake, the Fluence network is backed by a large number of Tier 4 data centers offering the best CPUs and RAM configurations at extremely competitive prices compared centralized cloud providers. The Fluence marketplace, backed by an innovative blockchain solution, allows you to create deployment contracts according to a variety of attributes necessary for you to build your Flunece Lambdas' performance, availability and security suitable for your budget in an entirely transparent manner. A blockchain-based algorithm is employed to match capacity provides against developers requirements.
+
+While developers can ignore the intricacies of the peer-to-peer network, including network security solutions such as DDOS and other attack prevention or mitigation schemes, a salient difference between Fluence Lambda and other serverless solutions is that Fluence Lambda does not natively support HTTP request and response calls. However, this an easily surmountable challenge and Fluence already provides an out-of-the box solution to manage HTTP requests from your Fluence Lambdas.
+
 
 ## Use Cases
 
-By virtue of its on-demand, easy-to-scale and pay-per-execution model, serverless compute is inherently suitable to enable [event-driven architectures and systems](https://en.wikipedia.org/wiki/Event-driven_architecture). Some of the use cases Fluence Lambda enables are:
+By virtue of its on-demand, easy-to-scale and pay-per-execution model, serverless compute is inherently suitable to enable [event-driven architectures and systems](https://en.wikipedia.org/wiki/Event-driven_architecture). Some of the use cases Fluence Lambda enables are summarized in Table 2.
 
+Table 2: Sample Use Cases For Fluence Lambda
 
-| | |
+|Type|Applications |
 |--- |--- |
-|Data Processing Pipelines | ...|
+|Data Processing| Data preparation and processing|
+|Process Control|Task scheduling|
+|Messaging| Send notifications|
+|APIs| Mobile and web apps|
+|Serverless Workflows| Choreograph and compose Lambdas|
 
-* data processing pipelines
-    * tbd
-* data change drive processing
-    * tbd (Ceramic use case; dynamodb via http gateway)
-* cronjobs
-    * spell examples
-* messaging 
-    * tbd
+In summary, Fluence Lambda supports the full breadth of event- and trigger-based solutions serverless developers like yourself are accustomed to.
+
 
 
 
