@@ -34,7 +34,7 @@ Choose the default template option, `quickstart`, and stick with the default cho
   custom
 ```
 
-Depending on your previous use, or lack thereof, Fluence CLI may install multiple dependencies including the [Rust toolchain](https://www.rust-lang.org/), which will take a minute. Eventually, you should see a mesage similar to:
+Depending on your previous use, or lack thereof, Fluence CLI may install multiple dependencies including the [Rust toolchain](https://www.rust-lang.org/), which will take a minute. Eventually, you should see a message similar to:
 
 ```bash
 Successfully initialized Fluence CLI project template at <your path>/hello-world
@@ -66,7 +66,13 @@ In essence, Fluence CLI comes with several scaffolding templates to make develop
 * Aqua section including src/aqua dir
 * Internal section including the .fluence dir
 
-For starters, the *quickstart* template created a `src/services/` directory and a default service called myService. In your editor or IDE, have a look at the `src/services/myService/modules/myService/src/main.rs` file:
+For starters, the *quickstart* template created a `src/services/` directory and a default service called myService. 
+
+:::info
+In Marine terminology, a service is a namespace over the Wasm artifacts consisting of  modules and configuration files. Multiple Wasm modules can be linked but can only have a single (module) interface, called the facade module as reflected in the service.yaml file. See the [Glossary](https://fluence.dev/docs/build/glossary#facade-module) for more information about modules and module types.
+:::
+
+In your editor or IDE, have a look at the `src/services/myService/modules/myService/src/main.rs` file:
 
 ```rust
      1	#![allow(non_snake_case)]
@@ -103,9 +109,7 @@ ll target/wasm32-wasi/release|grep .wasm
 
 Eventually, we'll deploy that module to the network for serverless usage. But before we do that, lets quickly review testing options with respect to both local and remote. Running defective code in serverless can be an expensive undertaking as billing is commensurate with execution and a run-away service, fro example, can be rather costly. Hence, testing is of even greater importance. The Fluence toolchain supports interactive and non-interactive testing of your Fluence Lambdas using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](../how-to/test.md) for a comprehensive review of both tooling and strategy.
 
-Back to the task at hand. We created some code, well inherited it from the *quickstart* template, and compiled it to wasm32-wasi. So now what? Well, before we do anything else, we want to know if our *hello* functions works. For that we use the Marine Repl which we can start up using the Fluence CLI: `fluence service repl mYService`. Again, if you haven't used MREPL yet, the CLI will download and install it for you. 
-
-You should see something similar to this:
+Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi. So now what? Well, before we do anything else, we want to know if our *hello* function works. For that we use the Marine REPL. Use to the Fluence CLI to srat it up: `fluence service repl mYService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
 
 ```bash
 # Making sure service and modules are downloaded and built...
@@ -174,10 +178,6 @@ Now that we are satisfied that our code is in working order, it's time to deploy
 
 
 **Need payment and deployment sorted before we can continue and finalize the section**
-
-
-
-
 
 
 

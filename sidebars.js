@@ -33,7 +33,7 @@ const sidebars = {
       items: [
         "build-mvm/quickstarts/your_first_lambda",
         "build-mvm/quickstarts/connecting_to_the_world",
-        "build-mvm/quickstarts/connecting_to_a_datasource"
+        "build-mvm/quickstarts/connecting_to_local_storage"
       ]
     },
     {
