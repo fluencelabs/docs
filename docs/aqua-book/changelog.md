@@ -7,6 +7,19 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2023
+
+* **compiler:** `for ... rec` instruction (not documented). ([LNG-307](https://linear.app/fluence/issue/LNG-307)) ([#1026](https://github.com/fluencelabs/aqua/issues/1026))
+* **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-307)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
+* FIX: **compiler:** Correctly capture arrows from context in nested [closures](./language/closures.md). ([LNG-317](https://linear.app/fluence/issue/LNG-317)) ([#1038](https://github.com/fluencelabs/aqua/issues/1038))
+* FIX: **compiler:** Correctly capture abilities in [closures](./language/closures.md). ([LNG-314](https://linear.app/fluence/issue/LNG-314)) ([#1035](https://github.com/fluencelabs/aqua/issues/1035))
+* FIX: **compiler:** Correctly type check calls to [services](./language/services.md) and [abilities](./language/abilities.md) methods (check number of arguments and their types). ([LNG-315](https://linear.app/fluence/issue/LNG-315)) ([#1037](https://github.com/fluencelabs/aqua/issues/1037))
+
+### [0.13.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.3) - December 22, 2023
+
+* **api:** Refactor JS API interfaces. See [JS API](./aqua-js-api.md). ([#1024](https://github.com/fluencelabs/aqua/issues/1024))
+* **compiler:** By default, do not generate topological hops back to `INIT_PEER_ID` when function has no return value. In other words, function without a return value has fire-and-forget semantics by default. ([LNG-305](https://linear.app/fluence/issue/LNG-305)) ([#1019](https://github.com/fluencelabs/aqua/issues/1019))
+
 ### [0.13.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.2) - December 14, 2023
 
 * **api:** Accept structured imports to allow correct resolving of transitive dependencies. See [Aqua JS API](./aqua-js-api.md) for more info. ([LNG-288](https://linear.app/fluence/issue/LNG-288)) ([#989](https://github.com/fluencelabs/aqua/issues/989))
