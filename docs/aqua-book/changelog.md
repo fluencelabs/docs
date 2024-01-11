@@ -10,7 +10,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 ### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2023
 
 * **compiler:** `for ... rec` instruction (not documented). ([LNG-307](https://linear.app/fluence/issue/LNG-307)) ([#1026](https://github.com/fluencelabs/aqua/issues/1026))
-* **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-307)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
+* **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-313)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
 * FIX: **compiler:** Correctly capture arrows from context in nested [closures](./language/closures.md). ([LNG-317](https://linear.app/fluence/issue/LNG-317)) ([#1038](https://github.com/fluencelabs/aqua/issues/1038))
 * FIX: **compiler:** Correctly capture abilities in [closures](./language/closures.md). ([LNG-314](https://linear.app/fluence/issue/LNG-314)) ([#1035](https://github.com/fluencelabs/aqua/issues/1035))
 * FIX: **compiler:** Correctly type check calls to [services](./language/services.md) and [abilities](./language/abilities.md) methods (check number of arguments and their types). ([LNG-315](https://linear.app/fluence/issue/LNG-315)) ([#1037](https://github.com/fluencelabs/aqua/issues/1037))
