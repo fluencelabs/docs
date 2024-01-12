@@ -187,7 +187,8 @@ type: rust
 name: use_filesys
 ```
 
-Which is not enough. We need to specify that we want this module to be able to access the hosts filesystem via some specified directory, and we do this by mounting a named directory mapped to the SITES_DIR alias:
+As mentioned earlier, we need to provide a reference to the location of the file directory on the host system. We do this by referencing the `.tmp`, which needs to be available on the host system. If the specified dir is not available on the host system, an error will occur at runtime.
+By specifying the `sites` directory, we are enabling the mounting the named directory mapped to the SITES_DIR alias in our rust code.
 
 ```yaml
 # src/modules/use_filesys/module.yaml
