@@ -12,10 +12,26 @@ Let's start by creating a new, minimal Fluence CLI project by the name of your c
 fluence init write-to-file
 ```
 ```
+vasd85@MacBook-Pro test % fluence init write-to-file
+? Select template
+  quickstart
+❯ minimal
+  ts
+  js
+```
+```
 ? Select template minimal
+? Select Fluence Environment to use by default with this project (Use arrow keys)
+❯ kras (default)
+  testnet
+  stage
+  local
+  custom
+```
+```
 ? Select Fluence Environment to use by default with this project kras (default)
 
-Successfully initialized Fluence project template at ~/your-path/write-to-file
+Successfully initialized Fluence CLI project template at /Users/vasd85/fluence/test/write-to-file
 ```
 
 ```bash
@@ -28,14 +44,19 @@ In the new project directory, we scaffold a new service:
 fluence service new filesys_adapter
 ```
 ```
-Successfully generated template for new service at ~/your-path/write-to-file/src/services/filesys_adapter
-    Updating crates.io index
-   Compiling ...
-   Compiling filesys_adapter v0.1.0 (~/your-path/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
-    Finished release [optimized] target(s) in 29.35s
-Added filesys_adapter to ~/your-path/write-to-file/fluence.yaml
+vasd85@MacBook-Pro write-to-file % fluence service new filesys_adapter
+Successfully generated template for new service at /Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter
+Added filesys_adapter to /Users/vasd85/fluence/test/write-to-file/fluence.yaml
+? Do you want to add service filesys_adapter to a default deal dealName: (Y/n)
+```
+```
 ? Do you want to add service filesys_adapter to a default deal dealName: Yes
 Added filesys_adapter to dealName
+    Updating crates.io index
+   Compiling proc-macro2 v1.0.76
+    <...>
+   Compiling filesys_adapter v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
+    Finished release [optimized] target(s) in 29.95s
 ```
 
 Which gives us the project scaffold:
@@ -84,7 +105,8 @@ Which we'll have to modify. In addition to the adapter, which handles the access
 fluence module new use_filesys
 ```
 ```
-Successfully generated template for new module at ~/your-path/write-to-file/src/modules/use_filesys
+vasd85@MacBook-Pro write-to-file % fluence module new use_filesys
+Successfully generated template for new module at /Users/vasd85/fluence/test/write-to-file/src/modules/use_filesys
 ```
 
 ```bash
@@ -184,10 +206,11 @@ With our configuration in place, let's build our adapter:
 fluence build
 ```
 ```
+vasd85@MacBook-Pro write-to-file % fluence build
 # Making sure all services are downloaded...
 # Making sure all services are built...
-   Compiling use_filesys v0.1.0 (~/your-path/write-to-file/src/modules/use_filesys)
-    Finished release [optimized] target(s) in 2.99s
+    Finished release [optimized] target(s) in 0.73s
+All services and spells built successfully
 ```
 
 > :warning: For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
@@ -296,10 +319,12 @@ Now that our business logic is in place we can compile our code to the Wasm modu
 fluence build
 ```
 ```
+vasd85@MacBook-Pro write-to-file % fluence build
 # Making sure all services are downloaded...
 # Making sure all services are built...
-   Compiling filesys_adapter v0.1.0 (~/your-path/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
-    Finished release [optimized] target(s) in 1.79s
+   Compiling filesys_adapter v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
+    Finished release [optimized] target(s) in 1.47s
+All services and spells built successfully
 ```
 
 All looks good, and we now have two Wasm module we'd like to use as a service. See the respective `target/wasm32-wasi/release` directories for the *.wasm files.
@@ -322,10 +347,16 @@ Now we can use our service, aptly called *local_storage*, even without deploymen
 fluence service repl
 ```
 ```
+vasd85@MacBook-Pro write-to-file % fluence service repl
+? Select service (Use arrow keys)
+❯ filesys_adapter 
+  Enter path to a service or url to .tar.gz archive 
+```
+```
 ? Select service filesys_adapter
 # Making sure service and modules are downloaded and built...
-   Compiling use_filesys v0.1.0 (~/your-path/write-to-file/src/modules/use_filesys)
-    Finished release [optimized] target(s) in 1.21s
+   Compiling use_filesys v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/modules/use_filesys)
+    Finished release [optimized] target(s) in 1.25s
 
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -339,15 +370,15 @@ call filesys_adapter <function_name> [<arg1>, <arg2>]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 }
-Welcome to the Marine REPL (version 0.24.0)
+Welcome to the Marine REPL (version 0.26.0)
 Minimal supported versions
   sdk: 0.6.0
   interface-types: 0.20.0
 
-app service was created with service id = 143d8abc-c1a0-4f0e-9ac0-00df893ad31a
-elapsed time 88.687041ms
+app service was created with service id = 5eb8abcf-3cbf-4af5-aead-fbb2601d5002
+elapsed time 71.630208ms
 
-1>
+1> 
 ```
 
 Note you can list the available/exposed interfaces with **i**:
