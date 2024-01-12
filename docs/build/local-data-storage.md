@@ -199,7 +199,7 @@ volumes:
   sites: ./tmp
 ```
 
-Where the *volumes* section contains the mapping of the actual directory to the alias we set in the `module.yaml`. For more information on import functions see the [Marine book](/docs/marine-book/marine-runtime/configuration-file) and the [configuration properties](https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/module.md) provided by Fluence CLI.
+For more information on import functions see the [Marine book](/docs/marine-book/marine-runtime/configuration-file) and the [configuration properties](https://github.com/fluencelabs/fluence-cli/tree/main/docs/configs/module.md) provided by Fluence CLI.
 
 With our configuration in place, let's build our adapter:
 
