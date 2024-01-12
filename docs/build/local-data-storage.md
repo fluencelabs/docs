@@ -328,7 +328,7 @@ vasd85@MacBook-Pro write-to-file % fluence build
 All services and spells built successfully
 ```
 
-All looks good, and we now have two Wasm module we'd like to use as a service. See the respective `target/wasm32-wasi/release` directories for the *.wasm files.
+All looks good and we now have two Wasm module we'd like to use as a service. See the respective `target/wasm32-wasi/release` directories for the *.wasm files.
 
 We have one more step to complete the creation of a service from our Wasm modules: specify the linking configuration in the `services/filesys_adapter/service.yaml` file by naming the appropriate facade and linked module(s). Update your *services.yaml* to:
 
