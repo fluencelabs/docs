@@ -135,7 +135,7 @@ src
 10 directories, 8 files
 ```
 
-With our service and modules scaffolded, we can now proceed and code our (reusable) `use_filesys` module to handle the interaction with the host filesystem.```
+With our service and modules scaffolded, we can now proceed and code our (reusable) `use_filesys` module to handle the interaction with the host filesystem.
 
 ```rust
 // src/modules/use_filesys/src/main.rs
