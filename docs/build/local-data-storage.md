@@ -177,7 +177,7 @@ pub fn rm(name: String) -> String {
 }
 ```
 
-The code is pretty straight forward read/write but a few lines are noteworthy: The `const SITES_DIR` is the *alias* to the local path and needs to match up with the mapping in `modules.yaml`.
+The code is pretty straight forward but note `const SITES_DIR`:  This is the **alias** to the local path and needs to match up with the `volumes` mapping in `modules.yaml`, which we still need to add.
 
 The scaffolded default `module.yaml` file looks like this:
 
