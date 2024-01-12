@@ -135,7 +135,7 @@ src
 10 directories, 8 files
 ```
 
-With the scaffolding out of the way, let's code our modules. First, we create our general-purpose, reusable `use_filesys` module to handle the put/get operations to/from the local, i.e., host peer, filesystem and add a file removal method, `rm`, as well:
+With our service and modules scaffolded, we can now proceed and code our (reusable) `use_filesys` module to handle the interaction with the host filesystem.```
 
 ```rust
 // src/modules/use_filesys/src/main.rs
