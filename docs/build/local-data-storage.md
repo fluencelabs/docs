@@ -12,26 +12,27 @@ Let's start by creating a new, minimal Fluence CLI project by the name of your c
 fluence init write-to-file
 ```
 ```
-vasd85@MacBook-Pro test % fluence init write-to-file
-? Select template
-  quickstart
-❯ minimal
-  ts
-  js
+? Select template 
+  quickstart 
+❯ minimal 
+  ts 
+  js 
 ```
 ```
 ? Select template minimal
-? Select Fluence Environment to use by default with this project (Use arrow keys)
-❯ kras (default)
-  testnet
-  stage
-  local
-  custom
+? Select Fluence Environment to use by default with this project 
+  kras (default) 
+  testnet 
+  stage 
+❯ local 
+  custom 
 ```
 ```
-? Select Fluence Environment to use by default with this project kras (default)
+? Select Fluence Environment to use by default with this project local
+Creating new provider config
 
-Successfully initialized Fluence CLI project template at /Users/vasd85/fluence/test/write-to-file
+
+Successfully initialized Fluence CLI project template at /<your-path>/write-to-file
 ```
 
 ```bash
@@ -44,9 +45,8 @@ In the new project directory, we scaffold a new service:
 fluence service new filesys_adapter
 ```
 ```
-vasd85@MacBook-Pro write-to-file % fluence service new filesys_adapter
-Successfully generated template for new service at /Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter
-Added filesys_adapter to /Users/vasd85/fluence/test/write-to-file/fluence.yaml
+Successfully generated template for new service at /<your-path>/write-to-file/src/services/filesys_adapter
+Added filesys_adapter to /<your-path>/write-to-file/fluence.yaml
 ? Do you want to add service filesys_adapter to a default deal dealName: (Y/n)
 ```
 ```
@@ -55,7 +55,7 @@ Added filesys_adapter to dealName
     Updating crates.io index
    Compiling proc-macro2 v1.0.76
     <...>
-   Compiling filesys_adapter v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
+   Compiling filesys_adapter v0.1.0 (/<your-path>/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
     Finished release [optimized] target(s) in 29.95s
 ```
 
@@ -106,7 +106,7 @@ fluence module new use_filesys
 ```
 ```
 vasd85@MacBook-Pro write-to-file % fluence module new use_filesys
-Successfully generated template for new module at /Users/vasd85/fluence/test/write-to-file/src/modules/use_filesys
+Successfully generated template for new module at /<your-path>/write-to-file/src/modules/use_filesys
 ```
 
 ```bash
@@ -207,14 +207,13 @@ With our configuration in place, let's build our adapter:
 fluence build
 ```
 ```
-vasd85@MacBook-Pro write-to-file % fluence build
 # Making sure all services are downloaded...
 # Making sure all services are built...
     Finished release [optimized] target(s) in 0.73s
 All services and spells built successfully
 ```
 
-> :warning: For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
+> ❗ For more effective ways to read/write files, see the [Rust documentation](https://doc.rust-lang.org/std/fs/struct.File.html) and [cookbook](https://rust-lang-nursery.github.io/rust-cookbook/file/read-write.html) and create your own custom file IO adapter!
 
 Now that we have our [effector module](/docs/build/glossary#effector-module) in place, let's code our [facade module](/docs/build/glossary#facade-module), which in our case consists of simple read and write methods essentially wrapping the effector methods with a little convenience: instead of byte arrays we can use human-readable strings to write and read our file content.
 
@@ -320,10 +319,9 @@ Now that our business logic is in place we can compile our code to the Wasm modu
 fluence build
 ```
 ```
-vasd85@MacBook-Pro write-to-file % fluence build
 # Making sure all services are downloaded...
 # Making sure all services are built...
-   Compiling filesys_adapter v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
+   Compiling filesys_adapter v0.1.0 (/<your-path>/write-to-file/src/services/filesys_adapter/modules/filesys_adapter)
     Finished release [optimized] target(s) in 1.47s
 All services and spells built successfully
 ```
@@ -350,7 +348,6 @@ Now we can use our service, aptly called *local_storage*, even without deploymen
 fluence service repl
 ```
 ```
-vasd85@MacBook-Pro write-to-file % fluence service repl
 ? Select service (Use arrow keys)
 ❯ filesys_adapter 
   Enter path to a service or url to .tar.gz archive 
@@ -358,7 +355,7 @@ vasd85@MacBook-Pro write-to-file % fluence service repl
 ```
 ? Select service filesys_adapter
 # Making sure service and modules are downloaded and built...
-   Compiling use_filesys v0.1.0 (/Users/vasd85/fluence/test/write-to-file/src/modules/use_filesys)
+   Compiling use_filesys v0.1.0 (/<your-path>/write-to-file/src/modules/use_filesys)
     Finished release [optimized] target(s) in 1.25s
 
 
@@ -442,31 +439,44 @@ result: {
 
 ### Run services on a host's filesystem
 
-To run our service on a host's filesystem, we need to deploy it to the network. Let's start by deploying our service:
+To run our service on a host's filesystem, we need to deploy it to the network. Let's start by deploying our service to the local network. First, we need to start the local network:
 
 ```bash
-fluence deal deploy
+fluence local up
+```
+
+Then we can deploy our service:
+> ❗ Use `--priv-key` flag for debug purposes only. Passing private keys through flags is unsecure.
+
+> 💡 You can take private keys from the `.fluence/provider-secrets.yaml` file to deploy the service in local environment.
+
+```bash
+fluence deal deploy --priv-key <your-private-key>
 ```
 ```
-Using kras blockchain environment to send transactions
-    Finished release [optimized] target(s) in 0.48s
-Connecting to random kras relay: /dns4/8-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWEFFCZnar1cUJQ3rMWjvPQg6yMV2aXWs2DkJNSRbduBWn
+Using local blockchain environment to send transactions
+    Finished release [optimized] target(s) in 0.64s
+Service memory limits for worker dealName:
+filesys_adapter: 2.00 GB
+
+Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWRScmJGv9ZSdden96cuYFrv1xxzRpd7q3UcDPWdw5KckB
 Connected
 
 Creating deal for worker dealName
 
 # Waiting for transaction to be mined......
 # Waiting for transaction to be mined......
-3 workers joined the deal 0x214AF6e33172A89Eae1129e4e3Ff20B18123587b
+# Waiting for transaction to be mined......
+1 workers joined the deal 0xEb92A1B5c10AD7BFdcaf23Cb7DDA9ea062CD07E8
 
 
 Success!
 
 created deals:
   dealName:
-    deal: https://mumbai.polygonscan.com/address/0x214AF6e33172A89Eae1129e4e3Ff20B18123587b
-    worker definition: bafkreie45jxbradrcummqn5f4j5l327slfxlqrebi4llddmctx76ct5pby
-    timestamp: 2024-01-15T11:30:22.547Z
+    deal: https://mumbai.polygonscan.com/address/0xEb92A1B5c10AD7BFdcaf23Cb7DDA9ea062CD07E8
+    worker definition: bafkreifdo4sohx7md3wv352jamsggs3teh4aeytrv4xqpvanusemj6hwdm
+    timestamp: 2024-01-15T20:28:11.252Z
 ```
 
 Now that we have our services deployed, we can turn our focus on writing the necessary Aqua code. First, we clear out the template code in the `src/aqua/main.aqua` file and start from scratch:
@@ -552,17 +562,9 @@ We simply wrapped the exposed facade interfaces with Aqua code and just pass thr
 fluence run -f 'write_file("test_file.txt", "Hello, Fluence!")'
 ```
 ```
-Connecting to random kras relay: /dns4/7-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWDUszU2NeWyUVjCXhGEt1MoZrhvdmaQQwtZUriuGN1jTr
+Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWHeaisCizqsM9ek2ozktR9wjmtGxRL5c7RVCeUcXmEPaE
 Connected
 [
-  {
-    "stderr": "",
-    "stdout": "OK"
-  },
-  {
-    "stderr": "",
-    "stdout": "OK"
-  },
   {
     "stderr": "",
     "stdout": "OK"
@@ -575,17 +577,9 @@ Connected
 fluence run -f 'read_file("test_file.txt")'
 ```
 ```
-Connecting to random kras relay: /dns4/1-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWR4cv1a8tv7pps4HH6wePNaK6gf1Hww5wcCMzeWxyNw51
+Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWHeaisCizqsM9ek2ozktR9wjmtGxRL5c7RVCeUcXmEPaE
 Connected
 [
-  {
-    "stderr": "",
-    "stdout": "Hello, Fluence!"
-  },
-  {
-    "stderr": "",
-    "stdout": "Hello, Fluence!"
-  },
   {
     "stderr": "",
     "stdout": "Hello, Fluence!"
@@ -599,17 +593,9 @@ Connected
 fluence run -f 'rm_file("test_file.txt")'
 ```
 ```
-Connecting to random kras relay: /dns4/10-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm
+Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWRScmJGv9ZSdden96cuYFrv1xxzRpd7q3UcDPWdw5KckB
 Connected
 [
-  {
-    "stderr": "",
-    "stdout": "OK"
-  },
-  {
-    "stderr": "",
-    "stdout": "OK"
-  },
   {
     "stderr": "",
     "stdout": "OK"
@@ -623,17 +609,9 @@ Connected
 fluence run -f 'read_file("test_file.txt")'
 ```
 ```
-Connecting to random kras relay: /dns4/5-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWFEwNWcHqi9rtsmDhsYcDbRUCDXH84RC4FW6UfsFWaoHi
+Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWHeaisCizqsM9ek2ozktR9wjmtGxRL5c7RVCeUcXmEPaE
 Connected
 [
-  {
-    "stderr": "error reading file",
-    "stdout": ""
-  },
-  {
-    "stderr": "error reading file",
-    "stdout": ""
-  },
   {
     "stderr": "error reading file",
     "stdout": ""
