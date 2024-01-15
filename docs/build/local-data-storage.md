@@ -2,9 +2,9 @@
 
 A peer hosting services may agree to provide access to their filesystem or allocate additional RAM. However, such persistence provisioning generally comes with no guarantees of availability. For example, a peer reboot will wipe a SQLite in-memory data base. Moreover, by the very nature of their local provisioning, such data sources are only available through the "sponsoring" service: there is no direct data access and when the service ceases to exist so does the data.While local data persistence has its use cases, developers need to be aware of their limitations.
 
-### Local Filesystem
+## Creating services
 
-While Wasm modules in general are sandboxed to not have access to host resources, Marine Wasm modules may be granted access to a variety of host resources iff the host peer agrees to such access. The request for resource access and allocation come in form of deployment parameters, which we'll see very soon
+While Wasm modules in general are sandboxed to not have access to host resources, Marine Wasm modules may be granted access to a variety of host resources if the host peer agrees to such access. The request for resource access and allocation come in form of deployment parameters, which we'll see very soon
 
 Let's start by creating a new, minimal Fluence CLI project by the name of your choice:
 
@@ -342,6 +342,8 @@ modules:
     get: ../../modules/use_filesys
 ```
 
+### Run services on a local filesystem
+
 Now we can use our service, aptly called *local_storage*, even without deployment to the network in the [Marine REPL](/docs/marine-book/marine-tooling-reference/marine-repl):
 
 ```bash
@@ -438,170 +440,205 @@ result: {
 
 ```
 
-**todo**: worker deploy
+### Run services on a host's filesystem
 
-- * delete old deploy: **
+To run our service on a host's filesystem, we need to deploy it to the network. Let's start by deploying our service:
 
 ```bash
-fluence deploy
-Making sure all services are downloaded... done
-    Blocking waiting for file lock on package cache
-    <...>
-Making sure all modules are downloaded and built... done
+fluence deal deploy
+```
+```
+Using kras blockchain environment to send transactions
+    Finished release [optimized] target(s) in 0.48s
+Connecting to random kras relay: /dns4/8-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWEFFCZnar1cUJQ3rMWjvPQg6yMV2aXWs2DkJNSRbduBWn
+Connected
 
-Going to deploy services described in ~/localdev/documentation-examples/write-to-file/fluence.yaml:
+Creating deal for worker dealName
 
-filesys_adapter:
-  get: services
-  deploy:
-    - deployId: default
-use_filesys:
-  get: services
-  deploy:
-    - deployId: default
+# Waiting for transaction to be mined......
+# Waiting for transaction to be mined......
+3 workers joined the deal 0x214AF6e33172A89Eae1129e4e3Ff20B18123587b
 
-? Do you want to deploy all of these services? Yes
-Going to upload module: filesys_adapter
-Going to upload module: use_filesys
-Module 'filesys_adapter' was uploaded
-Module 'use_filesys' was uploaded
-Now time to make the blueprint...
-{
-  "blueprint_id": "5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d",
-  "service_id": "b1adf912-abbe-45e8-9b2f-ac26158ba7db"
-}
-Deploying:
-  service: filesys_adapter
-  deployId: default
-  on: 12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm... done
-Going to upload module: filesys_adapter
-Going to upload module: use_filesys
-Module 'filesys_adapter' was uploaded
-Module 'use_filesys' was uploaded
-Now time to make the blueprint...
-{
-  "blueprint_id": "5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d",
-  "service_id": "2a6b3077-67ad-43d8-a181-0d24e8683d08"
-}
-Deploying:
-  service: use_filesys
-  deployId: default
-  on: 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA... done
 
-Currently deployed services listed in ~/localdev/documentation-examples/write-to-file/.fluence/app.yaml:
+Success!
 
-filesys_adapter:
-  default:
-    - blueprintId: 5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d
-      serviceId: b1adf912-abbe-45e8-9b2f-ac26158ba7db
-      peerId: 12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm
-      keyPairName: auto-generated
-use_filesys:
-  default:
-    - blueprintId: 5c6f2b9adb96ca87672fc9917f11b8c7249fce7b73c8769af73f83702ae0c68d
-      serviceId: 2a6b3077-67ad-43d8-a181-0d24e8683d08
-      peerId: 12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA
-      keyPairName: auto-generated
-
+created deals:
+  dealName:
+    deal: https://mumbai.polygonscan.com/address/0x214AF6e33172A89Eae1129e4e3Ff20B18123587b
+    worker definition: bafkreie45jxbradrcummqn5f4j5l327slfxlqrebi4llddmctx76ct5pby
+    timestamp: 2024-01-15T11:30:22.547Z
 ```
 
 Now that we have our services deployed, we can turn our focus on writing the necessary Aqua code. First, we clear out the template code in the `src/aqua/main.aqua` file and start from scratch:
 
-```python
--- src/aqua.main
+```
 aqua Main
 
-import App from "deployed.app.aqua"
--- we get these params from .fluence/aqua/services/use_filesys.aqua
-import IOResult, UseFilesys from "services/use_filesys.aqua"
-export App, write_to_file, read_from_file, remove_file
+import "@fluencelabs/aqua-lib/builtin.aqua"
+import "@fluencelabs/aqua-lib/subnet.aqua"
 
-func write_to_file(filename: string, content: string) -> IOResult:
-    services <- App.services()
-    on services.use_filesys.default!.peerId:
-        UseFilesys services.use_filesys.default!.serviceId
-        res <- UseFilesys.write_file(filename, content)
-    <- res
+use "deals.aqua"
+use "hosts.aqua"
+import "services.aqua"
 
-func read_from_file(filename:string) -> IOResult:
-    services <- App.services()
-    on services.use_filesys.default!.peerId:
-        UseFilesys services.use_filesys.default!.serviceId
-        res <- UseFilesys.read_file(filename)
-    <- res
+export read_file, rm_file, write_file
 
-func remove_file(filename: string) -> IOResult:
-    services <- App.services()
-    on services.use_filesys.default!.peerId:
-        UseFilesys services.use_filesys.default!.serviceId
-        res <- UseFilesys.rm_file(filename)
-    <- res
+func read_file(filename: string) -> []IOResult:
+    deals <- Deals.get()
+    dealId = deals.dealName!.dealIdOriginal
 
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    results: *IOResult
+
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            Console.print("Worker is not deployed")
+        else:
+            on w.worker_id! via w.host_id:
+                results <- FilesysAdapter.read_file(filename)
+
+    <- results
+
+func rm_file(filename: string) -> []IOResult:
+    deals <- Deals.get()
+    dealId = deals.dealName!.dealIdOriginal
+
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    results: *IOResult
+
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            Console.print("Worker is not deployed")
+        else:
+            on w.worker_id! via w.host_id:
+                results <- FilesysAdapter.rm_file(filename)
+
+    <- results
+
+func write_file(filename: string, content: string) -> []IOResult:
+    deals <- Deals.get()
+    dealId = deals.dealName!.dealIdOriginal
+
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    results: *IOResult
+
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            Console.print("Worker is not deployed")
+        else:
+            on w.worker_id! via w.host_id:
+                results <- FilesysAdapter.write_file(filename, content)
+
+    <- results
 ```
 
 We simply wrapped the exposed facade interfaces with Aqua code and just pass through the returned IOResult data. Let's run our Aqua against the deployed service with familiar parameters:
 
+#### Write to a file:
+
 ```bash
-# write to file
-fluence run
-? Enter a function call that you want to execute write_to_file("test_file.txt", "Hello, Fluence!")
-{
-  "stderr": "",
-  "stdout": "OK"
-}
-Running:
-  function: write_to_file("test_file.txt", "Hello, Fluence!")
-  relay: /dns4/kras-01.fluence.dev/tcp/19001/wss/p2p/12D3KooWKnEqMfYo9zvfHmqTLpLdiHXPe4SVqUWcWHDJdFGrSmcA... done
+fluence run -f 'write_file("test_file.txt", "Hello, Fluence!")'
+```
+```
+Connecting to random kras relay: /dns4/7-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWDUszU2NeWyUVjCXhGEt1MoZrhvdmaQQwtZUriuGN1jTr
+Connected
+[
+  {
+    "stderr": "",
+    "stdout": "OK"
+  },
+  {
+    "stderr": "",
+    "stdout": "OK"
+  },
+  {
+    "stderr": "",
+    "stdout": "OK"
+  }
+]
+```
+#### Read from the file:
 
-Result:
+```bash
+fluence run -f 'read_file("test_file.txt")'
+```
+```
+Connecting to random kras relay: /dns4/1-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWR4cv1a8tv7pps4HH6wePNaK6gf1Hww5wcCMzeWxyNw51
+Connected
+[
+  {
+    "stderr": "",
+    "stdout": "Hello, Fluence!"
+  },
+  {
+    "stderr": "",
+    "stdout": "Hello, Fluence!"
+  },
+  {
+    "stderr": "",
+    "stdout": "Hello, Fluence!"
+  }
+]
+```
 
-"{\\n  \\"stderr\\": \\"\\",\\n  \\"stdout\\": \\"OK\\"\\n}\\n"
+#### Remove the file:
 
-# read from file
-fluence run
-? Enter a function call that you want to execute read_from_file("test_file.txt")
-{
-  "stderr": "",
-  "stdout": "Hello, Fluence!"
-}
-Running:
-  function: read_from_file("test_file.txt")
-  relay: /dns4/kras-02.fluence.dev/tcp/19001/wss/p2p/12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf... done
+```bash
+fluence run -f 'rm_file("test_file.txt")'
+```
+```
+Connecting to random kras relay: /dns4/10-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWD7CvsYcpF9HE9CCV9aY3SJ317tkXVykjtZnht2EbzDPm
+Connected
+[
+  {
+    "stderr": "",
+    "stdout": "OK"
+  },
+  {
+    "stderr": "",
+    "stdout": "OK"
+  },
+  {
+    "stderr": "",
+    "stdout": "OK"
+  }
+]
+```
 
-Result:
+#### Try to read from the deleted file:
 
-"{\\n  \\"stderr\\": \\"\\",\\n  \\"stdout\\": \\"Hello, Fluence!\\"\\n}\\n"
-
-# remove the file
-fluence run
-? Enter a function call that you want to execute remove_file("test_file.txt")
-{
-  "stderr": "",
-  "stdout": "OK"
-}
-Running:
-  function: remove_file("test_file.txt")
-  relay: /dns4/kras-00.fluence.dev/tcp/19990/wss/p2p/12D3KooWSD5PToNiLQwKDXsu8JSysCwUt8BVUJEqCHcDe7P5h45e... done
-
-Result:
-
-"{\\n  \\"stderr\\": \\"\\",\\n  \\"stdout\\": \\"OK\\"\\n}\\n"
-
-# try to read from delete file
-fluence run
-? Enter a function call that you want to execute read_from_file("test_file.txt")
-{
-  "stderr": "error reading file",
-  "stdout": ""
-}
-Running:
-  function: read_from_file("test_file.txt")
-  relay: /dns4/kras-06.fluence.dev/tcp/19001/wss/p2p/12D3KooWDUszU2NeWyUVjCXhGEt1MoZrhvdmaQQwtZUriuGN1jTr... done
-
-Result:
-
-"{\\n  \\"stderr\\": \\"error reading file\\",\\n  \\"stdout\\": \\"\\"\\n}\\n"
-
+```bash
+fluence run -f 'read_file("test_file.txt")'
+```
+```
+Connecting to random kras relay: /dns4/5-kras.fluence.dev/tcp/9000/wss/p2p/12D3KooWFEwNWcHqi9rtsmDhsYcDbRUCDXH84RC4FW6UfsFWaoHi
+Connected
+[
+  {
+    "stderr": "error reading file",
+    "stdout": ""
+  },
+  {
+    "stderr": "error reading file",
+    "stdout": ""
+  },
+  {
+    "stderr": "error reading file",
+    "stdout": ""
+  }
+]
 ```
 
 All looks in order, well done! You now have the basic effector module for to write to hosts' filesystem, if permissioned, and a facade template to use.
