@@ -42,7 +42,7 @@ In any matched case, writing your service as WASM more suitable than doing so in
 
 ## What is Marine JS
 
-When JS client starts up, it starts with initialization Marine JS runtime.
+When JS client starts up, it starts with initialization of Marine JS runtime.
 The runtime hosts wasm services and even allows you to register your own wasm services.
 For example, AquaVM service (which process particle data) resides in Marine JS.
 That's why Marine JS is a foundation of JS client.
