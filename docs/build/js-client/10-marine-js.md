@@ -57,7 +57,7 @@ Using Marine services is pretty straight forward. The first thing to do is to lo
 
 Here are the examples of how to load your wasm file in browser or Node.js
 
-**Node.JS**
+**Node.js**
 
 ```javascript
 import { readFile } from 'fs/promises';
