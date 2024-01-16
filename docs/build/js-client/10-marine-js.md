@@ -36,7 +36,7 @@ For example, AI processing logic would be a lot effective if written in low-leve
 Usually you don't need to interact with Marine JS directly except the following:
 - Cross-platform service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
-- Would prefer to write service in Rust or other language with compilation to WASM
+- Would prefer to write a service in Rust or other language with compilation to WASM (at this moment only Rust is officially supported)
 
 In any matched case, writing your service as WASM more suitable than doing so in JavaScript.
 
