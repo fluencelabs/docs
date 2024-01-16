@@ -22,13 +22,14 @@ and the client contains logic to process it.
 ### Example 2
 
 AI image library with an ability to execute incoming processing requests and distribute the work through Fluence network.
-The lib should do some simple processing locally, e.g., directly in a browser and also parallel the work if necessary.
+The lib should do some simple processing locally, e.g., edit a simple image directly in a browser and also parallelize the work on Fluence remote peers if necessary (applying heavy shader on a picture).
 
 ### Summary
 
-These use cases have something in common—they need to host a logic locally.
+These use cases have something in common—they need to host a logic locally which will be executed on the local device.
+It saves you from the network latency and allows other peers to interact with and exchange your data. 
 Moreover, sometimes writing a logic in pure JavaScript is not feasible.
-For example, AI processing logic would be a lot effective if written in low-level language like Rust
+For example, AI processing logic would be a lot effective if written in low-level language like Rust.
 
 ## Use cases
 
@@ -43,7 +44,7 @@ In any matched case, writing your service as WASM more suitable than doing so in
 
 When JS client starts up, it starts with initialization Marine JS runtime.
 The runtime hosts wasm services and even allows you to register your own wasm services.
-For example, AquaVM service for processing particles and Air code resides in Marine JS.
+For example, AquaVM service (which process particle data) resides in Marine JS.
 That's why Marine JS is a foundation of JS client.
 
 ## Extending JS client with Marine services
