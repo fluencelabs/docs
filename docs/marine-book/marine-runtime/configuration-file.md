@@ -72,9 +72,7 @@ where `?` represents an optional field, `|` divides options and `specificator` i
 * `P`, `Pb` - petabyte
 * `Pi`, `PiB` - pebibyte
 
-Note, that practically the current limit of Wasm memory is limited to 4 GiB per module, so a service cannot consume more than `modules_number * 4 GiB`. Additionally, all specificators are case-insensitive.
-
-Wasm modules specify their initial memory size. If a limit is lower than the sum of initial memory sizes, the service will fail to load into runtime. Setting less than `2 MiB` per module will likely cause this kind of error.
+Additionally, all specificators are case-insensitive.
 
 Allocating memory exceeding the limit triggers a (Rust) panic at runtime time. 
 In this case the function call will be interrupted immediately, and the caller, i.e., the library using the marine-runtime, will be given an error detailing the out-of-memory (OOM) exception.
@@ -86,6 +84,14 @@ total\_memory\_limit = "100" - 100 bytes
 total\_memory\_limit = "100K" - 100 kilobytes
 
 total\_memory\_limit = "100 Ki" - 100 kibibytes
+
+> **Note**
+>
+> Practically the Wasm memory is limited to `4 GiB` per module by the Wasm specification, so a service cannot consume more than `modules_number * 4 GiB`. 
+
+> **Note**
+>
+> Each module allocates some memory on startup. Usually it is `>1 MiB`. In that case, on startup a service consumes at least `modules_number * 1 MiB` memory. To avoid startup fail, specify at `least modules_number * 2 MiB` total memory limit. 
 
 #### **logger\_enabled**
 
