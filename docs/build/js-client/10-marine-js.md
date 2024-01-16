@@ -55,7 +55,7 @@ Using Marine services is pretty straight forward. The first thing to do is to lo
 
 ### Loading module binary
 
-Here are the examples of how to load your wasm file in browser or node
+Here are the examples of how to load your wasm file in browser or Node.js
 
 **Node.JS**
 
