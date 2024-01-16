@@ -35,6 +35,7 @@ const sidebars = {
         "build/js-client/setting-up",
         "build/js-client/hello-world",
         "build/js-client/advanced-ipfs",
+        "build/js-client/marine-js",
       ],
     },
     // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
