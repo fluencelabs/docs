@@ -33,12 +33,10 @@ For example, AI processing logic would be a lot effective if written in low-leve
 
 ## Use cases
 
-Usually you don't need to interact with Marine JS directly except the following:
-- Cross-platform service which works both on Nox peer and JS client peer
+Here are the reasons why you might want to write a Marine JS Wasm service instead of writing a regular JavaScript service for JS client:
+- A service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
 - Would prefer to write service in Rust or other language with compilation to WASM
-
-In any matched case, writing your service as WASM more suitable than doing so in JavaScript.
 
 ## What is Marine JS
 
