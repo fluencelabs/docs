@@ -36,7 +36,7 @@ For example, AI processing logic would be a lot effective if written in low-leve
 Here are the reasons why you might want to write a Marine JS Wasm service instead of writing a regular JavaScript service for JS client:
 - A service which works both on Nox peer and JS client peer
 - Heavy computations, CPU intensive tasks
-- Would prefer to write service in Rust or other language with compilation to WASM
+- Would prefer to write a service in Rust or other language with compilation to WASM (at this moment only Rust is officially supported)
 
 ## What is Marine JS
 
@@ -53,9 +53,9 @@ Using Marine services is pretty straight forward. The first thing to do is to lo
 
 ### Loading module binary
 
-Here are the examples of how to load your wasm file in browser or node
+Here are the examples of how to load your wasm file in browser or Node.js
 
-**Node.JS**
+**Node.js**
 
 ```javascript
 import { readFile } from 'fs/promises';
