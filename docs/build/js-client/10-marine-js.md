@@ -22,7 +22,7 @@ and the client contains logic to process it.
 ### Example 2
 
 AI image library with an ability to execute incoming processing requests and distribute the work through Fluence network.
-The lib should do some simple processing locally, e.g., edit a simple image directly in a browser and also parallelize the work on Fluence remote peers if necessary (applying heavy shader on a picture).
+The lib should do some simple processing locally, e.g., edit a simple image directly in a browser and also parallelize the work on Fluence remote peers if necessary (e.g., applying heavy shader on a picture).
 
 ### Summary
 
