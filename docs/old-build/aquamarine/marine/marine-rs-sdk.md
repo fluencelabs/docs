@@ -628,7 +628,7 @@ name = "build_rs_test"
 path = "src/main.rs"
 
 [dependencies]
-marine-rs-sdk = "0.6.11"
+marine-rs-sdk = "0.10.2"
 
 [dev-dependencies]
 marine-rs-sdk-test = "0.4.0"
@@ -660,7 +660,7 @@ To enable logging please specify the `logger` feature of the Fluence SDK in `Con
 ```rust
 [dependencies]
 log = "0.4.14"
-marine-rs-sdk = { version = "0.7.0", features = ["logger"] }
+marine-rs-sdk = { version = "0.10.2", features = ["logger"] }
 ```
 
 The logger should be initialized before its usage. This can be done in the `main` function as shown in the example below.

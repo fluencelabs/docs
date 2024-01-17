@@ -9,7 +9,7 @@ The `logger` feature allows you to use a special logger that is based at the top
 ```toml
 [dependencies]
 log = "0.4.14"
-marine-rs-sdk = { version = "0.7.1", features = ["logger"] }
+marine-rs-sdk = { version = "0.10.2", features = ["logger"] }
 ```
 
 The logger should be initialized before its usage. This can be done in the `main` function as shown in the example below:
