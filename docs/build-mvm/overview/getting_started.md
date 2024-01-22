@@ -1,17 +1,17 @@
 # Getting Started
 
-Let's explore the obligatory **Hello World** example as an end-to-end Fluence Lambda application, which includes the following steps:
+Let's explore the obligatory **Hello World** example as an end-to-end Fluence Functions application, which includes the following steps:
 
-* Scaffold a Fluence Lambda project with the Fluence CLI
+* Scaffold a Fluence Functions project with the Fluence CLI
 * Create the Hello World example and compile it to Wasm
 * Distribute the Wasm module to capacity (hardware) providers
-* Execute your Fluence Lambda Hello World application
+* Execute your Fluence Functions Hello World application
 
 But first, let's get set up.
 
 ## Setting Up
 
-The best and recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Lambdas as well as your tooling and development dependencies.
+The best and recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Functions as well as your tooling and development dependencies.
 
 Fluence CLI requires [node](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs) version 18 and can be installed as a binary:
 
@@ -74,4 +74,4 @@ Which results in the following response:
 "Hi, Fluence"
 ```
 
-Congratulations! You just scaffolded your first Fluence Lambda project and executed your first *Hello World* on a remote peer operated by Fluence. We'll revisit our *Hello World* project in the [Quickstart](../Quickstarts/your_first_lambda.md) section.
+Congratulations! You just scaffolded your first Fluence Functions project and executed your first *Hello World* on a remote peer operated by Fluence. We'll revisit our *Hello World* project in the [Quickstart](../Quickstarts/your_first_lambda.md) section.

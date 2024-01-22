@@ -1,1 +1,1 @@
-# Deploy Your Fluence Lambda
+# Deploy Your Fluence Functions

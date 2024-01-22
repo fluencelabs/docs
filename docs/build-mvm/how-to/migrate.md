@@ -1,1 +1,1 @@
-# How To Migrate Your Deployed Fluence Lambda
+# How To Migrate Your Deployed Fluence Functions

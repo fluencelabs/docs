@@ -1,10 +1,10 @@
 # Connecting To The World
 
-Let's expand on the [previous section](./your_first_lambda.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Fluence Lambda, which requires us spend a little time on general Wasm and Marine before we can start coding.
+Let's expand on the [previous section](./your_first_lambda.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Fluence Functions, which requires us spend a little time on general Wasm and Marine before we can start coding.
 
-While Wasm provides a lot of benefits including portability and performance, it currently has a few limitations such as a lack of sockets. In order to enable your Fluence Lambda to make a HTTP request, we need to take advantage of Marine's [Mounted Binaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which allow us to utilize permissioned binaries, such as *curl*, from the host system. 
+While Wasm provides a lot of benefits including portability and performance, it currently has a few limitations such as a lack of sockets. In order to enable your Fluence Functions to make a HTTP request, we need to take advantage of Marine's [Mounted Binaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which allow us to utilize permissioned binaries, such as *curl*, from the host system. 
 
-Let's create a Wasm module giving us access to the hosts *curl* binary and link that Wasm module to one or more other modules so you end up with Fluence Lambda capable of making HTTP requests. But first, we create a new (Fluence Lambda) project using the Fluence CLI. This time we choose the *minimal* template but stick with the default environment selection, *kras* and name our project *http-enabled*:
+Let's create a Wasm module giving us access to the hosts *curl* binary and link that Wasm module to one or more other modules so you end up with Fluence Functions capable of making HTTP requests. But first, we create a new (Fluence Functions) project using the Fluence CLI. This time we choose the *minimal* template but stick with the default environment selection, *kras* and name our project *http-enabled*:
 
 ```bash
 fluence init http-enabled
@@ -213,9 +213,9 @@ result: {
 
 Again, our HTTP request successfully executed but now we can read our *stderr* and *stdout* pipes a little better. Loos like the curl binary writes the request metadata into *stderr* and we get the html code of the *example.com* site in *stdout*. Of course, go ahead, double check the output in your browser.
 
-Before we get to implement our actual business logic utilizing the curl-adapter module, lets quickly recap what happened so far: We created a reusable(!) Wasm module that allows us to bind to a host's curl binary and learned that Marine enables the necessary FFI approach to bind to essentially any binary available and permissioned by a host including the curl binary. That by the way is actually a powerful construct adding much value to the Wasm runtime and, of course, your Fluence Lambdas. Finally, we tested our curl binding to the local host and experimented with both byte- and string-based return types.
+Before we get to implement our actual business logic utilizing the curl-adapter module, lets quickly recap what happened so far: We created a reusable(!) Wasm module that allows us to bind to a host's curl binary and learned that Marine enables the necessary FFI approach to bind to essentially any binary available and permissioned by a host including the curl binary. That by the way is actually a powerful construct adding much value to the Wasm runtime and, of course, your Fluence Functions. Finally, we tested our curl binding to the local host and experimented with both byte- and string-based return types.
 
-Let's kick it up a notch and turn our sleepy greeting function into something a little more interesting and useful. How about we create a Fluence Lambda that takes a timezone instead of just a name and returns the local date and time? To make things a little easier on us, we'll use the [WorldTimeAPI](https://worldtimeapi.org/) to do the heavy lifting and provide us with the desired information for a given timezone parameter.
+Let's kick it up a notch and turn our sleepy greeting function into something a little more interesting and useful. How about we create a Fluence Functions that takes a timezone instead of just a name and returns the local date and time? To make things a little easier on us, we'll use the [WorldTimeAPI](https://worldtimeapi.org/) to do the heavy lifting and provide us with the desired information for a given timezone parameter.
 
 Change into the `src/services/http_requester/modules/http_requester` to add a couple Rust crates we want to use in our new endeavor with `cargo add chrono serde_json` and proceed to our code, which goes into the replaces the template code in `<..>/modules/http_requester/src/main.rs`:
 

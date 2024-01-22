@@ -1,1 +1,1 @@
-# Secure your Fluence Lambda
+# Secure your Fluence Functions

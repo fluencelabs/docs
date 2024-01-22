@@ -1,1 +1,1 @@
-# Decentralized RPC With Fluence Lambda
+# Decentralized RPC With Fluence Functions

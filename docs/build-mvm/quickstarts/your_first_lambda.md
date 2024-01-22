@@ -60,7 +60,7 @@ $ tree -L 2
 7 directories, 5 files
 ```
 
-In essence, Fluence CLI comes with several scaffolding templates to make development a little easier and a little faster. The *quickstart* template provides the basic components you need to develop and deploy your Fluence Lambda:
+In essence, Fluence CLI comes with several scaffolding templates to make development a little easier and a little faster. The *quickstart* template provides the basic components you need to develop and deploy your Fluence Functions:
 
 * Rust section including src/services dir
 * Aqua section including src/aqua dir
@@ -89,7 +89,7 @@ In your editor or IDE, have a look at the `src/services/myService/modules/myServ
     12	}
 ```
 
-For our quickstart purposes, lines 2 and 9 are the most pertinent. In line 2, we import the *marine macro* from the [marine_rs_sdk](https://crates.io/crates/marine-rs-sdk) crate. The SDK which builds on top of the [wasmtime](https://wasmtime.dev/) runtime to enable you to write performant, effective Fluence Lambdas for Fluence's serverless Wasm runtime. For a comprehensive overview and deep dive into Marine, see the [Marine book](https://fluence.dev/docs/marine-book/introduction).  Suffice it to say that in order for Rust to compile to the *wasm32-wasi* compile target usable by the Fluence stack, exposed functions, i.e., publicly accessible functions like `greeting`, need to be wrapped up with `#[marine]` (line 9) macro provided by the marine-rs-sdk.
+For our quickstart purposes, lines 2 and 9 are the most pertinent. In line 2, we import the *marine macro* from the [marine_rs_sdk](https://crates.io/crates/marine-rs-sdk) crate. The SDK which builds on top of the [wasmtime](https://wasmtime.dev/) runtime to enable you to write performant, effective Fluence Functions for Fluence's serverless Wasm runtime. For a comprehensive overview and deep dive into Marine, see the [Marine book](https://fluence.dev/docs/marine-book/introduction).  Suffice it to say that in order for Rust to compile to the *wasm32-wasi* compile target usable by the Fluence stack, exposed functions, i.e., publicly accessible functions like `greeting`, need to be wrapped up with `#[marine]` (line 9) macro provided by the marine-rs-sdk.
 
 Go ahead and change the function name from *greeting* to *hello* and run `fluence build` to recompile our code. You should see output similar to:
 
@@ -107,7 +107,7 @@ ll target/wasm32-wasi/release|grep .wasm
 -rwxr-xr-x@  1 bebo  staff    85K Jan  2 15:28 myService.wasm
 ```
 
-Eventually, we'll deploy that module to the network for serverless usage. But before we do that, lets quickly review testing options with respect to both local and remote. Running defective code in serverless can be an expensive undertaking as billing is commensurate with execution and a run-away service, fro example, can be rather costly. Hence, testing is of even greater importance. The Fluence toolchain supports interactive and non-interactive testing of your Fluence Lambdas using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](../how-to/test.md) for a comprehensive review of both tooling and strategy.
+Eventually, we'll deploy that module to the network for serverless usage. But before we do that, lets quickly review testing options with respect to both local and remote. Running defective code in serverless can be an expensive undertaking as billing is commensurate with execution and a run-away service, fro example, can be rather costly. Hence, testing is of even greater importance. The Fluence toolchain supports interactive and non-interactive testing of your Fluence Functions using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](../how-to/test.md) for a comprehensive review of both tooling and strategy.
 
 Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi. So now what? Well, before we do anything else, we want to know if our *hello* function works. For that we use the Marine REPL. Use to the Fluence CLI to srat it up: `fluence service repl mYService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
 
@@ -174,7 +174,7 @@ result: "Hi, Fluence"
  elapsed time: 3.402667ms
 ```
 
-Now that we are satisfied that our code is in working order, it's time to deploy our FLuence Lambda.
+Now that we are satisfied that our code is in working order, it's time to deploy our Fluence Functions.
 
 
 **Need payment and deployment sorted before we can continue and finalize the section**

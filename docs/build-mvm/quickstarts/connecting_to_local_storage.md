@@ -1,8 +1,8 @@
 # Connecting To Local Data Storage
 
-Like all serverless compute protocols, Fluence Lambda is an inherently stateless protocol and persistent data storage, e.g., to Ceramic or S3, is a complementary solution developers need integrate into their application stack. However, just like in AWS Lambda, Fluence Lambda provides ephemeral storage to developers that can be utilized during the course of a Lambda execution with no expectation of data durability beyond that execution epoch. Hence, ephemeral storage is of limited use and must not be confused with durable storage. On that cautionary note, let's dive in. 
+Like all serverless compute protocols, Fluence Functions is an inherently stateless protocol and persistent data storage, e.g., to Ceramic or S3, is a complementary solution developers need integrate into their application stack. However, just like in AWS Lambda, Fluence Functions provides ephemeral storage to developers that can be utilized during the course of a Lambda execution with no expectation of data durability beyond that execution epoch. Hence, ephemeral storage is of limited use and must not be confused with durable storage. On that cautionary note, let's dive in. 
 
-Fluence Lambda Ephemeral Storage follows the common file-based (Rust) IO process and is implemented as a Wasm module using [MountedBinaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which you already encountered in the previous section.
+Fluence Functions Ephemeral Storage follows the common file-based (Rust) IO process and is implemented as a Wasm module using [MountedBinaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which you already encountered in the previous section.
 
 Let's set up a new project with Fluence CLI using the minimal template and the default, i.e., *kras*, environment with `fluence init ephemeral-storage` and *cd* into the new directory. Recall that our first step in setting up our project is to create a new (Marine) service and the appropriate modules with `fluence service new eph_storage` and accept the proposed default:
 
