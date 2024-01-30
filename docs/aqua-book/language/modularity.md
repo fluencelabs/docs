@@ -2,7 +2,7 @@
 
 ## Source File Structure
 
-An Aqua source file has a header and a body. The body contains [function definitions](../expressions/functions.md), [services](../services.md), [types](../types.md), [constants](../values.md#constants). The header is dedicated to code management: it specifies [the name of the module](#giving-a-name-to-an-aqua-module-with-aqua), [what is declared by the module](#specifying-what-is-declared-by-the-module-with-declares), [what is exported from the module](#exporting-to-the-host-language-with-export) and [what is imported into the module](#importing-other-modules).
+An Aqua source file has a header and a body. The body contains [function definitions](./expressions/functions.md), [services](./services.md), [types](./types.md), [constants](./values.md#constants). The header is dedicated to code management: it specifies [the name of the module](#giving-a-name-to-an-aqua-module-with-aqua), [what is declared by the module](#specifying-what-is-declared-by-the-module-with-declares), [what is exported from the module](#exporting-to-the-host-language-with-export) and [what is imported into the module](#importing-other-modules).
 
 ## Giving a name to an Aqua module with `aqua`
 
@@ -114,7 +114,7 @@ Creation of a scope with `use` makes it easier to avoid name clashes and to unde
 
 ### Imports resolution
 
-To learn how compiler resolves the import path, see [JS Aqua API](../../aqua-js-api.md).
+To learn how compiler resolves the import path, see [JS Aqua API](./../aqua-js-api.md).
 
 :::info
 `.aqua` extension in `import` and `use` expressions can be omitted. So, `import "builtin.aqua"` does exactly the same as `import "builtin"`.
