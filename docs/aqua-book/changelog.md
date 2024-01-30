@@ -7,7 +7,14 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2023
+## [0.14.0](https://github.com/fluencelabs/aqua/compare/aqua-v0.13.4...aqua-v0.14.0) - January 30, 2024
+
+* BREAKING CHANGE: **compiler:** Force `aqua` header for all aqua files. See [Header](./language/header/header.md). ([LNG-308](https://linear.app/fluence/issue/LNG-308)) ([#1028](https://github.com/fluencelabs/aqua/issues/1028))
+* FIX: **compiler:** Correctly rename stream captured by closure. See [Streams](./language/crdt-streams.md) and [Closures](./language/closures.md). ([LNG-325](https://linear.app/fluence/issue/LNG-325))([#1055](https://github.com/fluencelabs/aqua/issues/1055))
+* PERFORMANCE: **compiler:** Optimize `Inliner` ([LNG-322](https://linear.app/fluence/issue/LNG-322)) ([#1047](https://github.com/fluencelabs/aqua/issues/1047))
+* PERFORMANCE: **compiler:** Optimize `Linker` ([LNG-321](https://linear.app/fluence/issue/LNG-321)) ([#1049](https://github.com/fluencelabs/aqua/issues/1049))
+
+### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2024
 
 * **compiler:** `for ... rec` instruction (not documented). ([LNG-307](https://linear.app/fluence/issue/LNG-307)) ([#1026](https://github.com/fluencelabs/aqua/issues/1026))
 * **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-313)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
