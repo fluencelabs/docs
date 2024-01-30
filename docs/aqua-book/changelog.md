@@ -10,7 +10,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 ## [0.14.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.0) - January 30, 2024
 
 * BREAKING CHANGE: **compiler:** Force `aqua` header for all aqua files. See [Header](./language/header/header.md). ([LNG-308](https://linear.app/fluence/issue/LNG-308)) ([#1028](https://github.com/fluencelabs/aqua/issues/1028))
-* FIX: **compiler:** Correctly rename stream captured by closure. See [Streams](./language/crdt-streams.md) and [Closures](./language/closures.md). ([LNG-325](https://linear.app/fluence/issue/LNG-325))([#1055](https://github.com/fluencelabs/aqua/issues/1055))
+* FIX: **compiler:** Correctly rename stream captured by closure. See [Streams](./language/crdt-streams.md) and [Closures](./language/closures.md). ([LNG-325](https://linear.app/fluence/issue/LNG-325)) ([#1055](https://github.com/fluencelabs/aqua/issues/1055))
 * PERFORMANCE: **compiler:** Optimize `Inliner` ([LNG-322](https://linear.app/fluence/issue/LNG-322)) ([#1047](https://github.com/fluencelabs/aqua/issues/1047))
 * PERFORMANCE: **compiler:** Optimize `Linker` ([LNG-321](https://linear.app/fluence/issue/LNG-321)) ([#1049](https://github.com/fluencelabs/aqua/issues/1049))
 
