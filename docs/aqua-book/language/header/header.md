@@ -1,22 +1,26 @@
 # Imports And Exports
 
-An Aqua source file has a header and a body. The body contains function definitions, services, types, constants. The header manages what is imported from other files and what is exported.
+An Aqua source file has a header and a body. The body contains [function definitions](../expressions/functions.md), [services](../services.md), [types](../types.md), [constants](../values.md#constants). The header manages what is imported from other files along with how and what is exported for external usage.
 
 ## Aqua source file header
 
-When header is omitted, `.aqua` file exports and declares everything it contains. With `aqua` header you can control what gets exported from the aqua file.
+Every aqua source file should begin with `aqua` keyword followed by the the name of the aqua module presented by the file.
 
 ```aqua
--- `aqua` expression may be only on the very first line of the file
-aqua AquaFile declares *
+-- `aqua` expression may only be on the very first line of the file
+aqua AquaFile
 ```
 
-`Aqua.File` may contain dots.
+Module name can contain dots, e.g. `aqua Aqua.File`.
 
-`AquaFile` can be used as the aqua's name when this file is `use`d. In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
+The `aqua AquaFile` expression may optionally include a `declares` section. This section enumerates the elements that the module will make available for use in other modules that import it. If the declares section is omitted, the module does not declare anything for external use.
+
+`AquaFile` can be used as the aqua's name when this file is [`use`d](#use-expression). In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
 
 ```aqua
 aqua AquaFile declares CONST_NAME, ServiceName, MyType, fn
+-- -- would have same effect:
+-- aqua AquaFile declares *
 
 const CONST_NAME = "something"
 
@@ -63,20 +67,20 @@ func foo():
 The `use` expression makes it possible to import a file into a named scope.
 
 ```aqua
-use Op from "@fluencelabs/aqua-lib/builtin" as BuiltIn
-
-func foo():
-  BuiltIn.Op.noop()
-```
-
-If the imported file has a `aqua` header, `from` and `as` sections of `use` may be omitted.
-
-```aqua
 use "@fluencelabs/aqua-lib/builtin.aqua"
 -- Assume that builtin.aqua's header is `aqua BuiltIn declares *`
 
 func foo():
   BuiltIn.Op.noop()
+```
+
+It is possible to rename the imported module with `use ... as ...` expression:
+
+```aqua
+use "@fluencelabs/aqua-lib/builtin" as Renamed
+
+func foo():
+  Renamed.Op.noop()
 ```
 
 ## Export
