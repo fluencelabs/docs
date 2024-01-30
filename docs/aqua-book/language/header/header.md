@@ -1,6 +1,6 @@
 # Imports And Exports
 
-An Aqua source file has a header and a body. The body contains [function definitions](../expressions/functions.md), [services](../services.md), [types](../types.md), [constants](../values.md#constants). The header manages what is imported from other files along with how and what is exported for external usage.
+An Aqua source file has a header and a body. The body contains [function definitions](../expressions/functions.md), [services](../services.md), [types](../types.md), [constants](../values.md#constants). The header manages what is imported from other files and what is exported for external usage.
 
 ## Aqua source file header
 
@@ -13,7 +13,7 @@ aqua AquaFile
 
 Module name can contain dots, e.g. `aqua Aqua.File`.
 
-The `aqua AquaFile` expression may optionally include a `declares` section. This section enumerates the elements that the module will make available for use in other modules that import it. If the declares section is omitted, the module does not declare anything for external use.
+The `aqua AquaFile` expression may optionally include a `declares` section. This section enumerates the elements that the module will make available for use in other modules that import it. If the `declares` section is omitted, the module does not declare anything for external use.
 
 `AquaFile` can be used as the aqua's name when this file is [`use`d](#use-expression). In this case, only what is enumerated in `declares` section will be available. `declares *` allows you to declare everything in the file as the module interface.
 
@@ -39,19 +39,21 @@ function fn() -> string:
 The main way to import a file is via `import` expression:
 
 ```aqua
+aqua AquaFile declares foo
+
 import "@fluencelabs/aqua-lib/builtin.aqua"
 
 func foo():
   Op.noop()
 ```
 
-Aqua compiler takes a source directory and a list of import directories (usually with `node_modules` as a default). You can use relative paths to `.aqua` files, relatively to the current file's path, and to import folders.
+To learn how compiler resolves the import path, see [JS Aqua API](../../aqua-js-api.md).
 
 :::info
 `.aqua` extension in `import` and `use` expressions can be omitted. So, `import "builtin.aqua"` does exactly the same as `import "builtin"`.
 :::
 
-Everything defined in the file is imported into the current namespace.
+Everything declared in the file is imported into the current namespace.
 
 You can cherry-pick and rename imports using `import ... from` expression:
 
@@ -87,11 +89,13 @@ func foo():
 
 While it's useful to split the code into several functions into different files, it's not always a good idea to compile everything into the host language.
 
-Another problem is libraries distribution. If a developer wants to deliver an `.aqua` library, he or she often needs to provide it in compiled form as well.
+Another problem is libraries distribution. If a developer wants to deliver an `.aqua` library, she often needs to provide it in the compiled form as well.
 
-`export` lets a developer decide what exactly is going to be exported, including imported functions.
+`export` lets a developer decide what exactly is going to be exported to the host language. Exporting imported symbols is allowed.
 
 ```aqua
+aqua Lib
+
 import bar from "lib"
 
 -- Exported functions and services will be compiled for the host language
