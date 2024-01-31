@@ -122,11 +122,9 @@ To learn how compiler resolves the import path, see [JS Aqua API](./../aqua-js-a
 
 ## Exporting to the host language with `export`
 
-While it's useful to split the code into several functions into different files, it's not always a good idea to compile everything into the host language.
+Inside Aqua language code modularity is achieved with [`declares`](#specifying-what-is-declared-by-the-module-with-declares), [`import`](#with-import) and [`use`](#with-use). However, what should be exported to the host language depends on the particular use case of aqua code and has nothing to do with code management inside Aqua. This is why exporting to the host language is a separate concept inside Aqua.
 
-Another problem is libraries distribution. If a developer wants to deliver an Aqua library, she often needs to provide it in the compiled form as well.
-
-It is possible to specify what should be exported to the host language with `export`. Exporting symbols that were imported from other modules is allowed. There could be several `export`s in the file and they are all merged into one.
+It is possible to specify what should be exported to the host language with `export`. Exporting symbols that were imported from other modules is allowed. There could be several `export`s in a file and they are all merged into one.
 
 ```aqua
 aqua Lib
