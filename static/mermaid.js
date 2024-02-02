@@ -3,22 +3,25 @@ const loadMermaid = () => mermaid.contentLoaded();
 
 // @ts-check
 
-const replaceWithMermaid = (el) => {
+function replaceWithMermaid(el) {
   const pre = document.createElement("pre");
   pre.classList.add("mermaid");
   pre.textContent = el.children[0].children[0].textContent;
   el.replaceWith(pre);
-};
+}
 
 setInterval(() => {
   const shikiElements = Array.from(document.getElementsByClassName("shiki"));
   shikiElements.forEach((el) => el.classList.add("visible"));
-  const elementsToReplace = shikiElements.filter(
-    (el) => el.previousElementSibling?.textContent === "mermaid"
-  );
+  const elementsToReplace = shikiElements.filter((el) => {
+    return (
+      el.parentElement.parentElement.previousElementSibling?.textContent ===
+      "mermaid"
+    );
+  });
 
   elementsToReplace.forEach((el) => {
-    el.previousElementSibling.remove();
+    el.parentElement.parentElement.previousElementSibling.remove();
     if (el.classList.contains("min-dark")) {
       el.remove();
       return;
