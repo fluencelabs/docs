@@ -70,6 +70,7 @@ const config: Config = {
           "rust",
           "shell",
           "toml",
+          "yaml",
           getFluenceLanguageConfig("aqua"),
           getFluenceLanguageConfig("air"),
         ],
