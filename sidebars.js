@@ -19,7 +19,7 @@ const sidebars = {
       collapsed: true,
       link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
       items: [
-        "build-mvm/overview/fluence_lambda",
+        "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
         "build-mvm/overview/roadmap"
       ]
@@ -31,7 +31,7 @@ const sidebars = {
       collapsed: true,
      //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
       items: [
-        "build-mvm/quickstarts/your_first_lambda",
+        "build-mvm/quickstarts/your_first_function",
         "build-mvm/quickstarts/connecting_to_the_world",
         "build-mvm/quickstarts/connecting_to_local_storage"
       ]

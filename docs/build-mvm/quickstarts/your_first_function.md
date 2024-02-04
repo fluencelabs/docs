@@ -1,4 +1,4 @@
-# Your First Lambda
+# Your First Function
 
 In this section we pickup where we left off in the [Getting Started](../overview/getting_started.md) section and dive into the *Hello World* Lambda. You can continue to use the project you created earlier or create a new one. If you don't have Fluence CLI installed, make sure you have nodejs v 18 and continue to install the binary or use an [alternative approach](https://github.com/fluencelabs/cli?tab=readme-ov-file#installation-and-usage).
 
