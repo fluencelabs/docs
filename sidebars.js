@@ -17,7 +17,7 @@ const sidebars = {
       label: "Overview",
       collapsible: true,
       collapsed: true,
-      link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+      link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
