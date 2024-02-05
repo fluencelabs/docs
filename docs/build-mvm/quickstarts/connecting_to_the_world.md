@@ -1,6 +1,6 @@
 # Connecting To The World
 
-Let's expand on the [previous section](./your_first_lambda.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Fluence Functions, which requires us spend a little time on general Wasm and Marine before we can start coding.
+Let's expand on the [previous section](./your_first_function.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Fluence Functions, which requires us spend a little time on general Wasm and Marine before we can start coding.
 
 While Wasm provides a lot of benefits including portability and performance, it currently has a few limitations such as a lack of sockets. In order to enable your Fluence Functions to make a HTTP request, we need to take advantage of Marine's [Mounted Binaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which allow us to utilize permissioned binaries, such as *curl*, from the host system. 
 
