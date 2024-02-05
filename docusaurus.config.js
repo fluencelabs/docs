@@ -99,7 +99,7 @@ const config = {
           {
             type: "doc",
             position: "left",
-            docId: "build-mvm/overview/fluence_lambda",
+            docId: "build-mvm/overview/fluence_functions",
             label: "Buidl",
           },
           {
