@@ -57,18 +57,23 @@ mermaid
     CommitmentRewards --> PoC: FLT payment    
 ```
 
-See [Capacity Commitment Protocol]() for a detailed presentation. 
+TODO: Clean up/Expand
+
+See [Capacity Commitment Protocol](https://fluence.dev/learn) for a detailed presentation. 
 
 Providers monetize CUs not utilized by developer request by computing Proofs of Capacity which result in capacity rewards. This allows the network to always have readily available capacity to server developer demands. 
 
+Deals are imperative not only their capacity to provide escrowed developer funds for provider billing but also to "seed" a very specific Fluence subnetwork with the necessary network and duration parameters. 
 
-The takeaway from this short introduction for developers is that 
+
+The takeaway from this short review for developers is that 
 
 * providers commit compute capacity that is verifiable on-chain
 * capacity commitments are provided in form of specific compute units (CU) defined by one core and 4GiB of RAM 
 * for CUs to be discoverable for matching with developer offers, each CU requires (delegated) stake and additional offer attributes including CU price per epoch committed to the Fluence IPC blockchain
 * these on-chain commitments result in provider offers eligible for matching with developer offers on a per CU basis
 * the capacity provided through the Fluence marketplace is indeed decentralized hardware
+* deals not only are the basis for settlement between developers and providers but also hold the parameters needed to create a subnet, i.e., the off-chain network overlay connecting CUs hosting developer artifacts across peers and providers
 
 ## Deploying On DePin: A Quick Excursion
 
@@ -77,12 +82,21 @@ Decentralized physical infrastructure (DePin) is the "*critical first mile*" to 
 DePin, as explained by [Technopedia](https://www.techopedia.com/definition/decentralized-physical-infrastructure-networks-depin#:~:text=Decentralized%20physical%20infrastructure%20networks%20(DePIN)%20are%20blockchain%20protocols%20that%20build,%2C%20data%20collection%2C%20and%20more.) is a peer-to-peer network that meets hardware demand through and open and decentralized marketplace. While brief, the above sections should make it clear that staked, verifiable capacity committed to the on-chain marketplace is in fact DePin allowing Fluence developers to build their decentralized serverless compute applications on DePin: decentralization without compromise from the bottom up!  
 
 
-## From Deployment Plans to Deployment
+## From Deployment Plans to Deployment And Payments
 
-So, you have compiled your business logic to Wasm, have done all your testing and are ready to deploy your code to the network for hosting and on-demand execution. 
+So, you have compiled your business logic to Wasm, have done all your testing and are ready to deploy your code to the peers for hosting and on-demand execution. 
 
 
+TODO:
 
+* peer selection: provider, number and impact on HA and costs
+* deployment plan specification
+* deployment plan implementation: CLI
+
+
+:::Info
+Currently, function pricing is based on an epoch model. That is, regardless of your function requests, you will be charged a fixed amount per time period per worker, i.e., epoch. The epoch model is a stopgap measure for FLuence to roll-out and test its mainnet and will be replaced shortly with a request based pricing model common to serverless compute.
+:::
 
 
 
