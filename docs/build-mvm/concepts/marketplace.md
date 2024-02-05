@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Fluence marketplace is a blockchain-based matcher of offers provided by data center operators (Providers) interested in monetizing their resources and offers put forward by developers looking for compute capacity to host and execute their serverless functions. Matching is based on attribute parameters provided by both providers and developer offers, respectively, where offer attributes include but are not limited to (escrowed) willingness to pay and accept and duration of capacity commitment. See [link to finalized deal sol](). Both Provider and Developer Offers are on-chain commitments which, upon matching, result in a contract called a Deal that governs the compute capacity provisioning and compensation over the agreed upon period of time between a developer and one or more providers. See Figure 1.
+The Fluence marketplace is a blockchain-based matcher of offers provided by data center operators (Providers) interested in monetizing their resources and offers put forward by developers looking for compute capacity to host and execute their serverless functions. Matching is based on attribute parameters provided by both providers and developer offers, respectively, where offer attributes include but are not limited to (escrowed) willingness to pay and accept and duration of capacity commitment. See [link to finalized deal sol](https://fluence/deal). Both Provider and Developer Offers are on-chain commitments which, upon matching, result in a contract called a Deal that governs the compute capacity provisioning and compensation over the agreed upon period of time between a developer and one or more providers. See Figure 1.
 
 Figure 1: Stylized On-Chain Deal Generation From Offer Commitments
 mermaid
@@ -70,7 +70,7 @@ The takeaway from this short introduction for developers is that
 * these on-chain commitments result in provider offers eligible for matching with developer offers on a per CU basis
 * the capacity provided through the Fluence marketplace is indeed decentralized hardware
 
-## DePin: A Quick Excursion
+## Deploying On DePin: A Quick Excursion
 
 Decentralized physical infrastructure (DePin) is the "*critical first mile*" to make decentralized solutions a reality. There is little point devising and implementing decentralized protocols when the resulting peers or nodes are deployed on centralized infrastructure such as AWS EC2, for example. That is, decentralized middleware and applications need to execute on decentralized infrastructure in order to be able to live up to their namesake.
 
@@ -79,39 +79,7 @@ DePin, as explained by [Technopedia](https://www.techopedia.com/definition/decen
 
 ## From Deployment Plans to Deployment
 
-So, you have compiled your business logic to Wasm, have done all your testing and are ready to deploy your code to the network for hosting and on-demand execution. Fluence gives you a very fine-grained ... 
-
-
-
-In a nutshell, developers want to deploy their functions to one or more peers for subsequent, event-driven execution. In order for data center providers to be interested in hosting and executing developers' functions, they want to be paid. 
-
-
-
-Once you have your business logic compiled to Wasm and tested, they are ready to deploy to the network based on their deployment plan. A deployment plan contains ... such as number of instances, which providers, willingness to pay, etc.
-
-
-
-Figure ?: Deployment Plan Parameters
-```solidity!
-function initialize(
-        ICore globalCore_,
-        CIDV1 calldata appCID_,
-        IERC20 paymentToken_,
-        uint256 minWorkers_,
-        uint256 targetWorkers_,
-        uint256 maxWorkersPerProvider_,
-        uint256 pricePerWorkerEpoch_,
-        CIDV1[] calldata effectors_,
-        AccessType providersAccessType_,
-        address[] calldata providersAccessList_
-    ) external;
-
-```
-https://github.com/fluencelabs/deal/blob/f16fce85f8d917eb212de7f3355832af6ce218a1/src/deal/interfaces/IDeal.sol#L35C5-L46C16
-
-
-
-
+So, you have compiled your business logic to Wasm, have done all your testing and are ready to deploy your code to the network for hosting and on-demand execution. 
 
 
 
