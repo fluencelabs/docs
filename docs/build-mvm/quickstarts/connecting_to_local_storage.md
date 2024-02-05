@@ -1,4 +1,4 @@
-# Connecting To Local Data Storage
+# Connecting To A Peer's Filesystem
 
 Like all serverless compute protocols, Fluence Functions is an inherently stateless protocol and persistent data storage, e.g., to Ceramic or S3, is a complementary solution developers need integrate into their application stack. However, just like in AWS Lambda, Fluence Functions provides ephemeral storage to developers that can be utilized during the course of a Lambda execution with no expectation of data durability beyond that execution epoch. Hence, ephemeral storage is of limited use and must not be confused with durable storage. On that cautionary note, let's dive in. 
 
