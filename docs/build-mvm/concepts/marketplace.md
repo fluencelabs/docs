@@ -75,7 +75,7 @@ The takeaway from this short review for developers is that
 * the capacity provided through the Fluence marketplace is indeed decentralized hardware
 * deals not only are the basis for settlement between developers and providers but also hold the parameters needed to create a subnet, i.e., the off-chain network overlay connecting CUs hosting developer artifacts across peers and providers
 
-## Deploying On DePin: A Quick Excursion
+## Deploying On DePin
 
 Decentralized physical infrastructure (DePin) is the "*critical first mile*" to make decentralized solutions a reality. There is little point devising and implementing decentralized protocols when the resulting peers or nodes are deployed on centralized infrastructure such as AWS EC2, for example. That is, decentralized middleware and applications need to execute on decentralized infrastructure in order to be able to live up to their namesake.
 

@@ -29,7 +29,7 @@ const sidebars = {
       label: "Quickstart",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/quickstarts/your_first_function",
         "build-mvm/quickstarts/connecting_to_the_world",
@@ -41,10 +41,10 @@ const sidebars = {
       label: "Concepts",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/concepts/best_practices",
-        "build-mvm/concepts/fluence_lambda_revisited",
+        "build-mvm/concepts/fluence_functions_revisited",
         "build-mvm/concepts/marketplace",
         "build-mvm/concepts/http_gateways",
         "build-mvm/concepts/cronjobs",
@@ -56,10 +56,10 @@ const sidebars = {
       label: "Tutorials",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/tutorials/workflow_fundamentals",
-        "build-mvm/tutorials/browser_based_events"
+        "build-mvm/tutorials/event_handling_in_js"
       ]
     },
     {
@@ -67,7 +67,7 @@ const sidebars = {
       label: "Examples",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/examples/frpc"
       ]
@@ -77,14 +77,14 @@ const sidebars = {
       label: "How To Guides",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_lambda", type: "doc" },
+    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/how-to/setting_up",
         "build-mvm/how-to/configure",
         "build-mvm/how-to/setup_payments",
         "build-mvm/how-to/develop",
         "build-mvm/how-to/test",
-        "build-mvm/how-to/securing_lambda",
+        "build-mvm/how-to/securing_functions",
         "build-mvm/how-to/deploy",
         "build-mvm/how-to/monitor",
         "build-mvm/how-to/migrate"
