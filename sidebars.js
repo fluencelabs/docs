@@ -59,7 +59,18 @@ const sidebars = {
     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/tutorials/workflow_fundamentals",
-        "build-mvm/tutorials/event_handling_in_js"
+          {
+              type: 'category',
+              label: 'Event handling in JS',
+              link: { id: "build/tutorials/event-handling/event-handling", type: "doc" },
+              items: [
+                  "build/tutorials/event-handling/installation",
+                  "build/tutorials/event-handling/setting-up",
+                  "build/tutorials/event-handling/hello-world",
+                  "build/tutorials/event-handling/advanced-ipfs",
+                  "build/tutorials/event-handling/marine-js",
+              ],
+          }
       ]
     },
     {
