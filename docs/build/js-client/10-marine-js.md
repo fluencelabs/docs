@@ -83,7 +83,7 @@ This is JS client's specific API that's why you need to add `Srv` definition in 
 
 Add the following aqua file in your project near the other aqua files.
 
-```
+```aqua
 data ServiceCreationResult:
     success: bool
     service_id: ?string
@@ -115,7 +115,7 @@ Here is an example of what that function could look like in a simple form.
 
 > In this example, wasm binary loaded as a string (see above) passed to Aqua function param.
 
-```
+```aqua
 service GreetingService("service-id"): -- (1)
     greeting: string -> string
 

@@ -16,6 +16,7 @@ const sidebars = {
     //     // "build/develop-distributed-algos"
     //   ],
     // },
+    "build/using-local-fluence-network",
     {
       type: "category",
       label: "Working with data",
