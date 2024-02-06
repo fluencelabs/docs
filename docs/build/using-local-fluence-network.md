@@ -45,9 +45,20 @@ fluence local up
 ```
 To restart your local Fluence Network with the new configuration
 
-## Use local Fluence Network addresses
+## Use local Fluence Network
 
-As you might already know Nox network addresses (that you need to connect to Nox using e.g. [Fluence JS Client](./js-client/1-js-client.md)) contain `peer id`. And that `peer id` is derived from the secret key that is stored at `.fluence/provider-secrets.yaml` and also stored in the form of the files in `.fluence/secrets` (these files are generated from `.fluence/provider-secrets.yaml` and passed to docker compose)
+Now, when running e.g. `fluence run` and other CLI commands — local network will be used for all of them automatically. For the commands that require blockchain — default private key will be used automatically. You don't need Metamask when working with local network. If you want to use some different private key that is available by default you can run:
+```sh
+fluence chain info
+```
+You will see `defaultAccounts` property in the output of this command. You can take any `privateKey` from there and pass it as a `--priv-key` flag when running CLI commands
+:::warning
+We recommend to use this feature only for local development. Passing private keys as flags is not secure
+:::
+
+### Get local Fluence Network addresses
+
+As you might already know, Nox network [addresses](https://multiformats.io/multiaddr/) (which you need to connect to Nox using e.g. [Fluence JS Client](./js-client/1-js-client.md)) contain `peer id`. Each `peer id` is derived from secret keys that are stored at `.fluence/provider-secrets.yaml` and also stored in the form of the files in `.fluence/secrets` (these files are generated from `.fluence/provider-secrets.yaml` and passed to docker compose)
 
 To get the actual network addresses you can run a CLI command like this:
 ```sh
