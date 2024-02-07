@@ -99,7 +99,7 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "build/introduction",
+          docId: "build-mvm/overview/getting_started",
           label: "Build",
         },
         {

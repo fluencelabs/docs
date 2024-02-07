@@ -1,6 +1,6 @@
-# Fluence Lambda
+# Fluence Functions
 
-Fluence Lambda is a decentralized serverless solution deeply rooted in the decentralized physical infrastructure [(DePin)](https://www.bitstamp.net/learn/web3/what-are-decentralized-physical-infrastructure-networks-depin/) paradigm. Even more than most serverless solutions, Fluence Lambda lets you do more with less code and without having to worry about the underlying infrastructure. Unlike centralized cloud providers, Fluence Lambda lets you select capacity providers, i.e., data centers, a la carte from a [marketplace](http://example.com) allowing you to customize the serverless infrastructure exactly to your applications' performance, SLA and budget needs. By virtue of its DePin roots, Fluence Lambda scales at speed at exceptionally low cost without foregoing performance and service level. Moreover, Fluence Lambda is supported with a proof system concerning Lambda execution, i.e., Proof of Execution (PoE), and correctness of execution, i.e., Proof of Processing (PoP), that revolutionizes a broad range of audits and, of course, billing.
+Fluence Functions is a decentralized serverless solution deeply rooted in the decentralized physical infrastructure [(DePin)](https://www.bitstamp.net/learn/web3/what-are-decentralized-physical-infrastructure-networks-depin/) paradigm. Even more than most serverless solutions, Fluence Lambda lets you do more with less code and without having to worry about the underlying infrastructure. Unlike centralized cloud providers, Fluence Lambda lets you select capacity providers, i.e., data centers, a la carte from a [marketplace](http://example.com) allowing you to customize the serverless infrastructure exactly to your applications' performance, SLA and budget needs. By virtue of its DePin roots, Fluence Lambda scales at speed at exceptionally low cost without foregoing performance and service level. Moreover, Fluence Lambda is supported with a proof system concerning Lambda execution, i.e., Proof of Execution (PoE), and correctness of execution, i.e., Proof of Processing (PoP), that revolutionizes a broad range of audits and, of course, billing.
 
 ## In A Nutshell
 
@@ -37,7 +37,7 @@ mermaid
     Lambda --> CapacityProvider_k: host and execute Lambda
 ```
 
-Prior to being able to execute your deployment plan, you are required to acquire to purchase <compute tokens, USDC tokens> from one of the (Fiat) gateway providers. <Compute, USDC> tokens are escrowed according to each deployment plan and used to periodically compensate capacity providers for executing your Lambdas commensurate with the execution loads, i.e., CPU and memory model, length of execution, data payload, etc. 
+Prior to being able to execute your deployment plan, you are required to acquire to purchase `<compute tokens, USDC tokens>` from one of the (Fiat) gateway providers. `<Compute, USDC>` tokens are escrowed according to each deployment plan and used to periodically compensate capacity providers for executing your Lambdas commensurate with the execution loads, i.e., CPU and memory model, length of execution, data payload, etc. 
 
 :::info
 For the purpose of launching the Fluence Lambda public compute network, billing follows an epoch rather than execution-based model also known as a subscription model. That is, you are billed for having a provider host your Lambdas for some period of time regardless of execution instances or loads. This is a temporary constraint. For more info, see ???.
