@@ -1,4 +1,4 @@
-# Marine JS (experimental)
+# Extending Fluence functions (experimental)
 
 > This section is experimental as the API is not stable and probably will change.
 

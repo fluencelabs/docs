@@ -62,15 +62,19 @@ const sidebars = {
           {
               type: 'category',
               label: 'Event handling in JS',
-              link: { id: "build/tutorials/event-handling/event-handling", type: "doc" },
+              link: { id: "build-mvm/tutorials/event-handling-in-js/event-handling", type: "doc" },
               items: [
-                  "build/tutorials/event-handling/installation",
-                  "build/tutorials/event-handling/setting-up",
-                  "build/tutorials/event-handling/hello-world",
-                  "build/tutorials/event-handling/advanced-ipfs",
-                  "build/tutorials/event-handling/marine-js",
+                  "build-mvm/tutorials/event-handling-in-js/installation",
+                  "build-mvm/tutorials/event-handling-in-js/setting-up",
+                  "build-mvm/tutorials/event-handling-in-js/hello-world",
               ],
-          }
+          },
+        {
+          type: 'category',
+          label: 'Extending Fluence functions in JS',
+          link: { id: "build-mvm/tutorials/extending-fluence-functions-in-js/marine-js", type: "doc" },
+          items: []
+        }
       ]
     },
     {

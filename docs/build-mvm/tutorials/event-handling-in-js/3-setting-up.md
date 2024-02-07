@@ -18,7 +18,25 @@ Run the command below. The command will create `js-example` folder with the stru
 fluence init -t ts --env kras js-example
 ```
 
-Then go to newly created folder
+Time to check out the new project scaffold:
+
+```bash
+.
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+├── fluence.yaml
+└── src
+    ├── aqua
+    │   └── main.aqua
+    └── frontend
+        ├── index.html
+        ├── package.json
+        ├── src
+        └── tsconfig.json
+```
+
+You can ignore other folders which ain't listed in the structure above. They're not important for this tutorial.
 
 ```sh
 cd ./js-example
@@ -34,7 +52,7 @@ To start your frontend project in dev mode, run `npm run dev`.
 
 ### Setting up for Node.js 
 
-If you want to run JS client in Node.js:
+If you want to run JS client in Node.js, you need to do some editing in frontend folder:
 - Remove `index.html` file from `src/frontend` folder
 - Run `npm remove vite` in `src/frontend` folder.
 - Remove vite specific scripts from `package.json`
