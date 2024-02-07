@@ -85,7 +85,7 @@ DePin, as explained by [Technopedia](https://www.techopedia.com/definition/decen
 ## From Deployment Plans to Deployment And Payments
 
 
-The Fluence platform gives you, the developer, a fairly fine-grained approach toward managing your decentralized applications especially with respect to availability. For example, if you require your application to be highly available across different geographies and data centers, you can specify these requirements in your deployment plan and deploy your compute function(s) to the desired number of peers with the desired providers.
+The Fluence platform gives you, the developer, a fairly fine-grained approach toward managing your decentralized applications especially with respect to availability. For example, if you require your application to be highly available across different geographies and data centers, you can specify these requirements in your deployment plan and deploy your compute function(s) to the desired number of peers with the desired providers. Of course, high availability comes at a price.
 
 
 
