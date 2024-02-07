@@ -1,3 +1,6 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Structures
 
 The `#[marine]` macro can also wrap a `struct` making it possible to use it as a function argument or return type. Note that

@@ -15,24 +15,25 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "2.3.1",
-    "@docusaurus/plugin-google-gtag": "^2.3.1",
-    "@docusaurus/preset-classic": "2.3.1",
-    "@mdx-js/react": "^1.6.22",
+    "@docusaurus/core": "3.1.1",
+    "@docusaurus/plugin-google-gtag": "^3.1.1",
+    "@docusaurus/preset-classic": "3.1.1",
+    "@mdx-js/react": "^3.0.0",
     "aqua-vscode": "github:fluencelabs/aqua-vscode",
-    "clsx": "^1.2.1",
-    "docusaurus-plugin-sass": "^0.2.3",
-    "docusaurus-preset-shiki-twoslash": "^1.1.39",
-    "mermaid": "^10.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-player": "^2.11.2",
-    "sass": "^1.58.3"
+    "clsx": "^2.1.0",
+    "docusaurus-plugin-sass": "^0.2.5",
+    "docusaurus-preset-shiki-twoslash": "https://gitpkg.now.sh/fluencelabs/twoslash/packages/docusaurus-preset-shiki-twoslash?fix-docusaurus-3",
+    "mermaid": "^10.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-player": "^2.14.1",
+    "sass": "^1.70.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.3.1",
-    "@tsconfig/docusaurus": "^1.0.6",
-    "typescript": "^4.9.5"
+    "@docusaurus/module-type-aliases": "3.1.1",
+    "@docusaurus/tsconfig": "3.1.1",
+    "@types/react": "^18.2.0",
+    "typescript": "~5.2.2"
   },
   "browserslist": {
     "production": [
@@ -47,7 +48,7 @@
     ]
   },
   "engines": {
-    "node": ">=16.14"
+    "node": ">=18.0"
   },
   "prettier": {}
 }

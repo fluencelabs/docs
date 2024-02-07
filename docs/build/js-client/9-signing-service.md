@@ -138,8 +138,6 @@ customSig.securityGuard = allowServiceFn("my_service", "my_function");
 registerSig("CustomSig", customSig);
 ```
 
-<!-- For a [non-default peer](in-depth.md#using-multiple-peers-in-one-application), the instance has to be specified: -->
-
 ```typescript
 const peer = new FluencePeer();
 await peer.start();
