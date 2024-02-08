@@ -16,6 +16,7 @@ const sidebars = {
     //     // "build/develop-distributed-algos"
     //   ],
     // },
+    "build/set-up-development-env",
     {
       type: "category",
       label: "Working with data",
