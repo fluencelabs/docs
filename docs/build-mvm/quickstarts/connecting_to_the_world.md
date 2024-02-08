@@ -279,7 +279,7 @@ pub fn what_o_clock(timezone: String) -> SimpleResult {
             let city_time = format!("The local time in {} is {}", city, datetime.time());
             SimpleResult {stderr: "".to_owned(), stdout: city_time}
         },
-        Err(e) => SimpleResult {stderr: format!("tiemzone conversion error: {}", e), stdout:"".to_owned()},
+        Err(e) => SimpleResult {stderr: format!("timezone conversion error: {}", e), stdout:"".to_owned()},
 
     }
 }
@@ -315,7 +315,7 @@ result: {
 
 ```
 
-Alright, we got what we wanted but maybe not quite in the format we wanted. Go ahead and clean things things up to your hearts content. Make sure you re-build the project after every change so you are loading the most recent Wasmm modules into the REPL.
+Alright, we got what we wanted but maybe not quite in the format we wanted. Go ahead and clean things things up to your hearts content. Make sure you re-build the project after every change so you are loading the most recent Wasm modules into the REPL.
 
 
 **Payment, deploy once we have it.**
