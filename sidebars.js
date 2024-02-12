@@ -47,7 +47,7 @@ const sidebars = {
         "build-mvm/concepts/fluence_functions_revisited",
         "build-mvm/concepts/marketplace",
         "build-mvm/concepts/http_gateways",
-        "build-mvm/concepts/cronjobs",
+        "build-mvm/concepts/scheduling_functions",
         "build-mvm/concepts/security"
       ]
     },
