@@ -294,34 +294,26 @@ Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
 
 ### Peer
 
-A participant of the Fluence Protocol identified with Peer ID.
-
-> TODO
-
-A Fluence Peer is the result of implementing the [Fluence protocol](#fluence-protocol) to host and execute general purpose compute functions to provide users with a serverless experience. 
+A Fluence Peer is the result of implementing the [Fluence protocol](#fluence-protocol) to host and execute general purpose compute functions to provide users with a serverless and cloudless experience. 
 
 Fluence reference peers are comprised of the following components:
 - Libp2p to manage connection pool
 - A pool of [AquaVM](#aquavm) processes to handle [Particle](#particle)s
-- A pool of Marine [Service](#service)s ready to be called from these [Particle](#particle)s
+- A pool of [Marine Service](#marine-service)s ready to be called from these [Particle](#particle)s
 - A scheduler for [Spell](#spell)s
-- A pool of [Worker](#worker)s to logically isolate Marine [Service](#service)s and [Spell](#spell)s to avoid interference
+- A pool of [Worker](#worker)s to logically isolate [Marine Service](#marine-service)s and [Spell](#spell)s to avoid interference
 
-Fluence peers are identified by Peer ID which is derived from the Peer's Public Key.
+Fluence peers are identified by [Peer ID](#peerid) which is derived from the Peer's Public Key.
 
 ### PeerId
 
-Logical address of a segregated cloudless functions execution environment. Derived from a private key, can be used to verify Peer’s signatures which is a part of Proof of Processing verified by AquaVM on every step of Cloudless Function.
+Logical address of a segregated [Compute Function](#compute-function)s execution environment. Derived from a Public key, used to verify Peer’s signatures which is a part of [Proof of Processing](#proof-of-processing) verified by [AquaVM](#aquavm) on every step of a [Cloudless Function](#cloudless-function).
 
 ### Host
 
-A Fluence Peer that participates in the Fluence’s Kademlia network. Nox is the reference implementation.
+A Fluence [Peer](#peer) that participates in the Fluence’s Kademlia network. [Nox](#nox) is the reference implementation.
 
-Hosts are capable to act as Relays for Workers and Clients.
-
-> TODO
-
-Host is the closest full-featured (neither a [Client](#client-peer), nor a [Worker](#worker)) Fluence [Peer](#peer).
+Hosts are capable to act as [Relay](#relay)s for [Worker](#worker)s and [Client](#client-peer)s.
 
 [Host Peer ID](/docs/aqua-book/language/topology.md#host_peer_id) can always be accessed from [Aqua](#Aqua).
 
@@ -329,22 +321,15 @@ Host is the closest full-featured (neither a [Client](#client-peer), nor a [Work
 
 #### Worker
 
-A single instance of a Cloudless Deployment: Compute Unit allocated for Cloudless Functions in form of Marine Services and Cloudless Scheduler in form of Spells.
+A single instance of a [Cloudless Deployment](#cloudless-deployment): [Compute Unit](#compute-unit) allocated for [Compute Function](#compute-function)s in form of [Marine Service](#marine-service)s and [Cloudless Scheduler](#cloudless-scheduler) in form of [Spell](#spell)s.
 
-So Cloudless Deployment is one or many Workers, each having the same code installed.
+So [Cloudless Deployment](#cloudless-deployment) forms or many Workers, each having the same code installed, the same behavior expected.
 
-> TODO
-
-Worker is a part of [Peer](#peer)'s resources that, together with other Workers, constitutes a Subnet, handles the [Deal](#deal), and isolates some resources. It has:
-- Its own keypair and Peer ID
-- One or more deployed [Spell](#spell)s
-- Zero or more deployed [Service](#service)s
-
-Workers are deployed and removed as a whole. [Service](#service)s of a single worker may share some resources like filesystem access, etc.
+Worker is a part of [Peer](#peer)'s resources that, together with other Workers, constitutes a Subnet, handles the [Deal](#deal), and isolates some resources. It has its own keypair and [Peer ID](#peerid).
 
 #### Worker Definition
 
-Services and spells of a worker, used to bake a single worker. Part of Cloudless Distribution – Deal.
+Services and Spells of a worker, used to bake a single worker. Part of [Cloudless Distributive](#cloudless-distributive), registered in a [Deal](#deal).
 
 #### Subnet
 
