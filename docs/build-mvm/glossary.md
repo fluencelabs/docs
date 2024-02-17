@@ -11,128 +11,126 @@ Fluence network is an open, permissionless network of [Fluence protocol](#fluen
 
 ### Fluence Protocol
 
-Fluence Protocol is an open, off-chain protocol that matches resource [provider](#provider)s and consumers to enable secure, verifiable decentralized serverless compute. The protocol is defined by a set of behaviors of [Peer](#peer)s, on top of Libp2p and [Aquamarine](#aquamarine), that enables emergent abilities of the [Fluence network](#fluence-network): ability to serve, resolve, execute [Cloudless Functions](#cloudless-function).
+Fluence Protocol is an open, off-chain protocol that [matches](#matching) resource [provider](#provider)s and consumers to enable secure, verifiable decentralized serverless [compute](#compute). The protocol is defined by a set of behaviors of [Peer](#peer)s, on top of Libp2p and [Aquamarine](#aquamarine), that enables emergent abilities of the [Fluence network](#fluence-network): to resolve, serve, execute and verify [Cloudless Functions](#cloudless-function).
 
 ### Fluence Blockchain
 
-Fluence Blockchain is a L2/L3 application-specific EVM-compatible blockchain dedicated to the [Marketplace](#marketplace), which includes both [Deployments](#cloudless-deployment) and [Capacity Commitments](#capacity-commitment). As of now, Fluence Blockchain is bridged with Filecoin and Ethereum Mainnet.
+Fluence Blockchain is a L2/L3 application-specific EVM-compatible blockchain dedicated to the [Compute Marketplace](#compute-marketplace), which includes both [Deployments](#cloudless-deployment) and [Capacity Commitments](#capacity-commitment). As of now, Fluence Blockchain is bridged with Filecoin and Ethereum Mainnet.
 
 ### Fluence CLI
 
-> TODO
-
-Fluence CLI is the main entry point into Fluence-based application lifecycle: 
- - Develop or reuse [Marine Service](#marine-service)s
- - Develop [Aqua](#Aqua) to run in the [Fluence network](#fluence-network)
- - Deploy the application composed of [Aqua](#Aqua) scripts, Marine [Service](#service)s, and [Spell](#spell)s to the [Fluence network](#fluence-network) by creating a [Deal](#deal) and initiating creation of Subnet from [Worker](#worker)s
- - Use the deployed Subnet via [Fluence JS Client](#fluence-js-client)
+Fluence CLI is the main entry point into [Fluence App](#fluence-app) lifecycle: 
+ - Develop or reuse [Compute Functions](#compute-function)s
+ - Develop or reuse distributed [Cloudless Functions](#cloudless-function) to run in the [Fluence Network](#fluence-network)
+ - Configure [Cloudless Scheduler](#cloudless-scheduler) to run [Cloudless Functions](#cloudless-function)
+ - Prepare [Cloudless Distributive](#cloudless-distributive)
+ - Using [Compute Marketplace](#compute-marketplace), make a [Cloudless Deployment](#cloudless-deployment)
+ - Run, use, upgrade, your [Fluence App](#fluence-app)
 
 ### Fluence App
 
-Fluence App is the actual end-user application that includes [Cloudless Deployment](#cloudless-deployment) but may also embrace a [Fluence Gateway](#fluence-gateway) to call Cloudless Functions from HTTP endpoints, DApp with event listeners, browser application and other integration.
+Fluence App is the actual end-user application that includes [Cloudless Deployment](#cloudless-deployment) but may also embrace a [Gateway](#gateway) to call Cloudless Functions from HTTP endpoints, DApp with event listeners, browser application and other integration.
 
 ### Fluence JS Client
 
 A JS library that enables full-fledged, bi-direction interactions between JS applications (both node.js and browser-based, Electron.js is also an option) and [Fluence Network](#fluence-network). 
 
-Fluence JS Client is embedded into [Fluence CLI](#fluence-cli).
-
-Aqua compiler has JS and TS targets that uses Fluence JS Client to actually run compiled [AIR](#air) code, and provides relevant types.
-
-### Fluence Gateway
-
-> TODO
+Fluence JS [Client](#client-peer) is embedded into [Fluence CLI](#fluence-cli).
 
 ### Cloudless Function
 
-Cloudless Function is a piece of useful compute work defined by developer. It contains one or more Compute Function calls, and an Aqua script that orchestrates it – connects outputs and inputs, denotes parallelism and defines success and failure.
+Cloudless Function is a piece of useful [compute](#compute) work defined by developer. It contains one or more [Compute Function](#compute-function) calls, and an [Aqua](#aqua) script that orchestrates it – connects outputs and inputs, denotes parallelism and defines success and failure.
 
 With help of Aqua, developer may choose redundancy and fault-tolerance policies for their Cloudless Functions, incur parallelism across different machines, pass data from peer to peer, and many more.
 
 ### Cloudless Deployment
 
-Cloudless Deployment is Compute Functions and Scheduled Cloudless Functions configured, deployed and ready for use. It is derived from Cloudless Distributive, managed with a Deal, running on Workers.
+Cloudless Deployment is [Compute Functions](#compute-function) and [Scheduled Cloudless](#cloudless-scheduler) Functions configured, deployed and ready for use. It is derived from [Cloudless Distributive](#cloudless-distributive), managed with a [Deal](#deal), running on [Workers](#worker).
 
 ### Cloudless Distributive
 
-Prototype for a Cloudless Deployment. Includes:
+Prototype for a [Cloudless Deployment](#cloudless-deployment). Includes:
 
-- Compute Functions binary sources (in form of WASM modules for Marine Services, and respective resources and module linking configuration)
-- Scheduled Cloudless Functions (in form of compiled AIR files), with triggers config for the Cloudless Scheduler
-- Cloudless Deployment configuration (needed resources such as effectors, replication factor – desired size of Subnet)
+- [Worker Definition](#worker-definition), that consists of:
+    - [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
+    - [Scheduled Cloudless](#cloudless-scheduler) [Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with triggers config
+- [Cloudless Deployment](#cloudless-deployment) configuration (needed resources such as [effectors](#effector-module), replication factor – desired size of a [Subnet](#subnet))
 
 Cloudless Distributive is structured with IPLD and uploaded to the storage for future CID-addressable use.
 
 ### Cloudless Scheduler
 
-Cloudless Scheduler triggers a Cloudless Function without client interaction, based on events. Implemented as a part of Cloudless Deployment. See Spells for low level details.
+Cloudless Scheduler triggers a [Cloudless Function](#cloudless-function) without [client](#client-peer) interaction, based on events. Implemented as a part of [Cloudless Deployment](#cloudless-deployment). See [Spells](#spell) for low level details.
 
 Kinds of triggers that the Scheduler is capable to handle:
 - time-based, such as cronjobs
 - event-based, such as chain events
 
-### Proof of Compute
+### Proofs
 
-> TODO
+[Fluence Protocol](#fluence-protocol) enables a set of Proofs that drives its economy model.
 
 #### Proof of Capacity
 
-Proof that a compute peer (Host) has certain capacity allocated and available for cloudless deployments. Every Host must provide Proofs of Capacity in order to participate in Deployments.
+Proof that a compute [peer](#peer) ([Host](#host)) has certain capacity allocated and available for [Cloudless Deployments](#cloudless-deployment). Every [Host](#host) must provide Proofs of Capacity in order to participate in [Deployments](#cloudless-deployment).
 
-Conducted by Capacity Commitments Prover (CCP).
+Conducted by [Capacity Commitments Prover (CCP)](#capacity-commitment-prover).
 
 #### Proof of Processing
 
-Proof that Cloudless Functions was executed as described – in distributed manner.
+Proof that a [Cloudless Function](#cloudless-function) was executed as described – in a distributed manner.
 
-Conducted and checked by AquaVM during execution on every step.
+Conducted and checked by [AquaVM](#aquavm) during execution on every step.
 
-See Golden Particles.
+See [Golden Particles](#golden-particle) to learn more about Proof of Processing use for payments.
 
 #### Proof of Execution
 
-Proof of Compute Function – a single function execution that runs on a Peer, verifies that computation was done correctly.
+Proof of [Compute Function](#compute-function) – a single function execution that runs on a [Peer](#peer), verifies that computation was done correctly.
 
-PoE is pluggable, so that different workloads can benefit from decentralization of compute.
-
-> TODO
-
-See more Somewhere. See Managed Effects.
+PoE is pluggable, so that different workloads can benefit from decentralization of compute. The options might include:
+- zk
+- TEE
+- Verification of cryptographic function execution for MPC
+- Repetition for [pure](#pure-module) code
+- Consensus for external [effects](#effect), [Managed Effects](#managed-effects)
+- and more
 
 ## Distributed
 
 ### AIR
 
-Aqua Intermediate Representation (AIR) results from compiling your [Aqua](#Aqua) scripts. AIR is used by the [AquaVM](#aquavm)s deployed on [Fluence peer](#Peer)s to execute the workflows and [Service](#service) compositions specified in your Aqua scripts.
+Aqua Intermediate Representation (AIR) results from compiling your [Aqua](#Aqua) scripts. AIR is used by the [AquaVM](#aquavm)s deployed on [Fluence Peer](#Peer)s to execute the workflows and [Compute Function](#compute-function) compositions specified in your Aqua scripts.
 AIR contains a very limited set of instructions, like `(seq A B)` or `(par A B)` for control flow, and `(call peerId (serviceId functionName) [...args] exportVariable)` to execute compute operations using [Marine](#marine) services or [Peer](#Peer) API.
 
 ### Aqua
 
-Aqua is the Fluence’s language for distributed Cloudless Functions.
-Aqua describes distributed control flow in developer-friendly terms, and delegates computations to [Service](#Service)s on particular [Peer](#Peer)s.
-Aqua follows [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Service](#service)s. Read more in [Aqua Book](/docs/aqua-book/introduction.md).
+Aqua is the Fluence’s language for choreography and orchestration of distributed [Cloudless Functions](#cloudless-function).
+Aqua describes distributed control flow in developer-friendly terms, and delegates computations to [Compute Function](#compute-function)s on particular [Peer](#Peer)s.
+Aqua follows [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Cloudless Functions](#cloudless-function). Read more in [Aqua Book](/docs/aqua-book/introduction.md).
 
 ### AquaVM
 
-Interprets Aqua IR to orchestrate local function calls or conduct choreography of the Cloudless Function. Checks and provides all the Cloudless Function proofs. See more somewhere.
+Interprets [Aqua IR](#air) to orchestrate local function calls or conduct choreography of the [Cloudless Function](#cloudless-function). Checks and provides all the Cloudless Function [proofs](#proof-of-processing).
 
-AquaVM is a State Machine that takes a [Particle](#particle) received by a particular [Peer](#peer), interprets an [AIR](#air) script of this [Particle](#particle) along with the [Particle Data](#particle-data), and gives the [Peer](#peer) a set of commands: what [Service](#service)s to call locally (if any), to what [Peer](#peer)s to send this [Particle](#particle) to (if any), and how the [Particle Data](#particle-data) should be updated (if should).
+AquaVM is a State Machine that takes a [Particle](#particle) received by a particular [Peer](#peer), interprets an [AIR](#air) script of this [Particle](#particle) along with the [Particle Data](#particle-data), and gives the [Peer](#peer) a set of commands: what [Compute Function](#compute-function)s to call locally (if any), to what [Peer](#peer)s to send this [Particle](#particle) to (if any), and how the [Particle Data](#particle-data) should be updated (if should).
 
-AquaVM takes its place for Proof of Processing as well, running on-chain to verify the [Particle](#particle), identify [Deal](#deal)s involved, and distribute the rewards.
+AquaVM takes its place for [Proof of Processing](#proof-of-processing), running on-chain to verify the [Particle](#particle), identify [Deal](#deal)s involved, and distribute the rewards.
 
 ### Aquamarine
 
-Aquamarine is a technology stack that enables the Fluence protocol: [Aqua](#Aqua) with [AIR](#air) and [AquaVM](#aquavm), and [Marine](#marine). In other words, Aquamarine is Fluence without incentives and builtins.
+Aquamarine is a technology stack that enables the off-chain [Fluence Protocol](#fluence-protocol): [Aqua](#Aqua) with [AIR](#air) and [AquaVM](#aquavm), and [Marine](#marine). In other words, Aquamarine is Fluence without incentives and [system services](#system-services).
 
 ### Particle
 
 Particle is a network package that forms a single-use software-defined network (SDN) for a single request of a single [AIR](#air) script.
 
-Particle contains an immutable header (with an [AIR](#air) script and some metadata, including the [initiator](#init-peer)'s signature) and a [mutable body](#particle-data) (results of service calls triggered by the script execution, along with the signatures of involved [Peer](#peer)s).
+Particle contains an immutable header (with an [AIR](#air) script and some metadata, including the [initiator](#init-peer)'s signature) and a [mutable body](#particle-data) (results of [compute function](#compute-function) calls triggered by the script execution, along with the signatures of involved [Peer](#peer)s).
 
 ### Particle Data
 
-A mutable part of the [Particle](#particle) that contains [Service](#service) responses and [Peer](#peer) signatures.
+Particle data is an audit log of the distributed execution flow of a Particle;
+a mutable part of the [Particle](#particle) that contains [Compute Function](#compute-function) responses and [Peer](#peer) signatures.
 
 Particle data has a CRDT-like format to handle fork-join behavior when the same [Particle](#particle) is sent to several different destinations in parallel, and then is observed on third [Peer](#peer) in different states. In this case, data converges in deterministic way.
 
@@ -144,69 +142,67 @@ The [AIR](#air) and [AquaVM](#aquavm) execution model is built on top of the fun
 
 ### Spell
 
-> TODO reference Scheduler
+Spell is a single-peer representation of [Cloudless Deployment](#cloudless-deployment) used for [Cloudless Scheduler](#cloudless-scheduler). It consists of a special [Marine Service](#marine-service) and an [AIR](#air) script.
 
-Spell is a part of Cloudless Deployment that consists of a special Marine Service and an AIR script. Spell script is executed periodically or based on event, hence being a single-peer representation of distributed Cloudless Scheduler for Cloudless Functions. Read more here.
+Spell script is executed periodically or based on event to run a predefined [Cloudless Functions](#cloudless-function).
+
+> TODO: See Spell docs here.
 
 ## Compute
 
 ### Nox
 
-Nox is the reference implementation of a full-fledged Fluence Protocol-compliant Peer capable to serve Cloudless Deployments. Nox serves as a Host for many Workers, each Worker devoted to a distinct Deployment. Read more below.
+Nox is the reference implementation of a full-fledged [Fluence Protocol](#fluence-protocol)-compliant [Peer](#peer) capable to serve [Cloudless Deployments](#cloudless-deployment). Nox serves as a [Host](#host) for many [Workers](#worker), each Worker devoted to a distinct Deployment. Read more below.
 
 #### System Services
 
-Marine services that are required for a Fluence Peer to operate according to the  Fluence Protocol, e.g. resolve Subnets, make Deployments, maintain Workers.
+[Marine Services](#marine-service) that are required for a [Fluence Peer](#peer) to operate according to the [Fluence Protocol](#fluence-protocol), e.g. resolve [Subnets](#subnet), make [Deployments](#deployment), maintain [Workers](#worker).
 
-Part of Nox.
+Part of [Nox](#nox).
 
 #### Builtin Services
 
-Low-level services made in peer’s native language (in case of Nox, Rust), required to serve Aqua properly. Includes math and string operations, etc. See more in aqua-lib.
+Low-level [Compute Function](#compute-function)s made in peer’s native language (in case of [Nox](#nox), Rust), required to serve [Aqua](#aqua) properly. Includes math and string operations, etc. See more in [aqua-lib](https://github.com/fluencelabs/aqua-lib) repo.
 
 ### Marine
 
-Marine is a general purpose Wasm runtime intended to execute compute functions in form of linked Wasm [Module](#marine-module)s (aka Services) on some [Peer](#peer).
+Marine is a general purpose Wasm runtime intended to execute [Compute Functions](#compute-function) in form of linked [Wasm](#webassembly-wasm) [Module](#marine-module)s (aka [Services](#marine-service)) on some [Peer](#peer).
 
-It is the main way to express computations in the [Fluence protocol](#fluence-protocol).
+It is the main way to express computations in the [Fluence Protocol](#fluence-protocol).
 
 Developers have three ways to define computations:
- - Write and use [Marine module](#marine-module)s to build a [Service](#service) from them
- - Write and use Marine [effector module](#effector-module)s to access an external effect, e.g. binary or API
- - Implement computations in Fluence [Peer](#peer)'s native language
+ - Write and use [Marine module](#marine-module)s to build a [Service](#marine-service) from them
+ - Write and use Marine [effector module](#effector-module)s to access an external [effect](#effect), e.g. [binary](#mounted-binary) or API
+ - Implement computations in Fluence [Peer](#peer)'s native language – cannot be a part of [Cloudless Deployment](#cloudless-deployment)
  
 With Marine, computations are portable and safe for the [Provider](#provider).
 
 #### Marine Service
 
-One or more linked Marine modules, one of them being a Facade module and exposing one or more Compute Functions via Webassembly IT.
-
-> TODO
-
-Service is a virtual construct combining [Marine Wasm module](#marine-module)s and linking instructions into a discoverable resource.
+Service is a virtual construct combining one or more [linked](#module-linking) [Marine modules](#marine-module), one of them being a [Facade Module](#facade-module) and exposing one or more [Compute Function](#compute-function)s via [Webassembly IT](#webassembly-it).
 
 Service:
-- Can be called from [Aqua](#Aqua)
+- Can be called from [Aqua](#Aqua) as a part of [Cloudless Function](#cloudless-function)
 - May be a Marine service, in this case it's a set of [Module](#marine-module)s linked together
 - May be implemented as a [Peer](#peer) native functionality, see [Builtins](#builtins) as an example. This includes JavaScript callbacks provided to [Fluence JS Client](#fluence-js-client)
 
 Service is identified by a Service ID that's bound to the Peer ID that provides this service.
 
-Service exposes one or more functions. So finally to call a function developer needs to provide peer id, service id, and function name.
+Service exposes one or more [Compute Function](#compute-function)s. So finally to call a function developer needs to provide [peer id](#peerid), service id, and function name.
 
-Service function calls within the [Fluence protocol](#fluence-protocol) are possible only via AIR instructions – from developer perspective, it means using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli) or another [Client](#client-peer).
+Service function calls within the [Fluence protocol](#fluence-protocol) are possible only via [AIR](#air) instructions – from developer perspective, it means using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli) or another [Client](#client-peer).
 
 #### Marine SDK
 
-[Marine SDK](/docs/marine-book/marine-rust-sdk/) is a set of tools that help developers write and compile Rust code as [Marine](#marine) [module](#marine-module)s and [Service](#service)s.
+[Marine SDK](/docs/marine-book/marine-rust-sdk/) is a set of tools that help developers write and compile Rust code as [Marine](#marine) [module](#marine-module)s and [Service](#marine-service)s.
 
 #### Marine JS
 
-Implementation of Marine running on JS, includes Marine SDK support and Module Linking. Marine Modules, Pure ones, can run in any Marine setup.
+Implementation of [Marine](#marine) running on JS, includes [Marine SDK](#marine-sdk) support and [Module Linking](#module-linking). [Marine Modules](#marine-module), [Pure](#pure-module) ones, can run in any Marine setup.
 
 #### Marine Module
 
-Marine Module is a single .wasm file compiled with Wasm IT support, e.g., using Rust language with [Marine SDK](#marine-sdk).
+Marine Module is a single .wasm file compiled with [Wasm IT](#webassembly-it) support, e.g., using Rust language with [Marine SDK](#marine-sdk).
 
 #### Module Linking
 
@@ -214,15 +210,15 @@ Modules can use each other using shared nothing linking scheme.
 
 #### Pure Module
 
-[Module](#marine-module) with no external effects (including WASI) that takes only inputs and maybe an internal sandboxed state, produces new state and outputs. May have import declarations of other modules.
+[Module](#marine-module) with no external [effects](#effect) (including [WASI](#wasi)) that takes only inputs and maybe an internal sandboxed state, produces new state and outputs. May have import declarations of other modules – for [Module Linking](#module-linking).
 
 #### Wasi Module
 
-A module that uses basic WASI effects such as access to time and file system.
+A [Marine Module](#marine-module) that uses basic [WASI](#wasi) effects such as access to time and file system.
 
 #### Facade Module
 
-A Module, that is the only module accessible from the outside – it constitutes API of a Service, a set of Compute Functions.
+A [Module](#facade-module), that is the only module accessible from the outside – it constitutes API of a [Service](#marine-service), a set of [Compute Function](#compute-function) declarations.
 
 For modules that are intended to be shared as API, developers often need to write a Facade module to protect internal APIs from unauthorized access, enforce business-invariants, etc.
 
@@ -247,49 +243,39 @@ Managed Effects is an approach to solve a problem:
 - Compute without effects is useless
 - Compute with effects might be dangerous
 
-With Managed Effects, every effect is accessed only with an Effector Module. Effector Module is audited by the community to check that its API is useful for developers, and its effects are safe for Compute Providers.
+With Managed Effects, every [effect](#effect) is accessed only with an [Effector Module](#effector-module). Effector Module is audited by the community to check that its API is useful for developers, and its effects are safe for [Compute Providers](#provider).
 
 Compute Providers whitelist only the known Effector Modules and forbid effects in any other module. If Effector Module requires Provider to have certain capabilities, e.g. locally deployed service, an installed binary, etc., Provider has to take care of that.
 
-Developer can access this effect safely using Module Linking.
+Developer can access this effect safely using [Module Linking](#module-linking).
 
 #### Effector Module
 
-A Marine Module that implements Managed Effects approach, providing access to an Effect in a safe and useful way. Effector is what developer can use via module linking.
-
-> TODO
-
-Effector Module has a reference to effects external to Marine [Service](#service), e.g. to a CLI, binary interface, HTTP client, etc.
+A [Marine Module](#marine-module) that implements [Managed Effects](#managed-effects) approach, providing access to an [Effect](#effect) in a safe and useful way. Effector is what developer can use via [Module Linking](#module-linking).
 
 Effector modules have a special section in their config that describes binary imports, socket imports, or similar things.
 
 #### Effect
 
-What Effector actually executes, external to Marine. Examples: curl, ipfs, websocket.
+What [Effector Module](#effector-module) actually executes on the host system, external to [Marine](#marine). Examples: curl, ipfs, websocket.
 
 #### Mounted Binary
 
 Mounted Binary is a special interface that provides an [effector module](#effector-module) with the capability to call any external binary with the provided set of arguments and obtain a result of this call. It makes it possible to integrate almost any other software (such as IPFS, Ceramic, and databases) in the Fluence ecosystem.
 
-
-
 ### Particle File Vault
 
 Particle File Vault is a temporary folder that is created on the [Peer](#peer) for every incoming [Particle](#particle) and removed when the [Particle](#particle) expires. All the services within this [Peer](#peer) have access to this folder.
 
-Particle File Vault is expected to be used to pass data between [Service](#service)s in a single [AIR](#air) script, making them more composable and avoiding revealing this data to other [Peer](#peer)s involved into this [Particle](#particle)'s coordination network, which could happen if the data is returned as a plain text.
-
-> TODO Reference Compute Function instead
+Particle File Vault is expected to be used to pass data between [Compute Function](#compute-function)s (distributed in the form of [Marine Service](#marine-service)s) within a single [AIR](#air) script, making them more composable and avoiding revealing this data to other [Peer](#peer)s involved into this [Particle](#particle)'s execution, which could happen if the data is returned as a plain text.
 
 ### Compute Function
 
-A single computational action executed on a single peer. Marine Services is the default way to deliver Compute Functions. Other options are builtins, and native code – e.g. Javascript callbacks for JS client.
+A single computational action executed on a single peer. [Marine Service](#marine-service)s is the default and preferred way to deliver [Compute Function](#compute-function)s. Other options are [builtins](#builtin-services), and native code – e.g. Javascript callbacks for [JS client](#fluence-js-client).
 
 ### Compute Unit
 
-> TODO
-
-Smallest divisible compute capacity providers allocate and stake to the marketplace and available to allocate to a worker. Proved by Proof of Capacity as a part of Capacity Commitment. Every Worker has exactly this amount of resources.
+Smallest divisible compute capacity [provider](#provider)s allocate and stake to the [Marketplace](#compute-marketplace) and available to allocate to a [Worker](#worker). Proved by [Proof of Capacity](#proof-of-capacity) as a part of [Capacity Commitment](#capacity-commitment). Every Worker has exactly this amount of resources.
 
 ### Tetraplet
 
@@ -300,9 +286,9 @@ Tetraplet is a data structure describing the origin of an argument to a function
 - `function_name`
 - `functor`
 
-Tetraplets are the mean to check and enforce distributed security invariants of a function by putting restrictions on its arguments, e.g.: the argument “is_authorized” must be provided by a function “check_auth” from “security” [Service](#service) run on the same [Peer](#peer). Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
+Tetraplets are the mean to check and enforce distributed security invariants of a function by putting restrictions on its arguments, e.g.: the argument “is_authorized” must be provided by a function “check_auth” from “security” [Compute Function](#compute-function) run on the same [Peer](#peer). Both [Marine SDK](#marine-sdk) and [Fluence JS Client](#fluence-js-client) provides access to tetraplets.
 
-> TODO
+Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
 
 ## Network
 
@@ -408,7 +394,11 @@ Relay is a [Host](#host) that a [Client](#client-peer) is connected to, or a [Ho
 
 To execute code on a [Peer](#peer) that's behind a Relay, [use `on peer via relay:` construct](/docs/aqua-book/language/topology#accessing-peers-via-other-peers) in [Aqua](#Aqua).
 
-## Chain
+## Compute Marketplace
+
+Compute Marketplace is a set of smart contracts on the Fluence IPC Subnet where developers put Deals, Matching happens, resulting in Cloudless Deployment to occur off-chain.
+
+The Fluence marketplace is an on-chain institution comprised of a set of smart contracts that maintains provider offers to sell compute capacity, accepts developer offers to purchase compute capacity and attempts to match developer offers with suitable provider offers in a trustless manner. A successful match results in a Deal.
 
 ### Deal
 
@@ -431,12 +421,6 @@ The Fluence protocol is open and permissionless and open to all providers. In or
 > TODO
 
 Provider is an agent that operates [Peer](#peer)s in the [network](#fluence-network) identified by a public key, holding private key to sign blockchain transactions when entering [Deal](#deal)s. Provider generates [PAT](#provider-access-token-pat)s, fetches [PATE](#pat-envelope-pate)s from [PAT](#provider-access-token-pat)s, uses them to issue [PDT](#peer-deal-token-pdt)s for Peers and therefore to assign them to [Deal](#deal)s.
-
-### Marketplace
-
-Compute Marketplace is a set of smart contracts on the Fluence IPC Subnet where developers put Deals, Matching happens, resulting in Cloudless Deployment to occur off-chain.
-
-The Fluence marketplace is an on-chain institution comprised of a set of smart contracts that maintains provider offers to sell compute capacity, accepts developer offers to purchase compute capacity and attempts to match developer offers with suitable provider offers in a trustless manner. A successful match results in a Deal.
 
 ### Matching
 
@@ -471,3 +455,7 @@ A provider can seamlessly switch their resource allocation between Proof of Capa
 A process that makes Capacity Commitments. Made for Providers.
 
 A piece of software augmenting each Nox peer tasked with generating Proofs of Capacity for that/Nox’s (?) hardware zone.
+
+### Golden Particle
+
+> TODO
