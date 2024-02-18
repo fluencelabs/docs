@@ -148,6 +148,12 @@ Spell script is executed periodically or based on event to run a predefined [Clo
 
 > TODO: See Spell docs here.
 
+### Topology
+
+Here: exact way the execution of Cloudless Function flows from Peer to Peer, including sequential transitions, fork/join convergent executions, and more.
+
+Topology is expressed and handled with the help of [Aqua](#aqua).
+
 ## Compute
 
 ### Nox
@@ -184,7 +190,7 @@ Service is a virtual construct combining one or more [linked](#module-linking) [
 Service:
 - Can be called from [Aqua](#Aqua) as a part of [Cloudless Function](#cloudless-function)
 - May be a Marine service, in this case it's a set of [Module](#marine-module)s linked together
-- May be implemented as a [Peer](#peer) native functionality, see [Builtins](#builtins) as an example. This includes JavaScript callbacks provided to [Fluence JS Client](#fluence-js-client)
+- May be implemented as a [Peer](#peer) native functionality, see [Builtins](#builtin-services) as an example. This includes JavaScript callbacks provided to [Fluence JS Client](#fluence-js-client)
 
 Service is identified by a Service ID that's bound to the Peer ID that provides this service.
 
@@ -329,103 +335,72 @@ Worker is a part of [Peer](#peer)'s resources that, together with other Workers,
 
 #### Worker Definition
 
-Services and Spells of a worker, used to bake a single worker. Part of [Cloudless Distributive](#cloudless-distributive), registered in a [Deal](#deal).
+Worker Definition is built with the help of [Fluence CLI](#fluence-cli), and used by [Nox](#nox) to deploy and update a [Worker](#worker). Part of [Cloudless Distributive](#cloudless-distributive), registered in [Deal](#deal)s.
+
+Consists of:
+- [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
+- [Scheduled Cloudless](#cloudless-scheduler) [Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with triggers config
 
 #### Subnet
 
-Interconnected set of all Workers of a single Cloudless Deployment, that can be used in runtime for redundancy, durability, fault tolerance, load balancing and better security of Cloudless Functions.
-
-> TODO
-
-A Subnetwork is a virtual partition (overlay) of the [Fluence p2p network](#fluence-network) defined by the terms and life of a Deal and accessed and managed with [Aqua](#Aqua). The behavior of a Subnetwork is defined by the set of [Worker](#worker)s specified by the [Deal](#deal).  
-
-Subnetworks are an integral part of the [Fluence protocol](#fluence-protocol) and offer additional qualities, like fault tolerance or read consensus. That depends on the [Aqua](#Aqua) code that is deployed on the Subnet [Worker](#worker)s to maintain emergent qualities, and on the [Aqua](#Aqua) code that is used to work with the subnet.
-
-To use Subnet, a developer needs to provide the [Deal](#deal) ID and possibly some additional authorization information.
+Interconnected set of all [Worker](#worker)s of a single [Cloudless Deployment](#cloudless-deployment), that can be used in runtime for redundancy, durability, fault tolerance, load balancing and better security of [Cloudless Function](#cloudless-function)s.
 
 #### Gateway
 
-A HTTP-facing Fluence Peer that is capable of running Cloudless Functions based on incoming requests. See this repo for more.
+A HTTP-facing Fluence [Client Peer](#client-peer) that is capable of running [Cloudless Function](#cloudless-function)s based on incoming requests.
 
+> TODO See this repo for more.
 
 ### Init Peer
 
-The Peer that initiates a Cloudless Function – creates a Particle and sends it over Fluence Protocol.
+The [Peer](#peer) that initiates a [Cloudless Function](#cloudless-function) – creates a [Particle](#particle) and sends it over [Fluence Protocol](#fluence-protocol).
 
-> TODO
-
-The [Peer](#peer)eer that takes initiative to create a brand new [Particle](#particle) with a particular [AIR](#air) script in it, and begin its execution. Init Peer provides a signature for the initial [Particle](#particle) structure.
-
-[Init Peer ID](/docs/aqua-book/language/topology.md#init_peer_id) can always be accessed from [Aqua](#Aqua).
+[Init Peer ID](/docs/aqua-book/language/topology.md#init_peer_id) can always be accessed from [Aqua](#Aqua) or via [Marine SDK](#marine-sdk).
 
 ### Client (peer)
 
-A Fluence Peer connected to a Relay, but not participating in the Fluence Kademlia network – so not a Host. Most likely a Fluence JS Client (browser, CLI).
+A Fluence [Peer](#peer) connected to a Relay, but not participating in the Fluence Kademlia network – so not a [Host](#host). Most likely a running [Fluence JS Client](#fluence-js-client) (browser, CLI).
 
-> TODO
-
-Client peer is a [Peer](#peer) that might be not publicly accessible to the rest of the [network](#fluence-network) without a Relay, and is not advertised to the Kademlia network – e.g., a Fluence [Peer](#peer) running inside a Web Browser, or a [Worker](#worker). Clients might be represented by short-living [Peer](#peer)s implementing just request-response or even fire-and-forget behavior. Clients might not offer full capabilities of the Fluence protocol, e.g. they don't route requests to Kademlia or [Subnetwork](#subnetwork)s, don't enter [Deal](#deal)s, etc.
+Client peers, as well as [Worker](#worker)s, cannot be discovered using their respective [PeerId](#peerid)s. Developer needs to discover what [Host](#host) or [Relay](#relay) is advertized to Kademlia network, and use [Aqua](#aqua) to ensure the right path is used.
 
 ### Relay
 
-A Fluence Peer, a Host, that participates in Cloudless Functions by providing its advanced connectivity capabilities, which includes:
+A Fluence Peer, a [Host](#host), that participates in [Cloudless Function](#cloudless-function)s by providing its advanced connectivity capabilities, which includes:
 
-- Ability of a Host to send messages internally to hosted Workers
-- Ability of a Host to send messages to connected Client Peers
-
-> TODO
-
-Relay is a [Host](#host) that a [Client](#client-peer) is connected to, or a [Host](#host) that a [Worker](#worker) resides on. [Worker](#worker)s and [Client](#client-peer)s are [Peer](#peer)s not involved into Kademlia discovery. To send or receive a [Particle](#particle), they are assisted by a Relay.
+- Ability of a Host to send messages internally to hosted [Worker](#worker)s
+- Ability of a Host to send messages to connected [Client Peer](#client-peer)s
 
 To execute code on a [Peer](#peer) that's behind a Relay, [use `on peer via relay:` construct](/docs/aqua-book/language/topology#accessing-peers-via-other-peers) in [Aqua](#Aqua).
 
 ## Compute Marketplace
 
-Compute Marketplace is a set of smart contracts on the Fluence IPC Subnet where developers put Deals, Matching happens, resulting in Cloudless Deployment to occur off-chain.
-
-The Fluence marketplace is an on-chain institution comprised of a set of smart contracts that maintains provider offers to sell compute capacity, accepts developer offers to purchase compute capacity and attempts to match developer offers with suitable provider offers in a trustless manner. A successful match results in a Deal.
+The Fluence's Compute Marketplace is an on-chain institution comprised of a set of smart contracts that maintains [provider offer](#provider-offer)s to sell compute capacity, accepts [developer offer](#developer-offer)s to purchase compute capacity and attempts to [match](#matching) developer offers with suitable provider offers in a trustless manner. A successful match results in a [Deal](#deal).
 
 ### Deal
 
-Requirements of a Cloudless Deployment represented on IPC Subnet.
+A Deal governs capacity supply and demand among [provider](#provider)s and developers over a set of attributes including capacity pricing and deal duration. Deals are the result of the [Compute Marketplace](#compute-marketplace) [matching](#matching) [provider](#provider-offer) and [developer](#developer-offer) offers. Moreover, Deals contain a content-addressable reference (CID) of [Cloudless Distributive](#cloudless-distributive) that specify off-chain [subnet](#subnet)s in terms of [topology](#topology), [Scheduled](#cloudless-scheduler) [Cloudless Function](#cloudless-function)s, [Compute Function](#compute-function)s, and initial data.
 
-A Deal governs capacity supply and demand among providers and developers over a set of attributes including capacity pricing and deal duration. Deals are the result of the IPC marketplace matching provider and developer offers. Moreover, Deals contain the immutable reference data that specify (define?) off-chain subnetworks in terms of topology, duration and application (function?) homogeneity (type?) and provide the event data necessary for providers to host the developer’s compute artifacts ready for invocation. Hence, a Deal is the necessary condition for the trustless provisioning, execution and billing of Fluence Cloudless Compute.
-
-> TODO
-
-Deal is a description of a job that a customer is willing to run on the [Fluence network](#fluence-network). It contains a Content Identifier (CID) that points to [Service](#service)s and [Spell](#spell)s expected to run as the Deal Subnet [Worker](#worker)s. Moreover, Deal describes payment options, desired Subnet size, and the [effector module](#effector-module)(s) required for [Peer](#peer)s to join the Deal.
-
-To join the Deal, a [PAT](#provider-access-token-pat) must be created by [Provider](#provider).
+Hence, a Deal is the necessary condition for the trustless provisioning, execution and billing of Fluence Cloudless Compute.
 
 ### Provider
 
-An organization that participates in the Fluence Protocol by providing hardware resources for use.
-
-The Fluence protocol is open and permissionless and open to all providers. In order to be able to participate in capacity rewards, a provider needs to have delegated stake for their capacity commitments and generate Proofs of Capacity.
-
-> TODO
-
-Provider is an agent that operates [Peer](#peer)s in the [network](#fluence-network) identified by a public key, holding private key to sign blockchain transactions when entering [Deal](#deal)s. Provider generates [PAT](#provider-access-token-pat)s, fetches [PATE](#pat-envelope-pate)s from [PAT](#provider-access-token-pat)s, uses them to issue [PDT](#peer-deal-token-pdt)s for Peers and therefore to assign them to [Deal](#deal)s.
+An organization that participates in the [Fluence Protocol](#fluence-protocol) by providing hardware resources for use.
 
 ### Matching
 
-The process of mapping a Deal with its requirements and Offers with its capabilities, resulting in Workers allocation on particular Hosts.
+The process of mapping a Developer Offer with its requirements and Provider Offers with its capabilities, resulting in assigning [Worker](#worker) allocations on particular [Host](#host)s – described inside a [Deal](#deal).
 
 ### Offer
 
-Market Offer is a description of capabilities. Offer must present a Capacity Commitment and send Proofs of Capacity to participate in the Matching process, so only PoC providers are eligible to provide capacity to the network, staking is not enough.
-
 #### Provider Offer
 
-A provider offer includes the CU capacity, provider metadata, such as data center attributes, desired revenue, etc. for hosting a developer’s Cloudless Distributive.
+Provider Offer is a description of capabilities. In order to participate in the [Matching](#matching) process, Offer must present a [Capacity Commitment](#capacity-commitment) and send [Proofs of Capacity](#proof-of-capacity), so only PoC providers are eligible to provide capacity to the network, staking is not enough.
+
+A provider offer includes the [CU](#compute-unit) capacity, provider metadata, such as data center attributes, desired revenue, etc.
 
 #### Developer Offer
 
-The developer’s Cloudless Distributive combined with their capacity selection criteria, such as payment offer, data center type, duration, payment offer, etc., and an (USDC) escrow payment
-
-> TODO
-
-The description, capabilities and expected payment for a developer’s deployment plan. In order to be able to register an offer with the marketplace, the developer needs to escrow their payment.
+The developer’s [Cloudless Distributive](#cloudless-distributive) combined with their capacity selection criteria, such as payment offer, data center type, duration, payment offer, etc., and an escrow payment
 
 ### Capacity Commitment
 
@@ -435,12 +410,10 @@ A provider can seamlessly switch their resource allocation between Proof of Capa
 
 ### Capacity Commitment Prover
 
-> TODO
-
-A process that makes Capacity Commitments. Made for Providers.
-
-A piece of software augmenting each Nox peer tasked with generating Proofs of Capacity for that/Nox’s (?) hardware zone.
+A piece of software augmenting each Nox peer tasked with generating Proofs of Capacity for Nox’s (?) hardware zone.
 
 ### Golden Particle
 
-> TODO
+Golden Particle is a Particle at some step of it's execution when Particle Data solves a puzzle and acts as a winning lottery ticket to distribute the rewards among all the participants of this Particle.
+
+Golden Particle brings sampled [Cloudless Function](#cloudless-function) executions to use [Proof of Processing](#proof-of-processing) for reward distribution.
