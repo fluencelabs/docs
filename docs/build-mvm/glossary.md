@@ -365,7 +365,7 @@ Client peers, as well as [Worker](#worker)s, cannot be discovered using their re
 
 ### Relay
 
-A Fluence Peer, a [Host](#host), that participates in [Cloudless Function](#cloudless-function)s by providing its advanced connectivity capabilities, which includes:
+A  [Host](#host), that participates in serving [Cloudless Function](#cloudless-function)s by providing its advanced connectivity capabilities, which includes:
 
 - Ability of a Host to send messages internally to hosted [Worker](#worker)s
 - Ability of a Host to send messages to connected [Client Peer](#client-peer)s
