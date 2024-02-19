@@ -47,7 +47,7 @@ const sidebars = {
         "build-mvm/concepts/fluence_functions_revisited",
         "build-mvm/concepts/marketplace",
         "build-mvm/concepts/http_gateways",
-        "build-mvm/concepts/scheduling_functions",
+        // "build-mvm/concepts/scheduling_functions",
         "build-mvm/concepts/security"
       ]
     },
@@ -87,7 +87,8 @@ const sidebars = {
         "build-mvm/how-to/securing_functions",
         "build-mvm/how-to/deploy",
         "build-mvm/how-to/monitor",
-        "build-mvm/how-to/migrate"
+        "build-mvm/how-to/migrate",
+        "build-mvm/how-to/schedule_functions"
       ]
     },
     "build-mvm/glossary",
