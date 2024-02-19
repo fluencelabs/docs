@@ -132,19 +132,19 @@ Every Particle contains an immutable header and a mutable body. The immutable he
 Particle data is an audit log of the distributed execution flow of a Particle;
 the mutable part of the [Particle](#particle) that contains [Compute Function](#compute-function) responses and [Peer](#peer) signatures.
 
-Particle data has a CRDT-like format to handle fork-join behavior when the same [Particle](#particle) is sent to several different destinations in parallel, and then is observed on third [Peer](#peer) in different states. In this case, data converges in deterministic way.
+Particle data has a CRDT-like format capable to handle fork-join behavior resulting in response data converging in a (eventually) deterministic way. Fork-join behavior in Aqua arises when the same [Particle](#particle) is executed in parallel on one or more peers.
 
 ### Pi-calculus
 
-Pi-calculus, π-calculus, process calculus is an extension of lambda calculus that takes parallel execution of processes.
+[Pi-calculus](https://en.wikipedia.org/wiki/%CE%A0-calculus), aka π-calculus, is a [process calculus](https://en.wikipedia.org/wiki/Process_calculus) that is an extension of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus) that describes the parallel execution of processes for dynamic network configurations.
 
-The [AIR](#air) and [AquaVM](#aquavm) execution model is built on top of the fundamental principles of pi-calculus, which serves as the foundation layer for these technologies.
+The [AIR](#air) and [AquaVM](#aquavm) execution model is built on fundamental principles of pi-calculus.
 
 ### Spell
 
-Spell is a single-peer representation of [Cloudless Deployment](#cloudless-deployment) used for [Cloudless Scheduler](#cloudless-scheduler). It consists of a special [Marine Service](#marine-service) and an [AIR](#air) script.
+A Spell is a single-peer representation of [Cloudless Deployment](#cloudless-deployment) used by the [Cloudless Scheduler](#cloudless-scheduler). It consists of a special [Marine Service](#marine-service) and an [AIR](#air) script.
 
-Spell script is executed periodically or based on event to run a predefined [Cloudless Functions](#cloudless-function).
+A Spell script is executed periodically or based on an event to run a predefined [Cloudless Functions](#cloudless-function).
 
 > TODO: See Spell docs here.
 
@@ -158,7 +158,7 @@ Topology is expressed and handled with the help of [Aqua](#aqua).
 
 ### Nox
 
-Nox is the reference implementation of a full-fledged [Fluence Protocol](#fluence-protocol)-compliant [Peer](#peer) capable to serve [Cloudless Deployments](#cloudless-deployment). Nox serves as a [Host](#host) for many [Workers](#worker), each Worker devoted to a distinct Deployment. Read more below.
+Nox is the reference implementation of a fully [Fluence Protocol](#fluence-protocol)-compliant [Peer](#peer) capable to serve [Cloudless Deployments](#cloudless-deployment). Nox serves as a [Host](#host) for many [Workers](#worker), where each Worker is devoted to a distinct Deployment. Read more below.
 
 #### System Services
 
@@ -168,7 +168,7 @@ Part of [Nox](#nox).
 
 #### Builtin Services
 
-Low-level [Compute Function](#compute-function)s made in peer’s native language (in case of [Nox](#nox), Rust), required to serve [Aqua](#aqua) properly. Includes math and string operations, etc. See more in [aqua-lib](https://github.com/fluencelabs/aqua-lib) repo.
+Low-level [Compute Function](#compute-function)s implemented in a peer’s native language, ie. Rust for [Nox](#nox). Builtins allow the protocol-compliant execution of [Aqua](#aqua), such a math and string operators. See more in [aqua-lib](https://github.com/fluencelabs/aqua-lib) repo.
 
 ### Marine
 
@@ -177,15 +177,15 @@ Marine is a general purpose Wasm runtime intended to execute [Compute Functions]
 It is the main way to express computations in the [Fluence Protocol](#fluence-protocol).
 
 Developers have three ways to define computations:
- - Write and use [Marine module](#marine-module)s to build a [Service](#marine-service) from them
+ - Write and use [Marine module](#marine-module)s to build a [Service](#marine-service)
  - Write and use Marine [effector module](#effector-module)s to access an external [effect](#effect), e.g. [binary](#mounted-binary) or API
- - Implement computations in Fluence [Peer](#peer)'s native language – cannot be a part of [Cloudless Deployment](#cloudless-deployment)
+ - Implement computations in Fluence [Peer](#peer)'s native language, which  **cannot** be a part of a [Cloudless Deployment](#cloudless-deployment)
  
 With Marine, computations are portable and safe for the [Provider](#provider).
 
 #### Marine Service
 
-Service is a virtual construct combining one or more [linked](#module-linking) [Marine modules](#marine-module), one of them being a [Facade Module](#facade-module) and exposing one or more [Compute Function](#compute-function)s via [Webassembly IT](#webassembly-it).
+Service is a virtual construct combining one or more [linked](#module-linking) [Marine modules](#marine-module), one of them being a [Facade Module](#facade-module), and exposing one or more [Compute Function](#compute-function)s via [Webassembly IT](#webassembly-it).
 
 Service:
 - Can be called from [Aqua](#Aqua) as a part of [Cloudless Function](#cloudless-function)
