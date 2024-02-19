@@ -15,7 +15,7 @@ Fluence Protocol is an open, off-chain protocol that [matches](#matching) resour
 
 ### Fluence Blockchain
 
-Fluence Blockchain is a L2/L3 application-specific EVM-compatible blockchain dedicated to the [Compute Marketplace](#compute-marketplace), which includes both [Deployments](#cloudless-deployment) and [Capacity Commitments](#capacity-commitment). As of now, Fluence Blockchain is bridged with Filecoin and Ethereum Mainnet.
+Fluence Blockchain is a L2/L3 application-specific EVM-compatible blockchain dedicated to the [Compute Marketplace](#compute-marketplace), which includes both [Deployments](#cloudless-deployment) and [Capacity Commitments](#capacity-commitment). As of now, Fluence Blockchain is bridged with Filecoin and Ethereum Mainnets.
 
 ### Fluence CLI
 
