@@ -24,7 +24,7 @@ Fluence CLI is the main entry point into a [Fluence App](#fluence-app) lifecycle
  - Develop or reuse distributed [Cloudless Functions](#cloudless-function) to run in the [Fluence Network](#fluence-network)
  - Configure [Cloudless Scheduler](#cloudless-scheduler) to run [Cloudless Functions](#cloudless-function)
  - Prepare [Cloudless Distributive](#cloudless-distributive)
- - Using [Compute Marketplace](#compute-marketplace), make a [Cloudless Deployment](#cloudless-deployment)
+ - Use [Compute Marketplace](#compute-marketplace), make a [Cloudless Deployment](#cloudless-deployment)
  - Run, use, upgrade, your [Fluence App](#fluence-app)
 
 ### Fluence App
