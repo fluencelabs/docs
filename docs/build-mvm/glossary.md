@@ -56,7 +56,7 @@ Prototype for a [Cloudless Deployment](#cloudless-deployment). Includes:
     - [Cloudless Scheduler](#cloudless-scheduler) for [Cloudless Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with trigger configuration
 - [Cloudless Deployment](#cloudless-deployment) configuration (needed resources such as [effectors](#effector-module), replication factor – desired size of a [Subnet](#subnet))
 
-Cloudless Distributive is structured with IPLD and uploaded to the storage for future CID-addressable use.
+Cloudless Distributive is structured with [IPLD](https://ipld.io/) resulting in a unique [CID](https://docs.ipfs.tech/concepts/content-addressing/) and uploaded to network storage for future content-addressable retrieval. 
 
 ### Cloudless Scheduler
 
