@@ -53,7 +53,7 @@ Prototype for a [Cloudless Deployment](#cloudless-deployment). Includes:
 
 - [Worker Definition](#worker-definition), that consists of:
     - [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
-    - [Scheduled Cloudless](#cloudless-scheduler) [Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with triggers config
+    - [Cloudless Scheduler](#cloudless-scheduler) for [Cloudless Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with trigger configuration
 - [Cloudless Deployment](#cloudless-deployment) configuration (needed resources such as [effectors](#effector-module), replication factor – desired size of a [Subnet](#subnet))
 
 Cloudless Distributive is structured with IPLD and uploaded to the storage for future CID-addressable use.
