@@ -33,7 +33,7 @@ Fluence App is the actual end-user application that includes [Cloudless Deployme
 
 ### Fluence JS Client
 
-A JS library that enables full-fledged, bi-direction interactions between JS applications (both node.js and browser-based, Electron.js is also an option) and [Fluence Network](#fluence-network). 
+A JS library that enables full-fledged, bi-directional interactions between JS applications (both node.js and browser-based, Electron.js is also an option) and [Fluence Network](#fluence-network). 
 
 Fluence JS [Client](#client-peer) is embedded into [Fluence CLI](#fluence-cli).
 
@@ -62,19 +62,19 @@ Cloudless Distributive is structured with [IPLD](https://ipld.io/) resulting in 
 
 Cloudless Scheduler triggers a [Cloudless Function](#cloudless-function) without [client](#client-peer) interaction, based on events. Implemented as a part of [Cloudless Deployment](#cloudless-deployment). See [Spells](#spell) for low level details.
 
-Kinds of triggers that the Scheduler is capable to handle:
+Trigger types a Scheduler is capable to handle:
 - time-based, such as cronjobs
 - event-based, such as chain events
 
 ### Proofs
 
-[Fluence Protocol](#fluence-protocol) enables a set of Proofs that drives its economy model.
+[Fluence Protocol](#fluence-protocol) enables a set of Proofs that drives its cryptonomic model.
 
 #### Proof of Capacity
 
 Proof that a compute [peer](#peer) ([Host](#host)) has certain capacity allocated and available for [Cloudless Deployments](#cloudless-deployment). Every [Host](#host) must provide Proofs of Capacity in order to participate in [Deployments](#cloudless-deployment).
 
-Conducted by [Capacity Commitments Prover (CCP)](#capacity-commitment-prover).
+Proofs generation is managed by the [Capacity Commitment Prover (CCP)](#capacity-commitment-prover).
 
 #### Proof of Processing
 
@@ -86,9 +86,9 @@ See [Golden Particles](#golden-particle) to learn more about Proof of Processing
 
 #### Proof of Execution
 
-Proof of [Compute Function](#compute-function) – a single function execution that runs on a [Peer](#peer), verifies that computation was done correctly.
+Proof of [Compute Function](#compute-function) i.e., a single function execution that runs on a [Peer](#peer), that attests that computation was done correctly.
 
-PoE is pluggable, so that different workloads can benefit from decentralization of compute. The options might include:
+PoE is pluggable, so that different workloads can benefit from the decentralization of compute. The options might include:
 - zk
 - TEE
 - Verification of cryptographic function execution for MPC
