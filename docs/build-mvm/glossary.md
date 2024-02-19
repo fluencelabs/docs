@@ -19,7 +19,7 @@ Fluence Blockchain is a L2/L3 application-specific EVM-compatible blockchain ded
 
 ### Fluence CLI
 
-Fluence CLI is the main entry point into [Fluence App](#fluence-app) lifecycle: 
+Fluence CLI is the main entry point into a [Fluence App](#fluence-app) lifecycle: 
  - Develop or reuse [Compute Functions](#compute-function)s
  - Develop or reuse distributed [Cloudless Functions](#cloudless-function) to run in the [Fluence Network](#fluence-network)
  - Configure [Cloudless Scheduler](#cloudless-scheduler) to run [Cloudless Functions](#cloudless-function)
