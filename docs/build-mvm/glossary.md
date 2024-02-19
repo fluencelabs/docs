@@ -236,7 +236,7 @@ Fluence provides a [Rust SDK](#marine-sdk) but supports any compiled Wasm module
 
 #### Webassembly IT
 
-Webassembly Interface Types (Wasm IT, WIT) is a part of the Component model proposal that allows using complex types, like strings, structs, enums and arrays, in the Wasm modules API.
+Webassembly Interface Types (Wasm IT, WIT) is a part of the Component model proposal that allows using complex types, like strings, structs, enums and arrays, in a Wasm module's API.
 
 #### WASI
 
@@ -244,7 +244,7 @@ Webassembly Interface Types (Wasm IT, WIT) is a part of the Component model prop
 
 ### Managed Effects
 
-Managed Effects is an approach to solve a problem:
+Managed Effects is an approach to solve the following problem:
 
 - Compute without effects is useless
 - Compute with effects might be dangerous
@@ -257,17 +257,17 @@ Developer can access this effect safely using [Module Linking](#module-linking).
 
 #### Effector Module
 
-A [Marine Module](#marine-module) that implements [Managed Effects](#managed-effects) approach, providing access to an [Effect](#effect) in a safe and useful way. Effector is what developer can use via [Module Linking](#module-linking).
+A [Marine Module](#marine-module) that implements [Managed Effects](#managed-effects) providing access to an [Effect](#effect) in a safe and useful way. An Effector is what a developer can use via [Module Linking](#module-linking).
 
 Effector modules have a special section in their config that describes binary imports, socket imports, or similar things.
 
 #### Effect
 
-What [Effector Module](#effector-module) actually executes on the host system, external to [Marine](#marine). Examples: curl, ipfs, websocket.
+What an [Effector Module](#effector-module) actually executes on the host system and is external to [Marine](#marine), such as curl, IPFS, Ceramic or websocket.
 
 #### Mounted Binary
 
-Mounted Binary is a special interface that provides an [effector module](#effector-module) with the capability to call any external binary with the provided set of arguments and obtain a result of this call. It makes it possible to integrate almost any other software (such as IPFS, Ceramic, and databases) in the Fluence ecosystem.
+A Mounted Binary is a special interface that provides an [effector module](#effector-module) with the capability to call any binary hosted by a peer with the provided set of arguments to obtain a result. It makes it possible to integrate almost any other software (such as IPFS, Ceramic, and databases) in the Fluence ecosystem.
 
 ### Particle File Vault
 
@@ -277,7 +277,7 @@ Particle File Vault is expected to be used to pass data between [Compute Functio
 
 ### Compute Function
 
-A single computational action executed on a single peer. [Marine Service](#marine-service)s is the default and preferred way to deliver [Compute Function](#compute-function)s. Other options are [builtins](#builtin-services), and native code – e.g. Javascript callbacks for [JS client](#fluence-js-client).
+A single computational action executed on a single peer. [Marine Service](#marine-service)s is the default and preferred way to deliver [Compute Function](#compute-function)s. Other options are [builtins](#builtin-services), and native code, e.g. Javascript callbacks for [JS client](#fluence-js-client).
 
 ### Compute Unit
 
@@ -292,7 +292,7 @@ Tetraplet is a data structure describing the origin of an argument to a function
 - `function_name`
 - `functor`
 
-Tetraplets are the mean to check and enforce distributed security invariants of a function by putting restrictions on its arguments, e.g.: the argument “is_authorized” must be provided by a function “check_auth” from “security” [Compute Function](#compute-function) run on the same [Peer](#peer). Both [Marine SDK](#marine-sdk) and [Fluence JS Client](#fluence-js-client) provides access to tetraplets.
+Tetraplets are the means to check and enforce distributed security invariants of a function by putting restrictions on its arguments, e.g.: the argument “is_authorized” must be provided by a function “check_auth” from “security” [Compute Function](#compute-function) run on the same [Peer](#peer). Both [Marine SDK](#marine-sdk) and [Fluence JS Client](#fluence-js-client) provides access to tetraplets.
 
 Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
 
@@ -307,13 +307,13 @@ Fluence reference peers are comprised of the following components:
 - A pool of [AquaVM](#aquavm) processes to handle [Particle](#particle)s
 - A pool of [Marine Service](#marine-service)s ready to be called from these [Particle](#particle)s
 - A scheduler for [Spell](#spell)s
-- A pool of [Worker](#worker)s to logically isolate [Marine Service](#marine-service)s and [Spell](#spell)s to avoid interference
+- A pool of [Worker](#worker)s to logically isolate [Marine Service](#marine-service)s and [Spell](#spell)s for security and locked resource availability
 
-Fluence peers are identified by [Peer ID](#peerid) which is derived from the Peer's Public Key.
+Fluence peers are identified by an unique [Peer ID](#peerid) derived from the Peer's Public Key.
 
 ### PeerId
 
-Logical address of a segregated [Compute Function](#compute-function)s execution environment. Derived from a Public key, used to verify Peer’s signatures which is a part of [Proof of Processing](#proof-of-processing) verified by [AquaVM](#aquavm) on every step of a [Cloudless Function](#cloudless-function).
+Logical address of a segregated [Compute Function](#compute-function)s execution environment. It is derived from a Public key and used to verify a Peer’s signatures, which itself is a part of [Proof of Processing](#proof-of-processing) verified by [AquaVM](#aquavm) for every step of a [Cloudless Function](#cloudless-function).
 
 ### Host
 
