@@ -317,7 +317,7 @@ Logical address of a segregated [Compute Function](#compute-function)s execution
 
 ### Host
 
-A Fluence [Peer](#peer) that participates in the Fluence’s Kademlia network. [Nox](#nox) is the reference implementation.
+A Fluence [Peer](#peer) that participates in Fluence’s [Kademlia](https://en.wikipedia.org/wiki/Kademlia) network. [Nox](#nox) is the reference peer implementation.
 
 Hosts are capable to act as [Relay](#relay)s for [Worker](#worker)s and [Client](#client-peer)s.
 
@@ -331,15 +331,15 @@ A single instance of a [Cloudless Deployment](#cloudless-deployment): [Compute U
 
 So [Cloudless Deployment](#cloudless-deployment) forms or many Workers, each having the same code installed, the same behavior expected.
 
-Worker is a part of [Peer](#peer)'s resources that, together with other Workers, constitutes a Subnet, handles the [Deal](#deal), and isolates some resources. It has its own keypair and [Peer ID](#peerid).
+A Worker is a part of a [Peer](#peer)'s resources that, together with other Workers, constitutes a [Subnet](#subnet), handles the [Deal](#deal), and isolates some resources. It has its own keypair and [Peer ID](#peerid).
 
 #### Worker Definition
 
-Worker Definition is built with the help of [Fluence CLI](#fluence-cli), and used by [Nox](#nox) to deploy and update a [Worker](#worker). Part of [Cloudless Distributive](#cloudless-distributive), registered in [Deal](#deal)s.
+A Worker Definition is built with the help of [Fluence CLI](#fluence-cli), and used by [Nox](#nox) to deploy and update a [Worker](#worker). It is part of [Cloudless Distributive](#cloudless-distributive) and registered in [Deal](#deal)s.
 
 Consists of:
 - [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
-- [Scheduled Cloudless](#cloudless-scheduler) [Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with triggers config
+- [Scheduled Cloudless](#cloudless-scheduler) [Functions](#cloudless-function) (in form of compiled [AIR](#air) files) with trigger configurations
 
 #### Subnet
 
@@ -353,13 +353,13 @@ A HTTP-facing Fluence [Client Peer](#client-peer) that is capable of running [Cl
 
 ### Init Peer
 
-The [Peer](#peer) that initiates a [Cloudless Function](#cloudless-function) – creates a [Particle](#particle) and sends it over [Fluence Protocol](#fluence-protocol).
+The [Peer](#peer) that initiates a [Cloudless Function](#cloudless-function) by creating a [Particle](#particle) and sending it over [Fluence Protocol](#fluence-protocol).
 
-[Init Peer ID](/docs/aqua-book/language/topology.md#init_peer_id) can always be accessed from [Aqua](#Aqua) or via [Marine SDK](#marine-sdk).
+[Init Peer ID](/docs/aqua-book/language/topology.md#init_peer_id) can always be accessed from [Aqua](#Aqua) or via the [Marine SDK](#marine-sdk).
 
 ### Client (peer)
 
-A Fluence [Peer](#peer) connected to a Relay, but not participating in the Fluence Kademlia network – so not a [Host](#host). Most likely a running [Fluence JS Client](#fluence-js-client) (browser, CLI).
+A Fluence [Peer](#peer) connected to a Relay but is not participating in the Fluence Kademlia network, i.e., not a [Host](#host). Most likely a running [Fluence JS Client](#fluence-js-client) (browser, CLI).
 
 Client peers, as well as [Worker](#worker)s, cannot be discovered using their respective [PeerId](#peerid)s. Developer needs to discover what [Host](#host) or [Relay](#relay) is advertized to Kademlia network, and use [Aqua](#aqua) to ensure the right path is used.
 
@@ -410,10 +410,10 @@ A provider can seamlessly switch their resource allocation between Proof of Capa
 
 ### Capacity Commitment Prover
 
-A piece of software augmenting each Nox peer tasked with generating Proofs of Capacity for Nox’s (?) hardware zone.
+A piece of software augmenting each [Nox](#nox) peer tasked with generating [Proofs of Capacity](#proof-of-capacity) for that Nox’s hardware zone.
 
 ### Golden Particle
 
-Golden Particle is a Particle at some step of it's execution when Particle Data solves a puzzle and acts as a winning lottery ticket to distribute the rewards among all the participants of this Particle.
+Golden Particle is a Particle at some step of its execution when Particle Data solves a cryptographic puzzle and acts as a winning lottery ticket to distribute the rewards among all the participants contributing to the execution of this Particle.
 
-Golden Particle brings sampled [Cloudless Function](#cloudless-function) executions to use [Proof of Processing](#proof-of-processing) for reward distribution.
+A Golden Particle represents sampled [Cloudless Function](#cloudless-function) executions used by the [Proof of Processing](#proof-of-processing) for reward distribution.
