@@ -89,10 +89,10 @@ See [Golden Particles](#golden-particle) to learn more about Proof of Processing
 Proof of [Compute Function](#compute-function) i.e., a single function execution that runs on a [Peer](#peer), that attests that computation was done correctly.
 
 PoE is pluggable, so that different workloads can benefit from the decentralization of compute. The options might include:
-- zk
-- TEE
+- zero knowledge proofs (ZKP)
+- Trusted Execution Environments (TEE)
 - Verification of cryptographic function execution for MPC
-- Repetition for [pure](#pure-module) code
+- Repeated execution of [pure](#pure-module) code
 - Consensus for external [effects](#effect), [Managed Effects](#managed-effects)
 - and more
 
@@ -105,17 +105,17 @@ AIR contains a very limited set of instructions, like `(seq A B)` or `(par A B)`
 
 ### Aqua
 
-Aqua is the Fluence’s language for choreography and orchestration of distributed [Cloudless Functions](#cloudless-function).
+Aqua is Fluence’s language for the choreography of distributed [Cloudless Function](#cloudless-function)s and orchestration of local functions.
 Aqua describes distributed control flow in developer-friendly terms, and delegates computations to [Compute Function](#compute-function)s on particular [Peer](#Peer)s.
-Aqua follows [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Cloudless Functions](#cloudless-function). Read more in [Aqua Book](/docs/aqua-book/introduction.md).
+Aqua follows the [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Cloudless Functions](#cloudless-function). Read more in the [Aqua Book](/docs/aqua-book/introduction.md).
 
 ### AquaVM
 
-Interprets [Aqua IR](#air) to orchestrate local function calls or conduct choreography of the [Cloudless Function](#cloudless-function). Checks and provides all the Cloudless Function [proofs](#proof-of-processing).
+Interprets [Aqua IR](#air) to orchestrate local function calls or choreograph [Cloudless Function](#cloudless-function)s. Checks and provides all the Cloudless Function [proofs](#proof-of-processing).
 
 AquaVM is a State Machine that takes a [Particle](#particle) received by a particular [Peer](#peer), interprets an [AIR](#air) script of this [Particle](#particle) along with the [Particle Data](#particle-data), and gives the [Peer](#peer) a set of commands: what [Compute Function](#compute-function)s to call locally (if any), to what [Peer](#peer)s to send this [Particle](#particle) to (if any), and how the [Particle Data](#particle-data) should be updated (if should).
 
-AquaVM takes its place for [Proof of Processing](#proof-of-processing), running on-chain to verify the [Particle](#particle), identify [Deal](#deal)s involved, and distribute the rewards.
+AquaVM enables [Proof of Processing](#proof-of-processing) by also running on-chain to verify [Particle](#particle)s, identify the [Deal](#deal)s involved, and distribute the rewards.
 
 ### Aquamarine
 
@@ -123,14 +123,14 @@ Aquamarine is a technology stack that enables the off-chain [Fluence Protocol](#
 
 ### Particle
 
-Particle is a network package that forms a single-use software-defined network (SDN) for a single request of a single [AIR](#air) script.
+A Particle is a network package that forms a single-use software-defined network (SDN) for a single request of a single [AIR](#air) script.
 
-Particle contains an immutable header (with an [AIR](#air) script and some metadata, including the [initiator](#init-peer)'s signature) and a [mutable body](#particle-data) (results of [compute function](#compute-function) calls triggered by the script execution, along with the signatures of involved [Peer](#peer)s).
+Every Particle contains an immutable header and a mutable body. The immutable header includes an [AIR](#air) script and some metadata including the [initiator](#init-peer)'s signature; the [mutable body](#particle-data) contains the results of [compute function](#compute-function) calls triggered by the script execution along with the signatures of involved [Peer](#peer)s.
 
 ### Particle Data
 
 Particle data is an audit log of the distributed execution flow of a Particle;
-a mutable part of the [Particle](#particle) that contains [Compute Function](#compute-function) responses and [Peer](#peer) signatures.
+the mutable part of the [Particle](#particle) that contains [Compute Function](#compute-function) responses and [Peer](#peer) signatures.
 
 Particle data has a CRDT-like format to handle fork-join behavior when the same [Particle](#particle) is sent to several different destinations in parallel, and then is observed on third [Peer](#peer) in different states. In this case, data converges in deterministic way.
 
