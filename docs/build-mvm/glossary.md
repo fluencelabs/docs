@@ -189,14 +189,14 @@ Service is a virtual construct combining one or more [linked](#module-linking) [
 
 Service:
 - Can be called from [Aqua](#Aqua) as a part of [Cloudless Function](#cloudless-function)
-- May be a Marine service, in this case it's a set of [Module](#marine-module)s linked together
+- May be a Marine service, in this case it's a set of linked [Module](#marine-module)s 
 - May be implemented as a [Peer](#peer) native functionality, see [Builtins](#builtin-services) as an example. This includes JavaScript callbacks provided to [Fluence JS Client](#fluence-js-client)
 
 Service is identified by a Service ID that's bound to the Peer ID that provides this service.
 
-Service exposes one or more [Compute Function](#compute-function)s. So finally to call a function developer needs to provide [peer id](#peerid), service id, and function name.
+Service exposes one or more [Compute Function](#compute-function)s and a developer needs to provide the [peer id](#peerid), service id, and function name to invoke the function.
 
-Service function calls within the [Fluence protocol](#fluence-protocol) are possible only via [AIR](#air) instructions – from developer perspective, it means using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli) or another [Client](#client-peer).
+Service function calls within the [Fluence protocol](#fluence-protocol) are possible only via [AIR](#air) instructions – from a developer perspective, this means using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli) or another [client peer](#client-peer).
 
 #### Marine SDK
 
@@ -204,19 +204,19 @@ Service function calls within the [Fluence protocol](#fluence-protocol) are poss
 
 #### Marine JS
 
-Implementation of [Marine](#marine) running on JS, includes [Marine SDK](#marine-sdk) support and [Module Linking](#module-linking). [Marine Modules](#marine-module), [Pure](#pure-module) ones, can run in any Marine setup.
+Implementation of [Marine](#marine) running on JS. This  includes support for [Marine SDK](#marine-sdk) and [Module Linking](#module-linking). Only [Pure](#pure-module) [module](#marine-modules) can run in JS Marine.
 
 #### Marine Module
 
-Marine Module is a single .wasm file compiled with [Wasm IT](#webassembly-it) support, e.g., using Rust language with [Marine SDK](#marine-sdk).
+Marine Module is a single .wasm file compiled with [Wasm IT](#webassembly-it) support, e.g., using Rust language with the [Marine SDK](#marine-sdk).
 
 #### Module Linking
 
-Modules can use each other using shared nothing linking scheme.
+Modules can use each other using the shared nothing linking scheme.
 
 #### Pure Module
 
-[Module](#marine-module) with no external [effects](#effect) (including [WASI](#wasi)) that takes only inputs and maybe an internal sandboxed state, produces new state and outputs. May have import declarations of other modules – for [Module Linking](#module-linking).
+[Module](#marine-module) with no external [effects](#effect) (including [WASI](#wasi)) that takes only inputs and maybe an internal sandboxed state, and produces new state and outputs. May have (foreign function) interface declarations for other modules via [Module Linking](#module-linking).
 
 #### Wasi Module
 
@@ -224,15 +224,15 @@ A [Marine Module](#marine-module) that uses basic [WASI](#wasi) effects such as 
 
 #### Facade Module
 
-A [Module](#facade-module), that is the only module accessible from the outside – it constitutes API of a [Service](#marine-service), a set of [Compute Function](#compute-function) declarations.
+A [Module](#facade-module), that is the only module accessible from the outside – it constitutes the API of a [Service](#marine-service) exposing a set of [Compute Function](#compute-function) declarations.
 
-For modules that are intended to be shared as API, developers often need to write a Facade module to protect internal APIs from unauthorized access, enforce business-invariants, etc.
+For modules that are intended to be shared as an API, developers often need to write a Facade module to protect internal APIs from unauthorized access, enforce business-invariants, etc.
 
 #### Webassembly (Wasm)
 
-[Webassembly](https://webassembly.org/) is a binary instruction format for a stack-based virtual machine. Wasm is intended to provide a memory-safe, sandboxed execution environment with a flexible set of settings, such as memory size and allowed imports. There are a lot of languages (Rust, C/C++, tinyGo) that support Wasm as a compilation target. 
+[Webassembly](https://webassembly.org/) is a binary instruction format for a stack-based virtual machine. Wasm is intended to provide a memory-safe, sandboxed execution environment with a flexible set of settings, such as memory size and allowed imports. Multiple languages, such as Rust, C/C++ or tinyGo, support the Wasm compile target. 
 
-Fluence provides an [SDK for Rust](#marine-sdk), but supports any compiled Wasm module following [particular conventions](/docs/marine-book/marine-rust-sdk/module-abi.md).
+Fluence provides a [Rust SDK](#marine-sdk) but supports any compiled Wasm module following [particular conventions](/docs/marine-book/marine-rust-sdk/module-abi.md).
 
 #### Webassembly IT
 
