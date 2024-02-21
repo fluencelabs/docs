@@ -77,9 +77,9 @@ Tested on:
         
         You can modify the name of the main function to any valid name, but you also need to modify the name in the `spell.yaml` configuration file.
         
-    3. To write logs in the [Spell Log Storage](#spell-log-api), you need to resolve [link to the services resolution in aqua] the Spell Service that belongs to the executing spell using the Spell’s Name.
+    3. To write logs in the [Spell Log Storage](#spell-logs-api), you need to resolve [link to the services resolution in aqua] the Spell Service that belongs to the executing spell using the Spell’s Name.
         
-        Note that you have several options to resolve the correct spell service, which we’ll explore later [link]. 
+        Note that you have several options to resolve the correct spell service, which we’ll explore [later](#how-to-resolve-your-spell-service).
         
     4. Here, we call the function provided by the Spell Service to store the message in the logs. This message will be added to the logs each spell runs. 
 4. The spell configuration is located in the `spell.yaml` file and defines several important aspects of the spell execution. Let’s look at the content of the default spell configuration file:
