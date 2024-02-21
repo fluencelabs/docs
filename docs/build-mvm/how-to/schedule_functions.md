@@ -9,6 +9,8 @@ Tested on:
 
 ## Create your first Spell: step-by-step
 
+First let's take a look at how to create a simple spell from the Fluence CLI template.
+
 1. Initialize a project with `fluence init -t minimal` 
     
     The spell library dependency should be added to the `fluence.yaml` configuration file automatically:
@@ -22,7 +24,7 @@ Tested on:
       "@fluencelabs/spell": 0.6.9
     ```
     
-2. Initialize a new spell template with `fluence spell new myFirstSpell`. Type `Yes` , or just press `return` , to add the spell to the default deal [link to the page explaining deals].
+2. Initialize a new spell template with `fluence spell new myFirstSpell`.
     
     This command modifies the `fluence.yaml` file, adding the spell to the list of the project’s spells and the default deal we deploy later.
     
@@ -72,8 +74,8 @@ Tested on:
     
     Let’s review the most important parts of the file:  
     
-    1. Importing the Spell Service API [link to the API section] is required to use logging capabilities, private spell storage, etc. Note that you can implement spells without ever interacting with the Spell Service if you don’t need the features it provides.
-    2. The `spell` function here is an entry point to the spell’s execution. The main function has several features we explore in the later sections [link].
+    1. Importing the (Spell Service API)[#how-to-resolve-your-spell-service] is required to use logging capabilities, private spell storage, etc. Note that you can implement spells without ever interacting with the Spell Service if you don’t need the features it provides.
+    2. The `spell` function here is an entry point to the spell’s execution. The main function has several features we explore in the [later](#inital-arguments) sections.
         
         You can modify the name of the main function to any valid name, but you also need to modify the name in the `spell.yaml` configuration file.
         
@@ -103,7 +105,7 @@ Tested on:
         1. `periodSec` defines how *often* your spell is run. `periodSec: 60` means that the spell is run every minute. 
         2. `endDelaySec`defines when the spell must be stopped from execution. `endDelaySec: 1800` means that the spell will no longer be periodically executed in 30 minutes.
             
-            ::warn This delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ::
+            **Warning:** this delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ::
             
         
         You can use other settings to tune your spells, which will be explored [later](#spell-configuration-in-fluence-cli).
@@ -558,7 +560,7 @@ The Spell Service protects spell data from **writing** from arbitrary sources. T
     For example, a system spell can write to the keys `h_hello_from_host`  or `hw_any_valid_name`.
     
 
-However**, everyone can read** anything from the spell’s storage, so you must not store in the KV private information like keys. You should consider using other methods[link to the methods].   
+However**, everyone can read** anything from the spell’s storage, so you must not store in the KV private information like keys. You should consider using other methods.   
 
 ### Spell Logs API
 
@@ -773,7 +775,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
 
 ### Other Spell Service API Functions
 
-If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling [link], and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21)
+If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling, and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21)
 
 ## Tips and Tricks
 
