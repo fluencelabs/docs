@@ -103,7 +103,7 @@ Tested on:
         1. `periodSec` defines how *often* your spell is run. `periodSec: 60` means that the spell is run every minute. 
         2. `endDelaySec`defines when the spell must be stopped from execution. `endDelaySec: 1800` means that the spell will no longer be periodically executed in 30 minutes.
             
-            ::warning This delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ::
+            ::warn This delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ::
             
         
         You can use other settings to tune your spells, which will be explored [later](#spell-configuration-in-fluence-cli).
