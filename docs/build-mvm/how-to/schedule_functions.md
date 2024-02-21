@@ -1,4 +1,4 @@
-# Spells How-To V2
+# Cloudless Scheduler
 
 Tested on:
 
@@ -55,7 +55,7 @@ Tested on:
     
 3. The spell script is located in the `spell.aqua` file:
     
-    ```haskell
+    ```aqua
     -- the Fluence CLI version is 0.13.5
     
     aqua MyFirstSpell
@@ -254,7 +254,7 @@ In this example, the spell will start executing in approximately a day after the
     
     The spell that uses these values can be like this:
     
-    ```haskell
+    ```aqua
     aqua MyFirstSpell
     
     export spell
@@ -314,7 +314,7 @@ You can find the actual Spell Service API for your version [here](https://www.np
 
 In the template example, we saw the way to find the spell service that belongs to the spell script:
 
-```haskell
+```aqua
 func spell():
    Spell "myFirstSpell"
 ```
@@ -323,14 +323,14 @@ Here, we use the spell name or alias [link to the concept of aliases] to find th
 
 1. Use `spell_id` of your spell, automatically available as an argument of the main function of your spell:
     
-    ```haskell
+    ```aqua
     func spell(spell_id: string):
     	Spell spell_id
     ```
     
 2. Use reserved names `"spell"` or `"self"`:
     
-    ```haskell
+    ```aqua
     func spell():
     	Spell "spell"
     ```
@@ -345,7 +345,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
 - strings
     - API
         
-        ```haskell
+        ```aqua
         data StringValue:
           -- The stored value, an empty string if the success isn't true or the value is absent
           value: string
@@ -365,7 +365,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
     - Example
         
-        ```haskell
+        ```aqua
         aqua MyFirstSpell
         
         export spell
@@ -388,7 +388,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
         - Output
             
-            ```haskell
+            ```aqua
             $ fluence deal logs dealName myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
             Connected
@@ -402,7 +402,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
 - `u32` numbers
     - API:
         
-        ```haskell
+        ```aqua
         data U32Value:
           -- The stored value, zero if the success isn't true or the value is absent
           value: u32
@@ -420,7 +420,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
     - Example
         
-        ```haskell
+        ```aqua
         aqua MyFirstSpell
         
         export spell
@@ -444,7 +444,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
         - Output
             
-            ```haskell
+            ```aqua
             $ fluence deal logs dealName myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWDd7zwsdYart7z9MQ2yEagjafPHLxbzNkNP7wYxJxvKiN
             Connected
@@ -459,7 +459,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
 - lists of `strings`
     - API
         
-        ```haskell
+        ```aqua
         data StringListValue:
           -- List of strings stored by the given key, empty if there's no such key 
           value: []string
@@ -480,7 +480,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
     - Example
         
-        ```haskell
+        ```aqua
         aqua MyFirstSpell
         
         export spell
@@ -503,7 +503,7 @@ The storage is presented as an extended Key-Value dictionary where you can store
         
         - Output
             
-            ```haskell
+            ```aqua
             $ fluence deal logs dealName myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
             Connected
@@ -566,7 +566,7 @@ The Spell Service also provides additional storage for logs. The storage is rest
 
 - API
     
-    ```haskell
+    ```aqua
     data Log:
       -- when the log was created
       timestamp: u64
@@ -590,7 +590,7 @@ The Spell Service also provides additional storage for logs. The storage is rest
     
     Note that the spell that just writes to its logs is the default template created by the Fluence CLI. Here’s another — though almost identical — way to write a simple spell with logging: 
     
-    ```haskell
+    ```aqua
     aqua MyFirstSpell
     
     export spell
@@ -670,7 +670,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
 
 - API
     
-    ```haskell
+    ```aqua
     
     data MailboxMessage:
       -- How put the message into the mailbox
@@ -708,7 +708,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     
     The Spell Script:
     
-    ```haskell
+    ```aqua
     aqua MyFirstSpell
     
     export spell
@@ -730,7 +730,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     
     We can put the message ourselves via Fluence CLI. Add this into your `src/aqua/main.aqua` :
     
-    ```haskell
+    ```aqua
     aqua Main
     
     import "@fluencelabs/aqua-lib/builtin.aqua"
@@ -785,7 +785,7 @@ TBD: not now :c
 
 Although the Spell Storage API mainly provides functions for storing strings, it’s possible to store any object using Nox JSON builtins:
 
-```haskell
+```aqua
 service Json("json"):
    -- Parse the given string into a JSON object
    parse(str: string) -> ⊤
@@ -797,7 +797,7 @@ Note that this service isn’t in the aqua-lib since it’s too generic, althoug
 
 To parse a specific object, you need to provide a service that references the `“json”` builtin and the `parse` function returning the required type:
 
-```haskell
+```aqua
 data MyObject:
    name: string
 
@@ -808,7 +808,7 @@ service MyObjectJson("json"):
 
 If you want to parse several objects, you need to provide the instance of JSON service for each of them:
 
-```haskell
+```aqua
 data MyObject:
    name: string
 
@@ -825,7 +825,7 @@ service MyAnotherObjectJson("json"):
 
 - **Example**
     
-    ```haskell
+    ```aqua
     aqua MyFirstSpell
     
     export spell
