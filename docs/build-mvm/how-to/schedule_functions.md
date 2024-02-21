@@ -7,7 +7,7 @@ Tested on:
 
 **TODO: when all updates are published, update to `kras` and the latest FCLI**
 
-# Create your first Spell: step-by-step
+## Create your first Spell: step-by-step
 
 1. Initialize a project with `fluence init -t minimal` 
     
@@ -155,9 +155,9 @@ Tested on:
     ```
     
 
-# Spell Configuration in Fluence CLI
+## Spell Configuration in Fluence CLI
 
-## Spell Triggers Configuration
+### Spell Triggers Configuration
 
 The `spell.yaml` file allows you to set up the *Spell Trigger,* aka how and on what conditions your spells will be run.
 
@@ -205,7 +205,7 @@ In this example, the spell will start executing in approximately a day after the
 
 **Warning:** under the hood, the timestamps are evaluated from `startDelaySec` and `endDelaySec` on your local computer when you call `fluence deal deploy` , so when you see `startDelaySec: 60`, it means that the spell start time is the time when you initiated the deployment plus 1 minute. So, if you want to use `startDelaySec`, you must choose bigger numbers for the delay since some time will definitely be spent on deployment. 
 
-### Timer-based Spell Trigger Restrictions
+#### Timer-based Spell Trigger Restrictions
 
  To create valid Timer-Based Spell Trigger Configurations, you need to consider several rules:
 
@@ -219,9 +219,9 @@ In this example, the spell will start executing in approximately a day after the
     That’s just some sensible upper bound to avoid strange behaviors. Please write the developers [link] if your business logic requires more.
     
 
-## Other Important Fields
+### Other Important Fields
 
-### Spell Setup
+#### Spell Setup
 
 `aquaFilePath`  — a path to the aqua file with *the spell main function*
 
@@ -229,7 +229,7 @@ In this example, the spell will start executing in approximately a day after the
 
 `version`  — Fluence CLI-specific version of the spell configuration. Note that it’s **not** relevant to the spell versioning.
 
-### Inital Arguments
+#### Inital Arguments
 
 `initArgs` field describes a key-value map that will be passed to spell on installation. The map can contain strings, numbers, and complex objects. 
 
@@ -304,13 +304,13 @@ In this example, the spell will start executing in approximately a day after the
         ```
         
 
-# Spell Basics
+## Spell Basics
 
 In this section, we will describe how to use Spell Service's features.
 
 You can find the actual Spell Service API for your version [here](https://www.npmjs.com/package/@fluencelabs/spell).
 
-## How to resolve your Spell Service
+### How to resolve your Spell Service
 
 In the template example, we saw the way to find the spell service that belongs to the spell script:
 
@@ -336,7 +336,7 @@ Here, we use the spell name or alias [link to the concept of aliases] to find th
     ```
     
 
-## Spell Key-Value Storage API
+### Spell Key-Value Storage API
 
 The major spell feature is *storage*: your spells can preserve their inner state between executions and make decisions based on the saved data. The data is preserved during the provider peers' reboots and is restricted to the paid amount of disk space [link, is it true?].
 
@@ -544,7 +544,7 @@ To check if a key exists, you can call the `exists` function.
     ```
     
 
-### Spell Storage Access Permissions
+#### Spell Storage Access Permissions
 
 The Spell Service protects spell data from **writing** from arbitrary sources. The writing rules are the following:
 
@@ -560,7 +560,7 @@ The Spell Service protects spell data from **writing** from arbitrary sources. T
 
 However**, everyone can read** anything from the spell’s storage, so you must not store in the KV private information like keys. You should consider using other methods[link to the methods].   
 
-## Spell Logs API
+### Spell Logs API
 
 The Spell Service also provides additional storage for logs. The storage is restricted to 500 entries; older logs are deleted automatically when new ones are added.
 
@@ -664,7 +664,7 @@ The Spell Service also provides additional storage for logs. The storage is rest
     ```
     
 
-## Spell Mailbox API
+### Spell Mailbox API
 
 The Spell Service provides the Mailbox API to receive messages from the outside world. Note that the mailbox keeps only 50 last messages in the storage.
 
@@ -771,17 +771,13 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
         ```
         
 
-## Other Spell Service API Functions
+### Other Spell Service API Functions
 
 If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling [link], and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21)
 
-# Create your advanced Spell: step-by-step
+## Tips and Tricks
 
-TBD: not now :c
-
-# Tips and Tricks
-
-### Storing objects in the Spell Service Storage
+#### Storing objects in the Spell Service Storage
 
 Although the Spell Storage API mainly provides functions for storing strings, it’s possible to store any object using Nox JSON builtins:
 
