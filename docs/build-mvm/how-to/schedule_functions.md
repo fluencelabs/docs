@@ -173,32 +173,32 @@ For example, if you want to setup a spell that runs only **once**, you can use t
 
 ```yaml
 clock:
-	periodSec: 0
+  periodSec: 0
 ```
 
 On the other hand, if you want your spell to run **every two minutes** **indefinitely**, you can do:
 
 ```yaml
 clock:
-   periodSec: 120
+  periodSec: 120
 ```
 
 Next, if we want the spell to **start on New Year’s Eve and end in a year**, we can add the date:
 
 ```yaml
 clock:
-   periodSec: 120
-	 startTimestamp: 2024-12-31
-   endTimestamp: 2025-12-31
+  periodSec: 120
+    startTimestamp: 2024-12-31
+  endTimestamp: 2025-12-31
 ```
 
 You can also use `startDelaySec` and `endDelaySec` fields to setup the times more flexibly than just setting the timestamps:
 
 ```yaml
 clock:
-   periodSec: 120
-   startDelaySec: 86400
-   endDelaySec: 1209600
+  periodSec: 120
+  startDelaySec: 86400
+  endDelaySec: 1209600
 ```
 
 In this example, the spell will start executing in approximately a day after the spell is deployed to the Network and will end in two weeks. 
@@ -242,14 +242,14 @@ In this example, the spell will start executing in approximately a day after the
       some_value: "hello"
       num_value: 35
       object:
-          name: "Joe"
-          age: 35
-          children:
-            - "Marie"
-            - "Tom"
-          dogs:
-            - name: "Anna"
-            - name: "Petr"
+        name: "Joe"
+        age: 35
+        children:
+          - "Marie"
+          - "Tom"
+        dogs:
+          - name: "Anna"
+          - name: "Petr"
     ```
     
     The spell that uses these values can be like this:
@@ -528,7 +528,7 @@ To remove the key from the storage, you can use the `remove_key` function.
 
 - API
     
-    ```bash
+    ```aqua
     service Spell:
       remove_key(key: string) -> UnitValue
     ```
@@ -538,7 +538,7 @@ To check if a key exists, you can call the `exists` function.
 
 - API
     
-    ```bash
+    ```aqua
     service Spell:
     	  exists(key: string) -> BoolValue
     ```
@@ -615,7 +615,7 @@ The Spell Service also provides additional storage for logs. The storage is rest
     
     Or you can get the logs manually via Aqua. Copy this code into your `src/aqua/main.aqua`:
     
-    ```bash
+    ```aqua
     aqua Main
     
     import "@fluencelabs/aqua-lib/builtin.aqua"
@@ -762,7 +762,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     - Output
         
         ```bash
-        $ fluence deal logs dealName myFirstSpell                                                                                                                                                                                                              148 ↵
+        $ fluence deal logs dealName myFirstSpell
         Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
         Connected
         dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: 8e00fe09-b6d8-4c81-b925-e3fb82d2317c):
