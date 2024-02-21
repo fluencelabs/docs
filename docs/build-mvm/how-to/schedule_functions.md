@@ -75,9 +75,9 @@ Tested on:
     1. Importing the Spell Service API [link to the API section] is required to use logging capabilities, private spell storage, etc. Note that you can implement spells without ever interacting with the Spell Service if you don’t need the features it provides.
     2. The `spell` function here is an entry point to the spell’s execution. The main function has several features we explore in the later sections [link].
         
-        You can modify the name of the main function to any valid name, but you also need to [modify](https://www.notion.so/Spells-How-To-V2-f011aac73ef346ad85a334d40ee9dff7?pvs=21) the name in the `spell.yaml` configuration file.  
+        You can modify the name of the main function to any valid name, but you also need to modify the name in the `spell.yaml` configuration file.
         
-    3. To write logs in the [Spell Log Storage](https://www.notion.so/Spells-How-To-V2-f011aac73ef346ad85a334d40ee9dff7?pvs=21), you need to resolve [link to the services resolution in aqua] the Spell Service that belongs to the executing spell using the Spell’s Name. 
+    3. To write logs in the [Spell Log Storage](#spell-log-api), you need to resolve [link to the services resolution in aqua] the Spell Service that belongs to the executing spell using the Spell’s Name.
         
         Note that you have several options to resolve the correct spell service, which we’ll explore later [link]. 
         
@@ -106,7 +106,7 @@ Tested on:
             **Warning:** this delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ****
             
         
-        You can use other settings to tune your spells, which will be explored [later](https://www.notion.so/Spells-How-To-V2-f011aac73ef346ad85a334d40ee9dff7?pvs=21). 
+        You can use other settings to tune your spells, which will be explored [later](#spell-configuration-in-fluence-cli).
         
 5. To deploy the deal, call `fluence deal deploy` . If you haven’t deployed before or need more info, see [link].
 6. You can check the logs of your spell with `fluence deal logs dealName myFirstSpell`:
@@ -773,7 +773,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
 
 ## Other Spell Service API Functions
 
-If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling [link], and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21) 
+If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling [link], and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21)
 
 # Create your advanced Spell: step-by-step
 
