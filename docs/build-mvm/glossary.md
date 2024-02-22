@@ -39,7 +39,7 @@ Fluence JS [Client](#client-peer) is embedded into [Fluence CLI](#fluence-cli).
 
 ### Cloudless Function
 
-Cloudless Function is a piece of useful [compute](#compute) work defined by developer. It contains one or more [Compute Function](#compute-function) and an [Aqua](#aqua) script to orchestrates them by connecting outputs and inputs, denoting parallelism and defining success and failure.
+Cloudless Function is a piece of useful [compute](#compute) work defined by developer. It contains one or more [Compute Function](#compute-function)s and an [Aqua](#aqua) script to orchestrate them by connecting outputs and inputs, denoting parallelism and defining success and failure.
 
 With the help of Aqua, a developer can implement redundancy and fault-tolerance policies for their Cloudless Functions, facilitate parallelism across different machines, pass data from peer to peer, and much more.
 
