@@ -1,11 +1,8 @@
 # Cloudless Scheduler
 
-Tested on:
-
-- the FCLI version: `@fluencelabs/cli/0.13.5 linux-x64 node-v18.19.0`
+This guide was tested on:
+- the FCLI version: `@fluencelabs/cli/0.15.5 linux-x64 node-v18.19.1`
 - Network env: `local`
-
-**TODO: when all updates are published, update to `kras` and the latest FCLI**
 
 ## Create your first Spell: step-by-step
 
@@ -16,9 +13,7 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
     The spell library dependency should be added to the `fluence.yaml` configuration file automatically:
     
     ```yaml
-    # FCLI version: 0.13.5
-    #...
-    
+    version: 8
     aquaDependencies:
       "@fluencelabs/aqua-lib": 0.9.1
       "@fluencelabs/spell": 0.6.9
@@ -29,15 +24,17 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
     This command modifies the `fluence.yaml` file, adding the spell to the list of the project’s spells and the default deal we deploy later.
     
     ```yaml
-    # FCLI version: 0.13.5 
-    deals:
-      dealName:
+    # FCLI version: 0.15.5 
+    version: 8
+
+    deployments:
+      myDeployment:
         targetWorkers: 1
-        pricePerWorkerEpoch: 0.1
-        collateralPerWorker: 1
+        pricePerWorkerEpoch: 0.00001
+        initialBalance: 0.001
         services: []
-        spells: [ myFirstSpell ]  # <-- added the spell to the deal
-    
+        spells: [ myFirstSpell ]
+
     spells:
       myFirstSpell:   # <-- added the new spell to the list of project's spells 
         get: src/spells/myFirstSpell # <-- the path to the spell directory 
@@ -58,7 +55,7 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
 3. The spell script is located in the `spell.aqua` file:
     
     ```aqua
-    -- the Fluence CLI version is 0.13.5
+    -- FCLI 0.15.5
     
     aqua MyFirstSpell
     
@@ -79,7 +76,7 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
         
         You can modify the name of the main function to any valid name, but you also need to modify the name in the `spell.yaml` configuration file.
         
-    3. To write logs in the [Spell Log Storage](#spell-logs-api), you need to resolve [link to the services resolution in aqua] the Spell Service that belongs to the executing spell using the Spell’s Name.
+    3. To write logs in the [Spell Log Storage](#spell-logs-api), you need to resolve the Spell Service that belongs to the executing spell using the Spell’s Name.
         
         Note that you have several options to resolve the correct spell service, which we’ll explore [later](#how-to-resolve-your-spell-service).
         
@@ -87,7 +84,6 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
 4. The spell configuration is located in the `spell.yaml` file and defines several important aspects of the spell execution. Let’s look at the content of the default spell configuration file:
     
     ```yaml
-    # FCLI: 0.13.5
     version: 0
     
     aquaFilePath: ./spell.aqua # <-- (1)
@@ -105,21 +101,21 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
         1. `periodSec` defines how *often* your spell is run. `periodSec: 60` means that the spell is run every minute. 
         2. `endDelaySec`defines when the spell must be stopped from execution. `endDelaySec: 1800` means that the spell will no longer be periodically executed in 30 minutes.
             
-            **Warning:** this delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. ::
+            :::warning: This delay is evaluated on the client, so the 30 minutes are counted since you created your deal, not since the spell was installed on a peer. :::
             
         
         You can use other settings to tune your spells, which will be explored [later](#spell-configuration-in-fluence-cli).
         
-5. To deploy the deal, call `fluence deal deploy` . If you haven’t deployed before or need more info, see [link].
-6. You can check the logs of your spell with `fluence deal logs dealName myFirstSpell`:
+5. To deploy the deal, call `fluence deal deploy`.
+6. You can check the logs of your spell with `fluence deal logs myDeployment myFirstSpell`:
     
     Example output:
     
     ```bash
-    $ fluence deal logs dealName myFirstSpell                                                                                                                                                                                                                1 ↵
+    $ fluence deal logs myDeployment myFirstSpell
     Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWDd7zwsdYart7z9MQ2yEagjafPHLxbzNkNP7wYxJxvKiN
     Connected
-    dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 275382d7-cb42-402c-ad80-85a546ecfe51):
+    myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 275382d7-cb42-402c-ad80-85a546ecfe51):
     
     2024-02-05 15:36:22 Spell 'myFirstSpell' is working!
     ```
@@ -132,7 +128,7 @@ First let's take a look at how to create a simple spell from the Fluence CLI tem
     $ fluence deal logs
     Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWDd7zwsdYart7z9MQ2yEagjafPHLxbzNkNP7wYxJxvKiN
     Connected
-    dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 4f35fd35-6be3-4a0b-8426-c0f9031d1cfa):
+    myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 4f35fd35-6be3-4a0b-8426-c0f9031d1cfa):
     
     2024-02-05 15:36:16 Installing worker for deal 0xeb92a1b5c10ad7bfdcaf23cb7dda9ea062cd07e8
     2024-02-05 15:36:16 parsed worker definition bafkreifgq24izy6wu22dt6wbrentfcjkmyunof32ospc3qzlkl4adg6tcm {
@@ -190,7 +186,7 @@ Next, if we want the spell to **start on New Year’s Eve and end in a year**, w
 ```yaml
 clock:
   periodSec: 120
-    startTimestamp: 2024-12-31
+  startTimestamp: 2024-12-31
   endTimestamp: 2025-12-31
 ```
 
@@ -214,22 +210,22 @@ In this example, the spell will start executing in approximately a day after the
 - the end dates set in `endDelaySec` and `endTimestamp` must be ***later*** than the start dates in `startDelaySec` and `startTimestamp`,
 - the end date **cannot precede** the spell deployment date
     
-    Note that *the past* check happens during the spell installation on a specific provider, and if this check fails, the provider won’t be able to install your spell, so you **must be careful** when using the end date settings. 
+    :::warning Note that *the past* check happens during the spell installation on a specific provider, and if this check fails, the provider won’t be able to install your spell, so you **must be careful** when using the end date settings. :::
     
 - the period used in `periodSec` must be less than 100 years
     
-    That’s just some sensible upper bound to avoid strange behaviors. Please write the developers [link] if your business logic requires more.
+    That’s just some sensible upper bound to avoid strange behaviors. Please write the developers if your business logic requires more.
     
 
 ### Other Important Fields
 
 #### Spell Setup
 
-`aquaFilePath`  — a path to the aqua file with *the spell main function*
+- `aquaFilePath` — a path to the aqua file with *the spell main function*
 
-`function`  — a name of *the spell main function*
+- `function` — a name of *the spell main function*
 
-`version`  — Fluence CLI-specific version of the spell configuration. Note that it’s **not** relevant to the spell versioning.
+- `version` — Fluence CLI-specific version of the spell configuration. Note that it’s **not** relevant to the spell versioning.
 
 #### Inital Arguments
 
@@ -282,10 +278,10 @@ In this example, the spell will start executing in approximately a day after the
     - Output
         
         ```bash
-        $ fluence deal logs dealName myFirstSpell
+        $ fluence deal logs myDeployment myFirstSpell
         Connecting to random local relay: /ip4/127.0.0.1/tcp/9991/ws/p2p/12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe
         Connected
-        dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: e1a2df12-efcd-4a13-be4d-dfc8d1caf3b8):
+        myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: e1a2df12-efcd-4a13-be4d-dfc8d1caf3b8):
         
         2024-02-09 16:56:13 Some value:  hello Num value: 35 Object: {
           "age": 35,
@@ -321,26 +317,26 @@ func spell():
    Spell "myFirstSpell"
 ```
 
-Here, we use the spell name or alias [link to the concept of aliases] to find the spell service. In the same way, you can find the spell from your command line using Fluence CLI. However, there are two other spell-specific ways to do so:
+Here, we use the spell name or alias to find the spell service. In the same way, you can find the spell from your command line using Fluence CLI. However, there are two other spell-specific ways to do so:
 
 1. Use `spell_id` of your spell, automatically available as an argument of the main function of your spell:
     
     ```aqua
     func spell(spell_id: string):
-    	Spell spell_id
+        Spell spell_id
     ```
     
 2. Use reserved names `"spell"` or `"self"`:
     
     ```aqua
     func spell():
-    	Spell "spell"
+        Spell "spell"
     ```
     
 
 ### Spell Key-Value Storage API
 
-The major spell feature is *storage*: your spells can preserve their inner state between executions and make decisions based on the saved data. The data is preserved during the provider peers' reboots and is restricted to the paid amount of disk space [link, is it true?].
+The major spell feature is *storage*: your spells can preserve their inner state between executions and make decisions based on the saved data. The data is preserved during the provider peers' reboots and is restricted to the paid amount of disk spac.
 
 The storage is presented as an extended Key-Value dictionary where you can store values of several types:
 
@@ -391,10 +387,10 @@ The storage is presented as an extended Key-Value dictionary where you can store
         - Output
             
             ```aqua
-            $ fluence deal logs dealName myFirstSpell
+            $ fluence deal logs myDeployment myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
             Connected
-            dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 6d8fc228-562a-4284-8d9b-f293c2f12785):
+            myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 6d8fc228-562a-4284-8d9b-f293c2f12785):
             
             2024-02-07 08:16:04 )
             2024-02-07 08:17:04 ))
@@ -447,10 +443,10 @@ The storage is presented as an extended Key-Value dictionary where you can store
         - Output
             
             ```aqua
-            $ fluence deal logs dealName myFirstSpell
+            $ fluence deal logs myDeployment myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWDd7zwsdYart7z9MQ2yEagjafPHLxbzNkNP7wYxJxvKiN
             Connected
-            dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: a8451478-b3b3-46f1-b45d-dae7dcf36a24):
+            myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: a8451478-b3b3-46f1-b45d-dae7dcf36a24):
             
             2024-02-07 08:23:06 "0"
             2024-02-07 08:24:06 "1"
@@ -506,10 +502,10 @@ The storage is presented as an extended Key-Value dictionary where you can store
         - Output
             
             ```aqua
-            $ fluence deal logs dealName myFirstSpell
+            $ fluence deal logs myDeployment myFirstSpell
             Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
             Connected
-            dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 1e62bbc3-d368-4030-a877-261a748bb66a):
+            myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWRRyM8XNhCFTQaqMQpg483Bq8pdfveeMKNxx4hArrNq7u, spell_id: 1e62bbc3-d368-4030-a877-261a748bb66a):
             
             2024-02-07 08:51:45
             2024-02-07 08:52:45 )
@@ -542,7 +538,7 @@ To check if a key exists, you can call the `exists` function.
     
     ```aqua
     service Spell:
-    	  exists(key: string) -> BoolValue
+          exists(key: string) -> BoolValue
     ```
     
 
@@ -551,7 +547,7 @@ To check if a key exists, you can call the `exists` function.
 The Spell Service protects spell data from **writing** from arbitrary sources. The writing rules are the following:
 
 - the spell can write to *any* key in its own KV
-- the particles[links to what a particle is] sent from the *same* worker the target spell is install on can write to the keys with `w_`  and `hw_`  prefix
+- the particles sent from the *same* worker the target spell is install on can write to the keys with `w_`  and `hw_`  prefix
     
     For example, another spell installed on the same worker can write to the keys `w_message`  or `hw_update`.
     
@@ -584,8 +580,8 @@ The Spell Service also provides additional storage for logs. The storage is rest
       -- Store a log. 
       -- Note that only a **spell** can store the log in its logs storage
       store_log(log: string) -> UnitValue
-    	-- Return all logs ordered by timestamp ascending.
-    	get_logs() -> GetLogsResult
+        -- Return all logs ordered by timestamp ascending.
+        get_logs() -> GetLogsResult
     ```
     
 - Example
@@ -607,10 +603,10 @@ The Spell Service also provides additional storage for logs. The storage is rest
     You can read the logs using the Fluence CLI command like this:
     
     ```bash
-    $ fluence deal logs dealName myFirstSpell                                                                                                                                                                                                              130 ↵
+    $ fluence deal logs myDeployment myFirstSpell
     Connecting to random local relay: /ip4/127.0.0.1/tcp/9991/ws/p2p/12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe
     Connected
-    dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: b030cf69-7a35-4eeb-bad1-981797e67eec):
+    myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: b030cf69-7a35-4eeb-bad1-981797e67eec):
     
     2024-02-09 15:49:15 I was run!
     ```
@@ -630,7 +626,7 @@ The Spell Service also provides additional storage for logs. The storage is rest
     
     func testSpell() -> []GetLogsResult:
         deals <- Deals.get()
-        dealId = deals.dealName!.dealIdOriginal
+        dealId = deals.myDeployment!.dealIdOriginal
     
         logs: *GetLogsResult
         on HOST_PEER_ID:
@@ -695,15 +691,15 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     
       error: string
     service Spell:
-    	-- Push a message to the mailbox. 
+        -- Push a message to the mailbox. 
       -- Mailbox keeps 50 latest messages.
       push_mailbox(message: string) -> UnitValue
-    	-- Get the latest mailbox message and remove it from the mailbox.
+        -- Get the latest mailbox message and remove it from the mailbox.
       -- result.absent is true if there are no messages in the mailbox.
       -- Only the spell can pop the messages from the mailbox
-    	pop_mailbox() -> PopMailboxResult
-    	-- Get all messages from the mailbox in FIFO order.
-    	get_mailbox() -> GetMailboxResult
+        pop_mailbox() -> PopMailboxResult
+        -- Get all messages from the mailbox in FIFO order.
+        get_mailbox() -> GetMailboxResult
     ```
     
 - Example
@@ -745,7 +741,7 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     
     func testSpell():
         deals <- Deals.get()
-        dealId = deals.dealName!.dealIdOriginal
+        dealId = deals.myDeployment!.dealIdOriginal
     
         on HOST_PEER_ID:
             subnet <- Subnet.resolve(dealId)
@@ -764,18 +760,14 @@ The Spell Service provides the Mailbox API to receive messages from the outside 
     - Output
         
         ```bash
-        $ fluence deal logs dealName myFirstSpell
+        $ fluence deal logs myDeployment myFirstSpell
         Connecting to random local relay: /ip4/127.0.0.1/tcp/9992/ws/p2p/12D3KooWMNJvkaLpUKzK64CgX1x9PNdy3vLCWFgLSpB2S7ymVhEC
         Connected
-        dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: 8e00fe09-b6d8-4c81-b925-e3fb82d2317c):
+        myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWBPfFGP7y1jiKgQ4DEkuS87KsfcPt5DDVoWUiwNtbzYFE, spell_id: 8e00fe09-b6d8-4c81-b925-e3fb82d2317c):
         
         2024-02-09 16:18:13 Got message: hello from the client! from: 12D3KooWQc1TuBEi54HNVuerVSZAMD3sDd4ZzTLan4tAgNp9SHi7
         ```
         
-
-### Other Spell Service API Functions
-
-If you read the full Spell Service definition, you may notice other functions not covered in the sections above. The main reason for this is that they are mostly used for utility purposes like initialization, AIR error handling, and so on, and you, as a developer, likely never need them. If you are interested, the implementation details you may find in [the Spell Service FLIP.](https://www.notion.so/Spells-Service-99e17c405f2548efb20e86866298a912?pvs=21)
 
 ## Tips and Tricks
 
@@ -811,7 +803,7 @@ data MyObject:
    name: string
 
 data MyAnotherObject:
-	 counter: u32
+     counter: u32
 
 service MyObjectJson("json"):
   parse(str: string) -> MyObject 
@@ -869,10 +861,10 @@ service MyAnotherObjectJson("json"):
     - **Output**
         
         ```bash
-        $ fluence deal logs dealName myFirstSpell
+        $ fluence deal logs myDeployment myFirstSpell
         Connecting to random local relay: /ip4/127.0.0.1/tcp/9993/ws/p2p/12D3KooWDd7zwsdYart7z9MQ2yEagjafPHLxbzNkNP7wYxJxvKiN
         Connected
-        dealName (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWT1v3MHQWNqVdRPtK7ntozb3JegdPo9cfM3tXkNAE3CYp, spell_id: 782d9ff1-a243-4447-a6b6-51a4f40966e1):
+        myDeployment (host_id: 12D3KooWFS4WXar3f1SWCykTUy9cVKNU8x1yDA18ZYp86mXTUyAe, worker_id: 12D3KooWT1v3MHQWNqVdRPtK7ntozb3JegdPo9cfM3tXkNAE3CYp, spell_id: 782d9ff1-a243-4447-a6b6-51a4f40966e1):
         
         2024-02-19 12:43:33 Created object: {"counter":0,"name":"test"}
         2024-02-19 12:44:33 Got:  {"counter":0,"name":"test"}
