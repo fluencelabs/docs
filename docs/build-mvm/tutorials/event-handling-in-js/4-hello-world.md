@@ -2,7 +2,7 @@
 
 ## Intro
 
-In this section, we will demonstrate how the Fluence JS Client can be used to create a "Hello, world!" application with the Fluence stack.
+In this section, we will demonstrate how the Fluence JS Client can be used to create a "Hello, world!" application using the Fluence stack.
 
 Make sure you have finished **Setting up** step. 
 
