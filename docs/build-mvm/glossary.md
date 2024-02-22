@@ -29,7 +29,7 @@ Fluence CLI is the main entry point into a [Fluence App](#fluence-app) lifecycle
 
 ### Fluence App
 
-Fluence App is the actual end-user application that includes [Cloudless Deployment](#cloudless-deployment) but may also embrace a [Gateway](#gateway) to call Cloudless Functions from HTTP endpoints, DApp with event listeners, browser application and other integration.
+Fluence App is the actual end-user application that includes [Cloudless Deployment](#cloudless-deployment) but may be paired with a [Gateway](#gateway) to call Cloudless Functions from HTTP endpoints and enable HTTP event listeners, browser application and other integration.
 
 ### Fluence JS Client
 
