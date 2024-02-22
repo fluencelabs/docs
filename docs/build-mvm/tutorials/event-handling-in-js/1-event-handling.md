@@ -108,5 +108,5 @@ sequenceDiagram
 ## Examples
 
 - Try to run `fluence init --env kras --template ts frontend`. After that you can review `./frontend/src/gateway` and `./frontend/src/gateway` folders and check their code.
-- Check out more examples in [example repo](https://github.com/fluencelabs/examples/tree/main/js-client-examples); You can find browser to browser interaction example there.
+- Check out more examples in the [example repo](https://github.com/fluencelabs/examples/tree/main/js-client-examples); You can find browser to browser interaction example there.
 
