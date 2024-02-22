@@ -36,6 +36,18 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Setting Up",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build-mvm/setting-up/setting_up", type: "doc" },
+      items: [
+        // "build-mvm/setting-up/setting_up",
+        "build-mvm/setting-up/installing_cli",
+        "build-mvm/setting-up/working_with_local_networks"
+      ]
+    },
+    {
+      type: "category",
       label: "Quickstart",
       collapsible: true,
       collapsed: true,
