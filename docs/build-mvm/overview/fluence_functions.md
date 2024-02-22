@@ -56,21 +56,19 @@ From a capabilities and development perspective, Fluence Cloudless Function is v
 Table 1: High Level Serverless Provider Comparison
 
 |  |Fluence Lambda| AWS Lambda| Azure Functions| Google Cloud Functions |
-|--- |--- |--- |--- |--- |
-|Runtime| Wasm  more coming| Multiple| Multiple| Multiple|
-|Languages| Rust more coming| Multiple| Multiple| Multiple|
-|Workflow Management|Aqua | Step Functions| Durable Functions| Cloud Functions Workflow|
-|&nbsp; &nbsp; &nbsp; &nbsp;Orchestration| | Step Functions| Durable Functions| Cloud Functions Workflow|
-| &nbsp; &nbsp; &nbsp; &nbsp;Choreography| Aqua| | | |
+|:--- |:---: |:---: |:---: |:---: |
+|Runtime| Wasm<br/>more coming| Multiple| Multiple| Multiple|
+|Languages| Rust<br/>more coming| Multiple| Multiple| Multiple|
+|Workflow Management|Aqua | Step Functions| Azure Logic App| Cloud Functions Workflow|
+|&nbsp; &nbsp; &nbsp; &nbsp;Orchestration| | √| √| √|
+  | &nbsp; &nbsp; &nbsp; &nbsp;Choreography| √| | | |
 |Endpoint Access| P2P or HTTP Gateway| HTTP| HTTP| HTTP|
 |Capacity (Data Center)| Transparent & Selectable| Blackbox |  Blackbox |  Blackbox |
-|Security Network| | | | |
-|Security Serverless| | | | 
 |CLI | Fluence CLI| AWS CLI| Azure CLI, Azure PowerShell | gcloud CLI |
 
-Unlike centralized cloud providers, the [Fluence Protocol](../glossary.md/#fluence-protocol) enables an open, permisisonless peer-to-peer network and compute marketplace that facilitates crowd sourcing of (data center) capacity. Make no mistake, the Fluence network is backed by a large number of Tier 4 data centers offering the top of the line CPU and RAM configurations at extremely competitive prices for extraordinary SLAs. The Fluence Compute Marketplace is built on [InterPlanetary Consensus](https://www.ipc.space/) (IPC), an EVM-compatible, modern high-performance PoS blockchain. 
+Unlike centralized cloud providers, the [Fluence Protocol](../glossary.md/#fluence-protocol) enables an open, permisisonless peer-to-peer network and compute marketplace that facilitates crowd sourcing of (data center) capacity. Make no mistake, the Fluence network is backed by a large number of Tier 4 data centers offering top of the line CPU and RAM configurations at extremely competitive prices for extraordinary SLAs. The Fluence Compute Marketplace is built on [InterPlanetary Consensus](https://www.ipc.space/) (IPC), an EVM-compatible, modern high-performance PoS blockchain. 
 
-While developers can ignore the intricacies of the peer-to-peer network,including network security solutions such as DDOS and other attack prevention or mitigation schemes, a salient difference between Fluence Protocol and other serverless solutions is that Fluence network does not natively support HTTP request and response calls. That is, function choreography happens on the peer-to-peer level. However, this is easily solved with existing Fluence solutions at both (p2p) network ingress and egress such as the [HTTP Gateway](../glossary.md/#gateway).
+While developers can ignore the intricacies of the peer-to-peer network,including network security solutions such as DDOS and other attack prevention or mitigation schemes, a salient difference between Fluence Protocol and other serverless solutions is that Fluence network does not natively support HTTP request and response calls. That is, function choreography happens on the peer-to-peer level. However, this is easily solved with existing Fluence solutions at both (p2p) network ingress and egress such as the [HTTP Gateway](../glossary.md/#gateway) and [HTTP cURL Adapter].
 
 ## Use Cases
 
