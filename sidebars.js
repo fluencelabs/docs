@@ -14,6 +14,16 @@ const sidebars = {
   "build": [
     {
       type: "category",
+      label: "Hello Fluence",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build-mvm/introducing_fluence", type: "doc" },
+      items: [
+      ]
+
+    },
+    {
+      type: "category",
       label: "Overview",
       collapsible: true,
       collapsed: true,

@@ -99,7 +99,7 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "build-mvm/overview/getting_started",
+          docId: "build-mvm/introducing_fluence",
           label: "Build",
         },
         {
