@@ -45,7 +45,7 @@ With the help of Aqua, a developer can implement redundancy and fault-tolerance 
 
 ### Cloudless Deployment
 
-Cloudless Deployment is [Compute Functions](#compute-function) and [Scheduled Cloudless](#cloudless-scheduler) Functions configured, deployed and ready for use. It is derived from [Cloudless Distributive](#cloudless-distributive), managed with a [Deal](#deal), running on [Workers](#worker).
+Cloudless Deployment is a [Compute Function](#compute-function) and/or [Cloudless Scheduler](#cloudless-scheduler) configured, deployed and ready for use. It is an instantiated [Cloudless Distributive](#cloudless-distributive), managed by a [Deal](#deal), and running on [Workers](#worker).
 
 ### Cloudless Distributive
 
@@ -54,7 +54,7 @@ Prototype for a [Cloudless Deployment](#cloudless-deployment). Includes:
 - [Worker Definition](#worker-definition), that consists of:
     - [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
     - [Cloudless Scheduler](#cloudless-scheduler) for [Cloudless Functions](#cloudless-function) (in form of compiled [AIR](#air) files), with trigger configuration
-- [Cloudless Deployment](#cloudless-deployment) configuration (needed resources such as [effectors](#effector-module), replication factor – desired size of a [Subnet](#subnet))
+- [Cloudless Deployment](#cloudless-deployment) configuration and required resources, such as [effectors](#effector-module) or replication factor, i.e., the desired size and provider diversity of a [Subnet](#subnet).
 
 Cloudless Distributive is structured with [IPLD](https://ipld.io/) resulting in a unique [CID](https://docs.ipfs.tech/concepts/content-addressing/) and uploaded to network storage for future content-addressable retrieval. 
 
@@ -82,11 +82,11 @@ Proof that a [Cloudless Function](#cloudless-function) was executed as described
 
 Conducted and checked by [AquaVM](#aquavm) during execution on every step.
 
-See [Golden Particles](#golden-particle) to learn more about Proof of Processing use for payments.
+See [Golden Particles](#golden-particle) to learn more about the use of Proof of Processing to facilitate verifiable deal settlement, i.e. payment for Cloudless Function executions.
 
 #### Proof of Execution
 
-Proof of [Compute Function](#compute-function) i.e., a single function execution that runs on a [Peer](#peer), that attests that computation was done correctly.
+Proof of [Compute Function](#compute-function): an attestation that a computation of a single function, running on a [Peer](#peer), was done correctly.
 
 PoE is pluggable, so that different workloads can benefit from the decentralization of compute. The options might include:
 - zero knowledge proofs (ZKP)
@@ -105,7 +105,7 @@ AIR contains a very limited set of instructions, like `(seq A B)` or `(par A B)`
 
 ### Aqua
 
-Aqua is Fluence’s language for the choreography of distributed [Cloudless Function](#cloudless-function)s and orchestration of local functions.
+Aqua is Fluence’s language, designed especially to program choreography of distributed [Cloudless Function](#cloudless-function)s and orchestration of local functions.
 Aqua describes distributed control flow in developer-friendly terms, and delegates computations to [Compute Function](#compute-function)s on particular [Peer](#Peer)s.
 Aqua follows the [structural typing](https://en.wikipedia.org/wiki/Structural_type_system) paradigm to simplify composition and reuse of different libraries and [Cloudless Functions](#cloudless-function). Read more in the [Aqua Book](/docs/aqua-book/introduction.md).
 
@@ -158,7 +158,7 @@ Topology is expressed and handled with the help of [Aqua](#aqua).
 
 ### Nox
 
-Nox is the reference implementation of a fully [Fluence Protocol](#fluence-protocol)-compliant [Peer](#peer) capable to serve [Cloudless Deployments](#cloudless-deployment). Nox serves as a [Host](#host) for many [Workers](#worker), where each Worker is devoted to a distinct Deployment. Read more below.
+Nox is the reference implementation of a fully [Fluence Protocol](#fluence-protocol)-compliant [Peer](#peer) capable to serve [Cloudless Deployments](#cloudless-deployment). Nox serves as a [Host](#host) for many [Workers](#worker), where each Worker is devoted to a distinct Deployment.
 
 #### System Services
 
@@ -172,7 +172,7 @@ Low-level [Compute Function](#compute-function)s implemented in a peer’s nativ
 
 ### Marine
 
-Marine is a general purpose Wasm runtime intended to execute [Compute Functions](#compute-function) in form of linked [Wasm](#webassembly-wasm) [Module](#marine-module)s (aka [Services](#marine-service)) on some [Peer](#peer).
+Marine is a general purpose Wasm runtime, intended to execute [Compute Functions](#compute-function)s in form of linked [Wasm](#webassembly-wasm) [Module](#marine-module)s (aka [Services](#marine-service)) on a [Peer](#peer).
 
 It is the main way to express computations in the [Fluence Protocol](#fluence-protocol).
 
@@ -194,9 +194,9 @@ Service:
 
 Service is identified by a Service ID that's bound to the Peer ID that provides this service.
 
-Service exposes one or more [Compute Function](#compute-function)s and a developer needs to provide the [peer id](#peerid), service id, and function name to invoke the function.
+Service exposes one or more [Compute Function](#compute-function)s and a developer needs to provide [peer id](#peerid), service id, and function name to invoke the function.
 
-Service function calls within the [Fluence protocol](#fluence-protocol) are possible only via [AIR](#air) instructions – from a developer perspective, this means using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli) or another [client peer](#client-peer).
+[AIR](#air) instructions is the only legitimate way in the [Fluence protocol](#fluence-protocol) to call a service function. For a developer, it entails using [Aqua](#Aqua) language and [Fluence CLI](#fluence-cli).
 
 #### Marine SDK
 
@@ -232,7 +232,7 @@ For modules that are intended to be shared as an API, developers often need to w
 
 [Webassembly](https://webassembly.org/) is a binary instruction format for a stack-based virtual machine. Wasm is intended to provide a memory-safe, sandboxed execution environment with a flexible set of settings, such as memory size and allowed imports. Multiple languages, such as Rust, C/C++ or tinyGo, support the Wasm compile target. 
 
-Fluence provides a [Rust SDK](#marine-sdk) but supports any compiled Wasm module following [particular conventions](/docs/marine-book/marine-rust-sdk/module-abi.md).
+Fluence provides a [Rust SDK](#marine-sdk) but supports any compiled Wasm module following [the Module ABI conventions](/docs/marine-book/marine-rust-sdk/module-abi.md).
 
 #### Webassembly IT
 
@@ -244,14 +244,14 @@ Webassembly Interface Types (Wasm IT, WIT) is a part of the Component model prop
 
 ### Managed Effects
 
-Managed Effects is an approach to solve the following problem:
+Managed Effects is an architectural approach that addresses the following contradiction:
 
 - Compute without effects is useless
 - Compute with effects might be dangerous
 
 With Managed Effects, every [effect](#effect) is accessed only with an [Effector Module](#effector-module). Effector Module is audited by the community to check that its API is useful for developers, and its effects are safe for [Compute Providers](#provider).
 
-Compute Providers whitelist only the known Effector Modules and forbid effects in any other module. If Effector Module requires Provider to have certain capabilities, e.g. locally deployed service, an installed binary, etc., Provider has to take care of that.
+Compute Providers whitelist only the known Effector Modules and forbid effects in any other module. If some Effector Module requires Provider to have certain capabilities, like locally deployed service or installed binary, it is the Provider's responsibility to ensure the capabilities are available.
 
 Developer can access this effect safely using [Module Linking](#module-linking).
 
@@ -267,7 +267,7 @@ What an [Effector Module](#effector-module) actually executes on the host system
 
 #### Mounted Binary
 
-A Mounted Binary is a special interface that provides an [effector module](#effector-module) with the capability to call any binary hosted by a peer with the provided set of arguments to obtain a result. It makes it possible to integrate almost any other software (such as IPFS, Ceramic, and databases) in the Fluence ecosystem.
+A Mounted Binary is a special interface that provides an [effector module](#effector-module) the capability to call any binary, hosted by a peer, with the provided set of arguments to obtain a result. It makes it possible to integrate almost any other software (such as IPFS, Ceramic, and databases) in the Fluence ecosystem.
 
 ### Particle File Vault
 
@@ -277,7 +277,7 @@ Particle File Vault is expected to be used to pass data between [Compute Functio
 
 ### Compute Function
 
-A single computational action executed on a single peer. [Marine Service](#marine-service)s is the default and preferred way to deliver [Compute Function](#compute-function)s. Other options are [builtins](#builtin-services), and native code, e.g. Javascript callbacks for [JS client](#fluence-js-client).
+An individual computational action, executed on a single peer. [Marine Service](#marine-service)s is the default and preferred way to run [Compute Function](#compute-function)s. Other options are [builtins](#builtin-services), and native code, e.g. Javascript callbacks for [JS client](#fluence-js-client).
 
 ### Compute Unit
 
@@ -300,7 +300,7 @@ Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
 
 ### Peer
 
-A Fluence Peer is the result of implementing the [Fluence protocol](#fluence-protocol) to host and execute general purpose compute functions to provide users with a serverless and cloudless experience. 
+A Fluence Peer is a node in the [Fluence Network](#fluence-network), which behaves according to the [Fluence protocol](#fluence-protocol), therefore hosts and executes general purpose [Compute Function](#compute-functions)s, thus providing users cloudless experience. 
 
 Fluence reference peers are comprised of the following components:
 - Libp2p to manage connection pool
@@ -335,7 +335,7 @@ A Worker is a part of a [Peer](#peer)'s resources that, together with other Work
 
 #### Worker Definition
 
-A Worker Definition is built with the help of [Fluence CLI](#fluence-cli), and used by [Nox](#nox) to deploy and update a [Worker](#worker). It is part of [Cloudless Distributive](#cloudless-distributive) and registered in [Deal](#deal)s.
+A Worker Definition is a transportable deployment configuration of a Worker. It is built with the help of [Fluence CLI](#fluence-cli), and used by [Nox](#nox) to deploy and update a [Worker](#worker). It is part of [Cloudless Distributive](#cloudless-distributive) and registered in [Deal](#deal)s.
 
 Consists of:
 - [Compute Functions](#compute-function) binary sources (in form of [WASM](#webassembly-wasm) [modules](#marine-module) for [Marine Services](#marine-service), and respective resources and [module linking](#module-linking) configuration)
@@ -343,7 +343,7 @@ Consists of:
 
 #### Subnet
 
-Interconnected set of all [Worker](#worker)s of a single [Cloudless Deployment](#cloudless-deployment), that can be used in runtime for redundancy, durability, fault tolerance, load balancing and better security of [Cloudless Function](#cloudless-function)s.
+A set of all [Worker](#worker)s, instantiated from an individual [Cloudless Deployment](#cloudless-deployment) and interconnected by runtime communication, which serves to provide redundancy, durability, fault tolerance, load balancing and better security of [Cloudless Function](#cloudless-function)' distributed execution.
 
 #### Gateway
 
@@ -370,7 +370,7 @@ A  [Host](#host), that participates in serving [Cloudless Function](#cloudless-f
 - Ability of a Host to send messages internally to hosted [Worker](#worker)s
 - Ability of a Host to send messages to connected [Client Peer](#client-peer)s
 
-To execute code on a [Peer](#peer) that's behind a Relay, [use `on peer via relay:` construct](/docs/aqua-book/language/topology#accessing-peers-via-other-peers) in [Aqua](#Aqua).
+To execute code on a [Peer](#peer) that's behind a Relay, e.g., if using a web browser or behind a NAT, use the [`on peer via relay:`](/docs/aqua-book/language/topology#accessing-peers-via-other-peers) construct available in [Aqua](#Aqua).
 
 ## Compute Marketplace
 
@@ -388,7 +388,7 @@ An organization that participates in the [Fluence Protocol](#fluence-protocol) b
 
 ### Matching
 
-The process of mapping a Developer Offer with its requirements and Provider Offers with its capabilities, resulting in assigning [Worker](#worker) allocations on particular [Host](#host)s – described inside a [Deal](#deal).
+The process of mapping a Developer Offer with its requirements and Provider Offers with its capabilities, resulting in assigning [Worker](#worker) allocations on particular [Host](#host)s, as described inside a [Deal](#deal).
 
 ### Offer
 
@@ -400,7 +400,7 @@ A provider offer includes the [CU](#compute-unit) capacity, provider metadata, s
 
 #### Developer Offer
 
-The developer’s [Cloudless Distributive](#cloudless-distributive) combined with their capacity selection criteria, such as payment offer, data center type, duration, payment offer, etc., and an escrow payment
+A [Cloudless Distributive](#cloudless-distributive), combined with the capacity selection criteria, such as payment offer, data center type, duration, payment offer, etc., and an escrow payment.
 
 ### Capacity Commitment
 
@@ -410,10 +410,10 @@ A provider can seamlessly switch their resource allocation between Proof of Capa
 
 ### Capacity Commitment Prover
 
-A piece of software augmenting each [Nox](#nox) peer tasked with generating [Proofs of Capacity](#proof-of-capacity) for that Nox’s hardware zone.
+A piece of software, augmenting each [Nox](#nox) peer, tasked with generating [Proofs of Capacity](#proof-of-capacity) for that Nox’s hardware zone.
 
 ### Golden Particle
 
-Golden Particle is a Particle at some step of its execution when Particle Data solves a cryptographic puzzle and acts as a winning lottery ticket to distribute the rewards among all the participants contributing to the execution of this Particle.
+Golden Particle is a Particle at a certain step of its life time, when its Particle Data contains a solution of a cryptographic puzzle, so it can act as a winning lottery ticket to distribute the rewards among all the participants contributing to the execution of this Particle.
 
 A Golden Particle represents sampled [Cloudless Function](#cloudless-function) executions used by the [Proof of Processing](#proof-of-processing) for reward distribution.
