@@ -29,7 +29,7 @@ const sidebars = {
       collapsed: true,
       link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
-        "build-mvm/overview/fluence_functions",
+        // "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
         "build-mvm/overview/roadmap"
       ]
@@ -51,7 +51,7 @@ const sidebars = {
       label: "Quickstart",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+     //  link: { id: "build-mvm/overview/your_first_function", type: "doc" },
       items: [
         "build-mvm/quickstarts/your_first_function",
         "build-mvm/quickstarts/connecting_to_the_world",

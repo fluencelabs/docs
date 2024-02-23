@@ -232,7 +232,9 @@ Let's focus on the three numbered sections:
 * (2) The *fluence.yaml* file holds all the information about dependencies, [Cloudless Deployment](../glossary.md/#cloudless-deployment) and compilation specific references. 
 * (3) The `src` directory holds all the source fils including aqua scripts. As you add [Marine Services](../glossary.md/#marine-service) or [Spells](../glossary.md/#spell), these artifacts are recorded and referenced in *fluence.yaml* and provide the canonical reference for CLI when the time comes to package all artifacts fro deployment. A valid CLI project requires an aqua file and the minimal template accounts for that requirement. go ahead and check out the scripts in *main.aqua*.  
 
+Feel free to check out the various files and go ahead and initiated additional projects with the different templates and do some comparison. For a complete enumeration and annotation of all files, see the [Configs](https://github.com/fluencelabs/cli/blob/main/docs/configs/README.md) reference.
 
-Feel free to check out the various files and go ahead and initiated additional projects with the different templates and do some comparison.
+
+
 
 
