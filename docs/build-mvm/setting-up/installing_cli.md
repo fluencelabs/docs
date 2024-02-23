@@ -132,7 +132,7 @@ Note that if you want to use the Fluence local network, you need to have [Docker
 
 ### Target Audience
 
-The FLuence CLI supports the needs of  developers, capacity providers and delegators. Some functionality is shared, others is more target specific and bundled under the `fluence provider` and `fluence delegator` topics, respectively.
+The Fluence CLI supports the needs of  developers, capacity providers and delegators. Some functionality is shared, others is more target specific and bundled under the `fluence provider` and `fluence delegator` topics, respectively.
 
 ## A Quick Tour Of CLI
 
@@ -168,7 +168,25 @@ The CLI ships with several templates that allow you to scaffold a project quickl
 * js
     * scaffold suitable for compute services with JS frontend
 
+### Fluence CLI Key Management
 
+In order for Fluence CLI to be able to securely interact and communicate with peers in Fluence’s peer-to-peer network, cryptographic keys are required for encryption and authentication. By defaut, CLI creates and manages such keys for you in the `~/.fluence/secrets` directory, which apply to all of your projects unless create a project-specific key. Project keys are by default stored in the `.fluence/secrets` dir of your project or any other location you specify.
+
+```bash
+$ fluence key new
+
+? Enter secret key name to generate at
+<your path>/keys-demo/.fluence/secrets: my-project-keys
+? Do you want to set my-project-keys as default secret key at
+<your path>/keys-demo/fluence.yaml: Yes
+Secret key with name my-project-keys successfully generated and saved to <your path>/keys-demo/.fluence/secrets
+```
+
+Check out all things key-related with `fluence key --help`.
+
+:::info
+The keys created and managed by Fluence CLI are for the purpose of peer identification and content encryption related to Fluence's off-chain, peer-to-peer compute network. Fluence CLI is not involved in managing your crypto (wallet) keys.
+:::
 
 ### Creating a Project
 
