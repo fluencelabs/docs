@@ -63,7 +63,7 @@ Now that your account and wallet are setup, select the Fluence network you just 
 
 <div>
   <img
-    src="/img/dar_faucet.png"
+    src="/img/mvm/dar_faucet.png"
     alt="Dar Faucet"
     style={{ display: "block", margin: "auto", maxWidth: "65%" }}
   />
