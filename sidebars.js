@@ -2,7 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  "learn": [
+  learn: [
     "learn/overview",
     "learn/how-it-works",
     "learn/why-fluence",
@@ -11,16 +11,14 @@ const sidebars = {
     "learn/technology",
     "learn/networks",
   ],
-  "build": [
+  build: [
     {
       type: "category",
       label: "Hello Fluence",
       collapsible: true,
       collapsed: true,
       link: { id: "build-mvm/introducing_fluence", type: "doc" },
-      items: [
-      ]
-
+      items: [],
     },
     {
       type: "category",
@@ -31,8 +29,8 @@ const sidebars = {
       items: [
         // "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
-        "build-mvm/overview/roadmap"
-      ]
+        "build-mvm/overview/roadmap",
+      ],
     },
     {
       type: "category",
@@ -43,63 +41,61 @@ const sidebars = {
       items: [
         // "build-mvm/setting-up/setting_up",
         "build-mvm/setting-up/installing_cli",
-        "build-mvm/setting-up/working_with_local_networks"
-      ]
+        "build-mvm/setting-up/working_with_local_networks",
+      ],
     },
     {
       type: "category",
       label: "Quickstart",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/your_first_function", type: "doc" },
+      //  link: { id: "build-mvm/overview/your_first_function", type: "doc" },
       items: [
         "build-mvm/quickstarts/your_first_function",
         "build-mvm/quickstarts/connecting_to_the_world",
-        "build-mvm/quickstarts/connecting_to_local_storage"
-      ]
+        "build-mvm/quickstarts/connecting_to_local_storage",
+      ],
     },
     {
       type: "category",
       label: "Concepts",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/concepts/best_practices",
         "build-mvm/concepts/fluence_functions_revisited",
         "build-mvm/concepts/marketplace",
         "build-mvm/concepts/http_gateways",
         // "build-mvm/concepts/scheduling_functions",
-        "build-mvm/concepts/security"
-      ]
+        "build-mvm/concepts/security",
+      ],
     },
     {
       type: "category",
       label: "Tutorials",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/tutorials/workflow_fundamentals",
-        "build-mvm/tutorials/event_handling_in_js"
-      ]
+        "build-mvm/tutorials/event_handling_in_js",
+      ],
     },
     {
       type: "category",
       label: "Examples",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
-      items: [
-        "build-mvm/examples/frpc"
-      ]
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      items: ["build-mvm/examples/frpc"],
     },
     {
       type: "category",
       label: "How To Guides",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/how-to/setting_up",
         "build-mvm/how-to/configure",
@@ -110,11 +106,11 @@ const sidebars = {
         "build-mvm/how-to/deploy",
         "build-mvm/how-to/monitor",
         "build-mvm/how-to/migrate",
-        "build-mvm/how-to/schedule_functions"
-      ]
+        "build-mvm/how-to/schedule_functions",
+      ],
     },
     "build-mvm/glossary",
-    "build-mvm/references"
+    "build-mvm/references",
   ],
   "aqua-book": [
     "aqua-book/introduction",
