@@ -59,14 +59,16 @@ Once you got the network set, it's time to visit the faucet and request our toke
 
 Now that your account and wallet are setup, select the Fluence network you just added and grab the account address you want to use to hold your testnet tokens. Go to the Fluence [dar testnet faucet](https://faucet-dar.fluence.dev/), which prompts you to sign in with an email address. Shortly after submitting your email address, you will receive an email from `Faucet`. Make sure to check your spam folder. Copy the code into the open field and submit. At this point, you should see a screen similar to this:
 
-<img src="../images/dar_faucet.png" alt="isolated" width="450"/>
+
+
+<div>
+  <img
+    src="/img/dar_faucet.png"
+    alt="Dar Faucet"
+    style={{ display: "block", margin: "auto", maxWidth: "65%" }}
+  />
+</div>
 
 Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to tbe imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account. You Blockscout the checkout the transaction.
 
 You are now equipped to pay for your Cloudless Deployment on the Fluence testnet!
-
-
-
-
-
-
