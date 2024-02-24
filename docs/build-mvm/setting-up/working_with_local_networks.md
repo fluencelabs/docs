@@ -51,7 +51,7 @@ Using local blockchain environment
 Successfully deposited 100 to nox-0 with tx hash: 0xfae650fcd2fdcda6ef73b158797faf5d428530ad7836d54629fc7f5f9997542d
 Successfully deposited 100 to nox-1 with tx hash: 0x421eef681f3e601446491f48ef634b686b533620cad3d9c3ddfa8c149336e757
 Successfully deposited 100 to nox-2 with tx hash: 0x75065283ffd42a3fe39b51dee2450518c1958fdbd33b2e7a51fd6afe0b5c461c
-setProviderInfo transaction 0x993282a1bee2b320dff25a45a75365c879dce0a34453afc61edc4dd09c2caaa7 was mined successfuly
+setProviderInfo transaction 0x993282a1bee2b320dff25a45a75365c879dce0a34453afc61edc4dd09c2caaa7 was mined successfully
 
 Provider successfully registered!
 
@@ -59,7 +59,7 @@ Provider name: defaultProvider
 
 Provider address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 
-registerMarketOffer transaction 0x9be7e50cac3e277ac28ffffbecf6b8ac619bd5a6a05926843d85e2874ec1094d was mined successfuly
+registerMarketOffer transaction 0x9be7e50cac3e277ac28ffffbecf6b8ac619bd5a6a05926843d85e2874ec1094d was mined successfully
 
 Offers defaultOffer successfully created!
 
@@ -73,10 +73,10 @@ Price Per Epoch: "0.00001"
 Peer Count: "3"
 
 
-multicall transaction 0x404d8e9e45c084dc73777570851ce42ade9236b1dc6599414a74bd795c74e6cd was mined successfuly
+multicall transaction 0x404d8e9e45c084dc73777570851ce42ade9236b1dc6599414a74bd795c74e6cd was mined successfully
 Commitments 0xd9c9ebe9a4bf369087cda827745ac23a9d8e1f0baf8a84a3ea074f1d5f486df2, 0xdb2116e34ca871b8b0ac7cf225e9d1180bd02d4a276a4cef972589590d99ff74, 0xf17db8e2592c1d35c6a473ebbe78c507dfc6523bf747c2b507e7287fa62e5c93 were registered
 Found created commitments for the following peers: nox-0, nox-1, nox-2
-depositCollateral transaction 0xc37b8996fa9265769fc8f2f70b0b0347660e2feaf9770a852fe8debf10f02cde was mined successfuly
+depositCollateral transaction 0xc37b8996fa9265769fc8f2f70b0b0347660e2feaf9770a852fe8debf10f02cde was mined successfully
 3 capacity commitments have been successfully activated by adding collateral!
 ATTENTION: Capacity proofs are expected to be sent in next epochs!
 Deposited 0.000000000000000096 collateral in total
