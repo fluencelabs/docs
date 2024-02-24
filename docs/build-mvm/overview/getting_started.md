@@ -11,18 +11,15 @@ But first, let's get set up.
 
 ## Setting Up
 
-The recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Functions as well as your tooling and development dependencies.
-
-Fluence CLI requires [node](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs) version 18 and can be installed as a binary:
+The recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Functions as well as your tooling and development dependencies. If you haven't installed the Fluence CLI already, use the install script provided below or check out the [Setting up](../setting-up/setting_up.md) section.
 
 ```bash
 curl -qsL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
 ```
 
 :::note
-Currently, Fluence CLI does not support native Windows OS but supports Windows Linux Subsystem (WLS).
+Currently, Fluence CLI does not support Windows OS but supports Windows Linux Subsystem (WLS).
 :::
-
 
 :::info
 During the installation process, you may be asked to provide *sudo* access to set the symlink for the binary.
@@ -36,7 +33,7 @@ fluence --version
 @fluencelabs/cli/0.12.7 darwin-arm64 node-v18.17.1
 ```
 
-If you get the above CLI version, or higher, you are good to go but should run `fluence update` just for good measure. Any trouble? Contact us on the Fluence discord  [development channel](https://fluence.chat).
+If you get the above CLI version, or higher, you are good to go but should run `fluence update` just for good measure.
 
 ## Hello World
 
@@ -74,4 +71,4 @@ Which results in the following response:
 "Hi, Fluence"
 ```
 
-Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *kras* network. We'll revisit our *Hello World* project in the [Quickstart](../Quickstarts/your_first_lambda.md) section.
+Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *dar* test network. We'll revisit our *Hello World* project in the [Quickstart](../Quickstarts/your_first_lambda.md) section.

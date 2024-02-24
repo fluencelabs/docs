@@ -4,12 +4,12 @@ Fluence Cloudless Function is a decentralized serverless solution deeply rooted 
 
 ## In A Nutshell
 
-To make Fluence Cloudless Function work for you, you need to complete three fundamental steps:
+To make Fluence Cloudless Function work for you, you need to complete four fundamental steps:
 
-* Create and manage your [Compute Functions](../glossary.md/#compute-functions) by compiling your business logic to Marine Wasm
+* Create and manage your [Compute Functions](../glossary.md/#compute-functions) by compiling your business logic to [Marine](../glossary.md/#marine) Wasm
 * Create your Aqua scripts to choreograph your Compute Functions
 * Create your [Developer Offer](../glossary.md/#developer-offer) to package your compute artifacts and deployment requirements
-* Submit your Developer Offer 
+* Submit your Developer Offer to the [marketplace](../glossary.md/#compute-marketplace) for matching
 
 Cloudless Function is available on a Wasm runtime called [Marine](../glossary.md/#marine), with more runtimes already under development, providing performant, available and portable compute functions across capacity providers participating in the [Compute Marketplace](../glossary.md/#compute-marketplace). Moreover, [Aqua](../glossary.md/#aqua) lets you choreograph compute functions into [Cloudless Deployments](../glossary.md/#cloudless-deployment).
 
@@ -41,17 +41,19 @@ mermaid
 ```
 Figure 1: Stylized Fluence Cloudless Development And Deployment Flow
 
-Prior to being able to submit your Deployment, you need to acquire tokens `<compute tokens, USDC tokens>` from one of the (Fiat) gateway providers. `<Compute, USDC>` tokens are escrowed according to each Deployment and used to periodically compensate capacity providers for executing your Cloudless Functions commensurate with the execution loads, i.e., CPU and memory model, length of execution, data payload, etc. 
+Prior to being able to submit your Deployment, you need to acquire **FLT** and **USDC** tokens from one of the (Fiat) gateway providers. **USDC** tokens are escrowed according to each Deployment and used to periodically compensate capacity providers with valid proofs attesting to the correct execution of your Cloudless Functions commensurate with the execution loads, i.e., CPU and memory model, length of execution, data payload, etc. 
+
+Of course, for development on a testnets, you are able to request testnet tokens, **tFLT** and **tUSDC**, free of charge and in sufficient quantities to support your development efforts. 
 
 :::info
 For the purpose of launching the Fluence mainnet, billing follows an epoch rather than execution-based model also known as a subscription model. That is, you are billed for having a provider host your Deployments for some period of time regardless of the number of executions or loads. This is a temporary constraint.
 :::
 
-An integral part of the Fluence Lambda developer experience is the Fluence CLI, which supports all development and deployment aspects of a Fluence Lambda application.
+An integral part of the Fluence Cloudless Function developer experience is the [Fluence CLI](../setting-up/installing_cli.md), which supports all development and deployment aspects necessary to create and manage your Cloudless App.
 
 ## Comparative Positioning
 
-From a capabilities and development perspective, Fluence Cloudless Function is very similar to other serverless solutions such as [AWS Lambda](https://aws.amazon.com/lambda/), [Azure Functions](https://azure.microsoft.com/en-us/products/functions) and [Google Cloud Functions](https://cloud.google.com/serverless). Unlike these centralized serverless cloud providers, Fluence Cloudless Function leverages the power and portability of Wasm to provide a high-performance compute runtime hosted and executed across a customizable, high-availability capacity mesh, thereby eliminating single points of failure, access controls, high exit barriers and excessive rent seeking. See Table 1.
+From a capabilities and development perspective, Cloudless Function is very similar to other serverless solutions such as [AWS Lambda](https://aws.amazon.com/lambda/), [Azure Functions](https://azure.microsoft.com/en-us/products/functions) and [Google Cloud Functions](https://cloud.google.com/serverless). Unlike centralized serverless cloud providers, Fluence Cloudless Function leverages the power and portability of Wasm to provide a high-performance compute runtime hosted and executed across a customizable, high-availability capacity mesh, thereby eliminating single points of failure, access controls, high exit barriers and excessive rent seeking. See Table 1.
 
 Table 1: High Level Serverless Provider Comparison
 
@@ -68,7 +70,9 @@ Table 1: High Level Serverless Provider Comparison
 
 Unlike centralized cloud providers, the [Fluence Protocol](../glossary.md/#fluence-protocol) enables an open, permisisonless peer-to-peer network and compute marketplace that facilitates crowd sourcing of (data center) capacity. Make no mistake, the Fluence network is backed by a large number of Tier 4 data centers offering top of the line CPU and RAM configurations at extremely competitive prices for extraordinary SLAs. The Fluence Compute Marketplace is built on [InterPlanetary Consensus](https://www.ipc.space/) (IPC), an EVM-compatible, modern high-performance PoS blockchain. 
 
-While developers can ignore the intricacies of the peer-to-peer network,including network security solutions such as DDOS and other attack prevention or mitigation schemes, a salient difference between Fluence Protocol and other serverless solutions is that Fluence network does not natively support HTTP request and response calls. That is, function choreography happens on the peer-to-peer level. However, this is easily solved with existing Fluence solutions at both (p2p) network ingress and egress such as the [HTTP Gateway](../glossary.md/#gateway) and [HTTP cURL Adapter].
+While developers can ignore the intricacies of the peer-to-peer network,including network security solutions such as DDOS and other attack prevention or mitigation schemes, a salient difference between Fluence Protocol and other serverless solutions is that Fluence network does not natively support HTTP request and response calls. That is, function choreography happens on the peer-to-peer level. However, this is easily solved with existing Fluence solutions at both (p2p) network ingress and egress such as the [HTTP Gateway](../glossary.md/#gateway).
+
+TODO: curl adapter reference
 
 ## Use Cases
 
