@@ -29,7 +29,7 @@ const sidebars = {
       items: [
         // "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
-        "build-mvm/overview/roadmap",
+        // "build-mvm/overview/roadmap",
       ],
     },
     {
@@ -52,10 +52,11 @@ const sidebars = {
       //  link: { id: "build-mvm/overview/your_first_function", type: "doc" },
       items: [
         "build-mvm/quickstarts/your_first_function",
-        "build-mvm/quickstarts/connecting_to_the_world",
-        "build-mvm/quickstarts/connecting_to_local_storage",
+        // "build-mvm/quickstarts/connecting_to_the_world",
+        // "build-mvm/quickstarts/connecting_to_local_storage",
       ],
     },
+    /*
     {
       type: "category",
       label: "Concepts",
@@ -71,6 +72,8 @@ const sidebars = {
         "build-mvm/concepts/security",
       ],
     },
+    */
+   /*
     {
       type: "category",
       label: "Tutorials",
@@ -82,6 +85,7 @@ const sidebars = {
         "build-mvm/tutorials/event_handling_in_js",
       ],
     },
+    */
     {
       type: "category",
       label: "Examples",
@@ -97,6 +101,7 @@ const sidebars = {
       collapsed: true,
       //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
+        /*
         "build-mvm/how-to/setting_up",
         "build-mvm/how-to/configure",
         "build-mvm/how-to/setup_payments",
@@ -106,6 +111,7 @@ const sidebars = {
         "build-mvm/how-to/deploy",
         "build-mvm/how-to/monitor",
         "build-mvm/how-to/migrate",
+        */
         "build-mvm/how-to/schedule_functions",
       ],
     },
