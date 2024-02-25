@@ -28,13 +28,13 @@ Choose the default option, `quickstart`, and stick with the default choice, *dar
   custom
 ```
 
-Depending on your previous use of, or lack thereof, Fluence CLI, you may witness the installation of multiple dependencies possibly including the [Rust toolchain](https://www.rust-lang.org/) which may take a minute. Eventually, you should see a message similar to:
+Depending on your previous use of Fluence CLI, you may witness the installation of multiple dependencies possibly including the [Rust toolchain](https://www.rust-lang.org/) which may take a minute. Eventually, you should see a message similar to:
 
 ```bash
 Successfully initialized Fluence CLI project template at <your path>/hello-world
 ```
 
-`cd` into the directory and look around a bit:
+`cd` into the directory and look around:
 
 ```bash
 $ tree -L 2 -a
@@ -58,7 +58,7 @@ $ tree -L 2 -a
 │   └── services 
 ```
 
-The *quickstart* template scaffolds out project with the basic components needed to develop and deploy your Cloudless Function. Specifically, the template scaffolds a Marine service (and a Gateway) section on top of the *minimal* template discussed earlier. For starters, the *quickstart* template created a `src/services/` directory and installed a Marine service template called myService (1).
+The *quickstart* template scaffolds our project with the basic components needed to develop and deploy your Cloudless Function. Specifically, the template scaffolds a Marine service (and a Gateway) section on top of the *minimal* template discussed earlier. For starters, the *quickstart* template created a `src/services/` directory and installed a Marine service template called myService (1).
 
 ```bash
 $ tree -L 5 -a src/services
@@ -75,24 +75,24 @@ src/services
 5 directories, 4 files
 ```
 
-Upon closer inspection, we see that *myService* is comprised of one module, although a service may const of multiple modules, with its module definition in the *module.yaml* file and the code in the main.rs file (2). With the exception of the yaml files, *myService* looks like a typical Rust project.
+Upon closer inspection, we see that *myService* is comprised of one module, although a service may consist of multiple modules, with its module definition in the *module.yaml* file and the code in the main.rs file (2). With the exception of the yaml files, *myService* looks like a typical Rust project.
 
 :::info
-In Marine terminology, a service is a namespace over the Wasm artifacts consisting of  modules and configuration files. Multiple Wasm modules can be linked but can only have a single (module) interface, called the facade module as reflected in the service.yaml file. See the [Glossary](https://fluence.dev/docs/build/glossary#facade-module) for more information about modules and module types.
+In Marine terminology, a service is a namespace over the Wasm artifacts consisting of modules and configuration files. Multiple Wasm modules can be linked but can only have a single (module) interface, called the facade module, as reflected in the service.yaml file. See the [Glossary](https://fluence.dev/docs/build/glossary#facade-module) for more information about modules and module types.
 :::
 
 In your editor or IDE, have a look at the `src/services/myService/modules/myService/src/main.rs` file:
 
 ```rust
      1	#![allow(non_snake_case)]
-     2	use marine_rs_sdk::marine;
+     2	use marine_rs_sdk::marine;                     (2)
      3	use marine_rs_sdk::module_manifest;
      4
      5	module_manifest!();
      6
      7	pub fn main() {}
      8
-     9	#[marine]
+     9	#[marine]                                       (9)
     10	pub fn greeting(name: String) -> String {
     11	    format!("Hi, {}", name)
     12	}
@@ -100,7 +100,7 @@ In your editor or IDE, have a look at the `src/services/myService/modules/myServ
 
 For our quickstart purposes, lines 2 and 9 are the most pertinent. In line 2, we import the *marine macro* from the [marine_rs_sdk](https://crates.io/crates/marine-rs-sdk) crate. The SDK which builds on top of the [wasmtime](https://wasmtime.dev/) runtime to enable you to write performant, effective Fluence Compute Functions for Fluence's serverless Wasm runtime. For a comprehensive overview and deep dive into Marine, see the [Marine book](https://fluence.dev/docs/marine-book/introduction).  Suffice it to say that in order for methods, or structs, be callable from the outside, they need to be wrapped by the `#[marine]` (line 9) macro provided by the marine-rs-sdk.
 
-Go ahead run `fluence build` to recompile our code. You should see output similar to:
+Go ahead run `fluence build` to compile our code. You should see output similar to:
 
 ```bash
 # Making sure all services are downloaded...
@@ -120,7 +120,7 @@ Eventually, we'll deploy that module to the network as a Compute Function. Befor
 
 The Fluence toolchain supports interactive and non-interactive testing of your Fluence Functions using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](../how-to/test.md) for a comprehensive review of both tooling and strategy.
 
-Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi. So now what? Well, before we do anything else, we want to know if our *greeting* function works. For that we use the Marine REPL by calling `fluence service repl myService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
+Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi giving us the [Marine Service](../glossary/#marine-service) we want to deply to the network for future execution(s). But before we go to deploying our functions, we want to know if our *greeting* function actually works. For that we use the Marine REPL by calling `fluence service repl myService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
 
 ```bash
 # Making sure service and modules are downloaded and built...
@@ -177,7 +177,9 @@ result: "Hi, Fluence"
 
 Looks like our *greeting* function is working as intended. Try calling it with a parameter of a wrong type, e.g., an **int** or **float**, and check the error message.
 
-Just to recap, we loaded our myService.wasm module into the REPl, identified our callable *greeting* function and called it. Don't forgot, if you make changes to your source code, you need to recompile it and load the new Wasm module into the REPL to see any changes.
+To recap, we loaded our myService.wasm module into the REPl, identified our callable *greeting* function and called it. It's worth repeating that you didn't test the  *greeting* function code per se but the *greeting* function exposed by the Wasm module you created earlier. Don't forgot, if you make changes to your source code, you need to recompile it and load the new Wasm module into the REPL to see any changes. 
+
+In addition to interactive testing with REPL, *cargo-based unit tests* are also available. For more information on creating Marine services, see the [Marine Book](https://fluence.dev/docs/marine-book/introduction).
 
 Now that we are satisfied that our code is in working order, it's time to think about deployment. If you haven't set up your wallet with the necessary test tokens, see [Setting Up](../setting-up/).
 
@@ -189,14 +191,14 @@ $ fluence default env dar
 
 which should return output similar to `Successfully set default fluence environment to dar`. Your `.fluence/env.yaml` content should reflect the `dar` testnet environment, i.e. you should see `fluenceEnv: dar`. 
 
-The next steps are to parameterize the [Cloudless Distributive](../glossary.md/#cloudless-distributive) and [developer offer](../glossary.md/#developer-offer). All this is actually happening in the `fluence.yaml` file, which already includes the dtritributive and off templates with some default values.
+The next steps are to parameterize the [Cloudless Distributive](../glossary/#cloudless-distributive) and [developer offer](../glossary/#developer-offer). All the offer-related parameterization is actually happening in the `fluence.yaml` file, which already includes the offer template with some default values.
 
 ```yaml
 version: 8
 
 deployments:                        (1)
   myDeployment:
-    targetWorkers: 1
+    targetWorkers: 3
     pricePerWorkerEpoch: 0.00001
     initialBalance: 0.001
     services: [ myService ]
@@ -220,15 +222,15 @@ compileAqua:
     target: js
 ```
 
-For our purposes, let's focus on the the deployment (1) section which is a list of deployments. In our case, we have only one deployment for our *myService* Marine service. 
+Let's focus on section (1), which is a list of deployments. In our case, we have only one deployment for our *myService* Marine service. 
 
-* *targetWorkers*: specifies how many instances of Cloudless Deployment you want. If you are looking for high-availability, you should specify a larger number of workers.
-* *pricePerWorkerEpoch*: specifies how much you are willing to pay for each worker per epoch in *tUSDC* and *USDC* for mainnet deployment. For development purposes, the duration of an epoch is defined as 15 seconds for the testnet and if your offer of USDC 0.0001 is accepted, you will be charged that amount per epoch per worker.  If your offer does not result in a match on the marketplace, you may want to look into the feasibility of your payment proposal. *Note that epoch-based pricing a temporary solution that will be replaced by request-based pricing in short order. 
+* *targetWorkers*: specifies how many instances of Cloudless Deployment you want. If you are looking for high-availability, you should specify a larger number of workers, such as the three specified by default. 
+* *pricePerWorkerEpoch*: specifies how much you are willing to pay for each worker per epoch in *tUSDC* and *USDC* for mainnet deployment. For development purposes, the duration of an epoch is defined as 15 seconds for the testnet and if your offer of USDC 0.0001 is accepted, you will be charged that amount per epoch per worker.  If your offer does not result in a match on the marketplace, you may want to look into the feasibility of your payment proposal. *Note that epoch-based pricing a temporary solution that will be replaced by request-based pricing in short order.* 
 * *initialBalance*: This is the amount of USDC you are committing to seed your deployment. You can add or withdraw funds once the your offer was successfully matched on the marketplace. In this case, you can expect your deployment to be available for invocation for 10 epochs or 2.5 minutes. That should be enough to make sure that our Cloudless Deployment works as planned.
 * *services* specifies which Marine services are part of the deployment. Note that you can include more than Marine service in your deployment as well as none assuming you have a *spell* to deploy.
-* *spell*: specifies which Cloudless Scheduler service you wan to deploy. See the [Cloudless Scheduler](../how-to/schedule_functions.md) section for more information.
+* *spell*: specifies which Cloudless Scheduler service you want to deploy. See the [Cloudless Scheduler](../how-to/schedule_functions.md) section for more information.
 
-We have now set up everything we need for the CLI to create and submit our offer to the marketplace and since out testnet providers are quite cooperative, there shouldn't be any problems getting this offer matched. Time to move to the deployment phase for which we use the `fluence deploy` command:
+We have set up everything we need for the CLI to create and submit our offer to the marketplace and since our testnet providers are quite cooperative, there shouldn't be any problems getting your offer matched. Time to move to the deployment phase for which we use the `fluence deploy` command:
 
 ```bash
 fluence deploy myDeployment
@@ -257,11 +259,14 @@ or go to https://cli-connector.fluence.dev and enter the following connection st
 wc:5270eac6c16c6e548352de5eca15da84e2578c100e29b91695931f3b8d8c8696@2?relay-protocol=irn&symKey=3e8ccf026bd1cef1de5d430be31f8c8ec157534aa852accb4e942039a294295f
 ```
 
-You are now prompted to confirm the transaction. Copy the url into a browser tab and you'll see your wallet, in our case MetaMask pop up asking you to confirm the transaction. Make sure you selected the correct network and tUSDC, tFLT funded account.
+You are now prompted to confirm the transaction. Copy the url into a browser tab and pretty soon you'll see your wallet, in our case MetaMask, pop up asking you to confirm the transaction. Make sure you selected the correct network and a tUSDC, tFLT funded account. Once the deployment offer is matched with one or more provider offers, 
+
+TODO
+
+Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout-dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
 
 
-
-Now that we've got our Cloudless Deployment in place with our compute function installed on one peer, we are ready to orchestrate with Aqua. For all things Aqua, see the [Auqa Book](https://fluence.dev/docs/aqua-book/introduction).
+Now that we've got our Cloudless Deployment in place with our compute function installed on three different peers, we are ready to orchestrate with Aqua. For all things Aqua, see the [Auqa Book](https://fluence.dev/docs/aqua-book/introduction).
 
 Luckily, the quickstart template already provided us with a a nice set of Aqua scripts to explore an use. Have a look at the *auqa.main* file in the `src/aqua` directory and let's quickly review the most salient sections before we start executing:
 
@@ -286,13 +291,13 @@ export helloWorld, helloWorldRemote, getInfo, getInfos
 -- example of running services deployed using `fluence deploy`
 -- with worker 'myDeployment' which has service 'MyService' with method 'greeting'
 
-export runDeployedServices, showSubnet
+export runDeployedServices, showSubnet         (4)
 
-data Answer:
+data Answer:                                   (5)
     answer: ?string
     worker: Worker
 
-func runDeployedServices() -> []Answer:
+func runDeployedServices() -> []Answer:        (6)
     deals <- Deals.get()
     dealId = deals.myDeployment!.dealIdOriginal
     answers: *Answer
@@ -306,7 +311,7 @@ func runDeployedServices() -> []Answer:
             answers <<- Answer(answer=nil, worker=w)
         else:
             on w.worker_id! via w.host_id:
-                answer <- MyService.greeting("fluence")
+                answer <- MyService.greeting("fluence")        (6a)
                 answers <<- Answer(answer=?[answer], worker=w)
 
     <- answers
@@ -314,7 +319,81 @@ func runDeployedServices() -> []Answer:
 <snip>
 ```
 
+Before we run through the code, let's got for instant gratification and choreograph our *greeting* compute function. We use `fluence run` to invoke the `runDeployedServices`, (6), function to invoke all three of our distributed compute functions:
 
-From the top, every aqua file needs a (named) header `aqua`. Imports are amanged with 'import' and 'use',
-where `use` allows you bring the file's namespace into your scope. See the [Aaqua book](https://fluence.dev/docs/aqua-book/language/header/)for more detail.
+```bash
+fluence run -f 'runDeployedServices()'
+```
+
+if you look in line (6a), you see that our distributed *greeting* functions are called with the *fluence* value
+and our expectation might be that we get back three *Hello, fluence* strings. Let's check the response:
+
+```bash
+Running runDeployedServices() from /Users/bebo/localdev/local-0.15.9/src/aqua/main.aqua
+
+[
+  {
+    "answer": "Hi, fluence",
+    "worker": {
+      "host_id": "12D3KooWHy6DowFR9n7MnKpywLm2MsfSyfZmxRKrbDC1sUXfrhhk",
+      "pat_id": "0x0025af2a1309527cc3505637b3cbcb1e05cf96e0d7b65cb43e994e0ff97e5a1e",
+      "worker_id": "12D3KooWDsorC8Vb5oVbUyjczKUttEcvpFBPjqyGbcQKBfBLuuRy"
+    }
+  },
+  {
+    "answer": "Hi, fluence",
+    "worker": {
+      "host_id": "12D3KooWKPTy4QDrWNFjEtDwdzyhvfv7TSu79PSUhkyVAPbug5tV",
+      "pat_id": "0x0d434243f6dd6b70cae0488dbc09889b6c9f1870d6f80cefc6fbe0954f6e2711",
+      "worker_id": "12D3KooWHphpX4TND7fPg5NE1y5TG1FUKfywtQ4BLSWY7z8w18o3"
+    }
+  },
+  {
+    "answer": "Hi, fluence",
+    "worker": {
+      "host_id": "12D3KooWRFyAVoaGBnpPfjgtmPrCg2dFjJ8jSspzNAxMVDk1rhUg",
+      "pat_id": "0x017451419285266927091d2864bc4fe8c4c492fd6084e1095af713882588e91e",
+      "worker_id": "12D3KooWKPGZJcvP7avSBpYfia1aaRXiCwaphE6g4dLF3rRqZeKB"
+    }
+  }
+]
+```
+
+Alright, we hit pay dirt! Note that the *answer* key holds the compute function return string, whereas the *worker* key holds the worker information for each of the Cloudless Deployments.
+
+
+Let's dig into the *main.aqua* file:
+
+*  every aqua file needs a (named) header `aqua` (1)
+*  imports are managed with 'import' and 'use' (2), where `use` allows you bring the file's namespace into your scope. See the [Aaqua book](https://fluence.dev/docs/aqua-book/language/header/)for more detail. The CLI scaffold already added the dependency requirements, (2a) and (2b), which support [Builtins](../glossary/#builtin-services) and [Subnet](../glossary/#subnet).
+* CLI maintains aqua files, (3a),(3b) and (3c), in the `.file/aqua` directory that can be imported/used in your Aqua scripts saving you from typing a bunch of boilerplate:
+ * (3a) contains the deployment information
+ * (3c) contains the interface bindings for Aqua to be able to interact with the exposed Wasm methods of your compute function; in this case  *greeting*
+* in order to be able to call an Aqua function, like *runDeployedServices*, the function needs to be exported (4)
+
+Now, let's review the *runDeployedServices* function (6), line-by-line:
+
+```haskell
+func runDeployedServices() -> []Answer:
+    deals <- Deals.get()                                  -- get the parameterized deal info from .fluence/aqua/deals.aqua
+    dealId = deals.myDeployment!.dealIdOriginal           -- now we can ge the deal id we need to resolve subnetwork
+    answers: *Answer                                      -- mutable stream variable of (5) data struct  
+    on HOST_PEER_ID:                                      -- on this full, e.g., relay, peer
+        subnet <- Subnet.resolve(dealId)                  -- get the subnet 
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    for w <- subnet.workers:                              -- for each worker holding Cloudless Deployment
+        if w.worker_id == nil:
+            answers <<- Answer(answer=nil, worker=w)
+        else:
+            on w.worker_id! via w.host_id:
+                answer <- MyService.greeting("fluence")    -- call the greeting function using using the interface definitions from services.aqua
+                answers <<- Answer(answer=?[answer], worker=w)   -- pipe the function results into the streaming variable
+
+    <- answers                                             -- return the streaming variable
+```
+
+For the most part, the lines through `subnet <- Subnet.resolve(dealId)` need to be implemented for your Aqua functions  needing to interact with your compute functions. If you are interested to see a little more information about your subnet, `fluence run -f 'showSubnet()'`.
+
 

@@ -2,7 +2,7 @@
 
 Let's explore the obligatory **Hello World** example as an end-to-end Fluence Cloudless App, which includes the following steps:
 
-* Scaffold a Fluence Cloud Function project with the [Fluence CLI](../glossary.md/#fluence-cli)
+* Scaffold a Fluence Cloud Function project with the [Fluence CLI](../glossary/#fluence-cli)
 * Create the Hello World example and compile it to Wasm
 * Distribute the Wasm module to capacity (hardware) providers
 * Execute your Fluence Functions Hello World application
@@ -26,14 +26,14 @@ During the installation process, you may be asked to provide *sudo* access to se
 Alternative installation approaches can be found in the [Readme](https://github.com/fluencelabs/cli?tab=readme-ov-file#installation-and-usage).
 :::
 
-After the installation process is complete, you should be able to use FLuence CLI and determine its version:
+After the installation process is complete, update the CLI with `fluence update unstable` and check the version:
 
 ```bash
 fluence --version
-@fluencelabs/cli/0.12.7 darwin-arm64 node-v18.17.1
+@fluencelabs/cli/0.15.10 darwin-arm64 node-v18.19.
 ```
 
-If you get the above CLI version, or higher, you are good to go but should run `fluence update` just for good measure.
+If you get the above CLI version, or higher, you are good to go.
 
 ## Hello World
 

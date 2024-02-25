@@ -1,6 +1,6 @@
 # Installing And Working With Fluence CLI
 
-[Fluence CLI](../glossary.md/#fluence-cli) is your one-stop command line interface to creating, deploying, paying, running, monitoring and removing Fluence Cloudless resources to/from the network.
+[Fluence CLI](../glossary/#fluence-cli) is your one-stop command line interface to creating, deploying, paying, running, monitoring and removing Fluence Cloudless resources to/from the network.
 
 :::info
 CLI is compatible with Linux systems including macOS but currently does **not** support Windows OS. However, Windows Linux Subsystem is supported. This limitation should be relaxed in the very near future. 
@@ -15,11 +15,11 @@ The easiest and quickest way to install Fluence CLI is using the install script.
 curl -qsL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
 ```
 
-This may make take some time and depending on your setup, you be prompted to *sudo* a symlink. Once the installation is complete and you type `fluence --version`, you should output similar to below:
+This may make take some time and depending on your setup, you be prompted to *sudo* a symlink. Once the installation is complete make sure you update to the latest version with `fluence update unstable` and then check the version, which should be similar to below or higher:
 
 ```bash
 $ fluence --version
-@fluencelabs/cli/0.15.5 darwin-arm64 node-v18.19.1
+@fluencelabs/cli/0.15.10 darwin-arm64 node-v18.19.
 ```
 
 For alternative approaches, additional documentation including all commands, changelogs and latest version, visit the [Fluence CLI](https://github.com/fluencelabs/cli/tree/main) repo.
@@ -66,7 +66,7 @@ js-client dependencies:
 
 ```
 
-Fluence CLI only installs what it needs and lazily adds what it doesn't have. This especially pertains to dependencies needed for the development of your compute functions such as Rust and various [Marine](../glossary.md/#marine) dependencies. However, you can install all dependencies at once including Rust, if needed, with:
+Fluence CLI only installs what it needs and lazily adds what it doesn't have. This especially pertains to dependencies needed for the development of your compute functions such as Rust and various [Marine](../glossary/#marine) dependencies. However, you can install all dependencies at once including Rust, if needed, with:
 
 ```bash
 $ fluence dep i
@@ -247,8 +247,8 @@ $ tree -L 3 -a
 Let's focus on the three numbered sections:
 
 * (1) The `.fluence` directory holds the various artifacts necessary to manage both the project and deployment. That includes *schemas* and project-specific dependencies as well as a reference to the active environment in the *env.yaml* file. As your project evolves through adding services, spells and aqua scripts, and deploying to the `dar` network, `.fluence` is updated and holds the latest references, meta data and data pertaining to your project
-* (2) The *fluence.yaml* file holds all the information about dependencies, [Cloudless Deployment](../glossary.md/#cloudless-deployment) and compilation specific references. 
-* (3) The `src` directory holds all the source fils including aqua scripts. As you add [Marine Services](../glossary.md/#marine-service) or [Spells](../glossary.md/#spell), these artifacts are recorded and referenced in *fluence.yaml* and provide the canonical reference for CLI when the time comes to package all artifacts fro deployment. A valid CLI project requires an aqua file and the minimal template accounts for that requirement. go ahead and check out the scripts in *main.aqua*.  
+* (2) The *fluence.yaml* file holds all the information about dependencies, [Cloudless Deployment](../glossary/#cloudless-deployment) and compilation specific references. 
+* (3) The `src` directory holds all the source fils including aqua scripts. As you add [Marine Services](../glossary/#marine-service) or [Spells](../glossary/#spell), these artifacts are recorded and referenced in *fluence.yaml* and provide the canonical reference for CLI when the time comes to package all artifacts fro deployment. A valid CLI project requires an aqua file and the minimal template accounts for that requirement. go ahead and check out the scripts in *main.aqua*.  
 
 Feel free to check out the various files and go ahead and initiated additional projects with the different templates and do some comparison. For a complete enumeration and annotation of all files, see the [Configs](https://github.com/fluencelabs/cli/blob/main/docs/configs/README.md) reference.
 

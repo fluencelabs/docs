@@ -1,8 +1,66 @@
 # Connecting To The World
 
-Let's expand on the [previous section](./your_first_function.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Fluence Functions, which requires us spend a little time on general Wasm and Marine before we can start coding.
+Let's expand on the [previous section](./your_first_function.md) by adding a small but powerful improvement to our code. Specifically, we want to be able to make HTTP requests from our Cloudless Functions, which requires us to spend a little time on Marine and Wasm before we can start coding.
 
-While Wasm provides a lot of benefits including portability and performance, it currently has a few limitations such as a lack of sockets. In order to enable your Fluence Functions to make a HTTP request, we need to take advantage of Marine's [Mounted Binaries](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which allow us to utilize permissioned binaries, such as *curl*, from the host system. 
+While Wasm provides a lot of benefits including portability and performance, it currently has a few limitations, such as a lack of sockets. In order to enable your functions to make a HTTP request, we need to take advantage of Marine's [Mounted Binaries](../glossary/#mounted-binary), also [Marine Book](https://fluence.dev/docs/marine-book/marine-runtime/mounted-binaries), which allow us to utilize permissioned binaries, such as *curl*, on the host system.
+
+The emphasis is on **permissioned binaries** and before we can move forward, we need to take a step back and discuss security and resource availability. 
+
+## Intro To Host Resource Permissioning And Fluence Effector Modules
+
+Fluence's open, permisisonless peer-to-peer network is the result of a number of largely independently operated, Fluence Protocol compliant peers hosted on heterogenous (data center) servers. Each of these (protocol-compliant) peers is capably to hose and execute compute functions based on [pure](../glossary/#pure-module) modules due to the Wasm's inherent portability (across peers) and runtime insulation of the host system. That is, Wasm modules execute in a tight sandbox clearly separating the host system form the Wasm module providing a high level of security to the host. However, many Cloudless Apps need more capabilities than the sandboxed Wasm modules provide, e.g., executing HTTP requests which depends on host resources being made available to the module(s). In the absence of Wasm sockets, host access from the module is required. Alas, accessing host resources from Wasm modules requires us to loosen the sandbox, which is what Mounted Binaries do, at the cost of weakening security. Hence, providers may reject hosting marine services utilizing Mounted Binaries.
+
+Even if a provider is willing to accept some Wasm module wanting to utilize host resources, there is the issue of "general availability": In order for a peer to be able to host a Wasm module with the desired access to a host resource, e.g., a cURL binary, the provider not only needs to have that resource available in a manner consistent with other peers (outside of their control), e.g., appropriate version of the resource, but also offer such a resource in a consistent manner, e..g, adhere to a single path to, say, the curl binary such as `/usr/bin/curl`. 
+
+In Fluence terminology, [effector modules](../glossary/#effector-module) accesses resources, such as APIs, outside of Marine. For example, a Wasm module making HTTP calls using the host system's `curl` binary is an effector module that needs to be permissioned by the host while adhering to some basic rules observed by all participating peers.
+
+If your function needs to work with some external effects, you need to implement that logic in an effector module that is uniquely identifiable, permissionable and provisioned by participating providers. Not all providers may host a particular effector module. But that providers that do need to serve such an effector module in a consistent manner across heterogenous hosts. 
+
+In order to create a uniquely identifiable effector module, we can use a [CID](https://ipld.io/glossary/#cid) to uniquely identify such a module. Alas, different compiler settings lead to slightly different Wasm compile output and therefore different CIDs. Hence, Fluence is providing a [repo](https://github.com/fluencelabs/fluence-effectors) of permissionable effector modules with their associated CIDs that currently includes a curl and ipfs effector module, respectively.
+
+To be able to use en effector module just as the *curl_adapter* you need to use the version provided by the repo as well as the associated CID (version 1). Neither the `dar` testnet nor the `kras` mainnet peers will accept effector modules that do not hash to the respective CIDs in the repo.
+
+Stay tuned for a more detailed chapter!
+
+
+:::info
+If you need an effector capability currently not offered, contact us in [discord](https://fluence.chat). For development purposes, however, you can use *local network*. 
+:::
+
+
+## Using The Permissionable cURL Effector
+
+Create a project with Fluence CLI. This time we choose the *minimal* template but stick with the default environment selection, *dar* and name our project *http-enabled*:
+
+```bash
+fluence init http-enabled
+```
+
+`cd` into you new directory and look around:
+
+```bash
+tree -L 2 .
+.
+├── README.md
+├── fluence.yaml
+└── src
+    └── aqua
+```
+
+This clearly is a much more minimalist scaffold than what the *quickstart* template provides and the first thing we need to do is create a our Marine artifacts by creating a new service called http_requester:
+
+```bash
+fluence service new http_requester
+```
+
+
+
+
+## Creating An Effector Module
+
+:::info
+If you are interested in using the curl-adapter module, you can skip to the next section. In this section we go through that steps necessary to create a curl-adapter module using Mounted Binaries. Note that that process involves switching to the [local network](../setting-up/working_with_local_networks.md) as the local configuration does not require CIDs in order to be able to deploy a module utilizing Mounted Binaries.
+:::
 
 Let's create a Wasm module giving us access to the hosts *curl* binary and link that Wasm module to one or more other modules so you end up with Fluence Functions capable of making HTTP requests. But first, we create a new (Fluence Functions) project using the Fluence CLI. This time we choose the *minimal* template but stick with the default environment selection, *kras* and name our project *http-enabled*:
 
@@ -21,27 +79,17 @@ tree -L 2 .
     └── aqua
 ```
 
-This clearly is a much more minimalist scaffold and the first thing we need to do is create a our Marine artifacts by creating a new service called http_requester:
+This clearly is a much more minimalist scaffold than what the *quickstart* template provided. Fhe first thing we need to do is create our Marine artifacts by creating a new service, let's call it http_requester:
 
 ```bash
 fluence service new http_requester
 ```
 
-which eventually prompts you with:
+which prompts you to specify the deployment. Approve the default and you'll see:
 
 ```bash
-Added hello_from to /Users/bebo/localdev/fluence-code/mvm-docs-code/hello-from/fluence.yaml
-? Do you want to add service hello_from to a default deal dealName: (Y/n)
+Added http_requester to myDeployment
 ```
-
-Approve the default and you'll see:
-
-```bash
-Added http_requester to dealName
-```
-
-**CLI prompts and naming have not been updated**
-
 
 Check that  the *http_requester* service was added to your project:
 
@@ -61,13 +109,15 @@ $ tree -L 6 ./src
         └── service.yaml                // service level configuration and linking details
 ```
 
-Looks like we have a new service and module added. If you check out the *main.rs* file created b the CLI, you'll notice it's the same content as the file created for the quickstart and we'll update that as soon as we've mounted our curl adapter to enable http requests. To this end, we'll add a second module to our project:
+The new service has been added to the project and is reflected in *fluence.yaml*. Moreover, a *main.rs* file was created by the CLI and upo inspection, you'll notice it's the same content as the file created for the quickstart. Not to worry, we'll clean that up as soon as we've added our curl adapter to enable http requests. 
+
+To this end, we'll add a second module to our project:
 
 ```bash
 $ fluence module new curl_adapter --path src/services/http_requester/modules/
 ```
 
-Let's make sure we've been successful:
+And upon inspection, you should see something like so:
 
 ```bash
 $ tree -L 6 ./src
@@ -77,7 +127,7 @@ $ tree -L 6 ./src
 └── services
     └── http_requester
         ├── modules
-        │   ├── curl_adapter            // the newly created curl_adapter module template
+        │   ├── curl_adapter            // the newly created module template
         │   │   ├── Cargo.toml
         │   │   ├── module.yaml
         │   │   └── src
@@ -90,7 +140,7 @@ $ tree -L 6 ./src
         └── service.yaml
 ```
 
-All looks well and we have the desired service-modules structure in place and it's time to code the *curl_adapter* module like so:
+All looks well and we have the desired service-modules structure in place and it's time to add the *curl_adapter.wasm* from the [Fluence effector](https://github.com/fluencelabs/fluence-effectors/tree/main/curl_adapter). Add the wasm 
 
 ```rust
 #![allow(improper_ctypes)]
