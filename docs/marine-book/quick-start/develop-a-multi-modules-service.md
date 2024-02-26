@@ -24,7 +24,7 @@ cargo new local-storage --bin
 cargo new facade --bin
 ```
 
-Then add `marine-rs-sdk = 0.7.1` to the `dependencies` section of each `Cargo.toml` file.
+Then add `marine-rs-sdk = "0.10.2"` to the `dependencies` section of each `Cargo.toml` file.
 
 ### Curl module
 
@@ -141,6 +141,7 @@ The configuration of the `url-downloader` service should look as follows:
 
 ```toml
 modules_dir = "artifacts/"
+total_memory_limit = "Infinity"
 
 [[module]]
     name = "local_storage"

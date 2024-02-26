@@ -7,7 +7,30 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-## [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
+### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2023
+
+* **compiler:** `for ... rec` instruction (not documented). ([LNG-307](https://linear.app/fluence/issue/LNG-307)) ([#1026](https://github.com/fluencelabs/aqua/issues/1026))
+* **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-313)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
+* FIX: **compiler:** Correctly capture arrows from context in nested [closures](./language/closures.md). ([LNG-317](https://linear.app/fluence/issue/LNG-317)) ([#1038](https://github.com/fluencelabs/aqua/issues/1038))
+* FIX: **compiler:** Correctly capture abilities in [closures](./language/closures.md). ([LNG-314](https://linear.app/fluence/issue/LNG-314)) ([#1035](https://github.com/fluencelabs/aqua/issues/1035))
+* FIX: **compiler:** Correctly type check calls to [services](./language/services.md) and [abilities](./language/abilities.md) methods (check number of arguments and their types). ([LNG-315](https://linear.app/fluence/issue/LNG-315)) ([#1037](https://github.com/fluencelabs/aqua/issues/1037))
+
+### [0.13.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.3) - December 22, 2023
+
+* **api:** Refactor JS API interfaces. See [JS API](./aqua-js-api.md). ([#1024](https://github.com/fluencelabs/aqua/issues/1024))
+* **compiler:** By default, do not generate topological hops back to `INIT_PEER_ID` when function has no return value. In other words, function without a return value has fire-and-forget semantics by default. ([LNG-305](https://linear.app/fluence/issue/LNG-305)) ([#1019](https://github.com/fluencelabs/aqua/issues/1019))
+
+### [0.13.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.2) - December 14, 2023
+
+* **api:** Accept structured imports to allow correct resolving of transitive dependencies. See [Aqua JS API](./aqua-js-api.md) for more info. ([LNG-288](https://linear.app/fluence/issue/LNG-288)) ([#989](https://github.com/fluencelabs/aqua/issues/989))
+
+### [0.13.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.1) - December 7, 2023
+
+* **language-server:** Pass types of variables tokens to LSP to display them. See [Aqua Extension for VSCode](./getting-started/installation/installation.md). ([LNG-285](https://linear.app/fluence/issue/LNG-285)) ([#999](https://github.com/fluencelabs/aqua/issues/999))
+* **compiler:** Allow returning resolved service as ability. See [Services](./language/types.md#service-type) and [Abilities](./language/types.md#ability-type). ([LNG-266](https://linear.app/fluence/issue/LNG-266)) ([#977](https://github.com/fluencelabs/aqua/issues/977))
+* **compiler:** Support `*[]` (anonymous empty stream) as a function argument. See [Collections](./language/values.md#collections). ([LNG-280](https://linear.app/fluence/issue/LNG-280)) ([#967](https://github.com/fluencelabs/aqua/issues/967)) 
+
+### [0.13.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.0) - November 22, 2023
 
 * BREAKING CHANGE: **compiler:** Change type of `nil` literal from `*⟂` to `?⟂`. Refer to [Literals](./language/values.md#literals) to learn more about `nil`.  ([LNG-279](https://linear.app/fluence/issue/LNG-279)) ([#968](https://github.com/fluencelabs/aqua/issues/968))
 * BREAKING CHANGE: **compiler:** Prohibit mutating options ([LNG-277](https://linear.app/fluence/issue/LNG-277)) ([#960](https://github.com/fluencelabs/aqua/issues/960))
@@ -160,8 +183,8 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * bump fluence-js to latest version
 
 ### [0.7.6](https://github.com/fluencelabs/aqua/releases/tag/0.7.6) – September 22, 2022
-* Run builtin services directly from aqua run without any input ([docs](/docs/aqua-book/aqua-cli/#run))
-* Run services in aqua run ([docs](/docs/aqua-book/aqua-cli/#run))
+* Run builtin services directly from aqua run without any input
+* Run services in aqua run
 * Forbid streams in structures. Restrict assignment with empty streams and arrays
 * bump fluence-js to v0.25.1
 * a lot of bugs fixed
@@ -176,7 +199,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.7.4](https://github.com/fluencelabs/aqua/releases/tag/0.7.4) – June 24, 2022
 
-* JSON services for `aqua run.` Read [here](./aqua-cli/aqua-cli.md#run) for more details. ([#520](https://github.com/fluencelabs/aqua/pull/520)).
+* JSON services for `aqua run`. ([#520](https://github.com/fluencelabs/aqua/pull/520)).
 * Use JSON for arguments in `aqua run` without extra brackets for optional fields ([#517](https://github.com/fluencelabs/aqua/pull/517))
 
 ### [0.7.3](https://github.com/fluencelabs/aqua/releases/tag/0.7.3) – June 10, 2022
@@ -203,7 +226,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.7.0](https://github.com/fluencelabs/aqua/releases/tag/0.7.0) – March 22, 2022
 
-* Moving all features from deprecated `fldist` to `aqua`. All interactions with peers moved to `aqua remote` subcommand. Descriptions of all commands can be found in [here](./aqua-cli/aqua-cli.md) ([#457](https://github.com/fluencelabs/aqua/pull/457))
+* Moving all features from deprecated `fldist` to `aqua`. All interactions with peers moved to `aqua remote` subcommand. ([#457](https://github.com/fluencelabs/aqua/pull/457))
 * Update FluenceJS to 0.21.5 ([#456](https://github.com/fluencelabs/aqua/pull/456))
 * Switching to v3 FluenceJS API. Improves JS support for optional Aqua types ([#453](https://github.com/fluencelabs/aqua/pull/453))
 * Add message when function not found ([#454](https://github.com/fluencelabs/aqua/pull/454))
@@ -220,7 +243,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 ### [0.6.2](https://github.com/fluencelabs/aqua/releases/tag/0.6.2) – February 24, 2022
 
 * Added top and bottom types to the parser – will be used for debugging functions ([#442](https://github.com/fluencelabs/aqua/pull/442))
-* [Schedule scripts](aqua-cli/scheduling-scripts.md) using Aqua CLI ([#440](https://github.com/fluencelabs/aqua/pull/440))
+* Schedule scripts using Aqua CLI ([#440](https://github.com/fluencelabs/aqua/pull/440))
 * Better timeouts handling for CLI ([#437](https://github.com/fluencelabs/aqua/pull/437))
 
 ### [0.6.1](https://github.com/fluencelabs/aqua/releases/tag/0.6.1) – February 16, 2022
@@ -244,7 +267,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * New expression: [explicit `join` to wait](language/flow/parallel.md#explicit-join-expression) for results computed in parallel branches ([#402](https://github.com/fluencelabs/aqua/pull/402))
 * New syntax to [access a collection element by index](language/values.md#getters): `array[5]`. With this syntax, non-literal indices are allowed, like `array[conf.length]` ([#401](https://github.com/fluencelabs/aqua/pull/401))
 * Refactoring of the compiler's internals: introducing `raw` model for values ([#398](https://github.com/fluencelabs/aqua/pull/398))
-* New network monitoring functions are added to [CLI](aqua-cli/aqua-cli.md#run) ([#393](https://github.com/fluencelabs/aqua/pull/393))
+* New network monitoring functions are added to Aqua CLI ([#393](https://github.com/fluencelabs/aqua/pull/393))
 * Small improvements and bug fixes ([#395](https://github.com/fluencelabs/aqua/pull/395), [#396](https://github.com/fluencelabs/aqua/pull/396), [#394](https://github.com/fluencelabs/aqua/pull/394), [#392](https://github.com/fluencelabs/aqua/pull/392))
 
 ### [0.5.2](https://github.com/fluencelabs/aqua/releases/tag/0.5.2) – December 24, 2021
@@ -255,7 +278,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.5.1](https://github.com/fluencelabs/aqua/releases/tag/0.5.1) – December 10, 2021
 
-* CLI: Support for [secret key](aqua-cli/aqua-cli.md#create-key-pair) in `aqua run` ([#375](https://github.com/fluencelabs/aqua/pull/375))
+* CLI: Support for secret key in `aqua run` ([#375](https://github.com/fluencelabs/aqua/pull/375))
 * CLI: Add log level, print generated AIR ([#368](https://github.com/fluencelabs/aqua/pull/368))
 * Improved topology calculation in `par` blocks ([#369](https://github.com/fluencelabs/aqua/pull/369))
 * JAR file is not pushed to releases anymore. JS is the sole compilation target now
@@ -336,6 +359,6 @@ aqua run -i aqua/caller.aqua -f "callFunc(\"arg1\",\"arg2\")"
 
 * Added `host_peer_id` , a predefined constant that points on the relay if Aqua compilation is configured so, and on `%init_peer_id%` otherwise, see [#218](https://github.com/fluencelabs/aqua/issues/218).
 
-### 0.1.10 – July 26, 2021
+### [0.1.10](https://github.com/fluencelabs/aqua/releases/tag/0.1.10) – July 26, 2021
 
 * Added `<<-` operator to push a value into a stream, see #[214](https://github.com/fluencelabs/aqua/pull/214), [#209](https://github.com/fluencelabs/aqua/issues/209).

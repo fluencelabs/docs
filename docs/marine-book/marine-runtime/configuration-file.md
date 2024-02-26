@@ -4,6 +4,7 @@ Service configuration files use TOML format. The most basic config for the `gree
 
 ```toml
 modules_dir = "artifacts/"
+total_memory_limit = "10 MiB"
 
 [[module]]
     name = "greeting"
@@ -13,6 +14,7 @@ This config contains the following information:
 
 * **modules\_dir**  - default directory for searching modules
 * **\[\[module]]** - a list of modules that the service consists of
+* **total\_memory\_limit** - total maximum memory the entire service can allocate for modules in a service
 * **name** - the name of the Wasm file in the modules\_dir directory
 
 Tools will interpret all relative paths in the config as relative to the config file location. Absolute paths will be used unchanged.
@@ -23,11 +25,10 @@ A more complex example of a service configuration file is shown below:
 
 ```toml
 modules_dir = "artifacts/"
+total_memory_limit = "10 MiB"
 
 [[module]]
     name = "effector"
-    mem_pages_count = 1
-    max_heap_size = "1 KiB"
     logger_enabled = true
     logging_mask = 0
     file_name = "effector-patched.wasm"
@@ -52,13 +53,13 @@ modules_dir = "artifacts/"
 
 There are several additional fields here:
 
-#### **max\_heap\_size**
+#### **total\_memory\_limit**
 
-the maximum size of the Wasm heap that a module could allocate. This setting should be specified as a string, that has the following format:
+the maximum size of the Wasm heap that a service could allocate. This limit is a shared pool for all modules in the service. This setting should be specified as a string, that has the following format:
 
-`<number><whitespace?><specificator?>`
+`<number><whitespace?><specificator?>|Infinity|infinity`
 
-where `?` represents an optional field and `specificator` is one from the following list:
+where `?` represents an optional field, `|` divides options and `specificator` is one from the following list:
 
 * `K`, `Kb` - kilobyte
 * `Ki`, `KiB` - kibibyte
@@ -71,19 +72,26 @@ where `?` represents an optional field and `specificator` is one from the follow
 * `P`, `Pb` - petabyte
 * `Pi`, `PiB` - pebibyte
 
-Note, that practically the current limit of Wasm memory is limited to 4 GiB, so you shouldn't use specifiers bigger than gibibyte. Additionally, all specificators are case-insensitive.
+Additionally, all specificators are case-insensitive.
+
+Allocating memory exceeding the limit triggers a (Rust) panic at runtime time. 
+In this case the function call will be interrupted immediately, and the caller, i.e., the library using the marine-runtime, will be given an error detailing the out-of-memory (OOM) exception.
 
 Let's consider a few examples:
 
-max\_heap\_size = "100" - 100 bytes
+total\_memory\_limit = "100" - 100 bytes
 
-max\_heap\_size = "100K" - 100 kilobytes
+total\_memory\_limit = "100K" - 100 kilobytes
 
-max\_heap\_size = "100 Ki" - 100 kibibytes
+total\_memory\_limit = "100 Ki" - 100 kibibytes
 
-#### **mem\_pages\_count (obsolete)**
+> **Note**
+>
+> Practically the Wasm memory is limited to `4 GiB` per module by the Wasm specification, so a service cannot consume more than `modules_number * 4 GiB`. 
 
-the maximum number of Wasm memory pages that the corresponding loaded module can use. Each Wasm page is 65536 (64 Kb) bytes long. This is an obsolete setting and will be removed in the future, use `max_heap_size` instead.
+> **Note**
+>
+> Each module allocates some memory on startup. Usually it is `>1 MiB`. In that case, on startup a service consumes at least `modules_number * 1 MiB` memory. To avoid startup fail, specify at `least modules_number * 2 MiB` total memory limit. 
 
 #### **logger\_enabled**
 

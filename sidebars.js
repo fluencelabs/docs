@@ -2,7 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  "learn": [
+  learn: [
     "learn/overview",
     "learn/how-it-works",
     "learn/why-fluence",
@@ -11,7 +11,15 @@ const sidebars = {
     "learn/technology",
     "learn/networks",
   ],
-  "build": [
+  build: [
+    {
+      type: "category",
+      label: "Hello Fluence",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build-mvm/introducing_fluence", type: "doc" },
+      items: [],
+    },
     {
       type: "category",
       label: "Overview",
@@ -19,81 +27,81 @@ const sidebars = {
       collapsed: true,
       link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
-        "build-mvm/overview/fluence_functions",
+        // "build-mvm/overview/fluence_functions",
         "build-mvm/overview/getting_started",
-        "build-mvm/overview/roadmap"
-      ]
+        // "build-mvm/overview/roadmap",
+      ],
+    },
+    {
+      type: "category",
+      label: "Setting Up",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build-mvm/setting-up/setting_up", type: "doc" },
+      items: [
+        // "build-mvm/setting-up/setting_up",
+        "build-mvm/setting-up/installing_cli",
+        "build-mvm/setting-up/working_with_local_networks",
+      ],
     },
     {
       type: "category",
       label: "Quickstart",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/your_first_function", type: "doc" },
       items: [
         "build-mvm/quickstarts/your_first_function",
-        "build-mvm/quickstarts/connecting_to_the_world",
-        "build-mvm/quickstarts/connecting_to_local_storage"
-      ]
+        // "build-mvm/quickstarts/connecting_to_the_world",
+        // "build-mvm/quickstarts/connecting_to_local_storage",
+      ],
     },
+    /*
     {
       type: "category",
       label: "Concepts",
       collapsible: true,
       collapsed: true,
-     //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/concepts/best_practices",
         "build-mvm/concepts/fluence_functions_revisited",
         "build-mvm/concepts/marketplace",
         "build-mvm/concepts/http_gateways",
-        "build-mvm/concepts/cronjobs",
-        "build-mvm/concepts/security"
-      ]
+        // "build-mvm/concepts/scheduling_functions",
+        "build-mvm/concepts/security",
+      ],
     },
+    */
+   /*
     {
       type: "category",
       label: "Tutorials",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
         "build-mvm/tutorials/workflow_fundamentals",
-          {
-              type: 'category',
-              label: 'Event handling in JS',
-              link: { id: "build-mvm/tutorials/event-handling-in-js/event-handling", type: "doc" },
-              items: [
-                  "build-mvm/tutorials/event-handling-in-js/installation",
-                  "build-mvm/tutorials/event-handling-in-js/setting-up",
-                  "build-mvm/tutorials/event-handling-in-js/hello-world",
-              ],
-          },
-        {
-          type: 'category',
-          label: 'Extending Fluence functions in JS',
-          link: { id: "build-mvm/tutorials/extending-fluence-functions-in-js/marine-js", type: "doc" },
-          items: []
-        }
-      ]
+        "build-mvm/tutorials/event_handling_in_js",
+      ],
     },
+    */
     {
       type: "category",
       label: "Examples",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
-      items: [
-        "build-mvm/examples/frpc"
-      ]
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      items: ["build-mvm/examples/frpc"],
     },
     {
       type: "category",
       label: "How To Guides",
       collapsible: true,
       collapsed: true,
-    //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
+      //  link: { id: "build-mvm/overview/fluence_functions", type: "doc" },
       items: [
+        /*
         "build-mvm/how-to/setting_up",
         "build-mvm/how-to/configure",
         "build-mvm/how-to/setup_payments",
@@ -102,11 +110,13 @@ const sidebars = {
         "build-mvm/how-to/securing_functions",
         "build-mvm/how-to/deploy",
         "build-mvm/how-to/monitor",
-        "build-mvm/how-to/migrate"
-      ]
+        "build-mvm/how-to/migrate",
+        */
+        "build-mvm/how-to/schedule_functions",
+      ],
     },
     "build-mvm/glossary",
-    "build-mvm/references"
+    "build-mvm/references",
   ],
   "aqua-book": [
     "aqua-book/introduction",
@@ -172,17 +182,6 @@ const sidebars = {
         "aqua-book/libraries/aqua-lib",
         "aqua-book/libraries/aqua-ipfs",
         "aqua-book/libraries/registry",
-      ],
-    },
-    {
-      type: "category",
-      label: "Aqua CLI",
-      link: { id: "aqua-book/aqua-cli/aqua-cli", type: "doc" },
-      items: [
-        "aqua-book/aqua-cli/service-management",
-        "aqua-book/aqua-cli/scheduling-scripts",
-        "aqua-book/aqua-cli/plugins",
-        "aqua-book/aqua-cli/peer-state-info",
       ],
     },
     "aqua-book/aqua-js-api",
