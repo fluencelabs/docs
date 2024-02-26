@@ -4,7 +4,7 @@ Many Web2 services don't know about Fluence Network and thus cannot interact wit
 Regular Web2 services usually communicate via REST (HTTP calls or HTTP events in terms of Fluence interaction).
 Conceptually, it's possible to build a special Web2 service which handles regular HTTP calls and convert them to interactions understandable by Fluence Network.
 That's the time to present Fluence gateway (??? should it be defined in glossary ???).
-The gateway in general is a peer itself, which keeps the connection with Fluence network and listens for HTTP request.
+The gateway, in essence, is a Fluence peer itself, which keeps the connection with Fluence network and wrapping code, which listens for HTTP request.
 
 ## Fluence gateway
 
