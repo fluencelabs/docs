@@ -86,9 +86,3 @@ If appointed by the General Assembly or required by law, the auditor shall:
 ### Other bodies
 Other bodies would need to be appointed first by the General Assembly by changing the articles of association and/or regulations. By doing so, the function, composition, powers and rights of a new body of the Association would need to be laid out in the articles of association. The Governance DAO may create sub-dao or guilds and implement appropriate regulations in this regard.
 
-|                       | Membership/General Assembly    | Governance Committee         | Governance DAO                   |
-|-----------------------|:------------------------------:|:----------------------------:|:--------------------------------:|
-| Participants          | Low         | Yes                   | Yes           |
-| Dismissal / Expulsion | Medium      | Yes*                  | Yes           |
-| Power | Medium        | Yes**                 | No**          |
-| Veto Right            | High        | No                    | No            |
