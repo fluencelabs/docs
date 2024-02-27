@@ -8,8 +8,13 @@ const sidebars = {
     "learn/why-fluence",
     "learn/fluence-comparison",
     "learn/use-cases",
-    "learn/technology",
-    "learn/networks",
+    {
+      type: "category",
+      label: "Governance",
+      link: { id: "learn/governance/overview", type: "doc" },
+      items: []
+    },
+
   ],
   build: [
     {
