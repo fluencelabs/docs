@@ -3,7 +3,7 @@
 
 # Production
 /build
-
+/build-mvm
 # Generated files
 .docusaurus
 .cache-loader
