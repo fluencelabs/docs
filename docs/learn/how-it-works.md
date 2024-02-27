@@ -8,7 +8,7 @@ Fluence protocol forms the network of compute resources and defines the cloudles
   <img
     src="/img/fluence-functions.png"
     alt="Fluence network overview"
-    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
   />
   <p>Fluence network overview</p>
 </div>
@@ -57,7 +57,7 @@ The marketplace is hosted on Fluence's own chain powered by IPC, validated by Fl
   <img
     src="/img/marketplace-providers.png"
     alt="Compute providers on the Fluence marketplace"
-    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
   />
   <p>Compute providers on the Fluence marketplace</p>
 </div>
@@ -66,7 +66,7 @@ The marketplace is hosted on Fluence's own chain powered by IPC, validated by Fl
   <img
     src="/img/marketplace-provider-resources.png"
     alt="Compute provider resources"
-    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
   />
   <p>Compute provider resources</p>
 </div>
@@ -80,7 +80,7 @@ Whenever customers need computing power from chosen providers, these resources a
   <img
     src="/img/marketplace-capacity.png"
     alt="Compute units submitting Proofs of Capacity"
-    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
   />
   <p>Compute units submitting Proofs of Capacity</p>
 </div>
@@ -95,7 +95,7 @@ Under-the-hood, for every application deployment, a Deal is being created on-cha
   <img
     src="/img/marketplace-matching.png"
     alt="Matching criteria for selecting providers"
-    style={{ display: "block", margin: "auto", maxWidth: "50%" }}
+    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
   />
   <p>Matching criteria for selecting providers</p>
 </div>
