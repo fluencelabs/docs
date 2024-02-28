@@ -7,6 +7,17 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
+## [0.14.2](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.2) - February 21, 2024
+
+* FIX: **compiler:** Correctly capture [abilities](./language/abilities.md) in [closures](./language/closures.md). ([LNG-338](https://linear.app/fluence/issue/LNG-338)) ([#1086](https://github.com/fluencelabs/aqua/issues/1086)) 
+
+## [0.14.1](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.1) - February 20, 2024
+
+* **language-server:** Add Aqua types representation to LSP. Used to show prettified types in [Aqua VSCE](./getting-started/installation/installation.md). ([LNG-331](https://linear.app/fluence/issue/LNG-331)) ([#1078](https://github.com/fluencelabs/aqua/issues/1078))
+* **language-server:** Resolve filesystem paths for imports. Used to support go-to-definition on import statements in [Aqua VSCE](./getting-started/installation/installation.md). ([LNG-309](https://linear.app/fluence/issue/LNG-309)) ([#1079](https://github.com/fluencelabs/aqua/issues/1079))
+* **language-server:** Support declares and exports in LSP. Show relevant information on hover for them in [Aqua VSCE](./getting-started/installation/installation.md). ([LNG-304](https://linear.app/fluence/issue/LNG-304), [LNG-319](https://linear.app/fluence/issue/LNG-319)) ([#1070](https://github.com/fluencelabs/aqua/issues/1070))
+* FIX: **compiler:** Correctly resolve [types](./language/types.md) to fix issues in case they have the same name. ([LNG-334](https://linear.app/fluence/issue/LNG-334)) ([#1071](https://github.com/fluencelabs/aqua/issues/1071))
+
 ## [0.14.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.0) - January 30, 2024
 
 * BREAKING CHANGE: **compiler:** Force `aqua` header for all aqua files. See [Header](./language/header/header.md). ([LNG-308](https://linear.app/fluence/issue/LNG-308)) ([#1028](https://github.com/fluencelabs/aqua/issues/1028))
