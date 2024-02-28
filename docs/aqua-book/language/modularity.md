@@ -149,7 +149,7 @@ To learn how compiler resolves the import path, see [JS Aqua API](./../aqua-js-a
 
 ## Exporting to the host language with `export`
 
-Inside Aqua language code modularity is achieved with [`declares`](#specifying-what-is-declared-by-the-module-with-declares), [`import`](#with-import) and [`use`](#with-use). However, what should be exported to the host language depends on the particular use case of aqua code and has nothing to do with code management inside Aqua. This is why exporting to the host language is a separate concept inside Aqua.
+Inside Aqua language code modularity is achieved with [`declares`](#specifying-what-is-declared-by-the-module-with-declares), [`import`](#with-import) and [`use`](#with-use) on module level (see also [Abilities](./abilities.md) as more fine grained method of code organization). However, what should be exported to the host language depends on the particular use case of aqua code and has nothing to do with code management inside Aqua. This is why exporting to the host language is a separate concept inside Aqua.
 
 It is possible to specify what should be exported to the host language with `export`. Exporting symbols that were imported from other modules is allowed. There could be several `export`s in a file and they are all merged into one.
 
