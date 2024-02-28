@@ -9,9 +9,11 @@ Applying the `#[marine]` macro to a function results in its export, which means 
 
 For the function to be compatible with this macro, its arguments must be of the `mtype`, which is defined as follows:
 
-`mtype` = `bool`, `u8`, `u16`, `u32`, `u64`, `i8`, `i16`, `i32`, `i64`, `f32`, `f64`, `String`\
-`mtype` = `mtype` | `Vec`<`mtype`>\
-`mtype` = `mtype` | `Record`<`mtype`>
+`mtype` = `bool`, `u8`, `u16`, `u32`, `u64`, `i8`, `i16`, `i32`, `i64`, `f32`, `f64`, `String`
+
+`mtype` = `mtype` | `Vec<mtype>`
+
+`mtype` = `mtype` | `Record<mtype>`
 
 ## Function Export Requirements
 
