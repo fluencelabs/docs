@@ -68,7 +68,7 @@ The `use` expression makes it possible to import a module as a named scope. The 
 ```aqua
 aqua AquaFile declares foo
 
--- builtin.aqua's header is `aqua BuiltIn declares *`
+-- builtin.aqua declares `Op`
 use "@fluencelabs/aqua-lib/builtin.aqua"
 
 func foo():
@@ -78,10 +78,31 @@ func foo():
 It is possible to rename the imported module with `use ... as ...` expression:
 
 ```aqua
+aqua AquaFile declares foo
+
+-- builtin.aqua declares `Op`
 use "@fluencelabs/aqua-lib/builtin" as Renamed
 
 func foo():
   Renamed.Op.noop()
+```
+
+It is also possible to cherry-pick and rename imports using `use ... as ... from ... as ...`:
+
+```aqua
+aqua AquaFile declares foo
+
+-- builtin.aqua declares `Op`
+use Op as Noop from "@fluencelabs/aqua-lib/builtin" as Renamed
+-- multiple imports are allowed
+-- dependency.aqua declares functions `foo`, `baz` and `bar`
+import foo as f, baz, bar as b from "dependency.aqua" as Dep
+
+func foo():
+  Dep.f()
+  Dep.baz()
+  Dep.b()
+  Renamed.Noop.noop()
 ```
 
 Creation of a scope with `use` makes it easier to avoid name clashes and to understand where the symbol comes from. Thus it is recommended to prefer `use` instead of `import` when possible.
@@ -103,7 +124,7 @@ func foo():
 It is possible to cherry-pick and rename imports using `import ... as ... from ...`:
 
 ```aqua
-aqua AquaFile declares main
+aqua AquaFile declares foo
 
 -- builtin.aqua declares `Op`
 import Op as Noop from "@fluencelabs/aqua-lib/builtin"
@@ -111,7 +132,7 @@ import Op as Noop from "@fluencelabs/aqua-lib/builtin"
 -- dependency.aqua declares functions `foo`, `baz` and `bar`
 import foo as f, baz, bar as b from "dependency.aqua"
 
-func main():
+func foo():
   f()
   baz()
   b()
