@@ -100,15 +100,21 @@ func foo():
   Op.noop()
 ```
 
-It is possible to cherry-pick and rename imports using `import ... from`:
+It is possible to cherry-pick and rename imports using `import ... as ... from ...`:
 
 ```aqua
-aqua AquaFile declares foo
+aqua AquaFile declares main
 
 -- builtin.aqua declares `Op`
 import Op as Noop from "@fluencelabs/aqua-lib/builtin"
+-- multiple imports are allowed
+-- dependency.aqua declares functions `foo`, `baz` and `bar`
+import foo as f, baz, bar as b from "dependency.aqua"
 
-func foo():
+func main():
+  f()
+  baz()
+  b()
   Noop.noop()
 ```
 
