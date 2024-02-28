@@ -61,32 +61,6 @@ Note that symbols declared with `declares` are not exported to the host language
 
 Aqua modules can import other modules to use their [declarations](#specifying-what-is-declared-by-the-module-with-declares). There are two ways to import a module: with [`import`](#with-import) and [`use`](#with-use).
 
-### With `import`
-
-The main way to import a module is via `import`. Everything declared in the imported module comes into the current namespace directly.
-
-```aqua
-aqua AquaFile declares foo
-
--- builtin.aqua declares `Op`
-import "@fluencelabs/aqua-lib/builtin.aqua"
-
-func foo():
-  Op.noop()
-```
-
-It is possible to cherry-pick and rename imports using `import ... from`:
-
-```aqua
-aqua AquaFile declares foo
-
--- builtin.aqua declares `Op`
-import Op as Noop from "@fluencelabs/aqua-lib/builtin"
-
-func foo():
-  Noop.noop()
-```
-
 ### With `use`
 
 The `use` expression makes it possible to import a module as a named scope. The name of the scope is taken from [`aqua` header](#giving-a-name-to-an-aqua-module-with-aqua) of the imported module. Everything declared in the imported module is available in the current namespace as a member of the scope.
@@ -111,6 +85,32 @@ func foo():
 ```
 
 Creation of a scope with `use` makes it easier to avoid name clashes and to understand where the symbol comes from. Thus it is recommended to prefer `use` instead of `import` when possible.
+
+### With `import`
+
+Another way to import a module is via `import`. In this case, everything declared in the imported module comes into the current namespace directly.
+
+```aqua
+aqua AquaFile declares foo
+
+-- builtin.aqua declares `Op`
+import "@fluencelabs/aqua-lib/builtin.aqua"
+
+func foo():
+  Op.noop()
+```
+
+It is possible to cherry-pick and rename imports using `import ... from`:
+
+```aqua
+aqua AquaFile declares foo
+
+-- builtin.aqua declares `Op`
+import Op as Noop from "@fluencelabs/aqua-lib/builtin"
+
+func foo():
+  Noop.noop()
+```
 
 ### Imports resolution
 
