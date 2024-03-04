@@ -1,6 +1,6 @@
 # Your First Cloudless Function
 
-In this section we pickup where we left off in the [Getting Started](../overview/getting_started.md) section and dive right back into the *Hello World* example. You can continue to use the FLuence CLI project you created earlier or create a new one. Let's create new project. 
+In this section we pickup where we left off in the [Getting Started](./../overview/getting_started.md) section and dive right back into the *Hello World* example. You can continue to use the FLuence CLI project you created earlier or create a new one. Let's create new project. 
 
 To scaffold our new project:
 
@@ -118,9 +118,9 @@ ll target/wasm32-wasi/release|grep .wasm
 
 Eventually, we'll deploy that module to the network as a Compute Function. Before we do that, lets quickly review testing options with respect to both local and remote environments. Running defective code in remote, distributed networks can be an expensive undertaking. Billing is commensurate with execution and a run-away service, for example, can be rather costly. Hence, testing is of utmost importance.
 
-The Fluence toolchain supports interactive and non-interactive testing of your Fluence Functions using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](../how-to/test.md) for a comprehensive review of both tooling and strategy.
+The Fluence toolchain supports interactive and non-interactive testing of your Fluence Functions using [Marine Repl](https://crates.io/crates/mrepl) or the [marine-rs-test-sdk](https://crates.io/crates/mrepl). For our purposes, we'll constrain ourself to the REPL. See the [testing section](./../how-to/test.md) for a comprehensive review of both tooling and strategy.
 
-Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi giving us the [Marine Service](../glossary/#marine-service) we want to deply to the network for future execution(s). But before we go to deploying our functions, we want to know if our *greeting* function actually works. For that we use the Marine REPL by calling `fluence service repl myService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
+Back to the task at hand. We created some code, well, inherited it from the *quickstart* template, and compiled it to wasm32-wasi giving us the [Marine Service](./../glossary#marine-service) we want to deply to the network for future execution(s). But before we go to deploying our functions, we want to know if our *greeting* function actually works. For that we use the Marine REPL by calling `fluence service repl myService`. If you haven't used the REPL yet, the CLI will download and install it for you. Once the installation is complete, you should see something similar to this:
 
 ```bash
 # Making sure service and modules are downloaded and built...
@@ -181,7 +181,7 @@ To recap, we loaded our myService.wasm module into the REPl, identified our call
 
 In addition to interactive testing with REPL, *cargo-based unit tests* are also available. For more information on creating Marine services, see the [Marine Book](https://fluence.dev/docs/marine-book/introduction).
 
-Now that we are satisfied that our code is in working order, it's time to think about deployment. If you haven't set up your wallet with the necessary test tokens, see [Setting Up](../setting-up/).
+Now that we are satisfied that our code is in working order, it's time to think about deployment. If you haven't set up your wallet with the necessary test tokens, see [Setting Up](./../setting-up).
 
 We'll deploy to the `dar` testnet and just to make sure you are set up correctly, run:
 
@@ -191,7 +191,7 @@ $ fluence default env dar
 
 which should return output similar to `Successfully set default fluence environment to dar`. Your `.fluence/env.yaml` content should reflect the `dar` testnet environment, i.e. you should see `fluenceEnv: dar`. 
 
-The next steps are to parameterize the [Cloudless Distributive](../glossary/#cloudless-distributive) and [developer offer](../glossary/#developer-offer). All the offer-related parameterization is actually happening in the `fluence.yaml` file, which already includes the offer template with some default values.
+The next steps are to parameterize the [Cloudless Distributive](./../glossary#cloudless-distributive) and [developer offer](./../glossary#developer-offer). All the offer-related parameterization is actually happening in the `fluence.yaml` file, which already includes the offer template with some default values.
 
 ```yaml
 version: 8
@@ -228,7 +228,7 @@ Let's focus on section (1), which is a list of deployments. In our case, we have
 * *pricePerWorkerEpoch*: specifies how much you are willing to pay for each worker per epoch in *tUSDC* and *USDC* for mainnet deployment. For development purposes, the duration of an epoch is defined as 15 seconds for the testnet and if your offer of USDC 0.0001 is accepted, you will be charged that amount per epoch per worker.  If your offer does not result in a match on the marketplace, you may want to look into the feasibility of your payment proposal. *Note that epoch-based pricing a temporary solution that will be replaced by request-based pricing in short order.* 
 * *initialBalance*: This is the amount of USDC you are committing to seed your deployment. You can add or withdraw funds once the your offer was successfully matched on the marketplace. In this case, you can expect your deployment to be available for invocation for 10 epochs or 2.5 minutes. That should be enough to make sure that our Cloudless Deployment works as planned.
 * *services* specifies which Marine services are part of the deployment. Note that you can include more than Marine service in your deployment as well as none assuming you have a *spell* to deploy.
-* *spell*: specifies which Cloudless Scheduler service you want to deploy. See the [Cloudless Scheduler](../how-to/schedule_functions.md) section for more information.
+* *spell*: specifies which Cloudless Scheduler service you want to deploy. See the [Cloudless Scheduler](./../how-to/schedule_functions.md) section for more information.
 
 We have set up everything we need for the CLI to create and submit our offer to the marketplace and since our testnet providers are quite cooperative, there shouldn't be any problems getting your offer matched. Time to move to the deployment phase for which we use the `fluence deploy` command:
 
@@ -365,7 +365,7 @@ Alright, we hit pay dirt! Note that the *answer* key holds the compute function 
 Let's dig into the *main.aqua* file:
 
 *  every aqua file needs a (named) header `aqua` (1)
-*  imports are managed with 'import' and 'use' (2), where `use` allows you bring the file's namespace into your scope. See the [Aaqua book](https://fluence.dev/docs/aqua-book/language/header/)for more detail. The CLI scaffold already added the dependency requirements, (2a) and (2b), which support [Builtins](../glossary/#builtin-services) and [Subnet](../glossary/#subnet).
+*  imports are managed with 'import' and 'use' (2), where `use` allows you bring the file's namespace into your scope. See the [Aaqua book](https://fluence.dev/docs/aqua-book/language/header/)for more detail. The CLI scaffold already added the dependency requirements, (2a) and (2b), which support [Builtins](./../glossary#builtin-services) and [Subnet](./../glossary#subnet).
 * CLI maintains aqua files, (3a),(3b) and (3c), in the `.file/aqua` directory that can be imported/used in your Aqua scripts saving you from typing a bunch of boilerplate:
  * (3a) contains the deployment information
  * (3c) contains the interface bindings for Aqua to be able to interact with the exposed Wasm methods of your compute function; in this case  *greeting*

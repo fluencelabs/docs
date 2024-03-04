@@ -2,7 +2,7 @@
 
 Let's explore the obligatory **Hello World** example as an end-to-end Fluence Cloudless App, which includes the following steps:
 
-* Scaffold a Fluence Cloud Function project with the [Fluence CLI](../glossary/#fluence-cli)
+* Scaffold a Fluence Cloud Function project with the [Fluence CLI](./../glossary#fluence-cli)
 * Create the Hello World example and compile it to Wasm
 * Distribute the Wasm module to capacity (hardware) providers
 * Execute your Fluence Functions Hello World application
@@ -11,7 +11,7 @@ But first, let's get set up.
 
 ## Setting Up
 
-The recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Functions as well as your tooling and development dependencies. If you haven't installed the Fluence CLI already, use the install script provided below or check out the [Setting up](../setting-up/setting_up.md) section.
+The recommended way to interact with the Fluence serverless network is to use the Fluence CLI. The CLI provides full lifecycle management for your Fluence Functions as well as your tooling and development dependencies. If you haven't installed the Fluence CLI already, use the install script provided below or check out the [Setting up](./../setting-up/setting_up.md) section.
 
 ```bash
 curl -qsL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
@@ -71,4 +71,4 @@ Which results in the following response:
 "Hi, Fluence"
 ```
 
-Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *dar* test network. We'll revisit our *Hello World* project in the [Quickstart](../Quickstarts/your_first_lambda.md) section.
+Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *dar* test network. We'll revisit our *Hello World* project in the [Quickstart](./../Quickstarts/your_first_lambda.md) section.
