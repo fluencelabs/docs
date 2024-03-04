@@ -71,4 +71,4 @@ Which results in the following response:
 "Hi, Fluence"
 ```
 
-Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *dar* test network. We'll revisit our *Hello World* project in the [Quickstart](./../Quickstarts/your_first_lambda.md) section.
+Congratulations! You just scaffolded your first Fluence project and executed your first *Hello World* on a remote peer on the *dar* test network. We'll revisit our *Hello World* project in the [Quickstart](./../quickstarts/your_first_function.md) section.
