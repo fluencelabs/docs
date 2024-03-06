@@ -26,11 +26,11 @@ During the installation process, you may be asked to provide *sudo* access to se
 Alternative installation approaches can be found in the [Readme](https://github.com/fluencelabs/cli?tab=readme-ov-file#installation-and-usage).
 :::
 
-After the installation process is complete, update the CLI with `fluence update unstable` and check the version:
+After the installation process is complete, update the CLI with `fluence update stable` and check the version:
 
 ```bash
 fluence --version
-@fluencelabs/cli/0.15.10 darwin-arm64 node-v18.19.
+@fluencelabs/cli/0.15.10 darwin-arm64 node-v18.19.1
 ```
 
 If you get the above CLI version, or higher, you are good to go.
