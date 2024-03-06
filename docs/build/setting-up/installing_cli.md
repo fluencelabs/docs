@@ -15,14 +15,14 @@ The easiest and quickest way to install Fluence CLI is using the install script.
 curl -qsL https://raw.githubusercontent.com/fluencelabs/cli/main/install.sh | bash
 ```
 
-This may make take some time and depending on your setup, you be prompted to *sudo* a symlink. Once the installation is complete make sure you update to the latest version with `fluence update unstable` and then check the version, which should be similar to below or higher:
+This may make take some time and depending on your setup, you be prompted to *sudo* a symlink. Once the installation is complete make sure you update to the latest version with `fluence update stable` and then check the version, which should be similar to below or higher:
 
 ```bash
 $ fluence --version
 @fluencelabs/cli/0.15.10 darwin-arm64 node-v18.19.
 ```
 
-For alternative approaches, additional documentation including all commands, changelogs and latest version, visit the [Fluence CLI](https://github.com/fluencelabs/cli/tree/main) repo.
+Alternatively, you can update CLI to specific network versions, e.g., **dar** or **kras**, with `fluence update dar` or `fluence update kras`, respectively. Updating to `stable` is the preferred and mostly safe choice. See the [Fluence CLI](https://github.com/fluencelabs/cli/tree/main) repo for additional documentation.
 
 
 ### Dependencies
@@ -72,6 +72,11 @@ Fluence CLI only installs what it needs and lazily adds what it doesn't have. Th
 $ fluence dep i
 ```
 In addition, you have `fluence dep reset` and `fluence dep uninstall` to reset your dependencies to the default of you CLI version or to uninstall a version, respectively. 
+
+::: info
+Your Rust setup requires the `wasm32-wasi` compile target to be able to generate the Wasm modules. You can check your system with `rustup target list --installed|grep wasm3`. If the `wasm32-wasi` target is missing, install it with `rustup target install wasm32-wasi`.
+:::
+
 
 Dependencies are installed and managed in the `~/.fluence` directory. Let's have a look:
 
