@@ -49,7 +49,7 @@ export class Call {
 }
 ```
 
-- `imports` is a path to files that is necessary for compilation but not needed to be compiled into AIR functions. More information [here](language/header/header.md).
+- `imports` is a path to files that is necessary for compilation but not needed to be compiled into AIR functions. More information [here](./language/modularity.md).
 - `config` is the following `AquaConfig` data structure
 
 ```typescript

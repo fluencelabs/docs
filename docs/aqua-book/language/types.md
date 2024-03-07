@@ -206,6 +206,7 @@ A file is a product of all defined constants and functions (treated as arrows). 
 
 ```aqua
 -- MyFile.aqua
+aqua MyFile
 
 func foo(arg: string) -> bool:
   ...
@@ -213,6 +214,6 @@ func foo(arg: string) -> bool:
 const FLAG ?= true
 ```
 
-See [Imports and Exports](header/header.md#module) for module declarations.
+See [Modularity](modularity.md) for module declarations.
 
 See the [types system implementation](https://github.com/fluencelabs/aqua/blob/main/types/src/main/scala/aqua/types/Type.scala)
