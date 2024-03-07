@@ -3,7 +3,7 @@
 [Fluence CLI](./../glossary#fluence-cli) is your one-stop command line interface to creating, deploying, paying, running, monitoring and removing Fluence Cloudless resources to/from the network.
 
 :::info
-CLI is compatible with Linux systems including macOS but currently does **not** support Windows OS. However, Windows Linux Subsystem is supported. This limitation should be relaxed in the very near future. 
+Fluence CLI works on Linux, macOS and currently has experimental support for Windows. Learn more [here](https://github.com/fluencelabs/cli?tab=readme-ov-file#windows)
 :::
 
 ## Installing Fluence CLI

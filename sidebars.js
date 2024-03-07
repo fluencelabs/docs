@@ -12,9 +12,8 @@ const sidebars = {
       type: "category",
       label: "Governance",
       link: { id: "learn/governance/overview", type: "doc" },
-      items: []
+      items: [],
     },
-
   ],
   build: [
     {
@@ -78,7 +77,7 @@ const sidebars = {
       ],
     },
     */
-   /*
+    /*
     {
       type: "category",
       label: "Tutorials",
@@ -121,7 +120,7 @@ const sidebars = {
       ],
     },
     "build/glossary",
-    "build/references",
+    // "build/references",
   ],
   "aqua-book": [
     "aqua-book/introduction",
