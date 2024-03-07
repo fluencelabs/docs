@@ -204,7 +204,7 @@ Service exposes one or more [Compute Function](#compute-function)s and a develop
 
 #### Marine JS
 
-Implementation of [Marine](#marine) running on JS. This  includes support for [Marine SDK](#marine-sdk) and [Module Linking](#module-linking). Only [Pure](#pure-module) [module](#marine-modules) can run in JS Marine.
+Implementation of [Marine](#marine) running on JS. This  includes support for [Marine SDK](#marine-sdk) and [Module Linking](#module-linking). Only [Pure](#pure-module) [module](#marine-module) can run in JS Marine.
 
 #### Marine Module
 
@@ -294,13 +294,11 @@ Tetraplet is a data structure describing the origin of an argument to a function
 
 Tetraplets are the means to check and enforce distributed security invariants of a function by putting restrictions on its arguments, e.g.: the argument “is_authorized” must be provided by a function “check_auth” from “security” [Compute Function](#compute-function) run on the same [Peer](#peer). Both [Marine SDK](#marine-sdk) and [Fluence JS Client](#fluence-js-client) provides access to tetraplets.
 
-Read more about Security Tetraplets [here](/docs/build-mvm/security.md).
-
 ## Network
 
 ### Peer
 
-A Fluence Peer is a node in the [Fluence Network](#fluence-network), which behaves according to the [Fluence protocol](#fluence-protocol), therefore hosts and executes general purpose [Compute Function](#compute-functions)s, thus providing users cloudless experience. 
+A Fluence Peer is a node in the [Fluence Network](#fluence-network), which behaves according to the [Fluence protocol](#fluence-protocol), therefore hosts and executes general purpose [Compute Function](#compute-function)s, thus providing users cloudless experience. 
 
 Fluence reference peers are comprised of the following components:
 - Libp2p to manage connection pool
