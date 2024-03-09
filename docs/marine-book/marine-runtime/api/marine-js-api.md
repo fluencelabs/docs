@@ -84,12 +84,6 @@ export interface MarineWASIConfig {
     envs: Env;
 
     /**
-     * A list of files available for this module.
-     * A loaded module could have access only to files from this list.
-     */
-    preopened_files: Set<string>;
-
-    /**
      * Mapping from a usually short to full file name.
      */
     mapped_dirs: Map<String, string>;

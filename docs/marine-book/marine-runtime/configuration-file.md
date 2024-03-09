@@ -35,7 +35,6 @@ total_memory_limit = "10 MiB"
     load_from = "downloaded-artifacts/"
 
     [module.wasi]
-    preopened_files = ["./dir"]
     mapped_dirs = { "alias" = "./dir" }
     envs = { "ENV1" = "arg1", "ENV2" = "arg2" }
     

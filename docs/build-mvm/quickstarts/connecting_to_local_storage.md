@@ -322,7 +322,7 @@ pub fn rm_file(name: String) -> String {
 }
 
 #[marine]
-#[link(wasm_import_module = "local_storage")]
+#[module_import("local_storage")]
 extern "C" {
     pub fn get(file_name: String) -> String;
 

@@ -17,7 +17,7 @@ Using this config with adding the following lines in your source code:
 
 ```rust
 #[marine]
-#[link(wasm_import_module = "host")]
+#[host_import]
 extern "C" {
     fn curl(cmd: Vec<String>) -> String;
 }

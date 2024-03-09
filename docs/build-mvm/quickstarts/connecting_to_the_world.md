@@ -155,7 +155,7 @@ pub fn curl_request(cmd: Vec<String>) -> MountedBinaryResult {
 }
 
 #[marine]                                                          // here we provide the FFI to the host's curl binary
-#[link(wasm_import_module = "host")]
+#[host_import]
 extern "C" {
     fn curl(cmd: Vec<String>) -> MountedBinaryResult;
 }
@@ -337,7 +337,7 @@ pub fn what_o_clock(timezone: String) -> SimpleResult {
 // here we provide the linking info for the curl-adapter module and expose the
 // curl_request method to the facade module
 #[marine]
- #[link(wasm_import_module = "curl_adapter")]
+ #[module_import("curl_adapter")]
  extern "C" {
      pub fn curl_request(cmd: Vec<String>) -> MountedBinaryStringResult;
  }

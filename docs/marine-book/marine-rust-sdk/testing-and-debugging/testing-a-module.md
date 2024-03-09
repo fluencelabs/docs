@@ -4,7 +4,7 @@ To use the `#[marine-test]` macro add `marine-rs-sdk-test` crate to the `[dev-de
 
 ```toml
 [dev-dependencies]
-marine-rs-sdk-test = "0.7.0"
+marine-rs-sdk-test = "0.16.1"
 ```
 
 Let's have a look at an implementation example:
@@ -26,13 +26,13 @@ pub fn greeting(name: String) -> String {    // 1
 mod tests {
     use marine_rs_sdk_test::marine_test;   // 2
 
-    #[marine_test(config_path = "../Config.toml", modules_dir = "../artifacts")] // 3
+    #[marine_test(config_path = "../Config.toml")] // 3
     fn empty_string(greeting: marine_test_env::greeting::ModuleInterface) {
         let actual = greeting.greeting(String::new());  // 4 
         assert_eq!(actual, "Hi, ");
     }
 
-    #[marine_test(config_path = "../Config.toml", modules_dir = "../artifacts")]
+    #[marine_test(config_path = "../Config.toml")]
     fn non_empty_string(greeting: marine_test_env::greeting::ModuleInterface) {
         let actual = greeting.greeting("name".to_string());
         assert_eq!(actual, "Hi, name");

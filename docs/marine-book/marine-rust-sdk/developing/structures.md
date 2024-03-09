@@ -71,7 +71,7 @@ pub struct TestRecord2 {
 }
 
 #[marine]
-#[link(wasm_import_module = "some_module")]
+#[module_import("some_module")]
 extern "C" {
   fn foo(mut test_record: TestRecord2) -> TestRecord2;
 }

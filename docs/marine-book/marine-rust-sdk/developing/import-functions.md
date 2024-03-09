@@ -5,7 +5,7 @@ import TabItem from "@theme/TabItem";
 
 The `#[marine]` macro can also wrap a Rust [extern block](https://doc.rust-lang.org/std/keyword.extern.html). In this case, all functions declared in it are considered imported functions. If there are imported functions in some module, say, module A, then
 
-* There should be another module, module B, that exports the same functions. The name of module B is indicated in the `link` macro (see examples below)
+* There should be another module, module B, that exports the same functions. The name of module B is indicated in the `module_import` macro (see examples below)
 * Module B should be loaded into `Marine` by the moment the loading of module A starts. Module A cannot be loaded if at least one imported function is absent in `Marine`.
 
 ## **Function import requirements**
@@ -31,7 +31,7 @@ pub struct TestRecord {
 // wrap the extern block with the marine macro to expose the function
 // as an import to the Marine VM
 #[marine]
-#[link(wasm_import_module = "some_module")]
+#[module_import("some_module")]
 extern "C" {
     pub fn foo(arg: Vec<Vec<Vec<Vec<TestRecord>>>>, arg_2: String) -> Vec<Vec<Vec<Vec<TestRecord>>>>;
 }
@@ -42,7 +42,7 @@ extern "C" {
 
 ```rust
 #[marine]
-#[link(wasm_import_module = "some_module")]
+#[module_import("some_module")]
 extern "C" {
   pub fn foo(arg: Vec<Vec<Vec<Vec<u8>>>>) -> Vec<Vec<Vec<Vec<u8>>>>;
 }

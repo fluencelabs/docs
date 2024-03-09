@@ -15,14 +15,8 @@ fn main() {}
 mod tests {
     use marine_rs_sdk_test::marine_test;
     #[marine_test( // 1
-        producer(
-            config_path = "../producer/Config.toml", 
-            modules_dir = "../producer/artifacts"
-        ),
-        consumer(
-            config_path = "../consumer/Config.toml",
-            modules_dir = "../consumer/artifacts"
-        )
+        producer(config_path = "../producer/Config.toml"),
+        consumer(config_path = "../consumer/Config.toml")
     )]
     fn test() {
         let mut producer = marine_test_env::producer::ServiceInterface::new(); // 2
@@ -98,14 +92,8 @@ fn main() {}
 
 #[cfg(test)]
 #[marine_rs_sdk_test::marine_test(
-    producer(
-        config_path = "../producer/Config.toml",
-        modules_dir = "../producer/artifacts"
-    ),
-    consumer(
-        config_path = "../consumer/Config.toml",
-        modules_dir = "../consumer/artifacts"
-    )
+    producer(config_path = "../producer/Config.toml"),
+    consumer(config_path = "../consumer/Config.toml")
 )]
 mod tests_on_mod {
     #[test]
@@ -145,14 +133,8 @@ fn main() {}
 mod tests {
     use marine_rs_sdk_test::marine_test;
     #[marine_test(
-        producer(
-            config_path = "../producer/Config.toml",
-            modules_dir = "../producer/artifacts"
-        ),
-        consumer(
-            config_path = "../consumer/Config.toml",
-            modules_dir = "../consumer/artifacts"
-        )
+        producer(config_path = "../producer/Config.toml"),
+        consumer(config_path = "../consumer/Config.toml")
     )]
     fn test() {
         let mut producer = marine_test_env::producer::ServiceInterface::new();

@@ -15,13 +15,13 @@ pub fn curl_request(curl_cmd: Vec<String>) -> MountedBinaryResult {
 }
 
 #[marine]
-#[link(wasm_import_module = "host")]
+#[host_import]
 extern "C" {
     fn curl(cmd: Vec<String>) -> MountedBinaryResult;
 }
 ```
 
-Note that to import functions from a host, not from other Wasm modules, `wasm_import_module` must be equal to `"host"`.
+Note that to import functions from a host, not from other Wasm modules, the `extern` block must be marked by `#[host_import]` macro.
 
 The code above creates a "curl adapter", i.e., a Wasm module that allows other Wasm modules to use the the `curl_request` function, which calls the imported _curl_ binary in this case, to make http calls. Please note that we are wrapping the `extern` block with the `#[marine]` macro and introduce a Marine-native data structure  `MountedBinaryResult` as the linked-function return value.
 

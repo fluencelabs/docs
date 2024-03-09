@@ -8,7 +8,7 @@ To enable logging please specify the logger feature of the Marine SDK in `Config
 
 ```toml
 [dependencies]
-marine-rs-sdk = { version = "0.7.1", features = ["debug"] }
+marine-rs-sdk = { version = "0.14.0", features = ["debug"] }
 ```
 
 ## Using debug API

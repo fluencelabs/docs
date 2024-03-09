@@ -24,7 +24,7 @@ cargo new local-storage --bin
 cargo new facade --bin
 ```
 
-Then add `marine-rs-sdk = "0.10.2"` to the `dependencies` section of each `Cargo.toml` file.
+Then add `marine-rs-sdk = "0.14.0"` to the `dependencies` section of each `Cargo.toml` file.
 
 ### Curl module
 
@@ -43,7 +43,7 @@ pub fn download(url: String) -> String {
 }
 
 #[marine]
-#[link(wasm_import_module = "host")]
+#[host_import]
 extern "C" {
     fn curl(url: String) -> String;
 }
@@ -98,13 +98,13 @@ fn get_n_save(url: String, file_name: String) -> String {
 }
 
 #[marine]
-#[link(wasm_import_module = "curl_adapter")]
+#[module_import("curl_adapter")]
 extern "C" {
     pub fn download(url: String) -> String;
 }
 
 #[marine]
-#[link(wasm_import_module = "local_storage")]
+#[module_import("local_storage")]
 extern "C" {
     // this link_name attribute allows using "file_get" name 
     // for function imported by "get" name
@@ -148,7 +148,6 @@ total_memory_limit = "Infinity"
     logger_enabled = true
 
     [module.wasi]
-    preopened_files = ["./sites"]
     # this is an alias to a full path for the sites dir
     mapped_dirs = { "sites" = "./sites" }
 
