@@ -107,7 +107,7 @@ The local network setup handles both sides of the marketplace, provider and deve
 
 ## Use local Fluence Network
 
-Now, when running e.g. `fluence run` and other CLI commands — local network will be used for all of them automatically. For the commands that require blockchain — default private key will be used automatically. You don't need Metamask when working with local network. If you want to use one of the other default private keys you can run:
+Now, when running e.g. `fluence run` and other CLI commands — local network will be used for all of them automatically. For the commands that require blockchain — default private key will be used automatically. You don't need MetaMask when working with local network. If you want to use one of the other default private keys you can run:
 ```sh
 fluence chain info
 ```
