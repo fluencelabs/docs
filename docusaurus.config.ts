@@ -158,7 +158,7 @@ const config: Config = {
               href: "https://discord.com/invite/5qSnPZKh7u",
             },
             {
-              label: "Youtube",
+              label: "YouTube",
               href: "https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw",
             },
             {
