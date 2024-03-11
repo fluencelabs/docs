@@ -28,4 +28,4 @@ This book is dedicated to all things in Marine and currently in its **alpha** ve
 
 - [Telegram](https://t.me/fluence_project)
 - [Marine github](https://github.com/fluencelabs/marine)
-- [Youtube](https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw)
+- [YouTube](https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw)

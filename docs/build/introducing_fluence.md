@@ -56,17 +56,17 @@ As Cloudless Functions are essentially distributed workflows that choreograph Co
 
 While Compute Functions can encompass any computations you prefer, only those considered safe for Compute Providers can be utilized for Cloudless Deployments. This necessitates both portability and sandboxing.
 
-[Marine](../marine-book/introduction.md) is the default compute runtime for Compute Functions, delivered as a part of Cloudless Deployment in the Fluence Network. Marine is a general purpose Webassembly runtime that supports Wasm Module Linking with a shared-nothing linking scheme. 
+[Marine](../marine-book/introduction.md) is the default compute runtime for Compute Functions, delivered as a part of Cloudless Deployment in the Fluence Network. Marine is a general purpose WebAssembly runtime that supports Wasm Module Linking with a shared-nothing linking scheme. 
 
 With the Marine runtime, developers can use any language that compiles to WASM, with some limitations needed for safety and portability.
 
-To achieve safety, Marine restricts host imports: Marine’s Webassembly modules, by default, cannot trigger any external effect, open a socket or execute a binary. Yet Marine makes an exception for capabilities provided by WASI system interface, such as reading a current host’s time or accessing file system.
+To achieve safety, Marine restricts host imports: Marine’s WebAssembly modules, by default, cannot trigger any external effect, open a socket or execute a binary. Yet Marine makes an exception for capabilities provided by WASI system interface, such as reading a current host’s time or accessing file system.
 
 Marine configures a number of directories to be accessible by Marine modules. The majority of these directories are situated in ephemeral storage, which is essentially RAM. Any state in this storage is lost if the host machine restarts. While a limited amount of persistent storage is also provided, to ensure data durability developers are required to use replication across peers in the Subnet and/or leverage external storage solutions.
 
-Compute Function can be assembled from several Webassembly modules with the help of module linking. The module linking approach allows partial solutions to be crafted in any compatible language and distributed in the form of a content-addressable .wasm binary. This facilitates their reuse across numerous Compute Functions on the network.
+Compute Function can be assembled from several WebAssembly modules with the help of module linking. The module linking approach allows partial solutions to be crafted in any compatible language and distributed in the form of a content-addressable .wasm binary. This facilitates their reuse across numerous Compute Functions on the network.
 
-For certain use cases, developers don't even need to code Rust or compile anything to Webassembly. One important case is Spell.
+For certain use cases, developers don't even need to code Rust or compile anything to WebAssembly. One important case is Spell.
 
 Spell is a special service that aggregates a set of Compute Functions, a local key-value storage that developers can build upon, and a Cloudless Function – an Aqua script that is executed based on a cron-like trigger.
 
@@ -89,7 +89,7 @@ Meet Managed Effects approach:
 - Effector Modules must be explicitly whitelisted by Compute Providers.
 - Developers have the capability to construct diverse Compute Functions by utilizing the necessary effects, all made possible through Effector Modules and the module linking feature of Marine.
 
-Managed Effects make Fluence Protocol a Swiss knife for the task of integrating web2 services and web3 protocols into a user facing products, taking off the limits of Webassembly runtime and boundaries of Fluence Network.
+Managed Effects make Fluence Protocol a Swiss knife for the task of integrating web2 services and web3 protocols into a user facing products, taking off the limits of WebAssembly runtime and boundaries of Fluence Network.
 
 There are two ways to use a web3 protocol: introduce a new Effector Module, or leverage capabilities of existing ones.
 

@@ -169,7 +169,7 @@ The CLI ships with several templates that allow you to scaffold a project quickl
 * quickstart
     * scaffold with installed compute service
 * ts
-    * scaffold suitable for compute services with Typescript frontend
+    * scaffold suitable for compute services with TypeScript frontend
 * js
     * scaffold suitable for compute services with JS frontend
 

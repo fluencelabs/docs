@@ -15,7 +15,7 @@ Which we compile with
 aqua -i aqua-scripts -o compiled-aqua
 ```
 
-to obtain Typescript wrapped AIR, `default_foo.ts` in the `compiled-aqua` directory:
+to obtain TypeScript wrapped AIR, `default_foo.ts` in the `compiled-aqua` directory:
 
 ```typescript
 import { FluenceClient, PeerIdB58 } from '@fluencelabs/fluence';
@@ -76,7 +76,7 @@ export async function foo(client: FluenceClient, config?: {ttl?: number}): Promi
 }
 ```
 
-Regardless of your output target, i.e. raw AIR or Typescript wrapped AIR, the default module namespace is `default_foo` and `foo` is the compiled function.
+Regardless of your output target, i.e. raw AIR or TypeScript wrapped AIR, the default module namespace is `default_foo` and `foo` is the compiled function.
 
 While this default approach is handy for single file, single module development, it makes for inefficient dependency management and unnecessary compilations for multi-module projects. The remainder of this section introduces the scoping and visibility concepts available in Aqua to effectively manage dependencies.
 

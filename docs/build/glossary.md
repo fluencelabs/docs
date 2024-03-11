@@ -185,7 +185,7 @@ With Marine, computations are portable and safe for the [Provider](#provider).
 
 #### Marine Service
 
-Service is a virtual construct combining one or more [linked](#module-linking) [Marine modules](#marine-module), one of them being a [Facade Module](#facade-module), and exposing one or more [Compute Function](#compute-function)s via [Webassembly IT](#webassembly-it).
+Service is a virtual construct combining one or more [linked](#module-linking) [Marine modules](#marine-module), one of them being a [Facade Module](#facade-module), and exposing one or more [Compute Function](#compute-function)s via [WebAssembly IT](#webassembly-it).
 
 Service:
 - Can be called from [Aqua](#Aqua) as a part of [Cloudless Function](#cloudless-function)
@@ -228,15 +228,15 @@ A [Module](#facade-module), that is the only module accessible from the outside
 
 For modules that are intended to be shared as an API, developers often need to write a Facade module to protect internal APIs from unauthorized access, enforce business-invariants, etc.
 
-#### Webassembly (Wasm)
+#### WebAssembly (Wasm)
 
-[Webassembly](https://webassembly.org/) is a binary instruction format for a stack-based virtual machine. Wasm is intended to provide a memory-safe, sandboxed execution environment with a flexible set of settings, such as memory size and allowed imports. Multiple languages, such as Rust, C/C++ or tinyGo, support the Wasm compile target. 
+[WebAssembly](https://webassembly.org/) is a binary instruction format for a stack-based virtual machine. Wasm is intended to provide a memory-safe, sandboxed execution environment with a flexible set of settings, such as memory size and allowed imports. Multiple languages, such as Rust, C/C++ or tinyGo, support the Wasm compile target. 
 
 Fluence provides a [Rust SDK](#marine-sdk) but supports any compiled Wasm module following [the Module ABI conventions](/docs/marine-book/marine-rust-sdk/module-abi.md).
 
-#### Webassembly IT
+#### WebAssembly IT
 
-Webassembly Interface Types (Wasm IT, WIT) is a part of the Component model proposal that allows using complex types, like strings, structs, enums and arrays, in a Wasm module's API.
+WebAssembly Interface Types (Wasm IT, WIT) is a part of the Component model proposal that allows using complex types, like strings, structs, enums and arrays, in a Wasm module's API.
 
 #### WASI
 
