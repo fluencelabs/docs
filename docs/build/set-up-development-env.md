@@ -8,7 +8,6 @@ The best way to make sure everything works for you is to ensure all the versions
 
 This is the first and the most important step that can help you ensure version compatibility. Use `fluence update` command to update Fluence CLI. Allowed arguments for this command are:
 
-- `kras` - version compatible with current kras environment
 - `dar` - version compatible with current dar environment
 - `stage` - version compatible with current stage environment
 - `main` - latest build from main branch
