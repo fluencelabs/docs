@@ -57,6 +57,11 @@ Fluence CLI will attempt to install Rust for you on Linux and macOS. If you are 
 
 Fluence CLI will also automatically install the required Rust toolchain and add `wasm32-wasi` target
 
+In case of any problems related to Rust, here's a quick troubleshoot list:
+- Check you don't have 2 Rust installations (ie via rustup and brew on macOS)
+- Install wasm32-wasi manually: `rustup target add wasm32-wasi` & `rustup target add wasm32-wasi --toolchain nightly`
+- `rustup update`
+
 ### Marine and Mrepl
 
 You will need these to build and test services written in Rust. They will be lazily downloaded from GitHub releases when they are needed. But you can also force the download by running
