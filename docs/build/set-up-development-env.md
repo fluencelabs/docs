@@ -13,7 +13,7 @@ This is the first and the most important step that can help you ensure version c
 - `main` - latest build from main branch
 - `unstable` - latest release of Fluence CLI
 
-So please run `fluence update kras` before running any CLI commands on `kras` environment. You can select environment by using `--env` flag or by running `fluence default env kras` inside your Fluence Project
+So please run `fluence update dar` before running any CLI commands on `dar` environment. You can select environment by using `--env` flag or by running `fluence default env dar` inside your Fluence Project
 
 Fluence CLI contains hardcoded versions of all the parts of Fluence Protocol that were tested to work together correctly. This means that if you work with local Fluence Network — generally speaking everything should just be working for you. The only thing to worry about is that you might have some dependency versions specified in `fluence.yaml` config of your Fluence Project that don't match with your current CLI version. To reset the versions of these dependencies to default, run:
 
