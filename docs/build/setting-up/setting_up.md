@@ -69,6 +69,6 @@ Now that your account and wallet are setup, select the Fluence network you just 
   />
 </div>
 
-Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to tbe imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account. You  the checkout the transaction.
+Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to be imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account.
 
 You are now equipped to pay for your Cloudless Deployment on the Fluence testnet!
