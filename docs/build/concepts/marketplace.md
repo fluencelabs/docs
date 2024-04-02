@@ -101,10 +101,6 @@ TODO:
 * deployment plan implementation: CLI
 
 
-:::Info
+:::info
 Currently, function pricing is based on an epoch model. That is, regardless of your function requests, you will be charged a fixed amount per time period per worker, i.e., epoch. The epoch model is a stopgap measure for FLuence to roll-out and test its mainnet and will be replaced shortly with a request based pricing model common to serverless compute.
 :::
-
-
-
-
