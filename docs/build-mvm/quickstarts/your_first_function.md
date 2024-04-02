@@ -263,7 +263,7 @@ You are now prompted to confirm the transaction. Copy the url into a browser tab
 
 TODO
 
-Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout-dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
+Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout.dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
 
 
 Now that we've got our Cloudless Deployment in place with our compute function installed on three different peers, we are ready to orchestrate with Aqua. For all things Aqua, see the [Auqa Book](https://fluence.dev/docs/aqua-book/introduction).
