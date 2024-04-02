@@ -261,24 +261,22 @@ wc:5270eac6c16c6e548352de5eca15da84e2578c100e29b91695931f3b8d8c8696@2?relay-prot
 
 You are now prompted to confirm the transaction. Copy the url into a browser tab and pretty soon you'll see your wallet, in our case MetaMask, pop up asking you to confirm the transaction. Make sure you selected the correct network and a tUSDC, tFLT funded account. Once the deployment offer is matched with one or more provider offers, 
 
-TODO
-
-Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout-dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
+Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout.dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
 
 
 Now that we've got our Cloudless Deployment in place with our compute function installed on three different peers, we are ready to orchestrate with Aqua. For all things Aqua, see the [Auqa Book](https://fluence.dev/docs/aqua-book/introduction).
 
 Luckily, the quickstart template already provided us with a a nice set of Aqua scripts to explore an use. Have a look at the *auqa.main* file in the `src/aqua` directory and let's quickly review the most salient sections before we start executing:
 
-```haskell
-aqua Main                                     (1)
+```aqua
+aqua Main                                   -- (1)
 
-import "@fluencelabs/aqua-lib/builtin.aqua"   (2a)
-import "@fluencelabs/aqua-lib/subnet.aqua"    (2b)
+import "@fluencelabs/aqua-lib/builtin.aqua" -- (2a)
+import "@fluencelabs/aqua-lib/subnet.aqua"  -- (2b)
 
-use "deals.aqua"                              (3a) 
-use "hosts.aqua"                              (3b)
-import "services.aqua"                        (3c)
+use "deals.aqua"                            -- (3a) 
+use "hosts.aqua"                            -- (3b)
+import "services.aqua"                      -- (3c)
 
 -- IMPORTANT: Add exports for all functions that you want to run
 export helloWorld, helloWorldRemote, getInfo, getInfos
@@ -291,13 +289,13 @@ export helloWorld, helloWorldRemote, getInfo, getInfos
 -- example of running services deployed using `fluence deploy`
 -- with worker 'myDeployment' which has service 'MyService' with method 'greeting'
 
-export runDeployedServices, showSubnet         (4)
+export runDeployedServices, showSubnet      -- (4)
 
-data Answer:                                   (5)
+data Answer:                                -- (5)
     answer: ?string
     worker: Worker
 
-func runDeployedServices() -> []Answer:        (6)
+func runDeployedServices() -> []Answer:     -- (6)
     deals <- Deals.get()
     dealId = deals.myDeployment!.dealIdOriginal
     answers: *Answer
@@ -311,12 +309,12 @@ func runDeployedServices() -> []Answer:        (6)
             answers <<- Answer(answer=nil, worker=w)
         else:
             on w.worker_id! via w.host_id:
-                answer <- MyService.greeting("fluence")        (6a)
+                answer <- MyService.greeting("fluence")     -- (6a)
                 answers <<- Answer(answer=?[answer], worker=w)
 
     <- answers
 
-<snip>
+-- snip --
 ```
 
 Before we run through the code, let's got for instant gratification and choreograph our *greeting* compute function. We use `fluence run` to invoke the `runDeployedServices`, (6), function to invoke all three of our distributed compute functions:
@@ -373,7 +371,7 @@ Let's dig into the *main.aqua* file:
 
 Now, let's review the *runDeployedServices* function (6), line-by-line:
 
-```haskell
+```aqua
 func runDeployedServices() -> []Answer:
     deals <- Deals.get()                                  -- get the parameterized deal info from .fluence/aqua/deals.aqua
     dealId = deals.myDeployment!.dealIdOriginal           -- now we can ge the deal id we need to resolve subnetwork

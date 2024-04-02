@@ -49,7 +49,7 @@ In your wallet, you need to create a network entry for the Fluence IPC `dar` tes
         "rpc url": "https://ipc-dar.fluence.dev",
         "chain id": 3525067388221321,
         "currency symbol": "tFLT",
-        "block explorer url": "https://blockscout-dar.fluence.dev/"
+        "block explorer url": "https://blockscout.dar.fluence.dev/"
     }
 ```
 
@@ -69,6 +69,6 @@ Now that your account and wallet are setup, select the Fluence network you just 
   />
 </div>
 
-Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to tbe imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account. You Blockscout the checkout the transaction.
+Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to be imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account.
 
 You are now equipped to pay for your Cloudless Deployment on the Fluence testnet!
