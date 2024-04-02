@@ -313,6 +313,8 @@ func runDeployedServices() -> []Answer:     -- (6)
                 answers <<- Answer(answer=?[answer], worker=w)
 
     <- answers
+
+-- snip --
 ```
 
 Before we run through the code, let's got for instant gratification and choreograph our *greeting* compute function. We use `fluence run` to invoke the `runDeployedServices`, (6), function to invoke all three of our distributed compute functions:
