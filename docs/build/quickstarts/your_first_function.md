@@ -269,14 +269,14 @@ Now that we've got our Cloudless Deployment in place with our compute function i
 Luckily, the quickstart template already provided us with a a nice set of Aqua scripts to explore an use. Have a look at the *auqa.main* file in the `src/aqua` directory and let's quickly review the most salient sections before we start executing:
 
 ```aqua
-aqua Main                                     (1)
+aqua Main                                   -- (1)
 
-import "@fluencelabs/aqua-lib/builtin.aqua"   (2a)
-import "@fluencelabs/aqua-lib/subnet.aqua"    (2b)
+import "@fluencelabs/aqua-lib/builtin.aqua" -- (2a)
+import "@fluencelabs/aqua-lib/subnet.aqua"  -- (2b)
 
-use "deals.aqua"                              (3a) 
-use "hosts.aqua"                              (3b)
-import "services.aqua"                        (3c)
+use "deals.aqua"                            -- (3a) 
+use "hosts.aqua"                            -- (3b)
+import "services.aqua"                      -- (3c)
 
 -- IMPORTANT: Add exports for all functions that you want to run
 export helloWorld, helloWorldRemote, getInfo, getInfos
@@ -289,13 +289,13 @@ export helloWorld, helloWorldRemote, getInfo, getInfos
 -- example of running services deployed using `fluence deploy`
 -- with worker 'myDeployment' which has service 'MyService' with method 'greeting'
 
-export runDeployedServices, showSubnet         (4)
+export runDeployedServices, showSubnet      -- (4)
 
-data Answer:                                   (5)
+data Answer:                                -- (5)
     answer: ?string
     worker: Worker
 
-func runDeployedServices() -> []Answer:        (6)
+func runDeployedServices() -> []Answer:     -- (6)
     deals <- Deals.get()
     dealId = deals.myDeployment!.dealIdOriginal
     answers: *Answer
@@ -309,12 +309,10 @@ func runDeployedServices() -> []Answer:        (6)
             answers <<- Answer(answer=nil, worker=w)
         else:
             on w.worker_id! via w.host_id:
-                answer <- MyService.greeting("fluence")        (6a)
+                answer <- MyService.greeting("fluence")     -- (6a)
                 answers <<- Answer(answer=?[answer], worker=w)
 
     <- answers
-
-<snip>
 ```
 
 Before we run through the code, let's got for instant gratification and choreograph our *greeting* compute function. We use `fluence run` to invoke the `runDeployedServices`, (6), function to invoke all three of our distributed compute functions:
