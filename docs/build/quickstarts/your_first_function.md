@@ -261,8 +261,6 @@ wc:5270eac6c16c6e548352de5eca15da84e2578c100e29b91695931f3b8d8c8696@2?relay-prot
 
 You are now prompted to confirm the transaction. Copy the url into a browser tab and pretty soon you'll see your wallet, in our case MetaMask, pop up asking you to confirm the transaction. Make sure you selected the correct network and a tUSDC, tFLT funded account. Once the deployment offer is matched with one or more provider offers, 
 
-TODO
-
 Before we move on to actually and finally (!) use our compute functions, stop by [Blockscout](https://blockscout.dar.fluence.dev/) and checkout the details of the blockchain transaction (TX). You can check out the details of your offer and more using the [Cloudless Explorer](https://explorer.fluence.dev/) -- mae sure you select the `dar` network in the upper right corner.
 
 
@@ -270,7 +268,7 @@ Now that we've got our Cloudless Deployment in place with our compute function i
 
 Luckily, the quickstart template already provided us with a a nice set of Aqua scripts to explore an use. Have a look at the *auqa.main* file in the `src/aqua` directory and let's quickly review the most salient sections before we start executing:
 
-```haskell
+```aqua
 aqua Main                                     (1)
 
 import "@fluencelabs/aqua-lib/builtin.aqua"   (2a)
@@ -373,7 +371,7 @@ Let's dig into the *main.aqua* file:
 
 Now, let's review the *runDeployedServices* function (6), line-by-line:
 
-```haskell
+```aqua
 func runDeployedServices() -> []Answer:
     deals <- Deals.get()                                  -- get the parameterized deal info from .fluence/aqua/deals.aqua
     dealId = deals.myDeployment!.dealIdOriginal           -- now we can ge the deal id we need to resolve subnetwork
