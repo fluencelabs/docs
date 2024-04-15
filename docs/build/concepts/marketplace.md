@@ -5,6 +5,7 @@
 The Fluence marketplace is a blockchain-based matcher of offers provided by data center operators (Providers) interested in monetizing their resources and offers put forward by developers looking for compute capacity to host and execute their serverless functions. Matching is based on attribute parameters provided by both providers and developer offers, respectively, where offer attributes include but are not limited to (escrowed) willingness to pay and accept and duration of capacity commitment. See [link to finalized deal sol](https://fluence/deal). Both Provider and Developer Offers are on-chain commitments which, upon matching, result in a contract called a Deal that governs the compute capacity provisioning and compensation over the agreed upon period of time between a developer and one or more providers. See Figure 1.
 
 Figure 1: Stylized On-Chain Deal Generation From Offer Commitments
+
 mermaid
 ```mermaid
     stateDiagram
@@ -32,6 +33,7 @@ The remainder of this chapter presents developers with the core concepts of the 
 Capacity providers (Providers) agree to operate protocol-compliant Fluence peers on servers with specific CPU and RAM capacity that is provable and verifiable on-chain with Fluence's Proof of Capacity protocol. Moreover, provider capacity is denominated, addressed and staked in terms of capacity units (CU) where one (1) CU is one core, two threads and four (4) GB of RAM. The Fluence peer allows providers to dynamically re-allocate CUs from the capacity commitment prover (CCP) to a worker and vice versa. Capacity allocated to deployment no longer produces proofs of capacity (PoC) and no longer generates commitment rewards. Instead, these resources now generate Deal rewards for the provider. See Figure 2.
 
 Figure 2: Overview Of Verifiable Provider Capacity And Compute Units
+
 mermaid
 ```mermaid
     stateDiagram
