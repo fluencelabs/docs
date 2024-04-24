@@ -46,8 +46,8 @@ In your wallet, you need to create a network entry for the Fluence IPC `dar` tes
 ```json
     {
         "network name": "Fluence Dar Testnet"
-        "rpc url": "https://ipc-dar.fluence.dev",
-        "chain id": 3525067388221321,
+        "rpc url": "https://ipc.dar.fluence.dev/",
+        "chain id": 2358716091832359,
         "currency symbol": "tFLT",
         "block explorer url": "https://blockscout.dar.fluence.dev/"
     }
