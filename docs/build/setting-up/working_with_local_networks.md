@@ -4,7 +4,7 @@ The simplest way to test and debug your code is to run it on a local Fluence Net
 
 ## Prerequisites
 
-- Install [Fluence CLI](https://github.com/fluencelabs/fluence-cli) or make sure you have the latest version of CLI by running `fluence update latest`
+- Install [Fluence CLI](https://github.com/fluencelabs/fluence-cli) or make sure you have an up-to-date CLI compatible with the environment you are interested in e.g. `fluence update dar`
 
 - Running docker daemon. The simplest way to use docker is to install [Docker Desktop](https://docs.docker.com/desktop/) (We recommend using [this guide](https://docs.docker.com/desktop/) to install docker from official documentation for you OS). Don't forget to run it after installation
 
