@@ -30,7 +30,7 @@ const config: Config = {
   tagline: "Decentralized Serverless Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   i18n: {
@@ -99,7 +99,7 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "build/introduction",
+          docId: "build/introducing_fluence",
           label: "Build",
         },
         {

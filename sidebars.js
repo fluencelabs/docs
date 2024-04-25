@@ -2,58 +2,125 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  build: [
-    "build/introduction",
-    "build/get-started",
-    "build/fundamentals",
-    "build/develop-services",
-    // {
-    //   type: "category",
-    //   label: "Quickstart",
-    //   items: [
-    //     "build/fundamentals",
-    //     "build/develop-services",
-    //     // "build/develop-distributed-algos"
-    //   ],
-    // },
-    "build/set-up-development-env",
-    {
-      type: "category",
-      label: "Working with data",
-      link: { id: "build/working-with-data", type: "doc" },
-      items: [
-        "build/local-data-storage",
-        // "build/remote-data-storage",
-        // "build/data-acquisition"
-      ],
-    },
-    {
-      type: "category",
-      label: "Fluence JS Client",
-      link: { id: "build/js-client/js-client", type: "doc" },
-      items: [
-        "build/js-client/installation",
-        "build/js-client/setting-up",
-        "build/js-client/hello-world",
-        "build/js-client/advanced-ipfs",
-        "build/js-client/marine-js",
-      ],
-    },
-    // "build/thinking-in-aqua-marine/thinking-in-aqua-marine",
-    "build/concepts/concepts",
-    "build/security",
-    "build/limits",
-    "build/glossary",
-    "build/reference",
-  ],
   learn: [
     "learn/overview",
     "learn/how-it-works",
     "learn/why-fluence",
     "learn/fluence-comparison",
     "learn/use-cases",
-    "learn/technology",
-    "learn/networks",
+    {
+      type: "category",
+      label: "Governance",
+      link: { id: "learn/governance/overview", type: "doc" },
+      items: [],
+    },
+  ],
+  build: [
+    {
+      type: "category",
+      label: "Hello Fluence",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build/introducing_fluence", type: "doc" },
+      items: [],
+    },
+    {
+      type: "category",
+      label: "Overview",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build/overview/fluence_functions", type: "doc" },
+      items: [
+        // "build/overview/fluence_functions",
+        "build/overview/getting_started",
+        // "build/overview/roadmap",
+      ],
+    },
+    {
+      type: "category",
+      label: "Setting Up",
+      collapsible: true,
+      collapsed: true,
+      link: { id: "build/setting-up/setting_up", type: "doc" },
+      items: [
+        // "build/setting-up/setting_up",
+        "build/setting-up/installing_cli",
+        "build/setting-up/working_with_local_networks",
+      ],
+    },
+    {
+      type: "category",
+      label: "Quickstart",
+      collapsible: true,
+      collapsed: true,
+      //  link: { id: "build/overview/your_first_function", type: "doc" },
+      items: [
+        "build/quickstarts/your_first_function",
+        // "build/quickstarts/connecting_to_the_world",
+        // "build/quickstarts/connecting_to_local_storage",
+      ],
+    },
+    /*
+    {
+      type: "category",
+      label: "Concepts",
+      collapsible: true,
+      collapsed: true,
+      //  link: { id: "build/overview/fluence_functions", type: "doc" },
+      items: [
+        "build/concepts/best_practices",
+        "build/concepts/fluence_functions_revisited",
+        "build/concepts/marketplace",
+        "build/concepts/http_gateways",
+        // "build/concepts/scheduling_functions",
+        "build/concepts/security",
+      ],
+    },
+    */
+    /*
+    {
+      type: "category",
+      label: "Tutorials",
+      collapsible: true,
+      collapsed: true,
+      //  link: { id: "build/overview/fluence_functions", type: "doc" },
+      items: [
+        "build/tutorials/workflow_fundamentals",
+        "build/tutorials/event_handling_in_js",
+      ],
+    },
+    */
+    {
+      type: "category",
+      label: "Examples",
+      collapsible: true,
+      collapsed: true,
+      //  link: { id: "build/overview/fluence_functions", type: "doc" },
+      items: ["build/examples/frpc"],
+    },
+    {
+      type: "category",
+      label: "How To Guides",
+      collapsible: true,
+      collapsed: true,
+      //  link: { id: "build/overview/fluence_functions", type: "doc" },
+      items: [
+        /*
+        "build/how-to/setting_up",
+        "build/how-to/configure",
+        "build/how-to/setup_payments",
+        "build/how-to/develop",
+        "build/how-to/test",
+        "build/how-to/securing_functions",
+        "build/how-to/deploy",
+        "build/how-to/monitor",
+        "build/how-to/migrate",
+        */
+        "build/how-to/schedule_functions",
+      ],
+    },
+    "build/glossary",
+    // "build/references",
   ],
   "aqua-book": [
     "aqua-book/introduction",
