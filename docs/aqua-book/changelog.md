@@ -7,7 +7,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 * `ENHANCING` part is incremented for every syntax addition
 * `RELEASE` is the release number, shows internal compiler changes, bugfixes that keep the language untouched
 
-### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2023
+### [0.13.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.13.4) - January 11, 2024
 
 * **compiler:** `for ... rec` instruction (not documented). ([LNG-307](https://linear.app/fluence/issue/LNG-307)) ([#1026](https://github.com/fluencelabs/aqua/issues/1026))
 * **compiler:** Enhance type error message on [ability](./language/abilities.md) or [structure](./language/types.md#structures) creation (report missing fields, excessive arguments passed and types mismatch). ([LNG-313](https://linear.app/fluence/issue/LNG-313)) ([#1033](https://github.com/fluencelabs/aqua/issues/1033))
