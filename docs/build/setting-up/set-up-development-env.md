@@ -55,7 +55,7 @@ For advanced users: The Aqua compiler currently relies on [npm](https://www.npmj
 
 Fluence CLI will attempt to install Rust for you on Linux and macOS. If you are on Windows or the Fluence CLI is unable to install Rust, please refer to the [official Rust documentation for installation instructions](https://www.rust-lang.org/tools/install)
 
-Fluence CLI will also automatically install the required Rust toolchain and add the `wasm32-wasi` target.
+Fluence CLI will also install the required Rust toolchain and add the `wasm32-wasi` target.
 
 In case of any problems related to Rust, here's a quick troubleshoot list:
 - Check you don't have 2 Rust installations (ie via rustup and brew on macOS)
