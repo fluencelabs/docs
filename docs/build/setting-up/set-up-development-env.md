@@ -65,7 +65,7 @@ In case of any problems related to Rust, here's a quick troubleshoot list:
 
 ### Marine and Mrepl
 
-In order to create and compile your Rust code to wasi and test the resulting Wasm modules, you need the Marine CLI and Marine REPL. Both components are wrapped by Fluence CLI and by default downloaded from the respective GitHub releases lazily when needed. Instead of the default lazy install, you can force the download by running
+In order to create and compile your Rust code to wasi and test the resulting Wasm modules, you need the Marine CLI and Marine REPL. Both components are wrapped by Fluence CLI and by default downloaded from the respective GitHub releases lazily. Instead of the default lazy install, you can force the download by running
 
 ```sh
 fluence dep i
