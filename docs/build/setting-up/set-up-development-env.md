@@ -61,7 +61,7 @@ In case of any problems related to Rust, here's a quick troubleshoot list:
 - Check you don't have 2 Rust installations (ie via rustup and brew on macOS)
 - Install wasm32-wasi manually: `rustup target add wasm32-wasi` & `rustup target add wasm32-wasi --toolchain nightly`
 - `rustup update`
-- Just reinstall rust completely from scratch
+- Just reinstall Rust
 
 ### Marine and Mrepl
 
