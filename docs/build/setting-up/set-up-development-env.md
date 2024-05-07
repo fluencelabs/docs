@@ -49,7 +49,7 @@ fluence dep un @fluencelabs/aqua-lib
 
 You can also edit `fluence.yaml` directly and run `fluence dep i` after that
 
-For advanced users: The Aqua compiler currently relies on [npm](https://www.npmjs.com/) under the hood, to serve as its package manager, which may change in the future. For the time being, if you encounter any issues or problems please refer to [npm documentation](https://docs.npmjs.com/). Keep in mind that you don't need to install `npm` as Fluence CLI installs and manages its own version.
+For advanced users: The Aqua compiler currently relies on [npm](https://www.npmjs.com/) to serve as its package manager. If you encounter any issues or problems, please refer to [npm documentation](https://docs.npmjs.com/). Keep in mind that you don't need to install `npm` as Fluence CLI installs and manages its own version.
 
 ### Rust
 
