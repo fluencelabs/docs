@@ -43,8 +43,8 @@ const sidebars = {
       collapsed: true,
       link: { id: "build/setting-up/setting_up", type: "doc" },
       items: [
-        // "build/setting-up/setting_up",
         "build/setting-up/installing_cli",
+        "build/setting-up/set-up-development-env",
         "build/setting-up/working_with_local_networks",
       ],
     },
