@@ -8,7 +8,11 @@ Let's use those readily available services to get the timestamp of a few of our 
 
 ```aqua
 -- timestamp_getter.aqua
+aqua Main
+
 import "@fluencelabs/aqua-lib/builtin.aqua"
+
+export ts_getter 
 
 func ts_getter(node: string, num_peers: u32) -> []u64:
   res: *u64
@@ -26,13 +30,27 @@ func ts_getter(node: string, num_peers: u32) -> []u64:
   <- res
 ```
 
-Let's explain this script line by line. First of all, it brings builtin services (see [aqua-lib](../libraries/aqua-lib.md)) in scope by import:
+Let's explain this script line by line. First of all, we need to specify module header.
+
+
+```aqua
+aqua Main
+```
+
+Next, it brings builtin services (see [aqua-lib](../libraries/aqua-lib.md)) in scope by import:
 
 ```aqua
 import "@fluencelabs/aqua-lib/builtin.aqua"
 ```
 
+Next, it export `ts_getter` function, cause we want to call it from outer scope:
+
+```aqua
+export ts_getter
+```
+
 Next it defines a function named `ts_getter` with two parameters: `node` which is peer id and `num_peers` which is how many neighbors to check. 
+(to get list of node ids on `dar` network you can execute: `fluence default peers dar`)
 That function returns array of obtained timestamps.
 
 ```aqua
@@ -89,9 +107,8 @@ Now that we have our script, let's use [Fluence CLI](https://github.com/fluencel
 ```sh
 # use `fluence run` as your client with some peer id
 fluence run \
-    --relay /dns4/kras-02.fluence.dev/tcp/19001/wss/p2p/12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf \
     -i aqua-scripts/timestamp_getter.aqua \
-    -f 'ts_getter("12D3KooWHLxVhUQyAuZe6AHMB29P7wkvTNMn7eDMcsqimJYLKREf", 10)'
+    -f 'ts_getter("12D3KooWBUJifCTgaxAUrcM9JysqCcS4CS8tiYH5hExbdWCAoNwb", 10)'
 ```
 
 </TabItem>
