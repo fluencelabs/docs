@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In order to get your [Cloudless App](../glossary#cloudless-app) developed and running, some housekeeping with respect to both development and payment environments are required. 
+In order to get your [Cloudless App](./../glossary#cloudless-app) developed and running, some housekeeping with respect to both development and payment environments are required. 
 
 Fluence Cloudless offers you, the developer, a great degree of control over almost every aspect of your Cloudless App: 
 
@@ -11,13 +11,13 @@ Fluence Cloudless offers you, the developer, a great degree of control over almo
 * what level of resources you want to power your functions, e.g., number of CPUs
 *  what level of availability you want for your Cloudless App. 
 
-Moreover, in Fluence's *"verify, don't trust"* paradigm, providers have to submit [cryptographic proofs](../glossary/#proofs) attesting to the correct execution of your Cloudless Functions in order to be able to collect the pre-agreed price for their compute services rendered. Hence, the underlying billing and payment models also are different.
+Moreover, in Fluence's *"verify, don't trust"* paradigm, providers have to submit [cryptographic proofs](./../glossary#proofs) attesting to the correct execution of your Cloudless Functions in order to be able to collect the pre-agreed price for their compute services rendered. Hence, the underlying billing and payment models also are different.
 
 Instead of a credit card on file that is (for the most part) charged at the end of the month for compute service charges incurred over the billing period, e.g., the last calendar month, as reported by the cloud provider, Fluence Cloudless operates on a pre-payment and token model putting you, the developer, fully into control of your payments. 
 
 ### Fluence Networks
 
-In order to create and operate your Cloudless App, you need to interact with two different networks: the Fluence Compute Network and the Fluence Compute Marketplace. The Fluence Compute Network is a peer-to-peer network connecting peers, i.e., servers in various data centers, hosting and executing your Cloudless Deployments on demand. The Fluence Compute Marketplace is a blockchain hosting the necessary smart contracts to allow you to commit your [developer offer](../glossary/#developer-offer) for matching with [provider offers](../glossary/#provider-offer) and to manage the proof-based charges from each peer owner, i.e., provider, running your [Cloudless Deployments](../glossary/#cloudless-deployment). Each network is available in a production, i.e., mainnet, or testing, i.e., testnet, flavor. In addition, the remote testnets can be stood-up locally to further ease development.
+In order to create and operate your Cloudless App, you need to interact with two different networks: the Fluence Compute Network and the Fluence Compute Marketplace. The Fluence Compute Network is a peer-to-peer network connecting peers, i.e., servers in various data centers, hosting and executing your Cloudless Deployments on demand. The Fluence Compute Marketplace is a blockchain hosting the necessary smart contracts to allow you to commit your [developer offer](./../glossary#developer-offer) for matching with [provider offers](./../glossary#provider-offer) and to manage the proof-based charges from each peer owner, i.e., provider, running your [Cloudless Deployments](./../glossary#cloudless-deployment). Each network is available in a production, i.e., mainnet, or testing, i.e., testnet, flavor. In addition, the remote testnets can be stood-up locally to further ease development.
 
 Table 1: Network Names
 
@@ -46,10 +46,10 @@ In your wallet, you need to create a network entry for the Fluence IPC `dar` tes
 ```json
     {
         "network name": "Fluence Dar Testnet"
-        "rpc url": "https://ipc-dar.fluence.dev",
-        "chain id": 3525067388221321,
+        "rpc url": "https://ipc.dar.fluence.dev/",
+        "chain id": 2358716091832359,
         "currency symbol": "tFLT",
-        "block explorer url": "https://blockscout-dar.fluence.dev/"
+        "block explorer url": "https://blockscout.dar.fluence.dev/"
     }
 ```
 
@@ -69,6 +69,6 @@ Now that your account and wallet are setup, select the Fluence network you just 
   />
 </div>
 
-Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to tbe imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account. You Blockscout the checkout the transaction.
+Enter the address of your wallet and, if you are using MetaMask, ask for the *tUSDC* token symbol to be imported. Then click the "Receive FLT & tUSDC" button. After a short delay, you should see a transaction id and the funds should be in your account.
 
 You are now equipped to pay for your Cloudless Deployment on the Fluence testnet!
