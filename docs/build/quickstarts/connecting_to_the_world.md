@@ -90,7 +90,7 @@ extern "C" {
 In essence, we use Rust's foreign function interface (FFI) to access the host's curl binary with MountedBinary returning a [MountedBinaryResult](https://github.com/fluencelabs/marine-rs-sdk/blob/d94bf3aa641dc294286bd326e3e9244da5bda7ef/src/mounted_binary.rs#L28), which basically captures any hosted binary's response in terms of stdout and stderr byte arrays.
 
 
-So now we got our cUrl Wasm API and how the access to and response from the host resource, i.e., curl binary, is handled. And when you [compile](https://github.com/fluencelabs/curl-effector/blob/main/build.sh) the code, you'll end up with a Wasm module ... but you don't compile the code for the Wasm module. Instead, you import a [pre-built curl effector module](https://github.com/fluencelabs/curl-effector/releases/tag/effector-v0.1.1). Why? remember the permissioning reference from a few paragraphs earlier? Well, in order for a host to confidently permission a Wasm module's access to a hosted binary, they want to review the code; make sure nothing nefarious is going on. Of course, that's not a feasible, scalable modus operandi. Instead, hosts use a package's immutable [contend identifier](https://docs.ipfs.tech/concepts/content-addressing/) (CID) to non-interactively identify approved packages. Alas, compilers are not quite deterministic in their creation of output and different versions tend to produce slightly different output all leading to different CIDs for the same functionality. Again, this is unmanagable at scale and hence, Fluence is providing the above referenced compiled and CID'ed module for you to use and for hosts to unequivocally recognize and permission. Try to compile your own module, maybe change a comment for good measure and to make sure you get a different CID, and then try to deploy it to a host.
+So now we got our cUrl Wasm API and know how the access to and response from the host resource, i.e., curl binary, is handled. And when you [compile](https://github.com/fluencelabs/curl-effector/blob/main/build.sh) the code, you'll end up with a Wasm module ... but you don't compile the code for the Wasm module just yet! Instead, import a [pre-built curl effector module](https://github.com/fluencelabs/curl-effector/releases/tag/effector-v0.1.1). Why? Remember the permissioning reference from a few paragraphs earlier? Well, in order for a host to confidently permission a Wasm module's access to a hosted binary, they want to review the code to make sure nothing nefarious is going on. Of course, that's not a feasible, scalable modus operandi. Instead, hosts use a package's immutable [contend identifier](https://docs.ipfs.tech/concepts/content-addressing/) (CID) to non-interactively identify pre-approved packages. Alas, compilers are not quite deterministic in their creation of output and different versions tend to produce slightly different output all leading to different CIDs for the same functionality. Since a one-to-many CID solution is also untenable, Fluence is providing the above referenced compiled and CID'ed module for you to use and for hosts to unequivocally recognize and permission. Try to compile your own module, maybe change a comment for good measure and to make sure you get a different CID, and then try to deploy it to a host.
 
 To import a module into a service, you can use the Fluence CLI:
 
@@ -99,7 +99,7 @@ fluence module add https://github.com/fluencelabs/curl-effector/releases/downloa
 ```
 
 Let's put the curl-effector to work and write some facade code:
-
+ 
 ```Rust
 use marine_rs_sdk::marine;
 use marine_rs_sdk::module_manifest;
@@ -138,7 +138,7 @@ pub fn demo_request(url: String) -> String {
 
 While the `demo_request` function is straight-forward, the `vault_path` function may need some explaining. To get some insight, see [here]()https://github.com/fluencelabs/effectors/blob/e8e3251a80e3a44fc1887f7e7a47aef3c0ecfdcb/example/src/services/myRPC/modules/myRPC/src/main.rs#L48 and [vault](https://fluence.dev/docs/build/glossary#particle-file-vault) for more info. But basically, the effector module needs to know where it should look for the pertinent IO data realted to the underlying [particle](https://fluence.dev/docs/build/glossary#particle). This function uses the existing vault path and appends an effector specific dir.
 
-Compile the code and let's have a look at it in the Marine REPL with `fluence service repl http-enabled`:
+Compile the code and let's have a look at it in the Marine REPL with `fluence service repl http-enabled`. Bur before you do, make sure you have the following directory in `.fluence/tmp/volumes/id-token`; if it's not there, create it. Back to the repl:
 
 ```bash
 $ fluence service repl http_handler
@@ -152,34 +152,50 @@ Minimal supported versions
 app service was created with service id = 91169eba-442e-463e-a3d7-0ca6ab967763
 elapsed time 62.390167ms
 
-1> call http_handler demo_request ["https://www.example.com"]
+1> call http_handler demo_request ["https://www.example.com"] {"particle": {"id":"id", "token":"token"}}
+result: "<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset=\"utf-8\" />\n    <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <style type=\"text/css\">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", \"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href=\"https://www.iana.org/domains/example\">More information...</a></p>\n</div>\n</body>\n</html>\n"
+ elapsed time: 578.853375ms
 ```
 
-As a last step, deploy you service to either `dar` or `local` and lets update our `aqua.main` to run the deployed code:
+All looks good and we're ready to deploy our code. Note that we had to add the `{"particle": {"id":"id", "token":"token"}}` configuration map to our call to handle the vault references expected by the module as there is no particle available.
+
+As a last step, deploy your service to either `dar` or `local` and let's update our `aqua.main` so we can run the deployed code:
 
 ```python
 -- aqua.main
+<...>
+export demo_http
 
-func demo_request(url: string) -> string:
-...
+data HTTPResponse:
+    http_response: ?string
+    worker: Worker
+
+func demo_http(url: string) -> []HTTPResponse:
+    deals <- Deals.get()
+    dealId = deals.myDeployment!.dealIdOriginal
+    responses: *HTTPResponse
+    
+    on HOST_PEER_ID:
+        subnet <- Subnet.resolve(dealId)
+    if subnet.success == false:
+        Console.print(["Failed to resolve subnet: ", subnet.error])
+
+    for w <- subnet.workers:
+        if w.worker_id == nil:
+            responses <<- HTTPResponse(http_response=nil, worker=w)
+        else:
+            on w.worker_id! via w.host_id:
+                http_response <- HttpHandler.demo_request(url)
+                responses <<- HTTPResponse(http_response=?[http_response], worker=w)
+
+    <- responses
 ```
 
-We can now execute our Aqua code `fluence run -f 'demo_request()'`:
-
-```bash
-
-```
-
-All is well and we can now move to our Aqua. In your `aqua.main` file, add something like:
-
-```python
-
-```
-
-and make sure you add the `demo_` function to the `export` statement at the top of the file. If you haven't already, deploy your project to either `dar` or `local` and run `fluence run -f 'demo_http("https://example.com")'` to call an http request to a url of your choosing:
+Run our function with `fluence run -f 'demo_http("https://example.com")'` to call an http request to a url of your choosing:
 
 ```bash
 $ fluence run -f 'demo_http("https://example.com")'
+
 Using aqua compiler version: 0.14.5
 Using local blockchain environment
 Connecting to random local relay: /ip4/127.0.0.1/tcp/9991/ws/p2p/12D3KooWBXmrDsroJP1mkPx3usds81WB1LoZH4RTtYnKKvhZof4Q
