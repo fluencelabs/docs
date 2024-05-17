@@ -16,7 +16,7 @@ From a high-level perspective then, a manged effect generally requires two compo
 Of course, there are a few more caveats, such as maintaining version compatibility and location (directory) consistency across providers and more. We'll provide a more in-dept presentation, including how to write and provision your own effector(s), shortly. In the meantime, you can utilize two effectors maintained by Fluence and supported by all participating providers: a [curl effector](https://github.com/fluencelabs/curl-effector) and an [IPFS effector](https://github.com/fluencelabs/ipfs-effector). Also see the [example use](https://github.com/fluencelabs/effectors/tree/main/example) of both effectors.
 
 
-## Using The cURL Effector Module
+## Working With The cURL Effector Module
 
 Create a project with Fluence CLI. This time we choose the *minimal* template but stick with the default environment selection, *dar* and name our project *http-enabled*:
 
@@ -89,6 +89,7 @@ extern "C" {
 
 In essence, we use Rust's foreign function interface (FFI) to access the host's curl binary with MountedBinary returning a [MountedBinaryResult](https://github.com/fluencelabs/marine-rs-sdk/blob/d94bf3aa641dc294286bd326e3e9244da5bda7ef/src/mounted_binary.rs#L28), which basically captures any hosted binary's response in terms of stdout and stderr byte arrays.
 
+## Using The cUrl Effector
 
 So now we got our cUrl Wasm API and know how the access to and response from the host resource, i.e., curl binary, is handled. And when you [compile](https://github.com/fluencelabs/curl-effector/blob/main/build.sh) the code, you'll end up with a Wasm module ... but you don't compile the code for the Wasm module just yet! Instead, import a [pre-built curl effector module](https://github.com/fluencelabs/curl-effector/releases/tag/effector-v0.1.1). Why? Remember the permissioning reference from a few paragraphs earlier? Well, in order for a host to confidently permission a Wasm module's access to a hosted binary, they want to review the code to make sure nothing nefarious is going on. Of course, that's not a feasible, scalable modus operandi. Instead, hosts use a package's immutable [contend identifier](https://docs.ipfs.tech/concepts/content-addressing/) (CID) to non-interactively identify pre-approved packages. Alas, compilers are not quite deterministic in their creation of output and different versions tend to produce slightly different output all leading to different CIDs for the same functionality. Since a one-to-many CID solution is also untenable, Fluence is providing the above referenced compiled and CID'ed module for you to use and for hosts to unequivocally recognize and permission. Try to compile your own module, maybe change a comment for good measure and to make sure you get a different CID, and then try to deploy it to a host.
 
@@ -115,7 +116,6 @@ fn vault_path(filename: &str) -> String {
     let cp = marine_rs_sdk::get_call_parameters();
     format!("/tmp/vault/{}-{}/{}", cp.particle.id, cp.particle.token, filename)
 }
-
 
 #[marine]
 pub fn demo_request(url: String) -> String {
@@ -216,31 +216,3 @@ Running demo_http("https://example.com") from /Users/bebo/localdev/new-effector/
 ```
 
 And that's a wrap. You now know how to utilize managed effects and use Fluence's curl and ipfs effectors to enable your applications to interact with the world!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
