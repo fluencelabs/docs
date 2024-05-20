@@ -46,7 +46,7 @@ We now got our project skeleton in place and are ready to create ....
 Let's stick with the http request function from the [example](https://github.com/fluencelabs/effectors/blob/e8e3251a80e3a44fc1887f7e7a47aef3c0ecfdcb/example/src/services/myRPC/modules/myRPC/src/main.rs#L16) and stick it in our main.rs file. Before we do that, though, let's add the [curl effector crate](https://crates.io/crates/curl-effector-imports), based on the [curl effector repo](https://github.com/fluencelabs/curl-effector) to our project (note that version numbers may have changed):
 
 ```toml
--- Cargo.toml
+## src/services/http_requester/http_requester/Cargo.toml
 [package]
 name = "http_requester"
 version = "0.1.0"
