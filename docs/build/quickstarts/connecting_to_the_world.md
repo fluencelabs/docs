@@ -68,7 +68,7 @@ Looking at the [source code](https://github.com/fluencelabs/curl-effector/blob/m
 
 ```rust
 //get
-fn curl_get(request: CurlRequest, output_vault_path: &str) -> CurlResult { ... }
+pub fn curl_get(request: CurlRequest, output_vault_path: &str) -> CurlResult { ... }
 
 // post
 pub fn curl_post(request: CurlRequest, data_vault_path: &str, output_vault_path: &str) -> CurlResult {...}
