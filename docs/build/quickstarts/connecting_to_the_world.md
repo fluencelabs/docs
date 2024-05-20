@@ -66,7 +66,7 @@ marine-rs-sdk-test = "0.16.1"
 
 Looking at the [source code](https://github.com/fluencelabs/curl-effector/blob/main/effector/src/main.rs#L126), you see the exposed cUrl API for [get](https://github.com/fluencelabs/curl-effector/blob/e820ea273fd30177ed7eef76358ad26089a35129/effector/src/main.rs#L104) and [post](https://github.com/fluencelabs/curl-effector/blob/e820ea273fd30177ed7eef76358ad26089a35129/effector/src/main.rs#L67) requests, respectively, as well as some support and test functions. So when all is said and done, the crate effectively gives you two API functions to use in your Wasm modules to make http calls.
 
-```Rust
+```rust
 //get
 fn curl_get(request: CurlRequest, output_vault_path: &str) -> CurlResult { ... }
 
