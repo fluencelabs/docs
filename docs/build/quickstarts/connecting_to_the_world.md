@@ -76,7 +76,7 @@ pub fn curl_post(request: CurlRequest, data_vault_path: &str, output_vault_path:
 
 Of course, there's a bit more to it. Looking in the [import.rs](https://github.com/fluencelabs/curl-effector/blob/main/effector/src/import.rs) file, you'll see where the "connection" between the Wasm module and the hosted binary is facilitated:
 
-```Rust
+```rust
 use marine_rs_sdk::{marine, MountedBinaryResult};
 
 #[marine]
@@ -101,7 +101,7 @@ fluence module add https://github.com/fluencelabs/curl-effector/releases/downloa
 
 Let's put the curl-effector to work and write some facade code:
  
-```Rust
+```rust
 use marine_rs_sdk::marine;
 use marine_rs_sdk::module_manifest;
 
