@@ -96,7 +96,7 @@ So now we got our cUrl Wasm API and know how the access to and response from the
 To import a module into a service, you can use the Fluence CLI:
 
 ```bash
-fluence module add https://github.com/fluencelabs/curl-effector/releases/download/effector-v0.1.1/curl_effector.tar.gz --service http_requests
+fluence module add https://github.com/fluencelabs/curl-effector/releases/download/effector-v0.1.1/curl_effector.tar.gz --service http_requester
 ```
 
 Let's put the curl-effector to work and write some facade code:
