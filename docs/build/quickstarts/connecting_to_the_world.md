@@ -136,7 +136,7 @@ pub fn demo_request(url: String) -> String {
 }
 ```
 
-While the `demo_request` function is straight-forward, the `vault_path` function may need some explaining. To get some insight, see [here](https://github.com/fluencelabs/effectors/blob/e8e3251a80e3a44fc1887f7e7a47aef3c0ecfdcb/example/src/services/myRPC/modules/myRPC/src/main.rs#L48) and [vault](https://fluence.dev/docs/build/glossary#particle-file-vault) for more info. But basically, the effector module needs to know where it should look for the pertinent IO data realted to the underlying [particle](https://fluence.dev/docs/build/glossary#particle). This function uses the existing vault path and appends an effector specific dir.
+While the `demo_request` function is straight-forward, the `vault_path` function may need some explaining. To get some insight, see [here](https://github.com/fluencelabs/effectors/blob/e8e3251a80e3a44fc1887f7e7a47aef3c0ecfdcb/example/src/services/myRPC/modules/myRPC/src/main.rs#L48) and [vault](https://fluence.dev/docs/build/glossary#particle-file-vault) for more info. But basically, the effector module needs to know where it should look for the pertinent IO data related to the underlying [particle](https://fluence.dev/docs/build/glossary#particle). This function uses the existing vault path and appends an effector specific dir.
 
 Compile the code and let's have a look at it in the Marine REPL with `fluence service repl http-enabled`. Bur before you do, make sure you have the following directory in `.fluence/tmp/volumes/id-token`; if it's not there, create it. Back to the repl:
 
