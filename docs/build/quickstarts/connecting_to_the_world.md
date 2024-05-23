@@ -157,7 +157,7 @@ result: "<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n 
  elapsed time: 578.853375ms
 ```
 
-All looks good and we're ready to deploy our code. Note that we had to add the `{"particle": {"id":"id", "token":"token"}}` configuration map to our call to handle the vault references expected by the module as there is no particle available.
+All looks good and we're ready to deploy our code. Note that we had to add the `{"particle": {"id":"id", "token":"token"}}` configuration map to our call to handle the vault references expected by the module as there is no particle available in REPL mode.
 
 As a last step, deploy your service to either `dar` or `local` and let's update our `aqua.main` so we can run the deployed code:
 
