@@ -181,7 +181,7 @@ To recap, we loaded our myService.wasm module into the REPl, identified our call
 
 In addition to interactive testing with REPL, *cargo-based unit tests* are also available. For more information on creating Marine services, see the [Marine Book](https://fluence.dev/docs/marine-book/introduction).
 
-Now that we are satisfied that our code is in working order, it's time to think about deployment. If you haven't set up your wallet with the necessary test tokens, see [Setting Up](./../setting-up).
+Now that we are satisfied that our code is in working order, it's time to think about deployment. If you haven't set up your wallet with the necessary test tokens, see [Setting Up](./../setting-up/setting_up.md).
 
 We'll deploy to the `dar` testnet and just to make sure you are set up correctly, run:
 
