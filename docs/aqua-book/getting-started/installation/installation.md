@@ -1,6 +1,6 @@
 # Installation
 
-To work with Aqua code from command line, install [Fluence CLI](https://github.com/fluencelabs/cli) and use [`fluence aqua`](https://github.com/fluencelabs/cli/blob/main/docs/commands/README.md#fluence-aqua) subcommand.
+To work with Aqua code from command line, install [Fluence CLI](https://github.com/fluencelabs/cli) and use [`fluence aqua`](https://github.com/fluencelabs/cli/blob/main/cli/docs/commands/README.md#fluence-aqua) subcommand.
 
 Also, the compiler API is exposed as an npm package, see [Aqua JS API](../../aqua-js-api.md).
 
