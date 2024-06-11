@@ -23,6 +23,13 @@ There are two kinds of collections in Aqua: immutable and appendable. To denote 
 - `?T` for an immutable option of `T`, e.g. `?[]i64`, `?string`
 - `[]T` for an immutable array of `T`, e.g. `[]u32`, `[]?Result`
 - `*T` for an appendable stream of `T`, e.g. `*[]Response`, `*?string`
+- `%T` for an appendable map-like collection of `T` with `string` keys, e.g. `%[]Response`, `%?string`
+
+Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64` are not.
+
+For every collection type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
+
+To see collections usage examples, see [Collections](../language/values.md#collections).
 
 ### Immutable Collections
 
@@ -32,18 +39,22 @@ Aqua has two types of immutable collections:
   - The bang notation, optionally followed by a number or a variable, e.g. `arr!10`, `arr!index`, `arr!` (the same as `arg!0`).
 - Options containing none or one element of a given type. The quantifier is `?`, e.g. `?string`, `?[]Error` are all valid option types. To access an element of an option, use the bang notation, e.g. `opt!` or `opt!0`. There is a literal that represents an empty option: `nil`.
 
-### Appendable Collections
+### Appendable Streams
 
 Aqua has appendable [streams](./crdt-streams.md). The quantifier is `*`, e.g. `*?string`, `*Result`, `*[]i64` are all valid stream types. To access an element of a stream, use:
-  - The square brackets notation, with any expression of integer type inside, e.g. `stream[10]`, `stream[requests.length - 1]`
+  - The square brackets notation, with any expression of integer type inside, e.g. `stream[10]`, `stream[requests.length - 1]`.
   - The bang notation, optionally followed by a number or a variable, e.g. `stream!5`, `stream!index`, `stream!` (the same as `stream!0`). 
 Note that accessing an element of a stream could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
 
-Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64` are not.
+### Appendable Maps
 
-For every collection type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
+Appendable [maps](./crdt-maps.md) are sort of streams with arrays of elements that can be accessed by `string` key. The quantifier is `%`, e.g. `%?string`, `%Result`, `%[]i64` are all valid map types. There is various methods to access elements of map:
+  - `get` and `getStream` methods that return array of elements and stream of elements by key.
+  - `keys` and `keysStream` methods that return array of keys and stream of keys.
+  - `contains` method that returns if key is exist in map or not.
+Note that accessing an element of a map could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
 
-To see collections usage examples, see [Collections](../language/values.md#collections).
+
 
 ## Structures
 
