@@ -25,9 +25,9 @@ There are two kinds of collections in Aqua: immutable and appendable. To denote 
 - `*T` for an appendable stream of `T`, e.g. `*[]Response`, `*?string`
 - `%T` for an appendable map-like collection of `T` with `string` keys, e.g. `%[]Response`, `%?string`
 
-Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64` are not.
+Only [data types](#data-types) can be used as elements of any collection, e.g. `[]u32`, `?[]string`, `*[]?u64`, `%[]?u64` are valid types, but `[]*u32`, `?*string`, `**u64`, `*%u64`, `?%string` are not.
 
-For every collection type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
+For options, arrays and streams type functor `length` is defined, e.g. `option.length`, `arr.length`, `stream.length`. It returns the number of elements in the collection.
 
 To see collections usage examples, see [Collections](../language/values.md#collections).
 
