@@ -49,8 +49,8 @@ Note that accessing an element of a stream could trigger [join behavior](../lang
 ### Appendable Maps
 
 Appendable [maps](./crdt-maps.md) are streams of key-value pairs with key always being a `string`. The quantifier is `%`, e.g. `%?string`, `%Result`, `%[]i64` are all valid map types. There are various methods to access elements of a map:
-  - `get` and `getStream` methods that return array of elements and stream of elements by key.
-  - `keys` and `keysStream` methods that return array of keys and stream of keys.
+  - `get` and `getStream` methods return array of elements or stream of elements by given key.
+  - `keys` and `keysStream` methods return array of keys or stream of keys.
   - `contains` method that returns if key is exist in map or not.
 Note that accessing an element of a map could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
 
