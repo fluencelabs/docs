@@ -137,4 +137,4 @@ func someFunc(xs: []string) -> []string:
 You still can keep streams as streams by using them as `*string` arguments, or by returning them as `*string`.
 
 ### Note
-`data` types must be immutable, therefore streams are not allowed in the type declarations.
+`data` types must be immutable and cannot be an arrow, therefore streams, maps, closures and abilities are not allowed in the type declarations.

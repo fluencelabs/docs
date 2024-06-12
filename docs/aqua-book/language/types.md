@@ -52,9 +52,6 @@ Appendable [maps](./crdt-maps.md) are streams of key-value pairs with key always
   - `get` and `getStream` methods return array of elements or stream of elements by given key.
   - `keys` and `keysStream` methods return array of keys or stream of keys.
   - `contains` method that returns if key is exist in map or not.
-Note that accessing an element of a map could trigger [join behavior](../language/flow/parallel.md#join-behavior) on the stream.
-
-
 
 ## Structures
 
