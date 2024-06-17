@@ -1,13 +1,13 @@
 # CRDT Maps
 
-A map is a kind of appendable [collection](types.md#collection-types) that stores key-pairs. A collection of elements can be accessed using keys of type `string`.
+A map is a kind of appendable [collection](types.md#collection-types) that stores key-value pairs. A collection of elements can be accessed using keys of type `string`.
 
 How to create a map and write to the map: 
 ```aqua
 -- Creation
 map: %u64
 
--- Append different key-pairs
+-- Append different key-value pairs
 map <- "key", 1234
 map <- "key", foo()
 map <- "second key", foo()
@@ -21,6 +21,7 @@ Get array of all elements by key:
 ```aqua
 values = map.get("key")
 ```
+
 Get stream of elements by key, later you can join on the stream to wait for specific number of elements in it:
 
 ```aqua
@@ -28,14 +29,17 @@ valuesStream <- map.getStream("key")
 -- wait for 9 elements
 join valuesStream[9]
 ```
+
 Get array of all keys (of type `[]string`) in map:
 ```aqua
 keys <- map.keys()
 ```
+
 Get stream of keys (of type `*string`):
 ```aqua
 keysStream <- map.keysStream
 ```
+
 Check if key contains at least one element, return boolean:
 ```aqua
 keyExist <- map.contains("key")
