@@ -41,7 +41,7 @@ Check if key contains at least one element, return boolean:
 keyExist <- map.contains("key")
 ```
 
-`get`, `keys` and `contains` methods will get non-changed result in-place, on the other hand `getStream` and `keysStream` methods will get streams, so, these streams can be changed over time while a map is updated during the execution. For example:
+`get`, `keys` and `contains` methods return immutable result in-place, on the other hand `getStream` and `keysStream` methods return streams which will eventually contain updates of the map. For example:
 ```aqua
 ...
 map: %string
