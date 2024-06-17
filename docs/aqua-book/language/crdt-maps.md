@@ -21,7 +21,7 @@ Get array of all elements by key:
 ```aqua
 values = map.get("key")
 ```
-Get stream of elements by key, later you can join on number of elements and wait for specific elements in this stream:
+Get stream of elements by key, later you can join on the stream to wait for specific number of elements in it:
 
 ```aqua
 valuesStream <- map.getStream("key")
