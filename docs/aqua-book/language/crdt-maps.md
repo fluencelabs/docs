@@ -13,7 +13,7 @@ map <- "key", foo()
 map <- "second key", foo()
 ```
 
-Maps can use only immutable [data types](./types.md#data-types). Arrows, streams, other maps, closures and abilities are not allowed in the type declarations.
+Maps can contain only immutable [data types](./types.md#data-types) elements. Arrows, streams, other maps, closures and abilities are not allowed in the type declarations.
 
 Access to keys and elements can create different behaviours based on tasks.
 
