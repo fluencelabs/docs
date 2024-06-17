@@ -32,7 +32,7 @@ Get array of all keys (of type `[]string`) in map:
 ```aqua
 keys <- map.keys()
 ```
-Get stream of keys (*string):
+Get stream of keys (of type `*string`):
 ```aqua
 keysStream <- map.keysStream
 ```
