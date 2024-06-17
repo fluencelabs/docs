@@ -1,6 +1,6 @@
 # CRDT Maps
 
-A map is a kind of [collection](types.md#collection-types) that store arrays of elements that can be accessible by `string` keys. Under the hood maps are appendable collections (streams) of key-pairs.
+A map is a kind of appendable [collection](types.md#collection-types) that stores key-pairs. A collection of elements can be accessed using keys of type `string`.
 
 How to create a map and write to the map: 
 ```aqua
@@ -43,7 +43,6 @@ keyExist <- map.contains("key")
 
 `get`, `keys` and `contains` methods return immutable result in-place, on the other hand `getStream` and `keysStream` methods return streams which will eventually contain updates of the map. For example:
 ```aqua
-...
 map: %string
 
 for p <- peers par:
