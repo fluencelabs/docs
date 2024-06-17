@@ -28,7 +28,7 @@ valuesStream <- map.getStream("key")
 -- wait for 9 elements
 join valuesStream[9]
 ```
-Get array of all keys ([]string) in map:
+Get array of all keys (of type `[]string`) in map:
 ```aqua
 keys <- map.keys()
 ```
