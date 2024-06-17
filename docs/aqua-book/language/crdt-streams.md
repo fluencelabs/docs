@@ -38,7 +38,7 @@ func bar(peer: string, relay: string):
   foo(peer, relayMaybe)
 ```
 
-Streams can use only immutable [data types](./types.md#data-types). Arrows, other streams, maps, closures and abilities are not allowed in the type declarations.
+Streams can contain only immutable [data types](./types.md#data-types) elements. Arrows, other streams, maps, closures and abilities are not allowed in the type declarations.
 
 But the most powerful use of streams pertains to their use with parallel execution, which incurs non-determinism.
 
