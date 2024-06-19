@@ -79,3 +79,7 @@ baz(return!5, return)
 ### `for` on streams
 
 `for` on streams is one of the most advanced and powerful parts of Aqua. See [CRDT streams](../crdt-streams.md) for details.
+
+### `for` on maps
+
+See [CRDT maps](../crdt-maps.md) for details.
