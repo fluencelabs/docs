@@ -153,6 +153,7 @@ const sidebars = {
           ],
         },
         "aqua-book/language/crdt-streams",
+        "aqua-book/language/crdt-maps",
         "aqua-book/language/closures",
         "aqua-book/language/modularity",
         {
