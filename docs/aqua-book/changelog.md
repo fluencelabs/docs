@@ -219,7 +219,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.8.0](https://github.com/fluencelabs/aqua/releases/tag/0.8.0) – November 30, 2022
 * Structures can be instantiated right in the code ([example](/docs/aqua-book/language/types.md#structures), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
-* `module` key word was renamed to `aqua` ([docs](/docs/aqua-book/language/header/header.md#aqua-source-file-header), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
+* `module` key word was renamed to `aqua` ([docs](/docs/aqua-book/language/modularity), PR: [#592](https://github.com/fluencelabs/aqua/pull/592))
 * Syntax checking has been disabled in generated JS/TS files ([#585](https://github.com/fluencelabs/aqua/pull/585))
 * a lot of bug fixes ([#590](https://github.com/fluencelabs/aqua/pull/590), [#584](https://github.com/fluencelabs/aqua/pull/584), [#582](https://github.com/fluencelabs/aqua/pull/582), [#581](https://github.com/fluencelabs/aqua/pull/581), [#580](https://github.com/fluencelabs/aqua/pull/580), [#578](https://github.com/fluencelabs/aqua/pull/578), [#579](https://github.com/fluencelabs/aqua/pull/579))
 * bump fluence-js to version 0.27.3
@@ -393,7 +393,7 @@ aqua run -i aqua/caller.aqua -f "callFunc(\"arg1\",\"arg2\")"
 
 ### [0.1.14](https://github.com/fluencelabs/aqua/releases/tag/0.1.14) – August 20, 2021
 
-* Aqua file header changes: `module`, `declares`, `use`, `export` expressions ([#245](https://github.com/fluencelabs/aqua/pull/245)), see [Imports and Exports](language/header/header.md) for the docs.
+* Aqua file header changes: `module`, `declares`, `use`, `export` expressions ([#245](https://github.com/fluencelabs/aqua/pull/245)), see [Modularity](language/modularity) for the docs.
 * Experimental Scala.js build of the compiler ([#247](https://github.com/fluencelabs/aqua/pull/247))
 
 ### [0.1.13](https://github.com/fluencelabs/aqua/releases/tag/0.1.13) – August 10, 2021
