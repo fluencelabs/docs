@@ -161,7 +161,7 @@ All looks good and we're ready to deploy our code. Note that we had to add the `
 
 As a last step, deploy your service to either `dar` or `local` and let's update our `aqua.main` so we can run the deployed code:
 
-```python
+```aqua
 -- aqua.main
 <...>
 export demo_http
