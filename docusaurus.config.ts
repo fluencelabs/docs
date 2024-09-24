@@ -114,6 +114,12 @@ const config: Config = {
           docId: "marine-book/introduction",
           label: "Marine Book",
         },
+        {
+          type: "doc",
+          position: "left",
+          docId: "stake/stake_introduction",
+          label: "Stake",
+        },
         // { to: "/blog", label: "Blog", position: "left" },
         {
           href: "https://github.com/fluencelabs",

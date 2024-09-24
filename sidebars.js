@@ -122,6 +122,7 @@ const sidebars = {
     "build/glossary",
     // "build/references",
   ],
+
   "aqua-book": [
     "aqua-book/introduction",
     {
@@ -295,6 +296,15 @@ const sidebars = {
       ],
     },
     "marine-book/changelog",
+  ],
+  stake: [
+    "stake/stake_introduction",
+    {
+      type: "category",
+      label: "Wallets guide",
+      link: { id: "stake/wallets_guide/wallets_guide", type: "doc" },
+      items: [],
+    },
   ],
 };
 
