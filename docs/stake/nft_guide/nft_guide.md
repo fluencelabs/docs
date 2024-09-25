@@ -265,7 +265,7 @@ You can easily adjust the price or remove an NFT you've listed for sale. Click o
 - To remove the NFT from sale, press the "Delist" button and confirm the transaction in your wallet.
 - To change the price, enter the new amount, press the "Change price" button, and confirm the transaction in your wallet.
 
-![Screenshot 2024-09-17 at 17.43.35.png](assets_old/nft_delist_button.png)
+![Screenshot 2024-09-17 at 17.43.35.png](assets/nft_delist_button.png)
 
 <div style={{ textAlign: "center" }}>
 
