@@ -299,12 +299,16 @@ const sidebars = {
   ],
   stake: [
     "stake/stake_introduction",
-    {
-      type: "category",
-      label: "Wallets guide",
-      link: { id: "stake/wallets_guide/wallets_guide", type: "doc" },
-      items: [],
-    },
+    "stake/wallets_guide/wallets_guide",
+    "stake/staking app_guide/staking_app_guide",
+    "stake/bridge_guide/bridge_guide",
+    "stake/nft_marketplace_guide/nft_marketplace_guide",
+    // {
+    //   type: "category",
+    //   label: "Wallets guide",
+    //   link: { id: "stake/wallets_guide/wallets_guide", type: "doc" },
+    //   items: [],
+    // },
   ],
 };
 

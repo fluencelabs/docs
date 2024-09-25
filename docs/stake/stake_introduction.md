@@ -1,1 +1,1 @@
-# Stake for Fluence
+# Stake
