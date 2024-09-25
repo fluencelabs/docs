@@ -7,7 +7,7 @@ To participate, you must first purchase an NFT from the newly launched [NFT Mark
 
 Once you have purchased your NFT, you can start staking FLT Tokens by going to the [Fluence Staking App](https://stake.fluence.network/), where you'll see a list of all available Capacity Commitments.
 
-You can read more about the Staker Application and Capacity Commitments in the official [Staker Application User Guide](https://www.notion.so/Staking-Application-User-Guide-b32e55aeb4db41149dd0212ce20c6d45?pvs=21).
+You can read more about the Staker Application and Capacity Commitments in the official [Staker Application User Guide](../staking_app_guide/staking_app_guide.md).
 
 :::note
 
@@ -43,7 +43,7 @@ Be cautious and use only the official application at [https://nft.fluence.networ
 
 The main page of the Fluence NFT Marketplace features three key elements:
 
-- **Top right:** An authentication button to connect your wallet. For a detailed guide on using crypto wallets with Fluence web applications, check out [this link](https://www.notion.so/User-s-guide-to-using-wallets-with-Fluence-web-applications-1025b9b0bcba80479589dc0136f5c791?pvs=21).
+- **Top right:** An authentication button to connect your wallet. For a detailed guide on using crypto wallets with Fluence web applications, read the official [guide](../wallets_guide/wallets_guide.md).
 - **Bottom left:** A link to the Fluence NFT collection page, where you can buy and sell NFTs.
 - To the right from the "Collection" link: A link to the user documentation.
 
@@ -265,7 +265,7 @@ You can easily adjust the price or remove an NFT you've listed for sale. Click o
 - To remove the NFT from sale, press the "Delist" button and confirm the transaction in your wallet.
 - To change the price, enter the new amount, press the "Change price" button, and confirm the transaction in your wallet.
 
-![Screenshot 2024-09-17 at 17.43.35.png](assets/nft_delist_button.png)
+![Screenshot 2024-09-17 at 17.43.35.png](assets_old/nft_delist_button.png)
 
 <div style={{ textAlign: "center" }}>
 

@@ -298,11 +298,12 @@ const sidebars = {
     "marine-book/changelog",
   ],
   stake: [
-    "stake/stake_introduction",
+    "stake/overview",
+    "stake/key_concepts_staker",
     "stake/wallets_guide/wallets_guide",
-    "stake/staking app_guide/staking_app_guide",
     "stake/bridge_guide/bridge_guide",
-    "stake/nft_marketplace_guide/nft_marketplace_guide",
+    "stake/nft_guide/nft_guide",
+    "stake/staking_app_guide/staking_app_guide",
     // {
     //   type: "category",
     //   label: "Wallets guide",

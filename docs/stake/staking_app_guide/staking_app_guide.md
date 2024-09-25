@@ -2,130 +2,19 @@
 
 ## Introduction
 
-This guide will help you understand the role of stakers in the Fluence Protocol and how to become one using the Fluence Staking Application. Learn to earn substantial rewards by powering the decentralized physical infrastructure (DePIN).
+This guide will walk you through the process of becoming a staker in the Fluence Protocol, allowing you to earn rewards by contributing to the decentralized physical infrastructure (DePIN).
+For that, you will use the Fluence Staking Application, a web application providing stakers with all the necessary resources to analyze available Capacity Commitments for staking and monitor active commitments' performance and rewards.
 
-First, you'll learn about the mechanics and economics behind the rewards earned.
+First, you'll be introduced to the Staking application—the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
+Then you will find a step-by-step guide on how to join the Fluence network and stake your first Capacity Commitment.
 
-Second, you'll be introduced to the Staking application—the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
-
-Finally, you'll read a step-by-step guide on becoming part of the Fluence network and stake for your first Capacity Commitment.
-
-## Key concepts
-
-Fluence is a decentralized compute marketplace & computing marketplace powered by blockchain economics.
-
-Proof of Capacity (PoC) is a mechanism the Fluence network utilizes to ensure that compute providers can deliver the computational capacity they committed to the Marketplace. Providers define their compute resources as compute Units (CUs), each CU consisting of 1 core, 4 GB of RAM, and an additional storage space.
-
-To demonstrate continuous readiness to provide computing power for user applications, CUs send cryptographic proofs (PoC) to the blockchain. In each epoch (24 hours) of capacity provisioned but not utilized by user applications, submitted proofs determine the reward paid in FLT tokens.
-
-### The incentivization layer
-
-Collateral must be staked to incentivize providers to act honestly. If anyone acts dishonestly—for example if Compute Units fail to submit proofs—this collateral is slashed.
-
-This mechanism involves two parties: the Compute Provider with compute power, who earns from proof submission and renting compute power through the Marketplace, and the Staker, who earns rewards from providing the collateral. Only staked CUs are considered active in the Marketplace, a prerequisite for participating in the reward and user computing programs.
-
-It's in both parties' interests to act wisely. The compute Provider puts their reputation at risk—no one wants to stake for or rent from an untrustworthy provider. The continued failure of the CU to provide the expected proofs leads to penalties and partial slashing of the collateral. If the slashing threshold is reached, the staking agreement is canceled.
-
-### Capacity commitments
-
-A Capacity Commitment is a formal declaration by a provider stating their intention to offer a specific amount of computing capacity to the Fluence network for a set period. This commitment is made for each Compute Peer (physical server) that a provider wants to commit to the Fluence network.
-
-Each CC has its characteristics, most of which are defined by the Provider during registration and some by the Network.
-
-**CC parameters set by Provider:**
-
-- **Duration:** The period during which the staked collateral is held—generally, longer durations yield higher rewards for stakers
-- **Staking rate:** The share of rewards allocated to the staker—providers set this rate, but it's in the staker's interest to choose CCs with higher rates
-- **Staker address** (Optional): Provider may grant exclusive staking rights for a CC to a specific address
-
-**CC parameters set by the Network:**
-
-- **Collateral:** The FLT tokens amount required to activate a Capacity Commitment (CC), calculated as: `collateralPerUnit` \* `UnitCount.`
-
-:::info[**Important numbers**]
-
-Current collateral per CU: USD 200 in FLT equivalent
-:::
-
-Once a Capacity Commitment (CC) is chosen and staked, the Compute Peer tied to it must start generating proofs for capacity starting the next epoch when it will be considered active. From the moment of activation, the Peer must submit the specified number of proofs for their capacity every epoch. The DAO determines the epoch length, which is currently set at 24 hours.
-
-### Staker rewards
-
-#### Rewards for Capacity Commitment proofs
-
-:::info[**Important numbers**]
-
-Current target revenue per CU: USD 0.33 per epoch in **FLT** equivalent
-:::
-
-As previously explained, the collateral in the **Capacity Commitment** acts as a security measure. It incentivizes the Peer linked to the **Capacity Commitment** to consistently submit the required number of proofs for each **Compute Unit** (CU) within every epoch throughout the **Capacity Commitment's** duration.
-
-At the end of each epoch, the smart contract tallies the number of correct proofs submitted by a **Compute Unit**. If a CU \*\*\*\*meets or exceeds the required number of correct proofs, it receives rewards. However, if a CU fails to submit enough proofs in an epoch, it's penalized by having a portion of its collateral slashed.
-
-The reward for a Compute Unit in an epoch fluctuates around the target value. It's determined by the proportion of correct proofs submitted by the CU relative to the total number of correct proofs submitted in that epoch. This algorithm ensures that the rewards pool stays close to the target value in FLT, making smooth adjustments when necessary.
-
-_The rewards earned by a CU for submitting proofs are shared between the compute provider and the staker. This division is determined by the staking rate outlined in the Capacity Commitment terms set by the compute Provider created it._
-
-#### Rewards for Deals
-
-An active Capacity Commitment, in which Compute Units submit proofs that they're ready to serve users' workloads, can be rented and participate in **Deals** created by users (developers). A Deal published by a developer specifies the required number of CUs to participate in the Deal.
-
-The compute marketplace smart contract automatically matches the **Deal** with providers whose capacity meets the specified conditions. CUs then transition from the **Capacity Commitment Proofs submission** mode to the **Deal** service mode.
-
-For the time spent computing resources in a Deal, CC's Staker **continues to earn rewards in FLT—** the target revenue of CUs in Capacity Commitment proofs submission mode in FLT equivalent, multiplied by the staking rate.
-
-This arrangement ensures that stakers' rewards generate stable and predictable revenue, making staking as risk-free as possible.
-
-#### Vesting
-
-:::info[**Important numbers**]
-
-**Duration of one vesting period:** 1 epoch (24 hours)
-
-**Total number of vesting periods:** 182 (6 months)
-
-:::
-
-**FLT** rewards earned each epoch are unlocked (vested) over time to encourage long-term commitment to the Network and consistent value contribution.
-
-Vesting (unlock) schemes for staker rewards vary slightly:
-
-- **Rewards for Capacity Commitment proofs:** Unlocked proportionally every epoch (24 hours). Each unlock releases a fraction of the rewards earned in that period. This process continues for six months with a daily unlock of 1/182 total rewards.
-- **Rewards for epochs spent in Deals:** Unlocked on an epoch-by-epoch basis, with the total vesting duration matching that of CCP rewards.
-
-#### Slashing
-
-:::info[**Important numbers**]
-
-Currently, the slashing rate for one failed epoch per compute Unit is set to 0 % for the first month of the Mainnet. It will be increased in the future.
-
-:::
-
-Slashing penalizes Capacity Commitments in which CUs fail to prove claimed capacity or act maliciously against the Network. Currently, it is set to zero.
-
-As previously explained, the collateral in the **Capacity Commitment** acts as a security measure. It ensures that the Peer linked to the **Capacity Commitment** consistently submits the necessary number of proofs for each **Compute Unit** (CU) within every epoch throughout the **Capacity Commitment's** lifetime. If a peer fails to send the required number of proofs for some CUs during an epoch, the CC collateral is slashed according to the slashing rate at the end of the epoch.
-
-The formula that determines how much collateral will be slashed in total:
-
-`totalSlashedCollateral` = `totalFailCount` \* `collateralPerUnit` \* `slashingRate`
-
-**Where:**
-
-- `totalFailCount`: The total number of CUs that failed to send the required proof amount during the CC activity time.
-- `collateralPerUnit`: The collateral for 1 Compute Unit set by the **DAO**.
-- `slashingRate`: The percentage of slashing for 1 compute Unit in 1 failed epoch.
-
-If the total slashed FLT amount exceeds the allowed threshold, the CC is marked as `FAILED`, and the Peer is removed from the Network, preventing further collateral slashing. Withdrawal of slashed collateral has a lock-in period of 30 days.
-
-Now that you're familiar with all the essentials for stakers, let's introduce you to the primary tool to help you find a suitable provider, stake effectively, and earn rewards!
+If you haven't read the [Key Concepts for Stakers](../key_concepts_staker.md) article yet, we recommend you do so before proceeding with this guide. The article explains the main concepts and mechanisms that are essential for understanding the staking process.
 
 :::note
-Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](https://www.notion.so/Bridge-Application-User-Guide-491f7d11ce05415da7444419e838dab8?pvs=21).
+Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
 :::
 
 ## The staking application overview
-
-The Staking application is a web-based tool created by Fluence. It provides stakers with all the necessary resources to analyze available Capacity Commitments for staking and monitor active commitments' performance and rewards.
 
 :::note
 Be cautious and use only the official application at [stake.fluence.network](https://stake.fluence.network). Never share your private keys or seed phrases with anyone, and always double-check the URL before signing the transactions.
@@ -445,7 +334,7 @@ To ensure your wallet is ready for the Staking Application, verify the following
 2. You've added the Fluence network to your wallet's list of networks.
 3. You've imported the FLT token, and it's visible in your wallet's token list.
 4. You have FLT tokens _in the Fluence Network_. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official Bridge. Click "Bridge" in the top center navigation bar to access the Bridge.
-5. You have a Fluence NFT that grants you the right to stake for Capacity Commitments. For more information, refer to the corresponding official [guide](PUT THE LINK).
+5. You have a Fluence NFT that grants you the right to stake for Capacity Commitments. You can obtain an NFT on the official [Marketplace](https://nft.fluence.network/).
 
 Once your wallet is connected to Fluence, it's time to choose the Capacity Commitment to stake for!
 

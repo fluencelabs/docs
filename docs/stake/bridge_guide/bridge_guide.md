@@ -85,7 +85,11 @@ The Bridge application consists of the following parts:
 
 To start using the Bridge application, you must authenticate by connecting your crypto wallet to the dApp. Simply click the button at the top right corner and select your preferred wallet.
 
-For a comprehensive guide on using crypto wallets with Fluence web applications, check out [this link](https://www.notion.so/User-s-guide-to-using-wallets-with-Fluence-web-applications-1025b9b0bcba80479589dc0136f5c791?pvs=21).
+:::tip
+
+Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
+
+:::
 
 Let's start by exploring how to deposit tokens from Ethereum to Fluence — a quick and straightforward process.
 

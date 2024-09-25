@@ -117,7 +117,7 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "stake/stake_introduction",
+          docId: "stake/overview",
           label: "Stake",
         },
         // { to: "/blog", label: "Blog", position: "left" },
