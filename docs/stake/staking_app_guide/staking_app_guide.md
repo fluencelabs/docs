@@ -8,7 +8,7 @@ For that, you will use the Fluence Staking Application, a web application provid
 First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
 Then you will find a step-by-step guide on how to join the Fluence network and stake your first Capacity Commitment.
 
-If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../key_concepts_staker.md). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehesively.
+If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehesively.
 
 :::note
 Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
@@ -101,7 +101,7 @@ After staking and activating a Capacity Commitment, it progresses through the fo
   <p>The view of the Capacity Commitments rewards panel</p>
 </div>
 
-This panel summarizes rewards earned in Capacity Commitments (CCs) across the Network or activated by the user. Rewards accumulate each epoch and vest over time. For more details, refer to the "Key Concepts" section above.
+This panel summarizes rewards earned in Capacity Commitments (CCs) across the Network or activated by the user. Rewards accumulate each epoch and vest over time.
 
 Rewards can have the following statuses:
 

@@ -7,7 +7,7 @@ To participate, you must first purchase an NFT from the newly launched [NFT Mark
 
 Once you have purchased your NFT, you can start staking FLT Tokens by going to the [Fluence Staking App](https://stake.fluence.network/), where you'll see a list of all available Capacity Commitments.
 
-If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../key_concepts_staker.md).
+If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers).
 
 :::note
 
