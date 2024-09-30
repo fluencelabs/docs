@@ -1,10 +1,10 @@
-# How to use wallets with Fluence web applications
+# Using wallets with Fluence web applications
 
 ## Introduction
 
 In the Web3 world, authentication relies on a private/public key scheme—a more secure method than traditional password-based approaches. Web3 wallets offer a convenient way to manage these keys and prove identity when logging in or signing transactions.
 
-Fluence applications, like most Web3 services, use wallet-based authentication. You can use your preferred crypto wallet with our services, as we've added support for most wallets on both desktop and mobile platforms.
+Fluence applications, like most Web3 services, use wallet-based authentication. We've added support for most wallets on desktop and mobile platforms, so you can use your preferred crypto wallet with our services.
 
 This guide will walk you through setting up your wallet and connecting to the Fluence network.
 
@@ -49,7 +49,7 @@ For a comprehensive list of supported wallets, visit the [WalletConnect Explorer
 
 :::note
 
-Further Metamask is used as the main wallet for the examples, but the shown actions are mostly the same for the other wallets.
+Further, Metamask is used as the examples' main wallet, but the actions shown are mostly the same for the other wallets.
 
 :::
 
@@ -57,16 +57,16 @@ Further Metamask is used as the main wallet for the examples, but the shown acti
 
 :::note
 
-You can skip this part if you have already added FLT tokens to your wallet and they are displayed in the list of available assets.
+You can skip this part if you have already added FLT tokens to your wallet, and they are displayed in the list of available assets.
 
 :::
 
-Initially, FLT tokens are not displayed in your wallet connected to the Ethereum network and need to be added.
+Initially, FLT tokens are not displayed in your wallet connected to the Ethereum network and must be added.
 
 To display FLT tokens in your assets list (Metamask example is shown below):
 
 1. User the address of the FLT token contract address: [0x236501327e701692a281934230AF0b6BE8Df3353](https://etherscan.io/token/0x236501327e701692a281934230AF0b6BE8Df3353)
-2. Copy this string and open your wallet, find the “Import tokens” button, and press it
+2. Copy this string and open your wallet, find the **“Import tokens”** button, and press it
 3. In the opened window, paste the token address to the input field and wait till the token symbol and the token decimal are loaded
 4. Confirm the token addition and proceed
 5. The token should appear in the list of your assets
@@ -88,7 +88,7 @@ To resolve any issues on the Metamask side, check the official [documentation](h
 
 ### Add Fluence Network to your wallet
 
-Your wallet does not include Fluence by default. This section will show you how to add Fluence Network to your wallet with Chainlist or manually.
+By default, your wallet does not include Fluence. This section will show you how to add Fluence Network to your wallet with Chainlist or manually in your wallet.
 
 #### Using Chainlist
 
@@ -107,7 +107,7 @@ You can add Fluence network with Chainlist:
 
     </div>
 
-3.  In the opened window of your wallet approve the action of adding Fluence network to your wallet. Confirm the action by pressing the **"Approve"** button.
+3.  In the opened window of your wallet, approve adding Fluence network to your wallet. Confirm the action by pressing the **"Approve"** button.
 
 <div style={{ textAlign: "center" }}>
 <img
@@ -118,7 +118,7 @@ You can add Fluence network with Chainlist:
 <p>Approving the addition of Fluence network in MetaMask</p>
 </div>
 
-4. Then in this window, the wallet will prompt you to switch the current network to Fluence. Confirm the switch by pressing the **"Switch network"** button.
+4. The wallet will then prompt you to switch the current network to Fluence in this window. Confirm the switch by pressing the "Switch network" button.
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -155,18 +155,61 @@ To add Fluence Network manually:
 5. Go to the list of your networks and ensure that Fluence is found in the list
 6. Switch to Fluence Network
 
-Now you have Fluence network on the list of the available networks in your wallet and is ready to connect to Fluence services.
+Now you have Fluence network on your wallet's list of available networks and are ready to connect to Fluence services.
+
+### (Optional) Import USDC tokens in the Fluence Network to your wallet
+
+:::note
+
+You can skip this part if you have already added USDC tokens to your wallet in the Fluence Network and they are displayed in the list of available assets, or if you don't plan to use USDC in the Fluence Network to create Deals.
+
+:::
+
+To display USDC tokens in your assets list in the Fluence Network (Metamask example is shown below):
+
+1. Open the Fluence Mainnet [page](https://mainnet.fluence.dev/) and press the **“USDC”** button.
+2. In the opened [Blockscout page](https://blockscout.mainnet.fluence.dev/token/0x2eC84f93e4F26465c38Fa8165A8927522290A138), you can see the USDC token contract address in the Fluence Network.
+    <div style={{ textAlign: "center" }}>
+     <img
+       src={require('./assets/mainnet_page_view.png').default}
+       alt="Mainnet page view on fluence.dev"
+       style={{ display: "block", margin: "auto", maxWidth: "70%" }}
+     />
+   </div>
+3. **Add automatically**: You can add the token automatically by pressing the button with the Metamask wallet icon and confirming the action in the wallet
+    <div style={{ textAlign: "center" }}>
+     <img
+       src={require('./assets/usdc_blockscout_add_auto.png').default}
+       alt="View the USDC contract page on Blockscout and automatically import it to the wallet."
+       style={{ display: "block", margin: "auto", maxWidth: "70%" }}
+     />
+   </div>
+4. **Add manually**:
+   - Copy the address of the FLT token contract address from Blockscout or this string: `0x2eC84f93e4F26465c38Fa8165A8927522290A138`
+   - Copy this string and open your wallet, find the **“Import tokens”** button, and press it
+   - In the opened window, paste the token address to the input field and wait till the token symbol and the token decimal are loaded or input them manually (you can find this information on the Blockscout page)
+   - Confirm the token addition and proceed
+   - The token should appear in the list of your assets
+
+<figure>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <img src={require('./assets/usdc_import_tokens_mm.png').default} alt="Import token step 1" style={{ width: '30%' }} />
+    <img src={require('./assets/usdc_confirm_import_mm.png').default} alt="Import token step 2" style={{ width: '30%' }} />
+    <img src={require('./assets/usdc_add_window.png').default} alt="Import token step 3" style={{ width: '30%' }} />
+  </div>
+  <figcaption style={{ textAlign: 'center', marginTop: '10px' }}>How to add the USDC token in the Fluence Network in MetaMask</figcaption>
+</figure>
 
 ## Connect your wallet
 
-Now when you are ready to use your wallet, let’s authenticate by connecting your wallet in the application. This guide shows you how to use Metamask as a direct wallet and Trust Wallet mobile with WalletConnect to log in to Fluence services like the Fluence Staking App.
+Now, when you are ready to use your wallet, let’s authenticate by connecting it to the application. This guide shows you how to use Metamask as a direct wallet and Trust Wallet mobile with WalletConnect to log in to Fluence services like the Fluence Staking App.
 
 First, press the **“Connect Wallet”** button in the top right corner.
 
 <div style={{ textAlign: "center" }}>
     <img
     src={require('./assets/staking_app_not_connected.png').default}
-    alt="Staking app view without user's wallet connected"
+    alt="Staking app view without user's wallet connected."
     style={{ display: "block", margin: "auto", maxWidth: "90%" }}
     />
     <p>Fluence App top part view without the user's wallet connected</p>
