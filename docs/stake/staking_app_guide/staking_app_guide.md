@@ -1,4 +1,4 @@
-# The Staking Application User Guide
+# Fluence Staking Application User Guide
 
 ## Introduction
 

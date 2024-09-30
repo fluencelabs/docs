@@ -1,4 +1,4 @@
-# Bridge Application User Guide
+# Fluence Bridge Application User Guide
 
 ## Introduction
 
