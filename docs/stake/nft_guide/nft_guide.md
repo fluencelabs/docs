@@ -7,7 +7,7 @@ To participate, you must first purchase an NFT from the newly launched [NFT Mark
 
 Once you have purchased your NFT, you can start staking FLT Tokens by going to the [Fluence Staking App](https://stake.fluence.network/), where you'll see a list of all available Capacity Commitments.
 
-You can read more about the Staker Application and Capacity Commitments in the official [Staker Application User Guide](../staking_app_guide/staking_app_guide.md).
+If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../key_concepts_staker.md).
 
 :::note
 
@@ -15,13 +15,26 @@ Additional NFTs will be released to the upcoming second Stake Race campaign winn
 
 :::
 
-### About this document
+This guide will walk you through using the Fluence NFT Marketplace, where you can buy, sell, or transfer NFTs on the Fluence Network. We'll start with an overview of the Marketplace interface. Then, we'll provide step-by-step instructions on how to buy a Fluence NFT and what to do with it once you own it, including how to sell or transfer it.
 
-This document will guide you through using the Fluence NFT Marketplace, where you can buy, sell, or transfer your NFTs in the Fluence Network.
+### Prepare Your Wallet
 
-The first part provides an overview of the Marketplace interface. The second part provides instructions on buying a Fluence NFT and managing it by selling or transferring it to another owner.
+Before diving into the Marketplace, it's crucial to set up a compatible crypto wallet. Ensure your wallet meets the following criteria to interact with the Fluence Web Applications:
 
-## Marketplace interface overview
+1. Your wallet is compatible with Fluence authentication methods.
+2. You've added the Fluence network to your wallet's list of networks.
+3. You've imported the FLT token, and it's visible in your wallet's token list.
+4. You have FLT tokens _on the Fluence Network_. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official [Bridge](https://bridge.fluence.network/bridge/fluence). Read more on using the bridge in the official [documentation](../bridge_guide/bridge_guide.md).
+
+:::tip
+
+Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
+
+:::
+
+With your wallet configured and connected to the Fluence NFT Marketplace, you can now buy or sell Fluence NFTs.
+
+## The Marketplace interface overview
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -44,12 +57,13 @@ Be cautious and use only the official application at [https://nft.fluence.networ
 The main page of the Fluence NFT Marketplace features three key elements:
 
 - **Top right:** An authentication button to connect your wallet. For a detailed guide on using crypto wallets with Fluence web applications, read the official [guide](../wallets_guide/wallets_guide.md).
-- **Bottom left:** A link to the Fluence NFT collection page, where you can buy and sell NFTs.
-- To the right from the "Collection" link: A link to the user documentation.
+- **Bottom left:** A link to the Fluence NFT collection page, where you can buy and sell NFTs and link to the user documentation.
 
 Now, let’s look at the Fluence NFT collection page.
 
 ### Fluence NFT collection page
+
+You can find all the minted Fluence NFTs on the main page of the NFT collection site.
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -63,36 +77,17 @@ Now, let’s look at the Fluence NFT collection page.
   <p>The view of the Fluence NFT Collection main page</p>
 </div>
 
-You can find all the minted Fluence NFTs on the main NFT collection page. You can filter the NFTs with filter buttons:
+You can apply the filters by pressing the buttons:
 
-- `All NFTs`: All NFTs are both available and unavailable for sale.
-- `For sale`: all NFTs are available for sale on the Marketplace.
-- `My NFTs` (only for logged-in users): shows NFTs you own.
+- `All NFTs`: All NFTs on the Marketplace.
+- `For sale`: All NFTs currently sold on the Marketplace.
+- `My NFTs` (only for logged-in users): NFTs you own.
 
-## How to purchase and sell NFTs on the Marketplace
+## How to buy an NFT
 
-### Prepare Your Wallet
+You can buy an NFT from the Fluence NFT Collections in a few simple steps:
 
-You'll first need to connect a compatible crypto wallet to use the NFT Marketplace. This section will guide you through ensuring your wallet is ready for use.
-
-:::tip
-
-Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
-
-:::
-
-To ensure your wallet is ready for the Staking Application, verify the following:
-
-1. Your wallet is compatible with Fluence authentication methods.
-2. You've added the Fluence network to your wallet's list of networks.
-3. You've imported the FLT token, and it's visible in your wallet's token list.
-4. You have FLT tokens **_on the Fluence Network_**. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official [Bridge](https://bridge.fluence.network/bridge/fluence). Read more on using the bridge in the official [documentation](../bridge_guide/bridge_guide.md).
-
-Once your wallet is connected to the Fluence NFT Marketplace, you can buy or sell Fluence NFTs.
-
-### How to buy an NFT
-
-1.  First, find NFTs sold on the marketplace by clicking the “For Sale” button. In the open list, choose an NFT that meets your needs.
+1.  First, find NFTs sold on the marketplace by clicking the **“For Sale”** button. In the opened list, choose an NFT that meets your needs.
 
     <div style={{ textAlign: "center" }}>
     <img
@@ -105,7 +100,7 @@ Once your wallet is connected to the Fluence NFT Marketplace, you can buy or sel
 
     </div>
 
-2.  Click on the NFT card you want to purchase and press the “Buy NFT button.”
+2.  Click on the NFT card you want to purchase and press the “Buy NFT " button.
 
     <div style={{ textAlign: "center" }}>
 
@@ -149,7 +144,7 @@ Once your wallet is connected to the Fluence NFT Marketplace, you can buy or sel
 
 5.  Now you can stake for Capacity Commitments with the NFT you’ve purchased or keep it until you want to sell it or transfer it to someone
 
-### How to Sell or Transfer an NFT
+## How to Sell or Transfer an NFT
 
 You can list your NFTs for sale at a price you set or transfer them to another address.
 
@@ -167,11 +162,11 @@ First, open the card of the NFT you wish to sell or transfer by pressing the 'My
 
 </div>
 
-#### Transfer NFT
+### Transfer an NFT
 
-You can transfer your NFT regardless of its sale status.
+You can transfer your NFT regardless of its sale status. For that, open the NFT card to be transferred and follow these steps:
 
-1.  Enter the recipient's address in the NFT card you've previously opened.
+1.  Enter the recipient's address.
 2.  Press the 'Transfer' button.
     <div style={{ textAlign: "center" }}>
 
@@ -201,11 +196,9 @@ You can transfer your NFT regardless of its sale status.
 
 **Note:** NFTs are sold and transferred on the Fluence Network. For the recipient to see the NFT in their wallet, the Fluence Network should be added first. Read more on preparing the wallet to work with Fluence Network in the corresponding [guide](../wallets_guide/wallets_guide.md).
 
-**Set NFT for sale**
+### Set NFT for sale
 
-When a user lists an NFT for sale, and someone buys the NFT, the funds are automatically transferred to your address.
-
-To sell an NFT:
+When you list an NFT for sale, and someone buys it, the funds are automatically transferred to your address. To sell an NFT, open the NFT card to be sold and follow these steps:
 
 1.  Approve the Marketplace to manage all your NFTs - to transfer them automatically to a buyer; if you haven’t done it before - press the “Approve collection” button.
 
@@ -258,7 +251,7 @@ Even if your NFT is set for sale, you still can transfer it manually without cha
 
 :::
 
-#### How to Change the price or Delist an NFT from a sale
+### How to Change the price or Delist an NFT from a sale
 
 You can easily adjust the price or remove an NFT you've listed for sale. Click on the card of the NFT on sale and choose your action:
 
@@ -272,7 +265,7 @@ You can easily adjust the price or remove an NFT you've listed for sale. Click o
     <img
 
           src={require('./assets/nft_delist_button.png').default}
-          alt="The view of the NFT card with the delist button"
+          alt="The view of the NFT card with the delist button."
           style={{ display: "block", margin: "auto", maxWidth: "80%" }}
 
     />

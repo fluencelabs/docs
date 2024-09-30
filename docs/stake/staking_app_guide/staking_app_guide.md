@@ -5,10 +5,10 @@
 This guide will walk you through the process of becoming a staker in the Fluence Protocol, allowing you to earn rewards by contributing to the decentralized physical infrastructure (DePIN).
 For that, you will use the Fluence Staking Application, a web application providing stakers with all the necessary resources to analyze available Capacity Commitments for staking and monitor active commitments' performance and rewards.
 
-First, you'll be introduced to the Staking application—the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
+First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
 Then you will find a step-by-step guide on how to join the Fluence network and stake your first Capacity Commitment.
 
-If you haven't read the [Key Concepts for Stakers](../key_concepts_staker.md) article yet, we recommend you do so before proceeding with this guide. The article explains the main concepts and mechanisms that are essential for understanding the staking process.
+If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../key_concepts_staker.md). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehesively.
 
 :::note
 Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
@@ -34,8 +34,8 @@ Be cautious and use only the official application at [stake.fluence.network](htt
 
 The Staking application consists of the following main parts:
 
-- Navigation bar with links to the blockchain Bridge Application and Fluence NFT Collection on the Fluence Marketplace
-- Button to connect your wallet to the application. Read more on how to connect your wallet to Fluence in this [article](../wallets_guide/wallets_guide.md)
+- Top center: The navigation bar with links to the blockchain Bridge Application and Fluence NFT Collection on the Fluence Marketplace
+- Top right: The button to connect your wallet to the application. Read more on how to connect your wallet to Fluence in this [article](../wallets_guide/wallets_guide.md)
 - Panels with a summary of the activated Capacity Commitment performance:
   - **"Capacity commitments"** - distribution of activated CCs by statuses
   - **"Rewards"** - summary of rewards earned by CCs so far
@@ -53,7 +53,7 @@ But the information in the **Panels** and the **Staked Capacity Commitments** se
 
 :::
 
-The following sections will first guide you through the application interface, demonstrate how to stake for a Capacity Commitment for the first time, and then monitor its performance.
+The following sections will guide you through the application interface, demonstrate how to stake for a Capacity Commitment for the first time, and then monitor its performance.
 
 ### Capacity commitments statuses panel
 
@@ -82,7 +82,7 @@ This panel displays current information about the number of CCs in different sta
 After staking and activating a Capacity Commitment, it progresses through the following stages:
 
 - It initially enters the `Funded` status
-- In the subsequent epoch, the CC transitions to `Active` and begins participating in the Network
+- In the subsequent epoch, the CC transitions to the `Active` status and begins participating in the Network
 - Upon completion or failure, the CC remains in either the `Completed` or `Failed` status until the staker withdraws the collateral.
   The CC's Provider can start the collateral withdrawal process before the staker. This happens when the Provider unregisters the compute resources from the ended CC. In this case, the collateral is transferred to the staker's wallet.
 - Finally, the CC transitions to the `Removed` status, when all rewards and collateral are withdrawn
@@ -139,7 +139,7 @@ This section has the following components:
   - Provider name
 - For users with a connected wallet, an "only for me" toggle is available. This filter displays CCs where Providers have set your wallet address as the only possible staker
 
-#### Individual Capacity Commitment card data fields
+#### Capacity Commitment cards list fields
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -169,7 +169,7 @@ You can sort the list by clicking on any numeric field (following the provider n
 
 Example of the Stake page list of CCs information cards collapsed.
 
-#### Individual Capacity Commitment card extended view fields
+#### Individual Capacity Commitment extended card fields
 
 <div style={{ textAlign: "center" }}>
   <img
@@ -198,9 +198,9 @@ Clicking on an individual CC card expands it, revealing more detailed informatio
 
 #### Stake button view
 
-The "Stake" button view depends on whether you have authenticated by connecting your wallet to the web application and have an NFT that grants you the right to stake tokens for Capacity Commitments:
+The **"Stake"** button view depends on whether you have authenticated by connecting your wallet to the web application and have an NFT that grants you the right to stake tokens for Capacity Commitments:
 
-- If you haven't connected your wallet to the application yet, you'll see a "Connect wallet" button.
+- If you haven't connected your wallet to the application yet, you'll see a **"Connect wallet"** button.
     <div style={{ textAlign: "center" }}>
     <img
 
@@ -352,7 +352,7 @@ After you've found the CC(s) you want to stake on, it's time to delegate your FL
 
 1.  Expand the target CC's card by clicking it
 2.  Ensure you're eligible to stake: your wallet is connected to the application, and you own a Fluence NFT in that wallet
-3.  Click the "Stake" button
+3.  Click the **"Stake"** button
 
     <div style={{ textAlign: "center" }}>
     <img
@@ -445,7 +445,7 @@ If you want to withdraw rewards from a CC where they are available, do the follo
     />
     </div>
 
-2.  Click the "withdraw rewards" button
+2.  Click the **"withdraw rewards"** button
 3.  Confirm the withdrawal in the popped-up window
 
     <div style={{ textAlign: "center" }}>
@@ -490,7 +490,7 @@ If you want to withdraw rewards from a CC where they are available, do the follo
 
 If you want to withdraw rewards from only one CC where they are available, do the following:
 
-1.  Click the "Withdraw available rewards" button in the top right panel "Rewards."
+1.  Click the **"Withdraw available rewards"** button in the top right panel "Rewards."
 2.  Confirm the withdrawal in the popped-up window
 
     <div style={{ textAlign: "center" }}>
@@ -550,12 +550,12 @@ The Capacity Commitment provider is eligible to initiate the collateral withdraw
 
 A staker can withdraw their collateral from a CC once it has completed or failed. The process for withdrawing collateral is essentially the same for completed and failed Capacity Commitments.
 
-However, there's one important difference: _Failed CCs have a cooldown period_, during which stakers cannot withdraw collateral. In such cases, the withdrawal button won't appear in the interface until the cooldown period has passed.
+However, there's one crucial difference: _Failed CCs have a cooldown period_, during which stakers cannot withdraw collateral. In such cases, the withdrawal button won't appear in the interface until the cooldown period has passed.
 
 :::note[**Important numbers**]
 
 The cooldown period for withdrawing collateral from a **Failed CC** **now** is **0 epochs** - instant withdrawal is available.
-In the **future**, it will be set to **30 days** during which stakers cannot withdraw collateral.
+In the **future**, it will be set to **30 days**, during which stakers cannot withdraw collateral.
 
 :::
 
@@ -567,20 +567,20 @@ To withdraw collateral from a Capacity Commitment, do the following:
     <img
 
         src={require('./assets/withdraw_collateral_cc_card_view.png').default}
-        alt="The view of a card of a CC available for collateral withdrawal"
+        alt="The view of a card of a CC available for collateral withdrawal."
         style={{ display: "block", margin: "auto", maxWidth: "80%" }}
 
     />
     </div>
 
-2.  Click the "withdraw collateral" button
+2.  Click the **"withdraw collateral"** button
 3.  Confirm the withdrawal in the popped-up window
 
     <div style={{ textAlign: "center" }}>
     <img
 
         src={require('./assets/withdraw_collateral_confirm.png').default}
-        alt="The view of a confirmation window for collateral withdrawal"
+        alt="The view of a confirmation window for collateral withdrawal."
         style={{ display: "block", margin: "auto", maxWidth: "80%" }}
 
     />
@@ -593,7 +593,7 @@ To withdraw collateral from a Capacity Commitment, do the following:
     <img
 
         src={require('./assets/withdraw_collateral_success.png').default}
-        alt="The view of a successful collateral withdrawal confirmation message"
+        alt="The view of a successful collateral withdrawal confirmation message."
         style={{ display: "block", margin: "auto", maxWidth: "80%" }}
 
     />
@@ -601,15 +601,15 @@ To withdraw collateral from a Capacity Commitment, do the following:
 
 6.  Ensure that the correct amount of tokens has been transferred to your account and that in the individual CC card:
 
-    - The current collateral field now has 0 tokens available
-    - The withdraw collateral button now displays "already withdrawn"
-    - The status field in the card is now "withdrawn"
+    - The current collateral field now has 0 tokens available.
+    - The "withdraw collateral" button is replaced with an "already withdrawn" caption.
+    - The status field in the card now displays "withdrawn".
 
     <div style={{ textAlign: "center" }}>
     <img
 
         src={require('./assets/withdraw_collateral_card_after_view.png').default}
-        alt="The view of a card of a CC after collateral withdrawal"
+        alt="The view of a card of a CC after collateral withdrawal."
         style={{ display: "block", margin: "auto", maxWidth: "80%" }}
 
     />
