@@ -33,7 +33,7 @@ You can transfer both tokens (FLT and USDC) between Ethereum and the Fluence cha
 When moving funds from Ethereum to Fluence, you'll need to pay transaction fees in two currencies _simultaneously_:
 
 - ETH: for the Ethereum network fees
-- FLT: for the minimum transaction fees on the Fluence network
+- FLT: for the transaction fees on the Fluence network
 
 #### Fluence to Ethereum Transfers
 
