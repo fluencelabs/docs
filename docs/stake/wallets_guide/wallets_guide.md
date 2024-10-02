@@ -6,7 +6,7 @@ In the Web3 world, authentication relies on a private/public key scheme—a more
 
 Fluence applications, like most Web3 services, use wallet-based authentication. We've added support for most wallets on desktop and mobile platforms, so you can use your preferred crypto wallet with our services.
 
-This guide will walk you through setting up your wallet and connecting to the Fluence network.
+This guide will walk you through setting up your wallet and connecting to the Fluence Network.
 
 We'll then explain how to connect to Fluence web applications using your chosen wallet.
 
@@ -92,7 +92,7 @@ By default, your wallet does not include Fluence. This section will show you how
 
 #### Using Chainlist
 
-You can add Fluence network with Chainlist:
+You can add Fluence Network with Chainlist:
 
 1.  Fluence can be found on Chainlist by this [link](https://chainlist.org/chain/9999999). Proceed to the site.
 2.  Press **“Connect Wallet”** button.
@@ -100,22 +100,22 @@ You can add Fluence network with Chainlist:
     <div style={{ textAlign: "center" }}>
         <img
         src={require('./assets/fluence_on_chainlist_view.png').default}
-        alt="Fluence network on Chainlist"
+        alt="Fluence Network on Chainlist"
         style={{ display: "block", margin: "auto", maxWidth: "70%" }}
         />
-        <p>Fluence network listing on Chainlist</p>
+        <p>Fluence Network listing on Chainlist</p>
 
     </div>
 
-3.  In the opened window of your wallet, approve adding Fluence network to your wallet. Confirm the action by pressing the **"Approve"** button.
+3.  In the opened window of your wallet, approve adding Fluence Network to your wallet. Confirm the action by pressing the **"Approve"** button.
 
 <div style={{ textAlign: "center" }}>
 <img
     src={require('./assets/mm_add_fluence_from_chainlist.png').default}
-    alt="Adding Fluence network to MetaMask"
+    alt="Adding Fluence Network to MetaMask"
     style={{ display: "block", margin: "auto", maxWidth: "70%" }}
 />
-<p>Approving the addition of Fluence network in MetaMask</p>
+<p>Approving the addition of Fluence Network in MetaMask</p>
 </div>
 
 4. The wallet will then prompt you to switch the current network to Fluence in this window. Confirm the switch by pressing the "Switch network" button.
@@ -123,10 +123,10 @@ You can add Fluence network with Chainlist:
 <div style={{ textAlign: "center" }}>
   <img
     src={require('./assets/mm_switch_network_fluence_chainlist.png').default}
-    alt="Switching to Fluence network in MetaMask"
+    alt="Switching to Fluence Network in MetaMask"
     style={{ display: "block", margin: "auto", maxWidth: "70%" }}
   />
-  <p>Switching to Fluence network in MetaMask</p>
+  <p>Switching to Fluence Network in MetaMask</p>
 </div>
 
 #### Manually
@@ -138,7 +138,7 @@ To add Fluence Network manually:
     <div style={{ textAlign: "center" }}>
      <img
        src={require('./assets/mm_settings_networks_list.png').default}
-       alt="Switching to Fluence network in MetaMask"
+       alt="Switching to Fluence Network in MetaMask"
        style={{ display: "block", margin: "auto", maxWidth: "70%" }}
      />
      <p>List of networks in the Metamask settings</p>
@@ -155,7 +155,7 @@ To add Fluence Network manually:
 5. Go to the list of your networks and ensure that Fluence is found in the list
 6. Switch to Fluence Network
 
-Now you have Fluence network on your wallet's list of available networks and are ready to connect to Fluence services.
+Now you have Fluence Network on your wallet's list of available networks and are ready to connect to Fluence services.
 
 ### (Optional) Import USDC tokens in the Fluence Network to your wallet
 

@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Fluence is a Layer 2 (L2) network bridging to Ethereum. To participate in the Fluence Network, you must first transfer your funds from Ethereum to the Fluence network, which is done with the Fluence blockchain Bridge Application.
+Fluence is a Layer 2 (L2) network bridging to Ethereum. To participate in the Fluence Network, you must first transfer your funds from Ethereum to the Fluence Network, which is done with the Fluence blockchain Bridge Application.
 This guide will walk you through using the Application and showing you how to move your assets between Ethereum and Fluence.
 
 ### Key concepts
 
-Fluence Chain (FC) uses an Optimistic Rollup system:
+Fluence Network uses an Optimistic Rollup system:
 
 - **Optimistic Rollup**: A scaling solution that assumes all transactions are valid unless proven otherwise. This approach allows for faster processing but requires a security mechanism called "fraud proofs."
 - **Challenge Period**: When withdrawing funds from Fluence to Ethereum, there's a 7-day waiting period. This period allows enough time for any potentially fraudulent transactions to be identified and disputed.
@@ -26,7 +26,7 @@ Currently, the Fluence Bridge supports two types of ERC20 tokens:
 
 ### Fee Structure for Cross-Chain Transfers
 
-You can transfer both tokens (FLT and USDC) between Ethereum and the Fluence chain in either direction. However, it's essential to understand the fee structure for these transfers.
+You can transfer both tokens (FLT and USDC) between Ethereum and the Fluence Networks in either direction. However, it's essential to understand the fee structure for these transfers.
 
 #### Ethereum to Fluence Transfers
 
@@ -39,8 +39,8 @@ When moving funds from Ethereum to Fluence, you'll need to pay transaction fees 
 
 When moving funds from Fluence to Ethereum, you'll need to pay transaction fees in two currencies _separately_:
 
-1. FLT: for the Fluence network fees when you initiate the withdrawal
-2. ETH: for the Ethereum network fees when you claim the withdrawal after the challenge period
+1. FLT: for the Fluence Network fees when you initiate the withdrawal
+2. ETH: for the Ethereum Network fees when you claim the withdrawal after the challenge period
 
 ### Prepare your wallet
 
@@ -55,7 +55,7 @@ Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypt
 To ensure your wallet is ready for the Bridge application, verify the following:
 
 1. Your wallet is compatible with Fluence authentication methods
-2. You've added the Fluence network to your wallet's list of networks
+2. You've added the Fluence Network to your wallet's list of networks
 3. You've imported the FLT token, and it's visible in your wallet's token list
 
 Once you've ensured that your wallet can interact with the Fluence Network and obtained tokens for bridging, you can use the Bridge application to deposit tokens from Ethereum to Fluence and withdraw tokens from Fluence to Ethereum.
@@ -95,9 +95,9 @@ The Bridge application consists of the following parts:
 - Authentication button (top right corner):
   - For unauthenticated users: **"Connect"** button for logging in with a crypto wallet
   - For authenticated users: a panel displaying your wallet address and icons to log out
-- The main bridge panel (in the center) with two options:
-  - Deposit tab: Transfer tokens from the Ethereum network to Fluence
-  - Withdraw tab: Move tokens from Fluence back to the Ethereum network
+- The main control panel (in the center) with two options:
+  - Deposit tab: Transfer tokens from the Ethereum Network to the Fluence Network
+  - Withdraw tab: Transfer tokens from the Fluence Network to the Ethereum Network
 - History (only for authenticated users): The time face icon to the left of the auth panel. Displays a record of your prior withdrawals from Fluence to Ethereum. Refer to the [Withdrawals history page](#withdrawals-history-page) section below for more details.
 
 To start using the Bridge application, you must first authenticate by connecting your crypto wallet to the application. To do so, press the button at the top right corner and select your preferred wallet.
@@ -106,10 +106,10 @@ Let's start by exploring how to deposit tokens from Ethereum to Fluence — a qu
 
 ### Depositing Tokens (Ethereum to Fluence)
 
-To bridge tokens from the Ethereum Mainnet to the Fluence Mainnet:
+To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
 
 1.  Select the **"Deposit"** tab in the main panel of the bridge application.
-2.  Choose the token you want to bridge. In this example, we're bridging FLT tokens.
+2.  Choose the token (FLT or USDC) you want to bridge. In this example, we're bridging FLT tokens.
 3.  Enter the number of tokens you wish to bridge.
 4.  Verify that the correct amount is displayed in the bridge panel and that you have enough FLT tokens in your wallet to cover the transaction fee specified in the "Estimated fees" field.
       <div style={{ textAlign: "center" }}>
@@ -123,7 +123,7 @@ To bridge tokens from the Ethereum Mainnet to the Fluence Mainnet:
     </div>
 
 5.  Click the **"Bridge Funds"** button.
-6.  Your wallet application will ask you to sign several transactions, one after another:
+6.  Your wallet application will ask you to sign several transactions:
 
     - Allow the bridge app to send the amount of tokens you specified. Ensure that the spending cap corresponds to the actual amount and confirm the transaction
       <div style={{ textAlign: "center" }}>
@@ -147,8 +147,10 @@ To bridge tokens from the Ethereum Mainnet to the Fluence Mainnet:
       />
         </div>
 
-7.  If the token bridging transaction is successful, you will be redirected to the Bridge application, and the success message will be displayed.
-    This window contains two critical links: to the L1 bridge transaction info (on [Etherscan](https://etherscan.io/)) and the L2 block scanner ([Blockscanner](https://blockscout.mainnet.fluence.dev/)) with the transaction info.
+7.  If the token bridging transaction is successful, you will be redirected to the Bridge application, and the success message will be displayed. This window contains two critical links:
+
+    - One to the L1 bridge transaction info on [Etherscan](https://etherscan.io/).
+    - The other to L2 network transaction info on [Blockscanner](https://blockscout.mainnet.fluence.dev/), the Fluence network block scanner.
 
     <div style={{ textAlign: "center" }}>
         <img
@@ -162,11 +164,11 @@ To bridge tokens from the Ethereum Mainnet to the Fluence Mainnet:
 
         :::note
 
-        **Bridging** from the Ethereum Mainnet to Fluence **takes** approximately **15 minutes**. This is done to ensure a high level of security for your funds.
+        **Bridging** from the Ethereum Mainnet to the Fluence network **takes** approximately **15 minutes**, which is sufficient to ensure a high level of security.
 
         :::
 
-8.  Once your tokens are bridged to the Fluence Mainnet, it will be reflected in the block scanner mentioned previously as a successful token transfer. You can check the transaction by hand by visiting the block scanner and entering your wallet address in the placeholder: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`
+8.  Once your tokens are bridged to the Fluence network, the token transfer transaction can be viewed on Blockscout. Simply enter your wallet address in the placeholder at the end of this url: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`
 
     <div style={{ textAlign: "center" }}>
         <img
@@ -178,7 +180,7 @@ To bridge tokens from the Ethereum Mainnet to the Fluence Mainnet:
     />
     </div>
 
-9.  The transferred tokens will be reflected in your wallet as well. To see the transferred tokens, you need to switch the network of your wallet to the Fluence Mainnet and ensure that the FLT token was previously added to your wallet, or it won't be displayed (read more in the "Prepare your wallet" section)
+9.  The transferred tokens will be reflected in your wallet as well. To see the transferred tokens, you need to switch the network of your wallet to the Fluence Network and ensure that the FLT token was previously added to your wallet, or it won't be displayed (read more in the "Prepare your wallet" section).
 
     <div style={{ textAlign: "center" }}>
     <img
@@ -196,17 +198,17 @@ Congratulations! You successfully and safely bridged your FLT tokens from the Et
 
 :::note
 
-Tokens withdrawal from the Fluence Mainnet to the Ethereum Mainnet takes seven days.
+Token withdrawal from the Fluence Mainnet to the Ethereum Mainnet takes seven days.
 
-The Fluence L2 Network uses Optimistic Rollups, which rely on a security mechanism called "fraud proofs." When a user initiates a withdrawal from an L2 network to Ethereum, the protocol enters a challenge period (7 days) to ensure that no fraudulent transactions have occurred.
+The Fluence L2 network uses Optimistic Rollups, which rely on a security mechanism called "fraud proofs." When a user initiates a withdrawal from the Fluence network to Ethereum, the protocol enters a challenge period (7 days) to ensure that no fraudulent transactions have occurred.
 
 :::
 
-To bridge tokens from the Fluence Mainnet to the Ethereum Mainnet :
+To bridge tokens from the Fluence Network to the Ethereum Network:
 
 1.  Choose the “withdraw” tab in the central panel of the bridge application
 2.  Choose the token you want to bridge. In this example, the FLT token is bridged
-3.  Enter the amount of token you want to withdraw from Fluence to Ethereum to your connected account
+3.  Enter the token amount you want to withdraw from Fluence to Ethereum using your connected account
 4.  Ensure that in the bridge panel, the correct amount is displayed
 5.  Press **“Withdraw Funds”** button
 6.  Your wallet application will ask you to sign a transaction of token withdrawal:
@@ -221,7 +223,7 @@ To bridge tokens from the Fluence Mainnet to the Ethereum Mainnet :
     />
     </div>
 
-7.  If the transaction to withdraw the tokens is successful, you will be redirected to the bridge app and will see the success message:
+7.  If the transaction to withdraw the tokens is successful, you will be redirected to the Bridge application and see the success message. Otherwise, you will see the transaction reversal error message.
 
     <div style={{ textAlign: "center" }}>
     <img
@@ -247,14 +249,14 @@ To bridge tokens from the Fluence Mainnet to the Ethereum Mainnet :
 
 ### Withdrawals history page
 
-The Withdrawals history page provides users with an overview of their withdrawal transactions and their statuses. To open this page, you have to connect the wallet you've made transactions with first.
+The Withdrawals History page offers users an overview of your withdrawal transactions and respective statuses. To access this page, please connect the wallet you used to sign the transactions.
 
 To access the Withdrawals history page, users have two options:
 
-1. After initiating a funds withdrawal, a **"History"** button appears in the confirmation message. Clicking this button provides immediate access to recent activity.
-2. Alternatively, you can click the time face icon located in the top-right corner, next to the account information.
+1. After initiating a funds withdrawal, the **"History"** button appears in the confirmation message. Clicking this button provides immediate access to recent activity.
+2. Alternatively, you can click the history button located in the top-right corner, next to the account information.
 
-It's important to note that the Withdrawals history data is only visible when your wallet is connected to the Ethereum Mainnet. Otherwise, the **"Switch network"** button will appear, which, when clicked, will initiate the network change process in the user's wallet application.
+It's important to note that the Withdrawals history is only visible when your wallet is connected to the Ethereum Mainnet. Otherwise, the **"Switch network"** button will appear, which, when clicked, will initiate the network change process in the user's wallet application.
 
 <div style={{ textAlign: "center" }}>
 <img
@@ -268,9 +270,9 @@ It's important to note that the Withdrawals history data is only visible when yo
 <p>The view of the Withdrawals history page for wallets not connected to Ethereum</p>
 </div>
 
-The "History" page serves as a personal ledger, offering updates on the progress of funds withdrawal. There you can see all of your pending and completed transactions with date, amount, status and the Tx hash with the link to the block scanner.
+The "History" page serves as a wallet-specific ledger, offering updates on the progress of withdrawal transactions. You can see all of your pending and completed transactions with transaction date, amount, status and hash.
 
-A withdrawal transaction may have following statuses:
+A withdrawal transaction may have one of the following statuses:
 
 - `Waiting`: The seven day challenge period hasn’t passed yet.
 - `Claim`: The funds are ready to be claimed. User can press the **“Claim”** button to withdraw the funds. Read more about the withdrawal process in the section below.
@@ -316,7 +318,7 @@ Once the challenge period for your withdrawal transaction has expired (7 days), 
     />
      </div>
 
-3.  The withdrawal status should change to **"Completed"** and the funds transferred should be added to your wallet balance
+3.  The withdrawal status will change to **"Completed"** and the funds transferred will be added to your wallet balance
 
     <div style={{ textAlign: "center" }}>
 

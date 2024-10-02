@@ -6,12 +6,12 @@ This guide will walk you through the process of becoming a staker in the Fluence
 For that, you will use the Fluence Staking Application, a web application providing stakers with all the necessary resources to analyze available Capacity Commitments for staking and monitor active commitments' performance and rewards.
 
 First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
-Then you will find a step-by-step guide on how to join the Fluence network and stake your first Capacity Commitment.
+Then you will find a step-by-step guide on how to join the Fluence Network and stake your first Capacity Commitment.
 
 If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehesively.
 
 :::note
-Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
+Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence Network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
 :::
 
 ## The staking application overview
@@ -331,7 +331,7 @@ Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypt
 To ensure your wallet is ready for the Staking Application, verify the following:
 
 1. Your wallet is compatible with Fluence authentication methods.
-2. You've added the Fluence network to your wallet's list of networks.
+2. You've added the Fluence Network to your wallet's list of networks.
 3. You've imported the FLT token, and it's visible in your wallet's token list.
 4. You have FLT tokens _in the Fluence Network_. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official Bridge. Click "Bridge" in the top center navigation bar to access the Bridge.
 5. You have a Fluence NFT that grants you the right to stake for Capacity Commitments. You can obtain an NFT on the official [Marketplace](https://nft.fluence.network/).
