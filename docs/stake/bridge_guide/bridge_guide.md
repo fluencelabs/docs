@@ -14,7 +14,7 @@ Fluence Chain (FC) uses an Optimistic Rollup system:
 
 The transfer times vary for deposit and withdrawal operations:
 
-- **Deposits (Ethereum to Fluence)**: Up to 15 minutes to provide the maximum security for your transactions.
+- **Deposits (Ethereum to Fluence)**: Take up to 15 minutes to provide the maximum security for your transactions.
 - **Withdrawals (Fluence to Ethereum)**: Take seven days due to the challenge period, ensuring maximum security for your funds. When the challenge period ends, you can _claim_ your funds in the Bridge App.
 
 ### Supported tokens
