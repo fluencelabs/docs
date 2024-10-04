@@ -37,7 +37,7 @@ If you haven't started your journey with Fluence yet, read the introductory part
 Once you're familiar with the essentials, follow these steps:
 
 - [**Bridge Your Funds to Fluence**](./bridge_guide/bridge_guide.md): Learn how to transfer your FLT and USDC tokens from Ethereum to the Fluence network using the [Fluence Bridge App](https://bridge.fluence.network).
-- [**Obtain a Fluence NFT**](./nft_guide/nft_guide.md): Understand how to obtain or to sell a Fluence NFT, which enables access to staking, from the official Fluence [NFT Marketplace](https://nft.fluence.network/).
+- [**Buy or Sell a Fluence NFT**](./nft_guide/nft_guide.md): Understand how to obtain or to sell a Fluence NFT, which enables access to staking, from the official Fluence [NFT Marketplace](https://nft.fluence.network/).
 - **Choose Your Staking Method**: Select based on your deposit size and desired level of involvement in the network:
   - [**The Fluence Staking App**](./staking_app_guide/staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
   - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with the re-staking protocol [Parasail](https://www.parasail.network).
