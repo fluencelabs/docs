@@ -4,17 +4,8 @@ Stakers, also known as Delegators, are crucial to the Fluence Network. They cont
 
 Becoming a Staker on the Fluence Network is a straightforward process, though it varies based on your deposit size and the level of involvement. The general journey to becoming a staker is illustrated in the image below:
 
-<div style={{ textAlign: "center" }}>
-<img
-
-src={require('./assets/staking_user_flow.png').default}
-alt="The flow of becoming a staker in the Fluence Network."
-style={{ display: "block", margin: "auto", maxWidth: "90%" }}
-
-/>
-
-<p>The flow diagram showing how to become a staker in the Fluence Network.</p>
-</div>
+![The flow of becoming a staker in the Fluence Network.](./assets/staking_user_flow.png)
+The flow diagram showing how to become a staker in the Fluence Network
 
 The flow presented is a general overview of the staking process for **a token holder**.
 
@@ -61,15 +52,15 @@ Fluence is a decentralized compute marketplace powered by blockchain economics. 
    - When customers rent the committed capacity, providers are paid in USDC.
    - If the hardware remains idle but ready for immediate use, providers become eligible for FLT rewards.
 
-2. **Proof of Capacity (PoC) Mechanism**: The Fluence Network uses PoC to ensure compute providers can deliver their committed computational capacity to the Marketplace. Providers define their resources as compute Units (CUs), with each CU consisting of:
+1. **Proof of Capacity (PoC) Mechanism**: The Fluence Network uses PoC to ensure compute providers can deliver their committed computational capacity to the Marketplace. Providers define their resources as compute Units (CUs), with each CU consisting of:
 
    - 1 core
    - 4 GB of RAM
    - Additional storage space
 
-3. **Continuous Readiness and Rewards**: To demonstrate ongoing readiness to serve user applications, CUs send cryptographic proofs (PoC) to the blockchain. For each 24-hour epoch where capacity is provisioned but not utilized by user applications, these submitted proofs determine the reward paid in FLT tokens.
+1. **Continuous Readiness and Rewards**: To demonstrate ongoing readiness to serve user applications, CUs send cryptographic proofs (PoC) to the blockchain. For each 24-hour epoch where capacity is provisioned but not utilized by user applications, these submitted proofs determine the reward paid in FLT tokens.
 
-4. **Stakers**: Stakers provide FLT token collateral to activate providers' compute on Fluence e and ensure network reliability. They earn FLT rewards for their role in maintaining the network's security and decentralization.
+1. **Stakers**: Stakers provide FLT token collateral to activate providers' compute on Fluence e and ensure network reliability. They earn FLT rewards for their role in maintaining the network's security and decentralization.
 
 This system ensures a robust, decentralized marketplace where compute resources are efficiently allocated and providers are incentivized to maintain readiness, whether their resources are actively used or standing by for immediate deployment.
 
@@ -148,13 +139,13 @@ Rewards unlock proportionally every epoch (24 hours) at a daily unlock amount of
 Let's break this down with a simple example:
 
 1. In the 5th epoch, you earn 182 FLT.
-2. Starting from this moment, for the next 182 days (about 6 months):
+1. Starting from this moment, for the next 182 days (about 6 months):
 
    - Every day (which is one epoch), 1 FLT (1/182) from this reward becomes available.
    - This continues until all 182 FLT are unlocked.
 
-3. Now, let's say in the 6th epoch, you earn another 182 FLT.
-4. The same process starts again for this new reward:
+1. Now, let's say in the 6th epoch, you earn another 182 FLT.
+1. The same process starts again for this new reward:
    - Every day for the next 182 days, another 1 FLT from this second reward becomes available.
 
 This pattern continues for each epoch where you earn rewards. It's like having multiple timers running at once, each slowly releasing your earned FLT over time.
@@ -188,9 +179,9 @@ If the total slashed FLT amount exceeds the allowed threshold, the CC is marked 
 If a Capacity Commitment (CC) **fails**:
 
 1. The accumulation of new rewards ceases.
-2. The vesting process for existing rewards is halted.
-3. All rewards that have completed vesting up to the failure epoch remain available for withdrawal.
-4. Any rewards still in the vesting process at the time of failure become permanently locked and cannot be withdrawn.
+1. The vesting process for existing rewards is halted.
+1. All rewards that have completed vesting up to the failure epoch remain available for withdrawal.
+1. Any rewards still in the vesting process at the time of failure become permanently locked and cannot be withdrawn.
 
 In essence, you retain access to fully vested rewards but forfeit any partially vested amounts when a CC fails.
 

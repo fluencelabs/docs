@@ -4,7 +4,7 @@
 const sidebars = {
   learn: [
     "learn/overview",
-    "learn/how-it-works",
+    "learn/how-it-works/how-it-works",
     "learn/why-fluence",
     "learn/fluence-comparison",
     "learn/use-cases",
@@ -41,7 +41,7 @@ const sidebars = {
       label: "Setting Up",
       collapsible: true,
       collapsed: true,
-      link: { id: "build/setting-up/setting_up", type: "doc" },
+      link: { id: "build/setting-up/setting-up/setting-up", type: "doc" },
       items: [
         "build/setting-up/installing_cli",
         "build/setting-up/set-up-development-env",

@@ -4,14 +4,8 @@
 
 Fluence protocol forms the network of compute resources and defines the cloudless stack to execute computations.
 
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/fluence-functions.png"
-    alt="Fluence network overview"
-    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
-  />
-  <p>Fluence network overview</p>
-</div>
+![Fluence network overview](./assets/fluence-functions.png)
+Fluence network overview
 
 ### Cloudless Functions, Aqua
 
@@ -53,37 +47,19 @@ On-chain marketplace matches compute providers with customers who pay for using 
 
 The marketplace is hosted on Fluence's own chain powered by IPC, validated by Fluence Compute Providers and anchored to Filecoin L1. The own chain enables cheap and fast transactions to enable renting compute resources at any scale: from tiny loads to massive scale.
 
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/marketplace-providers.png"
-    alt="Compute providers on the Fluence marketplace"
-    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
-  />
-  <p>Compute providers on the Fluence marketplace</p>
-</div>
+![Compute providers on the Fluence marketplace](./assets/marketplace-providers.png)
+Compute providers on the Fluence marketplace
 
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/marketplace-provider-resources.png"
-    alt="Compute provider resources"
-    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
-  />
-  <p>Compute provider resources</p>
-</div>
+![Compute provider resources](./assets/marketplace-provider-resources.png)
+Compute provider resources
 
 ### Proof of Capacity
 Fluence ensures that resources advertized by providers exist and available by enforcing a cryptographic proof called Proof of Capacity. Providers apply their hardware resources to constantly generate Proofs of Capacity to confirm that these resources are ready to serve customers. Protocol rewards such resources with Fluence token proportionally to the allocated power.
 
 Whenever customers need computing power from chosen providers, these resources are switched from generating proofs to serving customers' application.
 
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/marketplace-capacity.png"
-    alt="Compute units submitting Proofs of Capacity"
-    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
-  />
-  <p>Compute units submitting Proofs of Capacity</p>
-</div>
+![Compute units submitting Proofs of Capacity](./assets/marketplace-capacity.png)
+Compute units submitting Proofs of Capacity
 
 ### Resource Pricing
 
@@ -91,14 +67,8 @@ Customers may select providers by price advertised and other parameters, or alte
 
 Under-the-hood, for every application deployment, a Deal is being created on-chain between a customer and list of providers. Deals record financial detail (prices, pre-payment, and required collaterals from providers), technical requirements related to required services (access to certain data, binaries or web API), and a link to code installations in the network.
 
-<div style={{ textAlign: "center" }}>
-  <img
-    src="/img/marketplace-matching.png"
-    alt="Matching criteria for selecting providers"
-    style={{ display: "block", margin: "auto", maxWidth: "75%" }}
-  />
-  <p>Matching criteria for selecting providers</p>
-</div>
+![Matching criteria for selecting providers](./assets/marketplace-matching.png)
+Matching criteria for selecting providers
 
 ### Billing model
 

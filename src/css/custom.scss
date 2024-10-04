@@ -73,3 +73,21 @@
 .code-container {
   max-height: 60vh;
 }
+
+article img {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+}
+
+article p:has(img) {
+  text-align: center;
+}
+
+article li img {
+  margin: 1rem 0 0 0;
+}
+
+article li p:has(img) {
+  text-align: left;
+}
