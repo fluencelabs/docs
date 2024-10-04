@@ -30,7 +30,7 @@ Fluence authentication supports various wallet options through either direct app
 
 #### Direct Connection Options
 
-The following wallets can directly connect to Fluence services:
+The following wallets application are available to connect to Fluence services directly:
 
 - Metamask
 - Rainbow
@@ -88,7 +88,7 @@ To resolve any issues on the Metamask side, check the official [documentation](h
 
 ### Add Fluence Network to your wallet
 
-By default, your wallet does not include Fluence. This section will show you how to add Fluence Network to your wallet with Chainlist or manually in your wallet.
+By default, your wallet does not include the Fluence network and token configuration. This section will show you how to add Fluence Network to your wallet with Chainlist or manually in your wallet.
 
 #### Using Chainlist
 
@@ -118,7 +118,7 @@ You can add Fluence Network with Chainlist:
 <p>Approving the addition of Fluence Network in MetaMask</p>
 </div>
 
-4. The wallet will then prompt you to switch the current network to Fluence in this window. Confirm the switch by pressing the "Switch network" button.
+4.  The wallet will then prompt you to switch the current network to the Fluence network. Confirm the switch by pressing the **"Switch network"** button.
 
 <div style={{ textAlign: "center" }}>
   <img
