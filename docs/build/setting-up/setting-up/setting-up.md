@@ -44,13 +44,13 @@ It is recommended to use a dedicated development account for your testnet. That 
 In your wallet, you need to create a network entry for the Fluence IPC `dar` testnet. Use the following parameters:
 
 ```json
-    {
-        "network name": "Fluence Dar Testnet"
-        "rpc url": "https://ipc.dar.fluence.dev/",
-        "chain id": 2358716091832359,
-        "currency symbol": "tFLT",
-        "block explorer url": "https://blockscout.dar.fluence.dev/"
-    }
+{
+  "network name": "Fluence Dar Testnet",
+  "rpc url": "https://ipc.dar.fluence.dev/",
+  "chain id": 2358716091832359,
+  "currency symbol": "tFLT",
+  "block explorer url": "https://blockscout.dar.fluence.dev/"
+}
 ```
 
 Once you got the network set, it's time to visit the faucet and request our token allocation. You can find all relevant support urls for the `dar` testnet [here](https://dar.fluence.dev/). 
