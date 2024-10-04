@@ -1,9 +1,8 @@
 # Overview
 
-Stakers, also referred to as Delegators, play a crucial role in the Fluence Network.
-The process of becoming a Staker in the Fluence Network is straightforward, though it may vary based on the size of the deposit and the desired level of network involvement. The general steps to become a staker are illustrated in the image below:
+Stakers, also known as Delegators, are crucial to the Fluence Network. They contribute FLT token collateral to ensure the Network's decentralization and reliability. In return for this role, stakers earn rewards in FLT tokens.
 
-Becoming a Staker on the Fluence Network is a simple process and may vary depending on the deposit size and the level of involvement you want in the network. The general flow of becoming a staker is shown in the image below:
+Becoming a Staker on the Fluence Network is a straightforward process, though it varies based on your deposit size and the level of involvement. The general journey to becoming a staker is illustrated in the image below:
 
 <div style={{ textAlign: "center" }}>
 <img
@@ -17,17 +16,33 @@ style={{ display: "block", margin: "auto", maxWidth: "90%" }}
 <p>The flow diagram showing how to become a staker in the Fluence Network.</p>
 </div>
 
-The flow presented is a general overview of the staking process for **a token holder**. This documentation also covers the preparations steps, such as preparing and grasping the essential concepts of the Fluence Network for stakers.
+The flow presented is a general overview of the staking process for **a token holder**.
 
-It is recommended to read the documentation in the following order:
+:::note
 
-- **Fluence Key Concepts for stakers**: If you are unfamiliar with how the Fluence Network operates, the role of stakers, and the nature of rewards they earn, read the [Key Concepts for Stakers](#fluence-key-concepts-for-stakers) first to understand the basics of the Fluence Network.
-- **Prepare your wallet**: To interact with the Fluence Network and Fluence Web Apps, you must prepare your crypto wallet or create one. Read the comprehensive [guide](./wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
-- **Bridge Funds to Fluence**: Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence network, you first have to bridge them from Ethereum. Read the [guide](./bridge_guide/bridge_guide.md) on bridging your funds with the Fluence Bridge App.
-- **Obtain an NFT**: Fluence NFTs enable access to staking and can be purchased or sold on the official Fluence [NFT Marketplace](https://nft.fluence.network/). Read the official [guide](./nft_guide/nft_guide.md) on obtaining an NFT.
-- **Stake**: You can stake your FLT tokens to the Fluence Network differently depending on the deposit size and the level of involvement you want to have in the network:
-  - **The Fluence Staking App**: use the official [Staking App](https://staking.fluence.network/) to stake for Capacity Commitments. Read the official [guide](./staking_app_guide/staking_app_guide.md) to find more.
-  - **Staking Pool**: If your deposit is not large enough to stake for a Capacity Commitment directly, or you want to abstract most of the staking process - you can join the Staking Pool. The Pool is created with a re-staking protocol [Parasail](https://www.parasail.network). Head to [Fluence’s Delegation Pool](https://www.parasail.network/delegate/fluence) on Parasail and start delegating your tokens. Find out more [here](https://docs.parasail.network/restaking-guides/guide-for-fluence-stakers/).
+The staker's path diverges at the final step - the method of staking - depending on the deposit size:
+
+- For deposits of $12,000 USD or more in FLT equivalent: Stake directly using the official [Staking App](https://staking.fluence.network/).
+- For smaller deposits: Join the [Staking Pool](https://www.parasail.network/delegate/fluence), powered by the re-staking protocol [Parasail](https://www.parasail.network).
+
+:::
+
+## Documentation structure
+
+If you haven't started your journey with with Fluence yet, read the introductory part first:
+
+- [**Learn Fluence Key Concepts for Stakers**](#fluence-key-concepts-for-stakers): Understand the basics of the Fluence Network, the role of stakers, and the nature of rewards they earn.
+- [**Prepare Your Wallet**](./wallets_guide/wallets_guide.md): Learn how to prepare your crypto wallet for interacting with Fluence.
+
+Once you're familiar with the essentials, follow these steps:
+
+- [**Bridge Your Funds to Fluence**](./bridge_guide/bridge_guide.md): Learn how to transfer your FLT and USDC tokens from Ethereum to the Fluence network using the [Fluence Bridge App](https://bridge.fluence.network).
+- [**Obtain a Fluence NFT**](./nft_guide/nft_guide.md): Understand how to obtain or to sell a Fluence NFT, which enables access to staking, from the official Fluence [NFT Marketplace](https://nft.fluence.network/).
+- **Choose Your Staking Method**: Select based on your deposit size and desired level of involvement in the network:
+  - [**The Fluence Staking App**](./staking_app_guide/staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn how to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
+  - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with re-staking protocol [Parasail](https://www.parasail.network).
+
+Each section of this documentation provides detailed information and step-by-step instructions to guide you through your staking journey on the Fluence Network.
 
 ## Fluence key concepts for stakers
 
@@ -39,15 +54,28 @@ If you want to learn more about Fluence Network, please visit the [Learn](../lea
 
 ### The Fluence Network
 
-Fluence is a decentralized computing marketplace powered by blockchain economics.
+Fluence is a decentralized compute marketplace powered by blockchain economics. The network operates through several key components and processes:
 
-The Fluence Network utilizes the Proof of Capacity (PoC) mechanism to ensure that compute providers can deliver the computational capacity they committed to the Marketplace. Providers define their compute resources as compute Units (CUs), each CU consisting of 1 core, 4 GB of RAM, and an additional storage space.
+1. **Compute Providers and Capacity**: Data centers, also known as compute providers, commit hardware resources (compute capacity) to the Fluence compute marketplace. This capacity is then available for developers to rent.
 
-To demonstrate continuous readiness to provide computing power for user applications, CUs send cryptographic proofs (PoC) to the blockchain. In each epoch (24 hours) of capacity provisioned but not utilized by user applications, submitted proofs determine the reward paid in FLT tokens.
+   - When customers rent the committed capacity, providers are paid in USDC.
+   - If the hardware remains idle but ready for immediate use, providers become eligible for FLT rewards.
+
+2. **Proof of Capacity (PoC) Mechanism**: The Fluence Network uses PoC to ensure compute providers can deliver their committed computational capacity to the Marketplace. Providers define their resources as compute Units (CUs), with each CU consisting of:
+
+   - 1 core
+   - 4 GB of RAM
+   - Additional storage space
+
+3. **Continuous Readiness and Rewards**: To demonstrate ongoing readiness to serve user applications, CUs send cryptographic proofs (PoC) to the blockchain. For each 24-hour epoch where capacity is provisioned but not utilized by user applications, these submitted proofs determine the reward paid in FLT tokens.
+
+4. **Stakers**: Stakers provide FLT token collateral to activate providers' compute on Fluence e and ensure network reliability. They earn FLT rewards for their role in maintaining the network's security and decentralization.
+
+This system ensures a robust, decentralized marketplace where compute resources are efficiently allocated and providers are incentivized to maintain readiness, whether their resources are actively used or standing by for immediate deployment.
 
 ### The incentivization layer
 
-A collateral must be staked to allow the provision of providers' compute on Fluence and incentivize them to act honestly. If anyone acts dishonestly—for example, if Compute Units fail to submit capacity proofs — this collateral is partially slashed.
+A collateral must be staked to allow the provision of providers' compute on Fluence and incentivize them to act wisely. If anyone acts dishonestly—for example, if Compute Units fail to submit capacity proofs — this collateral is partially slashed.
 
 This mechanism involves two parties: the **Compute Provider** with compute power, who earns from proof submission and renting compute power through the Marketplace, and the **Staker**, who earns rewards from providing the collateral. Only staked CUs are considered active in the Marketplace, which is a prerequisite for participating in the reward and user computing programs.
 
@@ -55,11 +83,11 @@ It's in both parties' interests to act wisely. The compute Provider puts their r
 
 ### Capacity commitments
 
-A Capacity Commitment is a formal declaration by a provider stating their intention to offer a specific amount of computing capacity to the Fluence network for a set period. This commitment is made for each Compute Peer (physical server) that a provider wants to commit to the Fluence network.
+A Capacity Commitment is a formal declaration by a provider to offer a specific amount of compute capacity to the Fluence network for a set period. This commitment is made for each Compute Peer (physical server) that a provider wants to commit to the Fluence network.
 
-Each CC has its characteristics, most of which are defined by the Provider during registration and some by the Network.
+Each CC has its parameters, the ones important for stakers are:
 
-**CC parameters set by Provider:**
+**CC parameters set by a Provider:**
 
 - **Duration:** The period during which the staked collateral is held—generally, longer durations yield higher rewards for stakers.
 - **Staking rate:** The share of rewards allocated to the staker—providers set this rate, but it's in the staker's interest to choose CCs with higher rates.
@@ -67,7 +95,7 @@ Each CC has its characteristics, most of which are defined by the Provider durin
 
 **CC parameters set by the Network:**
 
-- **Collateral:** The FLT tokens amount required to activate a Capacity Commitment (CC), calculated as: `collateralPerUnit` \* `UnitCount.`
+- **Collateral:** The FLT tokens amount required to activate a Capacity Commitment (CC), calculated as: `collateralPerUnit` \* `UnitCount`.
 
 :::info[**Important numbers**]
 
@@ -78,7 +106,7 @@ Once a Capacity Commitment (CC) is chosen and staked, the Compute Peer tied to i
 
 ### Staker rewards
 
-#### Rewards for Capacity Commitment proofs
+#### Rewards from Capacity Commitment Proofs
 
 :::info[**Important numbers**]
 
@@ -90,19 +118,18 @@ As previously explained, the collateral for the **Capacity Commitment** acts as 
 
 At the end of each epoch, the smart contract tallies the number of correct proofs submitted by a **Compute Unit**. If a CU meets or exceeds the required number of correct proofs, it receives rewards. However, if a CU fails to submit enough proofs in an epoch, it's penalized by having a portion of its collateral slashed.
 
-The reward for a Compute Unit in an epoch fluctuates around the target value. It's determined by the proportion of correct proofs submitted by the CU relative to the total number of correct proofs submitted in that epoch. This algorithm ensures that the rewards pool stays close to the target value in FLT, making smooth adjustments when necessary.
+The reward for a Compute Unit in an epoch fluctuates around the target value. It's determined by the proportion of correct proofs submitted by the CU relative to the total number of correct proofs submitted by all providers in that epoch. This algorithm ensures that the rewards pool stays close to the target value in FLT, making smooth adjustments when necessary.
 
 _The rewards earned by a CU for submitting proofs are shared between the compute provider and the staker. This division is determined by the staking rate outlined in the Capacity Commitment terms set by the compute Provider created it._
 
-#### Rewards for Deals
+#### Rewards from Deals
 
-An active Capacity Commitment, in which Compute Units submit proofs that they're ready to serve users' workloads, can be rented and participate in **Deals** created by users. A Deal published by a developer specifies the required number of CUs to participate in the Deal.
+An active Capacity Commitment, in which Compute Units submit proofs that they're ready to serve users' workloads, can be rented by users (developers). Users publish their own offer, specifying their compute requirements and the price they're willing to pay.
+The Compute Marketplace's smart contract automatically matches offers from providers and developers and verifies that both parties' requirements are met. As a result, a **Deal** is created. CUs then transition from the **Capacity Commitment Proofs submission** move to the **Deal** service mode.
 
-The compute marketplace smart contract automatically matches the **Deal** with providers whose capacity meets the specified conditions. CUs then transition from the **Capacity Commitment Proofs submission** mode to the **Deal** service mode.
+For the time spent computing resources in a Deal, CC's Staker **continues to earn rewards in FLT** in the same amount as in the Capacity Commitment Proofs mode.
 
-For the time spent computing resources in a Deal, CC's Staker **continues to earn rewards in FLT** - the target revenue of CUs in Capacity Commitment proofs submission mode in FLT equivalent, multiplied by the staking rate.
-
-This arrangement ensures that _stakers' rewards generate stable and predictable revenue_, making staking as risk-free as possible.
+This arrangement ensures that _stakers' rewards generate stable and predictable revenue_.
 
 #### Vesting
 
@@ -116,14 +143,14 @@ This arrangement ensures that _stakers' rewards generate stable and predictable 
 
 **FLT** rewards earned each epoch are unlocked (vested) over time to encourage long-term commitment to the Network and consistent value contribution.
 
-Rewards unlocked proportionally every epoch (24 hours). Each unlock releases a fraction of the rewards earned in that period. This process continues for six months with a daily unlock of 1/182 total rewards.
+Rewards unlock proportionally every epoch (24 hours) at a daily unlock amount of 1/182 of vested rewards for the six months period.
 
 Let's break this down with a simple example:
 
 1. In the 5th epoch, you earn 182 FLT.
 2. Starting from this moment, for the next 182 days (about 6 months):
 
-   - Every day (which is one epoch), 1 FLT from this reward becomes available for you to use.
+   - Every day (which is one epoch), 1 FLT (1/182) from this reward becomes available.
    - This continues until all 182 FLT are unlocked.
 
 3. Now, let's say in the 6th epoch, you earn another 182 FLT.
@@ -156,6 +183,19 @@ The formula that determines how much collateral will be slashed in total:
 
 If the total slashed FLT amount exceeds the allowed threshold, the CC is marked as `FAILED`, and the Peer is removed from the Network, preventing further collateral slashing. Withdrawal of slashed collateral has a lock-in period of 30 days.
 
+:::note
+
+If a Capacity Commitment (CC) **fails**:
+
+1. The accumulation of new rewards ceases.
+2. The vesting process for existing rewards is halted.
+3. All rewards that have completed vesting up to the failure epoch remain available for withdrawal.
+4. Any rewards still in the vesting process at the time of failure become permanently locked and cannot be withdrawn.
+
+In essence, you retain access to fully vested rewards but forfeit any partially vested amounts when a CC fails.
+
+:::
+
 ### Conclusion
 
-Now you're familiar with all the essentials for stakers and is ready to stake your money effectively, earn rewards and become a part of the DePIN world.
+Now you're familiar with all the essentials for stakers and ready to stake your FLT effectively, earn rewards and become a part of the DePIN movement.
