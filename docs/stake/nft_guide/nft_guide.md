@@ -1,38 +1,41 @@
-# Fluence NFT Marketplace User documentation
+# Fluence NFT Marketplace User Guide
 
 ## About Fluence NFT Collection
 
-Anyone with sufficient FLT tokens can stake on the Fluence network and join us in our mission to enable decentralized computing worldwide. Access to staking is enabled by Fluence NFTs, which were initially distributed to the winners of the first [FLT Stake Race](https://race.fluence.network/) last month.
-To participate, you must first purchase an NFT from the newly launched [NFT Marketplace](https://nft.fluence.network/), where existing NFT holders can list their NFTs for sale.
+Fluence NFTs are your gateway to staking on the Fluence Network, enabling FLT token holders to participate in our mission of global decentralized computing. These NFTs were initially distributed to winners of the first [FLT Stake Race](https://race.fluence.network/), with more to be released in future campaigns.
+To participate in staking, you must either have been granted an NFT or purchased one from the newly launched [NFT Marketplace](https://nft.fluence.network/), where current NFT holders can list their tokens for sale.
 
-Once you have purchased your NFT, you can start staking FLT Tokens by going to the [Fluence Staking App](https://stake.fluence.network/), where you'll see a list of all available Capacity Commitments.
-
-If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers).
+If you are unfamiliar with the Fluence Network, Capacity Commitments and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers).
 
 :::note
 
-Additional NFTs will be released to the upcoming second Stake Race campaign winners.
+Additional NFTs will be released to the winners of the next Stake Race campaign.
 
 :::
 
-This guide will walk you through using the Fluence NFT Marketplace, where you can buy, sell, or transfer NFTs on the Fluence Network. We'll start with an overview of the Marketplace interface. Then, we'll provide step-by-step instructions on how to buy a Fluence NFT and what to do with it once you own it, including how to sell or transfer it.
+This guide will walk you through the Fluence NFT Marketplace, covering:
+
+- An overview of the Marketplace interface
+- Step-by-step instructions for buying an NFT
+- Procedures for selling or transferring an NFT if you're already an owner
+
+Whether you're looking to enter the Fluence ecosystem or manage your existing NFTs, this guide will provide you with the necessary information to navigate the Marketplace effectively.
 
 ### Prepare Your Wallet
 
-Before diving into the Marketplace, it's crucial to set up a compatible crypto wallet. Ensure your wallet meets the following criteria to interact with the Fluence Web Applications:
+Before using the Marketplace, it's essential to properly set up your crypto wallet for the Fluence Network. This preparation is crucial for interacting with all Fluence Web Applications. Your wallet should meet the following criteria:
 
-1. Your wallet is compatible with Fluence authentication methods.
-2. You've added the Fluence network to your wallet's list of networks.
-3. You've imported the FLT token, and it's visible in your wallet's token list.
-4. You have FLT tokens _on the Fluence Network_. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official [Bridge](https://bridge.fluence.network/bridge/fluence). Read more on using the bridge in the official [documentation](../bridge_guide/bridge_guide.md).
+1. The Fluence Network is added to your wallet's list of networks.
+2. The FLT token is imported and visible in your wallet's token list.
+3. You have FLT tokens _on the Fluence Network_. Since Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official [Bridge](https://bridge.fluence.network/bridge/fluence).
 
 :::tip
 
-Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
+For detailed instructions on wallet setup and token bridging, please refer to our comprehensive [Wallet Guide](../wallets_guide/wallets_guide.md) and [Bridge Guide](../bridge_guide/bridge_guide.md).
 
 :::
 
-With your wallet configured and connected to the Fluence NFT Marketplace, you can now buy or sell Fluence NFTs.
+Only after your wallet is properly configured and connected to the Fluence Network can you interact with the Fluence NFT Marketplace to buy or sell Fluence NFTs.
 
 ## The Marketplace interface overview
 
@@ -100,7 +103,7 @@ You can buy an NFT from the Fluence NFT Collections in a few simple steps:
 
     </div>
 
-2.  Click on the NFT card you want to purchase and press the “Buy NFT " button.
+2.  Click on the card of the NFT you want to purchase and press the **“Buy NFT"** button.
 
     <div style={{ textAlign: "center" }}>
 
@@ -142,7 +145,7 @@ You can buy an NFT from the Fluence NFT Collections in a few simple steps:
 
     </div>
 
-5.  Now you can stake for Capacity Commitments with the NFT you’ve purchased or keep it until you want to sell it or transfer it to someone
+5.  Now you can stake for Capacity Commitments with the NFT you’ve purchased or keep it until you want to sell or transfer it.
 
 ## How to Sell or Transfer an NFT
 
@@ -194,7 +197,7 @@ You can transfer your NFT regardless of its sale status. For that, open the NFT 
 
      </div>
 
-**Note:** NFTs are sold and transferred on the Fluence Network. For the recipient to see the NFT in their wallet, the Fluence Network should be added first. Read more on preparing the wallet to work with Fluence Network in the corresponding [guide](../wallets_guide/wallets_guide.md).
+**Note:** NFTs are sold and transferred on the Fluence Network. To be able to view the NFT in their wallet, the recipient must first add the Fluence Network. Read more on preparing the wallet to work with Fluence Network in the corresponding [guide](../wallets_guide/wallets_guide.md).
 
 ### Set NFT for sale
 
