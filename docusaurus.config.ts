@@ -87,7 +87,7 @@ const config: Config = {
       title: "Fluence",
       logo: {
         alt: "Fluence Logo",
-        src: "img/android-chrome-512x512.png",
+        src: "img/logo_badge_black.svg",
       },
       items: [
         {
