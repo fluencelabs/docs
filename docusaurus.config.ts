@@ -150,6 +150,10 @@ const config: Config = {
               label: "Marine Book",
               to: "/docs/marine-book/introduction",
             },
+            {
+              label: "Stake",
+              to: "/docs/stake/overview",
+            },
           ],
         },
         {
