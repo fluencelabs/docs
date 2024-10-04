@@ -8,7 +8,7 @@ For that, you will use the Fluence Staking Application, a web application provid
 First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
 Then you will find a step-by-step guide on how to join the Fluence Network and stake your first Capacity Commitment.
 
-If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehesively.
+If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehensively.
 
 :::note
 Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence Network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
@@ -115,7 +115,7 @@ For logged-in users, the panel displays a button to withdraw all available rewar
 
 :::
 
-### Available for Staking section
+### Available for the Staking section
 
 In this section, you'll find the list of Capacity Commitments available for staking.
 

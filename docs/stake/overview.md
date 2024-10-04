@@ -22,14 +22,14 @@ The flow presented is a general overview of the staking process for **a token ho
 
 The staker's path diverges at the final step - the method of staking - depending on the deposit size:
 
-- For deposits of $12,000 USD or more in FLT equivalent: Stake directly using the official [Staking App](https://staking.fluence.network/).
+- For deposits of USD 12,000 or more in FLT equivalent: Stake directly using the official [Staking App](https://staking.fluence.network/).
 - For smaller deposits: Join the [Staking Pool](https://www.parasail.network/delegate/fluence), powered by the re-staking protocol [Parasail](https://www.parasail.network).
 
 :::
 
 ## Documentation structure
 
-If you haven't started your journey with with Fluence yet, read the introductory part first:
+If you haven't started your journey with Fluence yet, read the introductory part first:
 
 - [**Learn Fluence Key Concepts for Stakers**](#fluence-key-concepts-for-stakers): Understand the basics of the Fluence Network, the role of stakers, and the nature of rewards they earn.
 - [**Prepare Your Wallet**](./wallets_guide/wallets_guide.md): Learn how to prepare your crypto wallet for interacting with Fluence.
@@ -39,8 +39,8 @@ Once you're familiar with the essentials, follow these steps:
 - [**Bridge Your Funds to Fluence**](./bridge_guide/bridge_guide.md): Learn how to transfer your FLT and USDC tokens from Ethereum to the Fluence network using the [Fluence Bridge App](https://bridge.fluence.network).
 - [**Obtain a Fluence NFT**](./nft_guide/nft_guide.md): Understand how to obtain or to sell a Fluence NFT, which enables access to staking, from the official Fluence [NFT Marketplace](https://nft.fluence.network/).
 - **Choose Your Staking Method**: Select based on your deposit size and desired level of involvement in the network:
-  - [**The Fluence Staking App**](./staking_app_guide/staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn how to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
-  - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with re-staking protocol [Parasail](https://www.parasail.network).
+  - [**The Fluence Staking App**](./staking_app_guide/staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
+  - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with the re-staking protocol [Parasail](https://www.parasail.network).
 
 Each section of this documentation provides detailed information and step-by-step instructions to guide you through your staking journey on the Fluence Network.
 
@@ -75,7 +75,7 @@ This system ensures a robust, decentralized marketplace where compute resources 
 
 ### The incentivization layer
 
-A collateral must be staked to allow the provision of providers' compute on Fluence and incentivize them to act wisely. If anyone acts dishonestly—for example, if Compute Units fail to submit capacity proofs — this collateral is partially slashed.
+Collateral must be staked to allow the provision of providers' compute on Fluence and incentivize them to act wisely. If anyone acts dishonestly—for example, if Compute Units fail to submit capacity proofs — this collateral is partially slashed.
 
 This mechanism involves two parties: the **Compute Provider** with compute power, who earns from proof submission and renting compute power through the Marketplace, and the **Staker**, who earns rewards from providing the collateral. Only staked CUs are considered active in the Marketplace, which is a prerequisite for participating in the reward and user computing programs.
 
@@ -120,12 +120,12 @@ At the end of each epoch, the smart contract tallies the number of correct proof
 
 The reward for a Compute Unit in an epoch fluctuates around the target value. It's determined by the proportion of correct proofs submitted by the CU relative to the total number of correct proofs submitted by all providers in that epoch. This algorithm ensures that the rewards pool stays close to the target value in FLT, making smooth adjustments when necessary.
 
-_The rewards earned by a CU for submitting proofs are shared between the compute provider and the staker. This division is determined by the staking rate outlined in the Capacity Commitment terms set by the compute Provider created it._
+_The rewards earned by a CU for submitting proofs are shared between the compute provider and the staker. This division is determined by the staking rate outlined in the Capacity Commitment terms set by the compute Provider who created it._
 
 #### Rewards from Deals
 
-An active Capacity Commitment, in which Compute Units submit proofs that they're ready to serve users' workloads, can be rented by users (developers). Users publish their own offer, specifying their compute requirements and the price they're willing to pay.
-The Compute Marketplace's smart contract automatically matches offers from providers and developers and verifies that both parties' requirements are met. As a result, a **Deal** is created. CUs then transition from the **Capacity Commitment Proofs submission** move to the **Deal** service mode.
+An active Capacity Commitment, in which Compute Units submit proofs that they're ready to serve users' workloads, can be rented by users (developers). Users publish their offer, specifying their compute requirements and the price they're willing to pay.
+The Compute Marketplace's smart contract automatically matches offers from providers and developers and verifies that both parties' requirements are met. As a result, a **Deal** is created. CUs then transition from the **Capacity Commitment Proofs submission** to the **Deal** service mode.
 
 For the time spent computing resources in a Deal, CC's Staker **continues to earn rewards in FLT** in the same amount as in the Capacity Commitment Proofs mode.
 

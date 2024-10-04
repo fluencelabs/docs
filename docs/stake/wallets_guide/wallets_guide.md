@@ -30,7 +30,7 @@ Fluence authentication supports various wallet options through either direct app
 
 #### Direct Connection Options
 
-The following wallets application are available to connect to Fluence services directly:
+The following wallet applications are available to connect to Fluence services directly:
 
 - Metamask
 - Rainbow

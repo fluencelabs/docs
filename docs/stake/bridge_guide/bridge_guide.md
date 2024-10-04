@@ -3,7 +3,7 @@
 ## Introduction
 
 Fluence is a Layer 2 (L2) network bridging to Ethereum. To participate in the Fluence Network, you must first transfer your funds from Ethereum to the Fluence Network, which is done with the Fluence blockchain Bridge Application.
-This guide will walk you through using the Application and showing you how to move your assets between Ethereum and Fluence.
+This guide will walk you through using the Application and show you how to move your assets between Ethereum and Fluence.
 
 ### Key concepts
 
@@ -21,7 +21,7 @@ The transfer times vary for deposit and withdrawal operations:
 
 Currently, the Fluence Bridge supports two types of ERC20 tokens:
 
-1. **FLT (Fluence Token)**: The primary Fluence token, used to reward Providers and Stakers for Capacity Commitment Proofs and for gas payments in the Fluence Network.
+1. **FLT (Fluence Token)**: The primary Fluence token, used to reward Providers and Stakers for Capacity Commitment Proofs and gas payments in the Fluence Network.
 2. **USDC (USD Coin)**: Used as a payment token for renting compute resources from Compute Providers by users.
 
 ### Fee Structure for Cross-Chain Transfers
@@ -147,10 +147,11 @@ To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
       />
         </div>
 
-7.  If the token bridging transaction is successful, you will be redirected to the Bridge application, and the success message will be displayed. This window contains two critical links:
+7.  After the transaction is processed, you'll be redirected to the Bridge application, where you'll see a status message:
 
-    - One to the L1 bridge transaction info on [Etherscan](https://etherscan.io/).
-    - The other to L2 network transaction info on [Blockscanner](https://blockscout.mainnet.fluence.dev/), the Fluence network block scanner.
+    - For successful transactions, you'll receive two important links:
+      1.  A link to the L1 bridge transaction details on [Etherscan](https://etherscan.io/).
+      2.  A link to the L2 network transaction details on [Blockscout](https://blockscout.mainnet.fluence.dev/), the Fluence network block explorer.
 
     <div style={{ textAlign: "center" }}>
         <img
@@ -168,7 +169,7 @@ To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
 
         :::
 
-8.  Once your tokens are bridged to the Fluence network, the token transfer transaction can be viewed on Blockscout. Simply enter your wallet address in the placeholder at the end of this url: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`
+8.  Once your tokens are bridged to the Fluence network, the token transfer transaction can be viewed on Blockscout. Simply enter your wallet address in the placeholder at the end of this URL: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`
 
     <div style={{ textAlign: "center" }}>
         <img
@@ -193,6 +194,12 @@ To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
     </div>
 
 Congratulations! You successfully and safely bridged your FLT tokens from the Ethereum Mainnet to the Fluence Mainnet network. Now, you can freely use your funds and stake your FLTs!
+
+:::tip
+
+If you encounter any issues while depositing or withdrawing tokens through the Bridge, please reach out for assistance. You can submit a support ticket through our official [Discord channel](https://discord.com/invite/5qSnPZKh7u), where our Fluence Customer Support team will help you resolve any problems.
+
+:::
 
 ### Withdrawing Tokens (Fluence to Ethereum)
 
