@@ -87,7 +87,7 @@ const config: Config = {
       title: "Fluence",
       logo: {
         alt: "Fluence Logo",
-        src: "img/logo.svg",
+        src: "img/logo_badge_black.svg",
       },
       items: [
         {
@@ -113,6 +113,12 @@ const config: Config = {
           position: "left",
           docId: "marine-book/introduction",
           label: "Marine Book",
+        },
+        {
+          type: "doc",
+          position: "left",
+          docId: "stake/overview",
+          label: "Stake",
         },
         // { to: "/blog", label: "Blog", position: "left" },
         {
@@ -143,6 +149,10 @@ const config: Config = {
             {
               label: "Marine Book",
               to: "/docs/marine-book/introduction",
+            },
+            {
+              label: "Stake",
+              to: "/docs/stake/overview",
             },
           ],
         },

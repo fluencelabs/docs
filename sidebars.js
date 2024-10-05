@@ -4,7 +4,7 @@
 const sidebars = {
   learn: [
     "learn/overview",
-    "learn/how-it-works",
+    "learn/how-it-works/how-it-works",
     "learn/why-fluence",
     "learn/fluence-comparison",
     "learn/use-cases",
@@ -41,7 +41,7 @@ const sidebars = {
       label: "Setting Up",
       collapsible: true,
       collapsed: true,
-      link: { id: "build/setting-up/setting_up", type: "doc" },
+      link: { id: "build/setting-up/setting-up/setting-up", type: "doc" },
       items: [
         "build/setting-up/installing_cli",
         "build/setting-up/set-up-development-env",
@@ -122,6 +122,7 @@ const sidebars = {
     "build/glossary",
     // "build/references",
   ],
+
   "aqua-book": [
     "aqua-book/introduction",
     {
@@ -295,6 +296,19 @@ const sidebars = {
       ],
     },
     "marine-book/changelog",
+  ],
+  stake: [
+    "stake/overview",
+    "stake/wallets_guide/wallets_guide",
+    "stake/bridge_guide/bridge_guide",
+    "stake/nft_guide/nft_guide",
+    "stake/staking_app_guide/staking_app_guide",
+    // {
+    //   type: "category",
+    //   label: "Wallets guide",
+    //   link: { id: "stake/wallets_guide/wallets_guide", type: "doc" },
+    //   items: [],
+    // },
   ],
 };
 
