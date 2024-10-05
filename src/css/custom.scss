@@ -62,11 +62,11 @@
 
 .mermaid {
   [data-theme="light"] & {
-    filter: hue-rotate(100deg) saturate(5) contrast(1.1);
+    filter: grayscale(100%) contrast(1.1);
   }
 
   [data-theme="dark"] & {
-    filter: invert(1) brightness(5) hue-rotate(276deg);
+    filter: invert(1) grayscale(100%) contrast(0.8);
   }
 }
 
@@ -77,7 +77,12 @@
 article img {
   display: block;
   margin: auto;
-  max-width: 80%;
+}
+
+@media (min-width: 577px) {
+  article img {
+    max-width: 80%;
+  }
 }
 
 article p:has(img) {
@@ -89,5 +94,14 @@ article li img {
 }
 
 article li p:has(img) {
-  text-align: left;
+  text-align: inherit;
+}
+
+article a {
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.navbar__link--active {
+  background-color: var(--ifm-menu-color-background-active);
+  border-radius: 0.25rem;
 }

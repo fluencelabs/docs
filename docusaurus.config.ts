@@ -45,10 +45,6 @@ const config: Config = {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/fluencelabs/docs/tree/main",
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: "https://github.com/fluencelabs/docs/tree/main",
-        },
         theme: {
           customCss: require.resolve("./src/css/custom.scss"),
         },
@@ -120,7 +116,6 @@ const config: Config = {
           docId: "stake/overview",
           label: "Stake",
         },
-        // { to: "/blog", label: "Blog", position: "left" },
         {
           href: "https://github.com/fluencelabs",
           label: "GitHub",
@@ -180,10 +175,6 @@ const config: Config = {
         {
           title: "More",
           items: [
-            // {
-            //   label: "Blog",
-            //   to: "/blog",
-            // },
             {
               label: "GitHub",
               href: "https://github.com/fluencelabs",
