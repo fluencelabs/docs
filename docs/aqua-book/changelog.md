@@ -10,16 +10,16 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 ### [0.14.7](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.7) - May 14, 2024
 
 
-* **compiler:** Allow declaring imported functions. See [Functions](./language/expressions/functions.md) and [Headers](./language/header/header.md). ([LNG-357](https://linear.app/fluence/issue/LNG-357)) ([#1127](https://github.com/fluencelabs/aqua/issues/1127))
-* **compiler:** Allow declaring imported services and abilities. See [Abilities](./language/abilities.md), [Services](./language/services.md) and [Headers](./language/header/header.md). ([LNG-360](https://linear.app/fluence/issue/LNG-360)) ([#1135](https://github.com/fluencelabs/aqua/issues/1135))
-* FIX: **lsp:** Correct go-to-definition in VSCode for used types. See [`use`](./language/header/header.md) and [VSCE](./getting-started/installation/installation.md). ([LNG-345](https://linear.app/fluence/issue/LNG-345)) ([#1128](https://github.com/fluencelabs/aqua/issues/1128))
+* **compiler:** Allow declaring imported functions. See [Functions](./language/expressions/functions.md) and [Headers](./language//expressions/header.md). ([LNG-357](https://linear.app/fluence/issue/LNG-357)) ([#1127](https://github.com/fluencelabs/aqua/issues/1127))
+* **compiler:** Allow declaring imported services and abilities. See [Abilities](./language/abilities.md), [Services](./language/services.md) and [Headers](./language/expressions/header.md). ([LNG-360](https://linear.app/fluence/issue/LNG-360)) ([#1135](https://github.com/fluencelabs/aqua/issues/1135))
+* FIX: **lsp:** Correct go-to-definition in VSCode for used types. See [`use`](./language/expressions/header.md) and [VSCE](./getting-started/installation/installation.md). ([LNG-345](https://linear.app/fluence/issue/LNG-345)) ([#1128](https://github.com/fluencelabs/aqua/issues/1128))
 * FIX: **lsp:** Fix OOM in VSCode on big projects. See [VSCE](./getting-started/installation/installation.md). ([#1134](https://github.com/fluencelabs/aqua/issues/1134))
 
 ### [0.14.6](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.6) - April 18, 2024
 
-* FIX: **parser**: Allow whitespace after `aqua` header. See [Headers](./language/header/header.md). ([#1112](https://github.com/fluencelabs/aqua/issues/1112))
+* FIX: **parser**: Allow whitespace after `aqua` header. See [Headers](./language/expressions/header.md). ([#1112](https://github.com/fluencelabs/aqua/issues/1112))
 * FIX: **compiler:** Catch all errors in `?[...]`. See [Collections](./language/values.md#collections). ([LNG-351](https://linear.app/fluence/issue/LNG-351) ([#1114](https://github.com/fluencelabs/aqua/issues/1114))
-* FIX: **compiler:** Allow declaring imported symbols. See [Headers](./language/header/header.md). ([LNG-344](https://linear.app/fluence/issue/LNG-344)) ([#1109](https://github.com/fluencelabs/aqua/issues/1109))
+* FIX: **compiler:** Allow declaring imported symbols. See [Headers](./language/expressions/header.md). ([LNG-344](https://linear.app/fluence/issue/LNG-344)) ([#1109](https://github.com/fluencelabs/aqua/issues/1109))
 * FIX: **compiler:** Refactor header semantics. ([LNG-352](https://linear.app/fluence/issue/LNG-352)) ([#1113](https://github.com/fluencelabs/aqua/issues/1113))
 * FIX: **compiler:** Show correct error in VSCode if exported function compiled with error. See [VSCE](./getting-started/installation/installation.md). ([LNG-356](https://linear.app/fluence/issue/LNG-356)) ([#1126](https://github.com/fluencelabs/aqua/issues/1126))
 * FIX: **lsp:** Correct go-to-definition for abilities as arguments in functions. See [Abilities](./language/abilities.md) and [VSCE](./getting-started/installation/installation.md). ([LNG-343](https://linear.app/fluence/issue/LNG-343)) ([#1116](https://github.com/fluencelabs/aqua/issues/1116))
@@ -32,7 +32,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 ### [0.14.4](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.4) - March 1, 2024
 
 * FIX: **compiler:** Correctly rename symbols in arrows during inlining. ([LNG-346](https://linear.app/fluence/issue/LNG-346)) ([#1094](https://github.com/fluencelabs/aqua/issues/1094))
-* FIX: **compiler:** Fix importing abilities with `use`. See [Abilities](./language/abilities.md) and [Headers](./language/header/header.md). ([LNG-324](https://linear.app/fluence/issue/LNG-324)) ([#1077](https://github.com/fluencelabs/aqua/issues/1077))
+* FIX: **compiler:** Fix importing abilities with `use`. See [Abilities](./language/abilities.md) and [Headers](./language/expressions/header.md). ([LNG-324](https://linear.app/fluence/issue/LNG-324)) ([#1077](https://github.com/fluencelabs/aqua/issues/1077))
 
 ### [0.14.3](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.3) - February 29, 2024
 
@@ -52,7 +52,7 @@ Aqua compiler's versioning scheme is the following: `0.BREAKING.ENHANCING.RELEAS
 
 ### [0.14.0](https://github.com/fluencelabs/aqua/releases/tag/aqua-v0.14.0) - January 30, 2024
 
-* BREAKING CHANGE: **compiler:** Force `aqua` header for all aqua files. See [Header](./language/header/header.md). ([LNG-308](https://linear.app/fluence/issue/LNG-308)) ([#1028](https://github.com/fluencelabs/aqua/issues/1028))
+* BREAKING CHANGE: **compiler:** Force `aqua` header for all aqua files. See [Header](./language/expressions/header.md). ([LNG-308](https://linear.app/fluence/issue/LNG-308)) ([#1028](https://github.com/fluencelabs/aqua/issues/1028))
 * FIX: **compiler:** Correctly rename stream captured by closure. See [Streams](./language/crdt-streams.md) and [Closures](./language/closures.md). ([LNG-325](https://linear.app/fluence/issue/LNG-325)) ([#1055](https://github.com/fluencelabs/aqua/issues/1055))
 * PERFORMANCE: **compiler:** Optimize `Inliner` ([LNG-322](https://linear.app/fluence/issue/LNG-322)) ([#1047](https://github.com/fluencelabs/aqua/issues/1047))
 * PERFORMANCE: **compiler:** Optimize `Linker` ([LNG-321](https://linear.app/fluence/issue/LNG-321)) ([#1049](https://github.com/fluencelabs/aqua/issues/1049))

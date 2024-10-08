@@ -40,6 +40,22 @@
   }
 }
 
+.footer__link-item:hover {
+  color: inherit;
+}
+
+.table-of-contents__link:hover {
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.table-of-contents__link--active {
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.table-of-contents__link--active:hover {
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
 .shiki {
   visibility: hidden;
 
@@ -62,11 +78,11 @@
 
 .mermaid {
   [data-theme="light"] & {
-    filter: hue-rotate(100deg) saturate(5) contrast(1.1);
+    filter: grayscale(100%) contrast(1.1);
   }
 
   [data-theme="dark"] & {
-    filter: invert(1) brightness(5) hue-rotate(276deg);
+    filter: invert(1) grayscale(100%) contrast(0.8);
   }
 }
 
@@ -74,20 +90,34 @@
   max-height: 60vh;
 }
 
-article img {
+.markdown img {
   display: block;
   margin: auto;
-  max-width: 80%;
 }
 
-article p:has(img) {
+@media (min-width: 577px) {
+  .markdown img {
+    max-width: 80%;
+  }
+}
+
+.markdown p:has(img) {
   text-align: center;
 }
 
-article li img {
+.markdown li img {
   margin: 1rem 0 0 0;
 }
 
-article li p:has(img) {
-  text-align: left;
+.markdown li p:has(img) {
+  text-align: inherit;
+}
+
+.markdown a {
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.navbar__link--active {
+  background-color: var(--ifm-menu-color-background-active);
+  border-radius: 0.25rem;
 }
