@@ -6,7 +6,7 @@ As a decentralized project, self-custody over your wallet is a critical requirem
 
 To address these concerns while still providing you with the self-custodial powers, our registration and login system uses the [Web3Auth](https://web3auth.io/docs/how-web3auth-works) solution, which works as follows: after you register through **Fluence Console**, a unique (wallet) address is generated and only you have access to the private key. However, the private key is securely stored in parts on Web3Auth's [MPC](https://web3auth.io/docs/features/mpc) (Multi-Party Computation) network.  As a result, you have a self-custodial wallet that eliminates catastrophic (loss) failures commonly encountered with traditional, self-managed and seed-based wallets.
 
-Of course, Fluence Console only has access to your wallets public key.
+Of course, Fluence Console only has access to your wallet's public key.
 
 ## Registration Process
 
