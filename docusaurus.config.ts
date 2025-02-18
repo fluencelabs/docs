@@ -1,29 +1,7 @@
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { cwd } from "process";
-
-function getFluenceLanguageConfig(langName: string) {
-  return {
-    id: langName,
-    scopeName: `source.${langName}`,
-    grammar: JSON.parse(
-      readFileSync(
-        join(
-          cwd(),
-          "node_modules",
-          "aqua-vscode",
-          "syntaxes",
-          `${langName}.tmLanguage.json`
-        ),
-        {
-          encoding: "utf-8",
-        }
-      )
-    ),
-  };
-}
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 const config: Config = {
   title: "Fluence Docs",
@@ -37,13 +15,17 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+  themes: ["@docusaurus/theme-mermaid"],
+  markdown: { mermaid: true },
   presets: [
     [
-      "classic",
+      "@docusaurus/preset-classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/fluencelabs/docs/tree/main",
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.scss"),
@@ -54,24 +36,15 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
-    [
-      "docusaurus-preset-shiki-twoslash",
-      {
-        themes: ["min-light", "min-dark"],
-        langs: [
-          "typescript",
-          "javascript",
-          "html",
-          "json",
-          "rust",
-          "shell",
-          "toml",
-          "yaml",
-          getFluenceLanguageConfig("aqua"),
-          getFluenceLanguageConfig("air"),
-        ],
-      },
-    ],
+  ],
+  stylesheets: [
+    {
+      href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      type: "text/css",
+      integrity:
+        "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
+      crossorigin: "anonymous",
+    },
   ],
   themeConfig: {
     algolia: {
@@ -89,32 +62,19 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "learn/overview",
-          label: "Learn",
-        },
-        {
-          type: "doc",
-          position: "left",
-          docId: "build/introducing_fluence",
-          label: "Build",
-        },
-        {
-          type: "doc",
-          position: "left",
-          docId: "aqua-book/introduction",
-          label: "Aqua Book",
-        },
-        {
-          type: "doc",
-          position: "left",
-          docId: "marine-book/introduction",
-          label: "Marine Book",
-        },
-        {
-          type: "doc",
-          position: "left",
           docId: "stake/overview",
           label: "Stake",
+        },
+        // {
+        //   type: "doc",
+        //   position: "left",
+        //   docId: "console/overview",
+        //   label: "Console",
+        // },
+        {
+          href: "https://fluencenetwork.notion.site/Fluence-Console-documentation-V0-1-1935b9b0bcba80e993cbe411eeeee1c9",
+          label: "Console",
+          position: "left",
         },
         {
           href: "https://github.com/fluencelabs",
@@ -130,24 +90,13 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "Learn",
-              to: "/docs/learn/overview",
-            },
-            {
-              label: "Build",
-              to: "/docs/build/introduction",
-            },
-            {
-              label: "Aqua Book",
-              to: "/docs/aqua-book/introduction",
-            },
-            {
-              label: "Marine Book",
-              to: "/docs/marine-book/introduction",
-            },
-            {
               label: "Stake",
               to: "/docs/stake/overview",
+            },
+            {
+              label: "Console",
+              // to: "/docs/console/overview",
+              to: "https://fluencenetwork.notion.site/Fluence-Console-documentation-V0-1-1935b9b0bcba80e993cbe411eeeee1c9",
             },
           ],
         },
@@ -186,20 +135,10 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Fluence Labs`,
+      copyright: `Copyright © ${new Date().getFullYear()} Cloudless Labs`,
     },
   } satisfies Preset.ThemeConfig,
   plugins: ["docusaurus-plugin-sass"],
-  scripts: [
-    {
-      src: "https://cdn.jsdelivr.net/npm/mermaid@9.4.0/dist/mermaid.min.js",
-      defer: true,
-    },
-    {
-      src: "/mermaid.js",
-      defer: true,
-    },
-  ],
 };
 
 export default config;

@@ -10,7 +10,7 @@
   overflow: hidden;
   min-height: calc(100vh - var(--ifm-navbar-height));
   background-image: radial-gradient(
-    circle, 
+    circle,
     rgb(86, 150, 216) 0%,
     rgb(64, 120, 224) 6%,
     rgb(64, 120, 224) 9%,
@@ -32,7 +32,7 @@
   border-radius: 30px;
   padding: 15px 25px;
   line-height: 1.4;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 700;
   transition: all 0.2s ease;
@@ -40,6 +40,7 @@
   padding: 16px 51px;
   &:hover {
     text-decoration: none;
+    color: #ffffff;
   }
 }
 

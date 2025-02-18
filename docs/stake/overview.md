@@ -20,10 +20,7 @@ The staker's path diverges at the final step - the method of staking - depending
 
 ## Documentation structure
 
-If you haven't started your journey with Fluence yet, read the introductory part first:
-
-- [**Learn Fluence Key Concepts for Stakers**](#fluence-key-concepts-for-stakers): Understand the basics of the Fluence Network, the role of stakers, and the nature of rewards they earn.
-- [**Prepare Your Wallet**](./wallets_guide/wallets_guide.md): Learn how to prepare your crypto wallet for interacting with Fluence.
+Learn how to prepare your crypto wallet for interacting with Fluence [**Prepare Your Wallet**](./wallets_guide/wallets_guide.md)
 
 Once you're familiar with the essentials, follow these steps:
 
@@ -34,14 +31,6 @@ Once you're familiar with the essentials, follow these steps:
   - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with the re-staking protocol [Parasail](https://www.parasail.network).
 
 Each section of this documentation provides detailed information and step-by-step instructions to guide you through your staking journey on the Fluence Network.
-
-## Fluence key concepts for stakers
-
-:::tip
-
-If you want to learn more about Fluence Network, please visit the [Learn](../learn/overview.md) section of the Fluence Docs.
-
-:::
 
 ### The Fluence Network
 
@@ -88,7 +77,7 @@ Each CC has its parameters, the ones important for stakers are:
 
 - **Collateral:** The FLT tokens amount required to activate a Capacity Commitment (CC), calculated as: `collateralPerUnit` \* `UnitCount`.
 
-:::info[**Important numbers**]
+:::info **Important numbers**
 
 Current collateral per CU: USD 200 in **FLT** **equivalent**
 :::
@@ -99,7 +88,7 @@ Once a Capacity Commitment (CC) is chosen and staked, the Compute Peer tied to i
 
 #### Rewards from Capacity Commitment Proofs
 
-:::info[**Important numbers**]
+:::info **Important numbers**
 
 Current target revenue per CU: USD 0.33 per epoch in **FLT** equivalent
 
@@ -124,7 +113,7 @@ This arrangement ensures that _stakers' rewards generate stable and predictable 
 
 #### Vesting
 
-:::info[**Important numbers**]
+:::info **Important numbers**
 
 **Duration of one vesting period:** 1 epoch (24 hours)
 
@@ -152,7 +141,7 @@ This pattern continues for each epoch where you earn rewards. It's like having m
 
 #### Slashing
 
-:::info[**Important numbers**]
+:::info **Important numbers**
 
 Currently, the **slashing rate** for one failed epoch per compute Unit is set to **0 %** for the **first month** of the Mainnet. It will be increased in the future.
 

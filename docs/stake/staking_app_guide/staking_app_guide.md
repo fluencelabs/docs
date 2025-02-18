@@ -8,8 +8,6 @@ For that, you will use the Fluence Staking Application, a web application provid
 First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
 Then you will find a step-by-step guide on how to join the Fluence Network and stake your first Capacity Commitment.
 
-If you are unfamiliar with the Fluence Network and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers). It explains the main concepts and mechanisms that are essential for understanding the staking process comprehensively.
-
 :::note
 Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence Network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
 :::
@@ -33,7 +31,7 @@ The Staking application consists of the following main parts:
 - **Available for Staking:** List of Capacity Commitments available for staking
 - **Staked Capacity Commitments:** Real-time information on the performance of active Capacity Commitments. If you are logged in, then the section will change to "**Your Capacity Commitments**"
 
-:::info[**The page layout differs for authenticated and unauthenticated users:**]
+:::info **The page layout differs for authenticated and unauthenticated users:**
 
 Depending on whether you have logged in by connecting your wallet, the list of Capacity Commitments available for staking will remain the same.
 
@@ -331,7 +329,7 @@ A staker can withdraw their collateral from a CC once it has completed or failed
 
 However, there's one crucial difference: _Failed CCs have a cooldown period_, during which stakers cannot withdraw collateral. In such cases, the withdrawal button won't appear in the interface until the cooldown period has passed.
 
-:::note[**Important numbers**]
+:::note **Important numbers**
 
 The cooldown period for withdrawing collateral from a **Failed CC** **now** is **0 epochs** - instant withdrawal is available.
 In the **future**, it will be set to **30 days**, during which stakers cannot withdraw collateral.

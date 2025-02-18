@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/docs/learn/overview",
+      "destination": "/docs/stake/overview",
       "permanent": true
     },
     {
@@ -12,6 +12,11 @@
     },
     {
       "source": "/docs/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/learn/overview",
       "destination": "/",
       "permanent": true
     }
