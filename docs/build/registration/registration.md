@@ -2,9 +2,11 @@
 
 ## Self-Custodial Wallet
 
-Smart contracts are used to rent and manage resources from the Fluence network, requiring users to use an [EVM wallet](https://blog.thirdweb.com/what-are-evm-wallets/). However, managing externally owned account (EOA) wallets, aka "regular" wallets, comes with certain limitations and pitfalls.
+As a decentralized project, self-custody over your wallet is a critical requirement for you stay in control over your data and resources. Yet, managing crypto wallets not only comes with certain limitations and pitfalls but also decouple users from well-known processes when it comes to account registration and log-ins.
 
-To address these concerns, our system uses a unique Self-Custodial Wallet based on a [solution from Web3Auth](https://web3auth.io/docs/how-web3auth-works), which operates on the [MPC](https://web3auth.io/docs/features/mpc) (Multi-Party Computation) protocol, instead of a standard EOA address. Thus, after a user registers through **Fluence Console**, a unique address is generated for them, and only the user has access to the private key. The private key is securely stored in parts within the distributed Web3Auth network and is protected by the MPC protocol. In turn, the Fluence protocol only has access to the user’s public address.
+To address these concerns while still providing you with the self-custodial powers, our registration and login system uses the [Web3Auth](https://web3auth.io/docs/how-web3auth-works) solution, which works as follows: after you register through **Fluence Console**, a unique (wallet) address is generated and only you have access to the private key. However, the private key is securely stored in parts on Web3Auth's [MPC](https://web3auth.io/docs/features/mpc) (Multi-Party Computation) network.  As a result, you have a self-custodial wallet that eliminates catastrophic (loss) failures commonly encountered with traditional, self-managed and seed-based wallets.
+
+Of course, Fluence Console only has access to your wallets public key.
 
 ## Registration Process
 
