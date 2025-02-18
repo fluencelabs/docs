@@ -6,7 +6,7 @@ Currently, there are a couple of limitations with respect renting VMs:
 
 1. A VM can only be rented for a limited period of time. This limitation is due to the implementation specifics of the verification, i.e., capacity commitment, and security, i.e., staking, protocols. The exact maximum rental period for a VM can be seen in the Fluence Console.
 
-2. When renting a VM, a prepayment amount equivalent to one day’s rent is deducted from your Balance to cover the next day’s rent. This amount is refunded to your Balance when the rental period ends, unless your available Balance amount is too low in which case the prepaid amount is used to cover that day's rent. You can check the amount of your Balance reserved as a “prepayment” on the Billing page in the Fluence Console.
+2. When renting a VM, a prepayment amount equivalent to one day’s rent is deducted from your Balance to cover the next day’s rent. This amount is refunded to your Balance when the rental period ends, unless your available Balance amount is too low in which case the prepaid amount is used to cover that day's rent. You can check the amount of your Balance reserved as a “prepayment” on the **Billing** page in the Fluence Console.
 
 :::warning
 If your Balance does not have enough funds to pay for the next day's rent, the previously deducted prepayment will be used to cover the rent. After the reserved funds are exhausted and you fail to top up o Balance in time, the VM's rental agreement will be terminated and the VM will be automatically deleted.
@@ -89,7 +89,7 @@ After selecting all the VM parameters, check and review the instance summary and
 
 ### 11. Launch the VM
 
-Click the “Launch” button to rent the VM after which you will be redirected to the Running Instances page.
+Click the “Launch” button to rent the VM after which you will be redirected to the **Running Instances** page.
 
 :::info
 Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.

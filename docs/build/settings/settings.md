@@ -4,15 +4,15 @@ Use the **Settings** page to manage your SSH and API keys and more.
 
 ## SSH Keys
 
-On **SSH keys** page, you can:
-1. Creating a new key. Currently, the following SSH key formats are supported: RSA, ECDSA, and ED25519.
-2. Deleting existing keys.
+On the **SSH keys** page, you can:
+1. Create a new key of any of the RSA, ECDSA or ED25519 format.
+2. Delete existing keys.
 
 ![SSH keys page](./assets/ssh_keys.webp)
 
 ## API Keys
 
-Instead of using the **Fluence Console**, yo cna manage your resources also through the **Public API**.
+Instead of using the **Fluence Console**, you can manage your resources also through our **Public API**.
 
 :::info
 In the first stage of the **Alpha VM testing**, you will not have access to the **Public API**. The Fluence team will  notify you when this functionality becomes available.
