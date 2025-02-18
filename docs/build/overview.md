@@ -1,13 +1,11 @@
 # Overview
 
-**Fluence Console** is one of the main ways to rent resources from the decentralized Fluence compute marketplace. It is a web-based application that allows you control the complete lifecycle of your resources and services and mange your payments and billing in one central locations.
+**Fluence Console** is the convenient way to renting and managing  resources from the decentralized Fluence compute marketplace. It is a web-based application that allows you to control the complete lifecycle of your resources and services including your payments and billing.
 
 ## Fluence Console Access
 
-:::warning
-Currently, Fluence Console is available only as part of the closed Alpha VM testing program.
+:::info
+Access to Fluence Console is currently only available to participants of the Alpha VM testing program.
 :::
 
-The Fluence Console web app is available via the following URL:
-
-[https://console.fluence.network/sign-in](https://console.fluence.network/sign-in)
+Access the Fluence Console: [https://console.fluence.network/sign-in](https://console.fluence.network/sign-in)

@@ -1,108 +1,96 @@
-# CPU VM Renting
+# Renting A VM 
 
-Currently, on the Fluence platform, it is possible to rent resources in the form of CPU VMs with various configurations. It is important to note that the rental process involves smart contracts in the Fluence network, which regulate the relationship between the user and the compute resource provider for launching and properly functioning the VM.
+The Fluence marketplace is a decentralized broker of compute supply and demand governed by a set of smart contracts. To this end, the Fluence marketplace not only facilitates the renting process of VMs between you and the participating compute provider(s) but also the configuration and management of your VMs. 
 
-Currently, due to the specifics of the Fluence protocol, there are several important limitation for rented VMs:
+Currently, there are a couple of limitations with respect renting VMs:
 
-1. **VMs can only be rented for a limited period**. Since the Fluence protocol uses the **Capacity Commitment (CC)** and **Staking** mechanics to verify the provider’s infrastructure, the rental period for a specific server is limited by the duration of the Capacity Commitment created for it. After the Capacity Commitment ends, the Fluence protocol stops verifying the provider’s infrastructure, meaning there is no guarantee of the server’s availability.
-    :::info
-    When renting a server through Fluence Console, users can explicitly see the maximum rental duration for a CPU VM.
-    :::
+1. A VM can only be rented for a limited period of time. This limitation is due to the implementation specifics of the verification, i.e., capacity commitment, and security, i.e., staking, protocols. The exact maximum rental period for a VM can be seen in the Fluence Console.
 
-1. When renting a VM, an additional amount equal to one day’s rent is deducted from the user’s balance. This amount is held as a 'prepayment' for the next day’s rental. It is refunded to your Fluence Balance once the rental period ends — unless your balance runs out and the prepaid amount is used to cover the VM costs.
-    :::info
-    Users can always check the amount of Balance reserved as a “prepayment” on the Billing page.
-    :::
+2. When renting a VM, a prepayment amount equivalent to one day’s rent is deducted from your Balance to cover the next day’s rent. This amount is refunded to your Balance when the rental period ends, unless your available Balance amount is too low in which case the prepaid amount is used to cover that day's rent. You can check the amount of your Balance reserved as a “prepayment” on the **Billing** page in the Fluence Console.
 
-## Steps to Configure a Rented VM
+:::warning
+If your Balance does not have enough funds to pay for the next day's rent, the previously deducted prepayment will be used to cover the rent. After the reserved funds are exhausted and you fail to top up o Balance in time, the VM's rental agreement will be terminated and the VM will be automatically deleted.
+:::
 
-The Fluence protocol provides users of the Fluence platform with access to a variety of commercial-grade server hardware from reliable Tier-1 to Tier-4 data centers around the world. To rent a VM, follow these steps:
+## Steps to Configure a VM
 
-### 1. Choose location
+The Fluence marketplace aggregates enterprise-grade compute resources from predominantly Tier-3 and Tier-4 data centers around the world. To rent a VM:
 
-Choose one of the available Locations for renting a VM.
+### 1. Choose a location
+
+Choose one of the available data center locations.
 
 ![choose location](./assets/location.webp)
 
-### 2. Choose configuration
+### 2. Choose a configuration
 
-Choose a Basic configuration. Currently, Fluence provides a fixed set of CPU and RAM configurations for VMs that users can rent.
+Choose your VM's configuration from the available options. Currently, compute resources can only be rented in multiples of a compute unit, which is 2 vCPUs and 4 GB of RAM. In the future, this limitation will be removed and compute resources can be added in a fine-grained manner for both vCPUs and RAM.
 
-:::info
-Currently, compute resources can only be rented in multiples of a compute unit, which is 2 vCPUs and 4 GB. In the future, this limitation will be removed and compute resources can be added in a fine-grained manner for both vCPUs and RAM.
-:::
 
 ![choose configuration](./assets/configuration.webp)
 
 ### 3. Choose storage
 
-Choose the type of Storage and its amount. Currently, the minimum Storage size for a VM is 25 GB. When renting a VM, DAS Storage is allocated, physically located on the same server as the CPU and RAM resources. This ensures higher Storage performance compared to NAS but limits the ability to expand it.
+Choose the type and amount of storage desired. Currently, the minimum storage size for a VM is 25 GB. At this point, only DAS storage is available, which ensures better performance than shared network solutions, like NAS, but does not allow for dynamic resizing.
 
 ![choose storage](./assets/storage.webp)
 
-### 4. Choose server type
+### 4. Choose the server type
 
-Specify the Server type for the VM. Since the hardware in the Fluence protocol can vary , the user needs to pay attention to the provided information as the price of resources may vary depending on the quality of the hardware. Users also need to utilized the Data Center information provided. In Fluence Console, users are provided with a Data Center's geo info at the city level, available certifications and more.
+Specify the server type for the VM. Since hardware within and across data centers may vary, pay close attention to the provided hardware specifications and price. Moreover, Fluence Console allows you to view a data center's geo location at the city level and other important details such as available certifications and you are encourage to utilize these resources.
 
 ![choose server type](./assets/server_type.webp)
 
 :::info
-The choice of **Server type** also affects the rental duration of the VM. Pay attention to the `Expires in` parameter in the **Review** block. If the user is not satisfied with the rental period, they can try selecting a different Server type. Currently, the maximum available rental period is set by default for each Server type.
+**Server type** may affect the available rental duration of the VM. Pay attention to the `Expires in` parameter in the **Review** block and ff you are not satisfied with the length of the rental period, try selecting a different server type.
 :::
 
-### 5. Rent Public IPv4 address
+### 5. Rent a Public IPv4 address
 
-Currently, users can only access their VMs via SSH over the public IPv4 allocated to the VM. In the future, the requirement for a Public IPv4 to access a VM will be removed.
+Currently, you can only access yor VM via SSH over the public IPv4 allocated to the VM at instantiation. In the future, this requirement will be removed.
 
 ![rent public IPv4 address](./assets/public_ip.webp)
 
-After selecting all the resource parameters for the VM, the user can proceed to the settings related to the workload that will be launched inside the VM.
+You are now ready to configure your VM.
 
-### 6. Specify VM name
+### 6. Specify the VM name
 
-Specify a **name for the VM**. Currently, the VM name must be unique within a specific user account.
+Specify a **name for the VM**. Currently, the VM name must be unique within a your (user) account.
 
 ![specify VM name](./assets/vm_name.webp)
 
-### 7. Specify the ports
+### 7. Specify the open ports
 
-Specify the **ports that need to be opened** for the VM. By default, all ports except **port 22** are closed. Therefore, before renting a VM, the user needs to select which ports need to be opened. Currently, all open ports support **TCP** and **UDP** protocols. The user can open **up to 50 ports**.
+By default, all ports except **port 22** are closed but you can assign up to 50 open ports for your VM and all open ports support **TCP** and **UDP**.
 
-:::danger
-Currently, it is not possible to change the set of open ports through **Fluence Console** after renting a VM. After renting a VM, users will be able to configure their own Firewall and **close** the necessary ports. However, users will not be able to **open** ports that were closed during the VM renting process.
+:::info
+Currently, it is not possible to change the set of open ports through **Fluence Console** after the VM is initiated. While you are able to configure your own Firewall and **close** ports originally asked to be opened, you will not be able to **open** ports not specified to be open at VM creation.
 :::
 
 ![specify ports](./assets/ports.webp)
 
 ### 8. Choose the OS image
 
-Choose the **OS image** for launching the VM. Users can either choose a pre-defined OS image or provide a link to their **custom OS image**. It is important to note the following limitations on custom OS images:
-
-- The Custom OS image must be available for download via a publicly accessible link.
-- The Custom OS image must be intended for running on the remote instance(s). The Fluence team recommends choosing images with the `Generic Cloud` or `Cloud` tags.
+Choose the **OS image** for your VM. You can either choose a pre-defined OS image or provide a link to a **custom OS image**. Only use custom OS images available for download from a publicly accessible link and configured to run on remote instances. The Fluence team recommends choosing (custom) images with the `Generic Cloud` or `Cloud` tags.
 
 ![choose OS image](./assets/os_image.webp)
 
 ### 9. Provide the public SSH key
 
-Provide the public SSH key for connecting to the VM, which is currently only possible via SSH using the public IPv4 address allocated to your VM. Thus, you need to specify at least one SSH key in one of the following formats: RSA, ECDSA, or ED25519.
+Provide the public SSH key you want to use to connect to your VM. You need to provide at least one SSH key in either RSA, ECDSA or ED25519 format.
 
 ![provide SSH key](./assets/ssh.webp)
 
 ### 10. Review the summary
 
-After selecting all the VM parameters, the user can see a quick summary in the Review section, including the final rental price of the VM.
+After selecting all the VM parameters, check and review the instance summary and price in the Review section.
 
 ![review summary](./assets/summary.webp)
 
-### 11. Click the Launch button
+### 11. Launch the VM
 
-Click the “Launch” button to rent the VM. After that, you will be redirected to the Running Instances page to manage the launched VM.
+Click the “Launch” button to rent the VM after which you will be redirected to the **Running Instances** page.
 
 :::info
-Currently an additional amount equal to the cost of one day’s rent is deducted from the user’s Balance, which is reserved as a “prepayment” until the rental is canceled. Immediately after canceling the VM rental, this amount will be returned to the user’s Balance provided that the "prepayment" amount was not used to pay for the VM after the entire Balance on the Fluence platform was exhausted. The reserved amount is displayed on the **Billing page** under the name `Reserved for running workload`.
-:::
-
-:::warning
-Please note **payment for rented VMs occurs at the same time every day at** `5:55 PM UTC`. Also, payment is currently only possible for full days, regardless of the rental start time. Thus, if a user rents a VM at `5:45 PM UTC`, they will pay for a **FULL** day of rent and 10 minutes later, at `5:55 PM UTC`, they will pay for another **FULL** day. This limitation is also expected to be remedied in the near future.
+Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.
 :::
