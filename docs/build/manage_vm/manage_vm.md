@@ -4,8 +4,7 @@ After renting a VM, all the relevant information is accessible on the **Running 
 
 ## VM Information
 
-After renting a VM, a corresponding card will appear on the **Running Instances** page, which can be expanded to view all the parameters of the rented VM and detailed information can be found in the `Hardware Specs` section. Note that
-the extended server parameters are only visible if the specific infrastructure provider has provided this necessary information.
+For each VM, a corresponding card will appear on the **Running Instances** page, which can be expanded. More detailed information can be found in the `Hardware Specs` section. Note that extended server parameters are only visible if the specific infrastructure provider has provided the underlying information.
 
 ![VM information](./assets/vm_info.webp)
 
@@ -13,7 +12,7 @@ The user can also see the maximum rental period for the VM (`Expires in`) and in
 
 ## VM Management
 
-Currently, the only operation available for a running VM is `Delete`, which terminates the VM and the rental agreement. The ability to Reboot, Reset, and Rebuild from the Fluence Console will be added soon.
+Currently, the only operation available for a (running) VM is `Delete`, which terminates the VM and the rental agreement. The ability to Reboot, Reset and Rebuild from the Fluence Console will be added soon.
 
 ![VM management](./assets/vm_manage.webp)
 
