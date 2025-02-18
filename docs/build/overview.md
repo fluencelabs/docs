@@ -8,4 +8,4 @@
 Access to Fluence Console is currently only available to participants of the Alpha VM testing program.
 :::
 
-Access the Fluence Console: [https://alpha.fluence.dev/](https://alpha.fluence.dev/)
+Access the Fluence Console: [https://console.fluence.network/sign-in](https://console.fluence.network/sign-in)
