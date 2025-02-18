@@ -9,7 +9,14 @@ const sidebars = {
     "stake/nft_guide/nft_guide",
     "stake/staking_app_guide/staking_app_guide",
   ],
-  console: ["console/overview"],
+  console: [
+    "console/overview",
+    "console/registration/registration",
+    "console/balance/balance",
+    "console/vm_rent/vm_rent",
+    "console/manage_vm/manage_vm",
+    "console/settings/settings",
+  ],
 };
 
 module.exports = sidebars;

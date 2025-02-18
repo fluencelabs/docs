@@ -65,16 +65,11 @@ const config: Config = {
           docId: "stake/overview",
           label: "Stake",
         },
-        // {
-        //   type: "doc",
-        //   position: "left",
-        //   docId: "console/overview",
-        //   label: "Console",
-        // },
         {
-          href: "https://fluencenetwork.notion.site/Fluence-Console-documentation-V0-1-1935b9b0bcba80e993cbe411eeeee1c9",
-          label: "Console",
+          type: "doc",
           position: "left",
+          docId: "console/overview",
+          label: "Console",
         },
         {
           href: "https://github.com/fluencelabs",
@@ -95,8 +90,7 @@ const config: Config = {
             },
             {
               label: "Console",
-              // to: "/docs/console/overview",
-              to: "https://fluencenetwork.notion.site/Fluence-Console-documentation-V0-1-1935b9b0bcba80e993cbe411eeeee1c9",
+              to: "/docs/console/overview",
             },
           ],
         },
