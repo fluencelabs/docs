@@ -10,4 +10,4 @@ Currently, Fluence Console is available only as part of the closed Alpha VM test
 
 The Fluence Console web app is available via the following URL:
 
-[https://alpha.fluence.dev/](https://alpha.fluence.dev/)
+[https://console.fluence.network/sign-in](https://console.fluence.network/sign-in)
