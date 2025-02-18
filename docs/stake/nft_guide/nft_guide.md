@@ -5,8 +5,6 @@
 Fluence NFTs are your gateway to staking on the Fluence Network, enabling FLT token holders to participate in our mission of global decentralized computing. These NFTs were initially distributed to winners of the first [FLT Stake Race](https://race.fluence.network/), with more to be released in future campaigns.
 To participate in staking, you must either have been granted an NFT or purchased one from the newly launched [NFT Marketplace](https://nft.fluence.network/), where current NFT holders can list their tokens for sale.
 
-If you are unfamiliar with the Fluence Network, Capacity Commitments and the role of stakers, we recommend first reading the official [Key Concepts for Stakers](../overview.md#fluence-key-concepts-for-stakers).
-
 :::note
 
 Additional NFTs will be released to the winners of the next Stake Race campaign.
