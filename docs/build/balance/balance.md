@@ -1,4 +1,4 @@
-# Balance top
+# Balance top up
 
 ## Features of Balance Management on the Fluence Platform
 

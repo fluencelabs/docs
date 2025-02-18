@@ -4,7 +4,7 @@
 
 ## Fluence Console Access
 
-:::info
+:::warning
 Currently, Fluence Console is available only as part of the closed Alpha VM testing program.
 :::
 

@@ -62,14 +62,14 @@ const config: Config = {
         {
           type: "doc",
           position: "left",
-          docId: "stake/overview",
-          label: "Stake",
+          docId: "build/overview",
+          label: "Build",
         },
         {
           type: "doc",
           position: "left",
-          docId: "console/overview",
-          label: "Console",
+          docId: "stake/overview",
+          label: "Stake",
         },
         {
           href: "https://github.com/fluencelabs",
@@ -85,12 +85,12 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "Stake",
-              to: "/docs/stake/overview",
+              label: "Build",
+              to: "/docs/build/overview",
             },
             {
-              label: "Console",
-              to: "/docs/console/overview",
+              label: "Stake",
+              to: "/docs/stake/overview",
             },
           ],
         },

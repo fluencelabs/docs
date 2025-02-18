@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/docs/stake/overview",
+      "destination": "/docs/build/overview",
       "permanent": true
     },
     {
