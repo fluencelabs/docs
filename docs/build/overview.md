@@ -1,6 +1,6 @@
 # Overview
 
-**Fluence Console** is the convenient way to renting and managing  resources from the decentralized Fluence compute marketplace. It is a web-based application that allows you to control the complete lifecycle of your resources and services including your payments and billing.
+**Fluence Console** is the convenient way to rent and manage resources from the decentralized Fluence compute marketplace. It is a web-based application that allows you to control the complete lifecycle of your resources and services, including your payments and billing.
 
 ## Fluence Console Access
 
