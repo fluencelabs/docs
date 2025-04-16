@@ -8,14 +8,13 @@ For each VM, a corresponding card will appear on the **Running Instances** page,
 
 ![VM information](./assets/vm_info.webp)
 
-The user can also see the maximum rental period for the VM (`Expires in`) and information about the next billing time (`Next billing time`) set at **5:55 PM UTC**.
+The user can also see information about the next billing time (`Next billing time`) set at **5:55 PM UTC**.
 
 ## VM Management
 
 Currently, the only operation available for a (running) VM is `Delete`, which terminates the VM and the rental agreement. The ability to Reboot, Reset and Rebuild from the Fluence Console will be added soon.
 
 ![VM management](./assets/vm_manage.webp)
-
 
 ## Billing History
 
