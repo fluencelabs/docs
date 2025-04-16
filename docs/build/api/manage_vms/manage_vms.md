@@ -78,7 +78,27 @@ Here's an example of a VM object in the response:
         "version": "4"
       }
     }
-  ]
+  ],
+  "createdAt": "+002025-04-01T16:50:57.000000000Z",
+  "nextBillingAt": "+002025-04-16T17:59:55.000000000Z",
+  "osImage": "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img",
+  "datacenter": {
+    "id": "0x0000000000000000000000000000000000000000000000000000000000000005",
+    "countryCode": "FR",
+    "cityCode": "PAR",
+    "cityIndex": 1,
+    "tier": 4,
+    "certifications": ["PCI DSS", "ISO 9001:2015", "ISO/IEC 27001:2022"]
+  },
+  "publicIp": "154.42.3.159",
+  "ports": [
+    {
+      "port": 22,
+      "protocol": "tcp"
+    }
+  ],
+  "reservedBalance": "359440",
+  "totalSpent": "17846000"
 }
 ```
 
@@ -92,6 +112,52 @@ Let's break down the key components of each VM object:
 - **`vmName`**: The name you assigned to the VM when creating it
 - **`status`**: Current operational status of the VM (currently - only `ACTIVE` is shown) // TODO: maybe add `LAUNCHING` to reflect Console UI statuses
 - **`pricePerEpoch`**: The cost of the VM per epoch (24 hours) in USDC (with 6 decimals)
+- **`createdAt`**: Timestamp indicating when the VM was created
+- **`nextBillingAt`**: Timestamp indicating when the next billing cycle will start
+- **`osImage`**: URL of the operating system image used for the VM
+- **`publicIp`**: The public IP address assigned to your VM
+- **`reservedBalance`**: The amount of USDC (with 6 decimals) currently reserved for this VM's operation
+- **`totalSpent`**: The total amount of USDC (with 6 decimals) spent on this VM since creation
+
+#### Datacenter Information
+
+The `datacenter` object provides detailed information about where your VM is physically hosted:
+
+```json
+"datacenter": {
+  "id": "0x0000000000000000000000000000000000000000000000000000000000000005",
+  "countryCode": "FR",
+  "cityCode": "PAR",
+  "cityIndex": 1,
+  "tier": 4,
+  "certifications": ["PCI DSS", "ISO 9001:2015", "ISO/IEC 27001:2022"]
+}
+```
+
+- **`id`**: Unique identifier for the datacenter
+- **`countryCode`**: ISO country code where the datacenter is located
+- **`cityCode`**: LOCODE code for the city
+- **`cityIndex`**: Index if multiple datacenters exist in the same city
+- **`tier`**: Datacenter tier level (1-4, with 4 being highest reliability)
+- **`certifications`**: Array of compliance certifications this datacenter holds
+
+#### Network Configuration
+
+The `ports` array indicates which network ports are open on your VM:
+
+```json
+"ports": [
+  {
+    "port": 22,
+    "protocol": "tcp"
+  }
+]
+```
+
+- **`port`**: The port number that is open
+- **`protocol`**: The network protocol for this port (e.g., "tcp", "udp")
+
+Open ports are essential for accessing services running on your VM. For example, port 22 is typically used for SSH access.
 
 #### Resources
 
@@ -106,12 +172,6 @@ The `resources` array contains detailed information about all resources allocate
 - **`quantity`**: The amount of this resource allocated to the VM (units depend on the resource type)
 - **`metadata`**: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications)
 - **`details`**: Additional technical specifications about the resource. This field is optional for compute providers and may be empty or contain arbitrary data.
-
-## VM Status Values
-
-The `status` field in the VM object indicates the current state of your virtual machine. Here are the possible status values and what they mean:
-
-- **`ACTIVE`**: The VM is running normally and available for use // TODO: maybe add `LAUNCHING` to reflect Console UI statuses
 
 ## Deleting a VM
 
