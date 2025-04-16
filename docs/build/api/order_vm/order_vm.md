@@ -1,4 +1,4 @@
-# Deploying Virtual Machines on the Fluence Marketplace
+# Deploying Virtual Machines
 
 After [finding available compute resources](../get_offerings/get_offerings.md) that match your requirements, the next step is to deploy your virtual machines (VMs). This guide walks you through the process of ordering and deploying VMs on the Fluence marketplace.
 
@@ -8,7 +8,6 @@ In this guide, you'll learn how to:
 2. Specify VM requirements and settings
 3. Submit your VM deployment request
 4. Understand the deployment response
-5. Manage your running VMs
 
 ## Creating a VM Deployment
 
@@ -23,19 +22,19 @@ POST https://api.fluence.dev/vms/v3
 Your deployment request has three key components:
 
 1. **Resource constraints (optional)** - Constraints on the compute resources, location, and price if you have any specific requirements. For options that are not constrained, the system will automatically select the best available option for you.
-2. **Number of instances** - How many VMs to deploy // TODO: What if not basic configuration chosen, what will happen?
+2. **Number of instances** - How many VMs to deploy.
 3. **VM configuration** - Settings for your VM deployment.
 
-Let's look at a complete example request:
+**An example request body:**
 
 ```json
 {
   "constraints": {
-    "basicConfiguration": "cpu-4-ram-8gb-storage-25gb", // If no basic configuration is chosen, the system will automatically select the smallest available option.
-    "additionalResources": null, // Null means no additional resources are needed. You can just omit this field, it is present here for example only.
+    "basicConfiguration": "cpu-4-ram-8gb-storage-25gb",
+    "additionalResources": null,
     "hardware": null,
     "datacenter": null,
-    "maxTotalPricePerEpochUsd": "1.5" // If no max price is chosen, the system will automatically select the cheapest available option.
+    "maxTotalPricePerEpochUsd": "1.5"
   },
   "instances": 2,
   "vmConfiguration": {
@@ -58,7 +57,7 @@ Let's look at a complete example request:
 
 Let's break down each component in detail:
 
-### Resource Constraints
+### Resource Constraints (optional)
 
 The `constraints` object specifies the compute resources you need for your VMs if you have any specific requirements. This field is optional. This uses the same parameters you learned about in the [Finding Compute Resources](../get_offerings/get_offerings.md) guide:
 
@@ -72,17 +71,21 @@ The `constraints` object specifies the compute resources you need for your VMs i
 }
 ```
 
-- **`basicConfiguration`**: A predefined resource profile (e.g., `cpu-4-ram-8gb-storage-25gb` for 4 CPUs, 8GB RAM, 25GB storage)
-- **`additionalResources`**: Extra resources beyond the basic configuration. Corresponds to the `additionalResources` field in the [Finding Compute Resources](../get_offerings/get_offerings.md#additional-resources) guide.
-- **`hardware`**: Specific hardware requirements like CPU manufacturer or storage type. Corresponds to the `hardware` field in the [Finding Compute Resources](../get_offerings/get_offerings.md#hardware-specifications) guide.
-- **`datacenter`**: Geographic constraints for your deployment. Corresponds to the `datacenter` field constraint in the [Finding Compute Resources](../get_offerings/get_offerings.md#geographic-constraints) guide.
-- **`maxTotalPricePerEpochUsd`**: Maximum price you're willing to pay per VM per epoch (24 hours). Corresponds to the `maxTotalPricePerEpochUsd` field constraint in the [Finding Compute Resources](../get_offerings/get_offerings.md#budget-constraint) guide.
+- **`basicConfiguration`**: A predefined resource profile. If no basic configuration is chosen, the system will automatically select the smallest available option. Read more about basic configurations in the [Basic Configurations section](../get_offerings/get_offerings.md#basic-configuration).
+- **`additionalResources`**: Extra resources beyond the basic configuration. Read more about additional resources in the [Additional Resources section](../get_offerings/get_offerings.md#additional-resources).
+- **`hardware`**: Specific hardware requirements like CPU manufacturer or storage type. Read more about hardware specifications in the [Hardware Specifications section](../get_offerings/get_offerings.md#hardware-specifications-constraints).
+- **`datacenter`**: Geographic constraints for your deployment. Read more about datacenter constraints in the [Datacenter Countries section](../get_offerings/get_offerings.md#datacenter-constraints).
+- **`maxTotalPricePerEpochUsd`**: Maximum price you're willing to pay per VM per epoch (24 hours). If no max price is chosen, the system will automatically select the cheapest available option. Read more about max price constraint in the [Maximum Price Per Epoch section](../get_offerings/get_offerings.md#maximum-price-per-epoch-constraint).
 
+:::info
 You only need to include the constraints that matter to you. For example, if you only care about the basic configuration and price, you can omit the other fields or set them to `null`.
+:::
 
 ### Number of Instances
 
 The `instances` field is straightforward - it specifies how many identical VMs you want to deploy:
+
+**Example:**
 
 ```json
 "instances": 2
@@ -92,11 +95,11 @@ This will create two VMs with identical configurations.
 
 ### VM Configuration
 
-The `vmConfiguration` object defines the settings for your VMs:
+The `vmConfiguration` object defines the deployment details for your VMs:
 
 ```json
 "vmConfiguration": {
-  "name": "web-server",
+  "name": "my-vm",
   "openPorts": [
     {
       "port": 80,
@@ -107,26 +110,24 @@ The `vmConfiguration` object defines the settings for your VMs:
       "protocol": "tcp"
     }
   ],
-  "osImage": "https://fluence-os-images.fra1.digitaloceanspaces.com/disk.img.gz",
+  "osImage": "https://cloud-images....img",
   "sshKeys": [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxV4JJjOCRCnPkvf9h..."
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxV4JJjOCR..."
   ]
 }
 ```
 
-Let's examine each field:
-
 #### VM Name
 
-- **`name`**: A human-readable name for your VM(s). Can contain only alphanumeric characters and hyphens.
+- **`name`** : A human-readable name for your VM(s). Can contain only alphanumeric characters and hyphens.
 
 #### Network Configuration
 
-- **`openPorts`**: An array of port configurations that should be accessible from the internet:
-  - **`port`**: The port number to open
-  - **`protocol`**: The protocol for this port (either `tcp`, `udp`)
+- **`openPorts`** : An array of port configurations that should be accessible from the internet:
+  - `port`: The port number to open
+  - `protocol`: The protocol for this port (either `tcp`, `udp`)
 
-For security reasons, all ports are closed by default. You must explicitly specify which ports you want to open for your application.
+By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
 
 #### Operating System
 
@@ -143,7 +144,7 @@ For security reasons, all ports are closed by default. You must explicitly speci
 
 - **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
 
-## Understanding the Deployment Response
+## Response structure
 
 When you submit your deployment request, the API will respond with an array of objects, one for each VM being deployed:
 
@@ -208,7 +209,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
              "protocol": "tcp"
            }
          ],
-         "osImage": "https://fluence-os-images.fra1.digitaloceanspaces.com/disk.img.gz",
+         "osImage": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img",
          "sshKeys": [
            "ssh-rsa AAAAB3NzaC1yc2EAAA..."
          ]

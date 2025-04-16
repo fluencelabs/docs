@@ -4,7 +4,16 @@ sidebar_position: 1
 
 # Introduction to the Fluence Console API
 
-The Fluence Console API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface. With this API, you can automate your infrastructure provisioning, scale resources dynamically, and integrate Fluence's decentralized compute capabilities directly into your applications and workflows.
+The Fluence Console API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface. With this API, you can integrate Fluence's decentralized compute capabilities directly into your applications and workflows.
+
+:::info
+All API endpoints are available at:
+
+```bash
+https://vodopad.mainnet.fluence.dev // TODO: switch to api.fluence.dev once it's ready
+```
+
+:::
 
 ## What You Can Do with the Fluence Console API
 
@@ -13,7 +22,6 @@ The API enables you to:
 1. **Search the Marketplace** - Find compute resources that match your specific requirements including CPU, memory, storage, geographic location, and budget constraints
 2. **Deploy Virtual Machines** - Create and configure VMs with your choice of operating system and network settings
 3. **Manage Resources** - View your active deployments and monitor their status
-4. **Terminate Resources** - Delete VMs when they're no longer needed
 
 ## Authentication
 
@@ -25,15 +33,7 @@ Include your API key in the `Authorization` header with all API requests:
 
 ```bash
 curl -X POST https://api.fluence.dev/vms/v3 \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
-## API Base URL
-
-All API endpoints are available at:
-
-```bash
-https://api.fluence.dev
+  -H "Authorization: Bearer <YOUR_API_KEY>"
 ```
 
 ## Request and Response Format
@@ -43,7 +43,7 @@ The Fluence Console API accepts and returns data in JSON format. When making POS
 ```bash
 curl -X POST https://api.fluence.dev/marketplace/offers \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Authorization: Bearer <YOUR_API_KEY>" \
   -d '{
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb"
   }'
@@ -70,7 +70,7 @@ Currently, the API has no rate limits. // TODO: add rate limits once we have the
 
 ## Next Steps
 
-Now that you understand the basics of the Fluence Console API, you can explore the following guides to learn more:
+Now that you are familiar with the basics of the Fluence Console API, you can explore the following guides to learn more:
 
 1. [Finding Compute Resources on the Fluence Marketplace](./get_offerings/get_offerings.md) - Learn how to search for and compare compute offerings that match your requirements
 2. [Deploying Virtual Machines on the Fluence Marketplace](./order_vm/order_vm.md) - Learn how to deploy and configure VMs

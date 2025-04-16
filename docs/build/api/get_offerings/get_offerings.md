@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Finding Compute Resources on the Fluence Marketplace
+# Finding compute resources on the Marketplace
 
 The Fluence compute marketplace is a decentralized platform where you can find and rent compute resources from various providers worldwide. Each provider has its own offers in different data centers with different configurations and prices. The marketplace API makes it easy to discover resources that meet your specific requirements.
 
@@ -13,12 +13,6 @@ In this guide, we'll walk through how to:
 3. Understand and compare different provider offerings
 4. Select the optimal resources for your needs
 
-The endpoint to get all available offers on the marketplace is:
-
-```bash
-POST  [/marketplace/offers](https://api.fluence.dev/marketplace/offers)
-```
-
 ## Searching for Available Offers
 
 The marketplace offers a powerful API endpoint that allows you to search for available compute resources with specific filters:
@@ -27,10 +21,11 @@ The marketplace offers a powerful API endpoint that allows you to search for ava
 POST https://api.fluence.dev/marketplace/offers
 ```
 
-### Understanding Search Parameters
+### Understanding search parameters (constraints)
 
 You can use the request body to filter offers based on your specific requirements. All filters are optional, you can use them to find whether there are offers that match your requirements.
-Example of a request body with all filters applied:
+
+**Example of a request body with all filters applied:**
 
 ```json
 {
@@ -76,7 +71,8 @@ Let's break down the request body parameters and their usage
 #### Basic Configuration
 
 A predefined configuration string that specifies a common resource profile. Use this for quick filtering without specifying individual resources
-Example:
+
+**Example:**
 
 ```json
 {
@@ -84,28 +80,28 @@ Example:
 }
 ```
 
-This filter would find offers with 8 CPU cores, 16GB RAM, and 25GB storage.
+This filter would show offers with 8 CPU cores, 16GB RAM, and 25GB storage.
 
-To get the list of all available basic configurations on the marketplace, you can use specific endpoint. Read more about it in the [Basic Configurations available on the marketplace](#basic-configurations-available-on-the-marketplace) section.
+To get the list with names of all available basic configurations on the marketplace, you can use specific endpoint. Read more about it in the [Basic configurations available on the Marketplace](#basic-configurations-available-on-the-marketplace) section.
 
-#### Hardware Specifications
+#### Hardware specifications constraints
 
 If you need specific CPU architecture or storage type, you can filter based on hardware requirements. To get the list of all available hardware specifications on the marketplace, you can use specific endpoint, read more about it in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
 
-- `hardware` (object)
+- `hardware`
 
   - Specific hardware requirements for the compute resources.
   - Fields:
-    - `cpu` (array of objects)
-      - `manufacturer` (string): CPU manufacturer (e.g., `"AMD"`, `"Intel"`)
-      - `architecture` (string): CPU architecture (e.g., `"Zen"`, `"x86_64"`)
-    - `memory` (array of objects)
-      - `type` (string): Memory type (e.g., `"DDR"`)
-      - `generation` (string): Memory generation (e.g., `"4"`, `"5"`)
-    - `storage` (array of objects)
-      - `type` (string): Storage type - one of: `"HDD"`, `"SSD"`, or `"NVMe"`
+    - `cpu`
+      - `manufacturer` : CPU manufacturer (e.g., `"AMD"`, `"Intel"`)
+      - `architecture` : CPU architecture (e.g., `"Zen"`, `"x86_64"`)
+    - `memory`
+      - `type` : Memory type (e.g., `"DDR"`)
+      - `generation` : Memory generation (e.g., `"4"`, `"5"`)
+    - `storage`
+      - `type` : Storage type - one of: `"HDD"`, `"SSD"`, or `"NVMe"`
 
-Example:
+**Example:**
 
 ```json
 {
@@ -130,9 +126,7 @@ Example:
 }
 ```
 
-This filter would find offers with AMD Zen processors, DDR5 memory, and NVMe storage.
-
-#### Geographic Constraints
+#### Datacenter constraints
 
 For applications with data residency requirements or to reduce latency for users in specific regions, you can filter datacenters by country. To get the list of all available countries on the marketplace, you can use specific endpoint, read more about it in the [Datacenter countries available on the marketplace](#datacenter-countries-available-on-the-marketplace) section.
 
@@ -142,7 +136,7 @@ For applications with data residency requirements or to reduce latency for users
   - Fields:
     - `countries` (array of strings): ISO country codes where you want your resources to be located (e.g., `["FR", "DE"]` for France and Germany)
 
-Example:
+**Example:**
 
 ```json
 {
@@ -152,21 +146,19 @@ Example:
 }
 ```
 
-This filter would find offers with resources located in France or Germany.
-
 #### Additional Resources
 
 If you need additional resources beyond the basic configuration, you can specify them in the request body to get offers that have enough additional resources to satisfy your requirements. Currently, only `STORAGE` is available as additional resource. Additional resources are hardware resources that are not included in the basic configuration, list of all hardware that you can use as additional resources is available in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
 
-- `additionalResources` (object)
+- `additionalResources`
 
   - Additional resources you need beyond the basic configuration.
   - Fields:
-    - `storage` (array of objects)
-      - `type` (string): Type of storage - one of: `"HDD"`, `"SSD"`, or `"NVMe"`
-      - `megabytes` (integer): Required storage size in megabytes
+    - `storage`
+      - `type` : Type of storage - one of: `"HDD"`, `"SSD"`, or `"NVMe"`
+      - `megabytes` : Required storage size in megabytes
 
-Example:
+**Example:**
 
 ```json
 {
@@ -174,25 +166,21 @@ Example:
     "storage": [
       {
         "type": "NVMe",
-        "megabytes": 20480 // TODO: will be supply, units fields instead of megabytes. Change once we have it.
+        "megabytes": 20480 // TODO: will be supply, units fields instead of megabytes. Change once we have it. And current value is in MiB, not MB.
       }
     ]
   }
 }
 ```
 
-This filter would find offers with 20GB NVMe storage.
-
-#### Budget Constraint
+#### Maximum price per epoch constraint
 
 You can apply filter for the max price per epoch (24 hours) in USDC that you're willing to pay for the resources.
 // TODO: specify whether it's per basic configuration or with additional resources.
 
-- `maxTotalPricePerEpochUsd` (string)
+- `maxTotalPricePerEpochUsd` - Maximum price you're willing to pay for the resources, in USD. This is expressed as a string to handle decimal precision (e.g. `"12.50"`)
 
-  - Maximum price you're willing to pay for the resources, in USD. This is expressed as a string to handle decimal precision (e.g. `"12.50"`)
-
-Example:
+**Example:**
 
 ```json
 {
@@ -200,14 +188,12 @@ Example:
 }
 ```
 
-This filter would find offers with price per epoch (24 hours) in USDC less than 12.5.
-
-## Understanding the Response
+## Response structure
 
 When you send a request to `/marketplace/offers`, you'll receive a response containing an array of offers that match your criteria. Each offer represents a unique configuration available from a specific provider in a particular data center.
 The response is an array of objects, each object represents an offer from a provider for some basic configuration. To get the list of all available basic configurations, you can use specific endpoint, read more about it in the [Basic Configurations available on the marketplace](#basic-configurations-available-on-the-marketplace) section.
 
-General structure of the response for a single object:
+**General structure of the response for a single object:**
 
 ```json
 [
@@ -266,7 +252,7 @@ The `configuration` object represents the basic configuration of the offer. It i
 - **`slug`**: The identifier for the basic configuration. Read more about basic configurations in the [Basic Configurations section](TODO: put link here). Full list of available basic configurations is available at GET [/marketplace/basic-configurations](https://api.fluence.dev/marketplace/basic-configurations).
 - **`price`**: The base price for this configuration (in USDC per epoch)
 
-**Example of a configuration object:**
+**Example:**
 
 ```json
 {
@@ -276,8 +262,6 @@ The `configuration` object represents the basic configuration of the offer. It i
   }
 }
 ```
-
-This object represents a basic configuration with 2 CPU cores, 4GB RAM, and 25GB storage, priced at 0.30698 USDC per epoch.
 
 #### Resources
 
@@ -289,7 +273,7 @@ Each resource element in the array includes:
 - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Resources section](TODO: put link here).
 - `price`: The price for this resource per epoch
 
-**Example of a resources array:**
+**Example:**
 
 ```json
 {
@@ -323,7 +307,7 @@ This example object represents hardware configuration for the example basic conf
 
 The `datacenter` object provides information about the physical location of the resources and the certifications the datacenter holds.
 
-Each `datacenter` object includes:
+Each `datacenter` object includes fields:
 
 - **`countryCode`**: ISO country code
 - **`cityCode`**: LOCODE code for the city
@@ -331,7 +315,7 @@ Each `datacenter` object includes:
 - **`tier`**: Datacenter tier level (1-4, with 4 being highest reliability)
 - **`certifications`**: Array of compliance certifications this datacenter holds
 
-**Example of a datacenter object:**
+**Example:**
 
 ```json
 {
@@ -345,8 +329,6 @@ Each `datacenter` object includes:
 }
 ```
 
-This object represents a datacenter in France with the city code PAR (Paris) with Tier 2 and a set of certifications.
-
 #### Servers
 
 The `servers` array provides information about the actual physical machines available to host your workloads. Each element in this array represents a distinct physical server in the provider's infrastructure.
@@ -358,10 +340,10 @@ Each `server` object includes:
   - `supply`: Total amount of this resource available on this server
   - `perVmLimit`: Maximum amount of this resource that can be allocated to a single VM (null means no limit)
   - `type`: Resource type (currently only STORAGE is supported)
-  - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Resources section](TODO: put link here).
+  - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
   - `price`: Cost per unit of this resource
 
-**Example of a servers array:**
+**Example:**
 
 ```json
 {
@@ -447,6 +429,7 @@ Response is an array of strings, each string is a basic configuration slug.
 ```json
 {
   "basic_configurations": [
+    // TODO: change to plain array
     "cpu-2-ram-4gb-storage-25gb",
     "cpu-4-ram-8gb-storage-25gb",
     "cpu-8-ram-16gb-storage-25gb"
@@ -455,7 +438,7 @@ Response is an array of strings, each string is a basic configuration slug.
 }
 ```
 
-**Usage:** Use these values in the `basicConfiguration` field of your [offer filters](#understanding-search-parameters) to quickly select standard resource profiles.
+**Usage:** Use these values in the `basicConfiguration` field of your [search parameters](#understanding-search-parameters-constraints) to quickly select standard resource profiles.
 Each configuration string follows the format `cpu-[cores]-ram-[memory]-storage-[disk]`. For example, `"cpu-2-ram-4gb-storage-25gb"` represents a configuration with 2 CPU cores, 4GB RAM, and 25GB storage.
 
 ### Datacenter countries available on the marketplace
@@ -472,7 +455,7 @@ Lists all countries that have datacenters with available offers in the marketpla
 ["DE", "FR", "GB", "LT", "PL", "US"]
 ```
 
-**Usage:** Use these ISO country codes in the `datacenter.countries` array of your [offer filters](TODO: put link here) to restrict results to specific geographic locations. This is particularly useful for applications with data residency requirements or to minimize latency for specific user regions.
+**Usage:** Use these ISO country codes in the `datacenter.countries` array of your [search parameters](#understanding-search-parameters-constraints) to restrict results to specific geographic locations. This is particularly useful for applications with data residency requirements or to minimize latency for specific user regions.
 
 ### Hardware specifications available on the marketplace
 
@@ -489,7 +472,7 @@ This endpoint returns all hardware specifications available across all providers
   "cpu": [
     {
       "manufacturer": "AMD",
-      "architecture": "Zen"
+      "architecture": "Zen" // TODO: add brand and generation once they are added to the API
     },
     {
       "manufacturer": "Intel",
@@ -518,7 +501,7 @@ This endpoint returns all hardware specifications available across all providers
 }
 ```
 
-**Usage:** This endpoint helps you understand what hardware specifications are available for filtering. You can use these values in the `hardware` section of your [offer filters](TODO: put link here):
+**Usage:** This endpoint helps you see what hardware specifications are available for filtering. You can use these values in the `hardware` section of your [search parameters](#understanding-search-parameters-constraints):
 
 - **CPU specifications**: Use `architecture` and `manufacturer` values to specify CPU requirements
 - **Memory specifications**: Use `type` and `generation` values to filter by RAM type
@@ -547,7 +530,7 @@ Let's walk through a typical workflow for finding and selecting compute resource
    - Compare prices, locations, and hardware specs
    - Select the offer that best meets your needs
 5. Proceed to deployment:
-   - Use the selected offer to create your deployment
+   - Use the selected offer to [create a deployment](../order_vm/order_vm.md)
 
 ## The next steps
 

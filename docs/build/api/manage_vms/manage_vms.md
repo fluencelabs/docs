@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Managing Your Virtual Machines on Fluence
+# Managing your Virtual Machines
 
 After deploying virtual machines on the Fluence marketplace, you'll need to monitor and manage them throughout their lifecycle. This guide explains how to view your active VMs, understand their status, and perform management operations like deletion when needed.
 
@@ -17,14 +17,14 @@ In this guide, we'll walk through how to:
 To view all your currently active virtual machines, you can use the following API endpoint:
 
 ```bash
-GET https://api.fluence.dev/vms/v2
+GET https://vodopad.mainnet.fluence.dev/vms/v2 // TODO: change to api.fluence.dev once the new API is deployed
 ```
 
 ### Response structure
 
-The response will contain an array of VM objects, each representing a virtual machine you have deployed. Each VM object includes detailed information about its configuration, status, and the resources allocated to it.
+The response contains an array of VM objects, each representing a virtual machine you have deployed. Each VM object includes detailed information about its configuration, status, and the resources allocated to it.
 
-Here's an example of a VM object in the response:
+**Example of a VM object in the response:**
 
 ```json
 {
@@ -170,7 +170,7 @@ The `resources` array contains detailed information about all resources allocate
   - `PUBLIC_IP`: Public IP address
   - `NETWORK_BANDWIDTH`: Network bandwidth allocation
 - **`quantity`**: The amount of this resource allocated to the VM (units depend on the resource type)
-- **`metadata`**: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications)
+- **`metadata`**: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications-available-on-the-marketplace)
 - **`details`**: Additional technical specifications about the resource. This field is optional for compute providers and may be empty or contain arbitrary data.
 
 ## Deleting a VM
