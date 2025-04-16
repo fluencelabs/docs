@@ -221,9 +221,12 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
    - Store the `appCid`, `dealId`, and `peerId` values // TODO: fix later when fields are changed
    - These will be needed to manage your deployment
 
+:::info
+Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.
+:::
+
 5. **Connect to your VM**:
-   - Use SSH with the private key corresponding to your public key
-   - The connection details will be provided in a separate response or dashboard
+   VM launching will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the connection details, you can visit UI of Fluence Console [described here](../../manage_vm/manage_vm.md). Or you can use a view endpoint to get the connection details using API, which is described in the next document.
 
 ## Next Steps
 
