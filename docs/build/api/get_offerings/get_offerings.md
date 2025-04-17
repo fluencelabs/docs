@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Finding compute resources on the Marketplace
 
-The Fluence compute marketplace is a decentralized platform where you can find and rent compute resources from various providers worldwide. Each provider has its own offers in different data centers with different configurations and prices. The marketplace API makes it easy to discover resources that meet your specific requirements.
+The Fluence compute marketplace is a decentralized platform where you can find and rent compute resources from various providers worldwide. Each provider has its own offers with different geographies, configurations and prices. The marketplace API makes it easy to discover resources that meet your specific requirements.
 
 In this guide, we'll walk through how to:
 
