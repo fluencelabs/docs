@@ -19,7 +19,7 @@ https://vodopad.mainnet.fluence.dev // TODO: switch to api.fluence.dev once it's
 
 The API enables you to:
 
-1. **Search the Marketplace** - Find compute resources that match your specific requirements including CPU, memory, storage, geographic location, and budget constraints
+1. **Search the Marketplace** - Find compute resources that match your specific requirements including CPU, memory, storage, geographic location, and budget
 2. **Deploy Virtual Machines** - Create and configure VMs with your choice of operating system and network settings
 3. **Manage Resources** - View your active deployments and monitor their status
 
