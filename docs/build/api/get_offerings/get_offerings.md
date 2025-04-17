@@ -72,7 +72,7 @@ You can use the request body to filter offers based on your specific requirement
 
 Let's break down the request body parameters and their usage
 
-#### Basic сonfiguration
+#### Basic configuration
 
 A predefined configuration string that specifies a common resource profile. Use this for quick filtering without specifying individual resources
 
