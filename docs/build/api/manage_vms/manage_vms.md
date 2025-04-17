@@ -17,7 +17,7 @@ In this guide, we'll walk through how to:
 To view all your currently active virtual machines, you can use the following API endpoint:
 
 ```bash
-GET https://vodopad.mainnet.fluence.dev/vms/v2 // TODO: change to api.fluence.dev once the new API is deployed
+GET https://api.fluence.dev/vms/v2
 ```
 
 ### Response structure

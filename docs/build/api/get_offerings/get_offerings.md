@@ -62,7 +62,6 @@ You can use the request body to filter offers based on your specific requirement
     "countries": ["FR"] // TODO: maybe add requirements for data center certifications
   },
   "maxTotalPricePerEpochUsd": "12.57426"
-  // TODO: add amount of instances (with additional resources)
 }
 ```
 
@@ -249,7 +248,7 @@ Let's break down the key components of the response:
 
 The `configuration` object represents the basic configuration of the offer. It includes:
 
-- **`slug`**: The identifier for the basic configuration. Read more about basic configurations in the [Basic Configurations section](TODO: put link here). Full list of available basic configurations is available at GET [/marketplace/basic-configurations](https://api.fluence.dev/marketplace/basic-configurations).
+- **`slug`**: The identifier for the basic configuration. Read more about basic configurations in the [Basic Configurations section](./get_offerings.md#basic-configurations-available-on-the-marketplace). Full list of available basic configurations is available at GET [/marketplace/basic-configurations](https://api.fluence.dev/marketplace/basic-configurations).
 - **`price`**: The base price for this configuration (in USDC per epoch)
 
 **Example:**
@@ -270,7 +269,7 @@ The `resources` array contains details about the base resources included in the 
 Each resource element in the array includes:
 
 - `type`: Resource type, can be one of the following: `VCPU`, `RAM`, `STORAGE`, `PUBLIC_IP`
-- `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Resources section](TODO: put link here).
+- `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Resources section](./get_offerings.md#hardware-specifications-available-on-the-marketplace).
 - `price`: The price for this resource per epoch
 
 **Example:**

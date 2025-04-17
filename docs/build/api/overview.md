@@ -10,7 +10,7 @@ The Fluence Console API provides programmatic access to the decentralized Fluenc
 All API endpoints are available at:
 
 ```bash
-https://vodopad.mainnet.fluence.dev // TODO: switch to api.fluence.dev once it's ready
+https://api.fluence.dev
 ```
 
 :::
@@ -60,7 +60,7 @@ The API is organized around these main resource areas:
 
 :::info
 
-You can find detailed information about all API endpoints in the [Fluence Console API Reference](https://vodopad.mainnet.fluence.dev/docs). // TODO: switch to api.fluence.dev once it's ready
+You can find detailed information about all API endpoints in the [Fluence Console API Reference](https://api.fluence.dev/docs).
 
 :::
 

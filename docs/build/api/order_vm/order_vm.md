@@ -151,24 +151,20 @@ When you submit your deployment request, the API will respond with an array of o
 ```json
 [
   {
-    "appCid": "bafkreihqjkkphghotzkjd5h4bnzh6n2ysmg6qbm2mk6dnlsm3r7zfwoo4y", // TODO: currently discussing to remove this field. Remove once it is decided.
-    "dealId": "0xCbfC94101AE30f212790B6Da340fD071B5eee86D", // TODO: currently discussing to name it vmId
-    "peerId": "12D3KooWHnPKNkhfvwEVQ5TJGEnD5LaXo6UHEG5eVXnhRLixfhXm" // TODO: currently discussing to remove this field. Remove once it is decided.
-    // TODO: currently discussing to add vmName here
+    "vmId": "0xCbfC94101AE30f212790B6Da340fD071B5eee86D",
+    "vmName": "my-vm"
   },
   {
-    "appCid": "bafkreifj2m7jpmnun4tsmdihaupf3l5egm2xz35jv2sdwqmhakxrjoeyq",
-    "dealId": "0x79F7D3F8c1A2D7B4A890a1B5cE3EfCd8D6E7F8a9",
-    "peerId": "12D3KooWRtgFEFGHiJkLmNoPQrStUvX7Ld3LHSVxMC7Nf8UEmTq3"
+    "vmId": "0x79F7D3F8c1A2D7B4A890a1B5cE3EfCd8D6E7F8a9",
+    "vmName": "my-vm-2"
   }
 ]
 ```
 
 Each object in the response contains these important identifiers:
 
-- **`appCid`**: The Content Identifier (CID) for your deployment. This is a unique identifier of service file with information of your VM deployment stored on IPFS.
-- **`dealId`**: The blockchain deal identifier. This represents the smart contract that manages your deployment on the blockchain.
-- **`peerId`**: The peer identifier for your VM in the Fluence network. You'll use this to communicate with your VM.
+- **`vmId`**: The unique identifier for your VM.
+- **`vmName`**: The name you assigned to the VM.
 
 Save these identifiers as they are essential for managing your deployment later.
 
@@ -219,7 +215,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
 
 4. **Save the response data**:
 
-   - Store the `appCid`, `dealId`, and `peerId` values // TODO: fix later when fields are changed
+   - Store the `vmId` and `vmName` values
    - These will be needed to manage your deployment
 
 :::info
