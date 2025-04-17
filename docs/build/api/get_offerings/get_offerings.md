@@ -534,6 +534,6 @@ Let's walk through a typical workflow for finding and selecting compute resource
 
 ## The next steps
 
-The Fluence compute marketplace API provides a powerful and flexible way to find and compare compute resources from various providers. By using the filtering capabilities and understanding the response structure, you can quickly find resources that match your specific requirements and make informed decisions based on price, location, and hardware specifications.
+The Fluence compute marketplace API provides a powerful and flexible way to find and compare compute resources from various providers across the globe. By using the filtering capabilities and understanding the response structure, you can quickly find resources that match your specific requirements including price, location, and hardware specifications.
 
 In the next document, we'll cover how to use your selected offer to create and manage deployments on the Fluence platform.
