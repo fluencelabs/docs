@@ -12,11 +12,11 @@ Access the Fluence Console: [https://console.fluence.network/sign-in](https://co
 
 ## API Access
 
-In addition to the web interface, Fluence Console offers a comprehensive REST API that allows you to programmatically:
+In addition to the web interface, an API is available to programmatically:
 
 - Search for available compute resources on the marketplace
 - Deploy virtual machines with custom configurations
-- Manage your active deployments
+- Manage active deployments
 
 The API is ideal for automation, integration with your existing workflows, or building custom tools on top of the Fluence platform.
 

@@ -21,7 +21,8 @@ The API enables you to:
 
 1. **Search the Marketplace** - Find compute resources that match your specific requirements including CPU, memory, storage, geographic location, and budget
 2. **Deploy Virtual Machines** - Create and configure VMs with your choice of operating system and network settings
-3. **Manage Resources** - View your active deployments and monitor their status
+3. **Manage deployments** - View your active VMs, change their configuration, and delete them when no longer needed
+4. **Manage personal resources** - View and edit SSH keys and other personal resources
 
 ## Authentication
 
@@ -63,10 +64,6 @@ The API is organized around these main resource areas:
 You can find detailed information about all API endpoints in the [Fluence Console API Reference](https://api.fluence.dev/docs).
 
 :::
-
-## Rate Limits
-
-Currently, the API has no rate limits. // TODO: add rate limits once we have them
 
 ## Next Steps
 

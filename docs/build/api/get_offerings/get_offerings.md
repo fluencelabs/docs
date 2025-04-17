@@ -29,10 +29,10 @@ You can use the request body to filter offers based on your specific requirement
 
 ```json
 {
-  "basicConfiguration": "cpu-8-ram-16gb-storage-25gb",
+  "basicConfiguration": "cpu-8-ram-16gb-storage-25gb", // optional
   "additionalResources": {
-    "ramMb": 2048,
     "storage": [
+      // optional
       {
         "type": "NVMe",
         "megabytes": 20480
@@ -40,28 +40,33 @@ You can use the request body to filter offers based on your specific requirement
     ]
   },
   "hardware": {
+    // optional
     "cpu": [
+      // optional
       {
         "manufacturer": "AMD",
-        "architecture": "Zen" // TODO: add brand and generation
+        "architecture": "Zen"
       }
     ],
     "memory": [
+      // optional
       {
         "type": "DDR",
         "generation": "5"
       }
     ],
     "storage": [
+      // optional
       {
         "type": "NVMe"
       }
     ]
   },
   "datacenter": {
-    "countries": ["FR"] // TODO: maybe add requirements for data center certifications
+    // optional
+    "countries": ["FR"]
   },
-  "maxTotalPricePerEpochUsd": "12.57426"
+  "maxTotalPricePerEpochUsd": "12.57426" // optional
 }
 ```
 
@@ -165,7 +170,7 @@ If you need additional resources beyond the basic configuration, you can specify
     "storage": [
       {
         "type": "NVMe",
-        "megabytes": 20480 // TODO: will be supply, units fields instead of megabytes. Change once we have it. And current value is in MiB, not MB.
+        "megabytes": 20480
       }
     ]
   }
@@ -174,10 +179,9 @@ If you need additional resources beyond the basic configuration, you can specify
 
 #### Maximum price per epoch constraint
 
-You can apply filter for the max price per epoch (24 hours) in USDC that you're willing to pay for the resources.
-// TODO: specify whether it's per basic configuration or with additional resources.
+You can apply filter for the max price per epoch (24 hours) in USDC that you're willing to pay for the resources you've specified in the request body: both basic configuration and additional resources.
 
-- `maxTotalPricePerEpochUsd` - Maximum price you're willing to pay for the resources, in USD. This is expressed as a string to handle decimal precision (e.g. `"12.50"`)
+- `maxTotalPricePerEpochUsd` - Expressed as a string to handle decimal precision (e.g. `"12.50"`)
 
 **Example:**
 
@@ -248,7 +252,7 @@ Let's break down the key components of the response:
 
 The `configuration` object represents the basic configuration of the offer. It includes:
 
-- **`slug`**: The identifier for the basic configuration. Read more about basic configurations in the [Basic Configurations section](./get_offerings.md#basic-configurations-available-on-the-marketplace). Full list of available basic configurations is available at GET [/marketplace/basic-configurations](https://api.fluence.dev/marketplace/basic-configurations).
+- **`slug`**: The basic configuration identifier. Read more about basic configurations in the [Basic Configurations section](./get_offerings.md#basic-configurations-available-on-the-marketplace). Full list of available basic configurations is available at GET [/marketplace/basic-configurations](https://api.fluence.dev/marketplace/basic-configurations).
 - **`price`**: The base price for this configuration (in USDC per epoch)
 
 **Example:**
@@ -428,11 +432,10 @@ Response is an array of strings, each string is a basic configuration slug.
 ```json
 {
   "basic_configurations": [
-    // TODO: change to plain array
     "cpu-2-ram-4gb-storage-25gb",
     "cpu-4-ram-8gb-storage-25gb",
     "cpu-8-ram-16gb-storage-25gb"
-    // More basic configurations
+    // Other basic configurations
   ]
 }
 ```
@@ -471,7 +474,7 @@ This endpoint returns all hardware specifications available across all providers
   "cpu": [
     {
       "manufacturer": "AMD",
-      "architecture": "Zen" // TODO: add brand and generation once they are added to the API
+      "architecture": "Zen"
     },
     {
       "manufacturer": "Intel",

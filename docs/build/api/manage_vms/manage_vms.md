@@ -30,8 +30,8 @@ The response contains an array of VM objects, each representing a virtual machin
 {
   "id": "0x0000000000000000000000000000000000000001",
   "vmName": "vm-name",
-  "status": "ACTIVE", // TODO: maybe add `LAUNCHING` to reflect Console UI statuses
-  "pricePerEpoch": 298160, // TODO: field without precision - may be changed to string with precision 6
+  "status": "ACTIVE",
+  "pricePerEpoch": 298160,
   "resources": [
     {
       "type": "VCPU",
@@ -48,7 +48,7 @@ The response contains an array of VM objects, each representing a virtual machin
     },
     {
       "type": "RAM",
-      "quantity": 4096, // TODO: quantity is in MiB. So it's not very readable
+      "quantity": 4096,
       "details": {
         "manufacturer": "Samsung",
         "model": "DGX",
@@ -110,7 +110,7 @@ Let's break down the key components of each VM object:
 
 - **`id`**: The unique identifier for the VM on the Fluence network
 - **`vmName`**: The name you assigned to the VM when creating it
-- **`status`**: Current operational status of the VM (currently - only `ACTIVE` is shown) // TODO: maybe add `LAUNCHING` to reflect Console UI statuses
+- **`status`**: Current operational status of the VM (currently - only `ACTIVE` is shown)
 - **`pricePerEpoch`**: The cost of the VM per epoch (24 hours) in USDC (with 6 decimals)
 - **`createdAt`**: Timestamp indicating when the VM was created
 - **`nextBillingAt`**: Timestamp indicating when the next billing cycle will start
