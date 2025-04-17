@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Introduction to the Fluence Console API
+# Introduction to the Fluence API
 
-The Fluence Console API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface. With this API, you can integrate Fluence's decentralized compute capabilities directly into your applications and workflows.
+The Fluence API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface. With this API, you can integrate Fluence's decentralized compute capabilities directly into your applications and workflows.
 
 :::info
 All API endpoints are available at:
@@ -15,7 +15,7 @@ https://api.fluence.dev
 
 :::
 
-## What You Can Do with the Fluence Console API
+## API functionality
 
 The API enables you to:
 
@@ -26,9 +26,9 @@ The API enables you to:
 
 ## Authentication
 
-The Fluence Console API uses API keys for authentication. All requests must include your API key in the Authorization header. You can read more about API keys creation and management in the [Fluence Console Settings guide](../settings/settings.md).
+The Fluence API uses API keys for authentication. All requests must include your API key in the Authorization header. You can read more about API keys creation and management in the [Fluence Console Settings guide](../settings/settings.md).
 
-### Using Your API Key
+### Using an API key
 
 Include your API key in the `Authorization` header with all API requests:
 
@@ -37,9 +37,9 @@ curl -X POST https://api.fluence.dev/vms/v3 \
   -H "Authorization: Bearer <YOUR_API_KEY>"
 ```
 
-## Request and Response Format
+## Request and response format
 
-The Fluence Console API accepts and returns data in JSON format. When making POST requests, set the `Content-Type` header to `application/json`:
+The Fluence API accepts and returns data in JSON format. When making POST requests, set the `Content-Type` header to `application/json`:
 
 ```bash
 curl -X POST https://api.fluence.dev/marketplace/offers \
@@ -50,7 +50,7 @@ curl -X POST https://api.fluence.dev/marketplace/offers \
   }'
 ```
 
-## Common API Endpoints
+## Common API endpoints
 
 The API is organized around these main resource areas:
 
@@ -61,13 +61,13 @@ The API is organized around these main resource areas:
 
 :::info
 
-You can find detailed information about all API endpoints in the [Fluence Console API Reference](https://api.fluence.dev/docs).
+You can find detailed information about all API endpoints in the [Fluence API Reference](https://api.fluence.dev/docs).
 
 :::
 
-## Next Steps
+## Next steps
 
-Now that you are familiar with the basics of the Fluence Console API, you can explore the following guides to learn more:
+Now that you are familiar with the basics of the Fluence API, you can explore the following guides to learn more:
 
 1. [Finding Compute Resources on the Fluence Marketplace](./get_offerings/get_offerings.md) - Learn how to search for and compare compute offerings that match your requirements
 2. [Deploying Virtual Machines on the Fluence Marketplace](./order_vm/order_vm.md) - Learn how to deploy and configure VMs

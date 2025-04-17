@@ -13,7 +13,7 @@ In this guide, we'll walk through how to:
 3. Understand and compare different provider offerings
 4. Select the optimal resources for your needs
 
-## Searching for Available Offers
+## Searching for available Offers
 
 The marketplace offers a powerful API endpoint that allows you to search for available compute resources with specific filters:
 
@@ -35,7 +35,7 @@ You can use the request body to filter offers based on your specific requirement
       // optional
       {
         "type": "NVMe",
-        "megabytes": 20480
+        "megabytes": 20480 // in MiB
       }
     ]
   },
@@ -72,7 +72,7 @@ You can use the request body to filter offers based on your specific requirement
 
 Let's break down the request body parameters and their usage
 
-#### Basic Configuration
+#### Basic сonfiguration
 
 A predefined configuration string that specifies a common resource profile. Use this for quick filtering without specifying individual resources
 
@@ -150,7 +150,7 @@ For applications with data residency requirements or to reduce latency for users
 }
 ```
 
-#### Additional Resources
+#### Additional resources
 
 If you need additional resources beyond the basic configuration, you can specify them in the request body to get offers that have enough additional resources to satisfy your requirements. Currently, only `STORAGE` is available as additional resource. Additional resources are hardware resources that are not included in the basic configuration, list of all hardware that you can use as additional resources is available in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
 
@@ -160,7 +160,12 @@ If you need additional resources beyond the basic configuration, you can specify
   - Fields:
     - `storage`
       - `type` : Type of storage - one of: `"HDD"`, `"SSD"`, or `"NVMe"`
-      - `megabytes` : Required storage size in megabytes
+      - `megabytes` : Required storage size in Mebibytes (MiB)
+
+:::tip
+To get the target value in Mebibytes (MiB) from Gigabytes (GB), use the following formula: 1 GiB = 1024 \* 1 GB.
+For example, if you need 10 GB of storage, you should set `megabytes` to 10240.
+:::
 
 **Example:**
 
@@ -246,7 +251,7 @@ The response is an array of objects, each object represents an offer from a prov
 
 Let's break down the key components of the response:
 
-### Response Fields of a single offering object
+### Response fields of a single offering object
 
 #### Configuration
 
@@ -340,7 +345,7 @@ Each `server` object includes:
 
 - **`availableBasicInstances`**: Number of instances with the basic configuration of the object that can be created on this set of resources
 - **`additionalResources`**: Extra resources this specific server can provide beyond the basic configuration.
-  - `supply`: Total amount of this resource available on this server
+  - `supply`: Total amount of this resource available on this server. In case of STORAGE, available amount is in Mebibytes (MiB).
   - `perVmLimit`: Maximum amount of this resource that can be allocated to a single VM (null means no limit)
   - `type`: Resource type (currently only STORAGE is supported)
   - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
@@ -375,11 +380,15 @@ Each `server` object includes:
 The `maxAdditionalSupply` array provides information about the maximum additional resources you can purchase per one instance of VM.
 Each element in this array represents a distinct resource type and has the following fields:
 
-- **`supply`**: Total available quantity of this resource type
+- **`supply`**: Total available quantity of this resource type.
 - **`perVmLimit`**: Maximum amount of this resource that can be allocated to a single VM (null means no limit)
 - **`type`**: Resource type (currently only STORAGE is supported)
 - **`metadata`**: Resource-specific details
 - **`price`**: Cost per unit of this resource
+
+:::note
+In case of STORAGE, values in `supply` and `perVmLimit` fields are in Mebibytes (MiB).
+:::
 
 ```json
 {
@@ -397,7 +406,7 @@ Each element in this array represents a distinct resource type and has the follo
 }
 ```
 
-## Comparing and Selecting Offers
+## Comparing and selecting offers
 
 The marketplace may return multiple offers that match your criteria. These offers can differ in several ways:
 
@@ -467,7 +476,7 @@ GET /marketplace/hardware
 
 This endpoint returns all hardware specifications available across all providers in the marketplace. The response is an object with arrays of hardware specifications for each resource type.
 
-**Example of a response:**
+**Example of a successful response:**
 
 ```json
 {

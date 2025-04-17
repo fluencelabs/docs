@@ -9,7 +9,7 @@ In this guide, you'll learn how to:
 3. Submit your VM deployment request
 4. Understand the deployment response
 
-## Creating a VM Deployment
+## Creating a VM deployment
 
 To deploy VMs on the Fluence marketplace, use the following endpoint:
 
@@ -17,7 +17,7 @@ To deploy VMs on the Fluence marketplace, use the following endpoint:
 POST https://api.fluence.dev/vms/v3
 ```
 
-### Building Your Deployment Request
+### Building your deployment request
 
 Your deployment request has three key components:
 
@@ -30,8 +30,16 @@ Your deployment request has three key components:
 ```json
 {
   "constraints": {
+    // optional
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb",
-    "additionalResources": null,
+    "additionalResources": {
+      "storage": [
+        {
+          "type": "NVMe",
+          "megabytes": 20480 // in MiB
+        }
+      ]
+    },
     "hardware": null,
     "datacenter": null,
     "maxTotalPricePerEpochUsd": "1.5"
@@ -49,7 +57,7 @@ Your deployment request has three key components:
         "protocol": "tcp"
       }
     ],
-    "osImage": "https://fluence-os-images.fra1.digitaloceanspaces.com/disk.img.gz",
+    "osImage": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img",
     "sshKeys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxV4JJjOCRCnPkvf9h..."]
   }
 }
@@ -57,19 +65,11 @@ Your deployment request has three key components:
 
 Let's break down each component in detail:
 
-### Resource Constraints (optional)
+### Resource constraints (optional)
 
 The `constraints` object specifies the compute resources you need for your VMs if you have any specific requirements. This field is optional. This uses the same parameters you learned about in the [Finding Compute Resources](../get_offerings/get_offerings.md) guide:
 
-```json
-"constraints": {
-  "basicConfiguration": "cpu-4-ram-8gb-storage-25gb",
-  "additionalResources": null,
-  "hardware": null,
-  "datacenter": null,
-  "maxTotalPricePerEpochUsd": "1.5"
-}
-```
+Fields:
 
 - **`basicConfiguration`**: A predefined resource profile. If no basic configuration is chosen, the system will automatically select the smallest available option. Read more about basic configurations in the [Basic Configurations section](../get_offerings/get_offerings.md#basic-configuration).
 - **`additionalResources`**: Extra resources beyond the basic configuration. Read more about additional resources in the [Additional Resources section](../get_offerings/get_offerings.md#additional-resources).
@@ -81,7 +81,7 @@ The `constraints` object specifies the compute resources you need for your VMs i
 You only need to include the constraints that matter to you. For example, if you only care about the basic configuration and price, you can omit the other fields or set them to `null`.
 :::
 
-### Number of Instances
+### Number of instances
 
 The `instances` field is straightforward - it specifies how many identical VMs you want to deploy:
 
@@ -93,7 +93,7 @@ The `instances` field is straightforward - it specifies how many identical VMs y
 
 This will create two VMs with identical configurations.
 
-### VM Configuration
+### VM configuration
 
 The `vmConfiguration` object defines the deployment details for your VMs:
 
@@ -110,18 +110,18 @@ The `vmConfiguration` object defines the deployment details for your VMs:
       "protocol": "tcp"
     }
   ],
-  "osImage": "https://cloud-images....img",
+  "osImage": "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img",
   "sshKeys": [
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxV4JJjOCR..."
   ]
 }
 ```
 
-#### VM Name
+#### VM name
 
 - **`name`** : A human-readable name for your VM(s). Can contain only alphanumeric characters and hyphens.
 
-#### Network Configuration
+#### Network configuration
 
 - **`openPorts`** : An array of port configurations that should be accessible from the internet:
   - `port`: The port number to open
@@ -129,7 +129,7 @@ The `vmConfiguration` object defines the deployment details for your VMs:
 
 By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
 
-#### Operating System
+#### Operating system
 
 - **`osImage`**: The URL to the OS image to use for your VM. Supported image formats are:
   - `.qcow2`
@@ -140,7 +140,7 @@ By default, only 22 port (TCP) is open for SSH access. You must explicitly speci
   - `.img.xz`
   - `.img.gz`
 
-#### Access Configuration
+#### Access configuration
 
 - **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
 
@@ -168,7 +168,12 @@ Each object in the response contains these important identifiers:
 
 Save these identifiers as they are essential for managing your deployment later.
 
-## Practical Workflow
+:::info
+In case if no offers match your requirements, you will receive an error response.
+_Currently, the error response has 500 status code and the body contains the error message "Internal server error"._
+:::
+
+## Practical workflow
 
 Let's walk through a typical workflow for deploying VMs on the Fluence marketplace:
 
@@ -193,7 +198,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
      -H "Authorization: Bearer $API_KEY" \
      -d '{
        "constraints": {
-         "basicConfiguration": "cpu-2-ram-8gb-storage-25gb",
+         "basicConfiguration": "cpu-4-ram-8gb-storage-25gb",
          "maxTotalPricePerEpochUsd": "1.5"
        },
        "instances": 1,
@@ -225,7 +230,7 @@ Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is current
 5. **Connect to your VM**:
    VM launching will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the connection details, you can visit UI of Fluence Console [described here](../../manage_vm/manage_vm.md). Or you can use a view endpoint to get the connection details using API, which is described in the next document.
 
-## Next Steps
+## Next steps
 
 After deploying your VMs, you might want to:
 
