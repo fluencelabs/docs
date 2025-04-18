@@ -132,7 +132,7 @@ If you need specific CPU architecture or storage type, you can filter based on h
 
 #### Datacenter constraints
 
-For applications with data residency requirements or to reduce latency for users in specific regions, you can filter datacenters by country. To get the list of all available countries on the marketplace, you can use specific endpoint, read more about it in the [Datacenter countries available on the marketplace](#datacenter-countries-available-on-the-marketplace) section.
+API allows you to filter datacenters by country. To get the list of all available countries on the marketplace, you can use specific endpoint, read more about it in the [Datacenter countries available on the marketplace](#datacenter-countries-available-on-the-marketplace) section.
 
 - `datacenter` (object)
 

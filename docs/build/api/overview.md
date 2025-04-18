@@ -4,7 +4,8 @@ sidebar_position: 1
 
 # Introduction to the Fluence API
 
-The Fluence API provides programmatic access to the decentralized Fluence compute marketplace. This API allows developers to find, rent, and manage compute resources without using the web interface, enabling direct integration of Fluence's decentralized compute capabilities into applications and workflows.
+The Fluence API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface, enabling direct integration of Fluence's decentralized compute capabilities into applications and workflows.
+This document will help you understand how to integrate Fluence's decentralized compute capabilities into your applications and workflows.
 
 :::info
 All API endpoints are available at:
@@ -63,6 +64,16 @@ The API is organized around these main resource areas:
 You can find detailed information about all API endpoints in the [Fluence API Reference](https://api.fluence.dev/docs).
 
 :::
+
+## API documentation resources
+
+### Swagger UI
+
+The Fluence API also provides an Swagger UI that allows you to explore and try the API endpoints directly in your browser: [https://api.fluence.dev/](https://api.fluence.dev/)
+
+### API Reference
+
+The Fluence API also provides an API Reference that provides more technical details on how to use the API: [https://api.fluence.dev/docs](https://api.fluence.dev/docs)
 
 ## Next steps
 
