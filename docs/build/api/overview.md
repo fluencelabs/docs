@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction to the Fluence API
 
-The Fluence API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface. With this API, you can integrate Fluence's decentralized compute capabilities directly into your applications and workflows.
+The Fluence API provides programmatic access to the decentralized Fluence compute marketplace. This API allows developers to find, rent, and manage compute resources without using the web interface, enabling direct integration of Fluence's decentralized compute capabilities into applications and workflows.
 
 :::info
 All API endpoints are available at:
@@ -19,16 +19,14 @@ https://api.fluence.dev
 
 The API enables you to:
 
-1. **Search the Marketplace** - Find compute resources that match your specific requirements including CPU, memory, storage, geographic location, and budget
-2. **Deploy Virtual Machines** - Create and configure VMs with your choice of operating system and network settings
-3. **Manage deployments** - View your active VMs, change their configuration, and delete them when no longer needed
+1. **Search the marketplace** - Find compute resources matching specific requirements for CPU, memory, storage, location, and budget
+2. **Deploy virtual machines** - Create and configure VMs with your choice of operating system and network settings
+3. **Manage deployments** - View active VMs, modify their configuration, and remove them when no longer needed
 4. **Manage personal resources** - View and edit SSH keys and other personal resources
 
 ## Authentication
 
-The Fluence API uses API keys for authentication. All requests must include your API key in the Authorization header. You can read more about API keys creation and management in the [Fluence Console Settings guide](../settings/settings.md).
-
-### Using an API key
+The Fluence API uses API keys for authentication. All requests must include your API key in the Authorization header. You can read more about creating and managing API keys in the [Fluence Console Settings guide](../settings/settings.md).
 
 Include your API key in the `Authorization` header with all API requests:
 
@@ -58,6 +56,7 @@ The API is organized around these main resource areas:
 | ---------------- | ------------------------------------------------------------------- |
 | `/marketplace/*` | Endpoints for searching and discovering available compute offerings |
 | `/vms/*`         | Endpoints for deploying and managing virtual machines               |
+| `/ssh_keys`      | Endpoints for managing SSH keys                                     |
 
 :::info
 
@@ -69,6 +68,6 @@ You can find detailed information about all API endpoints in the [Fluence API Re
 
 Now that you are familiar with the basics of the Fluence API, you can explore the following guides to learn more:
 
-1. [Finding Compute Resources on the Fluence Marketplace](./get_offerings/get_offerings.md) - Learn how to search for and compare compute offerings that match your requirements
-2. [Deploying Virtual Machines on the Fluence Marketplace](./order_vm/order_vm.md) - Learn how to deploy and configure VMs
-3. [Managing Your Virtual Machines on Fluence](./manage_vms/manage_vms.md) - Learn how to view, monitor, and delete your VMs
+1. [Find compute resources on the Fluence marketplace](./get_offerings/get_offerings.md) - Learn how to search for and compare compute offerings that match your requirements
+2. [Deploy virtual machines on the Fluence marketplace](./order_vm/order_vm.md) - Learn how to deploy and configure VMs
+3. [Manage your virtual machines on Fluence](./manage_vms/manage_vms.md) - Learn how to view, monitor, and delete your VMs

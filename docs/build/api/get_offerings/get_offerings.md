@@ -2,18 +2,18 @@
 sidebar_position: 2
 ---
 
-# Finding compute resources on the Marketplace
+# Find compute resources on the marketplace
 
-The Fluence compute marketplace is a decentralized platform where you can find and rent compute resources from various providers worldwide. Each provider has its own offers with different geographies, configurations and prices. The marketplace API makes it easy to discover resources that meet your specific requirements.
+The Fluence compute marketplace is a decentralized platform where you can find and rent compute resources from various providers worldwide. Each provider has offers with different geographies, configurations, and prices. The marketplace API helps you discover resources that meet your specific requirements.
 
-In this guide, we'll walk through how to:
+In this guide, you'll learn how to:
 
 1. Search for available compute offers
 2. Filter resources based on your requirements
 3. Understand and compare different provider offerings
 4. Select the optimal resources for your needs
 
-## Searching for available Offers
+## Search for available offers
 
 The marketplace offers a powerful API endpoint that allows you to search for available compute resources with specific filters:
 
@@ -21,7 +21,7 @@ The marketplace offers a powerful API endpoint that allows you to search for ava
 POST https://api.fluence.dev/marketplace/offers
 ```
 
-### Understanding search parameters (constraints)
+### Request parameters
 
 You can use the request body to filter offers based on your specific requirements. All filters are optional, you can use them to find whether there are offers that match your requirements.
 
@@ -422,6 +422,87 @@ For example, you might see two offers for the same basic configuration (e.g., `c
 
 This allows you to choose based on your priorities - whether that's cost, location, or specific hardware requirements.
 
+## Estimate price for a deployment
+
+Before committing to a deployment, you'll often want to know how much it will cost. The `/vms/v3/estimate` endpoint allows you to calculate the expected price for your deployment based on your configuration requirements and the number of instances you plan to deploy.
+
+```bash
+POST /vms/v3/estimate
+```
+
+### Request parameters
+
+The request body follows a similar structure to the `/marketplace/offers` endpoint, with the addition of an `instances` field to specify how many VMs you want to deploy.
+
+**Example of a request body with all filters specified:**
+
+```json
+{
+  "constraints": {
+    "basicConfiguration": "cpu-2-ram-4gb-storage-25gb",
+    "additionalResources": {
+      "storage": [
+        {
+          "type": "NVMe",
+          "megabytes": 20480
+        }
+      ]
+    },
+    "hardware": {
+      "cpu": [
+        {
+          "manufacturer": "AMD"
+        }
+      ],
+      "storage": [
+        {
+          "type": "NVMe"
+        }
+      ]
+    },
+    "datacenter": {
+      "countries": ["FR", "US"]
+    },
+    "maxTotalPricePerEpochUsd": "1.2"
+  },
+  "instances": 3
+}
+```
+
+- **`constraints`**: Contains all your requirements for the deployment, identical to the filters used in the `/marketplace/offers` endpoint.
+
+  - **`basicConfiguration`**: The predefined VM configuration you want (e.g., `"cpu-2-ram-4gb-storage-25gb"`)
+  - **`additionalResources`**: Extra resources you need beyond the basic configuration
+  - **`hardware`**: Specific hardware requirements (CPU manufacturer, storage type, etc.)
+  - **`datacenter`**: Geographic constraints for your deployment
+  - **`maxTotalPricePerEpochUsd`**: Maximum price per epoch (24 hours) you're willing to pay
+
+- **`instances`**: The number of VMs you want to deploy with this configuration
+
+### Response structure
+
+The endpoint returns detailed pricing estimation for your proposed deployment.
+
+**Example of a response:**
+
+```json
+{
+  "depositAmountUsdc": "7.01532", // totalPricePerEpoch * depositEpochs
+  "depositEpochs": 2,
+  "totalPricePerEpoch": "3.50766", // total price for all instances per epoch
+  "maxPricePerEpoch": "0.35793", // max price for a single instance per epoch
+  "instances": 10 // number of instances
+}
+```
+
+#### Response fields
+
+- **`depositAmountUsdc`**: The total deposit amount required in USDC. This is calculated as `totalPricePerEpoch` × `depositEpochs`.
+- **`depositEpochs`**: The number of epochs (days) for which the deposit is calculated. This represents the initial commitment period.
+- **`instances`**: The number of VM instances you requested in your estimate.
+- **`maxPricePerEpoch`**: The maximum price per epoch (24 hours) for a single instance of your configuration.
+- **`totalPricePerEpoch`**: The total price per epoch for all instances combined.
+
 ## Discovering available options for filter parameters
 
 The Fluence Marketplace API provides several endpoints to help you discover valid values for filter parameters. These endpoints allow you to see what options are available for basic configurations, countries, and hardware specifications.
@@ -439,17 +520,15 @@ Response is an array of strings, each string is a basic configuration slug.
 **Example of a response:**
 
 ```json
-{
-  "basic_configurations": [
-    "cpu-2-ram-4gb-storage-25gb",
-    "cpu-4-ram-8gb-storage-25gb",
-    "cpu-8-ram-16gb-storage-25gb"
-    // Other basic configurations
-  ]
-}
+[
+  "cpu-2-ram-4gb-storage-25gb",
+  "cpu-4-ram-8gb-storage-25gb",
+  "cpu-8-ram-16gb-storage-25gb"
+  // Other basic configurations
+]
 ```
 
-**Usage:** Use these values in the `basicConfiguration` field of your [search parameters](#understanding-search-parameters-constraints) to quickly select standard resource profiles.
+**Usage:** Use these values in the `basicConfiguration` field of your [request parameters](#request-parameters) to quickly select standard resource profiles.
 Each configuration string follows the format `cpu-[cores]-ram-[memory]-storage-[disk]`. For example, `"cpu-2-ram-4gb-storage-25gb"` represents a configuration with 2 CPU cores, 4GB RAM, and 25GB storage.
 
 ### Datacenter countries available on the marketplace
@@ -466,7 +545,7 @@ Lists all countries that have datacenters with available offers in the marketpla
 ["DE", "FR", "GB", "LT", "PL", "US"]
 ```
 
-**Usage:** Use these ISO country codes in the `datacenter.countries` array of your [search parameters](#understanding-search-parameters-constraints) to restrict results to specific geographic locations. This is particularly useful for applications with data residency requirements or to minimize latency for specific user regions.
+**Usage:** Use these ISO country codes in the `datacenter.countries` array of your [search parameters](#search-for-available-offers) to restrict results to specific geographic locations. This is particularly useful for applications with data residency requirements or to minimize latency for specific user regions.
 
 ### Hardware specifications available on the marketplace
 
@@ -512,7 +591,7 @@ This endpoint returns all hardware specifications available across all providers
 }
 ```
 
-**Usage:** This endpoint helps you see what hardware specifications are available for filtering. You can use these values in the `hardware` section of your [search parameters](#understanding-search-parameters-constraints):
+**Usage:** This endpoint helps you see what hardware specifications are available for filtering. You can use these values in the `hardware` section of your [search parameters](#search-for-available-offers):
 
 - **CPU specifications**: Use `architecture` and `manufacturer` values to specify CPU requirements
 - **Memory specifications**: Use `type` and `generation` values to filter by RAM type

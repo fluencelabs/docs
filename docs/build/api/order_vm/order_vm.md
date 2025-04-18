@@ -1,4 +1,4 @@
-# Deploying Virtual Machines
+# Deploy virtual machines
 
 After [finding available compute resources](../get_offerings/get_offerings.md) that match your requirements, the next step is to deploy your virtual machines (VMs). This guide walks you through the process of ordering and deploying VMs on the Fluence marketplace.
 
@@ -9,7 +9,7 @@ In this guide, you'll learn how to:
 3. Submit your VM deployment request
 4. Understand the deployment response
 
-## Creating a VM deployment
+## Create a VM deployment
 
 To deploy VMs on the Fluence marketplace, use the following endpoint:
 
@@ -17,7 +17,7 @@ To deploy VMs on the Fluence marketplace, use the following endpoint:
 POST https://api.fluence.dev/vms/v3
 ```
 
-### Building your deployment request
+### Request parameters
 
 Your deployment request has three key components:
 
@@ -65,7 +65,7 @@ Your deployment request has three key components:
 
 Let's break down each component in detail:
 
-### Resource constraints (optional)
+#### Resource constraints (optional)
 
 The `constraints` object specifies the compute resources you need for your VMs if you have any specific requirements. This field is optional. This uses the same parameters you learned about in the [Finding Compute Resources](../get_offerings/get_offerings.md) guide:
 
@@ -73,7 +73,7 @@ Fields:
 
 - **`basicConfiguration`**: A predefined resource profile. If no basic configuration is chosen, the system will automatically select the smallest available option. Read more about basic configurations in the [Basic Configurations section](../get_offerings/get_offerings.md#basic-configuration).
 - **`additionalResources`**: Extra resources beyond the basic configuration. Read more about additional resources in the [Additional Resources section](../get_offerings/get_offerings.md#additional-resources).
-- **`hardware`**: Specific hardware requirements like CPU manufacturer or storage type. Read more about hardware specifications in the [Hardware Specifications section](../get_offerings/get_offerings.md#hardware-specifications-constraints).
+- **`hardware`**: Specific hardware requirements like CPU manufacturer or storage type. Read more about hardware specifications in the [Hardware Specifications section](../get_offerings/get_offerings.md#hardware-specifications-constraints). If you use this field, you must use all the fields of the added hardware type.
 - **`datacenter`**: Geographic constraints for your deployment. Read more about datacenter constraints in the [Datacenter Countries section](../get_offerings/get_offerings.md#datacenter-constraints).
 - **`maxTotalPricePerEpochUsd`**: Maximum price you're willing to pay per VM per epoch (24 hours). If no max price is chosen, the system will automatically select the cheapest available option. Read more about max price constraint in the [Maximum Price Per Epoch section](../get_offerings/get_offerings.md#maximum-price-per-epoch-constraint).
 
@@ -81,7 +81,7 @@ Fields:
 You only need to include the constraints that matter to you. For example, if you only care about the basic configuration and price, you can omit the other fields or set them to `null`.
 :::
 
-### Number of instances
+#### Number of instances
 
 The `instances` field is straightforward - it specifies how many identical VMs you want to deploy:
 
@@ -93,7 +93,7 @@ The `instances` field is straightforward - it specifies how many identical VMs y
 
 This will create two VMs with identical configurations.
 
-### VM configuration
+#### VM configuration
 
 The `vmConfiguration` object defines the deployment details for your VMs:
 
@@ -117,21 +117,15 @@ The `vmConfiguration` object defines the deployment details for your VMs:
 }
 ```
 
-#### VM name
-
 - **`name`** : A human-readable name for your VM(s). Can contain only alphanumeric characters and hyphens.
 
-#### Network configuration
-
 - **`openPorts`** : An array of port configurations that should be accessible from the internet:
+
   - `port`: The port number to open
   - `protocol`: The protocol for this port (either `tcp`, `udp`)
 
-By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
-
-#### Operating system
-
 - **`osImage`**: The URL to the OS image to use for your VM. Supported image formats are:
+
   - `.qcow2`
   - `.img`
   - `.raw`
@@ -140,11 +134,13 @@ By default, only 22 port (TCP) is open for SSH access. You must explicitly speci
   - `.img.xz`
   - `.img.gz`
 
-#### Access configuration
-
 - **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
 
-## Response structure
+:::info
+By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
+:::
+
+### Response structure
 
 When you submit your deployment request, the API will respond with an array of objects, one for each VM being deployed:
 
@@ -173,7 +169,11 @@ In case if no offers match your requirements, you will receive an error response
 _Currently, the error response has 500 status code and the body contains the error message "Internal server error"._
 :::
 
-## Practical workflow
+:::info
+Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.
+:::
+
+### Practical workflow
 
 Let's walk through a typical workflow for deploying VMs on the Fluence marketplace:
 
@@ -222,10 +222,6 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
 
    - Store the `vmId` and `vmName` values
    - These will be needed to manage your deployment
-
-:::info
-Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.
-:::
 
 5. **Connect to your VM**:
    VM launching will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the connection details, you can visit UI of Fluence Console [described here](../../manage_vm/manage_vm.md). Or you can use a view endpoint to get the connection details using API, which is described in the next document.
