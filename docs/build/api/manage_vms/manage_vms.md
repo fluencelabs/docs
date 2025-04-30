@@ -48,8 +48,8 @@ The response contains an array of VM objects, each representing a virtual machin
     },
     {
       "type": "RAM",
-      "supply": "4096",
-      "units": "MiB",
+      "supply": 4,
+      "units": "GiB",
       "details": {
         "manufacturer": "Samsung",
         "model": "DGX",
@@ -62,8 +62,8 @@ The response contains an array of VM objects, each representing a virtual machin
     },
     {
       "type": "STORAGE",
-      "supply": "25600",
-      "units": "MiB",
+      "supply": 25,
+      "units": "GiB",
       "details": {
         "manufacturer": "WD",
         "sequentialWriteSpeed": 15000

@@ -36,7 +36,7 @@ Your deployment request has three key components:
       "storage": [
         {
           "type": "NVMe",
-          "supply": "20",
+          "supply": 20,
           "units": "GiB"
         }
       ]

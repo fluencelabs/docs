@@ -60,7 +60,7 @@ You can use the request body to filter offers based on your specific requirement
     // optional
     "storage": [
       {
-        "supply": "4",
+        "supply": 4,
         "units": "GiB",
         "type": "NVMe"
       }
@@ -199,7 +199,7 @@ Additional resources are hardware resources that you can request beyond the basi
   "additionalResources": {
     "storage": [
       {
-        "supply": "20",
+        "supply": 20,
         "units": "GiB",
         "type": "NVMe"
       }
@@ -258,8 +258,8 @@ To view all available basic configurations, use the endpoint described in the [B
         "availableBasicInstances": number,
         "additionalResources": [
             {
-                "supply": string,
-            "perVmLimit": string | null,
+            "supply": number,
+            "perVmLimit": number | null,
             "type": string,
             "metadata": {...},
             "price": string
@@ -269,8 +269,8 @@ To view all available basic configurations, use the endpoint described in the [B
     ],
     "maxAdditionalSupply": [
       {
-        "supply": string,
-        "perVmLimit": string | null,
+        "supply": number,
+        "perVmLimit": number | null,
       }
     ]
   },
@@ -395,7 +395,7 @@ Each `server` object includes:
             "type": "NVMe"
           },
           "price": "0.00001",
-          "supply": "100",
+          "supply": 100,
           "units": "GiB",
           "perVmLimit": 200
         }
@@ -426,7 +426,7 @@ Each element in this array represents a distinct resource type and has the follo
         "type": "NVMe"
       },
       "price": "0.00001",
-      "supply": "100",
+      "supply": 100,
       "units": "GiB",
       "perVmLimit": 200
     }
@@ -561,7 +561,7 @@ The request body follows a similar structure to the `/marketplace/offers` endpoi
       "storage": [
         {
           "type": "NVMe",
-          "supply": "20",
+          "supply": 20,
           "units": "GiB"
         }
       ]
