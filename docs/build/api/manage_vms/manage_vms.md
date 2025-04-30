@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# Manage virtual machines
+# Manage your deployments
 
-After deploying virtual machines on the Fluence marketplace, you need to monitor and manage them throughout their lifecycle. This guide explains how to view your active VMs, understand their status, and perform management operations like deletion when needed.
+After deploying virtual machines on the Fluence marketplace, you can monitor and manage them throughout their lifecycle. This guide explains how to view your active VMs, understand their status, and perform management operations like deletion when needed.
 
 In this guide, you'll learn how to:
 
@@ -28,10 +28,10 @@ The response contains an array of VM objects, each representing a virtual machin
 
 ```json
 {
-  "id": "0x0000000000000000000000000000000000000001",
+  "id": "0x311edB209b61EaA8c3e67c6B96D03288DB5Bc020",
   "vmName": "vm-name",
-  "status": "ACTIVE",
-  "pricePerEpoch": 298160,
+  "status": "Active",
+  "pricePerEpoch": "2.4352",
   "resources": [
     {
       "type": "VCPU",
@@ -48,7 +48,8 @@ The response contains an array of VM objects, each representing a virtual machin
     },
     {
       "type": "RAM",
-      "quantity": 4096,
+      "supply": "4096",
+      "units": "MiB",
       "details": {
         "manufacturer": "Samsung",
         "model": "DGX",
@@ -61,7 +62,8 @@ The response contains an array of VM objects, each representing a virtual machin
     },
     {
       "type": "STORAGE",
-      "quantity": 25600,
+      "supply": "25600",
+      "units": "MiB",
       "details": {
         "manufacturer": "WD",
         "sequentialWriteSpeed": 15000
@@ -79,11 +81,10 @@ The response contains an array of VM objects, each representing a virtual machin
       }
     }
   ],
-  "createdAt": "+002025-04-01T16:50:57.000000000Z",
-  "nextBillingAt": "+002025-04-16T17:59:55.000000000Z",
+  "createdAt": "2025-04-30T11:23:05Z",
+  "nextBillingAt": "2025-04-30T11:55:09Z",
   "osImage": "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img",
   "datacenter": {
-    "id": "0x0000000000000000000000000000000000000000000000000000000000000005",
     "countryCode": "FR",
     "cityCode": "PAR",
     "cityIndex": 1,
@@ -97,8 +98,8 @@ The response contains an array of VM objects, each representing a virtual machin
       "protocol": "tcp"
     }
   ],
-  "reservedBalance": "359440",
-  "totalSpent": "17846000"
+  "reservedBalance": "2.4352",
+  "totalSpent": "2.4352"
 }
 ```
 
@@ -123,7 +124,6 @@ The `datacenter` object provides detailed information about where your VM is phy
 
 ```json
 "datacenter": {
-  "id": "0x0000000000000000000000000000000000000000000000000000000000000005",
   "countryCode": "FR",
   "cityCode": "PAR",
   "cityIndex": 1,
@@ -141,7 +141,10 @@ The `datacenter` object provides detailed information about where your VM is phy
 
 #### Network configuration
 
-The `ports` array indicates which network ports are open on your VM:
+The **`ports`** array indicates which network ports are open on your VM. Each open port is represented by an object with the following fields:
+
+- `port`: The port number that is open
+- `protocol`: The network protocol for this port (e.g., "tcp", "udp")
 
 ```json
 "ports": [
@@ -152,24 +155,20 @@ The `ports` array indicates which network ports are open on your VM:
 ]
 ```
 
-- **`port`**: The port number that is open
-- **`protocol`**: The network protocol for this port (e.g., "tcp", "udp")
-
 Open ports are essential for accessing services running on your VM. For example, port 22 is typically used for SSH access.
 
 #### Resources
 
-The `resources` array contains detailed information about all resources allocated to your VM. Each resource is represented by an object with the following fields:
+The **`resources`** array contains detailed information about all resources allocated to your VM. Each resource is represented by an object with the following fields:
 
-- **`type`**: The type of resource, which can be one of:
+- `type`: The type of resource, which can be one of:
   - `VCPU`: Virtual CPU cores
   - `RAM`: Memory in MB
   - `STORAGE`: Disk space in MB
   - `PUBLIC_IP`: Public IP address
-  - `NETWORK_BANDWIDTH`: Network bandwidth allocation
-- **`quantity`**: The amount of this resource allocated to the VM (units depend on the resource type)
-- **`metadata`**: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications-available-on-the-marketplace)
-- **`details`**: Additional technical specifications about the resource. This field is optional for compute providers and may be empty or contain arbitrary data.
+- `quantity`: The amount of this resource allocated to the VM (units depend on the resource type)
+- `metadata`: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications-available-on-the-marketplace)
+- `details`: Additional technical specifications about the resource. This field is optional for compute providers and may be empty or contain arbitrary data.
 
 ## Delete a VM
 
@@ -181,19 +180,22 @@ DELETE https://api.fluence.dev/vms/v3
 
 ### Request parameters
 
-To delete a VM, you need to specify its ID in the request body:
+You can delete one or multiple VMs at once by specifying their IDs in the request body:
 
 ```json
 {
-  "vmId": "0x0B08D9233ed01f4697d4b6C5814bc6d9f0cB8F99"
+  "vmIds": [
+    "0x311edB209b61EaA8c3e67c6B96D03288DB5Bc020",
+    "0x79F7D3F8c1A2D7B4A890a1B5cE3EfCd8D6E7F8a9"
+  ]
 }
 ```
 
 Where:
 
-- **`vmId`**: The unique identifier of the VM you want to delete (from the list of your active VMs)
+- **`vmIds`**: An array of unique identifiers of the VMs you want to delete (from the list of your active VMs)
 
-A successful deletion request will return a 200 status code. The VM will be marked for deletion and will no longer appear in your list of active VMs once the deletion process is complete.
+A successful deletion request will return a 200 status code. The VMs will be marked for deletion and will no longer appear in your list of active VMs once the deletion process is complete.
 
 :::info
 You will be billed for the resources for each epoch of utilization. This means that if an epoch changes at 5:55 PM UTC and you delete the VM at 6:00 PM UTC, you will be charged for work in epoch started at 5:55 PM UTC as well.

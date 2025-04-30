@@ -4,14 +4,13 @@ sidebar_position: 1
 
 # Introduction to the Fluence API
 
-The Fluence API provides programmatic access to the decentralized Fluence compute marketplace, allowing developers to find, rent, and manage compute resources without using the web interface, enabling direct integration of Fluence's decentralized compute capabilities into applications and workflows.
-This document will help you understand how to integrate Fluence's decentralized compute capabilities into your applications and workflows.
+The Fluence API provides programmatic access to the decentralized Fluence compute marketplace. With API you can find, rent, and manage compute resources without using the web interface. This document will help you understand how to integrate Fluence's decentralized compute capabilities into your applications and workflows.
 
 :::info
 All API endpoints are available at:
 
 ```bash
-https://api.fluence.dev
+https://api.fluence.dev/
 ```
 
 :::
@@ -23,22 +22,20 @@ The API enables you to:
 1. **Search the marketplace** - Find compute resources matching specific requirements for CPU, memory, storage, location, and budget
 2. **Deploy virtual machines** - Create and configure VMs with your choice of operating system and network settings
 3. **Manage deployments** - View active VMs, modify their configuration, and remove them when no longer needed
-4. **Manage personal resources** - View and edit SSH keys and other personal resources
+4. **Manage SSH keys** - View, add, and remove your SSH public keys
 
-## Authentication
+## API requests
 
-The Fluence API uses API keys for authentication. All requests must include your API key in the Authorization header. You can read more about creating and managing API keys in the [Fluence Console Settings guide](../settings/settings.md).
+### Authentication
 
-Include your API key in the `Authorization` header with all API requests:
+All Fluence API endpoints require an API key sent as a Bearer token in the `Authorization` header.  
+You can create and manage your keys in the [Fluence Console settings guide](../settings/settings.md). If you omit or supply an invalid key, you’ll get a 403 code error.
 
-```bash
-curl -X POST https://api.fluence.dev/vms/v3 \
-  -H "Authorization: Bearer <YOUR_API_KEY>"
-```
+### Request and response format
 
-## Request and response format
+The Fluence API accepts and returns data in JSON format. When making POST requests, set the `Content-Type` header to `application/json`.
 
-The Fluence API accepts and returns data in JSON format. When making POST requests, set the `Content-Type` header to `application/json`:
+#### Example request
 
 ```bash
 curl -X POST https://api.fluence.dev/marketplace/offers \
@@ -47,6 +44,25 @@ curl -X POST https://api.fluence.dev/marketplace/offers \
   -d '{
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb"
   }'
+```
+
+### Response HTTP statuses
+
+Along with the HTTP methods that the API responds to, it will also return standard HTTP statuses, including error codes.
+
+- **Success:** If the status returned is in the 200 range, it indicates that the request was fulfilled successfully and that no error was encountered.
+- **Error:** In the event of a problem, the status will contain the error code:
+  - **Client errors:** Return codes in the 400 range typically indicate that there was an issue with the request that was sent. For example, this could mean missing or invalid API key, that the object you are requesting does not exist, or that your request is malformed.
+  - **Server errors:** If you receive a status in the 500 range, this generally indicates a server-side problem. This means that we are having an issue on our end and cannot fulfill your request currently.
+- **Error response body:** All 4xx/5xx responses return JSON with an `error` field with message providing additional information about the error.
+
+#### Example error response
+
+```bash
+    HTTP/1.1 403 Forbidden
+    {
+      "error": "Auth failed. No such API Key",
+    }
 ```
 
 ## Common API endpoints
@@ -58,12 +74,6 @@ The API is organized around these main resource areas:
 | `/marketplace/*` | Endpoints for searching and discovering available compute offerings |
 | `/vms/*`         | Endpoints for deploying and managing virtual machines               |
 | `/ssh_keys`      | Endpoints for managing SSH keys                                     |
-
-:::info
-
-You can find detailed information about all API endpoints in the [Fluence API Reference](https://api.fluence.dev/docs).
-
-:::
 
 ## API documentation resources
 
