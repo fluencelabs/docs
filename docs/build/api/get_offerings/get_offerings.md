@@ -183,6 +183,10 @@ API allows you to filter datacenters by country. To get the list of all availabl
 
 Additional resources are hardware resources that you can request beyond the basic configuration. You can specify them to find offers with sufficient extra capacity. Currently, only additional `storage` is supported.
 
+:::warning
+Currently, `additionalResources` can be used only along with `hardware.storage` filter.
+:::
+
 - **`additionalResources`**
 
   - Additional resources you need beyond the basic configuration.

@@ -75,6 +75,9 @@ Fields:
 
 - **`basicConfiguration`**: A predefined resource profile. If no basic configuration is chosen, the system will automatically select the smallest available option. Read more about basic configurations in the [Basic Configurations section](../get_offerings/get_offerings.md#basic-configuration).
 - **`additionalResources`**: Extra resources beyond the basic configuration. Read more about additional resources in the [Additional Resources section](../get_offerings/get_offerings.md#additional-resources).
+  :::warning
+  Currently, `additionalResources` can be used only along with `hardware.storage` filter.
+  :::
 - **`hardware`**: Specific hardware requirements like CPU manufacturer or storage type. Read more about hardware specifications in the [Hardware Specifications section](../get_offerings/get_offerings.md#hardware-specifications-constraints). If you use this field, you must use all the fields of the added hardware type.
 - **`datacenter`**: Geographic constraints for your deployment. Read more about datacenter constraints in the [Datacenter Countries section](../get_offerings/get_offerings.md#datacenter-constraints).
 - **`maxTotalPricePerEpochUsd`**: Maximum price you're willing to pay per VM per epoch (24 hours). If no max price is chosen, the system will automatically select the cheapest available option. Read more about max price constraint in the [Maximum Price Per Epoch section](../get_offerings/get_offerings.md#maximum-price-per-epoch-constraint).
