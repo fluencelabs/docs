@@ -109,12 +109,14 @@ Let's break down the key components of each VM object:
 
 - **`id`**: The unique identifier for the VM on the Fluence network
 - **`vmName`**: The name you assigned to the VM when creating it
-- **`status`**: Current operational status of the VM (currently - only `ACTIVE` is shown)
+- **`status`**: Current operational status of the VM. Statuses:
+  - `Launching`: The VM is being launched and does not yet has a public IP address to accept connections
+  - `Active`: The VM is running and operational
 - **`pricePerEpoch`**: The cost of the VM per epoch (24 hours) in USDC (with 6 decimals)
 - **`createdAt`**: Timestamp indicating when the VM was created
 - **`nextBillingAt`**: Timestamp indicating when the next billing cycle will start
 - **`osImage`**: URL of the operating system image used for the VM
-- **`publicIp`**: The public IP address assigned to your VM
+- **`publicIp`**: The public IP address assigned to your VM. If a VM is not active, the `publicIp` field will be `null`.
 - **`reservedBalance`**: The amount of USDC (with 6 decimals) currently reserved for this VM's operation
 - **`totalSpent`**: The total amount of USDC (with 6 decimals) spent on this VM since creation
 
