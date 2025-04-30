@@ -17,7 +17,7 @@ In this guide, you'll learn how to:
 To view all your currently active virtual machines, use the following API endpoint:
 
 ```bash
-GET https://api.fluence.dev/vms/v2
+GET https://api.fluence.dev/vms/v3
 ```
 
 ### Response structure
@@ -169,39 +169,8 @@ The **`resources`** array contains detailed information about all resources allo
   - `STORAGE`: Disk space in MB
   - `PUBLIC_IP`: Public IP address
 - `quantity`: The amount of this resource allocated to the VM (units depend on the resource type)
-- `metadata`: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Hardware Specifications](../get_offerings/get_offerings.md#hardware-specifications-available-on-the-marketplace)
+- `metadata`: Categorization and descriptive information about the resource. Corresponds to hardware resource characteristics from [Available Hardware Specifications](../get_offerings/get_offerings.md#available-hardware-specifications)
 - `details`: Additional technical specifications about the resource. This field is optional for compute providers and may be empty or contain arbitrary data.
-
-## Delete a VM
-
-When you no longer need a VM, you can delete it to release the resources and stop incurring charges. To delete a VM, use the following API endpoint:
-
-```bash
-DELETE https://api.fluence.dev/vms/v3
-```
-
-### Request parameters
-
-You can delete one or multiple VMs at once by specifying their IDs in the request body:
-
-```json
-{
-  "vmIds": [
-    "0x311edB209b61EaA8c3e67c6B96D03288DB5Bc020",
-    "0x79F7D3F8c1A2D7B4A890a1B5cE3EfCd8D6E7F8a9"
-  ]
-}
-```
-
-Where:
-
-- **`vmIds`**: An array of unique identifiers of the VMs you want to delete (from the list of your active VMs)
-
-A successful deletion request will return a 200 status code. The VMs will be marked for deletion and will no longer appear in your list of active VMs once the deletion process is complete.
-
-:::info
-You will be billed for the resources for each epoch of utilization. This means that if an epoch changes at 5:55 PM UTC and you delete the VM at 6:00 PM UTC, you will be charged for work in epoch started at 5:55 PM UTC as well.
-:::
 
 ## Update VM ports and name
 
@@ -253,9 +222,8 @@ Here's how to structure your request to update a VM:
 
 When updating the `openPorts` array, there are a few important things to understand:
 
-:::warning
-When specifying `openPorts`, you must include **ALL** ports that should be open, not just new ones. Any ports not included in your update request will be closed.
-:::
+1. When specifying `openPorts`, you must include **ALL** ports that should be open, not just new ones. Any ports not included in your update request will be closed.
+2. Currently, port 10250 is reserved for service purposes and will be available for exposure in upcoming releases.
 
 For example, if your VM currently has port 5050 (TCP) open and you want to add port 9000 (TCP) for a web application, your `openPorts` array should include both:
 
@@ -340,6 +308,37 @@ You can update both properties in a single request:
 
 A successful update request will return a 204 status code. The changes will take effect immediately, and you'll see the updated configuration when you next retrieve your VM details.
 
+## Delete a VM
+
+When you no longer need a VM, you can delete it to release the resources and stop incurring charges. To delete a VM, use the following API endpoint:
+
+```bash
+DELETE https://api.fluence.dev/vms/v3
+```
+
+### Request parameters
+
+You can delete one or multiple VMs at once by specifying their IDs in the request body:
+
+```json
+{
+  "vmIds": [
+    "0x311edB209b61EaA8c3e67c6B96D03288DB5Bc020",
+    "0x79F7D3F8c1A2D7B4A890a1B5cE3EfCd8D6E7F8a9"
+  ]
+}
+```
+
+Where:
+
+- **`vmIds`**: An array of unique identifiers of the VMs you want to delete (from the list of your active VMs)
+
+A successful deletion request will return a 200 status code. The VMs will be marked for deletion and will no longer appear in your list of active VMs once the deletion process is complete.
+
+:::info
+You will be billed for the resources for each epoch of utilization. This means that if an epoch changes at 5:55 PM UTC and you delete the VM at 6:00 PM UTC, you will be charged for work in epoch started at 5:55 PM UTC as well.
+:::
+
 ## Manage SSH keys
 
 Fluence allows you to manage your SSH keys, which can be automatically deployed to your VMs.
@@ -349,6 +348,10 @@ In this section, you'll learn how to:
 1. List your registered SSH keys
 2. Add new SSH keys to your account
 3. Remove SSH keys when they're no longer needed
+
+:::warning
+Without any SSH keys registered, you won't be able to access your VMs. Please ensure you have at least one SSH key registered before creating a VM.
+:::
 
 ### List SSH keys
 
@@ -400,8 +403,8 @@ POST https://api.fluence.dev/ssh_keys
 
 ```json
 {
-  "name": "name",
-  "publicKey": "ssh-ed25519 key"
+  "name": "my-key",
+  "publicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgJIjnDg1DjqOOxINs78oU3f7PJXIyq9uiNocNVhXNx user@example.com"
 }
 ```
 
@@ -417,14 +420,17 @@ Read how to [generate SSH keys](https://docs.github.com/en/authentication/connec
 If the key already exists in your account, the endpoint returns a 200 status code with the existing key details:
 
 ```json
-{
-  "active": true,
-  "algorithm": "ssh-ed25519",
-  "comment": "folex@mac.local",
-  "fingerprint": "SHA256:sINcLA/hlKG0nDpE9n233xEnXAgSISxq0/nVWbbx5A4",
-  "name": "first",
-  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgJIjnDg1DjqOOxINs78oU3f7PJXIyq9uiNocNVhXNx folex@mac.local"
-}
+[
+  {
+    "active": true,
+    "algorithm": "ssh-ed25519",
+    "comment": "user@example.com",
+    "createdAt": "+002025-03-01T00:00:000000000Z",
+    "fingerprint": "SHA256:sINcLA/hlKG0nDpE9n233xEnXAgSISxq0/nVWbbx5A4",
+    "name": "my-key",
+    "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgJIjnDg1DjqOOxINs78oU3f7PJXIyq9uiNocNVhXNx user@example.com"
+  }
+]
 ```
 
 If a new key is created, the endpoint returns a 201 status code with the newly created key details in the same format.

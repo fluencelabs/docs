@@ -17,15 +17,15 @@ In this document, you'll learn:
 
 Before exploring the Fluence Marketplace, let’s define five key terms:
 
-| Term                       | Description                                                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Offer**                  | A listing published by a provider. An offer groups one or more physical servers that run in the same datacenter and share a single pricing schedule. |
-| **Compute Peer**           | A physical server inside an offer with it's own set of hardware resources. Peers are the machines that will actually host your workloads.            |
-| **Resource**               | A consumable item on a peer: vCPU, RAM, storage, public IP.                                                                                          |
-| **Hardware specification** | Metadata that describes a resource (CPU architecture, memory generation, storage medium, etc.).                                                      |
-| **Epoch**                  | A fixed 24-hour billing period. All marketplace prices are quoted in USDC per epoch.                                                                 |
+| Term                       | Description                                                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Offer**                  | An on-chain listing from a provider that includes one or more compute Peers with identical specifications, located in the same datacenter, available at a set price. |
+| **Compute Peer**           | A physical server that is referenced in an Offer. Each Peer has its own hardware resources and is the actual machine that will run your workloads.                   |
+| **Resource**               | A distinct resource on a peer: vCPU, RAM, storage, or public IP.                                                                                                     |
+| **Hardware specification** | Metadata that describes a resource (such as CPU architecture, memory generation, storage medium, etc.).                                                              |
+| **Epoch**                  | A time period used for billing purposes. Currently, the billing interval is set to 24 hours. All marketplace prices are quoted in USDC per epoch.                    |
 
-### What distinguishes one compute peer from another?
+### Attributes of a compute peer
 
 1. **Hardware resources** – Each peer has it's own set of hardware resources and capacity.
 2. **Hardware specifications** – Detailed metadata lets you target exactly the hardware you need (e.g. `manufacturer: "AMD"`, `storage.type: "NVMe"`).
@@ -33,10 +33,10 @@ Before exploring the Fluence Marketplace, let’s define five key terms:
 4. **Location** – All peers in a single offer are located in the same datacenter.
 5. **Availability** – Peers differ in how many VMs (of a given basic configuration) they can still host and how much additional resource (such as extra storage) remains unallocated.
 
-Before deploying your workloads, you can search for offers that satisfy your CPU, RAM, storage, and location constraints and estimate their cost.
+Once you've found suitable offers that match your requirements for CPU, RAM, storage, and location, you can proceed to deploy virtual machines on these peers. The marketplace API helps you first discover and evaluate options before committing to deployment.
 
 :::tip
-You can skip the exploration step and simply declare your deployment requirements and the Marketplace algorithms will automatically match you with the best available offer. For this, proceed to [Deploy virtual machines](../order_vm/order_vm.md) section.
+You can skip the exploration step and simply declare your VM deployment requirements, then the Marketplace algorithms will automatically match you with the best available Offer. For this, proceed to [Deploy virtual machines](../order_vm/order_vm.md) section.
 :::
 
 ## Search for available offers
@@ -55,9 +55,8 @@ You can use the request body to filter offers based on your specific requirement
 
 ```json
 {
-  "basicConfiguration": "cpu-8-ram-16gb-storage-25gb", // optional
+  "basicConfiguration": "cpu-8-ram-16gb-storage-25gb",
   "additionalResources": {
-    // optional
     "storage": [
       {
         "supply": 4,
@@ -67,33 +66,28 @@ You can use the request body to filter offers based on your specific requirement
     ]
   },
   "hardware": {
-    // optional
     "cpu": [
-      // optional
       {
         "manufacturer": "AMD",
         "architecture": "Zen"
       }
     ],
     "memory": [
-      // optional
       {
         "type": "DDR",
         "generation": "5"
       }
     ],
     "storage": [
-      // optional
       {
         "type": "NVMe"
       }
     ]
   },
   "datacenter": {
-    // optional
     "countries": ["FR"]
   },
-  "maxTotalPricePerEpochUsd": "12.57426" // optional
+  "maxTotalPricePerEpochUsd": "12.57426"
 }
 ```
 
@@ -107,7 +101,7 @@ The `basicConfiguration` parameter allows you to specify a standardized resource
 - `{memory}` represents the RAM amount in GB
 - `{size}` represents the storage capacity in GB
 
-To get the list with names of all available basic configurations on the marketplace, you can use specific endpoint. Read more about it in the [Basic configurations available on the Marketplace](#basic-configurations-available-on-the-marketplace) section.
+To get the list with names of all available basic configurations on the marketplace, you can use specific endpoint. Read more about it in the [Available Basic VM Configurations](#available-basic-vm-configurations) section.
 
 **Example:**
 
@@ -119,7 +113,7 @@ To get the list with names of all available basic configurations on the marketpl
 
 #### Hardware specifications constraints
 
-If you need specific CPU architecture or storage type, you can filter based on hardware requirements. To get the list of all available hardware specifications on the marketplace, you can use specific endpoint, read more about it in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
+If you need specific CPU architecture or storage type, you can filter based on hardware requirements. To get the list of all available hardware specifications on the marketplace, you can use specific endpoint, read more about it in the [Available Hardware Specifications](#available-hardware-specifications) section.
 
 - **`hardware`**
 
@@ -141,7 +135,8 @@ If you need specific CPU architecture or storage type, you can filter based on h
   "hardware": {
     "cpu": [
       {
-        "manufacturer": "AMD"
+        "manufacturer": "AMD",
+        "architecture": "Zen"
       }
     ],
     "memory": [
@@ -161,20 +156,20 @@ If you need specific CPU architecture or storage type, you can filter based on h
 
 #### Datacenter constraints
 
-API allows you to filter datacenters by country. To get the list of all available countries on the marketplace, you can use specific endpoint, read more about it in the [Datacenter countries available on the marketplace](#datacenter-countries-available-on-the-marketplace) section.
+API allows you to filter datacenters by country. To get the list of all available countries on the marketplace, you can use specific endpoint, read more about it in the [Available Datacenter Countries](#available-datacenter-countries) section.
 
 - **`datacenter`**
 
   - Geographic constraints for the compute resources.
   - Fields:
-    - `countries`: ISO country codes where you want your resources to be located (e.g., `["FR", "DE"]` for France and Germany)
+    - `countries`: An array of ISO country codes where you want your resources to be located (e.g., `["US", "PL"]` for United States and Poland). The filter works as an OR condition - offerings from any of the specified countries will be included in the results.
 
 **Example:**
 
 ```json
 {
   "datacenter": {
-    "countries": ["FR", "DE"]
+    "countries": ["US", "PL"]
   }
 }
 ```
@@ -183,7 +178,7 @@ API allows you to filter datacenters by country. To get the list of all availabl
 
 Additional resources are hardware resources that you can request beyond the basic configuration. You can specify them to find offers with sufficient extra capacity. Currently, only additional `storage` is supported.
 
-:::warning
+:::info
 Currently, `additionalResources` can be used only along with `hardware.storage` filter.
 :::
 
@@ -214,7 +209,7 @@ Currently, `additionalResources` can be used only along with `hardware.storage` 
 
 #### Maximum price per epoch constraint
 
-You can apply filter for the max price per epoch (24 hours) in USDC that you're willing to pay for the resources you've specified in the request body: both basic configuration and additional resources.
+You can apply a filter for the max price per epoch (24 hours) in USDC that you're willing to pay for the resources you specify.
 
 - **`maxTotalPricePerEpochUsd`** - Expressed as a string to handle decimal precision (e.g. `"12.5"`)
 
@@ -228,10 +223,10 @@ You can apply filter for the max price per epoch (24 hours) in USDC that you're 
 
 ## Response structure
 
-When you send a request to `/marketplace/offers`, you'll receive a response containing an array of offers that match your criteria. Each offer represents a unique configuration available from a specific provider in a particular data center. The array consists of objects, with each object representing an offer from a provider for a specific basic configuration. _If no offers match your criteria, the response will contain an empty list._
+When you send a request to `/marketplace/offers`, you'll receive a response containing an array of offers that match your criteria. Each non-empty offer represents a configuration available from a specific provider in a particular data center. The array consists of objects, with each object representing an offer from a provider for a specific basic configuration. _If no offers match your criteria, the response will contain an empty list._
 
 :::note
-To view all available basic configurations, use the endpoint described in the [Basic Configurations available on the marketplace](#basic-configurations-available-on-the-marketplace) section.
+To view all available basic configurations, use the endpoint described in the [Available Basic VM Configurations](#available-basic-vm-configurations) section.
 :::
 
 **General structure of the response for a single object:**
@@ -290,8 +285,8 @@ Let's break down the key components of the response:
 
 The `configuration` object represents the basic configuration of the offer. It includes:
 
-- **`slug`**: The basic configuration identifier. Read more about basic configurations in the [Basic Configurations available on the marketplace](#basic-configurations-available-on-the-marketplace) section.
-- **`price`**: The base price for this configuration (in USDC per epoch)
+- **`slug`**: The basic configuration identifier. Read more about basic configurations in the [Available Basic VM Configurations](#available-basic-vm-configurations) section.
+- **`price`**: Price for the quoted configuration (in USDC per epoch)
 
 **Example:**
 
@@ -306,12 +301,12 @@ The `configuration` object represents the basic configuration of the offer. It i
 
 #### Resources
 
-The `resources` array contains details about the base resources included in the offer with the basic configuration. This shows the exact resources that will be allocated to the VM in case of matching with the offer.
+The `resources` array shows the resources that will be allocated to the VM, if matched to this offer.
 
 Each resource element in the array includes:
 
 - `type`: Resource type, can be one of the following: `VCPU`, `RAM`, `STORAGE`, `PUBLIC_IP`
-- `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
+- `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Available Hardware Specifications](#available-hardware-specifications) section.
 - `price`: The price for this resource per epoch
 
 **Example:**
@@ -342,18 +337,18 @@ Each resource element in the array includes:
 }
 ```
 
-This example object represents hardware configuration for the example basic configuration from the previous example.
+This example object contains the configuration, and associated pricing, for the basic configuration used in [the previous example](#configuration).
 
 #### Datacenter
 
-The `datacenter` object provides information about the physical location of the resources and the certifications the datacenter holds.
+The `datacenter` object provides information about the geo-location of the compute resources as well as the datacenter certifications, e.g., SOC2, ISO27001, etc..
 
 Each `datacenter` object includes fields:
 
 - **`countryCode`**: ISO country code
 - **`cityCode`**: LOCODE code for the city
 - **`cityIndex`**: Index if multiple datacenters exist in the same city
-- **`tier`**: Datacenter tier level (1-4, with 4 being highest reliability)
+- **`tier`**: Datacenter tier level (1-4, with 4 identifying data centers with the highest reliability rating)
 - **`certifications`**: Array of compliance certifications this datacenter holds
 
 **Example:**
@@ -361,11 +356,11 @@ Each `datacenter` object includes fields:
 ```json
 {
   "datacenter": {
-    "countryCode": "FR",
-    "cityCode": "PAR",
+    "countryCode": "PL",
+    "cityCode": "POZ",
     "cityIndex": 1,
-    "tier": 2,
-    "certifications": ["ISO 200027", "SOC2", "ISO 50001:2011", "PCI DSS 3.2"]
+    "tier": 4,
+    "certifications": ["ISO 27001:2022", "SOC2", "PCI DSS"]
   }
 }
 ```
@@ -379,7 +374,7 @@ Each `server` object includes:
 - **`availableBasicInstances`**: Number of instances with the basic configuration of the object that can be created on this set of resources
 - **`additionalResources`**: Extra resources this specific server can provide beyond the basic configuration.
   - `type`: Resource type (currently only `STORAGE` is supported)
-  - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Hardware specifications available on the marketplace](#hardware-specifications-available-on-the-marketplace) section.
+  - `metadata`: Its type-specific metadata. You can find more details about the metadata for each hardware resource type in the [Available Hardware Specifications](#available-hardware-specifications) section.
   - `price`: Cost per unit of this resource per epoch (24 hours)
   - `supply`: Total amount of a resource available on the server.
   - `units`: Units of measurement (currently only `GiB` is supported)
@@ -410,7 +405,7 @@ Each `server` object includes:
 }
 ```
 
-#### Max additional supply per VM
+#### Maximum Additional Supply Available Per VM
 
 The `maxAdditionalSupply` array provides information about the maximum amount of additional resources you can purchase in addition to a VM with the basic configuration.
 Each element in this array represents a distinct resource type and has the following fields:
@@ -438,11 +433,11 @@ Each element in this array represents a distinct resource type and has the follo
 }
 ```
 
-## Discovering available options for filter parameters
+## Discovering Filter Parameters
 
 The Fluence Marketplace API provides several endpoints to help you discover valid values for filter parameters. These endpoints allow you to see what options are available for basic configurations, countries, and hardware specifications.
 
-### Basic Configurations available on the marketplace
+### Available Basic VM Configurations
 
 To retrieve all available basic configurations, send a `GET` request to the following endpoint:
 
@@ -471,7 +466,7 @@ For example:
 ]
 ```
 
-### Datacenter countries available on the marketplace
+### Available Datacenter Countries
 
 To retrieve all available countries that have datacenters with available offers in the marketplace, send a `GET` request to the following endpoint:
 
@@ -489,7 +484,7 @@ For example:
 
 Use these ISO country codes in the `datacenter.countries` array of your [search parameters](#search-for-available-offers) to filter results and show only offers from specific geographic locations.
 
-### Hardware specifications available on the marketplace
+### Available Hardware Specifications
 
 To retrieve all available hardware specifications on the marketplace, send a `GET` request to the following endpoint:
 
@@ -583,7 +578,7 @@ The request body follows a similar structure to the `/marketplace/offers` endpoi
       ]
     },
     "datacenter": {
-      "countries": ["FR", "US"]
+      "countries": ["PL"]
     },
     "maxTotalPricePerEpochUsd": "1.2"
   },
@@ -635,4 +630,4 @@ In case no offers are found to satisfy the constraints, the endpoint will return
 
 The Fluence compute marketplace API provides a powerful and flexible way to find and compare compute resources from various providers across the globe. By using the filtering capabilities and understanding the response structure, you can quickly find resources that match your specific requirements including price, location, and hardware specifications.
 
-In the next [document](../order_vm/order_vm.md), we'll cover how to use your selected offer to create and manage deployments on the Fluence platform.
+In the next [section](../order_vm/order_vm.md), we'll cover how to use your selected offer to create and manage deployments on the Fluence platform.

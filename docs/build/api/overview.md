@@ -38,7 +38,7 @@ The Fluence API accepts and returns data in JSON format. When making POST reques
 #### Example request
 
 ```bash
-curl -X POST https://api.fluence.dev/marketplace/offers \
+curl -i -X POST https://api.fluence.dev/marketplace/offers \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <YOUR_API_KEY>" \
   -d '{
@@ -84,6 +84,10 @@ The Fluence API also provides an Swagger UI that allows you to explore and try t
 ### API Reference
 
 The Fluence API also provides an API Reference that provides more technical details on how to use the API: [https://api.fluence.dev/docs](https://api.fluence.dev/docs)
+
+## SSH keys and access to VMs
+
+To access your VMs, you need to have at least one SSH key registered. Please ensure you have at least one SSH key registered in your account before creating a VM. You can do it either via the [Account settings in Fluence Console](../settings/settings.md) or using the API endpoints described in the [Manage SSH keys](./manage_vms/manage_vms.md#manage-ssh-keys) guide.
 
 ## Next steps
 

@@ -30,7 +30,6 @@ Your deployment request has three key components:
 ```json
 {
   "constraints": {
-    // optional
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb",
     "additionalResources": {
       "storage": [
@@ -129,7 +128,10 @@ The `vmConfiguration` object defines the deployment details for your VMs:
 
   - `port`: The port number to open
   - `protocol`: The protocol for this port (either `tcp`, `udp`)
-  -
+
+:::warning
+Currently, port 10250 is reserved for service purposes and will be available for exposure in upcoming releases.
+:::
 
 - **`hostname`**: The hostname for your VM(s) that will be shown in the VM console when you connect to it. If not specified, the hostname will be the same as the `name` field.
 
@@ -246,9 +248,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
    ```
 
 4. **Save the response data**:
-
-   - Store the `vmId` and `vmName` values
-   - These will be needed to manage your deployment
+   Store the `vmId` and `vmName` values or find them by calling the [View your active VMs](../manage_vms/manage_vms.md#view-your-active-vms) endpoint.
 
 5. **Connect to your VM**:
    VM launching will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the connection details use a VM management API, described in the next document [Manage VMs](../manage_vms/manage_vms.md). Or you can visit UI of Fluence Console [described here](../../manage_vm/manage_vm.md).
