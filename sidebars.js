@@ -16,6 +16,17 @@ const sidebars = {
     "build/vm_rent/vm_rent",
     "build/manage_vm/manage_vm",
     "build/settings/settings",
+    {
+      type: "category",
+      label: "API",
+      items: [
+        "build/api/overview",
+        "build/api/get_offerings/get_offerings",
+        "build/api/order_vm/order_vm",
+        "build/api/manage_vms/manage_vms",
+      ],
+      collapsed: true,
+    },
   ],
 };
 

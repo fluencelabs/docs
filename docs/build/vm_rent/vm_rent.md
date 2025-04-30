@@ -1,6 +1,6 @@
-# Renting A VM 
+# Renting a VM
 
-The Fluence marketplace is a decentralized broker of compute supply and demand governed by a set of smart contracts. To this end, the Fluence marketplace not only facilitates the renting process of VMs between you and the participating compute provider(s) but also the configuration and management of your VMs. 
+The Fluence marketplace is a decentralized broker of compute supply and demand governed by a set of smart contracts. To this end, the Fluence marketplace not only facilitates the renting process of VMs between you and the participating compute provider(s) but also the configuration and management of your VMs.
 
 Currently, there are a couple of limitations with respect renting VMs:
 
@@ -26,7 +26,6 @@ Choose one of the available data center locations.
 
 Choose your VM's configuration from the available options. Currently, compute resources can only be rented in multiples of a compute unit, which is 2 vCPUs and 4 GB of RAM. In the future, this limitation will be removed and compute resources can be added in a fine-grained manner for both vCPUs and RAM.
 
-
 ![choose configuration](./assets/configuration.webp)
 
 ### 3. Choose storage
@@ -40,10 +39,6 @@ Choose the type and amount of storage desired. Currently, the minimum storage si
 Specify the server type for the VM. Since hardware within and across data centers may vary, pay close attention to the provided hardware specifications and price. Moreover, Fluence Console allows you to view a data center's geo location at the city level and other important details such as available certifications and you are encourage to utilize these resources.
 
 ![choose server type](./assets/server_type.webp)
-
-:::info
-**Server type** may affect the available rental duration of the VM. Pay attention to the `Expires in` parameter in the **Review** block and ff you are not satisfied with the length of the rental period, try selecting a different server type.
-:::
 
 ### 5. Rent a Public IPv4 address
 
@@ -62,10 +57,6 @@ Specify a **name for the VM**. Currently, the VM name must be unique within a yo
 ### 7. Specify the open ports
 
 By default, all ports except **port 22** are closed but you can assign up to 50 open ports for your VM and all open ports support **TCP** and **UDP**.
-
-:::info
-Currently, it is not possible to change the set of open ports through **Fluence Console** after the VM is initiated. While you are able to configure your own Firewall and **close** ports originally asked to be opened, you will not be able to **open** ports not specified to be open at VM creation.
-:::
 
 ![specify ports](./assets/ports.webp)
 
