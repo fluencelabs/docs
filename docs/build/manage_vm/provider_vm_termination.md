@@ -11,11 +11,11 @@ In this document, you'll learn:
 
 ## Reasons for Termination
 
-The Fluence compute marketplace unites established compute providers with high standards of security and reliability, proven by Tier certifications. Termination is the last resort for providers when handling issues and usually happens due to the user's actions, such as:
+The Fluence compute marketplace sources from established compute providers with high standards of security and reliability supported by high Tier 3 and 4 certifications. Termination is the last resort for providers when handling exceptions and usually are the result of a adverse user  behavior such as:
 
 - Not paying for the VM (VM balance reached 0)
-- The user violating the terms of service
-- The user using the VM for illegal activities or running malicious workloads
+- Violating the terms of service
+- Using the VM for illegal activities or running malicious workloads
 
 ## Notifications and Identification
 
