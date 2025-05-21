@@ -215,7 +215,7 @@ GET https://api.fluence.dev/vms/v3/default_images
 
 ### Response structure
 
-The response contains an array of objects, each representing a default OS image, you can use `downloadUrl` in your [deployment request](./order_vm.md#request-parameters) to use a default OS image.
+The response contains an array available OS images. Use `downloadUrl` in your [deployment request](./order_vm.md#request-parameters) to specify one of the OS images available from Fluence.
 
 Example of a successful response:
 
