@@ -13,7 +13,7 @@ In this document, you'll learn:
 
 The Fluence compute marketplace unites established compute providers with high standards of security and reliability, proven by Tier certifications. Termination is the last resort for providers when handling issues and usually happens due to the user's actions, such as:
 
-- The user not paying for the VM (VM balance reached 0)
+- Not paying for the VM (VM balance reached 0)
 - The user violating the terms of service
 - The user using the VM for illegal activities or running malicious workloads
 
