@@ -12,7 +12,7 @@ The user can also see information about the next billing time (`Next billing tim
 
 ## VM Management
 
-Currently, the only operation available for a (running) VM is `Terminate`, which terminates the VM and the rental agreement. The ability to Reboot, Reset and Rebuild from the Fluence Console will be added soon.
+Currently, the only operation available to manage a (running) VM is `Terminate`, which terminates the VM and the rental agreement. The ability to Reboot, Reset and Rebuild from the Fluence Console will be added soon.
 
 ![VM management](./assets/vm_manage.webp)
 
