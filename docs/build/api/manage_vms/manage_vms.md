@@ -202,17 +202,20 @@ Here's how to structure your request to update a VM:
 
 ```json
 {
-  "id": "0x730eB2c518c881AEB05299DDf38ca546F3513a93", // required
-  "vmName": "new-vm-name", // optional
-  "openPorts": [
-    // optional
+  "updates": [
     {
-      "port": 22,
-      "protocol": "tcp"
-    },
-    {
-      "port": 9000,
-      "protocol": "tcp"
+      "id": "0x730eB2c518c881AEB05299DDf38ca546F3513a93",
+      "vmName": "new-vm-name",
+      "openPorts": [
+        {
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "port": 9000,
+          "protocol": "tcp"
+        }
+      ]
     }
   ]
 }

@@ -145,7 +145,7 @@ Currently, port 10250 is reserved for service purposes and will be available for
   - `.img.xz`
   - `.img.gz`
 
-- **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
+- **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet. **Important:** Ensure that you add only your public SSH keys (usually with a `.pub` extension). Keep your private keys secure at all times.
 
 :::info
 By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
@@ -279,7 +279,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
    ```
 
 4. **Connect to your VM**:
-   Launching the VM will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the public IP address for the ssh connection, use  the API, described in the nextsecion [Manage VMs](../manage_vms/manage_vms.md), or visit the Fluence Console[described here](../../manage_vm/manage_vm.md).
+   Launching the VM will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the public IP address for the ssh connection, use the API, described in the nextsecion [Manage VMs](../manage_vms/manage_vms.md), or visit the Fluence Console[described here](../../manage_vm/manage_vm.md).
 
 ## Next steps
 
