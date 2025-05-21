@@ -283,7 +283,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
    ```
 
 4. **Connect to your VM**:
-   VM launching process will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the public IP address for connection use a VM management API, described in the next document [Manage VMs](../manage_vms/manage_vms.md). Or you can visit Fluence Console UI [described here](../../manage_vm/manage_vm.md).
+   Launching the VM will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the public IP address for the ssh connection, use  the API, described in the nextsecion [Manage VMs](../manage_vms/manage_vms.md), or visit the Fluence Console[described here](../../manage_vm/manage_vm.md).
 
 ## Next steps
 
