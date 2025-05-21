@@ -1,6 +1,6 @@
 # Handling Provider-Terminated VMs
 
-When a compute provider decides to stop running a VM that you are actively using, the VM is moved to a "Terminated" status.
+When a compute provider decides to terminate a VM that you are actively using, the VM is moved to "Terminated" status.
 Terminated VMs are no longer accessible, and data stored on the terminated VM is lost.
 
 In this document, you'll learn:
