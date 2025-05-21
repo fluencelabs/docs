@@ -135,7 +135,7 @@ Currently, port 10250 is reserved for service purposes and will be available for
 
 - **`hostname`**: The hostname for your VM(s) that will be shown in the VM console when you connect to it. If not specified, the hostname will be the same as the `name` field.
 
-- **`osImage`**: The URL to download the OS image to use for your VM. Supported image formats are:
+- **`osImage`**: The URL for the OS image to use for your VM. Supported image formats are:
 
   - `.qcow2`
   - `.img`
