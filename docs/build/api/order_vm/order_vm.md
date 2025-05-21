@@ -145,10 +145,6 @@ Currently, port 10250 is reserved for service purposes and will be available for
   - `.img.xz`
   - `.img.gz`
 
-:::tip
-You can use the [Get OS Images](#get-default-os-images) endpoint to get the list of default OS images URLs on the platform.
-:::
-
 - **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
 
 :::info

@@ -2,24 +2,25 @@
 
 When a compute provider decides to terminate a VM that you are actively using, the VM is moved to "Terminated" status.
 Terminated VMs are no longer accessible, and data stored on the terminated VM is lost.
+It's important to note that even though a provider has terminated your VM, the VM's record will still appear in your list with its balance reserved. You need to perform a final step to remove this record, which releases the funds back to your main balance. This action is the same one you would take when willfully terminating a VM yourself.
 
 In this document, you'll learn:
 
 1. Reasons for VM termination
-2. Notifications and identification of terminated VMs
-3. Managing terminated VMs in the Fluence Console (UI) or via the API
+2. Identification of terminated VMs
+3. Finalization of VM termination in the Fluence Console (UI) or via the API
 
 ## Reasons for Termination
 
-The Fluence compute marketplace sources from established compute providers with high standards of security and reliability supported by high Tier 3 and 4 certifications. Termination is the last resort for providers when handling exceptions and usually are the result of a adverse user  behavior such as:
+The Fluence compute marketplace sources from established compute providers with high standards of security and reliability supported by high Tier 3 and 4 certifications. Termination is the last resort for providers when handling exceptions and usually are the result of a adverse user behavior such as:
 
 - Not paying for the VM (VM balance reached 0)
 - Violating the terms of service
 - Using the VM for illegal activities or running malicious workloads
 
-## Notifications and Identification
+## Identification of terminated VMs
 
-Currently, notifications about VM termination are only available in the Fluence Console (UI) on the "Running Instances" page or via the API when you request your active VM info using the [View your active VMs](../api/manage_vms/manage_vms.md#view-your-active-vms) endpoint.
+Currently, status updates about VM termination are only available in the Fluence Console (UI) on the "Running Instances" page or via the API when you request your active VM info using the [View your active VMs](../api/manage_vms/manage_vms.md#view-your-active-vms) endpoint.
 
 ### For Fluence Console (UI) Users
 
@@ -67,17 +68,23 @@ Currently, notifications about VM termination are only available in the Fluence 
   }
   ```
 
-## Managing Terminated VMs
-
-Once a VM is terminated by a provider, it cannot be recovered. After you acknowledge the termination:
-
-- Contact Fluence support for further investigation.
-- Remove the VM record from your list by deleting it to release your reserved balance from the VM.
+## Finalization of VM termination and reserved funds release
 
 ### Fluence Console (UI) Users
 
-You can complete the initiated termination of the VM on the "Running Instances" page by clicking the "Terminate" button for the selected VMs, as shown in the [VM Management section](./manage_vm.md#vm-management).
+To remove the record of a provider-terminated VM (which also releases its funds):
+
+- Navigate to the "Running Instances" page.
+- Locate the VM marked with "Terminated" status.
+- Click the "Terminate" button for that VM.
+
+Although the provider has already stopped the VM, clicking "Terminate" in the UI is the action that updates your records and processes the release of the reserved balance. This uses the same mechanism as described in the general [VM Management section](./manage_vm.md#vm-management) for user-initiated terminations.
 
 ### API Users
 
-To remove a provider-terminated VM from your records via the API, use the [Delete your VM](../api/manage_vms/manage_vms.md#delete-your-vm) endpoint, providing the `vmId` of the terminated VM(s).
+To remove a provider-terminated VM from your records and release its funds via the API:
+
+- Use the [Delete your VM](../api/manage_vms/manage_vms.md#delete-your-vm) endpoint.
+- Provide the `vmId` of the provider-terminated VM(s).
+
+This API call will delete the VM record from your list and trigger the release of the associated reserved balance.
