@@ -14,7 +14,14 @@ const sidebars = {
     "build/registration/registration",
     "build/balance/balance",
     "build/vm_rent/vm_rent",
-    "build/manage_vm/manage_vm",
+    {
+      type: "category",
+      label: "VM Management",
+      items: [
+        "build/manage_vm/manage_vm",
+        "build/manage_vm/provider_vm_termination",
+      ],
+    },
     "build/settings/settings",
     {
       type: "category",

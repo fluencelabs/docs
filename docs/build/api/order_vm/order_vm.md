@@ -135,7 +135,7 @@ Currently, port 10250 is reserved for service purposes and will be available for
 
 - **`hostname`**: The hostname for your VM(s) that will be shown in the VM console when you connect to it. If not specified, the hostname will be the same as the `name` field.
 
-- **`osImage`**: The URL to the OS image to use for your VM. Supported image formats are:
+- **`osImage`**: The URL for the OS image to use for your VM. Supported image formats are:
 
   - `.qcow2`
   - `.img`
@@ -145,7 +145,7 @@ Currently, port 10250 is reserved for service purposes and will be available for
   - `.img.xz`
   - `.img.gz`
 
-- **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
+- **`sshKeys`**: An array of public SSH keys that will be authorized to access your VMs. These keys allow you to securely connect to your VMs via SSH. Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet. **Important:** Ensure that you add only your public SSH keys (usually with a `.pub` extension). Keep your private keys secure at all times.
 
 :::info
 By default, only 22 port (TCP) is open for SSH access. You must explicitly specify which ports you want to open for your application.
@@ -201,6 +201,36 @@ In case if not enough offers match your requirements or no matching offers are f
 Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is currently only possible for full days regardless of the rental start time. Thus, if you rent a VM at `5:45 PM UTC`, you will pay for a **FULL** day for the ten minutes of use. At `5:55 PM UTC`, the next full payment is due. This limitation is expected to be remedied in the very near future.
 :::
 
+## Get default OS images
+
+To list the urls of the available OS images, use the following endpoint:
+
+```bash
+GET https://api.fluence.dev/vms/v3/default_images
+```
+
+### Response structure
+
+The response contains an array available OS images. Use `downloadUrl` in your [deployment request](./order_vm.md#request-parameters) to specify one of the OS images available from Fluence.
+
+Example of a successful response:
+
+```json
+[
+    {
+        "id": "df6e9992f8694635a67baafadf5a1905",
+        "name": "22.04 (LTS) x64",
+        "distribution": "Ubuntu",
+        "slug": "ubuntu-22-04-x64",
+        "downloadUrl": "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img",
+        "username": "ubuntu",
+        "createdAt": "2025-05-06T14:29:39.382562Z",
+        "updatedAt": "2025-05-06T14:29:39.382562Z"
+    },
+    ...
+]
+```
+
 ### Practical workflow
 
 Let's walk through a typical workflow for deploying VMs on the Fluence marketplace:
@@ -215,7 +245,8 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
 2. **Create your deployment request**:
 
    - Specify your basic configuration and constraints
-   - Configure VM settings (name, ports, OS image)
+   - Get the url for the OS image from the [Get default OS images](#get-default-os-images) endpoint optional, you can use your own OS image)
+   - Configure VM settings (name, ports, OS image download URL)
    - Add your SSH keys for secure access
 
 3. **Submit your deployment**:
@@ -247,11 +278,8 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
      }'
    ```
 
-4. **Save the response data**:
-   Store the `vmId` and `vmName` values or find them by calling the [View your active VMs](../manage_vms/manage_vms.md#view-your-active-vms) endpoint.
-
-5. **Connect to your VM**:
-   VM launching will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the connection details use a VM management API, described in the next document [Manage VMs](../manage_vms/manage_vms.md). Or you can visit UI of Fluence Console [described here](../../manage_vm/manage_vm.md).
+4. **Connect to your VM**:
+   Launching the VM will take a few minutes. Once the VM is launched, you can connect to it using SSH with the private key corresponding to your public key. To get the public IP address for the ssh connection, use the API, described in the nextsecion [Manage VMs](../manage_vms/manage_vms.md), or visit the Fluence Console[described here](../../manage_vm/manage_vm.md).
 
 ## Next steps
 

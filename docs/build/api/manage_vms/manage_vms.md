@@ -112,6 +112,10 @@ Let's break down the key components of each VM object:
 - **`status`**: Current operational status of the VM. Statuses:
   - `Launching`: The VM is being launched and does not yet has a public IP address to accept connections
   - `Active`: The VM is running and operational
+  - `SmallBalance`: VM does not have enough funds to pay for the next billing period
+  - `InsufficientFunds`: VM balance is 0
+  - `Terminated`: VM was terminated by the provider. The VM is inaccessible, and your workload is no longer running. For detailed information, please see the dedicated section on [Handling Provider-Terminated VMs](../../manage_vm/provider_vm_termination.md).
+  - `Stopped`: VM was ended by user
 - **`pricePerEpoch`**: The cost of the VM per epoch (24 hours) in USDC (with 6 decimals)
 - **`createdAt`**: Timestamp indicating when the VM was created
 - **`nextBillingAt`**: Timestamp indicating when the next billing cycle will start
@@ -186,7 +190,7 @@ In this section, you'll learn how to:
 To update your VM's configuration, use the following API endpoint:
 
 ```bash
-PATCH https://api.fluence.dev/vms/v2
+PATCH https://api.fluence.dev/vms/v3
 ```
 
 This endpoint allows you to change the following properties:
@@ -198,17 +202,20 @@ Here's how to structure your request to update a VM:
 
 ```json
 {
-  "id": "0x730eB2c518c881AEB05299DDf38ca546F3513a93", // required
-  "vmName": "new-vm-name", // optional
-  "openPorts": [
-    // optional
+  "updates": [
     {
-      "port": 22,
-      "protocol": "tcp"
-    },
-    {
-      "port": 9000,
-      "protocol": "tcp"
+      "id": "0x730eB2c518c881AEB05299DDf38ca546F3513a93",
+      "vmName": "new-vm-name",
+      "openPorts": [
+        {
+          "port": 22,
+          "protocol": "tcp"
+        },
+        {
+          "port": 9000,
+          "protocol": "tcp"
+        }
+      ]
     }
   ]
 }
@@ -308,7 +315,7 @@ You can update both properties in a single request:
 
 A successful update request will return a 204 status code. The changes will take effect immediately, and you'll see the updated configuration when you next retrieve your VM details.
 
-## Delete a VM
+## Delete your VM
 
 When you no longer need a VM, you can delete it to release the resources and stop incurring charges. To delete a VM, use the following API endpoint:
 
