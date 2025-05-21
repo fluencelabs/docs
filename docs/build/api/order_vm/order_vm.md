@@ -207,7 +207,7 @@ Please note payment for VMs occurs every day at **`5:55 PM UTC`** and is current
 
 ## Get default OS images
 
-You can conveniently get the list of default OS images URLs on the platform, use the following endpoint:
+To list the urls of the available OS images, use the following endpoint:
 
 ```bash
 GET https://api.fluence.dev/vms/v3/default_images
