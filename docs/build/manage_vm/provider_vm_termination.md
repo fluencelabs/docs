@@ -72,19 +72,18 @@ Currently, status updates about VM termination are only available in the Fluence
 
 ### Fluence Console (UI) Users
 
-To remove the record of a provider-terminated VM (which also releases its funds):
+For provider-terminated VMs:
 
-- Navigate to the "Running Instances" page.
-- Locate the VM marked with "Terminated" status.
-- Click the "Terminate" button for that VM.
+- On the "Running Instances" page, locate the VM with "Terminated" status
+- Click "Terminate" to remove the VM record and release its reserved funds
 
-Although the provider has already stopped the VM, clicking "Terminate" in the UI is the action that updates your records and processes the release of the reserved balance. This uses the same mechanism as described in the general [VM Management section](./manage_vm.md#vm-management) for user-initiated terminations.
+For details on this process, see the [VM Management section](./manage_vm.md#vm-management).
 
 ### API Users
 
-To remove a provider-terminated VM from your records and release its funds via the API:
+For provider-terminated VMs:
 
-- Use the [Delete your VM](../api/manage_vms/manage_vms.md#delete-your-vm) endpoint.
-- Provide the `vmId` of the provider-terminated VM(s).
+- First, use the [View your active VMs](../api/manage_vms/manage_vms.md#view-your-active-vms) endpoint to identify VMs with "Terminated" status
+- Then, use the [Delete your VM](../api/manage_vms/manage_vms.md#delete-your-vm) endpoint with the `vmId` of these VMs
 
 This API call will delete the VM record from your list and trigger the release of the associated reserved balance.
