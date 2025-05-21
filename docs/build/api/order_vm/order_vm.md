@@ -249,7 +249,7 @@ Let's walk through a typical workflow for deploying VMs on the Fluence marketpla
 2. **Create your deployment request**:
 
    - Specify your basic configuration and constraints
-   - Get url for the OS image from the [Get default OS images](#get-default-os-images) endpoint (optional, you can use your own OS image)
+   - Get the url for the OS image from the [Get default OS images](#get-default-os-images) endpoint optional, you can use your own OS image)
    - Configure VM settings (name, ports, OS image download URL)
    - Add your SSH keys for secure access
 
