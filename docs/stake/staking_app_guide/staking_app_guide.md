@@ -2,28 +2,30 @@
 
 ## Introduction
 
-This guide will walk you through the process of becoming a staker in the Fluence Protocol, allowing you to earn rewards by contributing to the decentralized physical infrastructure (DePIN).
-For that, you will use the Fluence Staking Application, a web application providing stakers with all the necessary resources to analyze available Capacity Commitments for staking and monitor active commitments' performance and rewards.
+Welcome to the Fluence Staking Application guide.
 
-First, you'll be introduced to the Staking application — the main control panel for analyzing staking opportunities and monitoring the metrics of staked assets.
-Then you will find a step-by-step guide on how to join the Fluence Network and stake your first Capacity Commitment.
+This document will help you become a delegated staker on the Fluence Protocol, where you can earn rewards by contributing to the security of its decentralized physical infrastructure (DePIN). The Staking Application is a web application that lets you browse Capacity Commitments (CCs), stake your FLT tokens and monitor capacity performance and staking rewards.
+
+You’ll first get familiar with the Staking interface — your control panel for discovering delegated staking opportunities and tracking assets. Then, you’ll follow a step-by-step walkthrough to stake your first Capacity Commitment.
 
 :::note
-Fluence is an L2 network, and to use your FLT and USDC tokens in the Fluence Network, you first have to bridge them from Ethereum. Read more on how to use the blockchain bridge in the [corresponding article](../bridge_guide/bridge_guide.md).
+Fluence uses an L2 app chain anchored to Ethereum.  
+To use your FLT and USDC tokens in the Fluence Network, you must bridge them from Ethereum.  
+Read more in the [bridge guide](../bridge_guide/bridge_guide.md).
 :::
 
 ## The staking application overview
 
 :::note
-Be cautious and use only the official application at [stake.fluence.network](https://stake.fluence.network). Never share your private keys or seed phrases with anyone, and always double-check the URL before signing the transactions.
+Be cautious and use only the official application at [stake.fluence.network](https://stake.fluence.network). Never share your private keys or seed phrases with anyone and always double-check the URL before signing a transaction.
 :::
 
-![The view of the main page of the Staking Application](./assets/app_view_main.png)
+![The view of the main page of the Staking Application](./assets/app_view_main.png)  
 The view of the main page of the Staking Application
 
-The Staking application consists of the following main parts:
+The Staking Application consists of the following main parts:
 
-- Top center: The navigation bar with links to the blockchain Bridge Application and Fluence NFT Collection on the Fluence Marketplace
+- Top center: The navigation bar with links to the blockchain Bridge Application
 - Top right: The button to connect your wallet to the application. Read more on how to connect your wallet to Fluence in this [article](../wallets_guide/wallets_guide.md)
 - Panels with a summary of the activated Capacity Commitment performance:
   - **"Capacity commitments"** - distribution of activated CCs by statuses
@@ -37,7 +39,8 @@ Depending on whether you have logged in by connecting your wallet, the list of C
 
 But the information in the **Panels** and the **Staked Capacity Commitments** sections will be different:
 
-- Without a connected wallet, you'll see all Capacity Commitments listed, allowing you to track and analyze overall Network performance and rewards
+- Without a connected wallet, you'll see all Capacity Commitments listed, allowing y
+- ou to track and analyze overall Network performance and rewards
 - When logged in with your wallet, you'll only see CCs you've activated, along with buttons to withdraw rewards and collateral
 
 :::
@@ -46,16 +49,26 @@ The following sections will guide you through the application interface, demonst
 
 ### Capacity commitments statuses panel
 
-![The view of the Capacity Commitments statuses panel](./assets/cc_status_panel.png)
+![The view of the Capacity Commitments statuses panel](./assets/cc_status_panel.png)  
 The view of the Capacity Commitments statuses panel
 
-This panel displays current information about the number of CCs in different states:
+This panel shows the number of Capacity Commitments (CCs) in each current status:
 
-- `Funded`: CC is activated and awaits becoming active at the start of the next epoch
-- `Active`: CC is operational, and its CUs are either submitting CC proofs or participating in Deals
-- `Completed`: CC has successfully finished, but the staker hasn't yet withdrawn the collateral and rewards
-- `Failed`: CC has failed, but the staker hasn't yet withdrawn the collateral and rewards
-- `Removed`: Completed CCs from which the staker has withdrawn both collateral and rewards
+- `Funded`: The CC is activated and will become active at the start of the next epoch
+- `Active`: The CC is operational, and its CUs are either submitting CC proofs or participating in Deals
+- `Completed`: The CC has successfully ended, but the staker has not yet withdrawn the collateral and rewards
+- `Failed`: The CC has failed, but the staker has not yet withdrawn the collateral and rewards
+- `Removed`: The staker has withdrawn both collateral and rewards from a completed or failed CC
+
+#### The CC Lifecycle
+
+After staking and activating a Capacity Commitment, it progresses through the following stages:
+
+- It initially enters the `Funded` status
+- In the next epoch, the CC transitions to `Active` and begins participating in the network
+- Once the CC completes or fails, it enters the `Completed` or `Failed` state.  
+  The Provider can initiate collateral withdrawal before the staker by unregistering compute resources from the CC. In that case, the staker’s collateral is automatically returned to their wallet
+- After all collateral and rewards have been withdrawn, the CC moves to the `Removed` status
 
 #### The CC Lifecycle
 
@@ -69,20 +82,21 @@ After staking and activating a Capacity Commitment, it progresses through the fo
 
 ### Capacity commitments rewards panel
 
-![The view of the Capacity Commitments rewards panel](./assets/cc_rewards_panel.png)
+![The view of the Capacity Commitments rewards panel](./assets/cc_rewards_panel.png)  
 The view of the Capacity Commitments rewards panel
 
-This panel summarizes rewards earned in Capacity Commitments (CCs) across the Network or activated by the user. Rewards accumulate each epoch and vest over time.
+This panel provides a summary of rewards earned from Capacity Commitments (CCs) across the network — or specifically from the CCs you've activated if you're logged in.
 
-Rewards can have the following statuses:
+Rewards accumulate with each epoch and vest over time. Each reward can have one of the following statuses:
 
-- `In vesting`: Earned rewards that are locked and will be vested later
-- `Available to claim`: Rewards that can be withdrawn immediately
-- `Claimed`: Rewards already withdrawn from the CC. Both the CC's Provider and staker can initiate the withdrawal process. If the Provider initiates withdrawal first, rewards will be automatically sent to the staker's wallet
+- `In vesting`: Rewards that have been earned but are still locked and will vest later
+- `Available to claim`: Rewards that are unlocked and can be withdrawn immediately
+- `Claimed`: Rewards that have already been withdrawn from the CC.  
+  Both the Provider and the staker can initiate the withdrawal. If the Provider initiates it first, the rewards are automatically transferred to the staker’s wallet
 
 :::note
 
-For logged-in users, the panel displays a button to withdraw all available rewards from all CCs.
+For logged-in users, this panel displays a button to withdraw all available rewards from all Capacity Commitments.
 
 :::
 
@@ -90,72 +104,74 @@ For logged-in users, the panel displays a button to withdraw all available rewar
 
 In this section, you'll find the list of Capacity Commitments available for staking.
 
-![The view of the Available for staking section](./assets/available_for_staking_view.png)
+![The view of the Available for staking section](./assets/available_for_staking_view.png)  
 The view of the Available for staking section
 
 This section has the following components:
 
-- A list of CCs available for staking, with each CC displayed as an expandable card
-- Search bar: You can filter the list of Capacity Commitments by entering either:
+- A list of CCs available for staking, each displayed as an expandable card
+- **Search bar**: You can filter the list by entering either:
   - Capacity Commitment ID
   - Provider name
-- For users with a connected wallet, an "only for me" toggle is available. This filter displays CCs where Providers have set your wallet address as the only possible staker
+- For users with a connected wallet, an **"only for me"** toggle is available. This filter displays only the CCs where Providers have specifically set your wallet address as the sole allowed staker
 
 #### Capacity Commitment cards list fields
 
-![The view of the available for staking Capacity Commitment cards collapsed](./assets/available_for_staking_collapsed_cards.png)
+![The view of the available for staking Capacity Commitment cards collapsed](./assets/available_for_staking_collapsed_cards.png)  
 The view of the available for staking Capacity Commitment cards collapsed
 
-In the folded state, each CC card provides the following information:
+In the collapsed view, each Capacity Commitment card includes:
 
-- `Capacity Commitment ID`: A unique identifier for the CC with a hyperlink to the Fluence Explorer, offering detailed information such as a list of CUs
-- `Provider name`: The name set by the Provider for public display. Use this to identify the Provider and find more details in both the Staking Application and [Fluence Explorer](https://explorer.fluence.dev/)
-- `Staking duration`: The maximum time your assets will be staked
-- `Required collateral`: The amount of FLT tokens needed to activate the CC
-- `Staking reward`: The staker's share of rewards for Capacity Commitment Proofs submission. For more details, refer to the "Key Concepts" section above
-- `Expected APR`: The projected annual percentage rate based on the target revenue per CU per epoch
+- `Capacity Commitment ID`: A unique identifier for the CC, with a hyperlink to the Fluence Explorer for more details (including list of Compute Units)
+- `Provider name`: The name publicly displayed by the Provider. You can use this to find more details in the Staking Application and in the [Fluence Explorer](https://explorer.fluence.dev/)
+- `Staking duration`: The maximum time your assets will remain staked
+- `Required collateral`: The amount of FLT tokens required to activate the CC
+- `Staking reward`: The staker’s reward share for submitting Capacity Commitment proofs.  
+  See the "Key Concepts" section above for more information
+- `Expected APR`: The projected annual return based on target revenue per CU per epoch
 
 :::tip
-You can sort the list by clicking on any numeric field (following the provider name). This allows you to arrange the list in either descending or ascending order.
-
+You can sort the list by clicking on any numeric field (after the provider name). This allows you to order the list in ascending or descending order.
 :::
 
-Example of the Stake page list of CCs information cards collapsed.
+Example of the Stake page list of CCs displayed in collapsed card format.
+
 
 #### Individual Capacity Commitment extended card fields
 
-![The view of the available for staking Capacity Commitment card extended](./assets/available_cc_card_extended.png)
+![The view of the available for staking Capacity Commitment card extended](./assets/available_cc_card_extended.png)  
 The view of the available for staking Capacity Commitment card extended
 
-Clicking on an individual CC card expands it, revealing more detailed information about the Capacity Commitment and the Provider. This expanded view also allows you to stake for the CC.
+Clicking on a Capacity Commitment card expands it to show detailed information about the Commitment and its Provider. This expanded view also includes the option to stake.
 
 **Commitment Information:**
 
-- `Created at`: The date when the Provider created the CC
-- `Peer ID`: The identifier of the Peer you're staking for. Find more information about this Peer in the CC explorer: explorer.fluence.dev/peer/`<Peer ID>`
-- `Compute Capacity`: The number of Compute Units participating in the CC. For more details on how Fluence measures compute resources, refer to the "Key concepts" section above
+- `Created at`: The date the Provider created the Capacity Commitment
+- `Peer ID`: The identifier of the Peer associated with the CC.  
+  For more details, visit the Explorer: `https://explorer.fluence.dev/peer/<Peer ID>`
+- `Compute Capacity`: The number of Compute Units (CUs) participating in this Commitment.  
+  For details on how Fluence measures compute resources, see the "Key Concepts" section above
 
 **Provider Information:**
 
-- `Provider lifetime`: The duration since the Provider registered in the Network
-- `Total CCs over time`: The number of CCs the Provider has created to date. For detailed information about the Provider's published CCs and their status, visit the Provider's page in the Explorer: [https://explorer.fluence.dev/provider/](https://explorer.fluence.dev/provider/)`<Provider id>`/capacity
+- `Provider lifetime`: How long the Provider has been registered on the network
+- `Total CCs over time`: Total number of Capacity Commitments the Provider has created  
+  For full history, visit: `https://explorer.fluence.dev/provider/<Provider id>/capacity`
 
 #### Stake button view
 
-The **"Stake"** button view depends on whether you have authenticated by connecting your wallet to the web application and have an NFT that grants you the right to stake tokens for Capacity Commitments:
+The **"Stake"** button appears differently based on whether your wallet is connected and whether you're eligible to stake for that Capacity Commitment.
 
-- If you haven't connected your wallet to the application yet, you'll see a **"Connect wallet"** button.
+- If you haven't connected your wallet to the application, you'll see a **"Connect wallet"** button.
 ![The Stake button view for unauthenticated users](./assets/stake_button_unauth.png)
 
-- If you've connected your wallet but don't have a Fluence NFT, you'll see an "NFT required" button with an information message below it. Read more about Fluence NFTs and how to get one in the corresponding guide.
-![The Stake button view for authenticated users without Fluence NFT](./assets/stake_button_nft.png)
+- If your wallet is connected but the Provider has set exclusive staking rights for another address, the **"Stake"** button will be disabled. In this case, choose a different CC for staking.
+![The Stake button view for authenticated users who cannot stake because the CC's provider has set exclusive staking rights for another address](./assets/stake_button_reserved.png)
 
-- If you've connected your wallet and have a Fluence NFT, you're free to stake to any CC you like.
-  However, if a provider has set exclusive staking rights for another address, the "Stake" button will be inactive. In that case, you need to choose another CC for staking.
-![The Stake button view for authenticated users with a Fluence NFT, who cannot stake because the CC's provider has set exclusive staking rights for another address](./assets/stake_button_reserved.png)
-
-- If you've connected your wallet and have a Fluence NFT, you're free to stake to any CC you like. In an individual CC card, a "Stake" button will be active. Read more about how to choose a CC for staking in the section below.
-![The active Stake button view for authenticated users with Fluence NFT](./assets/stake_button_active.png)
+- If your wallet is connected and you’re eligible to stake, the **"Stake"** button will be active.  
+  Read more about how to choose the right CC in the next section.
+![The active Stake button view for authenticated users](./assets/stake_button_active.png)
+)
 
 ### Staked Capacity Commitments section
 
@@ -228,7 +244,6 @@ To ensure your wallet is ready for the Staking Application, verify the following
 1. You've added the Fluence Network to your wallet's list of networks.
 1. You've imported the FLT token, and it's visible in your wallet's token list.
 1. You have FLT tokens _in the Fluence Network_. As Fluence is an L2 Network, you must first bridge your FLT tokens from Ethereum to Fluence using the official Bridge. Click "Bridge" in the top center navigation bar to access the Bridge.
-1. You have a Fluence NFT that grants you the right to stake for Capacity Commitments. You can obtain an NFT on the official [Marketplace](https://nft.fluence.network/).
 
 Once your wallet is connected to Fluence, it's time to choose the Capacity Commitment to stake for!
 
@@ -245,8 +260,8 @@ To find a CC that matches your requirements, let's review the most important cri
 After you've found the CC(s) you want to stake on, it's time to delegate your FLT tokens:
 
 1.  Expand the target CC's card by clicking it
-1.  Ensure you're eligible to stake: your wallet is connected to the application, and you own a Fluence NFT in that wallet
-1.  Click the **"Stake"** button
+2.  Ensure you're eligible to stake: your wallet is connected to the application
+3.  Click the **"Stake"** button
 ![The view of a card of CC available for staking.](./assets/stake_view_of_card_for_staking.png)
 
 1.  Confirm that you agree with the staking terms in the popped-up window
