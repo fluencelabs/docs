@@ -6,7 +6,7 @@ Stakers, also known as Delegators, are crucial to the Fluence Network. They cont
 
 In return for providing the collateral, stakers earn rewards in FLT tokens.
 
-Becoming a Staker on the Fluence Network is rather straightforward and different options are avialble depending on your stake size and desi level of involvement. The general journey to becoming a staker is illustrated in the image below:
+Becoming a Staker on the Fluence Network is rather straightforward and different options are available depending on your stake size and desired level of involvement. The general journey to becoming a staker is illustrated in the image below:
 
 ![The flow of becoming a staker in the Fluence Network.](./assets/staking_user_flow.png)
 The flow diagram showing how to become a staker in the Fluence Network
