@@ -34,6 +34,15 @@ const sidebars = {
       collapsed: true,
     },
   ],
+  connect_servers: [
+    "connect_servers/overview",
+    "connect_servers/login/login",
+    "connect_servers/hardware/hardware",
+    "connect_servers/kubernetes/kubernetes",
+    "connect_servers/subnets/subnets",
+    "connect_servers/smart_contracts/smart_contracts",
+    "connect_servers/upcoming_features/upcoming_features",
+  ],
 };
 
 module.exports = sidebars;

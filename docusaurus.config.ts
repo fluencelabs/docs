@@ -72,6 +72,12 @@ const config: Config = {
           label: "Stake",
         },
         {
+          type: "doc",
+          position: "left",
+          docId: "connect_servers/overview",
+          label: "Connect Servers",
+        },
+        {
           href: "https://github.com/fluencelabs",
           label: "GitHub",
           position: "right",
@@ -91,6 +97,10 @@ const config: Config = {
             {
               label: "Stake",
               to: "/docs/stake/overview",
+            },
+            {
+              label: "Connect Servers",
+              to: "/docs/connect_servers/overview",
             },
           ],
         },
