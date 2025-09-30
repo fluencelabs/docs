@@ -1,15 +1,15 @@
 # IP subnets management
 
-## Adding new subnet for Customer workloads
+## Adding a new subnet for Customer workloads
 
-To host Fluence customers’ workload within the newly created K8s cluster,  at least one public IPv4 subnet needs to be allocated to the cluster. The subnet should be configured manually by the Providerto make it available for the all servers from the cluster within the data center where the subnet will be attached. Subsequently, the Fluence software will automatically route IPs from the pool to the correct servers .
+To host Fluence customers’ workloads within the newly created Kubernetes cluster, at least one public IPv4 subnet must be allocated to the cluster. The Provider is responsible for manually configuring this subnet to ensure it is accessible to all servers within the data center where the subnet will be attached. Afterward, the Fluence software will automatically route IP addresses from the allocated pool to the appropriate servers.
 
-To register a new subnet in Provider Application navigate to the Network section and create new subnet specifying the following core data:
+To register a new subnet in the Provider Application, navigate to the Network section and create a new subnet by specifying the following key details:
 
-1. *CIDR* - describe all IP addresses included into subnet
-2. *Gateway* - specify gateway address
-3. *Exclude IPs* - describe IP addresses that shouldn’t be available for launching Fluence customers’ workload
-4. *VLAN ID for public networking* - optional parameter that needs to  be set if you have additional networking logic within a data center for public traffic 
+1. *CIDR* -  Define the range of IP addresses included in the subnet.
+2. *Gateway* - Specify gateway address
+3. *Exclude IPs* - List IP addresses that should be excluded from allocation for Fluence
+4. *VLAN ID for public networking* - Optional parameter to set if there is additional networking logic within the data center for public traffic.
 
 ![ip_subnets](./assets/add_subnet_page.webp)
 
