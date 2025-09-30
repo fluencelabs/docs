@@ -12,7 +12,6 @@
 - *Removing servers from the Fluence Protocol* - currently Providers should contact Fluence team directly to initiate server removing. This process is impacted by Fluence customers’ workload running on the Provider’s hardware and presence of Capacity Commitment with staked FLT collateral so servers can’t be disconnected from the Protocol at any time.
 - *Maintenance window* - currently Providers should contact Fluence team directly to plan maintenance window. In the upcoming release, this operations will be automated via Web Application
 - *Talos logs and metrics* - currently Fluence collect metrics about Talos and K8s functioning, but they are only available via Kubernetes CLI within a pods. New functionality will allow to analize metrics via Provider Application to get insights about infrastructure faster
-- PXE talos boot
 - *Talos version management* - ability to safely update Talos version across all servers within a clusters to the supported one by Fluence stack via Provider Application
 
 ## Kubernetes cluster management

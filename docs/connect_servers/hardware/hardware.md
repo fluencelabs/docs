@@ -30,3 +30,8 @@ After installing Talos Linux on your servers, and assuming the private network i
 ![Screenshot 2025-09-28 at 6.55.55 PM.png](./assests/server_details_page.webp)
 
 - *Via IPMI*: Talos and SideroLink status with extended info about server and logs.
+
+:::danger **Attention**
+
+You will be able to rename new servers unlimited times before adding them to the cluster. After adding servers to the cluster, you will no longer be able to rename the servers.
+:::
