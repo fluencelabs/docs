@@ -8,12 +8,13 @@ To connect a server to the Provider Application, navigate to the Servers tab and
 
 1. *System extensions* - OS drivers that allow to extend basic Talos OS functionality and, for example, can be used for network or storage setup. To achieve maximum server performance, please use the `amd-ucode` or `intel-ucode` extension, respectively.
 2. *Extra kernel command line arguments* - These additional settings are required if there is no DHCP server running in the private network used for Talos API and Kubernetes API management. Reed more about private networking [here](../overview.md#network-requirements).
+
 :::danger **Attention**
 
 If you don’t have DHCP server setup, you will need to specify network parameters within kernel arguments. Refer to the [official Talos documentation](https://www.talos.dev/v1.10/reference/kernel/#ip) for network config examples.
 :::
 
-1. *Image extension* - Choose an image extension type suitable for bare-metal installation. PXE booting is highly recommended if most of your servers can use the same Talos image, including identical system extensions and kernel arguments. For more details, see the PXE [booting option](https://www.talos.dev/v1.11/talos-guides/install/bare-metal-platforms/pxe/).
+3. *Image extension* - Choose an image extension type suitable for bare-metal installation. PXE booting is highly recommended if most of your servers can use the same Talos image, including identical system extensions and kernel arguments. For more details, see the PXE [booting option](https://www.talos.dev/v1.11/talos-guides/install/bare-metal-platforms/pxe/).
 
 :::info **Note**
 
