@@ -72,5 +72,5 @@ machine:
       
       # workload
       - interface: enp6s20
-		ignore: true
+        ignore: true
 ```
