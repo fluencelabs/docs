@@ -40,7 +40,7 @@ The Fluence API accepts and returns data in JSON format. When making POST reques
 ```bash
 curl -i -X POST https://api.fluence.dev/marketplace/offers \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <YOUR_API_KEY>" \
+  -H "X-API-KEY: <YOUR_API_KEY>" \
   -d '{
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb"
   }'
