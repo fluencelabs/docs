@@ -28,7 +28,7 @@ The API enables you to:
 
 ### Authentication
 
-All Fluence API endpoints require an API key sent as a Bearer token in the `Authorization` header.  
+All Fluence API endpoints require an API key sent in the `X-API-KEY` header.  
 You can create and manage your keys in the [Fluence Console settings guide](../settings/settings.md). If you omit or supply an invalid key, you’ll get a 403 code error.
 
 ### Request and response format
