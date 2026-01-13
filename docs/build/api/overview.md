@@ -28,7 +28,7 @@ The API enables you to:
 
 ### Authentication
 
-All Fluence API endpoints require an API key sent as a Bearer token in the `Authorization` header.  
+All Fluence API endpoints require an API key sent in the `X-API-KEY` header.  
 You can create and manage your keys in the [Fluence Console settings guide](../settings/settings.md). If you omit or supply an invalid key, you’ll get a 403 code error.
 
 ### Request and response format
@@ -40,7 +40,7 @@ The Fluence API accepts and returns data in JSON format. When making POST reques
 ```bash
 curl -i -X POST https://api.fluence.dev/marketplace/offers \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <YOUR_API_KEY>" \
+  -H "X-API-KEY: <YOUR_API_KEY>" \
   -d '{
     "basicConfiguration": "cpu-4-ram-8gb-storage-25gb"
   }'
