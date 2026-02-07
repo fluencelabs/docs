@@ -29,7 +29,7 @@ The API enables you to:
 ### Authentication
 
 All Fluence API endpoints require an API key sent in the `X-API-KEY` header.  
-You can create and manage your keys in the [Fluence Console settings guide](../settings/settings.md). If you omit or supply an invalid key, you’ll get a 403 code error.
+You can create and manage your keys in the [Fluence Console settings guide](../../settings/settings.md). If you omit or supply an invalid key, you’ll get a 403 code error.
 
 ### Request and response format
 
@@ -87,7 +87,7 @@ The Fluence API also provides an API Reference that provides more technical deta
 
 ## SSH keys and access to VMs
 
-To access your VMs, you need to have at least one SSH key registered. Please ensure you have at least one SSH key registered in your account before creating a VM. You can do it either via the [Account settings in Fluence Console](../settings/settings.md) or using the API endpoints described in the [Manage SSH keys](./manage_vms/manage_vms.md#manage-ssh-keys) guide.
+To access your VMs, you need to have at least one SSH key registered. Please ensure you have at least one SSH key registered in your account before creating a VM. You can do it either via the [Account settings in Fluence Console](../../settings/settings.md) or using the API endpoints described in the [Manage SSH keys](./manage_vms/manage_vms.md#manage-ssh-keys) guide.
 
 ## Next steps
 

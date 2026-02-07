@@ -20,4 +20,4 @@ In addition to the web interface, an API is available to programmatically:
 
 The API is ideal for automation, integration with your existing workflows, or building custom tools on top of the Fluence platform.
 
-Learn more about using the API in our [API documentation](./api/overview.md).
+Learn more about using the API in our [API documentation](./cpu_cloud/api/overview.md).

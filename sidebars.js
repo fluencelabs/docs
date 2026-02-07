@@ -12,26 +12,51 @@ const sidebars = {
     "build/overview",
     "build/registration/registration",
     "build/balance/balance",
-    "build/vm_rent/vm_rent",
-    {
-      type: "category",
-      label: "VM Management",
-      items: [
-        "build/manage_vm/manage_vm",
-        "build/manage_vm/provider_vm_termination",
-      ],
-    },
     "build/settings/settings",
     {
       type: "category",
-      label: "API",
+      label: "CPU Cloud",
       items: [
-        "build/api/overview",
-        "build/api/get_offerings/get_offerings",
-        "build/api/order_vm/order_vm",
-        "build/api/manage_vms/manage_vms",
+        "build/cpu_cloud/vm_rent/vm_rent",
+        {
+          type: "category",
+          label: "Manage VMs",
+          items: [
+            "build/cpu_cloud/manage_vm/manage_vm",
+            "build/cpu_cloud/manage_vm/provider_vm_termination",
+          ],
+        },
+        {
+          type: "category",
+          label: "API",
+          collapsed: true,
+          items: [
+            "build/cpu_cloud/api/overview",
+            "build/cpu_cloud/api/get_offerings/get_offerings",
+            "build/cpu_cloud/api/order_vm/order_vm",
+            "build/cpu_cloud/api/manage_vms/manage_vms",
+          ],
+        },
       ],
-      collapsed: true,
+    },
+    {
+      type: "category",
+      label: "GPU Cloud",
+      items: [
+        "build/gpu_cloud/instance_rent/instance_rent",
+        "build/gpu_cloud/manage_instances/manage_instances",
+        {
+          type: "category",
+          label: "API",
+          collapsed: true,
+          items: [
+            "build/gpu_cloud/api/overview",
+            "build/gpu_cloud/api/get_offerings/get_offerings",
+            "build/gpu_cloud/api/order_instance/order_instance",
+            "build/gpu_cloud/api/manage_instances/manage_instances",
+          ],
+        },
+      ],
     },
   ],
   connect_servers: [
