@@ -5,10 +5,19 @@ The GPU marketplace offers three kinds of GPU workload for deployments: containe
 
 ## Billing model
 
-Instances rent works on pre-paid model. When renting an instance, a prepayment amount equivalent to three hours of rent is deducted from your Balance and stored on a separate balance dedicated to an instance. Billing happens by charging one hour of rent from instance's balance. When an instance balance is below the required pre-paid amount, the system tries to top-up instance's balance from your Balance in the console.
-Insufficient funds termination: if a system failed to charge an instance for one billing period due to insufficient funds on instance's prepdaid balance - a system failed to fill instance's balance from owner's balance, the instance rental agreement is terminated and it is automatically deleted.
-Instance balance unfreeze: once instance rent stops all unused funds (not charged for running workload) from it's balance are moved back to the owner's balance.
-You can check the amount of your Balance reserved as a “prepayment” on the **Billing** page in the Fluence Console.
+GPU instances are billed hourly on a pre-paid model. Each instance has its own dedicated balance that covers ongoing rent.
+
+Billing periods are fixed hourly intervals (e.g., 15:00–16:00, 16:00–17:00 UTC) regardless of when the instance was started. At each billing period, one hour of rent is charged from the instance's balance.
+
+**Deployment charge.** When you deploy an instance, an amount equivalent to 3 hours of rent is deducted from your account balance and transferred to the instance's balance. The current billing period is charged immediately, and the remaining 2 hours serve as a reserve. If provisioning fails, the full amount is returned to your account balance.
+
+**Automatic top-ups.** The system maintains a reserve of 2 hours of rent on each instance's balance. When the reserve drops below this target — typically after each hourly charge — the system automatically tops it up from your account balance.
+
+**Insufficient funds.** If your account balance cannot cover a top-up, the system will keep retrying. Your instance runs through any billing period that has already been paid for. Termination occurs when the system cannot charge for the next billing period due to insufficient funds on the instance's balance — the instance is then automatically deleted.
+
+**Funds after termination.** When an instance stops — whether terminated by you or the system — all unused funds remaining on the instance's balance are returned to your account balance.
+
+You can check the amounts reserved for your running instances on the **Billing** page in the Fluence Console.
 
 ## GPU container
 
@@ -101,10 +110,6 @@ You can add multiple variables as needed. Click the **X** button to remove a var
 ### 8. Select SSH keys
 
 Choose which SSH keys should have access to the container. Your registered keys are displayed, and you can select or deselect them. Click **Add New Key** to register a new SSH key if needed.
-
-:::info
-You need at least one SSH key registered to access your container. SSH keys can be managed in [Settings](../../settings/settings.md).
-:::
 
 :::warning
 When using a predefined OS image, the environment variable `SSH_PUBKEY` is reserved by the system for injecting your selected SSH keys into the container. Defining an environment variable with this name will cause the deployment request to fail.
