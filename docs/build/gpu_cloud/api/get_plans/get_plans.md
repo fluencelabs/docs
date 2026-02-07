@@ -443,4 +443,4 @@ Each element in the `options` array represents a specific deployable configurati
 
 ## Next steps
 
-Now that you know how to browse and compare available GPU plans, proceed to the [Deploy GPU instances](../order_instance/order_instance.md) guide to learn how to create instances from these plans.
+Now that you know how to browse and compare available GPU plans, proceed to the [Deploy GPU instances](../deploy_instance/deploy_instance.md) guide to learn how to create instances from these plans.

@@ -52,7 +52,7 @@ const sidebars = {
           items: [
             "build/gpu_cloud/api/overview",
             "build/gpu_cloud/api/get_plans/get_plans",
-            "build/gpu_cloud/api/order_instance/order_instance",
+            "build/gpu_cloud/api/deploy_instance/deploy_instance",
             "build/gpu_cloud/api/manage_instances/manage_instances",
           ],
         },
