@@ -58,7 +58,7 @@ You can update a running container by clicking **Update deployment** on the deta
 - Environment variables
 - SSH keys
 
-The update page works the same way as the [instance creation flow](../instance_rent/instance_rent.md#4-set-the-container-image). After making your changes, click **Redeploy** to restart the container with the updated configuration.
+The update page works the same way as the [instance creation flow](../instance_rent/instance_rent.md#set-the-container-image). After making your changes, click **Redeploy** to restart the container with the updated configuration.
 
 ![Update container deployment](./assets/container/update_options.webp)
 

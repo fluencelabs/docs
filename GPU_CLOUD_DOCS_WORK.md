@@ -86,7 +86,7 @@ docs/build/gpu_cloud/instance_rent/
    cwebp -q 80 input.png -o output.webp
    ```
 4. Reference the .webp version in markdown: `![short description](./assets/containers/image.webp)`.
-5. Remove the original .png after conversion.
+5. Keep the original .png files for now (useful for rework and rollbacks). Clean up when the owner confirms.
 
 **When describing screenshots** in the doc text, explain what the user sees and interacts with: mention specific UI elements like dropdowns, toggles, input fields, checkboxes, buttons, and panels by name. The goal is that a user can follow the doc alongside the actual UI. See the existing container section in `instance_rent.md` for the established style.
 
@@ -137,31 +137,34 @@ Containers have a meaningfully different creation flow compared to VMs/bare meta
 
 **Containers get their own sections** within each doc page (e.g., `## GPU container` and `## VM and Bare Metal` within `instance_rent.md`).
 
-### Billing model difference from CPU Cloud
+### GPU Cloud billing model
 
-- **CPU Cloud**: daily billing at 5:55 PM UTC, prepayment = 1 day.
-- **GPU Cloud**: hourly billing, prepayment = 3 hours. System auto-tops-up instance balance from the owner's balance.
+GPU instances use hourly pre-paid billing. Key facts:
+
+- Each instance has its own **dedicated balance**.
+- **Billing periods** are fixed hourly intervals (15:00–16:00, 16:00–17:00 UTC etc.), not relative to instance start time.
+- **On deployment**: 3 hours of rent are transferred from user's account to instance balance. 1 hour is charged immediately for the current billing period, 2 hours remain as reserve.
+- **If provisioning fails**: full amount is returned to user.
+- **Ongoing**: the system maintains a 2-hour reserve on instance balance by auto-topping-up from user's account after each hourly charge.
+- **Insufficient funds**: system retries top-up. Instance runs through any paid period. Termination happens only when the next charge fails (balance is 0, new billing period starts).
+- **On stop/termination**: unused funds return to user's account.
+
+For comparison, **CPU Cloud** uses daily billing at 5:55 PM UTC with a 1-day prepayment.
 
 ## Current State and Work Items
 
 ### DONE
 
-- [x] `instance_rent/instance_rent.md` - **Container section complete** (9-step walkthrough with screenshots)
+- [x] `instance_rent/instance_rent.md` - **Container section** (9-step walkthrough with screenshots)
+- [x] `instance_rent/instance_rent.md` - **VM and Bare Metal section** (7-step walkthrough with screenshots)
+- [x] `instance_rent/instance_rent.md` - **Billing model section** (pre-paid model, deployment charge, auto top-ups, termination, refunds)
+- [x] `manage_instances/manage_instances.md` - **Full page**: instances list, container details (logs/events/update), VM/bare metal details, billing page
 - [x] Container assets in `assets/containers/` - 10 webp screenshots
-- [x] VM/Bare metal assets in `assets/vm_baremetal/` - 7 png screenshots
+- [x] VM/Bare metal assets in `assets/vm_baremetal/` - 7 webp screenshots (png originals kept for now)
+- [x] Manage instances assets - container (list, details, update, logs, events), vm_baremetal (list, details), billing page
 - [x] Sidebar navigation configured for all GPU Cloud pages
-- [x] Billing model section written in `instance_rent.md`
 
 ### TODO - UI Documentation
-
-- [ ] **`instance_rent/instance_rent.md` - VM and Bare Metal section**: Screenshots exist in `assets/vm_baremetal/` but the walkthrough text is not yet written. Needs a section similar to the container one, explaining the VM/bare metal creation flow step by step. Note: explain VMs and bare metal together, mention where UI paths differ.
-
-- [ ] **`manage_instances/manage_instances.md` - Instance management**: Currently a "Coming soon" stub. Needs content covering:
-  - Instance information display (hardware specs, status, billing info)
-  - Instance management operations (terminate, etc.)
-  - Billing history
-  - Should cover all three types (containers, VMs, bare metal)
-  - Reference: `cpu_cloud/manage_vm/manage_vm.md` for structure
 
 - [ ] **Provider termination handling for GPU instances**: CPU Cloud has a dedicated `provider_vm_termination.md`. Evaluate whether GPU Cloud needs an equivalent page. If so, add it to `sidebars.js` under `manage_instances` category.
 
@@ -209,16 +212,21 @@ All GPU Cloud API pages are stubs ("Coming soon"). They need to be written follo
 
 3. **Screenshots are examples, not exhaustive references**: The marketplace is dynamic — available GPU models, configurations, OS images, locations, providers, and prices change over time. When describing a screenshot, explain what the UI elements are and how to use them (dropdowns, cards, columns, etc.) but **do not treat the specific options visible in a screenshot as the full or fixed set**. You may use `e.g.` to give examples for clarity, but don't write as if those are the only options available.
 
-4. **Write for users, not as a UI transcript**: Describe what the user can do and what the product provides — don't mechanically list every icon, button label, or panel. Avoid phrases like "click the arrow icon on the right side of the card" or "the right panel shows" — just state the facts. Each section (e.g., VM and Bare Metal) should be self-contained — don't write "same as containers but..." forcing users to scroll elsewhere. Don't over-describe obvious UI (e.g., "Click Top up to add funds" when the doc isn't about billing). Don't mention implementation details like "uses the same UI components".
+4. **Write for users, not as a UI transcript**: The tone should be informative and helpful — you're explaining how to use the product, not mechanically listing every pixel on screen. But don't go too dry either — include enough detail that users can follow along with the actual UI (mention action icons, relevant field names, etc.). Key principles:
+   - Each section should be **self-contained** — don't write "same as containers but..." forcing users to scroll elsewhere. Repeat the relevant info.
+   - Don't over-describe things outside the page's scope (e.g., don't explain how the Top up button works on a page about instance management).
+   - Don't mention implementation details (e.g., "uses the same UI components"). You can cross-reference related pages for detailed guidance (e.g., "The update page works the same way as the [instance creation flow](link)").
+   - Describe **what users can do**, not what the UI looks like.
 
-5. **Step-by-step walkthrough pattern** (established in both CPU and GPU docs):
-   - Numbered H3 headings: `### 1. Step name`
+5. **Step-by-step walkthrough pattern** (established in GPU docs):
+   - H3 headings without numbering: `### Select the GPU model` (not `### 1. Select the GPU model`)
    - Brief explanation of what the step does
    - Bullet list of options/fields when relevant
    - Screenshot at the end of each step
    - Admonitions (:::info, :::warning) for important notes
+   - Note: CPU Cloud docs still use numbered headings — don't follow that pattern for GPU docs
 
-4. **API doc pattern** (established in CPU Cloud API docs):
+6. **API doc pattern** (established in CPU Cloud API docs):
    - Show the endpoint URL in a code block
    - Document request parameters with field descriptions
    - Provide full JSON request examples
@@ -226,11 +234,13 @@ All GPU Cloud API pages are stubs ("Coming soon"). They need to be written follo
    - Include error response examples
    - End with "Next steps" linking to related guides
 
-5. **Structure within a page for multi-type content** (containers + VMs/bare metal):
+7. **Structure within a page for multi-type content** (containers + VMs/bare metal):
    - Common intro and billing at the top
    - `## GPU container` section with its full walkthrough
    - `## VM and Bare Metal` section with its full walkthrough
    - Note shared steps and highlight differences
+
+8. **Use H3 subheadings freely** within `##` sections (e.g., `### Deployment charge` under `## Billing model`). Docusaurus nests H3 under H2 in the right-side nav, so they organize well. H3 headings are linkable (useful for cross-references from other pages) and navigable on long pages.
 
 ## Useful References
 
@@ -246,5 +256,8 @@ All GPU Cloud API pages are stubs ("Coming soon"). They need to be written follo
 | CPU manage API (API reference) | `docs/build/cpu_cloud/api/manage_vms/manage_vms.md` |
 | Balance & billing (shared) | `docs/build/balance/balance.md` |
 | Settings & SSH keys (shared) | `docs/build/settings/settings.md` |
-| GPU container screenshots | `docs/build/gpu_cloud/instance_rent/assets/containers/` |
-| GPU VM/bare metal screenshots | `docs/build/gpu_cloud/instance_rent/assets/vm_baremetal/` |
+| GPU container screenshots (rent) | `docs/build/gpu_cloud/instance_rent/assets/containers/` |
+| GPU VM/bare metal screenshots (rent) | `docs/build/gpu_cloud/instance_rent/assets/vm_baremetal/` |
+| GPU container screenshots (manage) | `docs/build/gpu_cloud/manage_instances/assets/container/` |
+| GPU VM/bare metal screenshots (manage) | `docs/build/gpu_cloud/manage_instances/assets/vm_baremetal/` |
+| GPU billing page screenshot | `docs/build/gpu_cloud/manage_instances/assets/billing_page.webp` |
