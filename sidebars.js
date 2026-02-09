@@ -26,17 +26,6 @@ const sidebars = {
             "build/cpu_cloud/manage_vm/provider_vm_termination",
           ],
         },
-        {
-          type: "category",
-          label: "API",
-          collapsed: true,
-          items: [
-            "build/cpu_cloud/api/overview",
-            "build/cpu_cloud/api/get_offerings/get_offerings",
-            "build/cpu_cloud/api/order_vm/order_vm",
-            "build/cpu_cloud/api/manage_vms/manage_vms",
-          ],
-        },
       ],
     },
     {
@@ -45,15 +34,32 @@ const sidebars = {
       items: [
         "build/gpu_cloud/instance_rent/instance_rent",
         "build/gpu_cloud/manage_instances/manage_instances",
+      ],
+    },
+    {
+      type: "category",
+      label: "API",
+      items: [
+        "build/api/overview/overview",
+        "build/api/ssh_keys/ssh_keys",
         {
           type: "category",
-          label: "API",
-          collapsed: true,
+          label: "CPU Cloud",
           items: [
-            "build/gpu_cloud/api/overview",
-            "build/gpu_cloud/api/get_plans/get_plans",
-            "build/gpu_cloud/api/deploy_instance/deploy_instance",
-            "build/gpu_cloud/api/manage_instances/manage_instances",
+            "build/api/cpu_cloud/overview/overview",
+            "build/api/cpu_cloud/get_offerings/get_offerings",
+            "build/api/cpu_cloud/order_vm/order_vm",
+            "build/api/cpu_cloud/manage_vms/manage_vms",
+          ],
+        },
+        {
+          type: "category",
+          label: "GPU Cloud",
+          items: [
+            "build/api/gpu_cloud/overview/overview",
+            "build/api/gpu_cloud/get_plans/get_plans",
+            "build/api/gpu_cloud/deploy_instance/deploy_instance",
+            "build/api/gpu_cloud/manage_instances/manage_instances",
           ],
         },
       ],

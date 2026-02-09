@@ -1,4 +1,4 @@
-# GPU Instance Info and Management
+# GPU instance info and management
 
 After renting a GPU instance, you can view and manage it on the **Running Instances — GPU cloud** page. Instances are organized by type with separate tabs: **Container**, **VM**, and **Bare Metal**.
 

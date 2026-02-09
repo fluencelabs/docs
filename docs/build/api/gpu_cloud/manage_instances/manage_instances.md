@@ -132,7 +132,7 @@ The response is a JSON array of container instance objects:
         "interface": "sxm"
       }
     },
-    "domain": "provider.a100.kci.val.akash.pub",
+    "domain": "provider.a100.pub",
     "location": "US",
     "created_at": "2026-02-07T14:42:29.472381Z",
     "updated_at": "2026-02-07T14:43:41.901135Z"
@@ -258,7 +258,7 @@ The `network` object contains connectivity details. It is `null` when the instan
   - `external_port` (string): The externally accessible port assigned by the cluster
   - `protocol` (string): The protocol
 
-  Use the domain together with the external port to connect (e.g., `ssh -p 32345 root@provider.a100.kci.val.akash.pub`).
+  Use the domain together with the external port to connect (e.g., `ssh -p 32345 root@provider.a100.pub`).
 
 - **`uri`** (string or null): The HTTP address for the container, available when port 80 was exposed with the `"http"` protocol during deployment.
 
@@ -268,7 +268,7 @@ The `billing` object contains current billing information:
 
 - **`hourly_usage`** (number): Hourly cost in USDC.
 - **`total_spendings`** (number): Total amount spent on this instance since creation, in USDC.
-- **`reserved_amount`** (number): Amount currently reserved on the instance balance, in USDC. See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details on how the reserve works.
+- **`reserved_amount`** (number): Amount currently reserved on the instance balance, in USDC. See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details on how the reserve works.
 - **`next_billing_period`** (string or null): Timestamp of the next billing period start (ISO 8601). `null` when the instance is not active.
 
 #### Example: active instance
@@ -311,7 +311,7 @@ The `billing` object contains current billing information:
     "next_billing_period": "2026-02-07T15:00:00Z"
   },
   "network": {
-    "domain": "provider.a100.kci.val.akash.pub",
+    "domain": "provider.a100.pub",
     "forwarded_ports": [
       { "port": "22", "external_port": "32345", "protocol": "tcp" }
     ],
@@ -517,7 +517,7 @@ curl -X DELETE https://api.fluence.dev/gpu/instances/b54672e2-0a8b-490f-81ee-7d5
 A successful termination returns a **204** status code with no response body.
 
 :::info
-Only instances with `ACTIVE` status can be terminated. Any unused funds on the instance balance are returned to your account. See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details.
+Only instances with `ACTIVE` status can be terminated. Any unused funds on the instance balance are returned to your account. See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details.
 :::
 
 ## VM and Bare Metal
@@ -723,7 +723,7 @@ The `network` object contains connectivity details. It is `null` when the instan
 
 ##### Billing
 
-Same structure as [container billing](#billing). See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details on hourly charges and reserves.
+Same structure as [container billing](#billing). See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details on hourly charges and reserves.
 
 #### Example: active instance
 
@@ -866,23 +866,5 @@ curl -X DELETE https://api.fluence.dev/gpu/instances/vms/05cdd5fc-d384-4fbc-8861
 A successful termination returns a **204** status code with no response body.
 
 :::info
-Only instances with `ACTIVE` status can be terminated. Any unused funds on the instance balance are returned to your account. See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details.
+Only instances with `ACTIVE` status can be terminated. Any unused funds on the instance balance are returned to your account. See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details.
 :::
-
-## Error responses
-
-All management endpoints return errors in the same format as the [deployment endpoints](../deploy_instance/deploy_instance.md#error-responses):
-
-- **422 (Validation errors)**: Returned when request parameters are invalid. The response contains a `detail` array describing each validation issue.
-- **400 (Business logic errors)**: Returned when the request is valid but cannot be fulfilled (e.g., trying to terminate a non-active instance). The response contains a `detail` string.
-
-## Manage SSH keys
-
-To access your GPU instances via SSH, you need at least one SSH key registered in your account. SSH keys can be managed through the API endpoints described in the [Manage SSH keys](../../../cpu_cloud/api/manage_vms/manage_vms.md#manage-ssh-keys) guide.
-
-## Next steps
-
-- [Browse available GPU plans](../get_plans/get_plans.md) — find compute resources for your workload
-- [Deploy GPU instances](../deploy_instance/deploy_instance.md) — create new instances from plans
-- [Manage GPU instances in the console](../../manage_instances/manage_instances.md) — use the web UI to view and manage instances
-- [Billing model](../../instance_rent/instance_rent.md#billing-model) — understand how hourly billing and reserves work

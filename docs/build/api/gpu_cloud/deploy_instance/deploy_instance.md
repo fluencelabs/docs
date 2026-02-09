@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Deploy GPU instances
 
-After [browsing available GPU plans](../get_plans/get_plans.md), the next step is to deploy an instance. This guide walks you through the process of deploying GPU containers, VMs, and bare metal instances via the API.
+After [finding available GPU plans](../get_plans/get_plans.md), the next step is to deploy an instance. This guide walks you through the process of deploying GPU containers, VMs, and bare metal instances via the API.
 
 In this guide, you'll learn how to:
 
@@ -189,7 +189,7 @@ A successful response returns the new instance ID:
 - **`instance_id`** (string): Unique identifier for your new instance. Save this — you'll need it to manage the instance later.
 
 :::info
-An amount equivalent to 3 hours of rent is deducted from your account balance when the instance is created. See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details.
+An amount equivalent to 3 hours of rent is deducted from your account balance when the instance is created. See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details.
 :::
 
 ### Default container images
@@ -231,8 +231,8 @@ The response is a JSON array of default container image objects:
 
 #### Response fields
 
-- **`slug`** (string): Unique identifier for the image (e.g., `"debian-ssh-11"`).
-- **`name`** (string): Display name of the image (e.g., `"Debian SSH 11"`).
+- **`slug`** (string): Unique identifier for the image.
+- **`name`** (string): Display name of the image.
 - **`description`** (string or null): Optional description of the image.
 - **`image`** (string): Full container image reference. Use this value in the `container_settings.image` field of your [deployment request](#deploy-a-container).
 - **`expose`** (array): Default port configurations for this image. You can use these as a starting point and adjust in your deployment request.
@@ -344,53 +344,8 @@ A successful response returns the new instance ID:
 - **`instance_id`** (string): Unique identifier for your new instance. Save this — you'll need it to manage the instance later.
 
 :::info
-An amount equivalent to 3 hours of rent is deducted from your account balance when the instance is created. See the [billing model](../../instance_rent/instance_rent.md#billing-model) for details.
+An amount equivalent to 3 hours of rent is deducted from your account balance when the instance is created. See the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) for details.
 :::
-
-## Error responses
-
-All deployment endpoints return errors in the same format. There are two kinds:
-
-### Validation errors (422)
-
-Returned when the request body has invalid or missing fields. The response contains a `detail` array with the location and description of each error:
-
-```json
-{
-  "detail": [
-    {
-      "type": "value_error",
-      "loc": ["body", "container_settings", "expose", 0, "port"],
-      "msg": "Value error, Port must be between 1 and 65535",
-      "input": "999999999",
-      "ctx": {
-        "error": {}
-      }
-    }
-  ]
-}
-```
-
-### Business logic errors (400)
-
-Returned when the request is well-formed but cannot be fulfilled. The response contains a `detail` string describing the problem:
-
-```json
-{
-  "detail": "Insufficient balance to deploy instance"
-}
-```
-
-Common 400 errors include:
-
-- Insufficient account balance
-- Plan no longer available
-- Unsupported OS image for the selected plan (the error message lists the valid options):
-  ```json
-  {
-    "detail": "Provided OS image sss is not supported for the selected offer. Available OS images: Ubuntu Server 22.04"
-  }
-  ```
 
 ## Next steps
 

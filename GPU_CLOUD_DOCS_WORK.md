@@ -27,21 +27,22 @@ docs/build/
   registration/registration.md   # User registration (shared)
   balance/balance.md             # Billing & balance (shared)
   settings/settings.md           # Account settings, API keys, SSH keys (shared)
-  cpu_cloud/                     # CPU Cloud - COMPLETE, use as reference
+  cpu_cloud/                     # CPU Cloud UI docs
     vm_rent/vm_rent.md           # Renting a CPU VM (UI walkthrough)
     manage_vm/
       manage_vm.md               # VM info and management
       provider_vm_termination.md # Provider termination handling
-    api/
-      overview.md                # API intro, auth, request format
-      get_offerings/             # Marketplace search API
-      order_vm/                  # Deploy VMs API
-      manage_vms/                # Manage VMs API (+ SSH key mgmt)
-  gpu_cloud/                     # GPU Cloud - IN PROGRESS
+  gpu_cloud/                     # GPU Cloud UI docs
     instance_rent/instance_rent.md
     manage_instances/manage_instances.md
-    api/
-      overview.md
+  api/                           # All API docs (shared + cloud-specific)
+    overview/overview.md         # Shared API intro: auth, format, statuses, both clouds' endpoints
+    ssh_keys/ssh_keys.md         # Shared SSH key management (list, add, delete)
+    cpu_cloud/                   # CPU Cloud API
+      get_offerings/             # Marketplace search API
+      order_vm/                  # Deploy VMs API
+      manage_vms/                # Manage VMs API
+    gpu_cloud/                   # GPU Cloud API
       get_plans/get_plans.md
       deploy_instance/deploy_instance.md
       manage_instances/manage_instances.md
@@ -101,6 +102,7 @@ docs/build/gpu_cloud/instance_rent/
 - Use GitHub permalinks for any GitHub source links.
 - Use Docusaurus admonitions: `:::info`, `:::warning`, `:::tip`, etc.
 - Spell-check content and aim for clear, concise writing.
+- **Use sentence case for headings**, not title case. Write `## Browse available GPU plans`, not `## Browse Available GPU Plans`. Capitalizing every word hurts readability — only capitalize the first word and proper nouns.
 
 ### Linking
 - Use relative links between docs (e.g., `[Settings](../../settings/settings.md)`).
@@ -163,27 +165,17 @@ For comparison, **CPU Cloud** uses daily billing at 5:55 PM UTC with a 1-day pre
 - [x] VM/Bare metal assets in `assets/vm_baremetal/` - 7 webp screenshots (png originals kept for now)
 - [x] Manage instances assets - container (list, details, update, logs, events), vm_baremetal (list, details), billing page
 - [x] Sidebar navigation configured for all GPU Cloud pages
-- [x] `api/overview.md` - **Draft**: GPU Cloud API introduction (auth, request format, endpoint table, Swagger link). Has TODOs for wording polish.
-- [x] `api/get_plans/get_plans.md` - **Full page**: Browse available GPU plans. Container plans (flat array) and VM/bare metal plans (grouped by GPU model). All response fields documented with examples.
-- [x] `api/deploy_instance/deploy_instance.md` - **Full page**: Deploy GPU instances. Container deployment (plan_id, container_settings, constraints, ssh_key), default container images endpoint, VM/bare metal deployment (plan_id, name, ssh_key, os_image). Shared error responses section.
+- [x] Shared API overview (`api/overview/overview.md`) - merged auth, format, statuses, both clouds' endpoint tables, Swagger links
+- [x] Shared SSH keys page (`api/ssh_keys/ssh_keys.md`) - extracted from CPU manage_vms, cloud-agnostic
+- [x] `api/gpu_cloud/get_plans/get_plans.md` - **Full page**: Browse available GPU plans. Container plans (flat array) and VM/bare metal plans (grouped by GPU model). All response fields documented with examples.
+- [x] `api/gpu_cloud/deploy_instance/deploy_instance.md` - **Full page**: Deploy GPU instances. Container deployment (plan_id, container_settings, constraints, ssh_key), default container images endpoint, VM/bare metal deployment (plan_id, name, ssh_key, os_image). Shared error responses section.
+- [x] `api/gpu_cloud/manage_instances/manage_instances.md` - **Full page**: List/get/update/terminate instances, container logs/events, VM/baremetal rename
+- [x] API docs restructured: shared overview + SSH keys at top, cloud-specific endpoints in `api/cpu_cloud/` and `api/gpu_cloud/`
+- [x] `build/overview.md` - Updated to mention both CPU and GPU Cloud, links to shared API overview
 
 ### TODO - UI Documentation
 
 - [ ] **Provider termination handling for GPU instances**: CPU Cloud has a dedicated `provider_vm_termination.md`. Evaluate whether GPU Cloud needs an equivalent page. If so, add it to `sidebars.js` under `manage_instances` category.
-
-### TODO - API Documentation
-
-- [ ] **`api/overview.md`** - Polish the draft: fix TODO notes, improve endpoint path convention wording, verify links
-- [ ] **`api/manage_instances/manage_instances.md`** - Manage GPU instances
-  - List instances, get instance details
-  - Update instances (containers only)
-  - Terminate instances
-  - Get logs, get events (containers only)
-  - Reference: `cpu_cloud/api/manage_vms/manage_vms.md`
-
-### TODO - Shared/Cross-cutting
-
-- [ ] **`build/overview.md`** - Update to mention GPU Cloud alongside CPU Cloud. Currently only references CPU VMs and API.
 
 ## Writing Guidelines for GPU Cloud Docs
 
@@ -241,10 +233,14 @@ For comparison, **CPU Cloud** uses daily billing at 5:55 PM UTC with a 1-day pre
 | GPU API Swagger UI | `https://api.fluence.dev/gpu/api-docs` |
 | CPU VM rent (UI reference) | `docs/build/cpu_cloud/vm_rent/vm_rent.md` |
 | CPU VM management (UI reference) | `docs/build/cpu_cloud/manage_vm/manage_vm.md` |
-| CPU API overview (API reference) | `docs/build/cpu_cloud/api/overview.md` |
-| CPU deploy API (API reference) | `docs/build/cpu_cloud/api/order_vm/order_vm.md` |
-| CPU marketplace API (API reference) | `docs/build/cpu_cloud/api/get_offerings/get_offerings.md` |
-| CPU manage API (API reference) | `docs/build/cpu_cloud/api/manage_vms/manage_vms.md` |
+| Shared API overview | `docs/build/api/overview/overview.md` |
+| Shared SSH keys API | `docs/build/api/ssh_keys/ssh_keys.md` |
+| CPU marketplace API (API reference) | `docs/build/api/cpu_cloud/get_offerings/get_offerings.md` |
+| CPU deploy API (API reference) | `docs/build/api/cpu_cloud/order_vm/order_vm.md` |
+| CPU manage API (API reference) | `docs/build/api/cpu_cloud/manage_vms/manage_vms.md` |
+| GPU plans API (API reference) | `docs/build/api/gpu_cloud/get_plans/get_plans.md` |
+| GPU deploy API (API reference) | `docs/build/api/gpu_cloud/deploy_instance/deploy_instance.md` |
+| GPU manage API (API reference) | `docs/build/api/gpu_cloud/manage_instances/manage_instances.md` |
 | Balance & billing (shared) | `docs/build/balance/balance.md` |
 | Settings & SSH keys (shared) | `docs/build/settings/settings.md` |
 | GPU container screenshots (rent) | `docs/build/gpu_cloud/instance_rent/assets/containers/` |

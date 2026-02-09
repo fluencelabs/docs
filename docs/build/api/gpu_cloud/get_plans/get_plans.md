@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Browse available GPU plans
+# Find GPU plans on the marketplace
 
 The Fluence GPU compute marketplace offers pre-configured GPU plans that you can browse and rent. Each plan is a fixed package of GPU hardware, vCPU, memory, and storage available from a specific provider at a set hourly price. Plans are organized by workload type: containers, VMs, and bare metal.
 
@@ -28,12 +28,12 @@ The API provides three endpoints, one for each workload type:
 All endpoints are simple `GET` requests with no request body or query parameters. They return the currently available plans with pricing and location data.
 
 :::info
-All endpoints require the `X-API-KEY` header for authentication. See the [API introduction](../overview.md) for details on authentication and request format.
+All endpoints require the `X-API-KEY` header for authentication. See the [API introduction](../../overview/overview.md) for details on authentication and request format.
 :::
 
 ### Pricing model
 
-All GPU plans use hourly billing in USDC. Each plan includes an `upfront_hours` value (currently 3) — this is the number of hours charged from your balance when you deploy an instance. For more details on how billing works, see the [billing model](../../instance_rent/instance_rent.md#billing-model) section.
+All GPU plans use hourly billing in USDC. Each plan includes an `upfront_hours` value (currently 3) — this is the number of hours charged from your balance when you deploy an instance. For more details on how billing works, see the [billing model](../../../gpu_cloud/instance_rent/instance_rent.md#billing-model) section.
 
 ## Container plans
 
@@ -99,7 +99,7 @@ The response is a JSON array of plan objects. Each object contains the plan deta
 The `plan` object contains the configuration details and pricing for the plan.
 
 - **`id`** (string): Unique identifier for the plan. Use this ID when creating an instance from this plan.
-- **`name`** (string): Human-readable plan slug that encodes the key specs. Follows the pattern `{gpu}-{vram}-{interface}-{gpu_count}gpu-{vcpu}cpu-{ram}gb-{storage}gb` (e.g., `h200-141gi-sxm-1gpu-16cpu-128gb-120gb`).
+- **`name`** (string): Human-readable plan slug that encodes the key specs. Follows the pattern `{gpu}-{vram}-{interface}-{gpu_count}gpu-{vcpu}cpu-{ram}gi-{storage}gi` (e.g., `h200-141gi-sxm-1gpu-16cpu-128gi-120gi`).
 - **`supply`**: Resources allocated to instances created from this plan:
   - `vcpu.count` (integer): Number of virtual CPU cores
   - `memory.count` (integer): Amount of system memory
@@ -130,7 +130,7 @@ The `attributes` object provides additional metadata about where the plan is ava
   {
     "plan": {
       "id": "36cdb646-1246-42d8-b2d1-9480ca546536",
-      "name": "h200-141gi-sxm-1gpu-16cpu-128gb-120gb",
+      "name": "h200-141gi-sxm-1gpu-16cpu-128gi-120gi",
       "supply": {
         "vcpu": { "count": 16 },
         "memory": { "count": 128, "units": "Gi" },
@@ -156,7 +156,7 @@ The `attributes` object provides additional metadata about where the plan is ava
   {
     "plan": {
       "id": "472ea881-73d9-423a-8e61-19addd34424c",
-      "name": "a100-80gi-sxm-1gpu-1cpu-1gb-1gb",
+      "name": "a100-80gi-sxm-1gpu-1cpu-1gi-1gi",
       "supply": {
         "vcpu": { "count": 1 },
         "memory": { "count": 1, "units": "Gi" },
