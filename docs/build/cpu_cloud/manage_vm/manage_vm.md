@@ -1,4 +1,4 @@
-# CPU VM Info and Management
+# CPU VM info and management
 
 After renting a VM, all the relevant information is accessible on the **Running Instances** page.
 

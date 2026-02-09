@@ -1,4 +1,4 @@
-# Fluence Console Settings
+# Fluence console settings
 
 Use the **Settings** page to manage your SSH and API keys and more.
 

@@ -14,10 +14,11 @@ Access the Fluence Console: [console.fluence.network](https://console.fluence.ne
 
 In addition to the web interface, an API is available to programmatically:
 
-- Search for available compute resources on the marketplace
-- Deploy virtual machines with custom configurations
+- Search for available compute resources on the CPU and GPU Cloud marketplaces
+- Deploy virtual machines, GPU containers, and bare metal instances
 - Manage active deployments
+- Manage SSH keys for instance access
 
 The API is ideal for automation, integration with your existing workflows, or building custom tools on top of the Fluence platform.
 
-Learn more about using the API in our [API documentation](./api/overview.md).
+Learn more about using the API in our [API documentation](./api/overview/overview.md).

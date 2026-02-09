@@ -1,4 +1,4 @@
-# Payment And Balance Management
+# Payment and balance management
 
 In order to rent a VM from the Fluence marketplace, you need to provide funds to the marketplace which are used to pay for your rented resources. It is important to note that allocated funds are managed by smart contracts and based on your VM configuration and price, the smart contracts periodically charge the rent due to the compute provider. Throughout this document, we refer to the funds escrowed to these smart contracts as the Balance.
 
