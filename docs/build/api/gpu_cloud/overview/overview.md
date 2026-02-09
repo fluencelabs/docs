@@ -35,9 +35,9 @@ GPU Cloud supports three workload types: containers, VMs, and bare metal. Endpoi
 
 For example, `/gpu/plans/` returns container plans, `/gpu/plans/vms` returns VM plans, and `/gpu/plans/baremetal` returns bare metal plans. The same pattern applies to `/gpu/instances/`.
 
-## SSH keys
+## Swagger UI
 
-GPU Cloud does not require pre-registered SSH keys. Instead, you provide your public SSH key directly in the [deployment request](../deploy_instance/deploy_instance.md). The key is passed as the `ssh_key` field in the request body — it is optional for containers and required for VMs and bare metal.
+Explore and try the GPU Cloud API endpoints directly in your browser: [https://api.fluence.dev/gpu/api-docs](https://api.fluence.dev/gpu/api-docs)
 
 ## Error responses
 
@@ -84,10 +84,6 @@ Common 400 errors include:
     "detail": "Provided OS image Ubuntu Server 2.04 is not supported for the selected offer. Available OS images: Ubuntu Server 22.04"
   }
   ```
-
-## Swagger UI
-
-Explore and try the GPU Cloud API endpoints directly in your browser: [https://api.fluence.dev/gpu/api-docs](https://api.fluence.dev/gpu/api-docs)
 
 ## Next steps
 

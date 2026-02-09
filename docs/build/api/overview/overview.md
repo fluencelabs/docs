@@ -32,6 +32,8 @@ All error responses return a JSON body with a description of the problem. The ex
 
 ## Next steps
 
-- [CPU Cloud API overview](../cpu_cloud/overview/overview.md) — endpoints, error format, and Swagger UI for CPU Cloud
-- [GPU Cloud API overview](../gpu_cloud/overview/overview.md) — endpoints, workload types, error format, and Swagger UI for GPU Cloud
-- [Manage SSH keys](../ssh_keys/ssh_keys.md) — list, add, and remove SSH keys used for CPU Cloud VM access
+Pick the cloud that matches your workload and dive into its API guides:
+
+- [CPU Cloud API](../cpu_cloud/overview/overview.md) — create and manage virtual machines
+- [GPU Cloud API](../gpu_cloud/overview/overview.md) — create and manage GPU containers, VMs, and bare metal instances
+- [SSH keys](../ssh_keys/ssh_keys.md) — create and manage your SSH keys

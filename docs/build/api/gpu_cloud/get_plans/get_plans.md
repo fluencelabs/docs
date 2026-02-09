@@ -183,7 +183,7 @@ The `attributes` object provides additional metadata about where the plan is ava
 ]
 ```
 
-## VM and Bare Metal plans
+## VM and bare metal plans
 
 VM and bare metal plans provide full OS-level access with GPU passthrough. VMs run on a hypervisor, while bare metal gives you a dedicated physical server. Both workload types share the same API response structure — they use separate endpoints but return data in the same format.
 

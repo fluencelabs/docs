@@ -23,10 +23,6 @@ https://api.fluence.dev/
 | `/marketplace/*` | Search and discover available compute offerings    |
 | `/vms/*`         | Deploy and manage virtual machines                 |
 
-## SSH keys
-
-To access your CPU Cloud VMs via SSH, you need at least one SSH key registered in your account before creating a VM. You can register keys either through the [Fluence Console settings](../../../settings/settings.md) or using the [Manage SSH keys](../../ssh_keys/ssh_keys.md) API.
-
 ## Error responses
 
 All CPU Cloud API error responses return a JSON body with an `error` field containing a message:

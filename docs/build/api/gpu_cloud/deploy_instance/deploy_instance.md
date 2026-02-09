@@ -244,7 +244,7 @@ The response is a JSON array of default container image objects:
 You don't have to use default images — you can specify any public or private container image in your deployment request. Default images are provided as convenient starting points with pre-configured settings.
 :::
 
-## Deploy a VM or Bare Metal instance
+## Deploy a VM or bare metal instance
 
 VM and bare metal instances provide full OS-level access with GPU passthrough. Both use the same request structure — only the endpoint path differs.
 

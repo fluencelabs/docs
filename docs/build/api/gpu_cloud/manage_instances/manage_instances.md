@@ -10,10 +10,9 @@ In this guide, you'll learn how to:
 
 1. List your GPU instances and check their status
 2. Retrieve instance details and connection information
-3. Update a running container deployment
-4. Retrieve container logs and cluster events
-5. Rename a VM or bare metal instance
-6. Terminate instances
+3. Update a running deployment
+4. Retrieve a running container logs and cluster events
+5. Terminate instances
 
 ## Instance statuses
 

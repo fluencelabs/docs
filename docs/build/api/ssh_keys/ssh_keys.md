@@ -4,21 +4,13 @@ sidebar_position: 2
 
 # Manage SSH keys
 
-The Fluence API provides endpoints for managing SSH keys registered in your account. These keys are used by **CPU Cloud** — when you create a CPU VM, your registered keys are automatically deployed to it.
-
-:::info
-**GPU Cloud** does not use registered SSH keys. Instead, you provide your public key directly in the [deployment request](../gpu_cloud/deploy_instance/deploy_instance.md).
-:::
+The Fluence API provides endpoints for managing SSH keys registered in your account.
 
 In this guide, you'll learn how to:
 
 1. List your registered SSH keys
 2. Add new SSH keys to your account
 3. Remove SSH keys when they're no longer needed
-
-:::warning
-Without any SSH keys registered, you won't be able to access your CPU Cloud VMs. Please ensure you have at least one SSH key registered before creating a VM.
-:::
 
 :::tip
 You can also manage SSH keys through the [Fluence Console settings](../../settings/settings.md).
