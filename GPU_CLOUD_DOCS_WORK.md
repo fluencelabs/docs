@@ -42,8 +42,8 @@ docs/build/
     manage_instances/manage_instances.md
     api/
       overview.md
-      get_offerings/get_offerings.md
-      order_instance/order_instance.md
+      get_plans/get_plans.md
+      deploy_instance/deploy_instance.md
       manage_instances/manage_instances.md
 ```
 
@@ -163,6 +163,9 @@ For comparison, **CPU Cloud** uses daily billing at 5:55 PM UTC with a 1-day pre
 - [x] VM/Bare metal assets in `assets/vm_baremetal/` - 7 webp screenshots (png originals kept for now)
 - [x] Manage instances assets - container (list, details, update, logs, events), vm_baremetal (list, details), billing page
 - [x] Sidebar navigation configured for all GPU Cloud pages
+- [x] `api/overview.md` - **Draft**: GPU Cloud API introduction (auth, request format, endpoint table, Swagger link). Has TODOs for wording polish.
+- [x] `api/get_plans/get_plans.md` - **Full page**: Browse available GPU plans. Container plans (flat array) and VM/bare metal plans (grouped by GPU model). All response fields documented with examples.
+- [x] `api/deploy_instance/deploy_instance.md` - **Full page**: Deploy GPU instances. Container deployment (plan_id, container_settings, constraints, ssh_key), default container images endpoint, VM/bare metal deployment (plan_id, name, ssh_key, os_image). Shared error responses section.
 
 ### TODO - UI Documentation
 
@@ -170,31 +173,12 @@ For comparison, **CPU Cloud** uses daily billing at 5:55 PM UTC with a 1-day pre
 
 ### TODO - API Documentation
 
-All GPU Cloud API pages are stubs ("Coming soon"). They need to be written following the CPU Cloud API docs as structural reference, but with GPU-specific endpoints, parameters, and examples.
-
-- [ ] **`api/overview.md`** - GPU Cloud API introduction
-  - Authentication (same X-API-KEY mechanism)
-  - Request/response format
-  - GPU-specific endpoint overview table (likely `/gpu/*` or similar paths instead of `/vms/*`)
-  - Links to Swagger/API reference
-  - Reference: `cpu_cloud/api/overview.md`
-
-- [ ] **`api/get_offerings/get_offerings.md`** - Search GPU marketplace
-  - How to search for GPU compute offerings
-  - GPU-specific filters (GPU model, vRAM, interface type PCIe/SXM, etc.)
-  - Container vs VM/bare metal offering differences
-  - Reference: `cpu_cloud/api/get_offerings/get_offerings.md` (633 lines, very detailed)
-
-- [ ] **`api/order_instance/order_instance.md`** - Deploy GPU instances
-  - Creating containers via API (image, start command, ports, env vars, SSH keys)
-  - Creating VMs/bare metal via API (OS image, SSH keys, ports)
-  - Request/response structure with examples
-  - Reference: `cpu_cloud/api/order_vm/order_vm.md`
-
+- [ ] **`api/overview.md`** - Polish the draft: fix TODO notes, improve endpoint path convention wording, verify links
 - [ ] **`api/manage_instances/manage_instances.md`** - Manage GPU instances
   - List instances, get instance details
+  - Update instances (containers only)
   - Terminate instances
-  - SSH key management (or link to shared docs)
+  - Get logs, get events (containers only)
   - Reference: `cpu_cloud/api/manage_vms/manage_vms.md`
 
 ### TODO - Shared/Cross-cutting
@@ -226,13 +210,18 @@ All GPU Cloud API pages are stubs ("Coming soon"). They need to be written follo
    - Admonitions (:::info, :::warning) for important notes
    - Note: CPU Cloud docs still use numbered headings — don't follow that pattern for GPU docs
 
-6. **API doc pattern** (established in CPU Cloud API docs):
-   - Show the endpoint URL in a code block
-   - Document request parameters with field descriptions
-   - Provide full JSON request examples
-   - Document response structure with examples
-   - Include error response examples
+6. **API doc pattern** (established across CPU and GPU Cloud API docs):
+   - Start with intro paragraph + "In this guide, you'll learn:" numbered list
+   - Show the endpoint URL in a `sh` code block, then a curl example
+   - For responses: show annotated JSON schema first (with `string`, `number` type placeholders), then field-by-field breakdown under H3/H4 headings, then a real trimmed example
+   - For requests: show full example body first, then break down each field under H4 headings with isolated JSON snippets
+   - **Error responses**: document once per page if all endpoints share the same format. GPU API has two error types:
+     - **422** (validation): `detail` is an array of objects with `loc`, `msg`, `type`, `input`, `ctx`
+     - **400** (business logic): `detail` is a plain string (e.g., insufficient balance, plan unavailable, unsupported OS image)
    - End with "Next steps" linking to related guides
+   - **File/directory naming**: align with the H1 title (e.g., H1 "Deploy GPU instances" → `deploy_instance/deploy_instance.md`, H1 "Browse available GPU plans" → `get_plans/get_plans.md`)
+   - **API terminology**: use the actual API naming in docs (e.g., "plans" not "offerings" when the endpoint is `/plans/`). This helps users map docs to the API they'll call.
+   - **Swagger/OpenAPI**: the GPU API spec is at `https://api.fluence.dev/gpu/openapi.json` (Swagger UI at `/gpu/api-docs`). Use it to verify field names, types, required/optional status, and enums.
 
 7. **Structure within a page for multi-type content** (containers + VMs/bare metal):
    - Common intro and billing at the top
@@ -248,6 +237,8 @@ All GPU Cloud API pages are stubs ("Coming soon"). They need to be written follo
 |------|-------|
 | Docusaurus config | `docusaurus.config.ts` |
 | Sidebar navigation | `sidebars.js` |
+| GPU API OpenAPI spec | `https://api.fluence.dev/gpu/openapi.json` |
+| GPU API Swagger UI | `https://api.fluence.dev/gpu/api-docs` |
 | CPU VM rent (UI reference) | `docs/build/cpu_cloud/vm_rent/vm_rent.md` |
 | CPU VM management (UI reference) | `docs/build/cpu_cloud/manage_vm/manage_vm.md` |
 | CPU API overview (API reference) | `docs/build/cpu_cloud/api/overview.md` |
