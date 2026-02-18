@@ -52,16 +52,7 @@ const sidebars = {
             "build/api/cpu_cloud/manage_vms/manage_vms",
           ],
         },
-        {
-          type: "category",
-          label: "GPU Cloud",
-          items: [
-            "build/api/gpu_cloud/overview/overview",
-            "build/api/gpu_cloud/get_plans/get_plans",
-            "build/api/gpu_cloud/deploy_instance/deploy_instance",
-            "build/api/gpu_cloud/manage_instances/manage_instances",
-          ],
-        },
+        "build/api/gpu_cloud/overview/overview",
       ],
     },
   ],
