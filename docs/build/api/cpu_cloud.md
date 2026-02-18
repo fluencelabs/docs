@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# CPU Cloud API
+# CPU Cloud
 
 The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machines, and manage them throughout their lifecycle.
 

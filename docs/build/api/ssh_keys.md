@@ -2,120 +2,40 @@
 sidebar_position: 2
 ---
 
-# Manage SSH keys
+# SSH keys
 
-The Fluence API provides endpoints for managing SSH keys registered in your account.
+SSH keys are account-level credentials used when deploying compute instances. The API lets you register, list, and remove keys so they're available at deploy time.
 
-In this guide, you'll learn how to:
+For authentication and general request format, see the [API introduction](./overview.md).
 
-1. List your registered SSH keys
-2. Add new SSH keys to your account
-3. Remove SSH keys when they're no longer needed
+For complete request/response schemas, see the [API reference](https://api.fluence.dev/) (Swagger UI).
 
 :::tip
 You can also manage SSH keys through the [Fluence Console settings](../settings/settings.md).
 :::
 
-## List SSH keys
+## Endpoints
 
-To view all SSH keys registered in your account, use the following API endpoint:
+Base URL: `https://api.fluence.dev`
 
-```sh
-GET https://api.fluence.dev/ssh_keys
-```
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/ssh_keys` | List all registered keys |
+| `POST` | `/ssh_keys` | Add a new key |
+| `DELETE` | `/ssh_keys` | Remove a key |
 
-This endpoint returns an array of SSH key objects representing all the keys you've registered.
+## Add a key
 
-**Example response:**
-
-```json
-[
-  {
-    "name": "name-ed25519",
-    "fingerprint": "SHA256:fingerprint",
-    "algorithm": "ssh-ed25519",
-    "comment": "comment",
-    "publicKey": "ssh-ed25519 key",
-    "active": true,
-    "createdAt": "+002025-03-28T16:26:38.808750000Z"
-  }
-]
-```
-
-### Response fields
-
-Each SSH key object includes the following information:
-
-- **`active`**: Indicates whether the key is currently active and can be used
-- **`algorithm`**: The cryptographic algorithm used for the key (e.g., `ssh-ed25519`, `ssh-rsa`)
-- **`comment`**: A comment included with the key, often indicating the user and machine that created it
-- **`createdAt`**: Timestamp when the key was added to your account
-- **`fingerprint`**: A unique identifier for the key, used when deleting keys
-- **`name`**: The friendly name you assigned to the key
-- **`publicKey`**: The full public key string
-
-## Add an SSH key
-
-To add a new SSH key to your account, use the following API endpoint:
-
-```sh
-POST https://api.fluence.dev/ssh_keys
-```
-
-### Request parameters
-
-```json
-{
-  "name": "my-key",
-  "publicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgJIjnDg1DjqOOxINs78oU3f7PJXIyq9uiNocNVhXNx user@example.com"
-}
-```
-
-- **`name`**: A friendly name for identifying this key in your account
-- **`publicKey`**: The full SSH public key string, which typically includes the algorithm, the key itself, and optionally a comment
+Provide a friendly `name` and the full `publicKey` string. If the key already exists in your account (matched by fingerprint), the endpoint returns **200** with the existing key details instead of creating a duplicate. A newly created key returns **201**.
 
 :::tip
-Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have them yet.
+Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have one yet.
 :::
 
-### Response fields
+## Delete a key
 
-If the key already exists in your account, the endpoint returns a 200 status code with the existing key details:
+Deletion uses the key's `fingerprint` as the identifier — not its name. You can find fingerprints by listing your keys first.
 
-```json
-[
-  {
-    "active": true,
-    "algorithm": "ssh-ed25519",
-    "comment": "user@example.com",
-    "createdAt": "+002025-03-01T00:00:000000000Z",
-    "fingerprint": "SHA256:sINcLA/hlKG0nDpE9n233xEnXAgSISxq0/nVWbbx5A4",
-    "name": "my-key",
-    "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgJIjnDg1DjqOOxINs78oU3f7PJXIyq9uiNocNVhXNx user@example.com"
-  }
-]
-```
-
-If a new key is created, the endpoint returns a 201 status code with the newly created key details in the same format.
-
-## Delete an SSH key
-
-When you no longer need an SSH key, you can remove it from your account using the following API endpoint:
-
-```sh
-DELETE https://api.fluence.dev/ssh_keys
-```
-
-### Request parameters
-
-To delete a key, specify its unique fingerprint in the request body:
-
-```json
-{
-  "fingerprint": "SHA256:sINcLA/hlKG0nDpE9n233xEnXAgSISxq0/nVWbbx5A4"
-}
-```
-
-- **`fingerprint`**: The unique fingerprint of the SSH key you want to delete
-
-A successful deletion request will return a 200 status code.
+:::info
+Removing a key from your account does not affect instances that were already deployed with it. Those instances remain accessible until terminated.
+:::

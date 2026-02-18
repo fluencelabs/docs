@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# GPU Cloud API
+# GPU Cloud
 
 The GPU Cloud API lets you browse available GPU plans, deploy instances, and manage them throughout their lifecycle. It supports three workload types — containers, VMs, and bare metal — each accessed through a consistent URL pattern.
 

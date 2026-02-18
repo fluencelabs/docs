@@ -30,10 +30,13 @@ curl -i -X GET https://api.fluence.dev/gpu/plans \
 
 All error responses return a JSON body with a description of the problem. The exact error format differs between CPU Cloud and GPU Cloud — see the cloud-specific overview pages for details.
 
-## Next steps
+## Contents
 
-Pick the cloud that matches your workload and dive into its API guides:
+The Fluence API covers two cloud platforms — CPU Cloud and GPU Cloud. Pick the one that matches your workload:
 
-- [CPU Cloud API](./cpu_cloud.md) — create and manage virtual machines
-- [GPU Cloud API](./gpu_cloud.md) — create and manage GPU containers, VMs, and bare metal instances
-- [SSH keys](./ssh_keys.md) — create and manage your SSH keys
+- [CPU Cloud](./cpu_cloud.md) — search the decentralized CPU compute marketplace, deploy and manage virtual machines
+- [GPU Cloud](./gpu_cloud.md) — browse available GPU plans, deploy and manage containers, VMs, and bare metal instances
+
+In addition, the API provides shared account-level management that applies across both platforms:
+
+- [SSH keys](./ssh_keys.md) — register and manage SSH keys for use during deployment
