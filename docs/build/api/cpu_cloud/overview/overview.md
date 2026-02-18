@@ -2,30 +2,108 @@
 sidebar_position: 1
 ---
 
-# Overview
+# CPU Cloud API
 
 The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machines, and manage them throughout their lifecycle.
 
-:::info
-All CPU Cloud API endpoints require the `X-API-KEY` header for authentication. See the [API introduction](../../overview/overview.md) for details on authentication and request format.
-:::
+For authentication and general request format, see the [API introduction](../../overview/overview.md). For product concepts (marketplace model, VM lifecycle, billing), see the [CPU Cloud overview](../../../cpu_cloud/overview/overview.md).
 
-## Base URL
-
-```sh
-https://api.fluence.dev/
-```
+For complete request/response schemas, see the [API reference](https://api.fluence.dev/docs/fluence-public.yaml) ([Swagger UI](https://api.fluence.dev/)).
 
 ## Endpoints
 
-| Endpoint         | Description                                        |
-| ---------------- | -------------------------------------------------- |
-| `/marketplace/*` | Search and discover available compute offerings    |
-| `/vms/*`         | Deploy and manage virtual machines                 |
+Base URL: `https://api.fluence.dev`
+
+### Marketplace
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/marketplace/offers` | Search for available offers |
+| `GET` | `/marketplace/basic_configurations` | List available basic configurations |
+| `GET` | `/marketplace/countries` | List available data center countries |
+| `GET` | `/marketplace/hardware` | List available hardware specifications |
+
+### Virtual machines
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/vms/v3` | Deploy one or more VMs |
+| `GET` | `/vms/v3` | List running VMs |
+| `GET` | `/vms/v3/status` | Get VM statuses and IP info |
+| `PATCH` | `/vms/v3` | Update VM name and ports |
+| `DELETE` | `/vms/v3` | Delete one or more VMs |
+| `GET` | `/vms/v3/default_images` | List default OS images |
+| `POST` | `/vms/v3/estimate` | Estimate deployment cost |
+
+## Browse the marketplace
+
+`POST /marketplace/offers` accepts optional filters in the request body. All filters are optional — send an empty `{}` to get all available offers.
+
+Available filters: basic configuration, hardware specs (CPU, memory, storage), data center country, and maximum price per epoch.
+
+### Basic configurations
+
+The API uses predefined configuration slugs that follow the pattern `cpu-{cores}-ram-{memory}gb-storage-{size}gb` (e.g., `cpu-4-ram-8gb-storage-25gb`). Each represents a fixed package of vCPU, RAM, and base storage. You can request additional storage on top. Currently, resources are in multiples of a compute unit (2 vCPUs, 4 GB RAM).
+
+### Discovery endpoints
+
+Use these to find valid filter values:
+
+- `GET /marketplace/basic_configurations` — available configuration slugs
+- `GET /marketplace/countries` — ISO country codes with active offers
+- `GET /marketplace/hardware` — available CPU architectures, memory types, storage types
+
+:::info
+`additionalResources` (extra storage beyond the basic configuration) can only be used together with the `hardware.storage` filter.
+:::
+
+:::tip
+You can skip marketplace exploration entirely and just submit a deploy request with your constraints — the system will automatically match you with the best available offer.
+:::
+
+### Estimate cost
+
+`POST /vms/v3/estimate` accepts the same constraints as the deploy endpoint plus an `instances` count, and returns the expected deposit amount and per-epoch pricing without committing to a deployment.
+
+## Deploy VMs
+
+`POST /vms/v3` deploys one or more VMs. The request has three parts:
+
+- **constraints** (optional) — same filters as marketplace search. If omitted or partially specified, the system auto-selects (smallest configuration, cheapest price).
+- **instances** — number of VMs to deploy with this configuration.
+- **vmConfiguration** — name, open ports, hostname, OS image URL, and SSH keys.
+
+Things to know:
+
+- **OS image**: provide a download URL. Use `GET /vms/v3/default_images` for pre-built options, or supply your own (must be publicly downloadable; supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`).
+- **Ports**: only port 22 (TCP) is open by default. You must explicitly specify any additional ports. Port 10250 is reserved.
+- **SSH keys**: at least one key is required. You can provide a raw public key string or reference an existing key by name from your [SSH keys](../../ssh_keys/ssh_keys.md).
+
+### After deployment
+
+VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud overview](../../../cpu_cloud/overview/overview.md).
+
+## Manage VMs
+
+### Update name and ports
+
+`PATCH /vms/v3` accepts an array of updates, each targeting a VM by ID. You can change the name and/or open ports.
+
+:::warning
+When updating `openPorts`, you must include **all** ports that should remain open. Any ports omitted from the update will be closed. This can lock you out if you forget to include port 22.
+:::
+
+### Delete VMs
+
+`DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
+
+:::info
+Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../../../cpu_cloud/overview/overview.md#billing-model).
+:::
 
 ## Error responses
 
-All CPU Cloud API error responses return a JSON body with an `error` field containing a message:
+All CPU Cloud API errors return a JSON body with an `error` string:
 
 ```json
 {
@@ -33,18 +111,7 @@ All CPU Cloud API error responses return a JSON body with an `error` field conta
 }
 ```
 
-Common errors include:
+Common errors:
 
-- **403**: Invalid or missing API key
-- **422**: No matching offers found for the given constraints
-
-## API documentation resources
-
-- **Swagger UI:** [https://api.fluence.dev/](https://api.fluence.dev/)
-- **API Reference:** [https://api.fluence.dev/docs](https://api.fluence.dev/docs)
-
-## Next steps
-
-1. [Find compute resources on the marketplace](../get_offerings/get_offerings.md) — search for and compare compute offerings
-2. [Deploy virtual machines](../order_vm/order_vm.md) — deploy and configure VMs
-3. [Manage your deployments](../manage_vms/manage_vms.md) — view, monitor, and delete your VMs
+- **403** — invalid or missing API key
+- **422** — no matching offers found, or not enough offers to satisfy the request

@@ -17,6 +17,7 @@ const sidebars = {
       type: "category",
       label: "CPU Cloud",
       items: [
+        "build/cpu_cloud/overview/overview",
         "build/cpu_cloud/vm_rent/vm_rent",
         {
           type: "category",
@@ -42,16 +43,7 @@ const sidebars = {
       items: [
         "build/api/overview/overview",
         "build/api/ssh_keys/ssh_keys",
-        {
-          type: "category",
-          label: "CPU Cloud",
-          items: [
-            "build/api/cpu_cloud/overview/overview",
-            "build/api/cpu_cloud/get_offerings/get_offerings",
-            "build/api/cpu_cloud/order_vm/order_vm",
-            "build/api/cpu_cloud/manage_vms/manage_vms",
-          ],
-        },
+        "build/api/cpu_cloud/overview/overview",
         "build/api/gpu_cloud/overview/overview",
       ],
     },
