@@ -9,11 +9,7 @@ The instances list displays your GPU instances. Each instance card shows:
 - **Location** — data center location
 - **Configuration** — hardware summary: GPU model, vRAM, interface type, vCPU, RAM, and Disk
 - **Domain** — the domain name or IP address assigned to the instance
-- **Status** — current state of the instance:
-  - **Initiated** — the instance is being provisioned
-  - **Active** — the instance is running
-  - **Failed** — the instance failed to be provisioned
-  - **Ended** — the instance was terminated by the user or the system
+- **Status** — current state of the instance (see [instance lifecycle](../overview/overview.md#instance-lifecycle))
 
 Active instances have action icons: edit name (pencil), terminate (trash), and open details (arrow).
 

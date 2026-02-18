@@ -33,6 +33,7 @@ const sidebars = {
       type: "category",
       label: "GPU Cloud",
       items: [
+        "build/gpu_cloud/overview/overview",
         "build/gpu_cloud/instance_rent/instance_rent",
         "build/gpu_cloud/manage_instances/manage_instances",
       ],

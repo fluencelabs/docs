@@ -1,31 +1,8 @@
 # Renting an instance
 
-The Fluence marketplace is a decentralized broker of GPU compute supply and demand that facilitates the renting process of GPU instances and management of your instances in datacenters located around the world.
-The GPU marketplace offers three kinds of GPU workload for deployments: containers, VMs and bare metal instances. This document is focused on showing how to choose and configure and deploy an instance of any available kind.
+This guide walks you through deploying a GPU instance on Fluence. GPU Cloud supports three workload types — containers, VMs, and bare metal — each covered below. For background on workload types, instance lifecycle, and how billing works, see the [GPU Cloud concepts](../overview/overview.md).
 
-## Billing model
-
-GPU instances are billed hourly on a pre-paid model. Each instance has its own dedicated balance that covers ongoing rent.
-
-Billing periods are fixed hourly intervals (e.g., 15:00–16:00, 16:00–17:00 UTC) regardless of when the instance was started. At each billing period, one hour of rent is charged from the instance's balance.
-
-### Deployment charge
-
-When you deploy an instance, an amount equivalent to 3 hours of rent is deducted from your account balance and transferred to the instance's balance. The current billing period is charged immediately, and the remaining 2 hours serve as a reserve. If provisioning fails, the full amount is returned to your account balance.
-
-### Automatic top-ups
-
-The system maintains a reserve of 2 hours of rent on each instance's balance. When the reserve drops below this target — typically after each hourly charge — the system automatically tops it up from your account balance.
-
-### Insufficient funds
-
-If your account balance cannot cover a top-up, the system will keep retrying. Your instance runs through any billing period that has already been paid for. Termination occurs when the system cannot charge for the next billing period due to insufficient funds on the instance's balance — the instance is then automatically deleted.
-
-### Funds after termination
-
-When an instance stops — whether terminated by you or the system — all unused funds remaining on the instance's balance are returned to your account balance.
-
-You can check the amounts reserved for your running instances on the **Billing** page in the Fluence Console.
+When you deploy, the system reserves 3 hours of rent from your account balance — one hour is charged immediately, the other two are kept as a reserve. Make sure your balance has enough funds before starting. See [billing model](../overview/overview.md#billing-model) for details.
 
 ## GPU container
 

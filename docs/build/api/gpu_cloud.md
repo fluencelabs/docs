@@ -6,6 +6,8 @@ sidebar_position: 4
 
 The GPU Cloud API lets you browse available GPU plans, deploy instances, and manage them throughout their lifecycle. It supports three workload types — containers, VMs, and bare metal — each accessed through a consistent URL pattern.
 
+Before you begin, we recommend familiarizing yourself with the [GPU Cloud concepts](../gpu_cloud/overview/overview.md) — it covers workload types, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
+
 For authentication and general request format, see the [API introduction](./overview.md).
 
 For complete request/response schemas, see the [API reference](https://api.fluence.dev/gpu/api-docs/openapi.json) ([Swagger UI](https://api.fluence.dev/gpu/api-docs)).
