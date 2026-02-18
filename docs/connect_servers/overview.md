@@ -59,6 +59,6 @@ Provider Application contains functionality for managing the following Fluence N
     - Can’t be used as Bond
     - Can use VLAN
 
-![subnets](./assets/subnets.svg)
+![subnets](./assets/overview/subnets.svg)
 
 Possible network topology within data center. Orange area represents a physical server.

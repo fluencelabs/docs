@@ -22,4 +22,4 @@ Navigate to the `Clusters` page and retrieve the newly generated Cluster key, wh
 This process will be automated in upcoming releases.
 :::
 
-![cluster_key](./assets/show_clusters_address_page.webp)
+![cluster_key](./assets/smart_contracts/show_clusters_address_page.webp)

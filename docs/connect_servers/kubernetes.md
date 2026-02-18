@@ -28,7 +28,7 @@ You should set the `ignore: true` parameter in the custom Patch of all network i
 Kubernetes default subnets are using `10.244.0.0/16` and `10.96.0.0/12` as pod and service subnets, respectively. Make sure that the Talos management interface doesn’t overlap with these ranges. Alternatively, configure these subnets with the Talos Patch based on the following [example](#example-of-custom-talos-patch-setup).
 :::
 
-![network_interfaces](./assets/patches.webp)
+![network_interfaces](./assets/kubernetes/patches.webp)
 
 After all required parameters have been specified, you can proceed with the Cluster creation. In the Cluster section you can track the setup status. Within the cluster launching process, the Provider Application will do the following:
 
@@ -41,7 +41,7 @@ After all required parameters have been specified, you can proceed with the Clus
 
 Let’s assume that we have the following networking topology for individual server:
 
-![network_interfaces](./assets/one-interface.svg)
+![network_interfaces](./assets/kubernetes/one-interface.svg)
 
 In this case **Talos Patch** for this server should be the following:
 

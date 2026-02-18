@@ -13,7 +13,7 @@ To participate in the Fluence Protocol as Hardware Provider, please complete [th
 
 After successfully completing the KYB process, partners are whitelisted and receive the necessary credentials from the Fluence team to be able to access the Provider Web Application.
 
-![login](./assests/sign_page.webp)
+![login](./assets/login/sign_page.webp)
 
 ### Prerequisites
 

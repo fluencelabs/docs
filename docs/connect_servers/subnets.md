@@ -11,6 +11,6 @@ To register a new subnet in the Provider Application, navigate to the Network se
 3. *Exclude IPs* - List IP addresses that should be excluded from allocation for Fluence
 4. *VLAN ID for public networking* - Optional parameter to set if there is additional networking logic within the data center for public traffic.
 
-![ip_subnets](./assets/add_subnet_page.webp)
+![ip_subnets](./assets/subnets/add_subnet_page.webp)
 
 After the subnet has been created, you can select it from the list on the `Network` page and Assign it to the specific Kubernetes cluster.
