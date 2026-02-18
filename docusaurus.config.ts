@@ -2,6 +2,7 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import path from "path";
 
 const config: Config = {
   title: "Fluence Docs",
@@ -142,7 +143,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Cloudless Labs`,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: ["docusaurus-plugin-sass"],
+  plugins: ["docusaurus-plugin-sass", "docusaurus-markdown-source-plugin"],
 };
 
 export default config;

@@ -23,6 +23,6 @@ If you are using the Fluence Console for the first time, you need to register us
 If you register with the same email through Google and Email Passwordless, two different accounts will be created for you.
 :::
 
-![registration page](./assets/registration.webp)
+![registration page](./assets/registration/registration.webp)
 
 After successful registration, you have access to the Fluence Console.

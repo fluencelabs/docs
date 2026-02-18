@@ -26,39 +26,39 @@ Go to the **Billing page** and click the **“Top Up”** button.
 :::info
 You can check for pending payment sessions on the **Billing page**, in the **Payments History** section. Pending payment sessions have the status `Pending`.
 :::
-![top up button](./assets/top_up_button.webp)
+![top up button](./assets/balance/top_up_button.webp)
 
 ### 2. Enter the amount you want to top up your Balance with
 
 :::info
 Currently, the minimum top up amount is **USDC 10.00**, while your total Balance amount cannot exceed **USDC 5000.00**.
 :::
-![enter amount](./assets/amount.webp)
+![enter amount](./assets/balance/amount.webp)
 
 ### 3. Enter your details
 
 You will be redirected to the CopperX payment page.
 
-![copperx payment page](./assets/payment_page.webp)
+![copperx payment page](./assets/balance/payment_page.webp)
 
 #### Cancel payment
 :::info
 To cancel a payment, use the corresponding option in the CopperX interface. If a payment is not completed within 15 minutes, the payment will be automatically cancelled.
 :::
-![cancel payment](./assets/cancel.webp)
-![cancel result](./assets/cancel_res.webp)
+![cancel payment](./assets/balance/cancel.webp)
+![cancel result](./assets/balance/cancel_res.webp)
 
 :::info
 If you accidentally close the CopperX payment page, go back to the Fluence Console payment page.
 :::
-![return to payment page](./assets/return_to_payment.webp)
+![return to payment page](./assets/balance/return_to_payment.webp)
 
 ### 4. Choose one of the payment methods and complete the payment
 
 :::info
 If you encounter issues with the “Wallet” payment option, we recommend using the “Scan QR code” option.
 :::
-![complete payment](./assets/complete_payment.webp)
+![complete payment](./assets/balance/complete_payment.webp)
 
 ### 5. Return to the Fluence Console
 

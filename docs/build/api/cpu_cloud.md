@@ -6,7 +6,7 @@ sidebar_position: 3
 
 The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machine instances, and manage them throughout their lifecycle.
 
-Before you begin, we recommend familiarizing yourself with the [CPU Cloud concepts](../cpu_cloud/overview/overview.md) — it covers the marketplace model, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
+Before you begin, we recommend familiarizing yourself with the [CPU Cloud concepts](../cpu_cloud/overview.md) — it covers the marketplace model, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
 
 For authentication and general request format, see the [API introduction](./overview.md). For complete request/response schemas, see the [API reference](https://api.fluence.dev/docs/fluence-public.yaml) ([Swagger UI](https://api.fluence.dev/)).
 
@@ -81,7 +81,7 @@ Things to know:
 
 ### After deployment
 
-VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview/overview.md).
+VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview.md).
 
 ## Manage VMs
 
@@ -98,7 +98,7 @@ When updating `openPorts`, you must include **all** ports that should remain ope
 `DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
 
 :::info
-Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../cpu_cloud/overview/overview.md#billing-model).
+Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../cpu_cloud/overview.md#billing-model).
 :::
 
 ## Error responses

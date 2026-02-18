@@ -9,7 +9,7 @@ The Fluence API provides programmatic access to the decentralized Fluence comput
 ## Authentication
 
 All Fluence API endpoints require an API key sent in the `X-API-KEY` header.
-You can create and manage your keys in the [Fluence Console settings](../settings/settings.md). If you omit or supply an invalid key, you'll get a 403 error.
+You can create and manage your keys in the [Fluence Console settings](../settings.md). If you omit or supply an invalid key, you'll get a 403 error.
 
 ## Request and response format
 

@@ -9,13 +9,13 @@ The instances list displays your GPU instances. Each instance card shows:
 - **Location** — data center location
 - **Configuration** — hardware summary: GPU model, vRAM, interface type, vCPU, RAM, and Disk
 - **Domain** — the domain name or IP address assigned to the instance
-- **Status** — current state of the instance (see [instance lifecycle](../overview/overview.md#instance-lifecycle))
+- **Status** — current state of the instance (see [instance lifecycle](./overview.md#instance-lifecycle))
 
 Active instances have action icons: edit name (pencil), terminate (trash), and open details (arrow).
 
-![Container instances list](./assets/container/list_page.webp)
+![Container instances list](./assets/manage_instances/container/list_page.webp)
 
-![VM instances list](./assets/vm_baremetal/list_page.webp)
+![VM instances list](./assets/manage_instances/vm_baremetal/list_page.webp)
 
 ## GPU container
 
@@ -31,7 +31,7 @@ Open an instance card to view its details. The details page provides:
 - **Renting information** — deployment date, next billing time, hourly rate, and total spendings
 - **Container image** — the image currently running on the instance
 
-![Container instance details](./assets/container/instance_details.webp)
+![Container instance details](./assets/manage_instances/container/instance_details.webp)
 
 ### Logs and Events
 
@@ -39,11 +39,11 @@ At the bottom of the details page, two tabs provide runtime information:
 
 - **Logs** — container output (stdout/stderr)
 
-![Container logs](./assets/container/container_logs.webp)
+![Container logs](./assets/manage_instances/container/container_logs.webp)
 
 - **Events** — cluster-level events for the instance lifecycle: scheduling, image pulling, container creation, and startup
 
-![Cluster events](./assets/container/cluster_events.webp)
+![Cluster events](./assets/manage_instances/container/cluster_events.webp)
 
 ### Updating a container deployment
 
@@ -54,9 +54,9 @@ You can update a running container by clicking **Update deployment** on the deta
 - Environment variables
 - SSH keys
 
-The update page works the same way as the [instance creation flow](../instance_rent/instance_rent.md#set-the-container-image). After making your changes, click **Redeploy** to restart the container with the updated configuration.
+The update page works the same way as the [instance creation flow](./instance_rent.md#set-the-container-image). After making your changes, click **Redeploy** to restart the container with the updated configuration.
 
-![Update container deployment](./assets/container/update_options.webp)
+![Update container deployment](./assets/manage_instances/container/update_options.webp)
 
 ## VM and Bare Metal
 
@@ -76,10 +76,10 @@ Open an instance card to view its details. The details page provides:
 Updating a running VM or bare metal instance is not currently supported. To change the configuration, terminate the instance and create a new one.
 :::
 
-![VM instance details](./assets/vm_baremetal/instance_details.webp)
+![VM instance details](./assets/manage_instances/vm_baremetal/instance_details.webp)
 
 ## Billing
 
 The history of your charges can be found on the **Billing page** under the **GPU cloud** tab. The page shows your monthly spending with a daily breakdown chart, filterable by instance type. The **Billing history** table lists each charge with the instance name, instance ID, payment date, and amount.
 
-![Billing page](./assets/billing_page.webp)
+![Billing page](./assets/manage_instances/billing_page.webp)

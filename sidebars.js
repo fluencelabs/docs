@@ -10,32 +10,25 @@ const sidebars = {
   ],
   build: [
     "build/overview",
-    "build/registration/registration",
-    "build/balance/balance",
-    "build/settings/settings",
+    "build/registration",
+    "build/balance",
+    "build/settings",
     {
       type: "category",
       label: "CPU Cloud",
       items: [
-        "build/cpu_cloud/overview/overview",
-        "build/cpu_cloud/vm_rent/vm_rent",
-        {
-          type: "category",
-          label: "Manage instances",
-          items: [
-            "build/cpu_cloud/manage_vm/manage_vm",
-            "build/cpu_cloud/manage_vm/provider_vm_termination",
-          ],
-        },
+        "build/cpu_cloud/overview",
+        "build/cpu_cloud/vm_rent",
+        "build/cpu_cloud/manage_vm",
       ],
     },
     {
       type: "category",
       label: "GPU Cloud",
       items: [
-        "build/gpu_cloud/overview/overview",
-        "build/gpu_cloud/instance_rent/instance_rent",
-        "build/gpu_cloud/manage_instances/manage_instances",
+        "build/gpu_cloud/overview",
+        "build/gpu_cloud/instance_rent",
+        "build/gpu_cloud/manage_instances",
       ],
     },
     {

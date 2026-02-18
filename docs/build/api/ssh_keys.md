@@ -11,7 +11,7 @@ For authentication and general request format, see the [API introduction](./over
 For complete request/response schemas, see the [API reference](https://api.fluence.dev/) (Swagger UI).
 
 :::tip
-You can also manage SSH keys through the [Fluence Console settings](../settings/settings.md).
+You can also manage SSH keys through the [Fluence Console settings](../settings.md).
 :::
 
 ## Endpoints

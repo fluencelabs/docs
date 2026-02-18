@@ -28,7 +28,7 @@ Each instance goes through the following statuses during its lifetime:
 | `Active` | Instance is running and accessible |
 | `SmallBalance` | Not enough funds for the next billing period |
 | `InsufficientFunds` | Instance balance is 0 and the grace period passed |
-| `Terminated` | Instance was terminated by the provider — workload is no longer running. See [provider termination handling](../manage_vm/provider_vm_termination.md). |
+| `Terminated` | Instance was terminated by the provider — workload is no longer running. See [provider termination handling](./manage_vm.md#handling-provider-terminated-instances). |
 | `Stopped` | Instance was ended by the user |
 
 ## Billing model
