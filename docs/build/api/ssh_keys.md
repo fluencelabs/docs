@@ -13,7 +13,7 @@ In this guide, you'll learn how to:
 3. Remove SSH keys when they're no longer needed
 
 :::tip
-You can also manage SSH keys through the [Fluence Console settings](../../settings/settings.md).
+You can also manage SSH keys through the [Fluence Console settings](../settings/settings.md).
 :::
 
 ## List SSH keys

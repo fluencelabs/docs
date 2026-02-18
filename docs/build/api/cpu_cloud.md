@@ -1,12 +1,12 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 # CPU Cloud API
 
 The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machines, and manage them throughout their lifecycle.
 
-For authentication and general request format, see the [API introduction](../../overview/overview.md). For product concepts (marketplace model, VM lifecycle, billing), see the [CPU Cloud overview](../../../cpu_cloud/overview/overview.md).
+For authentication and general request format, see the [API introduction](./overview.md). For product concepts (marketplace model, VM lifecycle, billing), see the [CPU Cloud overview](../cpu_cloud/overview/overview.md).
 
 For complete request/response schemas, see the [API reference](https://api.fluence.dev/docs/fluence-public.yaml) ([Swagger UI](https://api.fluence.dev/)).
 
@@ -77,11 +77,11 @@ Things to know:
 
 - **OS image**: provide a download URL. Use `GET /vms/v3/default_images` for pre-built options, or supply your own (must be publicly downloadable; supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`).
 - **Ports**: only port 22 (TCP) is open by default. You must explicitly specify any additional ports. Port 10250 is reserved.
-- **SSH keys**: at least one key is required. You can provide a raw public key string or reference an existing key by name from your [SSH keys](../../ssh_keys/ssh_keys.md).
+- **SSH keys**: at least one key is required. You can provide a raw public key string or reference an existing key by name from your [SSH keys](./ssh_keys.md).
 
 ### After deployment
 
-VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud overview](../../../cpu_cloud/overview/overview.md).
+VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud overview](../cpu_cloud/overview/overview.md).
 
 ## Manage VMs
 
@@ -98,7 +98,7 @@ When updating `openPorts`, you must include **all** ports that should remain ope
 `DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
 
 :::info
-Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../../../cpu_cloud/overview/overview.md#billing-model).
+Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../cpu_cloud/overview/overview.md#billing-model).
 :::
 
 ## Error responses

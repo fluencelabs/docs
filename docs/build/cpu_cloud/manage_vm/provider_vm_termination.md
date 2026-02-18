@@ -20,7 +20,7 @@ The Fluence compute marketplace sources from established compute providers with 
 
 ## Identification of terminated VMs
 
-Currently, status updates about VM termination are only available in the Fluence Console (UI) on the "Running Instances" page or via the API when you request your active VM info using the [View your active VMs](../../api/cpu_cloud/manage_vms/manage_vms.md#view-your-active-vms) endpoint.
+Currently, status updates about VM termination are only available in the Fluence Console (UI) on the "Running Instances" page or via the API when you request your active VM info using the [View your active VMs](../../api/cpu_cloud.md#manage-vms) endpoint.
 
 ### For Fluence Console (UI) Users
 
@@ -36,7 +36,7 @@ Currently, status updates about VM termination are only available in the Fluence
 
 ### For API Users
 
-- **Status Field**: In the response from the [View your active VMs](../../api/cpu_cloud/manage_vms/manage_vms.md#view-your-active-vms) endpoint, the `status` field for the affected VM will be `"Terminated"`.
+- **Status Field**: In the response from the [View your active VMs](../../api/cpu_cloud.md#manage-vms) endpoint, the `status` field for the affected VM will be `"Terminated"`.
 - **Missing Information**:
 
   - The `publicIp` field will be `null`.
@@ -80,4 +80,4 @@ For details on this process, see the [VM Management section](./manage_vm.md#vm-m
 
 ### API Users
 
-- Use the [Delete your VM](../../api/cpu_cloud/manage_vms/manage_vms.md#delete-your-vm) endpoint with the `vmId` of the terminated VM to remove its record and release its reserved funds
+- Use the [Delete your VM](../../api/cpu_cloud.md#delete-vms) endpoint with the `vmId` of the terminated VM to remove its record and release its reserved funds

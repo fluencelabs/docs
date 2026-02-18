@@ -9,7 +9,7 @@ The Fluence API provides programmatic access to the decentralized Fluence comput
 ## Authentication
 
 All Fluence API endpoints require an API key sent in the `X-API-KEY` header.
-You can create and manage your keys in the [Fluence Console settings](../../settings/settings.md). If you omit or supply an invalid key, you'll get a 403 error.
+You can create and manage your keys in the [Fluence Console settings](../settings/settings.md). If you omit or supply an invalid key, you'll get a 403 error.
 
 ## Request and response format
 
@@ -34,6 +34,6 @@ All error responses return a JSON body with a description of the problem. The ex
 
 Pick the cloud that matches your workload and dive into its API guides:
 
-- [CPU Cloud API](../cpu_cloud/overview/overview.md) — create and manage virtual machines
-- [GPU Cloud API](../gpu_cloud/overview/overview.md) — create and manage GPU containers, VMs, and bare metal instances
-- [SSH keys](../ssh_keys/ssh_keys.md) — create and manage your SSH keys
+- [CPU Cloud API](./cpu_cloud.md) — create and manage virtual machines
+- [GPU Cloud API](./gpu_cloud.md) — create and manage GPU containers, VMs, and bare metal instances
+- [SSH keys](./ssh_keys.md) — create and manage your SSH keys
