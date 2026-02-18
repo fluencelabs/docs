@@ -11,7 +11,7 @@ You’ll first get familiar with the Staking interface — your control panel fo
 :::note
 Fluence uses an L2 app chain anchored to Ethereum.  
 To use your FLT and USDC tokens in the Fluence Network, you must bridge them from Ethereum.  
-Read more in the [bridge guide](../bridge_guide/bridge_guide.md).
+Read more in the [bridge guide](./bridge_guide.md).
 :::
 
 ## The staking application overview
@@ -20,13 +20,13 @@ Read more in the [bridge guide](../bridge_guide/bridge_guide.md).
 Be cautious and use only the official application at [stake.fluence.network](https://stake.fluence.network). Never share your private keys or seed phrases with anyone and always double-check the URL before signing a transaction.
 :::
 
-![The view of the main page of the Staking Application](./assets/app_view_main.png)  
+![The view of the main page of the Staking Application](./assets/staking_app_guide/app_view_main.png)  
 The view of the main page of the Staking Application
 
 The Staking Application consists of the following main parts:
 
 - Top center: The navigation bar with links to the blockchain Bridge Application
-- Top right: The button to connect your wallet to the application. Read more on how to connect your wallet to Fluence in this [article](../wallets_guide/wallets_guide.md)
+- Top right: The button to connect your wallet to the application. Read more on how to connect your wallet to Fluence in this [article](./wallets_guide.md)
 - Panels with a summary of the activated Capacity Commitment performance:
   - **"Capacity commitments"** - distribution of activated CCs by statuses
   - **"Rewards"** - summary of rewards earned by CCs so far
@@ -49,7 +49,7 @@ The following sections will guide you through the application interface, demonst
 
 ### Capacity commitments statuses panel
 
-![The view of the Capacity Commitments statuses panel](./assets/cc_status_panel.png)  
+![The view of the Capacity Commitments statuses panel](./assets/staking_app_guide/cc_status_panel.png)  
 The view of the Capacity Commitments statuses panel
 
 This panel shows the number of Capacity Commitments (CCs) in each current status:
@@ -82,7 +82,7 @@ After staking and activating a Capacity Commitment, it progresses through the fo
 
 ### Capacity commitments rewards panel
 
-![The view of the Capacity Commitments rewards panel](./assets/cc_rewards_panel.png)  
+![The view of the Capacity Commitments rewards panel](./assets/staking_app_guide/cc_rewards_panel.png)  
 The view of the Capacity Commitments rewards panel
 
 This panel provides a summary of rewards earned from Capacity Commitments (CCs) across the network — or specifically from the CCs you've activated if you're logged in.
@@ -104,7 +104,7 @@ For logged-in users, this panel displays a button to withdraw all available rewa
 
 In this section, you'll find the list of Capacity Commitments available for staking.
 
-![The view of the Available for staking section](./assets/available_for_staking_view.png)  
+![The view of the Available for staking section](./assets/staking_app_guide/available_for_staking_view.png)  
 The view of the Available for staking section
 
 This section has the following components:
@@ -117,7 +117,7 @@ This section has the following components:
 
 #### Capacity Commitment cards list fields
 
-![The view of the available for staking Capacity Commitment cards collapsed](./assets/available_for_staking_collapsed_cards.png)  
+![The view of the available for staking Capacity Commitment cards collapsed](./assets/staking_app_guide/available_for_staking_collapsed_cards.png)  
 The view of the available for staking Capacity Commitment cards collapsed
 
 In the collapsed view, each Capacity Commitment card includes:
@@ -139,7 +139,7 @@ Example of the Stake page list of CCs displayed in collapsed card format.
 
 #### Individual Capacity Commitment extended card fields
 
-![The view of the available for staking Capacity Commitment card extended](./assets/available_cc_card_extended.png)  
+![The view of the available for staking Capacity Commitment card extended](./assets/staking_app_guide/available_cc_card_extended.png)  
 The view of the available for staking Capacity Commitment card extended
 
 Clicking on a Capacity Commitment card expands it to show detailed information about the Commitment and its Provider. This expanded view also includes the option to stake.
@@ -163,21 +163,21 @@ Clicking on a Capacity Commitment card expands it to show detailed information a
 The **"Stake"** button appears differently based on whether your wallet is connected and whether you're eligible to stake for that Capacity Commitment.
 
 - If you haven't connected your wallet to the application, you'll see a **"Connect wallet"** button.
-![The Stake button view for unauthenticated users](./assets/stake_button_unauth.png)
+![The Stake button view for unauthenticated users](./assets/staking_app_guide/stake_button_unauth.png)
 
 - If your wallet is connected but the Provider has set exclusive staking rights for another address, the **"Stake"** button will be disabled. In this case, choose a different CC for staking.
-![The Stake button view for authenticated users who cannot stake because the CC's provider has set exclusive staking rights for another address](./assets/stake_button_reserved.png)
+![The Stake button view for authenticated users who cannot stake because the CC's provider has set exclusive staking rights for another address](./assets/staking_app_guide/stake_button_reserved.png)
 
 - If your wallet is connected and you’re eligible to stake, the **"Stake"** button will be active.  
   Read more about how to choose the right CC in the next section.
-![The active Stake button view for authenticated users](./assets/stake_button_active.png)
+![The active Stake button view for authenticated users](./assets/staking_app_guide/stake_button_active.png)
 )
 
 ### Staked Capacity Commitments section
 
 This section lists of Capacity Commitments (CCs) activated by the logged-in user or all users. CCs are displayed as expandable cards, providing various information about their performance.
 
-![The view of the Staked Capacity Commitments section](./assets/staked_cc_section_view.png)
+![The view of the Staked Capacity Commitments section](./assets/staking_app_guide/staked_cc_section_view.png)
 The view of the Staked Capacity Commitments section
 
 You can filter the list by the Capacity Commitment status by clicking on the "Status" collapsable list and choosing the target status of CCs to show.
@@ -204,7 +204,7 @@ In the collapsed state, each card shows the following general information about 
 
 By clicking on an individual CC card, you can expand it to view additional information about the CC's performance, collateral, and current rewards:
 
-![The view of a staked Capacity Commitment card extended](./assets/staked_cc_card_extended.png)
+![The view of a staked Capacity Commitment card extended](./assets/staking_app_guide/staked_cc_card_extended.png)
 The view of a staked Capacity Commitment card extended
 
 **Statistics:**
@@ -234,7 +234,7 @@ You'll first need to connect a compatible crypto wallet to use the Staking Appli
 
 :::tip
 
-Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
+Read the comprehensive [guide](./wallets_guide.md) on using crypto wallets with Fluence web applications.
 
 :::
 
@@ -262,16 +262,16 @@ After you've found the CC(s) you want to stake on, it's time to delegate your FL
 1.  Expand the target CC's card by clicking it
 2.  Ensure you're eligible to stake: your wallet is connected to the application
 3.  Click the **"Stake"** button
-![The view of a card of CC available for staking.](./assets/stake_view_of_card_for_staking.png)
+![The view of a card of CC available for staking.](./assets/staking_app_guide/stake_view_of_card_for_staking.png)
 
 1.  Confirm that you agree with the staking terms in the popped-up window
-![The view of a confirmation window for staking.](./assets/stake_confirm_depo_app_view.png)
+![The view of a confirmation window for staking.](./assets/staking_app_guide/stake_confirm_depo_app_view.png)
 
 1.  Sign the transaction in your wallet
-![The view of a transaction signing window in the wallet](./assets/stake_sign_tx.png)
+![The view of a transaction signing window in the wallet](./assets/staking_app_guide/stake_sign_tx.png)
 
 1.  A message informing about a successful staking will pop up. This message has the link to the transaction in the block explorer under the "Tx: …" text
-![The view of a successful staking confirmation message](./assets/stake_confirmed_depo_view.png)
+![The view of a successful staking confirmation message](./assets/staking_app_guide/stake_confirmed_depo_view.png)
 
 1.  You can proceed to the "**Your Capacity Commitments**" section under the list of available for staking CCs section and monitor the status and performance of the staked CC, or stay on this page and choose other CCs for staking
 
@@ -291,24 +291,24 @@ To withdraw rewards, log in to the application using the wallet address you used
 
 The Rewards panel will then display your rewards' current status. "Available to claim" shows the rewards that have been unlocked and are ready to be claimed.
 
-![The view of the rewards panel with available rewards to withdraw](./assets/withdraw_rew_panel_view.png)
+![The view of the rewards panel with available rewards to withdraw](./assets/staking_app_guide/withdraw_rew_panel_view.png)
 
 ### Withdraw rewards from an individual CC
 
 If you want to withdraw rewards from a CC where they are available, do the following:
 
 1.  Find the CC in the list and click its card to expand it
-![The view of a card of a CC available for rewards withdrawal](./assets/card_for_withdraw_view.png)
+![The view of a card of a CC available for rewards withdrawal](./assets/staking_app_guide/card_for_withdraw_view.png)
 
 1.  Click the **"withdraw rewards"** button
 1.  Confirm the withdrawal in the popped-up window
-![The view of a confirmation window for rewards withdrawal](./assets/withdraw_rew_card_confirm_in_app.png)
+![The view of a confirmation window for rewards withdrawal](./assets/staking_app_guide/withdraw_rew_card_confirm_in_app.png)
 
 1.  Confirm the transaction in your wallet. Notice that the information window in the Staking Application contains the ID of commitment you are withdrawing from
-![The view of a transaction signing window in the wallet](./assets/withdraw_rew_card_confirm_in_wallet.png)
+![The view of a transaction signing window in the wallet](./assets/staking_app_guide/withdraw_rew_card_confirm_in_wallet.png)
 
 1.  An information message confirming the successful withdrawal will pop up
-![The view of a successful rewards withdrawal confirmation message](./assets/withdraw_rew_one_cards_success.png)
+![The view of a successful rewards withdrawal confirmation message](./assets/staking_app_guide/withdraw_rew_one_cards_success.png)
 
 1.  Ensure that the correct amount of rewards has been transferred to your account and that in the individual CC card:
     - The amount of rewards available to claim has reduced (to zero or a smaller positive value if, during the withdrawal, a new reward was vested)
@@ -320,19 +320,19 @@ If you want to withdraw rewards from only one CC where they are available, do th
 
 1.  Click the **"Withdraw available rewards"** button in the top right panel "Rewards."
 1.  Confirm the withdrawal in the popped-up window
-![The view of a confirmation window for rewards withdrawal](./assets/withdr_rew_all_confirm_app.png)
+![The view of a confirmation window for rewards withdrawal](./assets/staking_app_guide/withdr_rew_all_confirm_app.png)
 
 1.  Confirm the transaction in your wallet. Notice that the information window in the Staking Application contains the number of commitments you are withdrawing from
-![The view of a transaction signing window in the wallet](./assets/withdr_rew_all_confirm_wallet.png)
+![The view of a transaction signing window in the wallet](./assets/staking_app_guide/withdr_rew_all_confirm_wallet.png)
 
 1.  An information message confirming the successful withdrawal will pop up
-![The view of a successful rewards withdrawal confirmation message](./assets/withdr_rew_all_success.png)
+![The view of a successful rewards withdrawal confirmation message](./assets/staking_app_guide/withdr_rew_all_success.png)
 
 1.  Ensure that the correct amount of rewards has been transferred to your account and that in the rewards panel:
 
     - The amount of rewards available to claim has reduced (to zero or a smaller positive value if, during the withdrawal, a new reward was vested)
     - The total claimed amount value has increased by the amount of rewards withdrawn
-    ![The view of a panel with all rewards withdrawn](./assets/panel_all_rewards_withdrawn.png)
+    ![The view of a panel with all rewards withdrawn](./assets/staking_app_guide/panel_all_rewards_withdrawn.png)
 
 ### How to withdraw collateral
 
@@ -354,16 +354,16 @@ In the **future**, it will be set to **30 days**, during which stakers cannot wi
 To withdraw collateral from a Capacity Commitment, do the following:
 
 1.  Find the CC in the list and click its card to expand it
-![The view of a card of a CC available for collateral withdrawal](./assets/withdraw_collateral_cc_card_view.png)
+![The view of a card of a CC available for collateral withdrawal](./assets/staking_app_guide/withdraw_collateral_cc_card_view.png)
 1.  Click the **"withdraw collateral"** button
 1.  Confirm the withdrawal in the popped-up window
-![The view of a confirmation window for collateral withdrawal](./assets/withdraw_collateral_confirm.png)
+![The view of a confirmation window for collateral withdrawal](./assets/staking_app_guide/withdraw_collateral_confirm.png)
 1.  Confirm the transaction in your wallet
 1.  An information message confirming the successful withdrawal will pop up
-![The view of a successful collateral withdrawal confirmation message](./assets/withdraw_collateral_success.png)
+![The view of a successful collateral withdrawal confirmation message](./assets/staking_app_guide/withdraw_collateral_success.png)
 1.  Ensure that the correct amount of tokens has been transferred to your account and that in the individual CC card:
 
     - The current collateral field now has 0 tokens available.
     - The "withdraw collateral" button is replaced with an "already withdrawn" caption.
     - The status field in the card now displays "withdrawn".
-    ![The view of a card of a CC after collateral withdrawal](./assets/withdraw_collateral_card_after_view.png)
+    ![The view of a card of a CC after collateral withdrawal](./assets/staking_app_guide/withdraw_collateral_card_after_view.png)

@@ -48,7 +48,7 @@ You'll first need to connect a compatible crypto wallet to use the Bridge Applic
 
 :::tip
 
-Read the comprehensive [guide](../wallets_guide/wallets_guide.md) on using crypto wallets with Fluence web applications.
+Read the comprehensive [guide](./wallets_guide.md) on using crypto wallets with Fluence web applications.
 
 :::
 
@@ -78,7 +78,7 @@ Be cautious and use only the official Bridge Application at [https://bridge.flue
 
 :::
 
-![The main view of the Bridge Application](./assets/bridge_app_view.png)
+![The main view of the Bridge Application](./assets/bridge_guide/bridge_app_view.png)
 The view of the Bridge Application main page
 
 The Bridge application consists of the following parts:
@@ -103,17 +103,17 @@ To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
 1.  Choose the token (FLT or USDC) you want to bridge. In this example, we're bridging FLT tokens.
 1.  Enter the number of tokens you wish to bridge.
 1.  Verify that the correct amount is displayed in the bridge panel and that you have enough FLT tokens in your wallet to cover the transaction fee specified in the "Estimated fees" field.
-![The view of the wallet window with the token amount to deposit](./assets/bridge_view_deposit_main.png)
+![The view of the wallet window with the token amount to deposit](./assets/bridge_guide/bridge_view_deposit_main.png)
 1.  Click the **"Bridge Funds"** button.
 1.  Your wallet application will ask you to sign several transactions:
     - Allow the bridge app to send the amount of tokens you specified. Ensure that the spending cap corresponds to the actual amount and confirm the transaction
-    ![The view of the wallet window asking to allow the bridge app to spend the tokens](./assets/bridge_allow_spending.png)
+    ![The view of the wallet window asking to allow the bridge app to spend the tokens](./assets/bridge_guide/bridge_allow_spending.png)
 
     - To initiate bridging
-    ![The view of the wallet window asking to initiate the bridging](./assets/wallet_initiate_bridging.png)
+    ![The view of the wallet window asking to initiate the bridging](./assets/bridge_guide/wallet_initiate_bridging.png)
 
 1.  After the transaction is processed, you'll be redirected to the Bridge application, where you'll see a status message:
-![The view of the application window with the success message](./assets/success_deposit_window.png)
+![The view of the application window with the success message](./assets/bridge_guide/success_deposit_window.png)
     For successful transactions, you'll receive two important links:
     -  A link to the L1 bridge transaction details on [Etherscan](https://etherscan.io/).
     -  A link to the L2 network transaction details on [Blockscout](https://blockscout.mainnet.fluence.dev/), the Fluence network block explorer.
@@ -123,10 +123,10 @@ To bridge tokens from the Ethereum Network to the Fluence (L2) Network:
     :::
 
 1.  Once your tokens are bridged to the Fluence network, the token transfer transaction can be viewed on Blockscout. Simply enter your wallet address in the placeholder at the end of this URL: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`
-![The view of the block scanner with the successful transaction](./assets/blockscout_success_deposit.png)
+![The view of the block scanner with the successful transaction](./assets/bridge_guide/blockscout_success_deposit.png)
 
 1.  The transferred tokens will be reflected in your wallet as well. To see the transferred tokens, you need to switch the network of your wallet to the Fluence Network and ensure that the FLT token was previously added to your wallet, or it won't be displayed (read more in the "Prepare your wallet" section).
-![The view of the wallet window with the added tokens](./assets/deposit_show_added_tokens.png)
+![The view of the wallet window with the added tokens](./assets/bridge_guide/deposit_show_added_tokens.png)
 
 Congratulations! You successfully and safely bridged your FLT tokens from the Ethereum Mainnet to the Fluence Mainnet network. Now, you can freely use your funds and stake your FLTs!
 
@@ -154,14 +154,14 @@ To bridge tokens from the Fluence Network to the Ethereum Network:
 1.  Ensure that in the bridge panel, the correct amount is displayed
 1.  Press **“Withdraw Funds”** button
 1.  Your wallet application will ask you to sign a transaction of token withdrawal:
-![The view of the wallet window asking to confirm the withdrawal](./assets/withdraw_confirm_in_wallet.png)
+![The view of the wallet window asking to confirm the withdrawal](./assets/bridge_guide/withdraw_confirm_in_wallet.png)
     
 1.  If the transaction to withdraw the tokens is successful, you will be redirected to the Bridge application and see the success message. Otherwise, you will see the transaction reversal error message.
-![The view of the application window with the success message](./assets/success_withdrawal_message.png)
+![The view of the application window with the success message](./assets/bridge_guide/success_withdrawal_message.png)
 
 1.  You can track your withdrawal status on the **Withdrawals history** page. To open it, press **“History”** button in the information message. Read more about **Withdrawals history** in the next [section](#withdrawals-history-page).
 1.  You can also visit the Fluence blockscanner and ensure that the withdrawal initialization transaction has appeared. For that, open the link with your wallet address put in the placeholder: [https://blockscout.mainnet.fluence.dev/address/](https://blockscout.mainnet.fluence.dev/address/)`<YOUR_WALLET_ADDRESS>`.
-![The view of the block scanner with the withdrawal transaction](./assets/blockscout_withdraw_info.png)
+![The view of the block scanner with the withdrawal transaction](./assets/bridge_guide/blockscout_withdraw_info.png)
 
 ### Withdrawals history page
 
@@ -174,7 +174,7 @@ To access the Withdrawals history page, users have two options:
 
 It's important to note that the Withdrawals history is only visible when your wallet is connected to the Ethereum Mainnet. Otherwise, the **"Switch network"** button will appear, which, when clicked, will initiate the network change process in the user's wallet application.
 
-![The view of the application window with the switch network message](./assets/withdraw_history_wrong_network.png)
+![The view of the application window with the switch network message](./assets/bridge_guide/withdraw_history_wrong_network.png)
 The view of the Withdrawals history page for wallets not connected to Ethereum
 
 The "History" page serves as a wallet-specific ledger, offering updates on the progress of withdrawal transactions. You can see all of your pending and completed transactions with transaction date, amount, status and hash.
@@ -185,7 +185,7 @@ A withdrawal transaction may have one of the following statuses:
 - `Claim`: The funds are ready to be claimed. User can press the **“Claim”** button to withdraw the funds. Read more about the withdrawal process in the section below.
 - `Completed`: The funds has been withdrawn successfully.
 
-![The view of the application window with the withdrawals history](./assets/view_withdraw_history.png)
+![The view of the application window with the withdrawals history](./assets/bridge_guide/view_withdraw_history.png)
 The view of the Withdrawals history page
 
 #### Funds withdrawal after the challenge period has passed
@@ -193,10 +193,10 @@ The view of the Withdrawals history page
 Once the challenge period for your withdrawal transaction has expired (7 days), you will be able to safely withdraw your funds. You will see the **"Claim"** button in the **"Status"** field of the relevant withdrawal request. To withdraw the funds, follow these steps:
 
 1.  Press the **"Claim"** button to initialize the withdrawal of the funds to your wallet
-![The view of the application window with the transaction history](./assets/view_withdraw_history.png)
+![The view of the application window with the transaction history](./assets/bridge_guide/view_withdraw_history.png)
 
 1.  Confirm the transaction in your wallet
-![The view of the wallet window asking to confirm the withdrawal](./assets/confirm_withdrawal_claim.png)
+![The view of the wallet window asking to confirm the withdrawal](./assets/bridge_guide/confirm_withdrawal_claim.png)
 
 1.  The withdrawal status will change to **"Completed"** and the funds transferred will be added to your wallet balance
-![The view of the application window with the claimed withdrawal](./assets/claimed_withdraw_view.png)
+![The view of the application window with the claimed withdrawal](./assets/bridge_guide/claimed_withdraw_view.png)

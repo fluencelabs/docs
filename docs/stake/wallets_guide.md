@@ -77,7 +77,7 @@ To resolve any issues on the Metamask side, check the official [documentation](h
 
 :::
 
-![How to add the FLT token in MetaMask](./assets/mm_import_tokens.png)
+![How to add the FLT token in MetaMask](./assets/wallets_guide/mm_import_tokens.png)
 How to add the FLT token in MetaMask
 
 ### Add Fluence Network to your wallet
@@ -90,13 +90,13 @@ You can add Fluence Network with Chainlist:
 
 1.  Fluence can be found on Chainlist by this [link](https://chainlist.org/chain/9999999). Proceed to the site.
 1.  Press **“Connect Wallet”** button.
-![Fluence Network on Chainlist](./assets/fluence_on_chainlist_view.png)
+![Fluence Network on Chainlist](./assets/wallets_guide/fluence_on_chainlist_view.png)
 Fluence Network listing on Chainlist
 1.  In the opened window of your wallet, approve adding Fluence Network to your wallet. Confirm the action by pressing the **"Approve"** button.
-![Adding Fluence Network to MetaMask](./assets/mm_add_fluence_from_chainlist.png)
+![Adding Fluence Network to MetaMask](./assets/wallets_guide/mm_add_fluence_from_chainlist.png)
 Approving the addition of Fluence Network in MetaMask
 1.  The wallet will then prompt you to switch the current network to the Fluence network. Confirm the switch by pressing the **"Switch network"** button.
-![Switching to Fluence Network in MetaMask](./assets/mm_switch_network_fluence_chainlist.png)
+![Switching to Fluence Network in MetaMask](./assets/wallets_guide/mm_switch_network_fluence_chainlist.png)
 Switching to Fluence Network in MetaMask
 
 #### Manually
@@ -104,7 +104,7 @@ Switching to Fluence Network in MetaMask
 To add Fluence Network manually:
 
 1. Open the setting of your wallet app and find the **“Networks”** section or something similar
-![Switching to Fluence Network in MetaMask](./assets/mm_settings_networks_list.png)
+![Switching to Fluence Network in MetaMask](./assets/wallets_guide/mm_settings_networks_list.png)
 1. Click the **“Add a Network”** button or similar
 1. Fill the fields as follows:
    - **Network:** Fluence
@@ -130,9 +130,9 @@ To display USDC tokens in your assets list in the Fluence Network (Metamask exam
 
 1. Open the Fluence Mainnet [page](https://mainnet.fluence.dev/) and press the **“USDC”** button.
 1. In the opened [Blockscout page](https://blockscout.mainnet.fluence.dev/token/0x2eC84f93e4F26465c38Fa8165A8927522290A138), you can see the USDC token contract address in the Fluence Network.
-![Mainnet page view on fluence.dev](./assets/mainnet_page_view.png)
+![Mainnet page view on fluence.dev](./assets/wallets_guide/mainnet_page_view.png)
 1. **Add automatically**: You can add the token automatically by pressing the button with the Metamask wallet icon and confirming the action in the wallet
-![View the USDC contract page on Blockscout and automatically import it to the wallet](./assets/usdc_blockscout_add_auto.png)
+![View the USDC contract page on Blockscout and automatically import it to the wallet](./assets/wallets_guide/usdc_blockscout_add_auto.png)
 1. **Add manually**:
    - Copy the address of the FLT token contract address from Blockscout or this string: `0x2eC84f93e4F26465c38Fa8165A8927522290A138`
    - Copy this string and open your wallet, find the **“Import tokens”** button, and press it
@@ -140,7 +140,7 @@ To display USDC tokens in your assets list in the Fluence Network (Metamask exam
    - Confirm the token addition and proceed
    - The token should appear in the list of your assets
 
-![How to add the USDC token in MetaMask](./assets/usdc_import_tokens_mm.png)
+![How to add the USDC token in MetaMask](./assets/wallets_guide/usdc_import_tokens_mm.png)
 How to add the USDC token in the Fluence Network in MetaMask
 
 ## Connect your wallet
@@ -149,21 +149,21 @@ Now, when you are ready to use your wallet, let’s authenticate by connecting i
 
 First, press the **“Connect Wallet”** button in the top right corner.
 
-![Fluence Staking App view without the wallet connected](./assets/staking_app_not_connected.png)
+![Fluence Staking App view without the wallet connected](./assets/wallets_guide/staking_app_not_connected.png)
 Fluence App top part view without the user's wallet connected
 
 ### Connect with direct app
 
 1. Choose a wallet to connect from the list of available ones
-![Example of choosing a wallet in the staking app](./assets/staking_app_window_choose_wallets.png)
+![Example of choosing a wallet in the staking app](./assets/wallets_guide/staking_app_window_choose_wallets.png)
 1. In the open wallet window, select the account for connection and confirm the action.
-![Example of choosing an account to connect](./assets/staking_app_choose_account_mm.png)
+![Example of choosing an account to connect](./assets/wallets_guide/staking_app_choose_account_mm.png)
 1. **Optional step:** If your wallet is connected to a different network, you will need to switch to the Fluence Mainnet first. The application will prompt you to switch the network. Confirm the switch.
-![Example of switching the network](./assets/staking_app_switch_network_mm.png)
+![Example of switching the network](./assets/wallets_guide/staking_app_switch_network_mm.png)
 1. When the wallet is connected, the “Connect” button in the top right corner will be replaced with new buttons: one with the network name and one with the connected wallet address on it.
-![Staking app view with user's wallet connected](./assets/staking_app_connected.png)
+![Staking app view with user's wallet connected](./assets/wallets_guide/staking_app_connected.png)
 1. You can press the button with the wallet address to see the connected wallet details and log out.
-![Staking app view with user's wallet connected](./assets/staking_app_connected_wallet_details.png)
+![Staking app view with user's wallet connected](./assets/wallets_guide/staking_app_connected_wallet_details.png)
 
 ### Connect with WalletConnect
 
@@ -171,7 +171,7 @@ If your preferred wallet isn't directly supported, you can use WalletConnect to 
 
 1. Select WalletConnect from the list of available wallets.
 1. A QR code will appear on your screen.
-![Example of WalletConnect QR code](./assets/staking_app_wc.png)
+![Example of WalletConnect QR code](./assets/wallets_guide/staking_app_wc.png)
 1. Choose the app for authentication:
 
    - For mobile: open your preferred wallet app on the phone and scan the QR code displayed
@@ -184,7 +184,7 @@ If your preferred wallet isn't directly supported, you can use WalletConnect to 
 1. Your wallet app will ask for confirmation to connect. Approve the connection.
 1. **Optional step:** If your wallet is connected to a different network, you will need to switch to the Fluence Mainnet first. The application will prompt you to switch the network. Confirm the switch.
 
-![How to connect to a Fluence Application through WalletConnect and a mobile application](./assets/mm_mobile_wallet_view.png)
+![How to connect to a Fluence Application through WalletConnect and a mobile application](./assets/wallets_guide/mm_mobile_wallet_view.png)
 How to connect to a Fluence Application through WalletConnect and a mobile application
 
 Now that you've connected your wallet to a Fluence Application, you're all set to start using it and participate in the Fluence Network.
