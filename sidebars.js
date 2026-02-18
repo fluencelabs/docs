@@ -21,7 +21,7 @@ const sidebars = {
         "build/cpu_cloud/vm_rent/vm_rent",
         {
           type: "category",
-          label: "Manage VMs",
+          label: "Manage instances",
           items: [
             "build/cpu_cloud/manage_vm/manage_vm",
             "build/cpu_cloud/manage_vm/provider_vm_termination",

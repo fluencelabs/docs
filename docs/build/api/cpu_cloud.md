@@ -4,11 +4,11 @@ sidebar_position: 3
 
 # CPU Cloud
 
-The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machines, and manage them throughout their lifecycle.
+The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machine instances, and manage them throughout their lifecycle.
 
-For authentication and general request format, see the [API introduction](./overview.md). For product concepts (marketplace model, VM lifecycle, billing), see the [CPU Cloud overview](../cpu_cloud/overview/overview.md).
+Before you begin, we recommend familiarizing yourself with the [CPU Cloud concepts](../cpu_cloud/overview/overview.md) — it covers the marketplace model, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
 
-For complete request/response schemas, see the [API reference](https://api.fluence.dev/docs/fluence-public.yaml) ([Swagger UI](https://api.fluence.dev/)).
+For authentication and general request format, see the [API introduction](./overview.md). For complete request/response schemas, see the [API reference](https://api.fluence.dev/docs/fluence-public.yaml) ([Swagger UI](https://api.fluence.dev/)).
 
 ## Endpoints
 
@@ -81,7 +81,7 @@ Things to know:
 
 ### After deployment
 
-VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud overview](../cpu_cloud/overview/overview.md).
+VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview/overview.md).
 
 ## Manage VMs
 
