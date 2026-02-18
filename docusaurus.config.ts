@@ -143,7 +143,10 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Cloudless Labs`,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: ["docusaurus-plugin-sass", "docusaurus-markdown-source-plugin"],
+  plugins: [
+    "docusaurus-plugin-sass",
+    path.resolve(__dirname, "plugins/markdown-source-plugin"),
+  ],
 };
 
 export default config;
