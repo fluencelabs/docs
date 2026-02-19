@@ -27,6 +27,7 @@ const config: Config = {
           editUrl: "https://github.com/fluencelabs/docs/tree/main",
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
+          exclude: ["**/llms_txt_override.md", "**/llms_txt_include_head.md"],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.scss"),
@@ -146,6 +147,7 @@ const config: Config = {
   plugins: [
     "docusaurus-plugin-sass",
     path.resolve(__dirname, "plugins/markdown-source-plugin"),
+    path.resolve(__dirname, "plugins/llms-txt-plugin"),
   ],
 };
 

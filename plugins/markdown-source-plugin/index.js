@@ -125,6 +125,10 @@ function findMarkdownFiles(dir, fileList = [], baseDir = dir) {
     if (stat.isDirectory()) {
       findMarkdownFiles(filePath, fileList, baseDir);
     } else if (file.endsWith('.md')) {
+      // Skip llms-txt-plugin special files
+      if (file === 'llms_txt_override.md' || file === 'llms_txt_include_head.md') {
+        return;
+      }
       // Store relative path from base directory
       const relativePath = path.relative(baseDir, filePath);
       fileList.push(relativePath);
