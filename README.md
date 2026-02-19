@@ -11,6 +11,10 @@ Fluence Docs are built using [Docusaurus 2](https://docusaurus.io/), a modern st
 - Please at least use spell checker inside your editor or maybe Grammarly and be attentive when writing docs - they are the face of the company in a sense
 - Use \`\`\`sh for something that you intend to type in a shell. Maybe don't put \$ signs and execution results right inside  \`\`\`sh code-blocks for the following reasons: \$ signs and commands output mixed with all of it make it harder to copy and use the code from the docs and also some of the commands output will be changed by us and will have to be maintained in the docs as well which is very inconvenient.
 - Headings are not just a stylistic tool but also semantic one. Headings are used to give document a structure which is especially important for page navigation for certain people and also for generating valid quick navigation tree that is displayed on the right side of the docs. So basically the main rule is to not skip heading levels (e.g. don't do #Heading followed immediately by ###Heading - use ##Heading instead)
+- Every docs page has a "View/Copy as Markdown" dropdown button (see `plugins/markdown-source-plugin/`). The plugin strips MDX syntax to produce clean, readable markdown for end users. Keep the following in mind:
+  - Put images in directories named `assets/` (not `img/`) — the plugin looks for `assets/` when copying images to the build output and when rewriting image paths
+  - `<Tabs>`, `<TabItem>`, and `<details>`/`<summary>` are converted to readable markdown equivalents automatically
+  - Any other uppercase-starting React/MDX component (e.g. `<MyWidget>`) is **silently removed** along with its content. If you add a new custom component that contains user-facing content, add a conversion rule in `plugins/markdown-source-plugin/index.js` — see the `cleanMarkdownForDisplay()` function and the plugin's own README for details
 
 ## Installation
 
