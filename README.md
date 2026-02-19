@@ -15,6 +15,12 @@ Fluence Docs are built using [Docusaurus 2](https://docusaurus.io/), a modern st
   - Put images in directories named `assets/` (not `img/`) — the plugin looks for `assets/` when copying images to the build output and when rewriting image paths
   - `<Tabs>`, `<TabItem>`, and `<details>`/`<summary>` are converted to readable markdown equivalents automatically
   - Any other uppercase-starting React/MDX component (e.g. `<MyWidget>`) is **silently removed** along with its content. If you add a new custom component that contains user-facing content, add a conversion rule in `plugins/markdown-source-plugin/index.js` — see the `cleanMarkdownForDisplay()` function and the plugin's own README for details
+- The site generates `llms.txt` index files at build time so LLM agents can discover our docs (see `plugins/llms-txt-plugin/`). Keep the following in mind:
+  - The page list is auto-generated from `sidebars.js` — adding or moving pages updates the llms.txt files on the next build
+  - To customize the header of any section's llms.txt, create an `llms_txt_include_head.md` in that section's directory (or `docs/` root). To replace the entire llms.txt with hand-written content, use `llms_txt_override.md` instead
+  - Files named `llms_txt_include_head.md` and `llms_txt_override.md` are not doc pages — they are excluded from the site, the markdown-source-plugin, and the page lists automatically. Don't rename them
+  - Page titles come from the first `# Heading` in each doc (or YAML front matter `title:`). Optional `description:` front matter adds a short description after the link
+  - See the plugin's README for the full guide on writing headers, overrides, and adding new sections
 
 ## Installation
 

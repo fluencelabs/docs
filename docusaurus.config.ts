@@ -6,7 +6,7 @@ import path from "path";
 
 const config: Config = {
   title: "Fluence Docs",
-  tagline: "Decentralized Serverless Platform",
+  tagline: "Decentralized Compute Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "warn",
