@@ -70,6 +70,3 @@ Review the instance summary and price in the Review section before launching.
 
 Click **Launch** to deploy. You'll be redirected to the **Running Instances** page.
 
-:::warning
-Billing is per full epoch. If you deploy at 5:45 PM UTC, you pay for a full day for those 10 minutes — the next charge follows at 5:55 PM UTC. See [billing model](./overview.md#billing-model).
-:::

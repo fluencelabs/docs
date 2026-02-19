@@ -1,18 +1,19 @@
 # Instance info and management
 
-After deploying an instance, all the relevant information is accessible on the **Running Instances** page.
+After deploying an instance, you can view and manage it from the **Running Instances** page. Use the search bar to filter instances by name or the status dropdown to narrow the list.
 
 ## Instance information
 
-For each instance, a corresponding card will appear on the **Running Instances** page, which can be expanded. More detailed information can be found in the `Hardware Specs` section. Note that extended server parameters are only visible if the specific infrastructure provider has provided the underlying information.
+Each instance appears as a card with its name, location, hardware summary, IP address, and status. Click the expand arrow to reveal full details — general info, hardware specs, connection details, and billing.
 
 ![Instance information](./assets/manage_vm/vm_info.webp)
 
-The card also shows the next billing time (`Next billing time`) set at **5:55 PM UTC**.
-
 ## Instance management
 
-Currently, the only operation available for a running instance is **Terminate**, which stops the instance and ends the rental agreement. Unused reserved balance is returned to your account — see [billing model](./overview.md#billing-model).
+Click the three-dot menu on an instance card to access the available actions:
+
+- **Edit VM name** — rename the instance.
+- **Terminate** — stop the instance and end the rental agreement. Any unused reserved balance is returned to your account.
 
 ![Instance management](./assets/manage_vm/vm_manage.webp)
 

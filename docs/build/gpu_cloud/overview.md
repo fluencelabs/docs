@@ -43,7 +43,7 @@ GPU Cloud uses hourly pre-paid billing in USD. Billing periods are fixed hourly 
 
 ### Instance balance
 
-Every instance has its own **reserved balance** that covers ongoing rent. When you deploy an instance, the system deducts an amount equivalent to **3 hours of rent** from your account balance and transfers it to the instance's reserved balance. One hour is charged immediately for the current billing period, while the remaining 2 hours stay as a reserve.
+Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts an amount equivalent to 3 hours of rent from your account balance and transfers it to the instance's reserved balance. One hour is charged immediately for the current billing period, while the remaining 2 hours stay as a reserve.
 
 If provisioning fails, the full amount is returned to your account balance.
 

@@ -141,5 +141,3 @@ GPU Cloud API errors come in two formats:
   "detail": "Insufficient balance to deploy instance"
 }
 ```
-
-Common causes: insufficient balance, plan no longer available, unsupported OS image (the error lists valid options).

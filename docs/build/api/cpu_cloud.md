@@ -97,10 +97,6 @@ When updating `openPorts`, you must include **all** ports that should remain ope
 
 `DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
 
-:::info
-Billing is per full epoch. If you delete a VM shortly after the billing time (5:55 PM UTC), you'll still be charged for that epoch. See the [billing model](../cpu_cloud/overview.md#billing-model).
-:::
-
 ## Error responses
 
 All CPU Cloud API errors return a JSON body with an `error` string:
@@ -110,8 +106,3 @@ All CPU Cloud API errors return a JSON body with an `error` string:
   "error": "No suitable offer found"
 }
 ```
-
-Common errors:
-
-- **403** — invalid or missing API key
-- **422** — no matching offers found, or not enough offers to satisfy the request

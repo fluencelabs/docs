@@ -33,31 +33,23 @@ Each instance goes through the following statuses during its lifetime:
 
 ## Billing model
 
-CPU Cloud uses daily billing in USDC. All prices are quoted per **epoch** — a 24-hour billing period. Charges are processed daily at **5:55 PM UTC**.
-
-:::warning
-Billing is for full epochs regardless of when you start. If you deploy an instance at 5:45 PM UTC, you pay for a full day for those 10 minutes, and the next charge happens at 5:55 PM UTC.
-:::
+CPU Cloud uses daily billing in USDC. Each instance has its own 24-hour billing period that starts at activation time and repeats every 24 hours.
 
 ### Instance balance
 
-Every instance has its own **reserved balance** that covers ongoing rent. When you deploy an instance, the system deducts an amount equivalent to **2 days' rent** from your account balance and transfers it to the instance's reserved balance. One day is charged immediately for the current epoch, while the other day stays as a reserve for the next one.
+Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts 2 days' worth of rent from your account — one day is charged immediately, and the other stays as a reserve for the next billing period.
 
 ### Automatic top-ups
 
-After each daily charge, the reserved balance drops. The system then automatically tops it back up from your account balance to maintain one epoch of reserve — enough to cover the next billing period.
+After each daily charge, the system automatically tops up the reserved balance from your account to maintain one day of reserve.
 
 ### Insufficient funds
 
-If your account balance cannot cover a top-up, the system keeps retrying. Your instance continues running through any epoch that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent — at that point the instance is deleted.
+If your account balance cannot cover a top-up, the system keeps retrying. Your instance continues running through any period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent.
 
 ### Refunds on termination
 
-When an instance is stopped or terminated — whether by you or the system — any unused funds remaining on the instance's reserved balance are returned to your account balance.
-
-:::warning
-Instances have a maximum rental period. The exact limit is shown in the Fluence Console.
-:::
+When you stop or terminate an instance, any unused funds on its reserved balance are returned to your account.
 
 ## OS images
 
