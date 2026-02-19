@@ -21,6 +21,10 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    { "source": "/llms.txt", "destination": "/llms.txt" },
+    { "source": "/docs/:path*/llms.txt", "destination": "/docs/:path*/llms.txt" }
+  ],
   "headers": [
     {
       "source": "/docs/(.*).md",
