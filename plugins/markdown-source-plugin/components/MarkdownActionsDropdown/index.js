@@ -73,14 +73,19 @@ export default function MarkdownActionsDropdown() {
       className={`dropdown ${isOpen ? 'dropdown--show' : ''}`}
     >
       <button
-        className="button button--outline button--secondary button--sm"
+        className="markdown-actions-trigger"
         onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        Open Markdown
-        <svg width="14" height="14" viewBox="0 0 16 16" style={{marginLeft: '4px'}}>
-          <path fill="currentColor" d="M4.427 6.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396a.25.25 0 00-.177-.427H4.604a.25.25 0 00-.177.427z"/>
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="5" y="2" width="9" height="11" rx="1.5" />
+          <path d="M3 5v8.5a1.5 1.5 0 001.5 1.5H11" />
+        </svg>
+        <span>Copy markdown</span>
+        <span className="markdown-actions-divider" />
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M2 3.5L5 6.5L8 3.5"/>
         </svg>
       </button>
 
@@ -91,7 +96,7 @@ export default function MarkdownActionsDropdown() {
             onClick={handleOpenMarkdown}
             style={{cursor: 'pointer', border: 'none', background: 'none', width: '100%', textAlign: 'left'}}
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" style={{marginRight: '8px', verticalAlign: 'middle'}}>
+            <svg width="12" height="12" viewBox="-1 -1 18 18" style={{marginRight: '8px', verticalAlign: '-0.1em'}}>
               <path fill="currentColor" d="M8 0a8 8 0 110 16A8 8 0 018 0zM1.5 8a6.5 6.5 0 1013 0 6.5 6.5 0 00-13 0z"/>
               <path fill="currentColor" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-1 0V4a.5.5 0 01.5-.5z"/>
               <path fill="currentColor" d="M7.5 11.5a.5.5 0 111 0 .5.5 0 01-1 0z"/>
@@ -108,14 +113,14 @@ export default function MarkdownActionsDropdown() {
           >
             {copied ? (
               <>
-                <svg width="16" height="16" viewBox="0 0 16 16" style={{marginRight: '8px', verticalAlign: 'middle'}}>
+                <svg width="12" height="12" viewBox="-1 -1 18 18" style={{marginRight: '8px', verticalAlign: '-0.1em'}}>
                   <path fill="currentColor" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/>
                 </svg>
                 Copied!
               </>
             ) : (
               <>
-                <svg width="16" height="16" viewBox="0 0 16 16" style={{marginRight: '8px', verticalAlign: 'middle'}}>
+                <svg width="12" height="12" viewBox="-1 -1 18 18" style={{marginRight: '8px', verticalAlign: '-0.1em'}}>
                   <path fill="currentColor" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"/>
                   <path fill="currentColor" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"/>
                 </svg>
