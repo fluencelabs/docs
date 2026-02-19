@@ -80,6 +80,12 @@ const config: Config = {
           label: "Connect Servers",
         },
         {
+          type: "doc",
+          position: "left",
+          docId: "build_with_ai/overview",
+          label: "Build with AI",
+        },
+        {
           href: "https://github.com/fluencelabs",
           label: "GitHub",
           position: "right",
@@ -103,6 +109,10 @@ const config: Config = {
             {
               label: "Connect Servers",
               to: "/docs/connect_servers/overview",
+            },
+            {
+              label: "Build with AI",
+              to: "/docs/build_with_ai/overview",
             },
           ],
         },

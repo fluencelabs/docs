@@ -9,5 +9,6 @@ Choose a section based on how you use Fluence:
 - **[Build](https://fluence.dev/docs/build/llms.txt)** — Rent CPU and GPU instances from the decentralized compute marketplace using the Fluence Console or API.
 - **[Stake](https://fluence.dev/docs/stake/llms.txt)** — Delegate FLT tokens to secure the network and earn rewards.
 - **[Connect Servers](https://fluence.dev/docs/connect_servers/llms.txt)** — Register your data center hardware as a compute provider and earn USDC and FLT.
+- **[Build with AI](https://fluence.dev/docs/build_with_ai/overview.md)** — How to use Fluence docs with LLMs, AI coding assistants, and agent frameworks.
 
 Each section links to an llms.txt index with links to individual documentation pages in markdown format.

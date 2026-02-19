@@ -51,6 +51,9 @@ const sidebars = {
     "connect_servers/smart_contracts",
     "connect_servers/upcoming_features",
   ],
+  build_with_ai: [
+    "build_with_ai/overview",
+  ],
 };
 
 module.exports = sidebars;
