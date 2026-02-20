@@ -2,13 +2,13 @@
 
 Stakers, also known as Delegators, are crucial to the Fluence Network. They contribute FLT token collateral to ensure the Network's decentralization, security and reliability. 
 
-![The flow of becoming a staker in the Fluence Network.](./assets/secure_with_staking.png)
+![The flow of becoming a staker in the Fluence Network.](./assets/overview/secure_with_staking.png)
 
 In return for providing the collateral, stakers earn rewards in FLT tokens.
 
 Becoming a Staker on the Fluence Network is rather straightforward and different options are available depending on your stake size and desired level of involvement. The general journey to becoming a staker is illustrated in the image below:
 
-![The flow of becoming a staker in the Fluence Network.](./assets/staking_user_flow.png)
+![The flow of becoming a staker in the Fluence Network.](./assets/overview/staking_user_flow.png)
 The flow diagram showing how to become a staker in the Fluence Network
 
 The flow presented is a general overview of the staking process for **a token holder**.
@@ -24,13 +24,13 @@ At the final step, the staking path splits depending on your deposit size:
 
 ## Documentation structure
 
-Learn how to prepare your crypto wallet for interacting with Fluence [**Prepare Your Wallet**](./wallets_guide/wallets_guide.md)
+Learn how to prepare your crypto wallet for interacting with Fluence [**Prepare Your Wallet**](./wallets_guide.md)
 
 Once you're familiar with the essentials, follow these steps:
 
-- [**Bridge Your Funds to Fluence**](./bridge_guide/bridge_guide.md): Learn how to transfer your FLT and USDC tokens from Ethereum to the Fluence network using the [Fluence Bridge App](https://bridge.fluence.network).
+- [**Bridge Your Funds to Fluence**](./bridge_guide.md): Learn how to transfer your FLT and USDC tokens from Ethereum to the Fluence network using the [Fluence Bridge App](https://bridge.fluence.network).
 - **Choose Your Staking Method**: Select based on your deposit size and desired level of involvement in the network:
-  - [**The Fluence Staking App**](./staking_app_guide/staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
+  - [**The Fluence Staking App**](./staking_app_guide.md): For deposits > $12,000 USD in FLT equivalent. Learn to stake directly for Capacity Commitments using the official [Staking App](https://staking.fluence.network/).
   - [**The Staking Pool**](https://www.parasail.network/delegate/fluence): For smaller deposits, or for those who want to abstract most of the staking process. The Pool is created with the re-staking protocol [Parasail](https://www.parasail.network).
 
 Each section of this documentation provides detailed information and step-by-step instructions to guide you through your staking journey on the Fluence Network.

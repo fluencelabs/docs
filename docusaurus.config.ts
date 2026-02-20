@@ -2,10 +2,11 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import path from "path";
 
 const config: Config = {
   title: "Fluence Docs",
-  tagline: "Decentralized Serverless Platform",
+  tagline: "Decentralized Compute Platform",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "warn",
@@ -26,6 +27,7 @@ const config: Config = {
           editUrl: "https://github.com/fluencelabs/docs/tree/main",
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
+          exclude: ["**/llms_txt_override.md", "**/llms_txt_include_head.md"],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.scss"),
@@ -78,6 +80,12 @@ const config: Config = {
           label: "Connect Servers",
         },
         {
+          type: "doc",
+          position: "left",
+          docId: "build_with_ai/overview",
+          label: "Build with AI",
+        },
+        {
           href: "https://github.com/fluencelabs",
           label: "GitHub",
           position: "right",
@@ -101,6 +109,10 @@ const config: Config = {
             {
               label: "Connect Servers",
               to: "/docs/connect_servers/overview",
+            },
+            {
+              label: "Build with AI",
+              to: "/docs/build_with_ai/overview",
             },
           ],
         },
@@ -142,7 +154,11 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Cloudless Labs`,
     },
   } satisfies Preset.ThemeConfig,
-  plugins: ["docusaurus-plugin-sass"],
+  plugins: [
+    "docusaurus-plugin-sass",
+    path.resolve(__dirname, "plugins/markdown-source-plugin"),
+    path.resolve(__dirname, "plugins/llms-txt-plugin"),
+  ],
 };
 
 export default config;

@@ -4,75 +4,55 @@
 const sidebars = {
   stake: [
     "stake/overview",
-    "stake/wallets_guide/wallets_guide",
-    "stake/bridge_guide/bridge_guide",
-    "stake/staking_app_guide/staking_app_guide",
+    "stake/wallets_guide",
+    "stake/bridge_guide",
+    "stake/staking_app_guide",
   ],
   build: [
     "build/overview",
-    "build/registration/registration",
-    "build/balance/balance",
-    "build/settings/settings",
+    "build/registration",
+    "build/balance",
+    "build/settings",
     {
       type: "category",
       label: "CPU Cloud",
       items: [
-        "build/cpu_cloud/vm_rent/vm_rent",
-        {
-          type: "category",
-          label: "Manage VMs",
-          items: [
-            "build/cpu_cloud/manage_vm/manage_vm",
-            "build/cpu_cloud/manage_vm/provider_vm_termination",
-          ],
-        },
+        "build/cpu_cloud/overview",
+        "build/cpu_cloud/vm_rent",
+        "build/cpu_cloud/manage_vm",
       ],
     },
     {
       type: "category",
       label: "GPU Cloud",
       items: [
-        "build/gpu_cloud/instance_rent/instance_rent",
-        "build/gpu_cloud/manage_instances/manage_instances",
+        "build/gpu_cloud/overview",
+        "build/gpu_cloud/instance_rent",
+        "build/gpu_cloud/manage_instances",
       ],
     },
     {
       type: "category",
       label: "API",
       items: [
-        "build/api/overview/overview",
-        "build/api/ssh_keys/ssh_keys",
-        {
-          type: "category",
-          label: "CPU Cloud",
-          items: [
-            "build/api/cpu_cloud/overview/overview",
-            "build/api/cpu_cloud/get_offerings/get_offerings",
-            "build/api/cpu_cloud/order_vm/order_vm",
-            "build/api/cpu_cloud/manage_vms/manage_vms",
-          ],
-        },
-        {
-          type: "category",
-          label: "GPU Cloud",
-          items: [
-            "build/api/gpu_cloud/overview/overview",
-            "build/api/gpu_cloud/get_plans/get_plans",
-            "build/api/gpu_cloud/deploy_instance/deploy_instance",
-            "build/api/gpu_cloud/manage_instances/manage_instances",
-          ],
-        },
+        "build/api/overview",
+        "build/api/ssh_keys",
+        "build/api/cpu_cloud",
+        "build/api/gpu_cloud",
       ],
     },
   ],
   connect_servers: [
     "connect_servers/overview",
-    "connect_servers/login/login",
-    "connect_servers/hardware/hardware",
-    "connect_servers/kubernetes/kubernetes",
-    "connect_servers/subnets/subnets",
-    "connect_servers/smart_contracts/smart_contracts",
-    "connect_servers/upcoming_features/upcoming_features",
+    "connect_servers/login",
+    "connect_servers/hardware",
+    "connect_servers/kubernetes",
+    "connect_servers/subnets",
+    "connect_servers/smart_contracts",
+    "connect_servers/upcoming_features",
+  ],
+  build_with_ai: [
+    "build_with_ai/overview",
   ],
 };
 

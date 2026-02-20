@@ -19,6 +19,47 @@
       "source": "/docs/learn/overview",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/docs/llms.txt",
+      "destination": "/llms.txt",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    { "source": "/llms.txt", "destination": "/llms.txt" },
+    { "source": "/docs/:path*/llms.txt", "destination": "/docs/:path*/llms.txt" }
+  ],
+  "headers": [
+    {
+      "source": "/docs/(.*).md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/docs/(.*)/assets/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "Cache-Control", "value": "public, max-age=86400, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)/llms.txt",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
     }
   ]
 }
