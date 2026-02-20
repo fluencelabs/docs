@@ -51,7 +51,7 @@ function convertDetailsToMarkdown(content) {
 }
 
 // Clean markdown content for raw display - remove MDX/Docusaurus-specific syntax
-function cleanMarkdownForDisplay(content, filepath) {
+function cleanMarkdownForDisplay(content, filepath, siteUrl) {
   // Get the directory path for this file (relative to docs root)
   const fileDir = filepath.replace(/[^/]*$/, ''); // Remove filename, keep directory
 
@@ -98,7 +98,20 @@ function cleanMarkdownForDisplay(content, filepath) {
   // This runs AFTER Tabs/details conversion to preserve their content
   content = content.replace(/<[A-Z][a-zA-Z]*[\s\S]*?(?:\/>|<\/[A-Z][a-zA-Z]*>)/g, '');
 
-  // 10. Convert relative image paths to absolute paths from /docs/ root
+  // 10. Convert relative markdown links to absolute URLs
+  // Matches: [text](./path.md), [text](../path/file.md), [text](file.md)
+  // Does NOT match: [text](https://...), [text](#anchor), [text](mailto:...)
+  if (siteUrl) {
+    content = content.replace(
+      /\[([^\]]*)\]\((\.[^)]*\.md(?:#[^)]*)?)\)/g,
+      (match, text, relPath) => {
+        const resolved = path.posix.normalize(path.posix.join(fileDir, relPath));
+        return `[${text}](${siteUrl}/docs/${resolved})`;
+      }
+    );
+  }
+
+  // 11. Convert relative image paths to absolute paths from /docs/ root
   // Matches: ![alt](./assets/file.png) or ![alt](assets/file.png)
   content = content.replace(
     /!\[([^\]]*)\]\((\.\/)?assets\/([^)]+)\)/g,
@@ -108,7 +121,7 @@ function cleanMarkdownForDisplay(content, filepath) {
     }
   );
 
-  // 11. Remove any leading blank lines
+  // 12. Remove any leading blank lines
   content = content.replace(/^\s*\n/, '');
 
   return content;
@@ -196,6 +209,7 @@ module.exports = function markdownSourcePlugin(context, options) {
     async postBuild({ outDir }) {
       const docsDir = path.join(context.siteDir, 'docs');
       const buildDir = outDir;
+      const siteUrl = context.siteConfig.url;
 
       console.log('[markdown-source-plugin] Copying markdown source files...');
 
@@ -217,7 +231,7 @@ module.exports = function markdownSourcePlugin(context, options) {
           const content = await fs.readFile(sourcePath, 'utf8');
 
           // Clean markdown for raw display
-          const cleanedContent = cleanMarkdownForDisplay(content, mdFile);
+          const cleanedContent = cleanMarkdownForDisplay(content, mdFile, siteUrl);
 
           // Write the cleaned content
           await fs.writeFile(destPath, cleanedContent, 'utf8');
