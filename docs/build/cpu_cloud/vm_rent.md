@@ -2,7 +2,7 @@
 
 This guide walks you through deploying a virtual machine instance on CPU Cloud. For background on marketplace concepts, instance lifecycle, and how billing works, see the [CPU Cloud concepts](./overview.md).
 
-When you deploy, the system reserves 2 days' rent from your account balance — one day is charged immediately, the other is kept as a reserve. Make sure your balance has enough funds before starting. See [billing model](./overview.md#billing-model) for details.
+When you deploy, the system reserves 2 days' rent from your account balance — one day is charged immediately upon starting the instance, the other is kept as a reserve. Make sure your balance has enough funds before starting. See [billing model](./overview.md#billing-model) for details.
 
 ## Steps to configure an instance
 
@@ -69,4 +69,3 @@ Review the instance summary and price in the Review section before launching.
 ### 11. Launch the instance
 
 Click **Launch** to deploy. You'll be redirected to the **Running Instances** page.
-

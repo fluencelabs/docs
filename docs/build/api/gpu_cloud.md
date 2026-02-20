@@ -10,7 +10,7 @@ Before you begin, we recommend familiarizing yourself with the [GPU Cloud concep
 
 For authentication and general request format, see the [API introduction](./overview.md).
 
-For complete request/response schemas, see the [API reference](https://api.fluence.dev/gpu/api-docs/openapi.json) ([Swagger UI](https://api.fluence.dev/gpu/api-docs)).
+For complete request/response schemas, see the [API reference - OpenAPI spec](https://api.fluence.dev/gpu/api-docs/openapi.json) , or try out the endpoints interactively in [Swagger UI](https://api.fluence.dev/gpu/api-docs).
 
 ## Endpoints
 
@@ -91,13 +91,9 @@ Provisioning typically takes 2–3 minutes. Once active, connection details are 
 
 ### Update a container
 
-`PUT /gpu/instances/{instance_id}` is a **full replacement** — include all fields, not just the ones you're changing.
+`PUT /gpu/instances/{instance_id}` is a **full replacement** of container configuration — include all fields except ports exposure, not just the ones you're changing. Exposed ports cannot be changed after deployment. The port configuration from the original deployment stays in effect.
 
 :::warning
-Exposed ports cannot be changed after deployment. The port configuration from the original deployment stays in effect.
-:::
-
-:::info
 A new update cannot be submitted while a previous one is still being applied.
 :::
 

@@ -37,7 +37,7 @@ CPU Cloud uses daily billing in USDC. Each instance has its own 24-hour billing 
 
 ### Instance balance
 
-Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts 2 days' worth of rent from your account — one day is charged immediately, and the other stays as a reserve for the next billing period.
+Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts 2 days' worth of rent from your account — one day is charged immediately upon starting the instance, and the other stays as a reserve for the next billing period.
 
 ### Automatic top-ups
 
@@ -45,7 +45,7 @@ After each daily charge, the system automatically tops up the reserved balance f
 
 ### Insufficient funds
 
-If your account balance cannot cover a top-up, the system keeps retrying. Your instance continues running through any period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent.
+If your account balance cannot cover a top-up, the system keeps retrying the top-up. Your instance continues running through any period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent.
 
 ### Refunds on termination
 

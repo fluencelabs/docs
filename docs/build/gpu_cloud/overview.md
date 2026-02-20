@@ -53,7 +53,7 @@ The system maintains a reserve of 2 hours of rent on each instance's balance. Wh
 
 ### Insufficient funds
 
-If your account balance cannot cover a top-up, the system keeps retrying. Your instance continues running through any billing period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent — at that point the instance is deleted.
+If your account balance cannot cover a top-up, the system keeps retrying the top-up. Your instance continues running through any billing period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent — at that point the instance is deleted.
 
 ### Refunds on termination
 
