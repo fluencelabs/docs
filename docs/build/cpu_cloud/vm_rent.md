@@ -20,7 +20,7 @@ Choose your instance's configuration from the available options. Compute resourc
 
 ### 3. Choose storage
 
-Choose the type and amount of storage. The minimum storage size is 25 GB. Currently only DAS (direct-attached storage) is available, which offers better performance than shared network solutions but does not allow dynamic resizing.
+Choose the type and amount of storage. The minimum storage size is 25 GB. Currently only DAS (direct-attached storage) is available, which offers better performance than shared network solutions but does not allow dynamic resizing and is terminating along with compute resources.
 
 ![choose storage](./assets/vm_rent/storage.webp)
 
