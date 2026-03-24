@@ -14,96 +14,60 @@ For information on authentication and general request formatting, see the [API i
 
 Base URL: `https://api.fluence.dev`
 
-### Marketplace
+### Compute 
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/marketplace/offers` | Search for available offers |
-| `GET` | `/marketplace/basic_configurations` | List available basic configurations |
-| `GET` | `/marketplace/countries` | List available data center countries |
-| `GET` | `/marketplace/hardware` | List available hardware specifications |
-| `GET` | `/v1/marketplace/datacenters` | List available data centers |
+| Method | Path                                  | Description                                              |
+|--------|---------------------------------------|----------------------------------------------------------| 
+| `GET`  | `/v1/datacenters`                     | List available datacenters                               |
+| `GET`  | `/v1/clusters`                        | List available clusters                                  | 
+| `GET`  | `/v1/clusters/{cluster_id}/resources` | List available resources and configurations in a cluster |
 
 ### Virtual machines
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/vms/v3` | Deploy one or more VMs |
-| `GET` | `/vms/v3` | List running VMs |
-| `GET` | `/vms/v3/status` | Get VM statuses and IP info |
-| `PATCH` | `/vms/v3` | Update VM name and ports |
-| `DELETE` | `/vms/v3` | Delete one or more VMs |
-| `GET` | `/vms/v3/default_images` | List default OS images |
-| `POST` | `/vms/v3/estimate` | Estimate deployment cost |
-
-## Browse the marketplace
-
-`POST /marketplace/offers` accepts optional filters in the request body. All filters are optional — send an empty `{}` to get all available offers.
-
-Available filters: basic configuration, hardware specs (CPU, memory, storage), data center country, and maximum price per epoch.
+| Method  | Path                        | Description              |
+|---------|-----------------------------|--------------------------|
+| `POST`  | `/v2/vms`                   | Deploy a VM              |
+| `GET`   | `/v2/vms `                  | List  VMs                | 
+| `PATCH` | `/v2/vms`                   | Update VM name           |
+| `POST`  | `/v2/vms/{vm_id}/terminate` | Terminate VM             |
+| `GET`   | `/v1/default_images`        | List default OS images   |
+| `POST`  | `/v1/prices/cost`           | Estimate deployment cost |
 
 ### Basic configurations
 
-The API uses predefined configuration slugs that follow the pattern `cpu-{cores}-ram-{memory}gb-storage-{size}gb` (e.g., `cpu-4-ram-8gb-storage-25gb`). Each represents a fixed package of vCPU, RAM, and base storage. You can request additional storage on top.
+The API uses predefined VM configuration slugs that follow the pattern `{configuration-family}-{vcpu_num}-{memory_gb}` (e.g., `cpu-regular-2vcpu-4gb`). Each represents a fixed package of vCPU and RAM. Storages and Public IPs are added on top of the basic configuration. 
 
 ### Discovery endpoints
 
-Use these to list valid filter values:
+Use these to find out entities IDs required for deployment and management, as well as available configuration options:
 
-- `GET /marketplace/basic_configurations` — available configuration slugs
-- `GET /marketplace/countries` — ISO country codes with active offers
-- `GET /marketplace/hardware` — available CPU architectures, memory types, storage types
+- `GET /v1/datacenters` — available data center locations
+- `GET /v1/clusters` — available clusters (groupings of hardware resources within data centers)
+- `GET /v1/clusters/{cluster_id}/resources` — available resources and configurations within a cluster
 
-:::info
-`additionalResources` (extra storage beyond the basic configuration) can only be used together with the `hardware.storage` filter.
-:::
-
-:::tip
-You can skip marketplace exploration entirely and just submit a deploy request with your constraints — the system will automatically match you with the best available offer.
-:::
 
 ### Estimate cost
 
-`POST /vms/v3/estimate` accepts the same constraints as the deploy endpoint plus an `instances` count, and returns the expected deposit amount and per-epoch pricing without committing to a deployment.
+`POST /v1/prices/cost` estimates the cost of a deployment based on the specified configuration. The request body includes the cluster_id, vm configuration slug, storage type and public ips. The response returns the estimated total cost in USD.
 
 ## Deploy VMs
 
-`POST /vms/v3` deploys one or more VMs. The request has three parts:
-
-- **constraints** (optional) — same filters as marketplace search. If omitted or partially specified, the system auto-selects (smallest configuration, cheapest price).
-- **instances** — number of VMs to deploy with this configuration.
-- **vmConfiguration** — name, open ports, hostname, OS image URL, and SSH keys.
+`POST /2/vms` deploys VMs. The request contain target cluster ID, VM configuration ID, name, SSH keys and optional parameters for storages (boot and data disks) public IPs. Existing entities are referenced by their IDs, while new ones are created on the fly based on the provided parameters. For example, you can specify a new storage by providing its type and size, or reference an existing one by ID.
 
 Things to know:
-
-- **OS image**: provide a download URL. Use `GET /vms/v3/default_images` for pre-built options, or supply your own (must be publicly downloadable; supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`).
-- **Ports**: only port 22 (TCP) is open by default. You must explicitly specify any additional ports. Port 10250 is reserved.
+ 
 - **SSH keys**: at least one key is required. You can provide a raw public key string or reference an existing key by name from your [SSH keys](./ssh_keys.md).
 
 ### After deployment
 
-VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview.md).
+VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Launched`. Use `GET /v1/vms` with optional filter by vm ids to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview.md).
 
 ## Manage VMs
 
-### Update name and ports
+### Update name 
 
-`PATCH /vms/v3` accepts an array of updates, each targeting a VM by ID. You can change the name and/or open ports.
-
-:::warning
-When updating `openPorts`, you must include **all** ports that should remain open. Any ports omitted from the update will be closed. This can lock you out if you forget to include port 22.
-:::
+`PATCH /v1/vms`provides a way to update the name of an active VM.
 
 ### Delete VMs
 
-`DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
-
-## Error responses
-
-All CPU Cloud API errors return a JSON body with an `error` string:
-
-```json
-{
-  "error": "No suitable offer found"
-}
-```
+`POST /v2/vms/{vm_id}/terminate` terminates a VM. The instance is deprovisioned and removed from your account. 
