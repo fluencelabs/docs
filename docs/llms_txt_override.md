@@ -1,6 +1,6 @@
 # Fluence Docs
 
-> Fluence is a decentralized compute network for deploying virtual machines on globally distributed, independently operated infrastructure. Built on an Arbitrum Orbit L2 appchain anchored to Ethereum, Fluence coordinates compute providers through staking and governance. Compute is paid in USDC; FLT is the native token used for staking and protocol governance.
+> Fluence is a decentralized compute network for deploying virtual machines on globally distributed, independently operated infrastructure. Built on an Arbitrum Orbit L2 appchain anchored to Ethereum, Fluence coordinates compute providers through staking and governance. Compute is billed in USD, paid by card or in crypto; FLT is the native token used for staking and protocol governance.
 
 ## Get started
 
