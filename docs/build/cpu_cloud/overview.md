@@ -33,7 +33,7 @@ Each instance goes through the following statuses during its lifetime:
 
 ## Billing model
 
-CPU Cloud uses daily billing in USDC. Each instance has its own 24-hour billing period that starts at activation time and repeats every 24 hours.
+CPU Cloud uses daily billing in USD. Each instance has its own 24-hour billing period that starts at activation time and repeats every 24 hours.
 
 ### Instance balance
 

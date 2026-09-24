@@ -1,73 +1,70 @@
 # Payment and balance management
 
-In order to rent a VM from the Fluence marketplace, you need to provide funds to the marketplace which are used to pay for your rented resources. It is important to note that allocated funds are managed by smart contracts and based on your VM configuration and price, the smart contracts periodically charge the rent due to the compute provider. Throughout this document, we refer to the funds escrowed to these smart contracts as the Balance.
+Your Fluence account has a prepaid balance in USD. Rent for your CPU and GPU instances is charged from this balance, so top it up before you deploy. See the billing sections of [CPU Cloud](./cpu_cloud/overview.md) and [GPU Cloud](./gpu_cloud/overview.md) for how rent is charged.
 
+The balance can only be spent on Fluence resources and cannot be withdrawn. If you need a refund, contact the Fluence team.
 
-The Fluence Console simplifies interacting with the blockchain by using [account abstraction](https://web3auth.io/docs/features/account-abstraction) to manage balances. As a result, topping up your balance is reflected as a transaction in the secure [Balance smart contract](https://blockscout.mainnet.fluence.dev/address/0xF0C308C622eeBA94aeEc2E3Fd67F34619f86761B) and not the Web3Auth wallet created during registration. Note that the Balance can only be used to rent resources from the Fluence network and that you cannot directly withdraw funds from the Balance contract. If a refund is required, please contact the Fluence team.
+## Top-up methods
 
-:::info
-Fluence Console users **cannot** top up their Balance from the newly created Web3Auth or any other wallet you may own. This restriction is related to AML (Anti-Money Laundering) limitations. Instead, Fluence Console users need to go through whitelisted payment portals such as CopperX.
-:::
-
-## Topping up the Balance
-
-:::info
-Participants in the Alpha VM testing program receive 256 USDC in balance credits. This amount should easily get you through the testing period and it is doubtful that you will need to top up the Balance during the testing phase.
-:::
-
-Currently, you fund your Balance using [CopperX](https://copperx.io/), which offers payment options for Ethereum (USDC) and Polygon (USDC.e). The Fluence Console integrates CopperX payment and event monitoring providing a seamless experience to establish payments to the Balance smark contracts. Once your CopperX payment is successfully executed, the Balance smart contract will reflect the transaction.
-
-To initiate a payment with CopperX, follow these steps:
-
-### 1. Click the Top Up button
-
-Go to the **Billing page** and click the **“Top Up”** button.
+| Method | Provider | How you pay |
+|--------|----------|-------------|
+| **Crypto** | [NOWPayments](https://nowpayments.io/) | Cryptocurrency. You choose the coin and the network on the NOWPayments payment page |
+| **Card** | [Stripe](https://stripe.com/) | Credit or debit card on the Stripe checkout page |
+| **Promo code** | — | Enter a code you received from the Fluence team |
 
 :::info
-You can check for pending payment sessions on the **Billing page**, in the **Payments History** section. Pending payment sessions have the status `Pending`.
+The minimum top-up is **10 USD**. Your balance cannot exceed **5,000 USD** after the top-up.
 :::
-![top up button](./assets/balance/top_up_button.webp)
 
-### 2. Enter the amount you want to top up your Balance with
+You enter the amount in USD. Processing fees, if any, are added on top and shown on the payment page. Your balance is credited with the amount you entered.
+
+## Topping up the balance
+
+### 1. Open the top-up dialog
+
+Go to the **Billing** page and click **Top up** in the **My balance** card.
+
+### 2. Choose a method and enter the amount
+
+Select **Crypto** or **Card**, enter the amount in USD and click **Top up**. The payment page opens in a new tab.
+
+### 3. Complete the payment
+
+- **Crypto**: on the NOWPayments page, choose the coin and network, then send the exact amount shown to the address shown.
+- **Card**: enter your card details on the Stripe checkout page and confirm the payment.
+
+### 4. Wait for the payment to be credited
+
+While the payment is in progress, the **My balance** card shows **Waiting for payment** with two buttons:
+
+- **Complete** reopens the payment page, for example if you closed the tab.
+- **Cancel** cancels the top-up.
+
+Once the payment is confirmed, the amount is added to your balance and the top-up gets the `Completed` status. Card payments are usually credited right after checkout, crypto payments once the transaction is confirmed on its network.
 
 :::info
-Currently, the minimum top up amount is **USDC 10.00**, while your total Balance amount cannot exceed **USDC 5000.00**.
-:::
-![enter amount](./assets/balance/amount.webp)
-
-### 3. Enter your details
-
-You will be redirected to the CopperX payment page.
-
-![copperx payment page](./assets/balance/payment_page.webp)
-
-#### Cancel payment
-:::info
-To cancel a payment, use the corresponding option in the CopperX interface. If a payment is not completed within 15 minutes, the payment will be automatically cancelled.
-:::
-![cancel payment](./assets/balance/cancel.webp)
-![cancel result](./assets/balance/cancel_res.webp)
-
-:::info
-If you accidentally close the CopperX payment page, go back to the Fluence Console payment page.
-:::
-![return to payment page](./assets/balance/return_to_payment.webp)
-
-### 4. Choose one of the payment methods and complete the payment
-
-:::info
-If you encounter issues with the “Wallet” payment option, we recommend using the “Scan QR code” option.
-:::
-![complete payment](./assets/balance/complete_payment.webp)
-
-### 5. Return to the Fluence Console
-
-After a successful payment, you will be redirected back to the **Fluence Console** page. The payment will be in the `Pending` status for a bit.
-
-:::info
-You cannot have multiple `Pending` transactions. If you cannot complete a CopperX payment and don't want to wait 15 minutes, you need to [cancel to the payment](#cancel-payment). 
+You can have only one pending top-up at a time. To start a new one, complete or cancel the current one. An unpaid top-up expires automatically: a card top-up after 1 hour, a crypto top-up after 24 hours.
 :::
 
-### 6. Wait for the "Completed" payment status
+:::warning
+Don't pay for a top-up that has been canceled or has expired. If a payment arrives after that, contact the Fluence team to have it credited.
+:::
 
-Once the on-chain transactions are processed, the Balance smart contract will reflect your payment and the FLuence Console payment status updates to `Completed`.
+## Top-up history
+
+The **Top-up history** table on the **Billing** page lists your top-ups with their amount, deposit method and status:
+
+| Status | Meaning |
+|--------|---------|
+| `Pending` | Waiting for your payment |
+| `Under review` | The payment was received but needs a manual check by the Fluence team before it is credited |
+| `Completed` | The amount has been added to your balance |
+| `Expired` | The top-up was not paid in time |
+| `Canceled` | You canceled the top-up |
+| `Failed` | The payment did not go through |
+
+## Promo codes
+
+To activate a promo code, open the **Promo code** card on the **Billing** page (or the **Promo code** method in the top-up dialog), enter the code and click **Activate**.
+
+Promo credits may have an expiration date. They are spent before your prepaid balance.
