@@ -1,92 +1,36 @@
 # Instance info and management
 
-After deploying an instance, you can view and manage it from the **Running Instances** page. Use the search bar to filter instances by name or the status dropdown to narrow the list.
+After launching a VM, you manage it in the **Public cloud** section of the Fluence Console. To do the same through the API, see the [CPU Cloud API](../api/cpu_cloud.md).
 
-## Instance information
+## VM list
 
-Each instance appears as a card with its name, location, hardware summary, IP address, and status. Click the expand arrow to reveal full details — general info, hardware specs, connection details, and billing.
+The **Compute** page lists your VMs and drafts with their name, plan, resources, creation time and status. You can filter the list by name and status, and sort it by name or creation time.
 
-![Instance information](./assets/manage_vm/vm_info.webp)
+## VM details
 
-## Instance management
+Open a VM to see its details:
 
-Click the three-dot menu on an instance card to access the available actions:
+- **Overview**: the VM's resources, disks and network, and a **Connect** card with the **SSH command** (the user name of its OS image and its public IPv4 address) and the SSH **Public keys** installed on the VM.
+- **Disks** and **Networking**: the VM's disks and network interfaces.
+- **Console**: a terminal to the VM in your browser. It becomes available once the VM has booted.
 
-- **Edit VM name** — rename the instance.
-- **Terminate** — stop the instance and end the rental agreement. Any unused reserved balance is returned to your account.
+## Managing a VM
 
-![Instance management](./assets/manage_vm/vm_manage.webp)
+The **Manage VM** menu on the VM page offers:
 
-## Billing history
+- **Edit name**: rename the VM.
+- **Reboot**: restart the VM.
+- **Remove VM**: remove the VM. In the confirmation dialog, select the attached disks and public IPv4 addresses to delete along with it, then type the VM name to confirm. Disks and addresses you don't select are kept and billed until you delete them.
 
-The history of your charges can be found on the **Billing page** in the **Billing History** section.
+The **Attach resources** menu adds a disk (an existing one or a new one) or a public IPv4 address to the VM. A disk's size can be increased; the VM may need a reboot to see the new size.
 
-![Billing history](./assets/manage_vm/billing_history.webp)
+## Disks and network
 
-## Handling provider-terminated instances
+- **Public cloud → Storage** lists all your disks, including the ones not attached to any VM. You can create disks, rename them, increase their size and remove them. Detach a disk from its VM before removing it.
+- **Public cloud → Network** manages public IPv4 addresses, private networks (VPCs) and their subnets, and security groups.
 
-When a compute provider terminates an instance that you are actively using, the instance is moved to `Terminated` status.
-Terminated instances are no longer accessible, and data stored on them is lost.
-Even though a provider has terminated your instance, its record will still appear in your list with its balance reserved. You need to perform a final step to remove this record, which releases the funds back to your main balance.
+## Usage and charges
 
-### Reasons for termination
+The **Billing** page shows your balance and, under **Usage overview**, the month-to-date usage, the estimated cost for the month, how long your balance will last and the spend per resource type. Use **Export usage** to download the usage for a period.
 
-The Fluence compute marketplace sources from established compute providers with high standards of security and reliability supported by Tier 3 and 4 certifications. Termination is a last resort for providers when handling exceptions and usually results from adverse user behavior such as:
-
-- Not paying for the instance (reserved balance reached 0)
-- Violating the terms of service
-- Using the instance for illegal activities or running malicious workloads
-
-### Identification of terminated instances
-
-Status updates about instance termination are available in the Fluence Console on the **Running Instances** page, or via the API when you request your active instances using the [list VMs](../api/cpu_cloud.md#endpoints) endpoint (`GET /v2/vms`).
-
-#### Fluence Console
-
-**Banner notification.** You will see an informational banner on the Running Instances page with the message: _"Certain virtual machines were stopped by the provider. View details"_. Click **View details** to see the list of terminated instances.
-
-**Status display.** The instance will be clearly marked with a `Terminated` status.
-
-![Running Instances page with a banner notification and a terminated instance](./assets/manage_vm/terminated_vms_general.png)
-
-**Filtering.** You can use the status filter on the Running Instances page and select `Terminated` to view only these instances.
-
-![Running Instances page with a status filter](./assets/manage_vm/terminated_vms_filtered.png)
-
-#### API
-
-In the response from the list instances endpoint, the `status` field for the affected instance will be `"Terminated"`. The `publicIp` field will be `null`, and location information within the `datacenter` object may be absent.
-
-```json
-{
-  "id": "0x68bd60079721AE2A04759d00Fc516148aCF479e4",
-  "vmName": "apricot-wolf-5354",
-  "status": "Terminated",
-  "pricePerEpoch": "0.30697",
-  "resources": [ ... ],
-  "osImage": "...",
-  "datacenter": null,
-  "publicIp": null,
-  "ports": [
-    {
-      "port": 22,
-      "protocol": "tcp"
-    }
-  ],
-  "reservedBalance": ".30697",
-  "totalSpent": "2.45576",
-  "createdAt": "2025-05-07T16:20:43Z"
-}
-```
-
-### Finalization and reserved funds release
-
-After identifying instances terminated by a provider, you need to finalize the termination to release the reserved funds:
-
-#### Fluence Console
-
-Click **Terminate** on the instance with `Terminated` status to remove its record and release its reserved funds. See [instance management](#instance-management) for details.
-
-#### API
-
-Call the [terminate endpoint](../api/cpu_cloud.md#stop-paying) with the instance ID, then delete its public IP and boot disk to stop paying for them.
+If your balance runs out, your resources are removed after a while; see the [billing model](./overview.md#billing-model).

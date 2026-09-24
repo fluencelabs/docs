@@ -36,9 +36,10 @@ All error responses return a JSON body with a description of the problem. The ex
 
 The Fluence API covers two cloud platforms — CPU Cloud and GPU Cloud. Pick the one that matches your workload:
 
-- [CPU Cloud](./cpu_cloud.md) — search the decentralized CPU compute marketplace, deploy and manage virtual machines
+- [CPU Cloud](./cpu_cloud.md) — choose locations and plans, deploy and manage virtual machines, disks and public IP addresses
 - [GPU Cloud](./gpu_cloud.md) — browse available GPU plans, deploy and manage containers, VMs, and bare metal instances
 
 In addition, the API provides shared account-level management that applies across both platforms:
 
 - [SSH keys](./ssh_keys.md) — register and manage SSH keys for use during deployment
+- [Pay with x402](./x402.md) — fund the balance with USDC over HTTP and sign in with the paying wallet, for AI agents and scripts
