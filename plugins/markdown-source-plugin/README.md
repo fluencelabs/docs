@@ -55,6 +55,8 @@ Runs during `npm run build` via the Docusaurus `postBuild` lifecycle hook.
    - Rewrites relative `./assets/` image paths to absolute `/docs/.../assets/` paths
    - Strips leading blank lines
 
+   Fenced code blocks are set aside before these steps and restored unchanged, so code samples keep their `import` lines, JSX and indentation.
+
 3. **Write to build output** — Cleaned `.md` files are written to `build/docs/<path>`, mirroring the source structure. This means `/docs/build/overview.md` serves the raw markdown for the `/docs/build/overview` page.
 
 4. **Copy asset directories** — Finds all `assets/` directories under `docs/` and copies them to `build/docs/...` so image references in the cleaned markdown resolve correctly.
