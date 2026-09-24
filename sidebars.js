@@ -36,6 +36,7 @@ const sidebars = {
       label: "API",
       items: [
         "build/api/overview",
+        "build/api/x402",
         "build/api/ssh_keys",
         "build/api/cpu_cloud",
         "build/api/gpu_cloud",

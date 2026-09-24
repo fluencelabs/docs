@@ -11,6 +11,8 @@ The Fluence API provides programmatic access to the decentralized Fluence comput
 All Fluence API endpoints require an API key sent in the `X-API-KEY` header.
 You can create and manage your keys in the [Fluence Console settings](../settings.md). If you omit or supply an invalid key, you'll get a 403 error.
 
+AI agents and scripts can skip the console entirely: [pay with x402](./x402.md) to fund an account with USDC on Base and sign in with the same wallet.
+
 ## Request and response format
 
 The Fluence API accepts and returns data in JSON format. When making POST requests, set the `Content-Type` header to `application/json`.
