@@ -18,8 +18,6 @@ You can also manage SSH keys through the [Fluence Console settings](../settings.
 
 Base URL: `https://api.fluence.dev`
 
-These endpoints take an access token in the `Authorization: Bearer` header.
-
 | Method | Path | Description |
 |--------|------|-------------|
 | `GET` | `/v1/ssh_keys` | List all registered keys |

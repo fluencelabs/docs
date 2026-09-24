@@ -28,12 +28,12 @@ GPU Cloud supports three deployment types. Each suits a different use case:
 
 Each instance goes through the following statuses:
 
-| Status | Description |
-|--------|-------------|
-| `Initiated` | Instance is being provisioned |
-| `Active` | Instance is running and accessible |
-| `Failed` | Provisioning failed — funds are returned to your account |
-| `Ended` | Instance was terminated by the user or the system |
+| API status | Console label | Description |
+|------------|---------------|-------------|
+| `INITIALIZED` | Initialized | Instance is being provisioned |
+| `ACTIVE` | Running | Instance is running and accessible |
+| `FAILED` | Failed | Provisioning failed — funds are returned to your account |
+| `ENDED` | Ended | Instance was terminated by the user or the system |
 
 Provisioning typically takes 2–3 minutes. Once active, connection details become available — a domain with forwarded ports for containers, or an SSH connection for VMs and bare metal.
 

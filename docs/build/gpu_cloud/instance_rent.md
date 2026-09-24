@@ -111,7 +111,7 @@ Review your configuration in the **Review** panel on the right side. Verify:
 - Hardware configuration (GPU, vRAM, interface, vCPU, RAM, Disk)
 - Payment details (hourly rate, upfront payment of 3 hours, total)
 
-Click **Launch** to deploy your GPU container. You will be redirected to the **Instances** page where you can monitor the deployment status.
+Click **Launch** to deploy your GPU container. You will be redirected to the **GPU instances** page where you can monitor the deployment status.
 
 ![Review and launch](./assets/instance_rent/containers/review.webp)
 
@@ -193,6 +193,6 @@ Review your configuration in the **Review** panel on the right side. Verify:
 - **Configuration**: GPU model, vRAM, interface, vCPU, RAM, Storage
 - **Payment**: Hourly payment rate, upfront payment (3 hours), and total amount to be deducted
 
-Click **Launch** to deploy your instance. You will be redirected to the **Instances** page where you can monitor the deployment status.
+Click **Launch** to deploy your instance. You will be redirected to the **GPU instances** page where you can monitor the deployment status.
 
 ![Review and launch](./assets/instance_rent/vm_baremetal/review.webp)

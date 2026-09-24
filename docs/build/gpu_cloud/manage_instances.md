@@ -1,6 +1,6 @@
 # Instance info and management
 
-After renting a GPU instance, you can view and manage it on the **Running Instances — GPU cloud** page. Instances are organized by type with separate tabs: **Container**, **VM**, and **Bare Metal**.
+After renting a GPU instance, you can view and manage it on the **GPU instances** page. Instances are organized by type with separate tabs: **Container**, **VM**, and **Bare Metal**.
 
 ## Instances list
 
@@ -80,6 +80,4 @@ Updating a running VM or bare metal instance is not currently supported. To chan
 
 ## Billing
 
-The history of your charges can be found on the **Billing page** under the **GPU cloud** tab. The page shows your monthly spending with a daily breakdown chart, filterable by instance type. The **Billing history** table lists each charge with the instance name, instance ID, payment date, and amount.
-
-![Billing page](./assets/manage_instances/billing_page.webp)
+The details page of each instance shows its **Hourly usage** and the **Next billing time**. Your balance and top-ups are on the **Billing** page; see [Payment and balance management](../balance.md). For how GPU rent is charged, see the [billing model](./overview.md#billing-model).

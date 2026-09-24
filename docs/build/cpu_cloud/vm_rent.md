@@ -1,71 +1,51 @@
 # Renting an instance
 
-This guide walks you through deploying a virtual machine instance on CPU Cloud. For background on marketplace concepts, instance lifecycle, and how billing works, see the [CPU Cloud concepts](./overview.md).
+This guide walks you through launching a virtual machine in the Fluence Console, on the **Public cloud → Compute** page. For resources, statuses and billing, see the [CPU Cloud concepts](./overview.md). To do the same through the API, see [CPU Cloud API → Deploy a VM](../api/cpu_cloud.md#deploy-a-vm).
 
-When you deploy, the system reserves 2 days' rent from your account balance — one day is charged immediately upon starting the instance, the other is kept as a reserve. Make sure your balance has enough funds before starting. See [billing model](./overview.md#billing-model) for details.
+:::info
+If the page shows **Request access**, your account can't create VMs yet. Click it, and the Fluence team will review your request.
+:::
 
-## Steps to configure an instance
+Nothing is prepaid when you launch a VM, but your balance must cover all your resources for at least 6 hours. See the [billing model](./overview.md#billing-model).
 
-### 1. Choose a location
+## Steps to launch a VM
 
-Choose one of the available data center locations.
+### 1. Start a new VM
 
-![choose location](./assets/vm_rent/location.webp)
+On the **Compute** page, click **Create Virtual Machine**. The console creates a draft and opens the **Create new VM** page. The draft is saved as you edit and is not billed. Drafts are listed on the **Compute** page with the `Draft` status, where you can open or discard them.
 
-### 2. Choose a configuration
+### 2. Basic settings
 
-Choose your instance's configuration from the available options. Compute resources come in multiples of a compute unit — 2 vCPUs and 4 GB of RAM.
+- **VM name**: lowercase letters, digits and hyphens, up to 25 characters.
+- **Available locations**: the data center to run the VM in. Hover over the tier badge to see the data center's certifications.
 
-![choose configuration](./assets/vm_rent/configuration.webp)
+### 3. Choose a plan
 
-### 3. Choose storage
+Under **Available plans**, pick the **Dedicated CPU** or **Shared CPU** tab and select a plan. Each plan shows its vCPU and RAM, and its monthly and hourly price.
 
-Choose the type and amount of storage. The minimum storage size is 25 GB. Currently only DAS (direct-attached storage) is available, which offers better performance than shared network solutions but does not allow dynamic resizing and is terminating along with compute resources.
+### 4. Set up disks
 
-![choose storage](./assets/vm_rent/storage.webp)
+Under **Disk setup**, configure the **Boot disk**: the operating system, the disk size in GB and the storage type. For a custom image, provide a publicly downloadable URL and select the boot mode (BIOS or EFI); see [supported formats](./overview.md#os-images).
 
-### 4. Choose the server type
+You can also add an **Additional disk**. Disks are billed separately from VMs, and you keep paying for a disk until you delete it, even if it isn't attached to a VM.
 
-Review the available servers for your chosen configuration. Hardware varies within and across data centers, so pay attention to the specifications and price. The console also shows each data center's location at the city level and details such as available certifications.
+### 5. Configure the network
 
-![choose server type](./assets/vm_rent/server_type.webp)
+Under **Network settings**, each network interface has a **Connection**:
 
-### 5. Rent a public IPv4 address
+- **Public IPv4 address**: the VM gets an address reachable from the internet. A VM can have one public IPv4 address. You need it to connect over SSH from outside Fluence.
+- **Private subnet**: the interface joins a subnet of one of your private networks.
 
-A public IPv4 address is allocated to the instance at deployment. Currently, this is the only way to access your instance via SSH.
+Choose a **Security group** for the interface. Use **Add network interface** to add more interfaces; one of them carries the default route.
 
-![rent public IPv4 address](./assets/vm_rent/public_ip.webp)
+### 6. Add SSH keys
 
-### 6. Specify the instance name
+Under **Access**, select one or more **SSH-keys**, or click **Add key** to add a new one. Supported formats: RSA, DSA, ECDSA and ED25519.
 
-Choose a **name** for your instance. The name must be unique within your account.
+### 7. Add cloud-init (optional)
 
-![specify VM name](./assets/vm_rent/vm_name.webp)
+Turn on **Enable custom cloud-init config** to provide cloud-init user data that runs on the VM's first boot.
 
-### 7. Specify the open ports
+### 8. Review and launch
 
-By default, only **port 22** is open. You can assign up to 50 additional ports — all open ports support **TCP** and **UDP**.
-
-![specify ports](./assets/vm_rent/ports.webp)
-
-### 8. Choose the OS image
-
-Choose an **OS image** for your instance. You can pick a pre-defined image or provide a link to a **custom image**. Custom images must be publicly downloadable and configured for remote instances — look for images tagged `Generic Cloud` or `Cloud`. See [supported formats](./overview.md#os-images).
-
-![choose OS image](./assets/vm_rent/os_image.webp)
-
-### 9. Provide the public SSH key
-
-Provide at least one SSH public key to connect to your instance. Supported formats: RSA, ECDSA, and ED25519.
-
-![provide SSH key](./assets/vm_rent/ssh.webp)
-
-### 10. Review the summary
-
-Review the instance summary and price in the Review section before launching.
-
-![review summary](./assets/vm_rent/summary.webp)
-
-### 11. Launch the instance
-
-Click **Launch** to deploy. You'll be redirected to the **Running Instances** page.
+The **Review** panel shows the configuration and its price, and marks sections that need attention. Click **Launch** and confirm. The VM appears on the **Compute** page; provisioning usually takes a few minutes, until the status is `Launched`.

@@ -4,55 +4,51 @@ sidebar_position: 0
 
 # Concepts
 
-Fluence CPU Cloud is a decentralized compute marketplace where you can rent virtual machine instances from enterprise-grade providers worldwide, predominantly in Tier-3 and Tier-4 data centers.
+Fluence CPU Cloud runs virtual machines in data centers operated by independent providers. In the Fluence Console it is the **Public cloud** section; programmatically it is the [CPU Cloud API](../api/cpu_cloud.md).
 
-## Marketplace
+## Access
 
-The marketplace aggregates compute supply from independent providers. The marketplace connects you with providers through several layers:
+If your account can't create VMs yet, the **Public cloud** pages show a **Request access** button. After you click it, the Fluence team reviews the request and the page shows *The Fluence team is reviewing your application* until it is approved.
 
-- **Offer** — a listing from a provider that includes one or more compute peers with identical specifications, located in the same data center, available at a set price.
-- **Compute peer** — a physical server referenced in an offer. Each peer has its own hardware resources and is the actual machine that runs your workload.
-- **Resource** — a distinct resource on a peer: vCPU, RAM, storage, or public IP.
-- **Hardware specification** — metadata describing a resource (CPU architecture, memory generation, storage medium, etc.).
+## Resources
 
-Compute resources are currently allocated in multiples of a **compute unit** — 2 vCPUs and 4 GB of RAM. Storage starts at a minimum of 25 GB.
+A VM is assembled from resources that are created, billed and deleted separately:
 
-## Instance lifecycle
+| Resource | What it is |
+|----------|------------|
+| **Location** | A data center (a *cluster* in the API). The console shows its city, tier and certifications. All resources of a VM are in one location. |
+| **Plan** | The VM's vCPU and RAM (a *configuration* in the API, for example `cpu-shared-2vcpu-2gb`). Plans come with dedicated or shared CPU. |
+| **Disk** | Network-attached block storage. The boot disk is created from an OS image; you can add more disks. A disk exists on its own: it can be resized, detached and attached to another VM in the same location. |
+| **Public IPv4** | An address that makes the VM reachable from the internet. A VM can have one public IPv4 address. |
+| **Network** | Private networks (VPCs) with subnets, and security groups for the VM's network interfaces. |
 
-Each instance goes through the following statuses during its lifetime:
+## VM statuses
 
-| Status | Description |
-|--------|-------------|
-| `New` | Instance is created and is about to be provisioned |
-| `Launching` | Instance is being provisioned, no public IP yet |
-| `Active` | Instance is running and accessible |
-| `SmallBalance` | Not enough funds for the next billing period |
-| `InsufficientFunds` | Instance balance is 0 and the grace period passed |
-| `Terminated` | Instance was terminated by the provider — workload is no longer running. See [provider termination handling](./manage_vm.md#handling-provider-terminated-instances). |
-| `Stopped` | Instance was ended by the user |
+| Status | Meaning |
+|--------|---------|
+| `draft` | Being configured in the console; not provisioned and not billed |
+| `new` | Launched, waiting to be provisioned |
+| `launching` | Being provisioned |
+| `launched` | Running |
+| `updating`, `restarting`, `softRebooting` | A change or a reboot is in progress |
+| `suspending`, `suspended` | The platform is stopping the VM, or has stopped it |
+| `terminating`, `terminated` | Being removed, removed |
+| `failed` | Provisioning failed |
 
 ## Billing model
 
-CPU Cloud uses daily billing in USD. Each instance has its own 24-hour billing period that starts at activation time and repeats every 24 hours.
+- Every resource has an hourly price in USD and is billed per second while it exists. Charges are taken from your account balance as the resources run.
+- Nothing is reserved or prepaid when you launch a VM, so there is nothing to refund when you remove it: you pay only for the time your resources existed.
+- Disks and public IPv4 addresses are billed until you delete them, even when they are not attached to a VM. Removing a VM does not delete its disks and addresses unless you choose to.
+- To launch a VM, your balance must be enough to keep all your resources, including the new ones, running for at least 6 hours.
+- If your balance runs out, your resources keep running for a while. When the unpaid amount exceeds 5 USD or stays unpaid for 3 days, your VMs and public IPv4 addresses are removed; if the debt reaches 20 USD or is still unpaid 10 days later, your disks are deleted as well. Top up your balance to avoid this; see [Payment and balance management](../balance.md).
 
-### Instance balance
-
-Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts 2 days' worth of rent from your account — one day is charged immediately upon starting the instance, and the other stays as a reserve for the next billing period.
-
-### Automatic top-ups of instance's balance
-
-After each daily charge, the system automatically tops up the reserved balance from your account to maintain one day of reserve.
-
-### Insufficient funds
-
-If your account balance cannot cover a top-up, the system keeps retrying the top-up. Your instance continues running through any period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent.
-
-### Refunds on termination
-
-When you stop or terminate an instance, any unused funds on its reserved balance are returned to your account.
+Current usage, the estimated cost for the month and how long your balance will last are shown on the **Billing** page.
 
 ## OS images
 
-You can use a pre-defined OS image from Fluence or provide a URL to a custom image. Custom images must be publicly downloadable and configured for remote instances.
+You can boot a VM from a pre-built Fluence image or from a custom image. Each pre-built image lists the user name to log in with over SSH.
+
+Custom images must be publicly downloadable and prepared for cloud use; look for images labeled `Generic Cloud` or `Cloud`. They can boot with BIOS or EFI firmware.
 
 Supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`.
