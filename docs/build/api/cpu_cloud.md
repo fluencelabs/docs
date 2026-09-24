@@ -4,106 +4,148 @@ sidebar_position: 3
 
 # CPU Cloud
 
-The CPU Cloud API lets you search the decentralized compute marketplace, deploy virtual machine instances, and manage them throughout their lifecycle.
+The CPU Cloud API lets you pick a location and a VM configuration, check prices, deploy virtual machines and manage them throughout their lifecycle.
 
-Before you begin, we recommend familiarizing yourself with the [CPU Cloud concepts](../cpu_cloud/overview.md) — it covers the marketplace model, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
+For authentication and general request format, see the [API introduction](./overview.md). For complete request and response schemas, see the [API reference](https://api.fluence.dev/docs) or the [OpenAPI spec](https://api.fluence.dev/docs/fluence-public.yaml).
 
-For information on authentication and general request formatting, see the [API introduction](./overview.md). For complete request and response schemas, refer to the [API reference - OpenAPI spec](https://api.fluence.dev/docs/fluence-public.yaml), or try out the endpoints interactively in [Swagger UI](https://api.fluence.dev/).
+## Resources
+
+A VM is built from separately billed resources in one **cluster** (a data center location):
+
+- **VM configuration**: vCPU and RAM, identified by an id and a slug such as `cpu-shared-2vcpu-2gb`.
+- **Boot disk**: a storage volume created from an OS image.
+- **Public IP**: an IPv4 address to reach the VM from the internet.
+
+Each resource is billed per second while it exists. Terminating a VM does not delete its boot disk or public IP; delete them separately to stop paying for them. See [billing](../cpu_cloud/overview.md#billing-model).
 
 ## Endpoints
 
 Base URL: `https://api.fluence.dev`
 
-### Marketplace
-
 | Method | Path | Description |
 |--------|------|-------------|
-| `POST` | `/marketplace/offers` | Search for available offers |
-| `GET` | `/marketplace/basic_configurations` | List available basic configurations |
-| `GET` | `/marketplace/countries` | List available data center countries |
-| `GET` | `/marketplace/hardware` | List available hardware specifications |
-| `GET` | `/v1/marketplace/datacenters` | List available data centers |
+| `GET` | `/v1/clusters` | List clusters (id and name) |
+| `GET` | `/v1/clusters/resources` | Per cluster: available VM configurations, public IPs and storage |
+| `GET` | `/v1/clusters/{cluster_id}/resources` | The same for one cluster |
+| `GET` | `/v1/prices/vm` | Hourly VM prices per configuration and cluster |
+| `GET` | `/v1/prices/storage` | Storage prices |
+| `GET` | `/v1/prices/public-ip` | Public IP prices |
+| `POST` | `/v1/prices/cost` | Cost of a set of resources over a period |
+| `GET` | `/v1/storages/default_images` | Pre-built OS images |
+| `POST` | `/v2/vms` | Create a VM |
+| `GET` | `/v2/vms` | List your VMs |
+| `GET` | `/v2/vms/{vm_id}` | Get a VM |
+| `PATCH` | `/v2/vms/{vm_id}` | Update a VM |
+| `POST` | `/v2/vms/{vm_id}/restart` | Restart a VM |
+| `POST` | `/v2/vms/{vm_id}/softreboot` | Reboot the guest OS |
+| `POST` | `/v2/vms/{vm_id}/terminate` | Terminate a VM |
+| `DELETE` | `/v1/storages/{storage_id}` | Delete a disk |
+| `DELETE` | `/v1/public_ips/{public_ip_id}` | Release a public IP |
 
-### Virtual machines
+VM operations need the `vms:read` / `vms:write` permissions. SSH keys are managed with the [SSH keys](./ssh_keys.md) endpoints.
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/vms/v3` | Deploy one or more VMs |
-| `GET` | `/vms/v3` | List running VMs |
-| `GET` | `/vms/v3/status` | Get VM statuses and IP info |
-| `PATCH` | `/vms/v3` | Update VM name and ports |
-| `DELETE` | `/vms/v3` | Delete one or more VMs |
-| `GET` | `/vms/v3/default_images` | List default OS images |
-| `POST` | `/vms/v3/estimate` | Estimate deployment cost |
+## Deploy a VM
 
-## Browse the marketplace
+### 1. Choose a cluster and a configuration
 
-`POST /marketplace/offers` accepts optional filters in the request body. All filters are optional — send an empty `{}` to get all available offers.
+`GET /v1/clusters/resources` returns, for each cluster id, `availableConfigurations` (each with `id`, `slug`, `vcpu`, `ramGb`), the number of available public IPs (`availablePublicIps.V4`) and available storage. `GET /v1/clusters` maps cluster ids to names.
 
-Available filters: basic configuration, hardware specs (CPU, memory, storage), data center country, and maximum price per epoch.
+### 2. Check the price
 
-### Basic configurations
+`GET /v1/prices/vm` returns `items`, each with `vmTypeId.vmConfigurationId`, `vmTypeId.clusterId` and `priceInfo.pricePerHourPerQty`. Match on your configuration and cluster. Storage and public IP prices come from `/v1/prices/storage` and `/v1/prices/public-ip`.
 
-The API uses predefined configuration slugs that follow the pattern `cpu-{cores}-ram-{memory}gb-storage-{size}gb` (e.g., `cpu-4-ram-8gb-storage-25gb`). Each represents a fixed package of vCPU, RAM, and base storage. You can request additional storage on top.
-
-### Discovery endpoints
-
-Use these to list valid filter values:
-
-- `GET /marketplace/basic_configurations` — available configuration slugs
-- `GET /marketplace/countries` — ISO country codes with active offers
-- `GET /marketplace/hardware` — available CPU architectures, memory types, storage types
-
-:::info
-`additionalResources` (extra storage beyond the basic configuration) can only be used together with the `hardware.storage` filter.
-:::
-
-:::tip
-You can skip marketplace exploration entirely and just submit a deploy request with your constraints — the system will automatically match you with the best available offer.
-:::
-
-### Estimate cost
-
-`POST /vms/v3/estimate` accepts the same constraints as the deploy endpoint plus an `instances` count, and returns the expected deposit amount and per-epoch pricing without committing to a deployment.
-
-## Deploy VMs
-
-`POST /vms/v3` deploys one or more VMs. The request has three parts:
-
-- **constraints** (optional) — same filters as marketplace search. If omitted or partially specified, the system auto-selects (smallest configuration, cheapest price).
-- **instances** — number of VMs to deploy with this configuration.
-- **vmConfiguration** — name, open ports, hostname, OS image URL, and SSH keys.
-
-Things to know:
-
-- **OS image**: provide a download URL. Use `GET /vms/v3/default_images` for pre-built options, or supply your own (must be publicly downloadable; supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`).
-- **Ports**: only port 22 (TCP) is open by default. You must explicitly specify any additional ports. Port 10250 is reserved.
-- **SSH keys**: at least one key is required. You can provide a raw public key string or reference an existing key by name from your [SSH keys](./ssh_keys.md).
-
-### After deployment
-
-VMs start with in `New` and `Launching` status. Once provisioned (typically a few minutes), the status changes to `Active` and a public IP is assigned. Use `GET /vms/v3` or `GET /vms/v3/status` to check. Read more about instance statuses and transitions in [CPU Cloud concepts](../cpu_cloud/overview.md).
-
-## Manage VMs
-
-### Update name and ports
-
-`PATCH /vms/v3` accepts an array of updates, each targeting a VM by ID. You can change the name and/or open ports.
-
-:::warning
-When updating `openPorts`, you must include **all** ports that should remain open. Any ports omitted from the update will be closed. This can lock you out if you forget to include port 22.
-:::
-
-### Delete VMs
-
-`DELETE /vms/v3` accepts an array of VM IDs to delete in a single request.
-
-## Error responses
-
-All CPU Cloud API errors return a JSON body with an `error` string:
+To get the total for a set of resources, use `POST /v1/prices/cost`. `secs` is the period in seconds:
 
 ```json
 {
-  "error": "No suitable offer found"
+  "secs": 86400,
+  "resources": [
+    { "vm": { "resource_id": { "vmConfigurationId": "<configuration_id>", "clusterId": "<cluster_id>" } } },
+    { "storage": { "resource_id": { "storageType": "NVME", "replicated": false, "clusterId": "<cluster_id>" }, "volume_gb": 25 } },
+    { "publicIp": { "resource_id": { "addressType": "V4", "clusterId": "<cluster_id>" } } }
+  ]
+}
+```
+
+The response carries `totalCost` in USD.
+
+### 3. Pick an OS image
+
+`GET /v1/storages/default_images` returns `items`, each with a `downloadUrl` and the `username` to log in with. You can also use your own publicly downloadable image in one of these formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`.
+
+### 4. Register an SSH key
+
+Add your public key with `POST /v1/ssh_keys` and keep the returned `id`. See [SSH keys](./ssh_keys.md).
+
+### 5. Create the VM
+
+`POST /v2/vms`:
+
+```json
+{
+  "name": "my-vm",
+  "clusterId": "<cluster_id>",
+  "configurationId": "<configuration_id>",
+  "bootDisk": {
+    "clusterId": "<cluster_id>",
+    "name": "my-vm-boot",
+    "storageType": "NVME",
+    "volumeGb": 25,
+    "replicated": false,
+    "osImage": "<downloadUrl>"
+  },
+  "publicIp": {
+    "clusterId": "<cluster_id>",
+    "name": "my-vm-ip",
+    "addressType": "V4"
+  },
+  "sshKeys": ["<ssh_key_id>"]
+}
+```
+
+Names use lowercase letters, digits and hyphens, up to 25 characters. The response contains the VM `id`, its `status` (`new`), and the ids of the created boot disk (`bootDisk`) and public IP (`publicIp`); keep them for cleanup.
+
+Your balance must be enough to run all your resources, including the new ones, for at least 6 hours; otherwise the request is rejected.
+
+### 6. Wait until the VM is running
+
+Poll `GET /v2/vms/<vm_id>?expand=publicIp` every 20–30 seconds until `status` is `launched`. This usually takes a few minutes. The address is in `expanded.publicIp.address`.
+
+### 7. Connect
+
+```sh
+ssh <username>@<address>
+```
+
+`<username>` is the one listed for the image in step 3. Port 22 is reachable without extra setup.
+
+## Stop paying
+
+Terminating a VM stops billing for the VM only:
+
+1. `POST /v2/vms/<vm_id>/terminate`. The status goes to `terminating`, then `terminated`.
+2. `DELETE /v1/public_ips/<public_ip_id>` releases the address.
+3. `DELETE /v1/storages/<storage_id>` deletes the boot disk and its data.
+
+## VM statuses
+
+| Status | Meaning |
+|--------|---------|
+| `new` | Accepted, waiting to be provisioned |
+| `launching` | Being provisioned |
+| `launched` | Running |
+| `updating`, `restarting`, `softRebooting` | A change or reboot is in progress |
+| `suspending`, `suspended` | The platform is stopping the VM, or has stopped it |
+| `terminating`, `terminated` | Being terminated, terminated |
+| `failed` | Provisioning failed |
+
+## Error responses
+
+Errors return a JSON body with a `code` and an `error` message:
+
+```json
+{
+  "code": "unauthorized",
+  "error": "No Access/Api Key token found"
 }
 ```

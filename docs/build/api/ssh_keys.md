@@ -8,7 +8,7 @@ SSH keys are account-level credentials used when deploying compute instances. Th
 
 For authentication and general request format, see the [API introduction](./overview.md).
 
-For complete request/response schemas, see the [API reference](https://api.fluence.dev/) (Swagger UI).
+For complete request and response schemas, see the [API reference](https://api.fluence.dev/docs).
 
 :::tip
 You can also manage SSH keys through the [Fluence Console settings](../settings.md).
@@ -18,15 +18,27 @@ You can also manage SSH keys through the [Fluence Console settings](../settings.
 
 Base URL: `https://api.fluence.dev`
 
+These endpoints take an access token in the `Authorization: Bearer` header.
+
 | Method | Path | Description |
 |--------|------|-------------|
-| `GET` | `/ssh_keys` | List all registered keys |
-| `POST` | `/ssh_keys` | Add a new key |
-| `DELETE` | `/ssh_keys` | Remove a key |
+| `GET` | `/v1/ssh_keys` | List all registered keys |
+| `POST` | `/v1/ssh_keys` | Add a new key |
+| `DELETE` | `/v1/ssh_keys/{ssh_key_id}` | Remove a key |
+| `POST` | `/v1/ssh_keys/delete` | Remove several keys: `{"ids": ["<ssh_key_id>", …]}` |
 
 ## Add a key
 
-Provide a friendly `name` and the full `publicKey` string. If the key already exists in your account (matched by fingerprint), the endpoint returns **200** with the existing key details instead of creating a duplicate. A newly created key returns **201**.
+Send a `name` (lowercase letters, digits and hyphens, up to 25 characters) and the full `publicKey` string, for example `ssh-ed25519 AAAA… user@host`:
+
+```json
+{
+  "name": "my-key",
+  "publicKey": "ssh-ed25519 AAAA…"
+}
+```
+
+A new key returns **200** with its `id`, `name`, `publicKey`, `algorithm` and `fingerprint`. Use the `id` when you [create a VM](./cpu_cloud.md#deploy-a-vm). If the same key (matched by fingerprint) is already in your account, the request fails with **409**.
 
 :::tip
 Read how to [generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you don't have one yet.
@@ -34,7 +46,7 @@ Read how to [generate SSH keys](https://docs.github.com/en/authentication/connec
 
 ## Delete a key
 
-Deletion uses the key's `fingerprint` as the identifier — not its name. You can find fingerprints by listing your keys first.
+Delete a key by its `id`, which you can find by listing your keys.
 
 :::info
 Removing a key from your account does not affect instances that were already deployed with it. Those instances remain accessible until terminated.

@@ -39,7 +39,7 @@ The Fluence compute marketplace sources from established compute providers with 
 
 ### Identification of terminated instances
 
-Status updates about instance termination are available in the Fluence Console on the **Running Instances** page, or via the API when you request your active instances using the [list instances](../api/cpu_cloud.md#manage-vms) endpoint.
+Status updates about instance termination are available in the Fluence Console on the **Running Instances** page, or via the API when you request your active instances using the [list VMs](../api/cpu_cloud.md#endpoints) endpoint (`GET /v2/vms`).
 
 #### Fluence Console
 
@@ -89,4 +89,4 @@ Click **Terminate** on the instance with `Terminated` status to remove its recor
 
 #### API
 
-Use the [delete endpoint](../api/cpu_cloud.md#delete-vms) with the instance ID to remove its record and release its reserved funds.
+Call the [terminate endpoint](../api/cpu_cloud.md#stop-paying) with the instance ID, then delete its public IP and boot disk to stop paying for them.

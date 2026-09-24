@@ -8,8 +8,10 @@ The Fluence API provides programmatic access to the decentralized Fluence comput
 
 ## Authentication
 
-All Fluence API endpoints require an API key sent in the `X-API-KEY` header.
-You can create and manage your keys in the [Fluence Console settings](../settings.md). If you omit or supply an invalid key, you'll get a 403 error.
+Fluence API endpoints require credentials: an API key in the `X-API-KEY` header, or an access token in the `Authorization: Bearer` header.
+You can create and manage your keys in the [Fluence Console settings](../settings.md) or with `POST /v1/api_keys`. A request without valid credentials is rejected with `401`, or `400` when the key is missing or malformed on some endpoints; a key without the permission an endpoint needs gets `403`.
+
+AI agents and scripts can skip the console entirely: [pay with x402](./x402.md) to fund an account with USDC on Base, sign in with the same wallet to get an access token, and create an API key from it. The x402 and sign-in endpoints themselves need no credentials.
 
 ## Request and response format
 

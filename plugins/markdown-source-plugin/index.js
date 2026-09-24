@@ -58,6 +58,13 @@ function cleanMarkdownForDisplay(content, filepath, siteUrl) {
   // 1. Strip YAML front matter (--- at start, content, then ---)
   content = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
 
+  // Set fenced code blocks aside so the MDX clean-up below never rewrites code samples
+  const codeBlocks = [];
+  content = content.replace(/^[ \t]*(`{3,}|~{3,})[^\n]*\n[\s\S]*?^[ \t]*\1[ \t]*$/gm, (block) => {
+    codeBlocks.push(block);
+    return `\u0000CODE_BLOCK_${codeBlocks.length - 1}\u0000`;
+  });
+
   // 2. Remove import statements (MDX imports)
   content = content.replace(/^import\s+.*?from\s+['"].*?['"];?\s*$/gm, '');
 
@@ -120,6 +127,8 @@ function cleanMarkdownForDisplay(content, filepath, siteUrl) {
       return `![${alt}](/docs/${fileDir}assets/${filename})`;
     }
   );
+
+  content = content.replace(/\u0000CODE_BLOCK_(\d+)\u0000/g, (_, index) => codeBlocks[Number(index)]);
 
   // 12. Remove any leading blank lines
   content = content.replace(/^\s*\n/, '');
