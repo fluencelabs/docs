@@ -13,7 +13,7 @@ The balance can only be spent on Fluence resources and cannot be withdrawn. If y
 | **Promo code** | — | Enter a code you received from the Fluence team |
 
 :::info
-The minimum top-up is **$10**. Your balance cannot exceed **$5,000** after the top-up.
+The minimum top-up is **10 USD**. Your balance cannot exceed **5,000 USD** after the top-up.
 :::
 
 You enter the amount in USD. Processing fees, if any, are added on top and shown on the payment page. Your balance is credited with the amount you entered.
