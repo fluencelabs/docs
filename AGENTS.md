@@ -27,7 +27,7 @@ Run `npm run gate` before every push. Vercel builds a preview for each PR; open 
 | Path | Contents |
 |---|---|
 | `docs/build/` | Build: account, balance, settings, CPU Cloud, GPU Cloud, API, agent guides |
-| `docs/stake/` | Stake: wallets, bridge, staking app |
+| `docs/stake/` | Stake: staking FLT |
 | `docs/connect_servers/` | Connect Servers: provider onboarding |
 | `docs/build_with_ai/` | Using the docs and the product from AI tools |
 | `sidebars.js` | Page order. A page missing here is not in the sidebar or in `llms.txt`. |
