@@ -17,7 +17,7 @@ The server does not manage GPU instances, top-ups, or payments. For the full lis
 
 You need:
 
-- A Fluence account with access to Public cloud. See [Account access](../build/overview.md#account-access).
+- A Fluence account. See [Registration](../build/registration.md).
 - An MCP client that runs on your computer and connects to remote MCP servers over HTTP with a custom header. All clients listed on this page can. For another client with these features, use the URL and header below.
 
 Browser-based clients and hosted connectors cannot connect. This includes Claude.ai custom connectors, Claude Desktop connectors, and ChatGPT. The server rejects requests that come from a browser, and it does not support OAuth sign-in.

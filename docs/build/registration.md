@@ -15,9 +15,7 @@ The Fluence Console uses one page to sign in and to create an account.
 
 After the first sign-in, the console asks for your name, last name, job role, and company. You can fill them in or click **Skip**. You can change them later in **Settings** > **Account**.
 
-A new account needs access from the Fluence team before it can rent compute. See [Account access](./overview.md#account-access).
-
-Your balance is in USD. To top it up, see [Payment and balance management](./balance.md).
+After you register, you can rent GPU and CPU compute. Rent is charged from a balance in USD, so top it up first. See [Payment and balance management](./balance.md).
 
 :::tip
 An AI agent or a script doesn't need to register. [Paying with x402](./api/x402.md) creates an account for the paying wallet.

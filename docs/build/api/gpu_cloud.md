@@ -24,8 +24,6 @@ Send an API key in the `X-API-KEY` header, or an access token in `Authorization:
 
 There is no read-only scope for GPU. To list or read GPU instances, a key needs the same scope as to deploy them. A key with the **Read only** preset of the Fluence Console cannot use the GPU API.
 
-New accounts don't have GPU permissions. See [Account access](../overview.md#account-access).
-
 ## Endpoints
 
 ### Plans

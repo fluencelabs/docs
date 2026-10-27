@@ -7,8 +7,6 @@ description: "CPU Cloud concepts: the resources a VM is made of, VM statuses, OS
 
 Fluence CPU Cloud runs virtual machines in data centers of independent providers. In the Fluence Console it is the **Public cloud** section. To work with it from code, use the [CPU Cloud API](../api/cpu_cloud.md).
 
-New accounts need access to Public cloud before they can create VMs. See [Account access](../overview.md#account-access).
-
 ## Resources
 
 A VM is made of resources that are created, billed, and deleted separately:

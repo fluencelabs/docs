@@ -32,15 +32,6 @@ The sidebar of the Fluence Console has these sections:
 | **Settings** | Your profile, API keys, SSH keys, and the **MCP** page with configurations for AI clients |
 | **Support** | Opens an email to support@fluence.ai |
 
-## Account access
-
-A new account can top up its balance, manage its keys, and use the API, but it cannot rent compute until the Fluence team enables access:
-
-- The GPU Marketplace pages show **GPU Cloud is temporarily unavailable**.
-- The Public cloud pages show that virtual machines, disks, and public IP addresses are available on request.
-
-To ask for access, write to support@fluence.ai. Accounts that the Fluence team invited by email have access from the first sign-in. Accounts created with a wallet through [x402](./api/x402.md) need access the same way.
-
 ## Pay for compute
 
-Rent is charged from your prepaid balance in USD. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
+A new account can rent GPU and CPU compute right after registration. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).

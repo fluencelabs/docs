@@ -6,10 +6,7 @@ description: Create and launch a CPU virtual machine in the Public cloud section
 
 This guide shows how to create and launch a virtual machine on the **Public cloud** > **Compute** page of the Fluence Console. For resources, statuses, and billing, see [CPU Cloud concepts](./overview.md). To create a VM from code, see [CPU Cloud API: Create a VM](../api/cpu_cloud.md#create-a-vm).
 
-Before you start:
-
-- Your account needs access to Public cloud. If the **Compute** page shows **Request access** instead of **Create new VM**, see [Account access](../overview.md#account-access).
-- Your balance must keep all your resources, including the new VM, running for at least 6 hours. See the [billing model](./overview.md#billing-model).
+Before you start, make sure that your balance can keep all your resources, including the new VM, running for at least 6 hours. See the [billing model](./overview.md#billing-model).
 
 ## 1. Create a draft
 
