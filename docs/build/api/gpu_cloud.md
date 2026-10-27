@@ -22,7 +22,7 @@ Send an API key in the `X-API-KEY` header, or an access token in `Authorization:
 | Containers | `akash:write` |
 | VMs and bare metal servers | `spheron:write` |
 
-There is no read-only scope for GPU. To list or read GPU instances, a key needs the same scope as to deploy them. A key with the **Read only** preset of the Fluence Console cannot use the GPU API.
+The GPU API does not accept read-only scopes. Every GPU endpoint except the default images list needs `akash:write` or `spheron:write`, including the endpoints that list and read instances. The scopes `akash:read` and `spheron:read` exist, but the GPU API does not use them. A key with the **Read only** preset of the Fluence Console cannot use the GPU API.
 
 ## Endpoints
 

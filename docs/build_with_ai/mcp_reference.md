@@ -66,7 +66,7 @@ The server does not support OAuth. Clients that can only sign in with OAuth, and
 
 How the console's permission presets map to these permissions:
 
-- **Read only** gives the `*:read` permissions for VMs, disks, VPCs, subnets, security groups, and public IP addresses, plus `ssh_key:list`. It does not give `clusters:read`, `vm:list`, or `prices:read`, so a Read only key cannot use the catalog, price, or estimate tools.
+- **Read only** gives the `*:read` scopes for VMs, disks, VPCs, subnets, security groups, and public IP addresses, plus `ssh_key:list`, `api_key:list`, `billing:get_history`, and `billing:get_spending_history`. It does not give `clusters:read`, `vm:list`, or `prices:read`, so a Read only key cannot use the catalog, price, or estimate tools.
 - **Custom scopes** with **Virtual machines** set to **Manage** gives `vms:read` and `vms:write`, and adds `clusters:read`, `vm:list`, and `prices:read`.
 - The console does not offer `account:read`, so `get_balances` does not work with a key created in the console.
 
