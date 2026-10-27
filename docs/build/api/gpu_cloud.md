@@ -1,120 +1,137 @@
 ---
 sidebar_position: 4
+description: "GPU Cloud API: list GPU plans, deploy and manage GPU containers, VMs, and bare metal servers, with permissions, rate limits, and errors."
 ---
 
-# GPU Cloud
+# GPU Cloud API
 
-The GPU Cloud API lets you browse available GPU plans, deploy instances, and manage them throughout their lifecycle. It supports three workload types — containers, VMs, and bare metal — each accessed through a consistent URL pattern.
+The GPU Cloud API lets you list GPU plans and deploy GPU containers, VMs, and bare metal servers. The same API manages them after deployment. For workload types, statuses, and billing, see [GPU Cloud concepts](../gpu_cloud/overview.md).
 
-Before you begin, we recommend familiarizing yourself with the [GPU Cloud concepts](../gpu_cloud/overview.md) — it covers workload types, instance lifecycle, and billing, which will help you make sense of the API's resources and responses.
+- Base URL: `https://api.fluence.dev/gpu`
+- OpenAPI document: [api.fluence.dev/gpu/api-docs/openapi.json](https://api.fluence.dev/gpu/api-docs/openapi.json)
+- Interactive reference: [api.fluence.dev/gpu/api-docs](https://api.fluence.dev/gpu/api-docs)
 
-For authentication and general request format, see the [API introduction](./overview.md).
+The GPU API is a separate service. It has no v3 version, and its requests, responses, and errors differ from the rest of the [Fluence API](./overview.md).
 
-For complete request/response schemas, see the [API reference - OpenAPI spec](https://api.fluence.dev/gpu/api-docs/openapi.json) , or try out the endpoints interactively in [Swagger UI](https://api.fluence.dev/gpu/api-docs).
+## Authentication and permissions
+
+Send an API key in the `X-API-KEY` header, or an access token in `Authorization: Bearer`. The default images endpoint needs no credentials.
+
+| Workload | Scope |
+|---|---|
+| Containers | `akash:write` |
+| VMs and bare metal servers | `spheron:write` |
+
+There is no read-only scope for GPU. To list or read GPU instances, a key needs the same scope as to deploy them. A key with the **Read only** preset of the Fluence Console cannot use the GPU API.
+
+New accounts don't have GPU permissions. See [Account access](../overview.md#account-access).
 
 ## Endpoints
 
-Base URL: `https://api.fluence.dev/gpu`
-
 ### Plans
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/gpu/plans/` | List container plans |
-| `GET` | `/gpu/plans/vms` | List VM plans |
-| `GET` | `/gpu/plans/baremetal` | List bare metal plans |
+| Method | Path | What it does |
+|---|---|---|
+| `GET` | `/gpu/plans/` | Lists container plans |
+| `GET` | `/gpu/plans/vms` | Lists VM plans |
+| `GET` | `/gpu/plans/baremetal` | Lists bare metal plans |
 
-### Instances — containers
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/gpu/instances/` | Deploy a container |
-| `GET` | `/gpu/instances/` | List container instances |
-| `GET` | `/gpu/instances/{instance_id}` | Get container details |
-| `PUT` | `/gpu/instances/{instance_id}` | Update a container |
-| `DELETE` | `/gpu/instances/{instance_id}` | Terminate a container |
-| `GET` | `/gpu/instances/{instance_id}/logs` | Get container logs |
-| `GET` | `/gpu/instances/{instance_id}/events` | Get container events |
-
-### Instances — VMs and bare metal
-
-VMs and bare metal use identical request/response structures. Replace `/vms` with `/baremetal` for bare metal instances.
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/gpu/instances/vms` | Deploy a VM |
-| `GET` | `/gpu/instances/vms` | List VM instances |
-| `GET` | `/gpu/instances/vms/{instance_id}` | Get VM details |
-| `PUT` | `/gpu/instances/vms/{instance_id}` | Rename a VM |
-| `DELETE` | `/gpu/instances/vms/{instance_id}` | Terminate a VM |
-
-### Other
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/gpu/default-images/` | List default container images |
-
-## Browse plans
-
-The plan endpoints return available GPU configurations with pricing and location data.
-
-**Container plans** return a flat array. Each plan represents a group of resource offerings that can be placed in different locations.
-When deploying a container, use the plan ID and optionally pass a location as a constraint.
-
-**VM and bare metal plans** return plans grouped by GPU model, then by GPU count. Each group contains individual options tied to a specific provider and location. Use the option ID to deploy. Each option includes `os_options` — you must pass one of these values as `os_image` in the deploy request.
-
-## Deploy instances
+Keep the trailing slash in `/gpu/plans/`, `/gpu/instances/`, and `/gpu/default-images/`. Without it, the API answers with a redirect to an `http://` URL.
 
 ### Containers
 
-Deploy with `POST /gpu/instances/`. Every deployment should contain at least: plan ID, instance name, and container settings (at minimum an image and at least one exposed port). Additionally you can specify: environment variables, startup command, private registry credentials, location constraint, SSH key.
+| Method | Path | What it does |
+|---|---|---|
+| `POST` | `/gpu/instances/` | Deploys a container |
+| `GET` | `/gpu/instances/` | Lists containers |
+| `GET` | `/gpu/instances/{instance_id}` | Returns a container |
+| `PUT` | `/gpu/instances/{instance_id}` | Updates a container |
+| `DELETE` | `/gpu/instances/{instance_id}` | Terminates a container |
+| `GET` | `/gpu/instances/{instance_id}/logs` | Returns the container output |
+| `GET` | `/gpu/instances/{instance_id}/events` | Returns the cluster events of the container |
 
-Restrictions to be aware of:
+### VMs and bare metal servers
 
-- Only port 80 supports the `"http"` protocol; all others must use `"tcp"` or `"udp"`
-- Maximum 10 exposed ports, 64 environment variables
-- The environment variable `SSH_PUBKEY` is reserved for ssh key — defining it along with a key will fail the deployment
-- Private registries: only `docker.io` and `ghcr.io` are supported
-- You can use pre-built images from `GET /gpu/default-images/` as a starting point
+VMs and bare metal servers use the same requests and responses. For bare metal, replace `vms` with `baremetal` in the path.
 
-### VMs and bare metal
+| Method | Path | What it does |
+|---|---|---|
+| `POST` | `/gpu/instances/vms` | Deploys a VM |
+| `GET` | `/gpu/instances/vms` | Lists VMs |
+| `GET` | `/gpu/instances/vms/{instance_id}` | Returns a VM |
+| `PUT` | `/gpu/instances/vms/{instance_id}` | Renames a VM |
+| `DELETE` | `/gpu/instances/vms/{instance_id}` | Terminates a VM |
 
-Deploy with `POST /gpu/instances/vms` or `POST /gpu/instances/baremetal`. To deploy an instance, provide chosen option ID (as `plan_id`), instance name, SSH key, and OS image.
+### Images
 
-The `os_image` value must match one of the `os_options` from the selected plan option. If it doesn't match, the error response lists the valid values.
+| Method | Path | What it does |
+|---|---|---|
+| `GET` | `/gpu/default-images/` | Lists the predefined container images |
 
-### After deployment
+## Choose a plan
 
-Provisioning typically takes 2–3 minutes. Once active, connection details are available in the response: `ssh_connection` for VMs/bare metal, or `network.domain` and `network.forwarded_ports` for containers.
+- Container plans come as a flat list. Each plan groups offers that can run in different locations. To deploy, pass the plan ID and, optionally, a location.
+- VM and bare metal plans are grouped by GPU model and then by GPU count. Each group has options, each in one location. To deploy, pass the option ID as `plan_id`. Each option lists `os_options`. Pass one of them as `os_image`.
+
+## Deploy an instance
+
+Your balance must cover at least 1 hour of the instance's price. Otherwise the API refuses the request.
+
+### Deploy a container
+
+Send `POST /gpu/instances/` with at least a plan ID, an instance name, and container settings. The settings need an image and at least one exposed port. You can also pass environment variables, a start command, private registry credentials, a location, and an SSH key.
+
+- Only port 80 can use the `http` protocol. Other ports use `tcp` or `udp`.
+- A container can have up to 10 exposed ports and 64 environment variables.
+- `SSH_PUBKEY` is reserved for the SSH key. If you pass an SSH key and also define `SSH_PUBKEY`, the deployment fails.
+- Private registries can be `docker.io` or `ghcr.io`.
+- `GET /gpu/default-images/` lists the predefined images.
+
+### Deploy a VM or a bare metal server
+
+Send `POST /gpu/instances/vms` or `POST /gpu/instances/baremetal` with the option ID as `plan_id`, an instance name, an SSH key, and an `os_image`. If `os_image` is not in the `os_options` of the option, the error lists the valid values.
+
+### After the request
+
+Provisioning usually takes 2 to 3 minutes. Read the instance until its status is `ACTIVE`. Then its connection details are in the response: `ssh_connection` for a VM or a bare metal server, and `network.domain` with `network.forwarded_ports` for a container.
+
+If the response to a deploy request is lost, list your instances before you send it again. A repeated request can create a second instance.
 
 ## Manage instances
 
 ### Update a container
 
-`PUT /gpu/instances/{instance_id}` is a **full replacement** of container configuration — include all fields except ports exposure, not just the ones you're changing. Exposed ports cannot be changed after deployment. The port configuration from the original deployment stays in effect.
+`PUT /gpu/instances/{instance_id}` replaces the whole container configuration. Send every field, not only the ones you change. You cannot change the exposed ports. The ports from the deployment stay. The API refuses an update while a previous update is still being applied.
 
-:::warning
-A new update cannot be submitted while a previous one is still being applied.
-:::
+### Rename a VM or a bare metal server
 
-### VM and bare metal updates
+`PUT` on a VM or bare metal instance changes only its name. To change anything else, terminate the instance and deploy a new one.
 
-Only renaming is supported via `PUT`. To change other configuration, terminate and re-deploy.
+### Debug a container
 
-### Container debugging
+- `GET /gpu/instances/{instance_id}/logs` returns the container output. Add `?last=N` to get the last `N` lines.
+- `GET /gpu/instances/{instance_id}/events` returns cluster events, such as scheduling, image pulls, and container starts. Read them when a container doesn't start.
 
-- `GET /gpu/instances/{id}/logs` — container stdout/stderr. Use `?last=N` to tail.
-- `GET /gpu/instances/{id}/events` — cluster-level events (scheduling, image pull, container start). Useful when the container fails to start.
+### Terminate an instance
 
-### Terminate
+Send `DELETE` to the instance path. You can terminate only an instance with the status `ACTIVE`. Billing stops, and the unused part of the current hour is not returned.
 
-`DELETE` on the instance endpoint. Only `ACTIVE` instances can be terminated. Unused balance is refunded.
+## Rate limits
 
-## Error responses
+The API limits requests per API key, or per IP address for requests without a key.
 
-GPU Cloud API errors come in two formats:
+| Requests | Per second | Per minute |
+|---|---|---|
+| `GET` | 60 | 100 |
+| `POST`, `PUT`, `DELETE` | 30 | 50 |
 
-**Validation errors (422)** — the `detail` field is an array of objects describing each invalid field, with `loc`, `msg`, `type`, and `input`:
+Every response has the headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`. Over the limit, the API returns `429` with a `Retry-After` header.
+
+## Errors
+
+Errors have a `detail` field.
+
+Validation errors return `422`, and `detail` is a list with one object per invalid field:
 
 ```json
 {
@@ -130,10 +147,12 @@ GPU Cloud API errors come in two formats:
 }
 ```
 
-**Business logic errors (400)** — the `detail` field is a plain string:
+Other errors return `detail` as a string, for example:
 
 ```json
 {
-  "detail": "Insufficient balance to deploy instance"
+  "detail": "Invalid API key"
 }
 ```
+
+A `503` means that the authentication service is unavailable, or that deploying new instances is turned off for a while. Retry later.

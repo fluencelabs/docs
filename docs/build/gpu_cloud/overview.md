@@ -1,60 +1,48 @@
 ---
 sidebar_position: 0
+description: "GPU Cloud concepts: containers, GPU VMs and bare metal, instance statuses, and how hourly GPU billing works."
 ---
 
-# Concepts
+# GPU Cloud concepts
 
-Fluence GPU Cloud is a marketplace of GPU compute from providers in data centers around the world. You can deploy three types of GPU workloads — containers, VMs, and bare metal instances — and manage them through the console or the API.
+Fluence GPU Cloud rents GPUs from providers in data centers around the world. You can run three types of GPU workloads: containers, VMs, and bare metal servers. In the Fluence Console you rent them in the **GPU Marketplace** and manage them on the **GPU instances** page. To do the same from code, use the [GPU Cloud API](../api/gpu_cloud.md).
 
 ## Workload types
 
-GPU Cloud supports three deployment types. Each suits a different use case:
-
-| | Container | VM | Bare Metal |
+| | Container | VM | Bare metal |
 |---|---|---|---|
-| **What it is** | A containerized workload running on a shared host with full GPU access | A virtual machine with GPU passthrough | A dedicated physical server with direct GPU access |
-| **Image** | Container image (Docker) | OS image | OS image |
-| **Connectivity** | Domain with forwarded ports | Direct SSH via public IP | Direct SSH via public IP |
-| **Updatable** | Yes — image, start command, env vars, SSH keys | Rename only | Rename only |
-| **Best for** | ML inference, training jobs, GPU-accelerated apps packaged as containers | Workloads that need full OS control with GPU access | Maximum performance with no virtualization overhead |
+| What it is | A container on a shared host with full access to its GPUs | A virtual machine with GPU passthrough | A dedicated physical server |
+| Image | A container image | An OS image | An OS image |
+| Connection | A domain with forwarded ports | SSH to a public IP address | SSH to a public IP address |
+| What you can change after launch | Image, start command, environment variables, and SSH key | Name, through the API only | Name, through the API only |
 
-**Containers** are lightweight deployments ideal for running GPU workloads packaged as Docker images. You specify a container image, optional start command, environment variables, and exposed ports. The platform assigns a domain and maps your ports to externally accessible forwarded ports — for example, your port `22` may be forwarded to `30694`.
+A container runs a Docker image that you choose, with an optional start command, environment variables, and ports. The platform gives the container a domain and maps each of your ports to an external port. For example, your port `22` can become port `30694` on the domain.
 
-**VMs** provide a full virtual machine with GPU passthrough. You choose an OS image and connect directly via SSH over a public IP.
+A VM and a bare metal server both run an OS image with GPU drivers, and you connect to them over SSH. A VM runs on a hypervisor. A bare metal server is a physical machine with no virtualization layer. The console and the API rent both the same way.
 
-**Bare metal** instances give you a dedicated physical server with direct GPU access and no virtualization overhead. The deployment flow and management are identical to VMs — the only difference is the underlying hardware isolation.
+## Instance statuses
 
-## Instance lifecycle
+| API status | Console label | Meaning |
+|---|---|---|
+| `INITIALIZED` | Initialized or Provisioning | The instance is being provisioned. For a container, the console shows the provisioning step, from 1/4 to 4/4. |
+| `ACTIVE` | Running | The instance is running. Its connection details are available. |
+| `FAILED` | Failed | Provisioning failed. Nothing was charged. |
+| `ENDED` | Ended | You terminated the instance, or the platform ended it |
 
-Each instance goes through the following statuses:
-
-| API status | Console label | Description |
-|------------|---------------|-------------|
-| `INITIALIZED` | Initialized | Instance is being provisioned |
-| `ACTIVE` | Running | Instance is running and accessible |
-| `FAILED` | Failed | Provisioning failed — funds are returned to your account |
-| `ENDED` | Ended | Instance was terminated by the user or the system |
-
-Provisioning typically takes 2–3 minutes. Once active, connection details become available — a domain with forwarded ports for containers, or an SSH connection for VMs and bare metal.
+Provisioning usually takes 2 to 3 minutes.
 
 ## Billing model
 
-GPU Cloud uses hourly pre-paid billing in USD. Billing periods are fixed hourly intervals (e.g., 15:00–16:00, 16:00–17:00 UTC) regardless of when the instance was started. At each billing period, one hour of rent is charged from the instance's balance.
+GPU instances are billed by the hour in USD, from your account balance.
 
-### Instance balance
+- Billing starts when the instance becomes Running. At that moment Fluence charges the first hour.
+- After that, Fluence charges one hour at a time, every hour counted from the moment the instance started. For example, an instance that started at 11:13 is charged at 11:13, 12:13, 13:13, and so on. **Next billing time** on the instance page shows the next charge.
+- Every started hour is charged in full. When an instance ends, the unused part of the hour is not returned.
+- Nothing is reserved or held on the instance. A failed instance is not charged.
+- To launch an instance in the console, your balance must cover the first 2 hours. The console shows this as **Upfront** on the review panel. Through the API, the balance must cover 1 hour.
 
-Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts an amount equivalent to 3 hours of rent from your account balance and transfers it to the instance's reserved balance. One hour is charged immediately for the current billing period, while the remaining 2 hours stay as a reserve.
+If your balance cannot cover the next hour, Fluence still charges the hour, and your balance goes below zero. At the following charge, Fluence ends the instance. Fluence can also end all your GPU instances earlier, when your balance runs low. GPU instances do not get the grace period that CPU resources get. To keep instances running, keep enough balance. See [Payment and balance management](../balance.md).
 
-If provisioning fails, the full amount is returned to your account balance.
+## Access
 
-### Automatic top-ups
-
-The system maintains a reserve of 2 hours of rent on each instance's balance. When the reserve drops below this target — typically after each hourly charge — the system automatically tops it up from your account balance.
-
-### Insufficient funds
-
-If your account balance cannot cover a top-up, the system keeps retrying the top-up. Your instance continues running through any billing period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent — at that point the instance is deleted.
-
-### Refunds on termination
-
-When an instance is stopped or terminated — whether by you or the system — all unused funds remaining on the instance's reserved balance are returned to your account balance.
+New accounts don't have access to the GPU Marketplace. Its pages show **GPU Cloud is temporarily unavailable**. See [Account access](../overview.md#account-access).
