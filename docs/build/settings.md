@@ -1,25 +1,28 @@
 # Fluence console settings
 
-Use the **Settings** page to manage your account profile, SSH keys and API keys.
+Use the **Settings** section to manage your account profile, API keys and SSH keys.
 
 ## Account
 
 On the **Account** page, you can view your email and edit your profile: name, last name, job role and company.
 
-## SSH Keys
+## API keys
 
-On the **SSH keys** page, you can:
-1. Create a new key of any of the RSA, ECDSA or ED25519 format.
-2. Delete existing keys.
+An API key lets a script or an agent use the [Fluence API](./api/overview.md) on your behalf.
 
-![SSH keys page](./assets/settings/ssh_keys.webp)
+On the **API keys** page, click **Add API Key** and set:
 
-## API Keys
+1. **Name**: lowercase letters, digits and hyphens, up to 25 characters.
+2. **Permissions**:
+   - **Full access**: all permissions your account has, including payments and API keys.
+   - **Read only**: view resources and billing. Read-only keys don't work with GPU Cloud.
+   - **Custom scopes**: choose permissions for each resource.
+3. **Expires at**: the date the key stops working.
 
-Instead of using the **Fluence Console**, you can manage your resources also through our [Public API](./api/overview.md).
+The key value is shown once, right after the key is created; copy it and store it safely. The list shows each key's name, creation date, last use and expiration date. Delete a key you no longer need.
 
-On the API Keys page, users can:
-1. Create a new API key. Currently, it is possible to specify `Permissions` and `Expiration time` separately.
-2. Delete an API key.
+## SSH keys
 
-![API keys page](./assets/settings/api_keys.webp)
+On the **SSH keys** page, click **Add SSH Key**, give the key a name and paste your public key. Supported formats: RSA, DSA, ECDSA and ED25519. The list shows each key's name and fingerprint; you can delete keys you no longer need.
+
+SSH keys are added to VMs when you [launch them](./cpu_cloud/vm_rent.md#6-add-ssh-keys). Deleting a key doesn't remove it from VMs that already use it.

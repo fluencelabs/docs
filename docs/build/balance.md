@@ -12,8 +12,10 @@ The balance can only be spent on Fluence resources and cannot be withdrawn. If y
 | **Card** | [Stripe](https://stripe.com/) | Credit or debit card on the Stripe checkout page |
 | **Promo code** | — | Enter a code you received from the Fluence team |
 
+AI agents and scripts can also top up without the console: [pay with x402](./api/x402.md) in USDC on Base over HTTP.
+
 :::info
-The minimum top-up is **10 USD**. Your balance cannot exceed **5,000 USD** after the top-up.
+In the console, the minimum top-up is **10 USD**, and your balance cannot exceed **5,000 USD** after the top-up.
 :::
 
 You enter the amount in USD. Processing fees, if any, are added on top and shown on the payment page. Your balance is credited with the amount you entered.
