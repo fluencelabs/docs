@@ -9,8 +9,9 @@ const config: Config = {
   tagline: "GPU and CPU cloud compute in one console and API",
   url: "https://fluence.dev",
   baseUrl: "/",
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "throw",
+  onBrokenAnchors: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   i18n: {
     defaultLocale: "en",
