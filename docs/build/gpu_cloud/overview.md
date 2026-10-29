@@ -41,4 +41,4 @@ GPU instances are billed by the hour in USD, from your account balance.
 - Nothing is reserved or held on the instance. A failed instance is not charged.
 - To launch an instance in the console, your balance must cover the first 2 hours. The console shows this as **Upfront** on the review panel. Through the API, the balance must cover 1 hour.
 
-If your balance cannot cover the next hour, Fluence still charges the hour, and your balance goes below zero. At the following charge, Fluence ends the instance. Fluence can also end all your GPU instances earlier, when your balance runs low. GPU instances do not get the grace period that CPU resources get. To keep instances running, keep enough balance. See [Payment and balance management](../balance.md).
+If your balance cannot cover the next hour, Fluence still charges the hour, and your balance goes below zero. At the following charge, Fluence ends the instance. Fluence also ends all your GPU instances as soon as your balance reaches zero. GPU instances do not get the grace period that CPU resources get. To keep instances running, keep enough balance. See [Payment and balance management](../balance.md).
