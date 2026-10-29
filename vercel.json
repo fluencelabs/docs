@@ -17,7 +17,57 @@
     },
     {
       "source": "/docs/learn/overview",
-      "destination": "/",
+      "destination": "/docs/build/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/wallets_guide",
+      "destination": "/docs/stake/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/wallets_guide.md",
+      "destination": "/docs/stake/overview.md",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/bridge_guide",
+      "destination": "/docs/stake/chain_migration",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/bridge_guide.md",
+      "destination": "/docs/stake/chain_migration.md",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/staking_app_guide",
+      "destination": "/docs/stake/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/stake/staking_app_guide.md",
+      "destination": "/docs/stake/overview.md",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connect_servers/smart_contracts",
+      "destination": "/docs/connect_servers/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connect_servers/smart_contracts.md",
+      "destination": "/docs/connect_servers/overview.md",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connect_servers/upcoming_features",
+      "destination": "/docs/connect_servers/overview",
+      "permanent": true
+    },
+    {
+      "source": "/docs/connect_servers/upcoming_features.md",
+      "destination": "/docs/connect_servers/overview.md",
       "permanent": true
     },
     {

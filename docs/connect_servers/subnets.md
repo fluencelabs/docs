@@ -1,16 +1,22 @@
-# IP subnets management
+---
+description: Register a public IPv4 subnet in the Fluence Provider Application and assign it to a Kubernetes cluster for customer workloads.
+---
 
-## Adding a new subnet for Customer workloads
+# Add an IP subnet
 
-To host Fluence customers’ workloads within the newly created Kubernetes cluster, at least one public IPv4 subnet must be allocated to the cluster. The Provider is responsible for manually configuring this subnet to ensure it is accessible to all servers within the data center where the subnet will be attached. Afterward, the Fluence software will automatically route IP addresses from the allocated pool to the appropriate servers.
+A cluster needs at least one public IPv4 subnet before it can run Fluence customers' workloads. You configure the subnet in your data center so that every server in the data center can reach it. The Fluence software then routes addresses from the subnet to the right servers.
 
-To register a new subnet in the Provider Application, navigate to the Network section and create a new subnet by specifying the following key details:
+## Register the subnet
 
-1. *CIDR* -  Define the range of IP addresses included in the subnet.
-2. *Gateway* - Specify gateway address
-3. *Exclude IPs* - List IP addresses that should be excluded from allocation for Fluence
-4. *VLAN ID for public networking* - Optional parameter to set if there is additional networking logic within the data center for public traffic.
+Open **Network** in the Provider Application and create a subnet with these details:
 
-![ip_subnets](./assets/subnets/add_subnet_page.webp)
+1. **CIDR.** The range of IP addresses in the subnet.
+2. **Gateway.** The gateway address.
+3. **Exclude IPs.** Addresses that Fluence must not allocate.
+4. **VLAN ID for public networking.** Optional. Set it if public traffic in your data center uses a VLAN.
 
-After the subnet has been created, you can select it from the list on the `Network` page and Assign it to the specific Kubernetes cluster.
+![Adding a subnet in the Provider Application](./assets/subnets/add_subnet_page.webp)
+
+## Assign the subnet to a cluster
+
+After you create the subnet, select it in the list on the **Network** page and assign it to a Kubernetes cluster.

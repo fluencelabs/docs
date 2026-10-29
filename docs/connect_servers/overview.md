@@ -1,64 +1,44 @@
-# Overview
+---
+description: What the Fluence Provider Application manages, and the data center, hardware, and network requirements for Fluence providers.
+---
 
-**[Fluence Provider Application](https://providers.fluence.network/)** is the primary tool for Providers on the Fluence Network to manage all core operations within the Fluence Protocol: from server-level hardware management to interactions with blockchain smart contracts. It is a centralized application, developed and securely hosted by the Fluence team.
+# Connect servers to Fluence
 
-:::info **Note**
+Data center operators connect bare metal servers to Fluence Cloud through the [Fluence Provider Application](https://providers.fluence.network/). The Fluence team develops and hosts the application. With it, you:
 
-**A self-hosted version** of Provider Application will be available in the near future.
-:::
+- Install and manage Talos Linux, the supported server OS.
+- Create and manage Kubernetes clusters on servers that run Talos Linux.
+- Install, configure, and update the Fluence services that run in each cluster.
+- Configure network interfaces, VLANs, and private subnets for Talos Linux and Kubernetes.
+- Assign public IP subnets to clusters, so that Fluence customers' virtual machines get public IP addresses.
 
-Provider Application contains functionality for managing the following Fluence Network components:
+To get access, see [Log in to the Provider Application](./login.md).
 
-- **Infrastructure Management Software**:
-    - *Talos Linux operation system*: Launch and manage Talos Linux as the supported main OS
-    - *Kubernetes clusters*: Provision and manage Kubernetes (K8s) clusters on servers running Talos Linux.
-    - *Custom Fluence Stack*: Provision, configure and automatically update Fluence services running within a Kubernetes cluster
-- **Hardware Networking**:
-    - *Private networking*: Configure network interfaces, VLANs and Private Subnets for Talos OS and K8s
-    - *Public IP subnets*: Assign IP subnets for Kubernetes clusters for launching workloads, such as Virtual Machines, for Fluence customers
-- **Blockchain Smart-contracts (will be supported in early Q4 2025)**:
-    - *Offer contracts*: Register and update hardware resources and Data Center on-chain info. Manage prices for server resources in stablecoins.
-    - *Capacity commitments contracts*: Enable servers to participate in Fluence network by getting FLT collateral via Staking. Get revenue in FLT token for idle hardware resource.
-    - *Deal contracts*: Get revenue in stablecoins from Fluence Cloud customers renting your infrastructure.
+## Data center requirements
 
-## Infrastructure requirements
+- Tier 3 or Tier 4 certification.
+- ISO 27001, SOC 2 Type 1, or SOC 2 Type 2 certification is not required, but Fluence prefers data centers that have one or more of them.
 
-### Data center requirements
+## Hardware requirements
 
-- *Tier*: 3 or 4 certification
-- *Additional certificates*: not required but highly desirable to have one or more of the following certificates: ISO 27001, SOC2 Type 1, SOC2 Type 2
+Servers must be bare metal.
 
-### Hardware requirements
+| Component | Requirement |
+|---|---|
+| CPU | AMD EPYC or Ryzen Zen 2 or newer, or Intel Xeon Cascade Lake or newer. Unrestricted Turbo Boost on. At least 32 vCPU per CPU. |
+| RAM | DDR4 or newer. At least 4 GiB per 2 vCPU. |
+| Storage for customer workloads | Directly attached SSD or NVMe, without RAID. At least 25 GiB per 2 vCPU. |
+| Storage for the host OS | Recommended: a dedicated RAID 1 of two NVMe drives with at least 200 GiB free. Use two different drive models, so that both drives are less likely to fail at the same time. |
+| Network interface for Talos Linux and Kubernetes | 1 GbE or faster |
+| Network interface for customer workloads | 10 GbE minimum, 100 GbE or faster recommended |
 
-- *Type*: Bare metal servers
-- *Server CPU*:
-    - AMD EPYC or Ryzen Zen2 or better
-    - Intel Xeon Cascade Lake or better
-    - Unrestricted Turbo Boost enabled
-    - Minimum 32 vCPU per CPU unit
-- *Server RAM*:
-    - DDR4+ type
-    - Minimum 4 GiB per 2 vCPU
-- *DAS Storage*:
-    - SSD or NVMe types
-    - Minimum 25 GiB per 2 vCPU with disabled RAID for hosting customer facing workloads
-    - Recommended to use dedicated RAID1 NVMe for Host Operation System with 200+ GiB free space. It is recommended to use different NVMe models in the RAID to reduce the risk of simultaneous failures due to similar disk lifetimes
-- *Network interfaces*:
-    - 1+ GbE interface for Talos OS and Kubernetes
-    - 100+ GbE recommended, with 10 GbE minimum, interface for customer facing workloads
+## Network requirements
 
-### Network requirements
+Each server uses two networks:
 
-- *Management subnet* - management network for Host OS (Talos) and Kubernetes APIs:
-    - Allow egress to the Internet
-    - Support Bond
-    - Can use VLAN
-- *Workload subnet* - workload network for Fluence customers’ traffic:
-    - Should be isolated from internal networks
-    - Should have access only to/from the Internet
-    - Can’t be used as Bond
-    - Can use VLAN
+- The management subnet carries traffic for the host OS (Talos Linux) and the Kubernetes APIs. It must allow egress to the internet, supports bonding, and can use a VLAN.
+- The workload subnet carries Fluence customers' traffic. It must be isolated from your internal networks and reach only the internet. The workload subnet cannot be bonded but can use a VLAN.
 
-![subnets](./assets/overview/subnets.svg)
+![Management and workload subnets of servers in a data center](./assets/overview/subnets.svg)
 
-Possible network topology within data center. Orange area represents a physical server.
+The diagram shows one possible network layout in a data center. The orange area is one physical server.

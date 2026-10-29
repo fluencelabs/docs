@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Decentralized Serverless Platform"
+      description={siteConfig.tagline}
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">

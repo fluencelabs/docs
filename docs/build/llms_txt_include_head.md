@@ -1,7 +1,7 @@
 # Build
 
-> Documentation for developers using the Fluence compute marketplace. Covers the Fluence Console (web UI) and API for renting and managing CPU and GPU instances on decentralized infrastructure.
+> Guides for renting GPU and CPU compute on Fluence Cloud: the Fluence Console at console.fluence.ai, the Fluence API at api.fluence.dev, accounts, balance, and billing.
 
-If you are new to Fluence, start with the [Overview](https://fluence.dev/docs/build/overview.md) to understand the platform. Each cloud section below has its own Concepts page covering resources, billing, and instance lifecycle. If you are already familiar with the platform, jump to the relevant section below.
+If you are new to Fluence Cloud, start with the [Overview](https://fluence.dev/docs/build/overview.md). It lists what you can rent and the ways to work with Fluence Cloud. The CPU Cloud and GPU Cloud sections each start with a concepts page about resources, statuses, and billing. For code, start with the [API overview](https://fluence.dev/docs/build/api/overview.md). New integrations use the Public v3 API.
 
-AI agents can fund an account and sign in without a human: see [Pay with x402 (for agents)](https://fluence.dev/docs/build/api/x402.md) — pay USDC on Base over HTTP, then sign in with the paying wallet.
+AI agents can fund an account and sign in without a human. See [Pay with x402](https://fluence.dev/docs/build/api/x402.md). To connect an MCP client, see [Connect an AI client through MCP](https://fluence.dev/docs/build_with_ai/mcp.md).

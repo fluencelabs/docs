@@ -1,51 +1,70 @@
-# Renting an instance
+---
+description: Create and launch a CPU virtual machine in the Public cloud section of the Fluence Console, from plan and disks to network, SSH keys, and cloud-init.
+---
 
-This guide walks you through launching a virtual machine in the Fluence Console, on the **Public cloud → Compute** page. For resources, statuses and billing, see the [CPU Cloud concepts](./overview.md). To do the same through the API, see [CPU Cloud API → Deploy a VM](../api/cpu_cloud.md#deploy-a-vm).
+# Create a VM
 
-:::info
-If the page shows **Request access**, your account can't create VMs yet. Click it, and the Fluence team will review your request.
-:::
+This guide shows how to create and launch a virtual machine on the **Public cloud** > **Compute** page of the Fluence Console. For resources, statuses, and billing, see [CPU Cloud concepts](./overview.md). To create a VM from code, see [CPU Cloud API: Create a VM](../api/cpu_cloud.md#create-a-vm).
 
-Nothing is prepaid when you launch a VM, but your balance must cover all your resources for at least 6 hours. See the [billing model](./overview.md#billing-model).
+Before you start, make sure that your balance can keep all your resources, including the new VM, running for at least 6 hours. See the [billing model](./overview.md#billing-model).
 
-## Steps to launch a VM
+## 1. Create a draft
 
-### 1. Start a new VM
+On the **Compute** page, click **Create new VM**. The console creates a draft, opens the **Create new VM** page, and saves the draft as you edit it. A draft is not billed.
 
-On the **Compute** page, click **Create Virtual Machine**. The console creates a draft and opens the **Create new VM** page. The draft is saved as you edit and is not billed. Drafts are listed on the **Compute** page with the `Draft` status, where you can open or discard them.
+Drafts appear on the **Compute** page with the **Draft** status. From the list you can resume the setup of a draft or discard it.
 
-### 2. Basic settings
+## 2. Set the name and the location
 
-- **VM name**: lowercase letters, digits and hyphens, up to 25 characters.
-- **Available locations**: the data center to run the VM in. Hover over the tier badge to see the data center's certifications.
+Under **Basic settings**:
 
-### 3. Choose a plan
+- **VM name**: up to 25 characters, lowercase letters, digits, and hyphens. The name cannot start or end with a hyphen.
+- **Available locations**: the data center for the VM. Each location shows its tier. Hover over the tier to see the certifications of the data center.
 
-Under **Available plans**, pick the **Dedicated CPU** or **Shared CPU** tab and select a plan. Each plan shows its vCPU and RAM, and its monthly and hourly price.
+If you change the location after you set up disks or network interfaces, the console asks you to confirm, because the disks are detached and the interfaces lose their settings.
 
-### 4. Set up disks
+## 3. Choose a plan
 
-Under **Disk setup**, configure the **Boot disk**: the operating system, the disk size in GB and the storage type. For a custom image, provide a publicly downloadable URL and select the boot mode (BIOS or EFI); see [supported formats](./overview.md#os-images).
+Under **Available plans**, open the **Dedicated CPU** or **Shared CPU** tab and select a plan. Each plan shows its vCPU, RAM, and price per month and per hour.
 
-You can also add an **Additional disk**. Disks are billed separately from VMs, and you keep paying for a disk until you delete it, even if it isn't attached to a VM.
+## 4. Set up the disks
 
-### 5. Configure the network
+Under **Disk setup**:
+
+1. Click **Edit boot disk**. In the **Boot disk** dialog:
+   - On the **New disk** tab, enter a **Name**, choose the **Operating system**, the storage type, and the **Size**. To boot from your own image, choose **Custom Image**, enter its URL, and choose the **Boot mode**: BIOS or EFI. See [OS images](./overview.md#os-images).
+   - On the **Existing disk** tab, choose a disk you already have in this location.
+2. Optional: to add a data disk, click **Attach disk**. In the **Attach disk to VM** dialog, create a new disk or choose an existing one.
+
+A disk created in the draft is free until you launch the VM. An existing disk stays billed on its own.
+
+## 5. Configure the network
 
 Under **Network settings**, each network interface has a **Connection**:
 
-- **Public IPv4 address**: the VM gets an address reachable from the internet. A VM can have one public IPv4 address. You need it to connect over SSH from outside Fluence.
-- **Private subnet**: the interface joins a subnet of one of your private networks.
+- **Public IPv4 address**: the VM gets a public IP address reachable from the internet. You need it to connect over SSH from outside Fluence. A VM can have one public IP address.
+- **Private subnet**: the interface joins a subnet of one of your VPCs. Choose the **Subnet**, or click **Create subnet**. Subnets marked **no outbound** have no internet access. Optionally set a static private IPv4 address.
 
-Choose a **Security group** for the interface. Use **Add network interface** to add more interfaces; one of them carries the default route.
+For each interface, choose a **Security group**: **None**, an existing group, or **Create security group**. See [Security groups](./manage_vm.md#security-groups). If the group blocks outbound traffic, the console warns you that the VM cannot reach the internet through this interface.
 
-### 6. Add SSH keys
+To add another interface, click **Add network interface**. Use **Make default route** in the menu of an interface to choose the one that carries the default route.
 
-Under **Access**, select one or more **SSH-keys**, or click **Add key** to add a new one. Supported formats: RSA, DSA, ECDSA and ED25519.
+If the VM has no public IP address, you can still reach it from the **Console** tab of the VM page or from your private network.
 
-### 7. Add cloud-init (optional)
+## 6. Add SSH keys
 
-Turn on **Enable custom cloud-init config** to provide cloud-init user data that runs on the VM's first boot.
+Under **Access**, choose one or more keys in **SSH keys**, or click **Add key** to add a new one. Supported formats: RSA, DSA, ECDSA, and ED25519.
 
-### 8. Review and launch
+SSH keys are optional. Without a key, you sign in through the **Console** tab of the VM page with a root password that you generate there.
 
-The **Review** panel shows the configuration and its price, and marks sections that need attention. Click **Launch** and confirm. The VM appears on the **Compute** page; provisioning usually takes a few minutes, until the status is `Launched`.
+## 7. Add cloud-init (optional)
+
+Under **Custom cloud-init config**, turn on **Enable custom cloud-init config** and enter cloud-init user data. The user data runs on the first boot of the VM. After you save the user data, the console doesn't show its content again. You can replace or clear the user data.
+
+## 8. Review and launch
+
+The **Review** panel shows the configuration and its price, and lists the problems to fix in each section.
+
+Click **Launch**. Launching starts billing, and the settings of the draft become read-only. The console opens the page of the new VM. Provisioning usually takes a few minutes. Wait until the status is **Launched**.
+
+If the console cannot confirm that the launch started, click **Check status** before you try again.
