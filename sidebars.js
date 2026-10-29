@@ -4,9 +4,7 @@
 const sidebars = {
   stake: [
     "stake/overview",
-    "stake/wallets_guide",
-    "stake/bridge_guide",
-    "stake/staking_app_guide",
+    "stake/chain_migration",
   ],
   build: [
     "build/overview",
@@ -49,11 +47,11 @@ const sidebars = {
     "connect_servers/hardware",
     "connect_servers/kubernetes",
     "connect_servers/subnets",
-    "connect_servers/smart_contracts",
-    "connect_servers/upcoming_features",
   ],
   build_with_ai: [
     "build_with_ai/overview",
+    "build_with_ai/mcp",
+    "build_with_ai/mcp_reference",
   ],
 };
 

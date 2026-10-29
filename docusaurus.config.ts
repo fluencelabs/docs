@@ -5,8 +5,8 @@ import rehypeKatex from "rehype-katex";
 import path from "path";
 
 const config: Config = {
-  title: "Fluence Docs",
-  tagline: "Decentralized Compute Platform",
+  title: "Fluence Cloud Docs",
+  tagline: "GPU and CPU cloud compute in one console and API",
   url: "https://fluence.dev",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -56,7 +56,7 @@ const config: Config = {
       indexName: "fluence",
     },
     navbar: {
-      title: "Fluence",
+      title: "Fluence Cloud",
       logo: {
         alt: "Fluence Logo",
         src: "img/logo_badge_black.svg",
@@ -121,20 +121,16 @@ const config: Config = {
           title: "Community",
           items: [
             {
+              label: "X",
+              href: "https://x.com/fluence_project",
+            },
+            {
               label: "Telegram",
-              href: "https://t.me/fluence_project",
+              href: "https://t.me/fluence_official",
             },
             {
-              label: "Discord",
-              href: "https://discord.com/invite/5qSnPZKh7u",
-            },
-            {
-              label: "Youtube",
-              href: "https://www.youtube.com/channel/UC3b5eFyKRFlEMwSJ1BTjpbw",
-            },
-            {
-              label: "Telegram (ru)",
-              href: "https://t.me/fluenceru",
+              label: "YouTube",
+              href: "https://www.youtube.com/@fluencelabs",
             },
           ],
         },
@@ -144,10 +140,6 @@ const config: Config = {
             {
               label: "GitHub",
               href: "https://github.com/fluencelabs",
-            },
-            {
-              label: "Telegram Updates",
-              href: "https://t.me/fluencedev",
             },
           ],
         },

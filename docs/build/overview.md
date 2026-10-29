@@ -1,24 +1,37 @@
-# Overview
+---
+description: "What you can rent on Fluence Cloud, how to reach it through the Fluence Console, the API, or an AI client, and how new accounts get access."
+---
 
-**Fluence Console** is the convenient way to rent and manage resources from the decentralized Fluence compute marketplace. It is a web-based application that allows you to control the complete lifecycle of your resources and services, including your payments and billing.
+# Fluence Cloud overview
 
-## Fluence Console UI Access
+Fluence Cloud rents GPU and CPU compute from data centers around the world. You pay from a prepaid balance in USD. You can work with it in three ways:
 
-:::info
-Access to Fluence Console is currently only available to participants of the Alpha VM testing program.
-:::
+- In the Fluence Console at [console.fluence.ai](https://console.fluence.ai). To create an account, see [Registration](./registration.md).
+- Through the [Fluence API](./api/overview.md), from scripts and your own tools.
+- From an AI client such as Claude Code, Cursor, or Codex, through the [Fluence MCP server](../build_with_ai/mcp.md).
 
-Access the Fluence Console: [console.fluence.network](https://console.fluence.network/)
+## What you can rent
 
-## API Access
+| Product | What you get | Billing | Guides |
+|---|---|---|---|
+| GPU Cloud | GPU containers, GPU virtual machines, and bare metal servers | By the hour | [GPU Cloud concepts](./gpu_cloud/overview.md) |
+| CPU Cloud | Virtual machines with disks, public IP addresses, private networks, and security groups | By the second | [CPU Cloud concepts](./cpu_cloud/overview.md) |
 
-In addition to the web interface, an API is available to programmatically:
+To reserve GPU clusters for a longer term, Fluence runs [GPU Cluster Auctions](https://auctions.fluence.ai), where providers bid for your request. These docs do not cover auctions.
 
-- Search for available compute resources on the CPU and GPU Cloud marketplaces
-- Deploy virtual machines, GPU containers, and bare metal instances
-- Manage active deployments
-- Manage SSH keys for instance access
+## Console sections
 
-The API is ideal for automation, integration with your existing workflows, or building custom tools on top of the Fluence platform.
+The sidebar of the Fluence Console has these sections:
 
-Learn more about using the API in our [API documentation](./api/overview.md).
+| Section | What it is for |
+|---|---|
+| **Public cloud** | CPU virtual machines on the **Compute** page, disks on **Storage**, and public IP addresses, VPCs, and security groups on **Network** |
+| **GPU Marketplace** | Renting GPU containers, VMs, and bare metal servers |
+| **GPU instances** | Managing the GPU instances you rented |
+| **Billing** | Your balance, top-ups, promo codes, and usage. The balance in the page header also links here. |
+| **Settings** | Your profile, API keys, SSH keys, and the **MCP** page with configurations for AI clients |
+| **Support** | Opens an email to support@fluence.ai |
+
+## Pay for compute
+
+A new account can rent GPU and CPU compute right after registration. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).

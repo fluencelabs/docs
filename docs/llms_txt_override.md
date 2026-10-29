@@ -1,15 +1,15 @@
-# Fluence Docs
+# Fluence Cloud Docs
 
-> Fluence is a decentralized compute network for deploying virtual machines on globally distributed, independently operated infrastructure. Built on an Arbitrum Orbit L2 appchain anchored to Ethereum, Fluence coordinates compute providers through staking and governance. Compute is billed in USD, paid by card or in crypto; FLT is the native token used for staking and protocol governance.
+> Fluence Cloud, previously Fluence Network, is a cloud for GPU and CPU compute from data centers around the world. You rent GPU instances and CPU virtual machines in the Fluence Console or through the Fluence API, and pay in USD by card or in crypto. AI agents can manage virtual machines through the Fluence MCP server, or fund an account with USDC over x402. FLT is the token of the Fluence DAO on Ethereum, used for staking and governance.
 
 ## Get started
 
 Choose a section based on how you use Fluence:
 
-- **[Build](https://fluence.dev/docs/build/llms.txt)** — Rent CPU and GPU instances from the decentralized compute marketplace using the Fluence Console or API.
-- **[Stake](https://fluence.dev/docs/stake/llms.txt)** — Delegate FLT tokens to secure the network and earn rewards.
-- **[Connect Servers](https://fluence.dev/docs/connect_servers/llms.txt)** — Register your data center hardware as a compute provider and earn USDC and FLT.
-- **[Build with AI](https://fluence.dev/docs/build_with_ai/overview.md)** — How to use Fluence docs with LLMs, AI coding assistants, and agent frameworks.
-- **[Pay with x402](https://fluence.dev/docs/build/api/x402.md)** — For AI agents: fund an account with USDC on Base over HTTP and sign in with the paying wallet, no signup.
+- **[Build](https://fluence.dev/docs/build/llms.txt)**: rent and manage GPU instances and CPU virtual machines in the Fluence Console or through the API.
+- **[Build with AI](https://fluence.dev/docs/build_with_ai/llms.txt)**: connect Claude Code, Cursor, Codex, and other MCP clients to Fluence, and use the docs with LLMs.
+- **[Pay with x402](https://fluence.dev/docs/build/api/x402.md)**: for AI agents, fund an account with USDC on Base over HTTP and sign in with the paying wallet, without signing up.
+- **[Stake](https://fluence.dev/docs/stake/llms.txt)**: stake FLT on Ethereum, and claim tokens from the closed Fluence chain.
+- **[Connect Servers](https://fluence.dev/docs/connect_servers/llms.txt)**: connect bare metal servers in your data center to Fluence as a provider.
 
-Each section links to an llms.txt index with links to individual documentation pages in markdown format.
+Each section links to an llms.txt index of its pages in markdown format.

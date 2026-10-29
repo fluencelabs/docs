@@ -1,85 +1,57 @@
-# Instance info and management
+---
+description: View, connect to, update, and terminate GPU containers, VMs, and bare metal servers on the GPU instances page of the Fluence Console.
+---
 
-After renting a GPU instance, you can view and manage it on the **Running Instances — GPU cloud** page. Instances are organized by type with separate tabs: **Container**, **VM**, and **Bare Metal**.
+# Manage GPU instances
 
-## Instances list
+You manage rented GPU instances on the **GPU instances** page of the Fluence Console. It has a tab for each type: **Container**, **VM**, and **Bare Metal**. To do the same from code, see the [GPU Cloud API](../api/gpu_cloud.md).
 
-The instances list displays your GPU instances. Each instance card shows:
+## Instance list
 
-- **Location** — data center location
-- **Configuration** — hardware summary: GPU model, vRAM, interface type, vCPU, RAM, and Disk
-- **Domain** — the domain name or IP address assigned to the instance
-- **Status** — current state of the instance (see [instance lifecycle](./overview.md#instance-lifecycle))
+The list shows each instance with its **Location**, **Configuration** (GPU, vRAM, interface, vCPU, RAM, and disk), **Domain**, and **Status**. To find an instance, filter the list by name, or by status: Running, Initialized, Provisioning, Ended, or Failed.
 
-Active instances have action icons: edit name (pencil), terminate (trash), and open details (arrow).
+The buttons on a row depend on the instance:
 
-![Container instances list](./assets/manage_instances/container/list_page.webp)
+- The arrow opens the instance page. Every instance has it.
+- The trash button terminates the instance. Only running instances have it.
+- The pencil renames the instance. Only running containers have it.
 
-![VM instances list](./assets/manage_instances/vm_baremetal/list_page.webp)
+## Instance page
 
-## GPU container
+The instance page refreshes every 30 seconds. It shows:
 
-### Instance details
+- **Configuration**: GPU, vRAM, interface, vCPU, RAM, and disk.
+- **Network**:
+  - For a container: the **Domain**, the **Forwarded ports**, and the **URI** if port 80 serves HTTP. The platform maps each of your ports to an external port on the domain. For example, `22:30694` means that you connect to port `30694` of the domain to reach port `22` of the container.
+  - For a VM or a bare metal server: the **Domain**, the **SSH key**, and an **SSH command** that you can copy.
+- The image of the instance. The heading reads **Container image** for every type.
+- **Renting information**: **Deployment Date**, **Next billing time**, **Hourly usage**, and **Total spendings**. See the [billing model](./overview.md#billing-model).
 
-Open an instance card to view its details. The details page provides:
+## Containers
 
-- **Configuration** — the hardware allocated to the instance: GPU model, vRAM, interface, vCPU, RAM, and Disk
-- **Network** — connectivity information:
-  - **Domain** — the domain name or IP address assigned to the container
-  - **Forwarded ports** — your specified ports are mapped to externally accessible ports by the cluster (e.g., your port `22` may be forwarded to `30694`). Use the forwarded port together with the domain to connect.
-  - **URI** — the HTTP address, available when port 80 was enabled during creation
-- **Renting information** — deployment date, next billing time, hourly rate, and total spendings
-- **Container image** — the image currently running on the instance
+### Logs and events
 
-![Container instance details](./assets/manage_instances/container/instance_details.webp)
+The **Logs** tab shows the output of the container. The **Events** tab shows cluster events, such as scheduling, image pulls, and container starts. Read the events when a container doesn't start.
 
-### Logs and Events
+### Update a running container
 
-At the bottom of the details page, two tabs provide runtime information:
+To change a running container, click **Update deployment** on its page. You can change:
 
-- **Logs** — container output (stdout/stderr)
+- The container image, predefined or custom.
+- The container start command.
+- The environment variables.
+- The SSH key.
 
-![Container logs](./assets/manage_instances/container/container_logs.webp)
+The ports cannot be changed after launch. The fields work as in [Configure a container](./instance_rent.md#configure-a-container). Click **Redeploy** and confirm. The container restarts with the new settings.
 
-- **Events** — cluster-level events for the instance lifecycle: scheduling, image pulling, container creation, and startup
+### Rename a container
 
-![Cluster events](./assets/manage_instances/container/cluster_events.webp)
+Click the pencil next to the name of a running container.
 
-### Updating a container deployment
+## VMs and bare metal servers
 
-You can update a running container by clicking **Update deployment** on the details page. The following can be changed:
+You cannot change a running VM or bare metal server in the console. To use other settings, terminate the instance and rent a new one. The API can rename these instances. See the [GPU Cloud API](../api/gpu_cloud.md).
 
-- Container image (predefined or custom)
-- Container start command
-- Environment variables
-- SSH keys
+## Terminate an instance
 
-The update page works the same way as the [instance creation flow](./instance_rent.md#set-the-container-image). After making your changes, click **Redeploy** to restart the container with the updated configuration.
-
-![Update container deployment](./assets/manage_instances/container/update_options.webp)
-
-## VM and Bare Metal
-
-### Instance details
-
-Open an instance card to view its details. The details page provides:
-
-- **Configuration** — the hardware allocated to the instance: GPU model, vRAM, interface, vCPU, RAM, and Disk
-- **Network** — connectivity information:
-  - **Domain** — the domain name or IP address assigned to the instance
-  - **SSH key** — the key associated with the instance
-  - **SSH command** — a ready-to-use command to connect to the instance via SSH
-- **Renting information** — deployment date, next billing time, hourly rate, and total spendings
-- **OS image** — the image used for the instance
-
-:::info
-Updating a running VM or bare metal instance is not currently supported. To change the configuration, terminate the instance and create a new one.
-:::
-
-![VM instance details](./assets/manage_instances/vm_baremetal/instance_details.webp)
-
-## Billing
-
-The history of your charges can be found on the **Billing page** under the **GPU cloud** tab. The page shows your monthly spending with a daily breakdown chart, filterable by instance type. The **Billing history** table lists each charge with the instance name, instance ID, payment date, and amount.
-
-![Billing page](./assets/manage_instances/billing_page.webp)
+Click the trash button on the instance page or in the list, and confirm with **Terminate**. The status changes to Ended, and billing stops. The unused part of the current hour is not returned.

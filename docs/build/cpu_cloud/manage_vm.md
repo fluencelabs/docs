@@ -1,92 +1,106 @@
-# Instance info and management
+---
+description: Connect to, reboot, resize, and remove CPU virtual machines, and manage disks, public IP addresses, VPCs, and security groups in the Fluence Console.
+---
 
-After deploying an instance, you can view and manage it from the **Running Instances** page. Use the search bar to filter instances by name or the status dropdown to narrow the list.
+# Manage VMs
 
-## Instance information
+You manage virtual machines and their resources in the **Public cloud** section of the Fluence Console. To do the same from code, see the [CPU Cloud API](../api/cpu_cloud.md).
 
-Each instance appears as a card with its name, location, hardware summary, IP address, and status. Click the expand arrow to reveal full details — general info, hardware specs, connection details, and billing.
+## VM list
 
-![Instance information](./assets/manage_vm/vm_info.webp)
+The **Compute** page lists your VMs and drafts. Filter the list by name and by status. See [VM statuses](./overview.md#vm-statuses).
 
-## Instance management
+## VM page
 
-Click the three-dot menu on an instance card to access the available actions:
+Open a VM to see its page. It has four tabs:
 
-- **Edit VM name** — rename the instance.
-- **Terminate** — stop the instance and end the rental agreement. Any unused reserved balance is returned to your account.
+- **Overview** shows the resources of the VM and a **Connect** card with the **SSH command** to copy and the SSH **Public keys** of the VM. The SSH command uses the user name of the OS image and the public IP address.
+- **Disks** lists the disks of the VM. The menu of a disk has **Config instructions**, **Increase size**, and **Detach disk**.
+- **Networking** lists the network interfaces of the VM.
+- **Console** opens a serial console of the VM in your browser, available after the VM boots. Use it when the VM has no public IP address or no SSH key. The tab shows the login and a root password that you can copy and reveal. To set a new password, click **Generate new** and confirm.
 
-![Instance management](./assets/manage_vm/vm_manage.webp)
+## Change a VM
 
-## Billing history
+The **Manage VM** menu has:
 
-The history of your charges can be found on the **Billing page** in the **Billing History** section.
+- **Reboot** restarts the VM.
+- **Edit name** renames the VM.
+- **Remove VM** removes the VM. See [Remove a VM](#remove-a-vm).
 
-![Billing history](./assets/manage_vm/billing_history.webp)
+The **Attach resources** menu has:
 
-## Handling provider-terminated instances
+- **Attach disk** attaches an existing disk or a new one.
+- **Attach public IP** attaches a public IP address. A VM can have one.
 
-When a compute provider terminates an instance that you are actively using, the instance is moved to `Terminated` status.
-Terminated instances are no longer accessible, and data stored on them is lost.
-Even though a provider has terminated your instance, its record will still appear in your list with its balance reserved. You need to perform a final step to remove this record, which releases the funds back to your main balance.
+To make a disk larger, use **Increase size** on the **Disks** tab. The VM may need a reboot to see the new size.
 
-### Reasons for termination
+## Remove a VM
 
-The Fluence compute marketplace sources from established compute providers with high standards of security and reliability supported by Tier 3 and 4 certifications. Termination is a last resort for providers when handling exceptions and usually results from adverse user behavior such as:
+1. In the **Manage VM** menu, click **Remove VM**.
+2. Optional: under **Remove assigned public IP addresses** and **Remove attached disks**, select the resources to delete with the VM, or click **Remove all**. Nothing is selected by default.
+3. Type the name of the VM and click **Yes**.
 
-- Not paying for the instance (reserved balance reached 0)
-- Violating the terms of service
-- Using the instance for illegal activities or running malicious workloads
+The disks and addresses you don't select stay and are billed until you delete them. A boot disk cannot be removed while it is attached to its VM. To delete it, select it in this dialog.
 
-### Identification of terminated instances
+## Disks
 
-Status updates about instance termination are available in the Fluence Console on the **Running Instances** page, or via the API when you request your active instances using the [list VMs](../api/cpu_cloud.md#endpoints) endpoint (`GET /v2/vms`).
+The **Storage** page lists all your disks, including the ones not attached to any VM. By default the list hides removed disks. To see them, filter by status.
 
-#### Fluence Console
+- To create a disk, click **Create new disk**. Choose the name, the data center, and the disk type: boot disk or additional disk. For a boot disk, also choose the operating system. Then choose the storage type and the size, and click **Create disk**.
+- The menu of a disk has **Config instructions**, **Increase size**, **Edit name**, and **Remove**.
+- You can only remove a detached disk. Detach it from its VM first.
 
-**Banner notification.** You will see an informational banner on the Running Instances page with the message: _"Certain virtual machines were stopped by the provider. View details"_. Click **View details** to see the list of terminated instances.
+## Public IP addresses
 
-**Status display.** The instance will be clearly marked with a `Terminated` status.
+The **Network** > **Public IP** tab lists your public IP addresses with their location, IP address, VM, and status. Filter the list by name, status, and location.
 
-![Running Instances page with a banner notification and a terminated instance](./assets/manage_vm/terminated_vms_general.png)
+- To reserve an address, click **Create IP**.
+- The menu of an address has **Edit name** and **Remove**. Detach the address from its VM before you remove it.
 
-**Filtering.** You can use the status filter on the Running Instances page and select `Terminated` to view only these instances.
+An address that is not attached to a VM is still billed.
 
-![Running Instances page with a status filter](./assets/manage_vm/terminated_vms_filtered.png)
+## VPCs and subnets
 
-#### API
+The **Network** > **VPC** tab lists your private networks. To create one, click **Create VPC**.
 
-In the response from the list instances endpoint, the `status` field for the affected instance will be `"Terminated"`. The `publicIp` field will be `null`, and location information within the `datacenter` object may be absent.
+Open a VPC to manage its subnets. To create a subnet, click **Create subnet** and enter a name and an IPv4 CIDR range. The menu of a subnet has:
 
-```json
-{
-  "id": "0x68bd60079721AE2A04759d00Fc516148aCF479e4",
-  "vmName": "apricot-wolf-5354",
-  "status": "Terminated",
-  "pricePerEpoch": "0.30697",
-  "resources": [ ... ],
-  "osImage": "...",
-  "datacenter": null,
-  "publicIp": null,
-  "ports": [
-    {
-      "port": 22,
-      "protocol": "tcp"
-    }
-  ],
-  "reservedBalance": ".30697",
-  "totalSpent": "2.45576",
-  "createdAt": "2025-05-07T16:20:43Z"
-}
-```
+- **Edit name** renames the subnet.
+- **Set as default** makes it the default subnet of the VPC for new VMs.
+- **Enable egress** allows outbound internet traffic from the subnet. **Disable egress** blocks it.
+- **Remove** deletes the subnet.
 
-### Finalization and reserved funds release
+## Security groups
 
-After identifying instances terminated by a provider, you need to finalize the termination to release the reserved funds:
+A security group filters the traffic of the network interfaces it is attached to. The **Network** > **Security group** tab lists your groups and their inbound and outbound rules.
 
-#### Fluence Console
+To create a group, click **Create security group**. Choose the VPC, enter a name, and set a policy for **INBOUND TRAFFIC** and for **OUTBOUND TRAFFIC**:
 
-Click **Terminate** on the instance with `Terminated` status to remove its record and release its reserved funds. See [instance management](#instance-management) for details.
+- **Allow all traffic** lets all traffic through in this direction.
+- **Allow selected traffic** lets through only the traffic that matches a rule. Add rules with **Add inbound rule** or **Add outbound rule**.
+- **Block all traffic** blocks new connections in this direction. Blocking outbound traffic also blocks internet access.
 
-#### API
+A new group starts with **Block all traffic** in both directions. To connect over SSH, allow inbound TCP port `22`.
 
-Call the [terminate endpoint](../api/cpu_cloud.md#stop-paying) with the instance ID, then delete its public IP and boot disk to stop paying for them.
+Each rule has:
+
+- A **Protocol**: All, TCP, UDP, or ICMP.
+- A **Port range** for TCP and UDP.
+- A **Source** for inbound rules, or a **Destination** for outbound rules. It is an IP range in CIDR notation, such as `0.0.0.0/0`, or another security group.
+
+A group can have up to 50 rules. To change a group, use **Edit** in its menu.
+
+A VM can reach the internet only if both the security group and the subnet allow outbound traffic.
+
+## Usage and charges
+
+The **Billing** page shows your balance and a usage statement for Public cloud resources. Choose a month to see:
+
+- **Usage runway**: how long your balance will last.
+- **Month to date usage**: what you have spent this month.
+- The estimated cost for the month.
+- The usage and cost of each VM, disk, and public IP address.
+
+To download the statement for the month, click **Export usage**.
+
+If your balance runs out, Fluence removes your resources after a while. See [If your balance runs out](./overview.md#if-your-balance-runs-out).

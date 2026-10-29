@@ -1,58 +1,59 @@
 ---
 sidebar_position: 0
+description: "CPU Cloud concepts: the resources a VM is made of, VM statuses, OS images, and how per-second billing and unpaid balances work."
 ---
 
-# Concepts
+# CPU Cloud concepts
 
-Fluence CPU Cloud is a decentralized compute marketplace where you can rent virtual machine instances from enterprise-grade providers worldwide, predominantly in Tier-3 and Tier-4 data centers.
+Fluence CPU Cloud runs virtual machines in data centers of independent providers. In the Fluence Console it is the **Public cloud** section. To work with it from code, use the [CPU Cloud API](../api/cpu_cloud.md).
 
-## Marketplace
+## Resources
 
-The marketplace aggregates compute supply from independent providers. The marketplace connects you with providers through several layers:
+A VM is made of resources that are created, billed, and deleted separately:
 
-- **Offer** — a listing from a provider that includes one or more compute peers with identical specifications, located in the same data center, available at a set price.
-- **Compute peer** — a physical server referenced in an offer. Each peer has its own hardware resources and is the actual machine that runs your workload.
-- **Resource** — a distinct resource on a peer: vCPU, RAM, storage, or public IP.
-- **Hardware specification** — metadata describing a resource (CPU architecture, memory generation, storage medium, etc.).
+| Resource | What it is |
+|----------|------------|
+| Location | A data center, called a cluster in the API. The console shows its city, tier, and certifications. All resources of a VM are in one location. |
+| Plan | The vCPU and RAM of the VM, called a configuration in the API, for example `cpu-shared-2vcpu-2gb`. Plans have dedicated or shared CPU. |
+| Disk | Network-attached block storage. The boot disk is created from an OS image or is an existing disk. A VM can have more disks. A disk exists on its own: you can resize it, detach it, and attach it to another VM in the same location. |
+| Public IP address | An IPv4 address that makes the VM reachable from the internet. A VM can have one public IP address. |
+| Network | Private networks (VPCs) with subnets, and security groups that filter the traffic of a network interface |
 
-Compute resources are currently allocated in multiples of a **compute unit** — 2 vCPUs and 4 GB of RAM. Storage starts at a minimum of 25 GB.
+## VM statuses
 
-## Instance lifecycle
-
-Each instance goes through the following statuses during its lifetime:
-
-| Status | Description |
-|--------|-------------|
-| `New` | Instance is created and is about to be provisioned |
-| `Launching` | Instance is being provisioned, no public IP yet |
-| `Active` | Instance is running and accessible |
-| `SmallBalance` | Not enough funds for the next billing period |
-| `InsufficientFunds` | Instance balance is 0 and the grace period passed |
-| `Terminated` | Instance was terminated by the provider — workload is no longer running. See [provider termination handling](./manage_vm.md#handling-provider-terminated-instances). |
-| `Stopped` | Instance was ended by the user |
+| API status | Console label | Meaning |
+|--------|------|---------|
+| `draft` | Draft | Being configured. Not running and not billed. |
+| `new`, `launching` | New, Launching | Provisioning has started |
+| `launched` | Launched | The platform sees the VM as running |
+| `updating`, `restarting`, `softRebooting` | Updating, Restarting, Soft rebooting | A change or a reboot is in progress |
+| `suspending`, `suspended` | Suspending, Suspended | The platform is stopping the VM, or has stopped it |
+| `terminating`, `terminated` | Terminating, Terminated | The VM is being removed, or has been removed |
+| `failed` | Failed | The VM failed |
+| `unknown` | Checking | The platform is checking the health of the VM. The status can return to Launched. |
 
 ## Billing model
 
-CPU Cloud uses daily billing in USD. Each instance has its own 24-hour billing period that starts at activation time and repeats every 24 hours.
+- Every resource has an hourly price in USD and is billed per second while it exists. Fluence takes the charges from your balance as the resources run.
+- Nothing is reserved or prepaid when you launch a VM. You pay only for the time your resources exist, so there is nothing to refund when you remove them.
+- A draft is not billed. The disks and addresses created with a draft are billed from the launch.
+- Disks and public IP addresses are billed until you delete them, even when they are not attached to a VM. Removing a VM keeps its disks and addresses unless you choose to delete them.
+- To launch a VM, your balance must keep all your resources, including the new ones, running for at least 6 hours.
 
-### Instance balance
+The **Billing** page shows your usage this month, the estimated cost for the month, and how long your balance will last.
 
-Every instance has its own reserved balance that covers ongoing rent. When you deploy an instance, the system deducts 2 days' worth of rent from your account — one day is charged immediately upon starting the instance, and the other stays as a reserve for the next billing period.
+### If your balance runs out
 
-### Automatic top-ups of instance's balance
+Your resources keep running for a while, and the unpaid amount grows:
 
-After each daily charge, the system automatically tops up the reserved balance from your account to maintain one day of reserve.
+1. Fluence emails you when your balance is expected to run out in 7 days, 3 days, and 1 day. Accounts created with a wallet get no emails.
+2. When the unpaid amount exceeds 5 USD or stays unpaid for 3 days, Fluence removes your VMs. Your disks and public IP addresses stay and are still billed.
+3. When the unpaid amount then exceeds 20 USD or stays unpaid for 10 more days, Fluence deletes all your resources, including disks and public IP addresses. The data on the disks is lost.
 
-### Insufficient funds
-
-If your account balance cannot cover a top-up, the system keeps retrying the top-up. Your instance continues running through any period that has already been paid for. Termination happens only when the next charge fails because the reserved balance has been fully spent.
-
-### Refunds on termination
-
-When you stop or terminate an instance, any unused funds on its reserved balance are returned to your account.
+To avoid this, top up your balance. See [Payment and balance management](../balance.md).
 
 ## OS images
 
-You can use a pre-defined OS image from Fluence or provide a URL to a custom image. Custom images must be publicly downloadable and configured for remote instances.
+You can boot a VM from a Fluence image or from your own image. Each Fluence image lists the user name to sign in with over SSH.
 
-Supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`.
+Your own image must be publicly downloadable and prepared for cloud use. Look for images labeled `Generic Cloud` or `Cloud`. The image can boot with BIOS or EFI firmware. Supported formats: `.qcow2`, `.img`, `.raw`, `.raw.xz`, `.raw.gz`, `.img.xz`, `.img.gz`.
