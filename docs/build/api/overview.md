@@ -16,8 +16,11 @@ The Fluence API lets you do from code what you do in the Fluence Console. You ca
 | Version | Paths | Use it for |
 |---|---|---|
 | Public v3 | `/v3/...` | New integrations: CPU virtual machines, disks, networks, public IP addresses, SSH keys, prices, account, API keys, top-ups, and promo codes |
+| GPU v3 | `/v3/gpu/...` | New integrations: GPU offers, GPU containers, GPU virtual machines, and bare metal. See [GPU Cloud API](./gpu_cloud.md). |
 | Public v1 and v2 | `/v1/...`, `/v2/...` | Existing integrations. These paths still work. |
-| GPU | `/gpu/...` | GPU containers, GPU virtual machines, and bare metal. See [GPU Cloud API](./gpu_cloud.md). |
+| Legacy GPU (deprecated) | `/gpu/...` | Existing GPU integrations. These paths still work. Move them to GPU v3. See [Legacy GPU API](./gpu_cloud.md#legacy-gpu-api). |
+
+The GPU v3 endpoints have their own OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json).
 
 The x402 top-up and wallet sign-in endpoints use `/v2/x402/...` and `/v1/auth/siwe...`. They are not in the API reference. See [Pay with x402](./x402.md).
 
@@ -60,12 +63,13 @@ Each key has a set of permissions, called scopes, and an expiration date. The AP
 | API keys | `api_key:list` | `api_key:create`, `api_key:remove` |
 | Account | `account:read` | `account:write` |
 | Top-ups and payments | `billing:get_history`, `billing:get_spending_history` | `billing:top_up` |
-| GPU containers | | `akash:write` |
-| GPU virtual machines and bare metal | | `spheron:write` |
+| GPU instances and offers (`/v3/gpu`) | `gpu:read` | `gpu:write` |
+| Legacy GPU containers (`/gpu`) | | `akash:write` |
+| Legacy GPU virtual machines and bare metal (`/gpu`) | | `spheron:write` |
 
 - A key can only get scopes that your account has.
-- A `write` scope does not include the matching `read` scope. To create and then read a VM, a key needs both `vms:write` and `vms:read`.
-- The GPU API does not accept read-only scopes. To list or read GPU instances, a key needs `akash:write` or `spheron:write`.
+- A `write` scope does not include the matching `read` scope. To create and then read a VM, a key needs both `vms:write` and `vms:read`. The exception is `gpu:write`, which also allows reading `/v3/gpu`.
+- A key with `akash:write` or `spheron:write` also works with `/v3/gpu`. The legacy GPU API does not accept read-only scopes: to list or read instances there, a key needs `akash:write` or `spheron:write`.
 - In the Fluence Console, the **Read only** preset does not include `clusters:read`, `vm:list`, or `prices:read`. A key with only this preset cannot read the catalog or prices.
 
 ## Requests
@@ -87,6 +91,7 @@ Some v3 operations take an `Idempotency-Key` header. The key is 1 to 128 charact
 - `POST /v3/vms` and `POST /v3/vms/{vm_id}/terminate` require the header.
 - Creating a disk, a public IP address, a VPC, a subnet, a security group, or a draft VM's disk accepts the header.
 - A different body with the same key returns `409` with `idempotency_conflict`.
+- `/v3/gpu` has its own retry rules and codes. See [Retry a create request](./gpu_cloud.md#retry-a-create-request).
 - A request that is still running returns `409` with `request_in_progress` and a `Retry-After` header.
 
 Other changes, such as provisioning, restarting, editing, and creating SSH keys, API keys, or top-ups, have no `Idempotency-Key`. If the result of such a request is unknown, read the resource before you send it again. Repeating the request can, for example, restart a VM twice or create a second API key.
@@ -109,7 +114,7 @@ The API returns `2xx` on success and a JSON error body on failure:
 
 Every v3 error body has a `code` field, such as `forbidden`, `vm_not_draft`, or `insufficient_balance`. Write your error handling against `code`. Other fields of the error body differ between operations. The API reference lists them for each operation.
 
-The GPU endpoints return errors in a different format. See [GPU Cloud API](./gpu_cloud.md).
+GPU v3 error bodies also have `code`, plus `error` and `details`. The legacy GPU API returns `detail`. See [GPU Cloud API errors](./gpu_cloud.md#errors).
 
 ## Pages in this section
 

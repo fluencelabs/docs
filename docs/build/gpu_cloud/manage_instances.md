@@ -1,57 +1,54 @@
 ---
-description: View, connect to, update, and terminate GPU containers, VMs, and bare metal servers on the GPU instances page of the Fluence Console.
+description: View, connect to, rename, update, and terminate GPU containers, VMs, and bare metal servers in the GPU cloud section of the Fluence Console.
 ---
 
 # Manage GPU instances
 
-You manage rented GPU instances on the **GPU instances** page of the Fluence Console. It has a tab for each type: **Container**, **VM**, and **Bare Metal**. To do the same from code, see the [GPU Cloud API](../api/gpu_cloud.md).
+You manage rented GPU instances in the Fluence Console under **GPU cloud** > **Instances**. To do the same from code, see the [GPU Cloud API](../api/gpu_cloud.md).
 
 ## Instance list
 
-The list shows each instance with its **Location**, **Configuration** (GPU, vRAM, interface, vCPU, RAM, and disk), **Domain**, and **Status**. To find an instance, filter the list by name, or by status: Running, Initialized, Provisioning, Ended, or Failed.
+The list shows each instance with its **Name** and location, **GPU**, **Workload**, **Rental**, **Price** per hour, **Created at**, and **Status**.
 
-The buttons on a row depend on the instance:
+By default, the list shows active instances only. Ended and failed instances are hidden. To see them, set the status filter to **All**, or click **Show all**. You can also filter by name, status, workload, and rental type.
 
-- The arrow opens the instance page. Every instance has it.
-- The trash button terminates the instance. Only running instances have it.
-- The pencil renames the instance. Only running containers have it.
+The statuses are **Pending**, **Provisioning**, **Running**, **Updating**, **Terminating**, **Ended**, and **Failed**. See [Instance statuses](./overview.md#instance-statuses). Hover over a status to see more detail, for example **Reserving your balance** or **Looking for capacity**. A spot instance that the provider took back shows **Reclaimed**.
+
+A running instance can show a warning that it is still billed:
+
+- **Powered off — still billed**: the VM was powered off from inside. It is still billed, and its disk is kept. Terminate it to stop the charges.
+- **Container not running — still billed**: the container stopped, or it did not start after an update. Update the image to start it again, or terminate the instance to stop the charges.
+
+The list and the instance page refresh by themselves: every 5 seconds while an instance is changing status, and every 30 seconds otherwise.
 
 ## Instance page
 
-The instance page refreshes every 30 seconds. It shows:
+Click an instance to open its page. The **Overview** tab has three parts:
 
-- **Configuration**: GPU, vRAM, interface, vCPU, RAM, and disk.
-- **Network**:
-  - For a container: the **Domain**, the **Forwarded ports**, and the **URI** if port 80 serves HTTP. The platform maps each of your ports to an external port on the domain. For example, `22:30694` means that you connect to port `30694` of the domain to reach port `22` of the container.
-  - For a VM or a bare metal server: the **Domain**, the **SSH key**, and an **SSH command** that you can copy.
-- The image of the instance. The heading reads **Container image** for every type.
-- **Renting information**: **Deployment Date**, **Next billing time**, **Hourly usage**, and **Total spendings**. See the [billing model](./overview.md#billing-model).
+- Configuration: **Instance ID**, **Offer ID**, GPU, VRAM per GPU, vCPU, RAM, **Local disk**, location, workload, image or OS, command, SSH key, and environment variables. Secret values show as **Hidden**.
+- Connection: the **Host**, and for each port the external address in the form `host:port`, which you can copy. For a VM, a bare metal server, or a container with SSH, the page shows a ready SSH command. Connection details appear once the instance is running.
+- Billing: **Created**, **Started**, and **Ended** times, the **Price** per hour, how often the instance is **Billed**, the **Minimum charge**, and **Charged so far**. After the instance ends, the last value reads **Total charged**.
 
-## Containers
+While an instance provisions, the page shows how long it usually takes to be ready.
+
+When an instance ends or fails, the page explains why and what you were charged. To rent the same configuration again, click **Launch again**. The console copies the settings into a new instance, except secret values, which you enter again.
 
 ### Logs and events
 
-The **Logs** tab shows the output of the container. The **Events** tab shows cluster events, such as scheduling, image pulls, and container starts. Read the events when a container doesn't start.
+The **Logs** and **Events** tabs appear while the instance is running, if its provider offers them. **Logs** shows the output of the container. **Events** shows provider events, such as scheduling, image pulls, and container starts. Click **Refresh** to load new lines.
 
-### Update a running container
+## Change an instance
 
-To change a running container, click **Update deployment** on its page. You can change:
+Open **Manage instance** on the instance page. The menu shows only the actions that the instance supports.
 
-- The container image, predefined or custom.
-- The container start command.
-- The environment variables.
-- The SSH key.
+- **Rename**: enter a new **Name** and click **Confirm**.
+- **Update image**: for a running container, enter a new **Container image** and click **Update**. The container restarts with the new image. It may be unavailable during the restart.
 
-The ports cannot be changed after launch. The fields work as in [Configure a container](./instance_rent.md#configure-a-container). Click **Redeploy** and confirm. The container restarts with the new settings.
-
-### Rename a container
-
-Click the pencil next to the name of a running container.
-
-## VMs and bare metal servers
-
-You cannot change a running VM or bare metal server in the console. To use other settings, terminate the instance and rent a new one. The API can rename these instances. See the [GPU Cloud API](../api/gpu_cloud.md).
+In the console, you can change only the name and the image. The [GPU Cloud API](../api/gpu_cloud.md#rename-an-instance-or-change-a-container) also changes the startup command, environment variables, and registry credentials of a container. To change anything else, terminate the instance and launch a new one.
 
 ## Terminate an instance
 
-Click the trash button on the instance page or in the list, and confirm with **Terminate**. The status changes to Ended, and billing stops. The unused part of the current hour is not returned.
+1. Open **Manage instance** and click **Terminate**.
+2. Type the instance name to confirm, and click **Terminate**.
+
+The instance ends, and its disk is erased. Billing stops when you terminate the instance, even if its status still shows **Terminating** for a short while.
