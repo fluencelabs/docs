@@ -44,11 +44,11 @@ Open **Manage instance** on the instance page. The menu shows only the actions t
 - **Rename**: enter a new **Name** and click **Confirm**.
 - **Update image**: for a running container, enter a new **Container image** and click **Update**. The container restarts with the new image. It may be unavailable during the restart.
 
-Nothing else changes after launch. To use other settings, terminate the instance and launch a new one.
+In the console, you can change only the name and the image. The [GPU Cloud API](../api/gpu_cloud.md#rename-an-instance-or-change-a-container) also changes the startup command, environment variables, and registry credentials of a container. To change anything else, terminate the instance and launch a new one.
 
 ## Terminate an instance
 
 1. Open **Manage instance** and click **Terminate**.
 2. Type the instance name to confirm, and click **Terminate**.
 
-The instance stops, and its disk is erased. Billing stops when termination completes.
+The instance ends, and its disk is erased. Billing stops when termination completes.

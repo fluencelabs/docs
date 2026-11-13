@@ -10,7 +10,7 @@ The GPU Cloud API lets you find GPU offers, compare their prices, and rent GPU c
 - Base URL: `https://api.fluence.dev`. Every path on this page starts with `/v3/gpu`.
 - OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json)
 
-The GPU endpoints have their own OpenAPI document. Their errors use a different format from the rest of the [Fluence API](./overview.md). See [Errors](#errors).
+The GPU endpoints have their own OpenAPI document. Their errors have `code`, `error`, and `details`, a different body from the rest of the [Fluence API](./overview.md). See [Errors](#errors).
 
 ## Authentication and permissions
 
@@ -59,12 +59,12 @@ When you create a key in the Fluence Console, give it **View & manage** access t
 
 ## Find an offer
 
-An offer is one placement that you can rent: a provider, a region, a GPU model and count, the rest of the machine, a rental type, and a price. Each offer has a `workload`: `container`, `vm`, or `baremetal`.
+An offer is one placement that you can rent. It names a provider, a region, a GPU model and count, the rest of the machine, a rental type, and a price. Each offer has a `workload`: `container`, `vm`, or `baremetal`.
 
 Choose the call that matches what you know:
 
 - You know how much GPU memory you need: call `GET /v3/gpu/offer-picks` with `workload` and `minVramGib`. It returns up to 10 of the cheapest offers, 3 by default. Each item has `requirements` that you pass to the quote and to the create request unchanged.
-- You want to compare GPU models: call `GET /v3/gpu/offer-groups`. Each group has its lowest price and `requirements` for the quote.
+- You want to compare GPU models: call `GET /v3/gpu/offer-groups`. Each group has its lowest price and `requirements` for the quote. To create from a group, also set `offerId` to the group's `cheapestOfferId`, or set `maxPricePerHour`.
 - You want to see every placement: call `GET /v3/gpu/offers`. Filter with query parameters such as `workload`, `rentalType`, `gpuModel`, `minGpuVramGib`, `gpuCount`, `country`, `provider`, and `maxPricePerHour`. Without `sort`, the cheapest offers come first.
 
 Name GPU models exactly as offers name them, for example `rtx4090` or `h100`. `GET /v3/gpu/offer-facets` lists the models on sale.
@@ -72,7 +72,7 @@ Name GPU models exactly as offers name them, for example `rtx4090` or `h100`. `G
 By default, lists show on-demand offers. To list spot offers, add `rentalType=spot`.
 
 ```sh
-curl "https://api.fluence.dev/v3/gpu/offers?workload=vm&gpuModel=rtx4090&rentalType=spot"
+curl "https://api.fluence.dev/v3/gpu/offers?workload=vm&rentalType=spot&minGpuVramGib=80"
 ```
 
 ### Offer prices
@@ -121,8 +121,8 @@ Send `POST /v3/gpu/instances` with an `Idempotency-Key` header. The body has:
 For a container:
 
 - `image` is required: an image reference, as for `docker pull`. `GET /v3/gpu/default-images` lists predefined images with the ports and environment variables they expect.
-- `expose` lists the ports to open, each with `port` and `protocol`: `tcp`, `udp`, or `http`. You cannot change the ports after creation.
-- `environment` holds up to 64 variables. A name starts with an uppercase letter and has uppercase letters, digits, and underscores. Set `secret: true` to hide a value. The API never returns secret values.
+- `expose` lists the ports to open, each with `port` and `protocol`: `tcp`, `udp`, or `http`. The offer's `capabilities.portProtocols` lists the protocols it accepts. Where `capabilities.portRequired` is `true`, add at least one port. You cannot change the ports after creation.
+- `environment` holds up to 64 variables, where the offer's `capabilities.environment` is `true`. Other offers refuse every variable except `SSH_PUBKEY`. A name starts with an uppercase letter and has uppercase letters, digits, and underscores. Set `secret: true` to hide a value. The API never returns secret values.
 - `startupCommand` replaces the entry point of the image.
 - `registryCredentials` with `host`, `username`, and `password` pulls an image from a private registry.
 - `sshKey` passes a public SSH key to the container in the `SSH_PUBKEY` variable. The predefined images read it. If you also define `SSH_PUBKEY` in `environment`, the API refuses the request.
@@ -162,12 +162,12 @@ If the response is lost, send `GET /v3/gpu/instances/by-idempotency-key` with th
 
 ### Wait for the instance
 
-Read `GET /v3/gpu/instances/{id}` every few seconds until `status` is `running` or `failed`.
+Read `GET /v3/gpu/instances/{id}` every few seconds until `status` is `running`, or `isTerminal` is `true`.
 
-- When the instance is `running`, `connection` tells you how to reach it. For a VM or a bare metal server, `connection.sshCommand` is the ready SSH command. For a container, `connection.ports` maps each exposed port to an `externalPort` on `connection.host`.
-- When the instance is `failed`, `failure.code` and `failure.reason` say why.
+- When the instance is `running`, `connection` tells you how to reach it. For a VM or a bare metal server, `connection.sshCommand`, when present, is the ready SSH command. Otherwise use `connection.host`, `connection.port`, and `connection.user`. For a container, `connection.ports` maps each exposed port to an `externalPort` on `connection.host`.
+- When the instance is `failed` or `ended`, `statusDetail`, `failure.code`, and `failure.reason` say why.
 
-Each offer has a `provisioning` estimate in seconds: `typicalSeconds` and `upperSeconds`. If an instance provisions longer than that, read its events.
+An offer can have a `provisioning` estimate in seconds, with `typicalSeconds`, `upperSeconds`, or both. If an instance provisions longer than that, read its events.
 
 ## Manage instances
 
@@ -226,7 +226,7 @@ Lists take `page` and `perPage` (up to 200, 50 by default) and return `items` an
 
 ## Legacy GPU API
 
-The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New integrations use `/v3/gpu`. Instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
+The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New integrations use `/v3/gpu`. New instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
 
 The legacy API needs the scope `akash:write` for containers, or `spheron:write` for VMs and bare metal, on every endpoint except `GET /gpu/default-images/`. It has these endpoints:
 

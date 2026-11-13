@@ -91,6 +91,7 @@ Some v3 operations take an `Idempotency-Key` header. The key is 1 to 128 charact
 - `POST /v3/vms` and `POST /v3/vms/{vm_id}/terminate` require the header.
 - Creating a disk, a public IP address, a VPC, a subnet, a security group, or a draft VM's disk accepts the header.
 - A different body with the same key returns `409` with `idempotency_conflict`.
+- `/v3/gpu` has its own retry rules and codes. See [Retry a create request](./gpu_cloud.md#retry-a-create-request).
 - A request that is still running returns `409` with `request_in_progress` and a `Retry-After` header.
 
 Other changes, such as provisioning, restarting, editing, and creating SSH keys, API keys, or top-ups, have no `Idempotency-Key`. If the result of such a request is unknown, read the resource before you send it again. Repeating the request can, for example, restart a VM twice or create a second API key.
@@ -113,7 +114,7 @@ The API returns `2xx` on success and a JSON error body on failure:
 
 Every v3 error body has a `code` field, such as `forbidden`, `vm_not_draft`, or `insufficient_balance`. Write your error handling against `code`. Other fields of the error body differ between operations. The API reference lists them for each operation.
 
-The GPU endpoints return errors in a different format. See [GPU Cloud API errors](./gpu_cloud.md#errors).
+GPU v3 error bodies also have `code`, plus `error` and `details`. The legacy GPU API returns `detail`. See [GPU Cloud API errors](./gpu_cloud.md#errors).
 
 ## Pages in this section
 

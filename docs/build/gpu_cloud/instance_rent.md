@@ -41,8 +41,8 @@ The next steps depend on the workload type.
 1. In **Image**, choose a predefined image, or choose **Custom image** and enter the **Image reference**, for example `registry/image:tag`.
 2. Optional: in **Startup command (optional)**, enter a command that replaces the entry point of the image.
 3. Optional: in **SSH key**, choose a key, or click **Add SSH key**. The console passes the key to the container in the `SSH_PUBKEY` variable. Only images that read `SSH_PUBKEY` use it. Some predefined images need a key.
-4. In **Exposed ports**, set the ports to open and their protocol: TCP, UDP, or HTTP. Click **Add port** to add one. You cannot change the ports after launch.
-5. Optional: in **Environment variables**, click **Add variable** and enter a **Name** and a **Value**. A name has uppercase letters, digits, and underscores, and starts with a letter. To hide a value after launch, select **Secret**. You cannot read a secret value back.
+4. In **Exposed ports**, set the ports to open and their **Protocol**. The list offers the protocols that the location supports. Click **Add port** to add one. You cannot change the ports after launch.
+5. Optional: in **Environment variables**, click **Add variable** and enter a **Name** and a **Value**. A name has uppercase letters, digits, and underscores, and starts with an uppercase letter. To hide a value after launch, select **Secret**. You cannot read a secret value back. Some locations do not accept environment variables. To set them, pick another location.
 6. Optional: to pull the image from a private registry, select **Pull from a private registry** and enter the **Registry host**, **Registry username**, and **Registry password**. This option appears only where the offer supports it.
 
 :::warning
@@ -60,11 +60,11 @@ The **Review** panel shows the name, the GPU, the location, the expected time to
 
 - **Price per hour**: the hourly price of the instance.
 - **Billing**: how often you are **Billed**, for example per minute, the **Minimum** time you pay for, and the amount **Reserved at launch**, which is the minimum charge.
-- **If your balance runs out**: the instance is stopped within minutes, and its disk is erased.
+- **If your balance runs out**: the instance ends within minutes, and its disk is erased.
 
 If no offer matches your configuration, the panel says why and can suggest alternatives. Click **Use this** to switch to an alternative.
 
-For a spot instance, select the checkbox that confirms you understand that the provider can reclaim the instance at any time, and that any stop ends it and erases its disk.
+For a spot instance, select the confirmation checkbox. It confirms that the provider can take back the instance at any time. It also confirms that any stop ends the instance and erases its disk.
 
 Click **Launch**. The console opens the instance page, where you can follow the status. See [Manage GPU instances](./manage_instances.md).
 

@@ -24,17 +24,17 @@ Prices and availability change as providers change them.
 | What it is | A container with access to the GPUs of its host | A virtual machine with GPU passthrough | A dedicated physical server |
 | Image | A container image | An OS image | An OS image |
 | Connection | A host with forwarded ports | SSH | SSH |
-| What you can change after launch | Name, image, start command, environment variables, and registry credentials, if the offer supports updates | Name | Name |
+| What you can change after launch | Name. If the offer supports updates: image, startup command, environment variables, and registry credentials. The console changes only the image. | Name | Name |
 
-A container runs an image that you choose, with an optional start command, environment variables, and ports. The platform maps each of your ports to an external port. For example, your port `22` can become port `30694` on the host.
+A container runs an image that you choose, with an optional startup command, environment variables, and ports. The platform maps each of your ports to an external port. For example, your port `22` can become port `30694` on the host.
 
 A VM and a bare metal server both run an OS image with GPU drivers, and you connect to them over SSH. A VM runs on a hypervisor. A bare metal server is a physical machine with no virtualization layer.
 
 ## On-demand and spot instances
 
-An on-demand instance runs until you delete it or your balance runs out.
+An on-demand instance runs until you terminate it, your balance runs out, or the provider ends it.
 
-A spot instance runs on capacity that the provider can take back at any time, without warning. A spot instance has one life:
+A spot instance usually costs less. It runs on capacity that the provider can take back at any time, without warning. A spot instance has one life:
 
 - When the provider takes the machine back, the instance ends.
 - Any stop ends a spot instance, including a shutdown from inside the machine.
@@ -49,9 +49,9 @@ Use spot instances for work that can stop and start again, and keep your data ou
 | `pending` | Fluence is reserving funds on your balance |
 | `provisioning` | The provider is creating the instance |
 | `running` | The instance is running, and its connection details are available |
-| `updating` | A change to the container is being applied |
-| `terminating` | The instance is being closed at the provider |
-| `ended` | The instance ended: you deleted it, the provider took back a spot machine, or your balance ran out |
+| `updating` | The provider is applying a container change |
+| `terminating` | The provider is closing the instance |
+| `ended` | The instance ended, for example because you terminated it, the provider took back a spot machine, or your balance ran out |
 | `failed` | The instance was not created, or it did not survive creation |
 
 `ended` and `failed` are final. A final instance stays in your list, so you can see its history and its total charge.
@@ -63,7 +63,7 @@ GPU instances are billed in USD from your account balance, for the time they run
 - Billing starts when the instance becomes `running`. An instance that fails before it runs costs nothing.
 - Each offer has a billing step and a minimum period. Most offers bill per minute with a minimum of 20 minutes. Some offers bill per hour with a minimum of 1 hour. The offer and the instance show their terms.
 - An instance that starts running costs at least the minimum charge: the price for the minimum period. After the minimum period, you pay per billing step.
-- When you delete an instance, billing stops. The total charge is final a few minutes after the instance ends.
+- When you terminate an instance, billing stops. The total charge is final a few minutes after the instance ends.
 
 To launch an instance, your balance must cover its minimum charge on top of the amount that your running resources already hold.
 
