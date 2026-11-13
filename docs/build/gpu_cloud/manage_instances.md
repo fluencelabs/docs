@@ -51,4 +51,4 @@ In the console, you can change only the name and the image. The [GPU Cloud API](
 1. Open **Manage instance** and click **Terminate**.
 2. Type the instance name to confirm, and click **Terminate**.
 
-The instance ends, and its disk is erased. Billing stops when termination completes.
+The instance ends, and its disk is erased. Billing stops no later than when the provider closes the instance.

@@ -71,6 +71,12 @@ The **Top-up history** table on the **Billing** page lists your top-ups with the
 | `Canceled` | You canceled the top-up |
 | `Failed` | The payment did not go through |
 
+## GPU Cloud usage
+
+The **GPU Cloud usage** block on the **Billing** page lists your GPU resources for the selected calendar month in UTC. For each resource, it shows the name, type, hours, and cost.
+
+The page of a GPU instance shows what the instance cost since launch. For an instance that runs across the start of a month, the two numbers differ.
+
 ## Promo codes
 
 To activate a promo code, open the **Promo code** card on the **Billing** page, or the **Promo code** tab in the top-up dialog. Enter the code and click **Activate**.

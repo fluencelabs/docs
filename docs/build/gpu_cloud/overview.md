@@ -64,10 +64,11 @@ Use spot instances for work that can stop and start again, and keep your data ou
 
 GPU instances are billed in USD from your account balance, for the time they run.
 
-- Billing starts when the instance becomes `running`. An instance that fails before it runs costs nothing.
+- Billing starts when the instance becomes `running`. A launch that fails before that is not billed.
 - Each offer has a billing step and a minimum period. Most offers bill per minute with a minimum of 20 minutes. Some offers bill per hour with a minimum of 1 hour. The offer and the instance show their terms.
 - An instance that starts running costs at least the minimum charge: the price for the minimum period. After the minimum period, you pay per billing step.
-- When you terminate an instance, billing continues while it is `terminating`, and stops when the provider has closed it. The total charge is final a few minutes after the instance ends.
+- Billing runs while the instance is confirmed running, and stops no later than when the provider closes it. If the instance lived less than the minimum period, the minimum charge applies.
+- After an instance ends, its total charge can read 0 or grow for a few minutes. It is final when it is above 0 and does not change between two reads a minute apart.
 
 To launch an instance, your balance must cover its minimum charge on top of the amount that your running resources already hold.
 
