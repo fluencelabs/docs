@@ -67,7 +67,7 @@ Each key has a set of permissions, called scopes, and an expiration date. The AP
 | Legacy GPU containers (`/gpu`) | | `akash:write` |
 | Legacy GPU virtual machines and bare metal (`/gpu`) | | `spheron:write` |
 
-- A key can only get scopes that your account has.
+- A key can only get scopes that your account has. A key created before your account had GPU access does not get the GPU scopes later. To use the GPU API, create a new key.
 - A `write` scope does not include the matching `read` scope. To create and then read a VM, a key needs both `vms:write` and `vms:read`. The exception is `gpu:write`, which also allows reading `/v3/gpu`.
 - A key with `akash:write` or `spheron:write` also works with `/v3/gpu`. The legacy GPU API does not accept read-only scopes: to list or read instances there, a key needs `akash:write` or `spheron:write`.
 - In the Fluence Console, the **Read only** preset does not include `clusters:read`, `vm:list`, or `prices:read`. A key with only this preset cannot read the catalog or prices.

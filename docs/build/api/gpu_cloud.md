@@ -21,7 +21,7 @@ Send an API key in the `X-API-KEY` header, or an access token in `Authorization:
 | List images, read offers, get quotes, and read your instances | `gpu:read` |
 | Create, change, and delete instances, and everything that `gpu:read` allows | `gpu:write` |
 
-When you create a key in the Fluence Console, give it **View & manage** access to **GPU containers** or **GPU VMs & bare metal**. See [Settings](../settings.md). These options give `akash:write` and `spheron:write`, the scopes of the [legacy GPU API](#legacy-gpu-api). A key with either scope also works with `/v3/gpu`, for reading and for changes.
+When you create a key in the Fluence Console, give it **View & manage** access to **GPU containers** or **GPU VMs & bare metal**. See [Settings](../settings.md). These options give `akash:write` and `spheron:write`, the scopes of the [legacy GPU API](#legacy-gpu-api). A key with either scope also works with `/v3/gpu`, for reading and for changes. A key created before your account had GPU access has no GPU scopes. Create a new key.
 
 `GET /v3/gpu/offers` and `GET /v3/gpu/offers/{id}` also work without credentials. Without credentials, the list shows only offers that you can rent now. The OpenAPI document needs no credentials either. Every other endpoint returns `401` with `unauthenticated` without credentials.
 

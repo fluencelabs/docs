@@ -6,8 +6,6 @@ description: Rent a GPU container, GPU VM, or bare metal server, on demand or as
 
 This guide shows how to rent a GPU instance in the **GPU cloud** section of the Fluence Console. For workload types, spot instances, statuses, and billing, see [GPU Cloud concepts](./overview.md). To rent from code, see the [GPU Cloud API](../api/gpu_cloud.md).
 
-GPU Cloud is not open to every account. If the sidebar has no **GPU cloud** section, or the console shows **GPU Cloud is temporarily unavailable**, your account has no access to GPU Cloud yet. Contact support at support@fluence.ai.
-
 Before you start, top up your balance. To launch, your balance must cover the minimum charge of the instance on top of what your running resources already hold. See the [billing model](./overview.md#billing-model).
 
 ## Choose a GPU
