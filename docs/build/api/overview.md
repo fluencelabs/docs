@@ -18,7 +18,7 @@ The Fluence API lets you do from code what you do in the Fluence Console. You ca
 | Public v3 | `/v3/...` | New integrations: CPU virtual machines, disks, networks, public IP addresses, SSH keys, prices, account, API keys, top-ups, and promo codes |
 | GPU v3 | `/v3/gpu/...` | New integrations: GPU offers, GPU containers, GPU virtual machines, and bare metal. See [GPU Cloud API](./gpu_cloud.md). |
 | Public v1 and v2 | `/v1/...`, `/v2/...` | Existing integrations. These paths still work. |
-| Legacy GPU | `/gpu/...` | Existing GPU integrations. These paths still work. See [Legacy GPU API](./gpu_cloud.md#legacy-gpu-api). |
+| Legacy GPU (deprecated) | `/gpu/...` | Existing GPU integrations. These paths still work. Move them to GPU v3. See [Legacy GPU API](./gpu_cloud.md#legacy-gpu-api). |
 
 The GPU v3 endpoints have their own OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json).
 

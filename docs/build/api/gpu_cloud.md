@@ -308,7 +308,11 @@ Lists take `page` and `perPage` (up to 200, 50 by default) and return `items` an
 
 ## Legacy GPU API
 
-The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New integrations use `/v3/gpu`. New instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
+:::warning
+The legacy GPU API is deprecated. Use `/v3/gpu` for new integrations, and move existing integrations to it.
+:::
+
+The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
 
 The legacy API needs the scope `akash:write` for containers, or `spheron:write` for VMs and bare metal, on the endpoints below except `GET /gpu/default-images/`. The endpoints under `/gpu/billing/` need valid credentials only. The legacy API has these endpoints for instances:
 
