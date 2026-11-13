@@ -1,44 +1,70 @@
 ---
 sidebar_position: 0
-description: "GPU Cloud concepts: containers, GPU VMs and bare metal, instance statuses, and how hourly GPU billing works."
+description: "GPU Cloud concepts: offers and providers, containers, GPU VMs and bare metal, on-demand and spot instances, instance statuses, and per-minute GPU billing."
 ---
 
 # GPU Cloud concepts
 
-Fluence GPU Cloud rents GPUs from providers in data centers around the world. You can run three types of GPU workloads: containers, VMs, and bare metal servers. In the Fluence Console you rent them in the **GPU Marketplace** and manage them on the **GPU instances** page. To do the same from code, use the [GPU Cloud API](../api/gpu_cloud.md).
+Fluence GPU Cloud rents GPUs from several providers in data centers around the world. You can run three types of GPU workloads: containers, VMs, and bare metal servers, on demand or as spot instances. In the Fluence Console you rent them under **GPU cloud** > **Marketplace** and manage them under **GPU cloud** > **Instances**. To do the same from code, use the [GPU Cloud API](../api/gpu_cloud.md).
+
+## Offers
+
+An offer is one machine configuration that you can rent: a provider, a region, a GPU model and count, vCPU, memory, local storage, and a price. Each offer is for one workload type and one rental type. Offers also show:
+
+- Availability. An offer that recently ran out of capacity can stay on sale. If a launch fails because the provider has no capacity, nothing is charged.
+- An estimate of how long provisioning takes.
+- What the instance supports, for example logs, events, container updates, and private registries.
+
+Prices and availability change as providers change them.
 
 ## Workload types
 
 | | Container | VM | Bare metal |
 |---|---|---|---|
-| What it is | A container on a shared host with full access to its GPUs | A virtual machine with GPU passthrough | A dedicated physical server |
+| What it is | A container with access to the GPUs of its host | A virtual machine with GPU passthrough | A dedicated physical server |
 | Image | A container image | An OS image | An OS image |
-| Connection | A domain with forwarded ports | SSH to a public IP address | SSH to a public IP address |
-| What you can change after launch | Image, start command, environment variables, and SSH key | Name, through the API only | Name, through the API only |
+| Connection | A host with forwarded ports | SSH | SSH |
+| What you can change after launch | Name, image, start command, environment variables, and registry credentials, if the offer supports updates | Name | Name |
 
-A container runs a Docker image that you choose, with an optional start command, environment variables, and ports. The platform gives the container a domain and maps each of your ports to an external port. For example, your port `22` can become port `30694` on the domain.
+A container runs an image that you choose, with an optional start command, environment variables, and ports. The platform maps each of your ports to an external port. For example, your port `22` can become port `30694` on the host.
 
-A VM and a bare metal server both run an OS image with GPU drivers, and you connect to them over SSH. A VM runs on a hypervisor. A bare metal server is a physical machine with no virtualization layer. The console and the API rent both the same way.
+A VM and a bare metal server both run an OS image with GPU drivers, and you connect to them over SSH. A VM runs on a hypervisor. A bare metal server is a physical machine with no virtualization layer.
+
+## On-demand and spot instances
+
+An on-demand instance runs until you delete it or your balance runs out.
+
+A spot instance runs on capacity that the provider can take back at any time, without warning. A spot instance has one life:
+
+- When the provider takes the machine back, the instance ends.
+- Any stop ends a spot instance, including a shutdown from inside the machine.
+- When a spot instance ends, its disk and data are deleted.
+
+Use spot instances for work that can stop and start again, and keep your data outside the instance.
 
 ## Instance statuses
 
-| API status | Console label | Meaning |
-|---|---|---|
-| `INITIALIZED` | Initialized or Provisioning | The instance is being provisioned. For a container, the console shows the provisioning step, from 1/4 to 4/4. |
-| `ACTIVE` | Running | The instance is running. Its connection details are available. |
-| `FAILED` | Failed | Provisioning failed. Nothing was charged. |
-| `ENDED` | Ended | You terminated the instance, or the platform ended it |
+| Status | Meaning |
+|---|---|
+| `pending` | Fluence is reserving funds on your balance |
+| `provisioning` | The provider is creating the instance |
+| `running` | The instance is running, and its connection details are available |
+| `updating` | A change to the container is being applied |
+| `terminating` | The instance is being closed at the provider |
+| `ended` | The instance ended: you deleted it, the provider took back a spot machine, or your balance ran out |
+| `failed` | The instance was not created, or it did not survive creation |
 
-Provisioning usually takes 2 to 3 minutes.
+`ended` and `failed` are final. A final instance stays in your list, so you can see its history and its total charge.
 
 ## Billing model
 
-GPU instances are billed by the hour in USD, from your account balance.
+GPU instances are billed in USD from your account balance, for the time they run.
 
-- Billing starts when the instance becomes Running. At that moment Fluence charges the first hour.
-- After that, Fluence charges one hour at a time, every hour counted from the moment the instance started. For example, an instance that started at 11:13 is charged at 11:13, 12:13, 13:13, and so on. **Next billing time** on the instance page shows the next charge.
-- Every started hour is charged in full. When an instance ends, the unused part of the hour is not returned.
-- Nothing is reserved or held on the instance. A failed instance is not charged.
-- To launch an instance in the console, your balance must cover the first 2 hours. The console shows this as **Upfront** on the review panel. Through the API, the balance must cover 1 hour.
+- Billing starts when the instance becomes `running`. An instance that fails before it runs costs nothing.
+- Each offer has a billing step and a minimum period. Most offers bill per minute with a minimum of 20 minutes. Some offers bill per hour with a minimum of 1 hour. The offer and the instance show their terms.
+- An instance that starts running costs at least the minimum charge: the price for the minimum period. After the minimum period, you pay per billing step.
+- When you delete an instance, billing stops. The total charge is final a few minutes after the instance ends.
 
-If your balance cannot cover the next hour, Fluence still charges the hour, and your balance goes below zero. At the following charge, Fluence ends the instance. Fluence also ends all your GPU instances as soon as your balance reaches zero. GPU instances do not get the grace period that CPU resources get. To keep instances running, keep enough balance. See [Payment and balance management](../balance.md).
+To launch an instance, your balance must cover its minimum charge on top of the amount that your running resources already hold.
+
+When your balance runs out, Fluence ends your GPU instances within minutes. Their disks and data are deleted. Keep enough balance to keep instances running. See [Payment and balance management](../balance.md).

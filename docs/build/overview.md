@@ -14,7 +14,7 @@ Fluence Cloud rents GPU and CPU compute from data centers around the world. You 
 
 | Product | What you get | Billing | Guides |
 |---|---|---|---|
-| GPU Cloud | GPU containers, GPU virtual machines, and bare metal servers | By the hour | [GPU Cloud concepts](./gpu_cloud/overview.md) |
+| GPU Cloud | GPU containers, GPU virtual machines, and bare metal servers, on demand or as spot instances | Per minute or per hour, depending on the offer, with a minimum charge | [GPU Cloud concepts](./gpu_cloud/overview.md) |
 | CPU Cloud | Virtual machines with disks, public IP addresses, private networks, and security groups | By the second | [CPU Cloud concepts](./cpu_cloud/overview.md) |
 
 To reserve GPU clusters for a longer term, Fluence runs [GPU Cluster Auctions](https://auctions.fluence.ai), where providers bid for your request. These docs do not cover auctions.
@@ -26,12 +26,11 @@ The sidebar of the Fluence Console has these sections:
 | Section | What it is for |
 |---|---|
 | **Public cloud** | CPU virtual machines on the **Compute** page, disks on **Storage**, and public IP addresses, VPCs, and security groups on **Network** |
-| **GPU Marketplace** | Renting GPU containers, VMs, and bare metal servers |
-| **GPU instances** | Managing the GPU instances you rented |
+| **GPU cloud** | Renting GPU containers, VMs, and bare metal servers on the **Marketplace** page, and managing them on the **Instances** page |
 | **Billing** | Your balance, top-ups, promo codes, and usage. The balance in the page header also links here. |
 | **Settings** | Your profile, API keys, SSH keys, and the **MCP** page with configurations for AI clients |
 | **Support** | Opens an email to support@fluence.ai |
 
 ## Pay for compute
 
-A new account can rent GPU and CPU compute right after registration. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
+A new account can rent CPU compute right after registration. GPU Cloud is not open to every account: if the console shows **GPU Cloud is temporarily unavailable**, contact support. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
