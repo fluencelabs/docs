@@ -84,12 +84,12 @@ Choose the call that matches what you know:
 | `hostTier` | `dedicated`, `shared`, or `unknown` |
 | `cpuArchitecture` | `x86_64`, `arm64`, or `unknown` |
 | `maxPricePerHour` | The highest price per instance-hour in USD, as a decimal string, for example `0.50` |
-| `available` | `true` also lists offers without capacity left. Without credentials, only offers on sale are listed. |
+| `available` | `false` also lists offers without capacity left. Without credentials, only offers on sale are listed. |
 | `q` | Text in the GPU vendor, GPU model, provider, or region label |
 
 To sort, set `sort` to `price`, `vram`, `vcpu`, `memory`, `storage`, or `availability`, and `order` to `asc` or `desc`. Without `sort`, the cheapest offers come first.
 
-Name GPU models exactly as offers name them, for example `rtx4090` or `h100`. `GET /v3/gpu/offer-facets` lists the models on sale. An unknown model returns `invalid_input`.
+Name GPU models exactly as offers name them, for example `rtx4090` or `h100`. `GET /v3/gpu/offer-facets` lists the models on sale. A filter with an unknown model returns an empty list. In a quote or a create request, an unknown model in `requirements.gpu.model` returns `invalid_input`.
 
 ```sh
 curl "https://api.fluence.dev/v3/gpu/offers?workload=vm&rentalType=spot&minGpuVramGib=80"
@@ -220,7 +220,8 @@ An instance has the fields of its request, and these fields:
   - `provider_rate_limited`: the provider limits how often instances are created. The launch continues by itself, and nothing is billed before the instance runs.
   - `out_of_stock`: the provider had no capacity for the offer. Nothing is billed, and another offer can succeed.
   - `user_requested`: you deleted the instance.
-  - `provider_terminated`: the provider ended the instance. For a spot instance that the provider took back, `failure.reason` is `preempted`.
+  - `preempted`: the provider took a spot instance back. `failure.code` is then `provider_terminated`, and `failure.reason` is `preempted`.
+  - `provider_terminated`: the provider ended the instance.
 - `isBilling`: `true` while the instance is billed.
 - `isTerminal`: `true` for `ended` and `failed`.
 - `placement`: the offer that the instance runs on, with its provider, region, hardware, and capabilities.

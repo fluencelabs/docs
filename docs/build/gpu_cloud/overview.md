@@ -34,7 +34,9 @@ A VM and a bare metal server both run an OS image with GPU drivers, and you conn
 
 ## On-demand and spot instances
 
-An on-demand instance runs until you terminate it, your balance runs out, or the provider ends it. Fluence can also end an instance that stays not ready for too long. The instance page in the console and `statusDetail` in the API give the reason.
+An on-demand instance runs until you terminate it, your balance runs out, or the provider ends it. The instance page in the console and `statusDetail` in the API give the reason.
+
+If an instance does not become ready in time after launch, Fluence stops the launch, and the instance is `failed`. A running instance that stops being ready keeps running and is billed until you delete it, unless the provider ends it.
 
 A spot instance usually costs less. It runs on capacity that the provider can take back at any time, without warning. A spot instance has one life:
 
