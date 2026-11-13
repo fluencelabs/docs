@@ -33,4 +33,4 @@ The sidebar of the Fluence Console has these sections:
 
 ## Pay for compute
 
-GPU Cloud and CPU Cloud are open to every account. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
+GPU Cloud is open to every account. CPU Cloud is available on request: in the **Public cloud** section of the console, click **Request access**, and the Fluence team reviews your account. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
