@@ -263,7 +263,7 @@ Add `tail=N` to get the last `N` lines. The provider can return fewer.
 
 ### Delete an instance
 
-`DELETE /v3/gpu/instances/{id}` ends the instance. It answers `202` when it starts closing the instance, and `200` if the instance is already closing or ended, so you can repeat it. Billing stops no later than when the provider closes the instance. The local disk of the instance and its data are deleted.
+`DELETE /v3/gpu/instances/{id}` ends the instance. It answers `202` when it starts closing the instance, and `200` if the instance is already closing or ended, so you can repeat it. Billing stops when you delete the instance: `isBilling` becomes `false` and `endedAt` is set, while `status` can still read `terminating` for a short while. The local disk of the instance and its data are deleted.
 
 After you delete an instance, read it until `isTerminal` is `true`. After an instance ends, `charged.total` can read `0` or grow for a few minutes. It is final when it is above `0` and does not change between two reads a minute apart.
 
