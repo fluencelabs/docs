@@ -309,7 +309,7 @@ Lists take `page` and `perPage` (up to 200, 50 by default) and return `items` an
 ## Legacy GPU API
 
 :::warning
-The legacy GPU API is deprecated. Use `/v3/gpu` for new integrations, and move existing integrations to it.
+The legacy GPU API (`/gpu`) is deprecated. It keeps working and gets no new features; use `/v3/gpu`. No shutdown date is set.
 :::
 
 The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
