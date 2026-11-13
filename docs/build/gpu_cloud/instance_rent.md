@@ -56,7 +56,7 @@ The **SSH key** field sets the `SSH_PUBKEY` variable. Do not add `SSH_PUBKEY` to
 
 ## Review and launch
 
-The **Review** panel shows the name, the GPU, the location, the expected time to be ready, the rental type, the workload, the image or OS, and the SSH key. Then it shows the price:
+The **Review** panel shows the instance settings: name, GPU, location, expected time to be ready, rental type, workload, image or OS, and SSH key. Below them, it shows the price:
 
 - **Price per hour**: the hourly price of the instance.
 - **Billing**: how often you are **Billed**, for example per minute, the **Minimum** time you pay for, and the amount **Reserved at launch**, which is the minimum charge.

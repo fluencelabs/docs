@@ -15,6 +15,8 @@ An offer is one machine configuration that you can rent: a provider, a region, a
 - An estimate of how long provisioning takes.
 - What the instance supports, for example logs, events, container updates, and private registries.
 
+Most offers are one machine type of a provider. Some Akash offers fix only the hardware and the highest price: Akash picks the host from provider bids when you launch the instance.
+
 Prices and availability change as providers change them.
 
 ## Workload types
@@ -32,7 +34,7 @@ A VM and a bare metal server both run an OS image with GPU drivers, and you conn
 
 ## On-demand and spot instances
 
-An on-demand instance runs until you terminate it, your balance runs out, or the provider ends it.
+An on-demand instance runs until you terminate it, your balance runs out, or the provider ends it. Fluence can also end an instance that stays not ready for too long. The instance page in the console and `statusDetail` in the API give the reason.
 
 A spot instance usually costs less. It runs on capacity that the provider can take back at any time, without warning. A spot instance has one life:
 
