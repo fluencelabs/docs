@@ -51,7 +51,7 @@ Use spot instances for work that can stop and start again, and keep your data ou
 | `running` | The instance is running, and its connection details are available |
 | `updating` | The provider is applying a container change |
 | `terminating` | The provider is closing the instance |
-| `ended` | The instance ended, for example because you terminated it, the provider took back a spot machine, or your balance ran out |
+| `ended` | The instance ended, for example because you terminated it, the provider took back a spot machine, or your balance ran out. The API gives the reason in `statusDetail`, and the console on the instance page. |
 | `failed` | The instance was not created, or it did not survive creation |
 
 `ended` and `failed` are final. A final instance stays in your list, so you can see its history and its total charge.
@@ -63,7 +63,7 @@ GPU instances are billed in USD from your account balance, for the time they run
 - Billing starts when the instance becomes `running`. An instance that fails before it runs costs nothing.
 - Each offer has a billing step and a minimum period. Most offers bill per minute with a minimum of 20 minutes. Some offers bill per hour with a minimum of 1 hour. The offer and the instance show their terms.
 - An instance that starts running costs at least the minimum charge: the price for the minimum period. After the minimum period, you pay per billing step.
-- When you terminate an instance, billing stops. The total charge is final a few minutes after the instance ends.
+- When you terminate an instance, billing continues while it is `terminating`, and stops when the provider has closed it. The total charge is final a few minutes after the instance ends.
 
 To launch an instance, your balance must cover its minimum charge on top of the amount that your running resources already hold.
 

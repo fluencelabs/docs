@@ -19,7 +19,7 @@ Send an API key in the `X-API-KEY` header, or an access token in `Authorization:
 | To | Scope |
 |---|---|
 | List images, read offers, get quotes, and read your instances | `gpu:read` |
-| Create, change, and delete instances | `gpu:write` |
+| Create, change, and delete instances, and everything that `gpu:read` allows | `gpu:write` |
 
 When you create a key in the Fluence Console, give it **View & manage** access to **GPU containers** or **GPU VMs & bare metal**. See [Settings](../settings.md). These options give `akash:write` and `spheron:write`, the scopes of the [legacy GPU API](#legacy-gpu-api). A key with either scope also works with `/v3/gpu`, for reading and for changes.
 
@@ -63,7 +63,7 @@ An offer is one placement that you can rent. It names a provider, a region, a GP
 
 Choose the call that matches what you know:
 
-- You know how much GPU memory you need: call `GET /v3/gpu/offer-picks` with `workload` and `minVramGib`. It returns up to 10 of the cheapest offers, 3 by default. Each item has `requirements` that you pass to the quote and to the create request unchanged.
+- You know how much GPU memory you need: call `GET /v3/gpu/offer-picks` with `workload` and `minVramGib`, the memory of each GPU in GiB. It returns up to 10 of the cheapest offers, 3 by default. Each item has `requirements` that you pass to the quote and to the create request unchanged.
 - You want to compare GPU models: call `GET /v3/gpu/offer-groups`. Each group has its lowest price and `requirements` for the quote. To create from a group, also set `offerId` to the group's `cheapestOfferId`, or set `maxPricePerHour`.
 - You want to see every placement: call `GET /v3/gpu/offers`. Filter with query parameters such as `workload`, `rentalType`, `gpuModel`, `minGpuVramGib`, `gpuCount`, `country`, `provider`, and `maxPricePerHour`. Without `sort`, the cheapest offers come first.
 
@@ -180,7 +180,7 @@ An offer can have a `provisioning` estimate in seconds, with `typicalSeconds`, `
 `PATCH /v3/gpu/instances/{id}` changes:
 
 - `name`, at any time until the instance starts terminating.
-- For a running container, if the offer supports updates: `container.image`, `container.environment`, `container.startupCommand`, and `container.registryCredentials`. Omitted fields stay as they are.
+- For a running container, if the offer supports updates: `container.image`, `container.environment`, `container.startupCommand`, and `container.registryCredentials`. Omitted fields stay as they are. `container.environment` replaces the whole list of variables. To keep a secret value, list its name with `secret: true` and no value.
 
 A container change answers `200` with `status: updating`. The instance returns to `running` when the provider applies the change. A different change while one is being applied returns `update_in_progress`.
 
@@ -188,7 +188,7 @@ Nothing else changes after creation: not the offer, price, workload, or ports, a
 
 ### Read logs and events
 
-`GET /v3/gpu/instances/{id}/logs` and `GET /v3/gpu/instances/{id}/events` work when the instance's `actions` list `logs` or `events`. Add `tail=N` to get the last `N` lines. Otherwise the API returns `409` with `unsupported_by_provider` or `instance_state_conflict`. Read events when an instance stays in `provisioning` or a container does not start.
+`GET /v3/gpu/instances/{id}/logs` and `GET /v3/gpu/instances/{id}/events` work when the instance's `actions` list `logs` or `events`. If the actions do not list them, the API returns `409` with `unsupported_by_provider` or `instance_state_conflict`. Add `tail=N` to get the last `N` lines. Read events when an instance stays in `provisioning` or a container does not start.
 
 ### Delete an instance
 
@@ -228,7 +228,7 @@ Lists take `page` and `perPage` (up to 200, 50 by default) and return `items` an
 
 The earlier GPU API under `https://api.fluence.dev/gpu/...` still works for existing integrations, and its paths and responses do not change. New integrations use `/v3/gpu`. New instances rented through the legacy API are billed the same way as `/v3/gpu` instances: by the billing step and minimum of their offer.
 
-The legacy API needs the scope `akash:write` for containers, or `spheron:write` for VMs and bare metal, on every endpoint except `GET /gpu/default-images/`. It has these endpoints:
+The legacy API needs the scope `akash:write` for containers, or `spheron:write` for VMs and bare metal, on the endpoints below except `GET /gpu/default-images/`. The endpoints under `/gpu/billing/` need valid credentials only. The legacy API has these endpoints for instances:
 
 | Method | Path | What it does |
 |---|---|---|
@@ -240,4 +240,4 @@ The legacy API needs the scope `akash:write` for containers, or `spheron:write` 
 | `GET`, `PUT`, `DELETE` | `/gpu/instances/vms/{instance_id}`, `/gpu/instances/baremetal/{instance_id}` | Returns, renames, or terminates a VM or a bare metal server |
 | `GET` | `/gpu/default-images/` | Lists the predefined container images |
 
-Keep the trailing slash in `/gpu/plans/`, `/gpu/instances/`, and `/gpu/default-images/`. Legacy errors have a `detail` field instead of `code`.
+Legacy errors have a `detail` field instead of `code`.
