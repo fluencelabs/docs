@@ -15,7 +15,7 @@ An offer is one machine configuration that you can rent: a region, a GPU model a
 - An estimate of how long provisioning takes.
 - What the instance supports, for example logs, events, container updates, and private registries.
 
-Most offers are one machine type of a provider. Some container offers fix only the hardware and the highest price. Bids choose the host when you launch the instance.
+Most offers are one machine type of a provider. Some container offers fix only the hardware and the highest price, not the host. The instance gets its host when you launch it.
 
 Prices and availability change as providers change them.
 
