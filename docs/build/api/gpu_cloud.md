@@ -34,7 +34,7 @@ When you create a key in the Fluence Console, give it **View & manage** access t
 | `GET` | `/v3/gpu/offers` | Lists offers: one placement each, with hardware, price, and availability |
 | `GET` | `/v3/gpu/offers/{id}` | Returns one offer |
 | `GET` | `/v3/gpu/offer-groups` | Groups offers by GPU configuration, with the lowest price of each group |
-| `GET` | `/v3/gpu/offer-facets` | Lists the values you can filter by, such as GPU models, countries, and providers, with counts |
+| `GET` | `/v3/gpu/offer-facets` | Lists the values you can filter by, such as GPU models and countries, with counts |
 | `GET` | `/v3/gpu/offer-picks` | Returns the cheapest offers with at least the GPU memory you need |
 | `POST` | `/v3/gpu/instance-quotes` | Shows which offer a request would get and at what price, without renting |
 
@@ -62,7 +62,7 @@ The OpenAPI document also has volume endpoints. Volumes are not available yet. S
 
 ## Find an offer
 
-An offer is one placement that you can rent. It names a provider, a region, a GPU model and count, the rest of the machine, a rental type, and a price. Each offer has a `workload`: `container`, `vm`, or `baremetal`.
+An offer is one placement that you can rent. It names a region, a GPU model and count, the rest of the machine, a rental type, and a price. Each offer has a `workload`: `container`, `vm`, or `baremetal`.
 
 Choose the call that matches what you know:
 
@@ -80,12 +80,12 @@ Choose the call that matches what you know:
 | `gpuVramGib`, `minGpuVramGib` | Memory of each GPU in GiB, exact or at least |
 | `gpuCount`, `minGpuCount` | GPUs per machine, exact or at least |
 | `minVcpu`, `minMemoryGib`, `minStorageGib` | Machine size, at least |
-| `country`, `regionLabel`, `provider` | Location. `country` is a two-letter ISO code. `provider` takes several names separated by commas. |
+| `country`, `regionLabel` | Location. `country` is a two-letter ISO code. |
 | `hostTier` | `dedicated`, `shared`, or `unknown` |
 | `cpuArchitecture` | `x86_64`, `arm64`, or `unknown` |
 | `maxPricePerHour` | The highest price per instance-hour in USD, as a decimal string, for example `0.50` |
 | `available` | `false` also lists offers without capacity left. Without credentials, only offers on sale are listed. |
-| `q` | Text in the GPU vendor, GPU model, provider, or region label |
+| `q` | Text in the GPU vendor, GPU model, or region label |
 
 To sort, set `sort` to `price`, `vram`, `vcpu`, `memory`, `storage`, or `availability`, and `order` to `asc` or `desc`. Without `sort`, the cheapest offers come first.
 
@@ -99,7 +99,7 @@ curl "https://api.fluence.dev/v3/gpu/offers?workload=vm&rentalType=spot&minGpuVr
 
 Besides the hardware and the price, an offer has these fields:
 
-- `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an Akash offer that fixes the hardware profile and the highest bid, but not the host. Akash picks the host from bids when you create the instance.
+- `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an offer that fixes the hardware profile and the highest bid, but not the host. Bids choose the host when you create the instance.
 - `hostTier`: `dedicated`, `shared`, or `unknown`.
 - `region`, `dataCenter`, and `origin`: where the machine runs.
 - `topology`: GPU links, such as NVLink.
@@ -156,7 +156,7 @@ Send `POST /v3/gpu/instances` with an `Idempotency-Key` header. The body has:
   - `gpu`: `vendor`, `model`, and `count`, as offers name them.
   - `offerId` to rent one exact offer, or `maxPricePerHour` to let the API choose the cheapest matching offer at or below this price. One of them is required. With `offerId`, the other requirements must still fit the offer.
   - `rentalType`: `on_demand` or `spot`. On-demand is the default.
-  - Optional limits, such as `minVcpu`, `minMemoryGib`, `minStorageGib`, `region`, `providers`, `hostTier`, and `cpuArchitecture`.
+  - Optional limits, such as `minVcpu`, `minMemoryGib`, `minStorageGib`, `region`, `hostTier`, and `cpuArchitecture`.
 - Exactly one of `container`, `vm`, or `baremetal`, matching the workload.
 
 For a container:
@@ -216,7 +216,7 @@ An instance has the fields of its request, and these fields:
 
 - `status`: see [Instance statuses](../gpu_cloud/overview.md#instance-statuses).
 - `statusDetail`: why the instance is in its status. Some values:
-  - `awaiting_bids`: Akash collects bids for the instance.
+  - `awaiting_bids`: the instance waits for bids.
   - `provider_rate_limited`: the provider limits how often instances are created. The launch continues by itself, and nothing is billed before the instance runs.
   - `out_of_stock`: the provider had no capacity for the offer. Nothing is billed, and another offer can succeed.
   - `user_requested`: you deleted the instance.
@@ -224,7 +224,7 @@ An instance has the fields of its request, and these fields:
   - `provider_terminated`: the provider ended the instance.
 - `isBilling`: `true` while the instance is billed.
 - `isTerminal`: `true` for `ended` and `failed`.
-- `placement`: the offer that the instance runs on, with its provider, region, hardware, and capabilities.
+- `placement`: the offer that the instance runs on, with its region, hardware, and capabilities.
 - `price`: the price fixed when the instance was created.
 - `charged`: the amount charged so far in `total`, as of `asOf`.
 - `actions`: what you can do with the instance now: `rename`, `delete`, `update`, `logs`, and `events`.
@@ -239,7 +239,7 @@ An instance has the fields of its request, and these fields:
 
 - `live=true` lists only instances that are not ended or failed. `live=false` lists only ended and failed ones.
 - `status` takes one status or several, separated by commas.
-- `workload`, `rentalType`, `provider`, `country`, and `createdVia` match those fields.
+- `workload`, `rentalType`, `country`, and `createdVia` match those fields.
 - `q` matches text in the instance ID, name, or GPU model.
 
 To sort, set `sort` to `createdAt`, `name`, `status`, `pricePerHour`, or `activatedAt`. The newest instances come first by default.
