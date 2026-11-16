@@ -15,7 +15,7 @@ An offer is one machine configuration that you can rent: a provider, a region, a
 - An estimate of how long provisioning takes.
 - What the instance supports, for example logs, events, container updates, and private registries.
 
-Most offers are one machine type of a provider. Some Akash offers fix only the hardware and the highest price: Akash picks the host from provider bids when you launch the instance.
+Most offers are one machine type of a provider. Some container offers fix only the hardware and the highest price. Bids choose the host when you launch the instance.
 
 Prices and availability change as providers change them.
 

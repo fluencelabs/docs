@@ -99,7 +99,7 @@ curl "https://api.fluence.dev/v3/gpu/offers?workload=vm&rentalType=spot&minGpuVr
 
 Besides the hardware and the price, an offer has these fields:
 
-- `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an Akash offer that fixes the hardware profile and the highest bid, but not the host. Akash picks the host from bids when you create the instance.
+- `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an offer that fixes the hardware profile and the highest bid, but not the host. Bids choose the host when you create the instance.
 - `hostTier`: `dedicated`, `shared`, or `unknown`.
 - `region`, `dataCenter`, and `origin`: where the machine runs.
 - `topology`: GPU links, such as NVLink.
@@ -216,7 +216,7 @@ An instance has the fields of its request, and these fields:
 
 - `status`: see [Instance statuses](../gpu_cloud/overview.md#instance-statuses).
 - `statusDetail`: why the instance is in its status. Some values:
-  - `awaiting_bids`: Akash collects bids for the instance.
+  - `awaiting_bids`: the instance waits for bids.
   - `provider_rate_limited`: the provider limits how often instances are created. The launch continues by itself, and nothing is billed before the instance runs.
   - `out_of_stock`: the provider had no capacity for the offer. Nothing is billed, and another offer can succeed.
   - `user_requested`: you deleted the instance.
