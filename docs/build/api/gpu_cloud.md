@@ -80,12 +80,12 @@ Choose the call that matches what you know:
 | `gpuVramGib`, `minGpuVramGib` | Memory of each GPU in GiB, exact or at least |
 | `gpuCount`, `minGpuCount` | GPUs per machine, exact or at least |
 | `minVcpu`, `minMemoryGib`, `minStorageGib` | Machine size, at least |
-| `country`, `regionLabel` | Location. `country` is a two-letter ISO code. |
+| `country`, `regionLabel` | Location. `country` is a two-letter ISO code. `regionLabel` is a region label exactly as offers show it in `region.label`. |
 | `hostTier` | `dedicated`, `shared`, or `unknown` |
 | `cpuArchitecture` | `x86_64`, `arm64`, or `unknown` |
 | `maxPricePerHour` | The highest price per instance-hour in USD, as a decimal string, for example `0.50` |
 | `available` | `false` also lists offers without capacity left. Without credentials, only offers on sale are listed. |
-| `q` | Text in the GPU vendor, GPU model, or region label |
+| `q` | Text in the GPU vendor or GPU model |
 
 To sort, set `sort` to `price`, `vram`, `vcpu`, `memory`, `storage`, or `availability`, and `order` to `asc` or `desc`. Without `sort`, the cheapest offers come first.
 
@@ -101,12 +101,13 @@ Besides the hardware and the price, an offer has these fields:
 
 - `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an offer that fixes the hardware profile and the highest price, but not the host. The instance gets its host when you create it.
 - `hostTier`: `dedicated`, `shared`, or `unknown`.
-- `region`, `dataCenter`, and `origin`: where the machine runs.
+- `region`: where the machine runs. `region.country` is a two-letter ISO code, or `null` if the country is not known. `region.label` identifies the place. Pass it in the `regionLabel` filter, or in `requirements.region.label`.
+- `provider`, `dataCenter`, and `origin`: `provider` is `fluence` for every offer, `dataCenter` is `null`, and `origin` repeats the region.
 - `topology`: GPU links, such as NVLink.
 - `provisioning`: how long the instance usually takes to be ready, in `typicalSeconds`, `upperSeconds`, or both. It can be `null`.
 - `availability`: `status` is `available`, `limited`, `sold_out`, or `unknown`. `lastOutOfStockAt` is the last time the provider refused this offer for lack of capacity. Such an offer stays on sale, and the next launch can succeed.
 - `capabilities`: what an instance of the offer supports. `logs`, `events`, and `update` say whether you can read logs and events and change the container. `portProtocols`, `portRequired`, `environment`, and `privateRegistry` limit the container settings. See [Create the instance](#create-the-instance).
-- `osImages`: the OS images that a VM or bare metal offer accepts. An empty list means the provider takes any name, and a wrong name fails only at the provider.
+- `osImages`: the OS images that a VM or bare metal offer accepts, for example `ubuntu-24.04-cuda12.8-docker`.
 - `preemption`: only for spot offers. `noticeSeconds` is the warning the provider gives before it takes the machine back, and `0` means no warning. `dataSurvives` says whether the disk survives. `signal` is `explicit` when the provider reports the take-back, and `inferred` when Fluence detects it from the machine stopping.
 - `groupKey`: the offer group of the offer, as in `GET /v3/gpu/offer-groups`.
 
@@ -168,7 +169,7 @@ For a container:
 - `registryCredentials` with `host`, `username`, and `password` pulls an image from a private registry, where the offer's `capabilities.privateRegistry` is `true`.
 - `sshKey` passes a public SSH key to the container in the `SSH_PUBKEY` variable. The predefined images read it. If you also define `SSH_PUBKEY` in `environment`, the API refuses the request.
 
-For a VM or a bare metal server, `osImage` and `sshKey` are required. If the offer lists `osImages`, `osImage` must be one of them.
+For a VM or a bare metal server, `osImage` and `sshKey` are required. `osImage` must be one of the offer's `osImages`.
 
 ```json
 {
