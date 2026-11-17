@@ -9,13 +9,13 @@ Fluence GPU Cloud rents GPUs from several providers in data centers around the w
 
 ## Offers
 
-An offer is one machine configuration that you can rent: a provider, a region, a GPU model and count, vCPU, memory, local storage, and a price. Each offer is for one workload type and one rental type. Offers also show:
+An offer is one machine configuration that you can rent: a region, a GPU model and count, vCPU, memory, local storage, and a price. Each offer is for one workload type and one rental type. Offers also show:
 
 - Availability. An offer that recently ran out of capacity can stay on sale. If a launch fails because the provider has no capacity, nothing is charged.
 - An estimate of how long provisioning takes.
 - What the instance supports, for example logs, events, container updates, and private registries.
 
-Most offers are one machine type of a provider. Some Akash offers fix only the hardware and the highest price: Akash picks the host from provider bids when you launch the instance.
+Most offers are one machine type of a provider. Some container offers fix only the hardware and the highest price, not the host. The instance gets its host when you launch it.
 
 Prices and availability change as providers change them.
 

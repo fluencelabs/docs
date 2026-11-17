@@ -33,4 +33,4 @@ The sidebar of the Fluence Console has these sections:
 
 ## Pay for compute
 
-A new account can rent CPU compute right after registration. GPU Cloud is not open to every account: if the console shows **GPU Cloud is temporarily unavailable**, contact support. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
+GPU Cloud and CPU Cloud are open to every account. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC through [x402](./api/x402.md). See [Payment and balance management](./balance.md).
