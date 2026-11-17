@@ -85,7 +85,7 @@ Choose the call that matches what you know:
 | `cpuArchitecture` | `x86_64`, `arm64`, or `unknown` |
 | `maxPricePerHour` | The highest price per instance-hour in USD, as a decimal string, for example `0.50` |
 | `available` | `false` also lists offers without capacity left. Without credentials, only offers on sale are listed. |
-| `q` | Text in the GPU vendor or GPU model |
+| `q` | Text in the GPU vendor or GPU model, a country code, a country name in English, or a region label |
 
 To sort, set `sort` to `price`, `vram`, `vcpu`, `memory`, `storage`, or `availability`, and `order` to `asc` or `desc`. Without `sort`, the cheapest offers come first.
 
