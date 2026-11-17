@@ -101,7 +101,7 @@ Besides the hardware and the price, an offer has these fields:
 
 - `offerKind`: `provider_sku` is an item of a provider catalog, and `host_offer` is one host. `market_profile` is an offer that fixes the hardware profile and the highest price, but not the host. The instance gets its host when you create it.
 - `hostTier`: `dedicated`, `shared`, or `unknown`.
-- `region`: where the machine runs. `region.country` is a two-letter ISO code, or `null` if the country is not known. `region.label` identifies the place. Pass it in the `regionLabel` filter, or in `requirements.region.label`.
+- `region`: where the machine runs. `region.country` is a two-letter ISO code, or `null` if the country is not known. `region.label` identifies the place. It is the country code and a number, for example `US-5`, or `LOC-4` when the country is not known. Pass it in the `regionLabel` filter, or in `requirements.region.label`.
 - `provider`, `dataCenter`, and `origin`: `provider` is `fluence` for every offer, `dataCenter` is `null`, and `origin` repeats the region.
 - `topology`: GPU links, such as NVLink.
 - `provisioning`: how long the instance usually takes to be ready, in `typicalSeconds`, `upperSeconds`, or both. It can be `null`.
