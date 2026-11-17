@@ -107,7 +107,7 @@ Besides the hardware and the price, an offer has these fields:
 - `provisioning`: how long the instance usually takes to be ready, in `typicalSeconds`, `upperSeconds`, or both. It can be `null`.
 - `availability`: `status` is `available`, `limited`, `sold_out`, or `unknown`. `lastOutOfStockAt` is the last time the provider refused this offer for lack of capacity. Such an offer stays on sale, and the next launch can succeed.
 - `capabilities`: what an instance of the offer supports. `logs`, `events`, and `update` say whether you can read logs and events and change the container. `portProtocols`, `portRequired`, `environment`, and `privateRegistry` limit the container settings. See [Create the instance](#create-the-instance).
-- `osImages`: the OS images that a VM or bare metal offer accepts. An empty list means the provider takes any name, and a wrong name fails only at the provider.
+- `osImages`: the OS images that a VM or bare metal offer accepts, for example `ubuntu-24.04-cuda12.8-docker`.
 - `preemption`: only for spot offers. `noticeSeconds` is the warning the provider gives before it takes the machine back, and `0` means no warning. `dataSurvives` says whether the disk survives. `signal` is `explicit` when the provider reports the take-back, and `inferred` when Fluence detects it from the machine stopping.
 - `groupKey`: the offer group of the offer, as in `GET /v3/gpu/offer-groups`.
 
@@ -169,7 +169,7 @@ For a container:
 - `registryCredentials` with `host`, `username`, and `password` pulls an image from a private registry, where the offer's `capabilities.privateRegistry` is `true`.
 - `sshKey` passes a public SSH key to the container in the `SSH_PUBKEY` variable. The predefined images read it. If you also define `SSH_PUBKEY` in `environment`, the API refuses the request.
 
-For a VM or a bare metal server, `osImage` and `sshKey` are required. If the offer lists `osImages`, `osImage` must be one of them.
+For a VM or a bare metal server, `osImage` and `sshKey` are required. `osImage` must be one of the offer's `osImages`.
 
 ```json
 {
