@@ -25,7 +25,7 @@ You can use either kind of GitHub token:
 
 | Token kind | Permissions |
 |---|---|
-| Fine-grained | **Contents**, **Pull requests**, **Actions**, and **Issues**, each with read and write access. **Contents** with read-only access is enough to only read. |
+| Fine-grained | **Contents**, **Pull requests**, and **Issues**, each with read and write access. Add **Workflows** to let the agent change GitHub Actions workflows. **Contents** with read-only access is enough to only read. |
 | Classic | The `repo` scope. Add `workflow` to let the agent change GitHub Actions workflows. |
 
 By default, a fine-grained token reaches only the repositories of your own account, not the repositories of an organization. To work on an organization repository, select the organization as the **Resource owner** when you create the token. One token has one resource owner.
@@ -79,7 +79,9 @@ Some names cannot be used, because their variable belongs to the machine or to t
 - Variables of the agent process, for example `PATH`, `HOME`, `NODE_OPTIONS`, `HTTPS_PROXY`, and any variable that starts with `OPENCODE_`, `NPM_CONFIG_`, or `XDG_`.
 - `OPENAI_API_KEY`, which an OpenAI key on the **AI providers** page fills.
 
-A name that starts with a digit is also refused, because it makes no valid variable. Choose another name, for example `npm_registry_token` instead of `npm_config_token`.
+Choose another name, for example `npm_registry_token` instead of `npm_config_token`.
+
+A name that starts with a digit is also refused, because it makes no valid variable.
 
 :::warning
 Anything the agent can read, it can also print or send. Give an agent only the secrets that its task needs, and prefer tokens with narrow permissions and an expiry date.

@@ -61,4 +61,4 @@ When the agent works, its replies and tool calls appear in the conversation. Whe
 1. On the agent page, open the menu in the **Details** panel and click **Stop**.
 2. Click **Stop agent** to confirm.
 
-The agent stops, and its machine is released. An agent that you leave idle is stopped by itself after the idle time of its preset.
+The agent stops, and its machine is released. Anything the agent did not push to the repository is gone with the machine. An agent that you leave idle is stopped by itself after the idle time of its preset.

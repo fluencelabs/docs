@@ -4,7 +4,7 @@ description: "Cloud agents concepts: managed coding agents on isolated machines 
 
 # Cloud agents concepts
 
-Cloud agents are managed coding agents. Each agent runs on its own isolated virtual machine in your Fluence account. You give it a task, a model, and a repository. Fluence creates the machine, sets up the agent on it, and releases the machine when the work is done.
+Cloud agents are managed coding agents. Each agent runs on its own isolated virtual machine in your Fluence account. You give it a task, a model, and a repository. Fluence creates the machine, sets up the agent on it, and releases the machine when you stop the agent or when it stays idle.
 
 The agent clones the repository, works on the task, and answers in a conversation on its page. If its GitHub token has write access, it can push branches and open pull requests.
 
@@ -27,7 +27,7 @@ Each launch creates one agent on one machine:
 4. You send more messages while the agent works or after it finishes a turn.
 5. The agent runs until you stop it, or until it stays idle for the selected idle time. Then its machine is released.
 
-A stopped agent stays in your list with its conversation, but takes no more messages.
+An agent that stopped or failed stays in your list with its conversation, but takes no more messages.
 
 The agent runs [OpenCode](https://opencode.ai). The models it can use come from the AI providers that you connect.
 
@@ -58,6 +58,8 @@ See [Work with a cloud agent](./manage_agents.md).
 
 A machine does not run forever. When an agent stays idle for the selected idle time, the machine shuts down and the agent is stopped. The idle time is a whole number of hours.
 
+Anything the agent did not push to the repository is gone with the machine. Ask the agent to push its work before you leave it idle.
+
 To continue the work of a stopped agent, launch a copy of it. The copy starts on a new machine with a new conversation.
 
 ## Pricing
@@ -67,6 +69,6 @@ A cloud agent has two costs:
 - The machine. You pay for it by the hour while it runs, at the hourly price of its size. The console shows the price in the **Machine** step and the **Review** panel of the launch form, in the agent list, and on the agent page. The **Review** panel also shows what a month costs if the machine runs nonstop.
 - The model. Model use is billed by your AI provider, not by the machine price.
 
-You pay for the machine only while it runs. The idle stop limits what a forgotten agent can cost. Sizes and prices depend on the selected cluster.
+You pay for the machine only while it runs. It also runs while the agent is idle and waits for a message. The idle stop limits what a forgotten agent can cost. Sizes and prices depend on the selected cluster.
 
 The machine is billed to your Fluence account. See [Payment and balance management](../balance.md).
