@@ -1,22 +1,33 @@
 ---
-description: "Cloud agents concepts: a coding agent on its own machine in your Fluence account, what it gets at launch, turns and messages, agent states, idle stop, and pricing."
+description: "Cloud agents concepts: managed coding agents on isolated machines in your Fluence account, controlled from the console, MCP, or the API. What an agent gets at launch, turns and messages, idle stop, and pricing."
 ---
 
 # Cloud agents concepts
 
-A cloud agent is a coding agent that runs on its own machine in your Fluence account. You give it a task, a model, and a repository. The agent clones the repository, works on the task, and answers in a conversation on its page. If its GitHub token has write access, it can push branches and open pull requests.
+Cloud agents are managed coding agents. Each agent runs on its own isolated virtual machine in your Fluence account. You give it a task, a model, and a repository. Fluence creates the machine, sets up the agent on it, and releases the machine when the work is done.
 
-You work with cloud agents in the Fluence Console under **Cloud agents**. To launch one, see [Launch your first cloud agent](./get_started.md).
+The agent clones the repository, works on the task, and answers in a conversation on its page. If its GitHub token has write access, it can push branches and open pull requests.
+
+With cloud agents you get:
+
+- A managed agent. You do not rent or configure a server. You launch an agent, and you pay for its machine only while it runs.
+- An isolated machine. Each agent has its own virtual machine, with no SSH access and no static public IP address.
+- A reproducible setup. You set up AI providers, secrets, MCP servers, plugins, and skills once. Every new agent starts with the same setup, so you do not configure each machine by hand.
+- Control from the console, MCP, or the API. You launch agents, send them messages, and stop them in the Fluence Console, through [Fluence MCP](../../build_with_ai/mcp.md), or through the API.
+
+To launch your first agent in the Fluence Console, see [Launch your first cloud agent](./get_started.md).
 
 ## How a cloud agent works
 
 Each launch creates one agent on one machine:
 
-1. You launch an agent from a preset. The preset gives the machine size and the extensions. You give the task, the model, and the repository.
-2. Fluence creates a machine in your account and prepares it: the repository, the secrets, the AI providers, and the extensions.
+1. You launch an agent with a task, a model, and a repository.
+2. Fluence creates a machine of the selected size in your account and prepares it: the repository, the secrets, the AI providers, and the extensions.
 3. The agent starts on the task right after launch. Its replies and the tools it used appear in the conversation.
 4. You send more messages while the agent works or after it finishes a turn.
-5. The agent ends when you stop it, or when it stays idle for the idle time of its preset. Its machine is released.
+5. The agent runs until you stop it, or until it stays idle for the selected idle time. Then its machine is released.
+
+A stopped agent stays in your list with its conversation, but takes no more messages.
 
 The agent runs [OpenCode](https://opencode.ai). The models it can use come from the AI providers that you connect.
 
@@ -32,12 +43,6 @@ You set up three things once, and every new agent gets them:
 
 An agent takes its AI providers, secrets, and extensions at launch. Changes on these pages apply to new launches. Running agents keep what they started with. To give a running agent a change, stop it and launch a new one.
 
-## Presets
-
-A preset says what an agent runs with: a default model, a machine, and the extensions it includes. A preset can also carry a default repository and task.
-
-Every account has the **Default** preset. Agents launch from it when you choose no other. You need more presets only when you want different machines, models, or extensions for different work. See [Create and edit presets](./presets.md).
-
 ## Turns and messages
 
 The agent works in turns. The task you launch with starts the first turn. Each later message starts a new turn or joins the running one:
@@ -49,29 +54,11 @@ A turn has a time limit. A turn launched from the console can run for up to 6 ho
 
 See [Work with a cloud agent](./manage_agents.md).
 
-## Agent states
-
-| State | Meaning |
-|---|---|
-| **Pending** | The launch is accepted, and Fluence is finding or creating the machine |
-| **Preparing** | The machine is ready, and the repository and the agent are being prepared on it |
-| **Working** | A turn is running |
-| **Idle** | The agent has no turn running and waits for a message |
-| **Stopping** | The agent is stopping, and its machine is being released |
-| **Ended** | The agent was stopped, or it stayed idle for the idle time |
-| **Failed** | The agent could not start or lost its machine. Its page says why. |
-
-**Ended** and **Failed** are final. A final agent stays in your list with its conversation, but takes no more messages.
-
-While an agent is **Pending** or **Preparing**, its page shows the current step next to the state: **Accepted**, **Finding a machine**, **Raising the machine**, **Machine ready**, **Connecting to the machine**, or **Handing over the task**.
-
 ## Idle stop
 
-A machine does not run forever. When an agent stays idle for the idle time of its preset, the machine shuts down and the agent is stopped. Its state becomes **Ended**.
+A machine does not run forever. When an agent stays idle for the selected idle time, the machine shuts down and the agent is stopped. The idle time is a whole number of hours.
 
-You set the idle time in whole hours in the **Machine** block of a preset, in the **Idle hours** field. An empty field takes the default.
-
-To continue the work of an ended agent, launch a copy of it. The copy starts on a new machine with a new conversation.
+To continue the work of a stopped agent, launch a copy of it. The copy starts on a new machine with a new conversation.
 
 ## Pricing
 
@@ -80,6 +67,6 @@ A cloud agent has two costs:
 - The machine. You pay for it by the hour while it runs, at the hourly price of its size. The console shows the price in the **Machine** step and the **Review** panel of the launch form, in the agent list, and on the agent page. The **Review** panel also shows what a month costs if the machine runs nonstop.
 - The model. Model use is billed by your AI provider, not by the machine price.
 
-You pay for the machine only while it runs. The idle stop limits what a forgotten agent can cost. Sizes and prices depend on the cluster of the preset.
+You pay for the machine only while it runs. The idle stop limits what a forgotten agent can cost. Sizes and prices depend on the selected cluster.
 
 The machine is billed to your Fluence account. See [Payment and balance management](../balance.md).

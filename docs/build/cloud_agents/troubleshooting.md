@@ -29,7 +29,6 @@ For the limits of plugin variables, see [Plugin order and limits](./extensions.m
 |---|---|
 | **Connecting Cloud agents…** | Wait. The console connects the section to your account by itself. |
 | **Could not connect Cloud agents** | Click **Retry**. |
-| **Your role cannot use Cloud agents** | Your role lacks the access that the message names. Ask the account owner for a role that grants it. |
 
 ## The launch is closed or refused
 
@@ -46,7 +45,7 @@ The form checks its fields when you click **Launch agent**:
 | Message | What to do |
 |---|---|
 | **Describe the task** | Fill in **Task** |
-| **Choose a model** | Choose or enter a model |
+| **Choose a model** | Choose a model in **Model** |
 | **Enter a repository URL** | Fill in **Repository URL**. A launch needs a repository. |
 | **Enter an https:// repository URL without credentials** | Use an address such as `https://github.com/owner/repository`. Do not put a user name or a token into the address. SSH addresses are not accepted. |
 | **Use a shorter name**, **Use a name without line breaks** | Shorten the agent name, or remove line breaks from it |
@@ -57,12 +56,10 @@ A launch can also be refused after you click **Launch agent**. The console shows
 | Reason | What to do |
 |---|---|
 | A secret that an MCP server or a plugin names is missing | Add the secret on the **Secrets** page, or change the extension. The preset page marks it **Missing secret**. |
-| The model is not available | Choose a model from the list. If you typed it, check the `provider/model` form and that the provider is connected. |
+| The model is not available | Choose a model from the list, and check that its provider is connected. |
 | The ChatGPT subscription is not active | On the **AI providers** page, click **Sign in again**, or select another subscription |
 | The limit of agents is reached | Stop an agent that you no longer need, then launch again |
 | The preset, its secrets, or its AI providers no longer exist | Reload the page and choose another preset, or fix the preset on its page |
-
-If the console shows **Launch not confirmed**, it could not learn whether the agent was launched. Check the agent list before you launch again.
 
 ## The agent failed
 

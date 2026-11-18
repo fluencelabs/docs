@@ -4,7 +4,7 @@ description: Launch cloud agents, read their conversation, send messages, steer 
 
 # Work with a cloud agent
 
-You launch and manage cloud agents in the Fluence Console under **Cloud agents** > **Agents**. For states, turns, and pricing, see [Cloud agents concepts](./overview.md).
+You launch and manage cloud agents in the Fluence Console under **Cloud agents** > **Agents**. For turns, idle stop, and pricing, see [Cloud agents concepts](./overview.md).
 
 ## Launch an agent
 
@@ -47,14 +47,7 @@ Click an agent to open its page. It has the conversation on the left and the **D
 
 The **Details** panel shows the **Status**, **Name**, **Model**, **Repository**, **Machine**, the number of **Extensions** the agent was launched with, and the **Price** of the machine per hour. If the agent failed, the panel says why.
 
-The conversation shows:
-
-- Your messages, each with its time, how it was sent, and its delivery label.
-- The replies of the agent, which appear while the agent writes them. To copy a reply, click the copy button under it.
-- **Used N tools** for the tools the agent called in a turn. Click it to see each tool and what it worked on. A failed call is marked, and the list opens by itself when a call failed.
-- A line when a turn did not end well: **This turn failed.**, **This turn was interrupted.**, or **It is not known how this turn ended.**
-
-While the agent works, the conversation shows **Agent is working…**. The page refreshes by itself every 5 seconds while the agent is starting, working, or stopping.
+The page refreshes by itself every 5 seconds while the agent is starting, working, or stopping.
 
 ## Send a message
 
@@ -85,8 +78,6 @@ Each message that you send shows a label:
 | **Cancelled** | It never ran. It was still waiting when the agent was stopped or ended. |
 
 If a running turn is cut short, a message that you steered into it and that did not run shows **Failed**. A queued message is kept and runs as the next turn.
-
-If the console cannot confirm that a message was sent, it says so. Wait for the conversation to refresh. The message appears there if it was sent.
 
 ## Interrupt a turn
 

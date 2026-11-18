@@ -44,7 +44,7 @@ To remove a subscription, click **Forget** and confirm with **Forget subscriptio
 ## Add an API key
 
 1. Open **Cloud agents** > **AI providers** and select **API key**.
-2. Click **Connect** next to **Fluence inference**, **OpenAI**, **Z.ai**, or **OpenRouter**.
+2. Click **Connect** next to the provider.
 3. Paste the key. The link under the field opens the page where the provider issues keys.
 4. Click **Save key**. The row shows **Ready**.
 
@@ -72,9 +72,7 @@ To change the address, the protocol, or the key, click **Change** on the provide
 
 ## How models are named
 
-A model has the form `provider/model`. The launch form lists the models of all connected providers, each with its provider. You normally pick a model from the list.
-
-When the console cannot load the list, or the connected providers list no models, the **Model** field becomes a text field. Enter the model as `provider/model`.
+A model has the form `provider/model`. The launch form lists the models of all connected providers, each with its provider. You pick a model from the list.
 
 ## Changes and running agents
 

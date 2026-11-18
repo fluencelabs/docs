@@ -6,7 +6,7 @@ description: Add the GitHub token that cloud agents clone repositories with, and
 
 The **Cloud agents** > **Secrets** page holds what every new agent gets: one GitHub token, and any number of named secrets for MCP servers and plugins.
 
-Fluence stores a secret value when you save it and never shows it again. The console shows only names, dates, and what uses each secret. To change a value, save a new one.
+Fluence stores every secret value encrypted, the GitHub token and the named secrets alike. After you save a value, the console never shows it again. It shows only names, dates, and what uses each secret. To change a value, save a new one. When you remove a secret, Fluence deletes its stored value.
 
 ## Add the GitHub token
 
@@ -27,6 +27,8 @@ You can use either kind of GitHub token:
 |---|---|
 | Fine-grained | **Contents**, **Pull requests**, **Actions**, and **Issues**, each with read and write access. **Contents** with read-only access is enough to only read. |
 | Classic | The `repo` scope. Add `workflow` to let the agent change GitHub Actions workflows. |
+
+By default, a fine-grained token reaches only the repositories of your own account, not the repositories of an organization. To work on an organization repository, select the organization as the **Resource owner** when you create the token. One token has one resource owner.
 
 If an organization blocks fine-grained tokens or holds them for approval, use a classic token.
 

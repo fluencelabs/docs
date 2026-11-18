@@ -16,9 +16,7 @@ Before you start, you need:
 
 In the sidebar of the Fluence Console, open **Cloud agents**. The first time, the console connects the section to your account by itself and shows **Connecting Cloud agents…**. There is nothing to click.
 
-The section has five tabs: **Agents**, **Presets**, **AI providers**, **Secrets**, and **Extensions**. Before your first agent, the **Agents** tab shows **Launch your first agent** with the setup steps.
-
-If the console shows **Your role cannot use Cloud agents**, your role in the account lacks the access the message names. Ask the account owner for a role that grants it.
+Before your first agent, the **Agents** tab shows **Launch your first agent** with the setup steps.
 
 ## Connect an AI provider
 
@@ -51,8 +49,6 @@ The token needs access to every repository you give an agent: read access to clo
 The console opens the agent page. The agent starts on the task right after launch.
 
 If **Launch agent** is disabled, the line under it says what is missing: **Connect an AI provider to launch.** or **Add a GitHub token to launch.**
-
-If the console cannot confirm the launch, it opens the agent list. Check the list before you launch again. Otherwise you can end up with two agents.
 
 ## Follow the work
 
