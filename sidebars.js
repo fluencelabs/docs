@@ -31,6 +31,20 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Cloud Agents",
+      items: [
+        "build/cloud_agents/overview",
+        "build/cloud_agents/get_started",
+        "build/cloud_agents/ai_providers",
+        "build/cloud_agents/secrets",
+        "build/cloud_agents/extensions",
+        "build/cloud_agents/presets",
+        "build/cloud_agents/manage_agents",
+        "build/cloud_agents/troubleshooting",
+      ],
+    },
+    {
+      type: "category",
       label: "API",
       items: [
         "build/api/overview",
