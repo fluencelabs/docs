@@ -27,6 +27,7 @@ The sidebar of the Fluence Console has these sections:
 |---|---|
 | **Public cloud** | CPU virtual machines on the **Compute** page, disks on **Storage**, and public IP addresses, VPCs, and security groups on **Network** |
 | **GPU cloud** | Renting GPU containers, VMs, and bare metal servers on the **Marketplace** page, and managing them on the **Instances** page |
+| **Cloud agents** | Coding agents that run on machines in your account: the **Agents** list, **Presets**, **AI providers**, **Secrets**, and **Extensions**. See [Cloud agents concepts](./cloud_agents/overview.md). |
 | **Billing** | Your balance, top-ups, promo codes, and usage. The balance in the page header also links here. |
 | **Settings** | Your profile, API keys, SSH keys, and the **MCP** page with configurations for AI clients |
 | **Support** | Opens an email to support@fluence.ai |
