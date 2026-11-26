@@ -22,7 +22,7 @@ The Fluence API lets you do from code what you do in the Fluence Console. You ca
 
 The GPU v3 endpoints have their own OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json).
 
-The x402 top-up and wallet sign-in endpoints use `/v2/x402/...` and `/v1/auth/siwe...`. They are not in the API reference. See [Pay with x402](./x402.md).
+The x402 and Tempo MPP top-up and wallet sign-in endpoints use `/v2/x402/...`, `/v1/auth/siwe...`, and `/v1/auth/mpp`. They are documented in the [API reference](https://api.fluence.dev/scalar) and walked through in [Pay with x402 or MPP](./x402.md).
 
 AI clients can also use the API through the Fluence MCP server. See [Connect an AI client through MCP](../../build_with_ai/mcp.md).
 
@@ -33,7 +33,7 @@ Send one of these headers with every request:
 - `X-API-KEY: <API key>`
 - `Authorization: Bearer <access token>`
 
-The examples in these docs use API keys. An access token comes from signing in, for example with a wallet as described in [Pay with x402](./x402.md).
+The examples in these docs use API keys. An access token comes from signing in, for example with a wallet as described in [Pay with x402 or MPP](./x402.md).
 
 ```sh
 curl https://api.fluence.dev/v3/clusters \
@@ -121,4 +121,4 @@ GPU v3 error bodies also have `code`, plus `error` and `details`. The legacy GPU
 - [CPU Cloud API](./cpu_cloud.md): create a virtual machine, connect to it, and delete it.
 - [SSH keys](./ssh_keys.md): add and remove the SSH keys that VMs use.
 - [GPU Cloud API](./gpu_cloud.md): rent GPU containers, virtual machines, and bare metal.
-- [Pay with x402](./x402.md): fund an account with USDC over HTTP and sign in with a wallet, for AI agents and scripts.
+- [Pay with x402 or MPP](./x402.md): fund an account over HTTP with USDC on Base (x402) or USDC.e on Tempo (MPP) and sign in with a wallet, for AI agents and scripts.
