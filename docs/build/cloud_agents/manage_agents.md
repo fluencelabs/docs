@@ -22,13 +22,15 @@ When you choose another preset, the form takes its default model and fills the t
 
 ### Repositories
 
-A launch needs a repository. The agent clones it with the GitHub token:
+In the Fluence Console, a launch requires a repository. The agent clones it with the GitHub token:
 
 - The token needs read access to clone, and write access to push and open pull requests.
 - The **Repository** step shows **Token checked**, **Token not checked**, or **No GitHub token**. A checked token is valid, but the console learns only at launch whether it reaches this repository.
 - An agent that cannot clone the repository fails. Its page shows **The repository could not be prepared on the agent's machine.** Check the address and the access of the token, then launch again.
 
 An agent works on one repository. To work on another one, launch another agent.
+
+Through the Cloud Agents API (`POST /v3/agents/agents`) and Fluence MCP (`agents_create`), a repository is optional. Omit `repo_url` when the preset has no default, or pass `without_repo: true` to override a preset's repository. The agent runs in an empty working directory with nothing cloned.
 
 ## Agent list
 
@@ -102,3 +104,13 @@ An idle agent also stops by itself after the idle time of its preset. See [Idle 
 To start a new agent with the settings of an existing one, open the menu of the agent and click **Launch a copy**. The launch form opens with the name, task, model, and repository of that agent, and with its preset if the preset still exists. Change what you need, and click **Launch agent**.
 
 The copy is a new agent on a new machine. It does not continue the conversation of the first one.
+
+## API and MCP capabilities
+
+The Cloud Agents API (`/v3/agents/...`, [OpenAPI document](https://api.fluence.dev/v3/agents/openapi.json)) and [Fluence MCP](../../build_with_ai/mcp_reference.md#cloud-agents) support additional options beyond the console form:
+
+- Repo-less launches: omit `repo_url` (when the preset has none) or pass `without_repo: true` on `POST /v3/agents/agents` or `agents_create`.
+- Turn time budget: set `budget_seconds` to a number of seconds within the bounds from `GET /v3/agents/agent-defaults` (`agents_defaults`), or pass `"unlimited"` to remove the per-turn time limit.
+- Labels: attach up to 16 key/value pairs in `labels` at launch and filter agents with `GET /v3/agents/agents?label=` or `agents_list`.
+- Launch preflight check: call `POST /v3/agents/agents/check` with a launch body to inspect `findings` that would block a launch without creating a machine.
+- Full transcript: call `GET /v3/agents/agents/{agent_id}/transcript` to download the plain-text transcript snapshot of an agent.

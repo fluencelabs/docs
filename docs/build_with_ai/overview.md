@@ -6,13 +6,13 @@ description: Connect AI clients to Fluence through MCP, let agents pay with a wa
 
 AI tools can work with Fluence in three ways:
 
-- An MCP client manages your CPU virtual machines with a Fluence API key.
+- An MCP client manages your CPU virtual machines, GPU instances, and cloud agents with a Fluence API key.
 - An autonomous agent funds its own account with USDC on Base or USDC.e on Tempo and calls the Fluence API.
 - An LLM reads these docs in machine-readable formats.
 
 ## Connect an MCP client
 
-The Fluence MCP server at `https://api.fluence.dev/mcp` gives Claude Code, Cursor, Codex, VS Code, and other MCP clients tools for CPU virtual machines. The tools create, launch, and terminate VMs and manage their disks, networks, and public IP addresses. The client signs in with an API key that you create in the Fluence Console. The scopes of the key decide which tools the client gets.
+The Fluence MCP server at `https://api.fluence.dev/mcp` gives Claude Code, Cursor, Codex, VS Code, and other MCP clients tools for CPU virtual machines, GPU Cloud instances, and Cloud Agents. The tools create, launch, and terminate CPU VMs and manage their disks, networks, and public IP addresses; find, quote, and rent GPU containers, VMs, and bare metal; and launch, message, and manage cloud agents. The client signs in with an API key that you create in the Fluence Console. The scopes of the key decide which operations the client can run.
 
 To set up a client, see [Connect an AI client through MCP](./mcp.md). For the tool list, permissions, limits, and errors, see the [MCP server reference](./mcp_reference.md).
 

@@ -39,7 +39,7 @@ If the console cannot confirm that the payment session was created, check the st
 ### 3. Complete the payment
 
 - For **Crypto**, choose the coin and the network on the NOWPayments page. Then send the exact amount shown to the address shown.
-- For **Card**, enter your card details on the Stripe checkout page and confirm the payment.
+- For **Card**, enter your card details on the Stripe checkout page and confirm the payment. To include company details and a Tax or VAT ID on the invoice, see [Business invoices and VAT or Tax ID](#business-invoices-and-vat-or-tax-id).
 
 ### 4. Wait for the payment to be credited
 
@@ -71,11 +71,19 @@ The **Top-up history** table on the **Billing** page lists your top-ups with the
 | `Canceled` | You canceled the top-up |
 | `Failed` | The payment did not go through |
 
-## GPU Cloud usage
+## Business invoices and VAT or Tax ID
+
+When you top up by card on the Stripe checkout page, select **I'm purchasing as a business**. Enter your legal company name, registered billing address, and Tax or VAT ID. After payment, Fluence automatically issues a paid PDF invoice with those details for the top-up.
+
+If you pay in crypto and need a business invoice, write to support@fluence.ai.
+
+## GPU Cloud and Public Cloud usage
 
 The **GPU Cloud usage** block on the **Billing** page lists your GPU resources for the selected calendar month in UTC. For each resource, it shows the name, type, hours, and cost.
 
 The page of a GPU instance shows what the instance cost since launch. For an instance that runs across the start of a month, the two numbers differ.
+
+For CPU virtual machines, disks, and public IP addresses, see [CPU Cloud billing](./cpu_cloud/overview.md#billing-model) alongside the Public Cloud usage on the **Billing** page.
 
 ## Promo codes
 

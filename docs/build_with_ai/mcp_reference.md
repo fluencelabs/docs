@@ -14,9 +14,9 @@ This page describes the Fluence MCP server at `https://api.fluence.dev/mcp`. To 
 | Transport | Streamable HTTP, stateless, JSON responses. Requests use `POST`. There are no sessions and no event stream. |
 | Protocol versions | `2025-11-25`, `2026-07-28` |
 | Capabilities | Tools only. The server has no prompts and no resources. |
-| Scope | CPU virtual machines, disks, VPCs, subnets, security groups, public IP addresses, SSH keys, catalog, and prices |
+| Scope | CPU virtual machines, disks, VPCs, subnets, security groups, public IP addresses, SSH keys, catalog, prices, GPU Cloud instances and offers, and Cloud Agents |
 
-Each tool calls one operation of the Fluence public API v3 with your API key. A tool result is the same JSON that the API returns.
+Each tool calls one operation of the Fluence public API v3, GPU Cloud API (`/v3/gpu`), or Cloud Agents API (`/v3/agents`) with your API key. A tool result is the same JSON that the API returns.
 
 ## Authentication
 
@@ -37,7 +37,7 @@ The server does not support OAuth. Clients that can only sign in with OAuth, and
 
 ## Tools and scopes
 
-`tools/list` returns only the tools that your key has every permission for. If a client calls a tool anyway, the tool returns the error code `forbidden`. A key needs all permissions listed for a tool. `vms:write` does not include `vms:read`.
+For local CPU and account tools, `tools/list` returns only the tools that your key has every permission for. GPU Cloud (`gpu_*`) and Cloud Agents (`agents_*`) tools are always returned by `tools/list`, and the server checks key scopes and service connection when you call them. If a client calls a tool without a required permission, CPU and account tools return `forbidden`, and GPU Cloud or Cloud Agents tools return `insufficient_scope`. A key needs all permissions listed for a tool. `vms:write` does not include `vms:read`, while `gpu:write` also allows `gpu:read` operations.
 
 | Permissions | Tools |
 |---|---|
@@ -63,21 +63,28 @@ The server does not support OAuth. Clients that can only sign in with OAuth, and
 | `public_ip:read` | `list_public_ips` |
 | `public_ip:write` | `create_public_ip`, `update_public_ip`, `delete_public_ip` |
 | `account:read` | `get_balances` |
+| `gpu:read` | `gpu_listGpuOffers`, `gpu_getGpuOffer`, `gpu_listGpuOfferGroups`, `gpu_getGpuOfferFacets`, `gpu_pickGpuOffers`, `gpu_listGpuDefaultImages`, `gpu_quoteGpuInstance`, `gpu_listGpuInstances`, `gpu_getGpuInstance`, `gpu_getGpuInstanceLogs`, `gpu_getGpuInstanceEvents` |
+| `gpu:write` | `gpu_createGpuInstance`, `gpu_updateGpuInstance`, `gpu_deleteGpuInstance` (also grants `gpu:read` tools) |
+| `agents:read` | `agents_defaults`, `agents_models`, `agents_vm_sizes`, `agents_list_environments`, `agents_get_environment`, `agents_list`, `agents_get`, `agents_context`, `agents_log`, `agents_messages`, `agents_message`, `agents_events`, `agents_list_presets`, `agents_get_preset` |
+| `agents:run` | `agents_create`, `agents_send`, `agents_interrupt`, `agents_stop` |
+| `agents:write` | `agents_create_preset`, `agents_replace_preset`, `agents_delete_preset` |
 
-How the console's permission presets map to these permissions:
+How the console's permission presets and services map to these permissions:
 
 - **Read only** gives the `*:read` scopes for VMs, disks, VPCs, subnets, security groups, and public IP addresses, plus `ssh_key:list`, `api_key:list`, `billing:get_history`, and `billing:get_spending_history`. It does not give `clusters:read`, `vm:list`, or `prices:read`, so a Read only key cannot use the catalog, price, or estimate tools.
 - **Custom scopes** with **Virtual machines** set to **Manage** gives `vms:read` and `vms:write`, and adds `clusters:read`, `vm:list`, and `prices:read`.
+- For GPU Cloud tools (`gpu_*`), a key with legacy `akash:write` or `spheron:write` scopes also works.
+- All Cloud Agents tools (`agents_*`) require **Cloud agents** to be connected to your account in the Fluence Console. Calling them before connecting returns `managed_service_not_connected` with a `connectUrl`.
 - The console does not offer `account:read`, so `get_balances` does not work with a key created in the console.
 
 A key can only receive permissions that your account has.
 
 ## Arguments
 
-- Resource IDs are UUIDs in camelCase arguments: `vmId`, `clusterId`, `storageId`, `publicIpId`, `vpcId`, `subnetId`, `securityGroupId`, `sshKeyId`, `interfaceId`.
+- Resource IDs are camelCase arguments: `vmId`, `clusterId`, `storageId`, `publicIpId`, `vpcId`, `subnetId`, `securityGroupId`, `sshKeyId`, `interfaceId`, `id` (for GPU offers, GPU instances, and Cloud Agents presets and environments), `agentId`, and `messageId`.
 - The request body of the API operation goes in the `spec` argument. The server rejects unknown top-level arguments.
-- Names of VMs, disks, VPCs, subnets, security groups, public IP addresses, and SSH keys are 1 to 25 characters: lowercase letters, digits, and hyphens. A name starts and ends with a letter or digit.
-- List tools accept `page` (default 1) and `perPage` (default 50, maximum 200).
+- Names of CPU VMs, disks, VPCs, subnets, security groups, public IP addresses, SSH keys, and GPU instances are 1 to 25 characters: lowercase letters, digits, and hyphens. A CPU resource name starts and ends with a letter or digit.
+- Paginated list tools accept `page` (default 1) and `perPage` (default 50, maximum 200), or `limit` and `offset` for Cloud Agents list tools.
 
 ## Results and errors
 
@@ -94,30 +101,36 @@ A failed call returns `isError: true` and an error object in `structuredContent`
 | `rate_limited` | The key exceeded the request budget. Wait for the time in `retryAfter`. |
 | `operation_timeout` | The server stopped waiting for the operation. A write may have finished. |
 | `operation_unavailable` | The server could not run the operation, for example during a restart |
+| `managed_service_not_connected` | Cloud Agents is not connected to your account. Open `connectUrl` in the error object to connect it in the Fluence Console, then retry. |
+| `managed_service_unavailable` | The upstream GPU Cloud or Cloud Agents service could not be reached. Retry later. |
 | `output_too_large` | The result was larger than the server returns. A write may have finished. |
 | `idempotency_conflict` | A previous call used the same `requestKey` with different arguments |
 | `request_in_progress` | A call with the same `requestKey` is still running. Wait for the time in `retryAfter`. |
 | `idempotent_resource_gone` | The resource created under this `requestKey` has been deleted since |
 | `vm_not_draft` | The operation needs a VM in the `draft` status |
 
+Upstream calls (`gpu_*` and `agents_*`) can also return upstream refusal codes alongside an `upstreamStatus` field, such as `insufficient_scope`, `no_offer_matches`, `insufficient_balance`, and `idempotency_key_reused`. Inspect `code` and `upstreamStatus` before retrying.
+
 ## Limits
 
 - Each server instance runs at most 2 tool calls at a time for one user and 8 in total. A call over the limit returns `busy` and does not start. Wait for a running call to finish, then retry with the same arguments.
 - MCP calls and API calls made with the same key share one request budget.
-- A write keeps running after a timeout or after the client disconnects. A read stops when the client disconnects.
+- Local CPU writes keep running after a timeout or after the client disconnects. Upstream writes (`gpu_*` and `agents_*`) are cancelled when the upstream write timeout expires, though the upstream operation may already have succeeded. After a timeout on an upstream write, replay with the same `requestKey` if the tool takes one, or read the resource state before retrying. Reads stop when the client disconnects.
 
 ## Retries
 
-Nine tools take a required `requestKey` argument: `create_vm`, `create_storage`, `create_vm_data_disk`, `create_vm_boot_disk`, `create_public_ip`, `create_vpc`, `create_subnet`, `create_security_group`, and `terminate_vm`. The key is 1 to 128 characters: letters, digits, `.`, `_`, `:`, and `-`. If the outcome of a call is unknown, call the tool again with the same `requestKey` and the same arguments. The server returns the result of the first call and does not create a second resource. The same key works across MCP and the API.
+Twelve tools take a required `requestKey` argument: `create_vm`, `create_storage`, `create_vm_data_disk`, `create_vm_boot_disk`, `create_public_ip`, `create_vpc`, `create_subnet`, `create_security_group`, `terminate_vm`, `gpu_createGpuInstance`, `agents_create`, and `agents_send`. The key is 1 to 128 characters: letters, digits, `.`, `_`, `:`, and `-`. If the outcome of a call is unknown, call the tool again with the same `requestKey` and the same arguments. The server returns the result of the first call and does not create a duplicate resource or message. The same key works across MCP and the API.
 
-Other writes have no `requestKey`, for example `provision_vm`, `create_ssh_key`, interface changes, and deletions. If the outcome of such a call is unknown, read the resource state before you retry.
+For `gpu_createGpuInstance`, a refused creation (such as `insufficient_balance` or `no_offer_matches`) stays refused for that `requestKey`. Fix the cause and retry with a new `requestKey`.
+
+Other writes have no `requestKey`, for example `provision_vm`, `create_ssh_key`, interface changes, `gpu_updateGpuInstance`, `agents_create_preset`, and deletions. If the outcome of such a call is unknown, read the resource state before you retry.
 
 ## Tool annotations
 
 Every tool sets `readOnlyHint`, `destructiveHint`, and `idempotentHint`, and `openWorldHint` is `false`.
 
-- `readOnlyHint` is `true` for list, get, and estimate tools.
-- `destructiveHint` is `true` for tools that start billing, terminate or delete resources, or change network access. Clients can use it to ask for confirmation. `create_vm` is not destructive. It creates a draft that is not billed. `provision_vm` is destructive. It starts the VM and billing.
+- `readOnlyHint` is `true` for list, get, and estimate tools, including `gpu_quoteGpuInstance`.
+- `destructiveHint` is `true` for tools that start billing, terminate or delete resources, or change network access. Clients can use it to ask for confirmation. `create_vm` is not destructive because it creates an unbilled draft, while `provision_vm`, `gpu_createGpuInstance`, `gpu_deleteGpuInstance`, `agents_create`, `agents_stop`, and `agents_delete_preset` are destructive.
 - `idempotentHint` is `true` only for the tools that take a `requestKey`.
 
 ## VM lifecycle
@@ -222,9 +235,51 @@ Rules that agents often get wrong:
 | `set_default_vm_interface` | Chooses a VM's default interface |
 | `detach_vm_security_group` | Removes the security group from an interface, which can open access |
 
+### GPU Cloud
+
+GPU Cloud tools need `gpu:read` for discovery, quotes, and reads, and `gpu:write` to create, update, or delete instances (`gpu:write` also allows `gpu:read` calls). Quote an instance with `gpu_quoteGpuInstance` before calling `gpu_createGpuInstance`, and keep the same `requirements` and workload between the two calls. For full field rules, see the [GPU Cloud API](../build/api/gpu_cloud.md).
+
+| Tool | What it does |
+|---|---|
+| `gpu_pickGpuOffers` | Returns the cheapest offers on sale with at least `minVramGib` per GPU and ready `requirements` |
+| `gpu_listGpuOffers` | Lists sellable GPU offers with placement, hardware, price, and availability |
+| `gpu_getGpuOffer` | Reads one GPU offer by `id` |
+| `gpu_listGpuOfferGroups` | Groups GPU offers by workload, GPU model, memory, GPU count, and rental mode with lowest prices |
+| `gpu_getGpuOfferFacets` | Lists valid filter values (including exact `gpuModels` vendor and model pairs) and offer counts |
+| `gpu_listGpuDefaultImages` | Lists predefined GPU container images with default ports, environment variables, and `sshUser` |
+| `gpu_quoteGpuInstance` | Previews which offer a `spec` would pick and its `perHour` and `minimumCharge` without reserving or charging |
+| `gpu_createGpuInstance` | Creates a GPU instance (`requestKey` and `spec` required). Bills once `status` reaches `running`. |
+| `gpu_listGpuInstances` | Lists your GPU instances with status, workload, rental type, and search filters |
+| `gpu_getGpuInstance` | Reads one GPU instance by `id` (supports `wait` and `since` long polling) |
+| `gpu_getGpuInstanceLogs` | Reads recent output lines of a GPU instance (`tail` optional) when `actions` includes `logs` |
+| `gpu_getGpuInstanceEvents` | Reads recent provider events of a GPU instance (`tail` optional) when `actions` includes `events` |
+| `gpu_updateGpuInstance` | Renames a GPU instance or updates supported container settings (ports stay fixed on containers) |
+| `gpu_deleteGpuInstance` | Stops and deletes a GPU instance and its local disk. Poll `gpu_getGpuInstance` until `isTerminal` is `true`. |
+
+### Cloud Agents
+
+Cloud Agents tools require **Cloud agents** to be connected to your account in the Fluence Console. Read tools need `agents:read`, agent lifecycle tools need `agents:run`, and preset write tools need `agents:write`. See [Cloud agents concepts](../build/cloud_agents/overview.md).
+
+| Tool | What it does |
+|---|---|
+| `agents_defaults` | Returns the published bounds and defaults for per-turn `budget_seconds` |
+| `agents_models` | Lists AI models available across your live machines |
+| `agents_vm_sizes` | Lists VM size classes available for a cluster |
+| `agents_list_environments`, `agents_get_environment` | List or read your agent environments (secret names only, never values) |
+| `agents_list_presets`, `agents_get_preset` | List or read your presets |
+| `agents_create_preset`, `agents_replace_preset`, `agents_delete_preset` | Create, replace, or delete a preset |
+| `agents_list`, `agents_get` | List your cloud agents (filter by `label` or `instanceId`) or read one agent by `agentId` |
+| `agents_create` | Launches a cloud agent from a preset (`requestKey` and `spec` required; supports repo-less launch via omitted `repo_url` or `without_repo: true`) |
+| `agents_send` | Sends a message to an agent (`agentId`, `requestKey`, and `spec` required; `delivery`: `steer` or `queue`) |
+| `agents_interrupt` | Interrupts an agent's running turn and keeps the agent alive in idle state |
+| `agents_stop` | Permanently stops an agent and releases its machine |
+| `agents_messages`, `agents_message` | List messages exchanged with an agent or read one message by `messageId` |
+| `agents_context` | Reads an agent's current context usage |
+| `agents_log` | Reads an agent's log entries |
+| `agents_events` | Lists an agent's lifecycle events (`after`, `kinds`, and `limit` optional) |
+
 ## What the server does not do
 
-- Manage GPU instances.
 - Top up the balance, add payment methods, apply promo codes, or show payment history. Use the console or the [API](../build/api/overview.md).
 - Manage API keys or the account profile.
 - Read back cloud-init user data. `get_vm` shows only whether a draft has it.

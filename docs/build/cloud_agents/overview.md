@@ -4,7 +4,7 @@ description: "Cloud agents concepts: managed coding agents on isolated machines 
 
 # Cloud agents concepts
 
-Cloud agents are managed coding agents. Each agent runs on its own isolated virtual machine in your Fluence account. You give it a task, a model, and a repository. Fluence creates the machine, sets up the agent on it, and releases the machine when you stop the agent or when it stays idle.
+Cloud agents are managed coding agents. Each agent runs on its own isolated virtual machine in your Fluence account. You give it a task, a model, and a repository (required in the Fluence Console, optional through the API and MCP). Fluence creates the machine, sets up the agent on it, and releases the machine when you stop the agent or when it stays idle.
 
 The agent clones the repository, works on the task, and answers in a conversation on its page. If its GitHub token has write access, it can push branches and open pull requests.
 
@@ -21,7 +21,7 @@ To launch your first agent in the Fluence Console, see [Launch your first cloud 
 
 Each launch creates one agent on one machine:
 
-1. You launch an agent with a task, a model, and a repository.
+1. You launch an agent with a task, a model, and a repository (or without a repository through the API and MCP).
 2. Fluence creates a machine of the selected size in your account and prepares it: the repository, the secrets, the AI providers, and the extensions.
 3. The agent starts on the task right after launch. Its replies and the tools it used appear in the conversation.
 4. You send more messages while the agent works or after it finishes a turn.
@@ -50,13 +50,13 @@ The agent works in turns. The task you launch with starts the first turn. Each l
 - To an idle agent, a message starts a new turn at once.
 - To a working agent, you choose. **Steer now** hands the message to the running turn at its next step. **Queue** runs the message as its own turn after the running one.
 
-A turn has a time limit. A turn launched from the console can run for up to 6 hours. A turn that produces no output for too long is also stopped. When a limit stops a turn, the agent stays and takes the next message.
+A turn has a time limit. A turn launched from the console can run for up to 6 hours. Through the API and MCP, `budget_seconds` sets a custom per-turn limit or `"unlimited"`. A turn that produces no output for too long is also stopped. When a limit stops a turn, the agent stays and takes the next message.
 
 See [Work with a cloud agent](./manage_agents.md).
 
 ## Idle stop
 
-A machine does not run forever. When an agent stays idle for the selected idle time, the machine shuts down and the agent is stopped. The idle time is a whole number of hours.
+A machine does not run forever. When an agent stays idle for the selected idle time, the machine shuts down and the agent is stopped. In the console, the idle time is a whole number of hours. Through the API and MCP, a preset can set `idle_timeout` in seconds or to `"disabled"` so idle agents stay running until you stop them.
 
 Anything the agent did not push to the repository is gone with the machine. Ask the agent to push its work before you leave it idle.
 

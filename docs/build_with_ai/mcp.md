@@ -1,5 +1,5 @@
 ---
-description: Connect Claude Code, Cursor, Codex, VS Code, and other MCP clients to Fluence with an API key, so an AI agent can manage your CPU virtual machines.
+description: Connect Claude Code, Cursor, Codex, VS Code, and other MCP clients to Fluence with an API key, so an AI agent can manage your CPU virtual machines, GPU instances, and cloud agents.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -7,11 +7,11 @@ import TabItem from '@theme/TabItem';
 
 # Connect an AI client through MCP
 
-The Fluence MCP server lets an AI client manage CPU virtual machines, disks, networks, and public IP addresses in your Fluence Cloud account. The client signs in with a Fluence API key, and the key's permissions decide which tools the client can use.
+The Fluence MCP server lets an AI client manage CPU virtual machines, disks, networks, public IP addresses, GPU Cloud instances, and cloud agents in your Fluence Cloud account. The client signs in with a Fluence API key, and the key's permissions decide which operations the client can run.
 
 The server is free to use. You pay from your Fluence balance only for the resources that the agent creates.
 
-The server does not manage GPU instances, top-ups, or payments. For the full list of tools and limits, see the [MCP server reference](./mcp_reference.md).
+The server does not manage balance top-ups, payments, API keys, or your account profile. To use Cloud Agents tools, open **Cloud agents** in the Fluence Console once to connect your account. For the full list of tools and limits, see the [MCP server reference](./mcp_reference.md).
 
 ## Before you start
 
@@ -31,6 +31,8 @@ Create a separate key for each client. You can then revoke one client without af
    - To let the agent view your resources without changing them, choose **Read only**. With this preset the agent cannot read the VM catalog or prices.
    - To let the agent create and launch VMs, choose **Custom scopes**. Set **Virtual machines** to **Manage**, and give **View** access to the SSH keys, subnets, and security groups that the VMs use. Choosing **Manage** for virtual machines also adds access to the catalog and prices.
    - To let the agent delete disks or public IP addresses, also set **Disks** or **Public IP addresses** to **Manage**.
+   - To let the agent find or rent GPU instances (`gpu_*`), include `gpu:read` or `gpu:write`. In the console, setting **View & manage** on **GPU containers** or **GPU VMs & bare metal** also grants access to GPU Cloud tools.
+   - To let the agent inspect, launch, or configure cloud agents (`agents_*`), include `agents:read`, `agents:run`, or `agents:write`, and connect **Cloud agents** in the console.
 3. Set an expiration date and create the key.
 4. Copy the key and store it in a password manager or an environment variable. The console shows the key only once.
 
@@ -289,7 +291,7 @@ List my Fluence virtual machines without making changes.
 
 The agent calls `list_vms`. An empty list means the connection works and the account has no VMs.
 
-Some tools start billing or change live infrastructure, for example `provision_vm`, `create_storage`, `create_public_ip`, and `terminate_vm`. The server marks them as destructive, so a client that supports confirmations asks you before it runs them. Keep confirmations on for these tools.
+Some tools start billing or change live infrastructure, for example `provision_vm`, `create_storage`, `create_public_ip`, `terminate_vm`, `gpu_createGpuInstance`, `gpu_deleteGpuInstance`, `agents_create`, and `agents_stop`. The server marks them as destructive, so a client that supports confirmations asks you before it runs them. Keep confirmations on for these tools.
 
 ## Revoke access
 
@@ -302,6 +304,7 @@ Delete the key in **Settings** > **API keys**. The server checks the key on ever
 | `401` with `A single X-API-KEY header and native client are required` | The request has no `X-API-KEY` header, has two of them, has an `Authorization` header, or the URL has a query string | Send one `X-API-KEY` header to `https://api.fluence.dev/mcp` |
 | `403` with an empty body | The request has an `Origin` header, which browsers always send | Use a client that runs on your computer |
 | `400` with `Invalid API key format` | The key is incomplete or has extra characters | Copy the key again, or create a new one |
-| A tool is missing from the client's tool list | The key lacks a scope that the tool needs | Create a key with the scope. See [Tools and scopes](./mcp_reference.md#tools-and-scopes) |
+| A CPU or account tool is missing from the client's tool list | The key lacks a scope that the tool needs | Create a key with the scope. See [Tools and scopes](./mcp_reference.md#tools-and-scopes). GPU (`gpu_*`) and Cloud Agents (`agents_*`) tools always appear in `tools/list` and check scopes when called. |
+| A tool returns `managed_service_not_connected` | Cloud Agents is not connected to your account yet | Open the `connectUrl` in the error (or **Cloud agents** in the Fluence Console) to connect your account, then retry |
 | A tool returns the error code `busy` | Your account already has 2 tool calls running | Wait for a running call to finish, then retry with the same arguments. A `busy` call did not start |
 | `get_balances` returns `forbidden` | The Fluence Console cannot add the `account:read` scope to a key | Check the balance on the **Billing** page |
