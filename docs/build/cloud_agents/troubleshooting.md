@@ -12,9 +12,10 @@ This page lists the limits of cloud agents and the messages that the Fluence Con
 |---|---|
 | Agent name | 128 bytes, on one line |
 | Task and each message | 20,000 characters |
-| Repository | One per agent, required, an `https://` address without credentials |
-| Time per turn | 6 hours for a turn launched from the console |
-| Idle time | Whole hours, 1 or more, set in the preset. An empty field takes the default. |
+| Repository | One per agent. Required in the console (`https://` address without credentials). Optional through the API and MCP. |
+| Time per turn | 6 hours for a turn launched from the console. Through the API and MCP, `budget_seconds` sets a custom limit or `"unlimited"`. |
+| Idle time | Whole hours, 1 or more, set in the preset in the console. An empty field takes the default. Through the API and MCP, `idle_timeout` accepts seconds or `"disabled"` to prevent automatic idle stop. |
+| Labels (API and MCP) | Up to 16 key/value pairs per agent, set once at launch |
 | Agents alive at once | Limited per account. A launch over the limit is refused. |
 | Preset name | 64 characters, unique among your presets |
 | Secret name | 64 lowercase letters, digits, and underscores |
@@ -46,7 +47,7 @@ The form checks its fields when you click **Launch agent**:
 |---|---|
 | **Describe the task** | Fill in **Task** |
 | **Choose a model** | Choose a model in **Model** |
-| **Enter a repository URL** | Fill in **Repository URL**. A launch needs a repository. |
+| **Enter a repository URL** | Fill in **Repository URL**. The console launch form requires a repository. |
 | **Enter an https:// repository URL without credentials** | Use an address such as `https://github.com/owner/repository`. Do not put a user name or a token into the address. SSH addresses are not accepted. |
 | **Use a shorter name**, **Use a name without line breaks** | Shorten the agent name, or remove line breaks from it |
 | **This form expired. Reload the page.** | Reload the page and launch again |
@@ -85,10 +86,14 @@ A turn can go wrong while the agent itself stays alive. The agent becomes **Idle
 | Reason | What it means | What to do |
 |---|---|---|
 | `interrupted` | You interrupted the turn | Send the next message |
-| `turn_budget_exceeded` | The turn ran out of its time limit | Send a message to continue. Split large work into smaller tasks. |
-| `turn_silence_exceeded` | The turn produced no output for too long and was stopped | Send a message to continue. If it repeats, try another model. |
-| `unknown` | The reason could not be told | Send the message again |
-| Another reason | An error of the model or the provider, for example a rejected key, a rate limit, or an exhausted quota | Check the key, the plan, and the limits at your AI provider. Then send the message again, or launch a new agent with another model. |
+| `budget_exceeded` | The turn ran out of its time limit (`budget_seconds`) | Send a message to continue, split large work into smaller tasks, or raise `budget_seconds` on a new agent |
+| `turn_stalled` | The turn produced no output for too long and was stopped | Send a message to continue. If it repeats, try another model. |
+| `model_auth` | The AI provider rejected the key or subscription | Check the API key or sign in to the subscription again on **AI providers** |
+| `model_rate_limited`, `model_quota_exhausted` | The AI provider rate-limited the request or the quota ran out | Wait and send the message again, or check your plan and limits at your AI provider |
+| `model_timeout`, `model_unavailable`, `model_unsupported`, `model_request_rejected` | The model call timed out, was unavailable, or was rejected by the provider | Retry, or launch a new agent with another model |
+| `context_overflow` | The conversation exceeded the model's context window | Start a new agent with a shorter prompt or a model with a larger context window |
+| `tool_failed`, `prompt_rejected`, `harness_restarted` | A tool call failed, the prompt was rejected, or the agent runtime restarted during the turn | Send the message again or adjust the prompt |
+| `unknown` | The reason could not be determined | Send the message again |
 
 ## An extension does not work
 
@@ -105,7 +110,7 @@ A turn can go wrong while the agent itself stays alive. The agent becomes **Idle
 
 ### Can I launch an agent without a repository?
 
-No. A launch needs a repository, and the agent clones it with the GitHub token.
+In the Fluence Console, the launch form requires a repository, and the agent clones it with the GitHub token. Through the Cloud Agents API (`POST /v3/agents/agents`) and Fluence MCP (`agents_create`), you can launch an agent without a repository by omitting `repo_url` (when the preset has no default) or passing `without_repo: true`. The agent starts in an empty working directory with nothing cloned.
 
 ### Can the agent open a pull request?
 
@@ -129,7 +134,7 @@ No. The name is set at launch. Ended and failed agents stay in the list and are 
 
 ### Why did my agent end by itself?
 
-It stayed idle for the idle time of its preset. To keep idle agents longer, raise **Idle hours** in the **Machine** block of the preset. A longer idle time means that you pay for the machine longer.
+It stayed idle for the idle time of its preset. To keep idle agents longer, raise **Idle hours** in the **Machine** block of the preset. Through the API and MCP, setting `idle_timeout: "disabled"` on a preset prevents automatic idle stop until you stop the agent. A longer idle time means that you pay for the machine longer.
 
 ### Do I pay while the agent is idle?
 

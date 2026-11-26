@@ -5,7 +5,7 @@ description: "Fluence API basics: base URL, API versions, authentication with AP
 
 # Fluence API
 
-The Fluence API lets you do from code what you do in the Fluence Console. You can find locations and prices, create and manage CPU virtual machines, disks, networks, and public IP addresses, rent GPU instances, and manage your account, keys, and top-ups.
+The Fluence API lets you do from code what you do in the Fluence Console. You can find locations and prices, create and manage CPU virtual machines, disks, networks, and public IP addresses, rent GPU instances, launch and message cloud agents, and manage your account, keys, and top-ups.
 
 - Base URL: `https://api.fluence.dev`
 - API reference: [api.fluence.dev/scalar](https://api.fluence.dev/scalar)
@@ -17,10 +17,11 @@ The Fluence API lets you do from code what you do in the Fluence Console. You ca
 |---|---|---|
 | Public v3 | `/v3/...` | New integrations: CPU virtual machines, disks, networks, public IP addresses, SSH keys, prices, account, API keys, top-ups, and promo codes |
 | GPU v3 | `/v3/gpu/...` | New integrations: GPU offers, GPU containers, GPU virtual machines, and bare metal. See [GPU Cloud API](./gpu_cloud.md). |
+| Cloud Agents v3 | `/v3/agents/...` | New integrations: launch and message cloud agents, presets, environments, and AI profiles. See [Cloud agents concepts](../cloud_agents/overview.md). |
 | Public v1 and v2 | `/v1/...`, `/v2/...` | Existing integrations. These paths still work. |
 | Legacy GPU (deprecated) | `/gpu/...` | Existing GPU integrations. These paths still work. Move them to GPU v3. See [Legacy GPU API](./gpu_cloud.md#legacy-gpu-api). |
 
-The GPU v3 endpoints have their own OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json).
+The GPU v3 and Cloud Agents v3 endpoints have their own OpenAPI documents: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json) and [api.fluence.dev/v3/agents/openapi.json](https://api.fluence.dev/v3/agents/openapi.json).
 
 The x402 and Tempo MPP top-up and wallet sign-in endpoints use `/v2/x402/...`, `/v1/auth/siwe...`, and `/v1/auth/mpp`. They are documented in the [API reference](https://api.fluence.dev/scalar) and walked through in [Pay with x402 or MPP](./x402.md).
 
@@ -64,6 +65,7 @@ Each key has a set of permissions, called scopes, and an expiration date. The AP
 | Account | `account:read` | `account:write` |
 | Top-ups and payments | `billing:get_history`, `billing:get_spending_history` | `billing:top_up` |
 | GPU instances and offers (`/v3/gpu`) | `gpu:read` | `gpu:write` |
+| Cloud agents (`/v3/agents`) | `agents:read` | `agents:run`, `agents:write` |
 | Legacy GPU containers (`/gpu`) | | `akash:write` |
 | Legacy GPU virtual machines and bare metal (`/gpu`) | | `spheron:write` |
 
@@ -107,7 +109,9 @@ The API returns `2xx` on success and a JSON error body on failure:
 | `403` | The credentials lack a needed scope |
 | `404` | The resource does not exist or belongs to another account |
 | `409` | The request conflicts with the resource state or with an earlier request that used the same `Idempotency-Key` |
+| `410` | The resource created under this `Idempotency-Key` has been deleted (`idempotent_resource_gone`) |
 | `413` | The request body is too large |
+| `415` | The request is missing `Content-Type: application/json` (`unsupported_media_type`) |
 | `422` | The request is well formed but cannot be done, for example a disk that is too small for the image |
 | `429` | Too many requests. Wait for the number of seconds in `Retry-After`. |
 | `503` | A dependency is unavailable. Retry later. Do not retry a change with a new `Idempotency-Key` only because of a `503`. |

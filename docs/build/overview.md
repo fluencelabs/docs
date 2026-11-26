@@ -4,7 +4,7 @@ description: "What you can rent on Fluence Cloud, how to reach it through the Fl
 
 # Fluence Cloud overview
 
-Fluence Cloud rents GPU and CPU compute from data centers around the world. You pay from a prepaid balance in USD. You can work with it in three ways:
+Fluence Cloud rents GPU compute, CPU compute, and managed Cloud Agents from data centers around the world. You pay from a prepaid balance in USD. You can work with it in three ways:
 
 - In the Fluence Console at [console.fluence.ai](https://console.fluence.ai). To create an account, see [Registration](./registration.md).
 - Through the [Fluence API](./api/overview.md), from scripts and your own tools.
@@ -16,6 +16,7 @@ Fluence Cloud rents GPU and CPU compute from data centers around the world. You 
 |---|---|---|---|
 | GPU Cloud | GPU containers, GPU virtual machines, and bare metal servers, on demand or as spot instances | Per minute or per hour, depending on the offer, with a minimum charge | [GPU Cloud concepts](./gpu_cloud/overview.md) |
 | CPU Cloud | Virtual machines with disks, public IP addresses, private networks, and security groups | By the second | [CPU Cloud concepts](./cpu_cloud/overview.md) |
+| Cloud Agents | Managed coding agents on isolated virtual machines with your AI providers, secrets, and extensions | Hourly machine price while running; model use billed by your AI provider | [Cloud agents concepts](./cloud_agents/overview.md) |
 
 To reserve GPU clusters for a longer term, Fluence runs [GPU Cluster Auctions](https://auctions.fluence.ai), where providers bid for your request. These docs do not cover auctions.
 
@@ -34,4 +35,4 @@ The sidebar of the Fluence Console has these sections:
 
 ## Pay for compute
 
-GPU Cloud and CPU Cloud are open to every account. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC on Base or USDC.e on Tempo through [x402 or MPP](./api/x402.md). See [Payment and balance management](./balance.md).
+GPU Cloud, CPU Cloud, and Cloud Agents are open to every account. Rent is charged from your prepaid balance in USD, so top it up first. You can top it up by card or in crypto in the console. An AI agent can also top up over HTTP with USDC on Base or USDC.e on Tempo through [x402 or MPP](./api/x402.md). See [Payment and balance management](./balance.md).

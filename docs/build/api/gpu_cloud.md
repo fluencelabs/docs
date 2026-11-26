@@ -46,7 +46,9 @@ When you create a key in the Fluence Console, give it **View & manage** access t
 | `GET` | `/v3/gpu/instances` | Lists your instances |
 | `GET` | `/v3/gpu/instances/{id}` | Returns an instance |
 | `GET` | `/v3/gpu/instances/by-idempotency-key` | Finds an instance by the `Idempotency-Key` it was created with |
-| `PATCH` | `/v3/gpu/instances/{id}` | Renames an instance or changes the container of a running one |
+| `PATCH` | `/v3/gpu/instances/{id}` | Renames an instance, changes a running container, or updates `priceRaiseConsent` or `deleteAt` |
+| `POST` | `/v3/gpu/instances/{id}/ports` | Replaces the open inbound ports of a running VM or bare metal instance |
+| `POST` | `/v3/gpu/instances/{id}/reboot` | Reboots a running instance (`hard`, `soft`, or `container`) |
 | `DELETE` | `/v3/gpu/instances/{id}` | Ends an instance |
 | `GET` | `/v3/gpu/instances/{id}/logs` | Returns the last lines of the instance output |
 | `GET` | `/v3/gpu/instances/{id}/events` | Returns recent provider events of the instance |
@@ -106,7 +108,7 @@ Besides the hardware and the price, an offer has these fields:
 - `topology`: GPU links, such as NVLink.
 - `provisioning`: how long the instance usually takes to be ready, in `typicalSeconds`, `upperSeconds`, or both. It can be `null`.
 - `availability`: `status` is `available`, `limited`, `sold_out`, or `unknown`. `lastOutOfStockAt` is the last time the provider refused this offer for lack of capacity. Such an offer stays on sale, and the next launch can succeed.
-- `capabilities`: what an instance of the offer supports. `logs`, `events`, and `update` say whether you can read logs and events and change the container. `portProtocols`, `portRequired`, `environment`, and `privateRegistry` limit the container settings. See [Create the instance](#create-the-instance).
+- `capabilities`: what an instance of the offer supports. `logs`, `events`, `update`, and `ports` say whether you can read logs and events, change the container, or replace inbound ports on a running VM or bare metal server. `reboot` is `hard`, `soft`, `container`, or `null`. `portProtocols`, `portRequired`, `environment`, and `privateRegistry` limit container settings. `machinePorts` (`requested`, `all`, or `not_configurable`), `startupScript` (with `startupScriptMaxBytes`), and `disk` (`minGib`, `maxGib`, `stepGib`) describe VM, bare metal, and disk options. See [Create the instance](#create-the-instance).
 - `osImages`: the OS images that a VM or bare metal offer accepts, for example `ubuntu-24.04-cuda12.8-docker`.
 - `preemption`: only for spot offers. `noticeSeconds` is the warning the provider gives before it takes the machine back, and `0` means no warning. `dataSurvives` says whether the disk survives. `signal` is `explicit` when the provider reports the take-back, and `inferred` when Fluence detects it from the machine stopping.
 - `groupKey`: the offer group of the offer, as in `GET /v3/gpu/offer-groups`.
@@ -159,17 +161,27 @@ Send `POST /v3/gpu/instances` with an `Idempotency-Key` header. The body has:
   - `rentalType`: `on_demand` or `spot`. On-demand is the default.
   - Optional limits, such as `minVcpu`, `minMemoryGib`, `minStorageGib`, `region`, `hostTier`, and `cpuArchitecture`.
 - Exactly one of `container`, `vm`, or `baremetal`, matching the workload.
+- Optional instance controls:
+  - `allowPlacementFallback`: boolean (default `false`, not allowed with `requirements.offerId`). Permits one compatible replacement offer if the first placement fails with a capacity refusal before allocation.
+  - `deleteAt`: RFC 3339 timestamp in the future when Fluence deletes the instance automatically (billed as a `DELETE`, minimum charge still applies; ends with `statusDetail: delete_at_reached`). Accepted only where the environment supports it.
+  - `priceRaiseConsent`: `{ "maxPricePerHour": "<USD amount>" }` keeps the instance running if the provider raises the price up to that ceiling. Accepted only where the environment supports it.
 
 For a container:
 
 - `image` is required: an image reference, as for `docker pull`. `GET /v3/gpu/default-images` lists predefined images with the ports and environment variables they expect.
-- `expose` lists the ports to open, each with `port` and `protocol`: `tcp`, `udp`, or `http`. The offer's `capabilities.portProtocols` lists the protocols it accepts. Where `capabilities.portRequired` is `true`, add at least one port. You cannot change the ports after creation.
+- `expose` lists the ports to open, each with `port` and `protocol`: `tcp`, `udp`, or `http`. The offer's `capabilities.portProtocols` lists the protocols it accepts. Where `capabilities.portRequired` is `true`, add at least one port. Container ports stay fixed after creation.
 - `environment` holds up to 64 variables, where the offer's `capabilities.environment` is `true`. Other offers refuse every variable except `SSH_PUBKEY`. A name starts with an uppercase letter and has uppercase letters, digits, and underscores. Set `secret: true` to hide a value. The API never returns secret values.
 - `startupCommand` replaces the entry point of the image.
 - `registryCredentials` with `host`, `username`, and `password` pulls an image from a private registry, where the offer's `capabilities.privateRegistry` is `true`.
 - `sshKey` passes a public SSH key to the container in the `SSH_PUBKEY` variable. The predefined images read it. If you also define `SSH_PUBKEY` in `environment`, the API refuses the request.
+- `diskGib` sets a custom disk size in GiB within the offer's `capabilities.disk` bounds (`minGib` to `maxGib` by `stepGib`), set at creation only.
 
-For a VM or a bare metal server, `osImage` and `sshKey` are required. `osImage` must be one of the offer's `osImages`.
+For a VM or a bare metal server:
+
+- `osImage` and `sshKey` are required. `osImage` must be one of the offer's `osImages`.
+- `ports` optionally lists up to 20 inbound ports besides `22/tcp` (which is always open). Offers with `capabilities.machinePorts: "all"` keep every port open; offers with `"not_configurable"` are not chosen when `ports` is sent.
+- `startupScript` optionally provides a shell script starting with `#!` that runs once as root on first boot (write-only, requires `capabilities.startupScript: true`, size up to `startupScriptMaxBytes`).
+- `diskGib` optionally sets a custom disk size in GiB where `capabilities.disk` supports it, set at creation only.
 
 ```json
 {
@@ -228,7 +240,9 @@ An instance has the fields of its request, and these fields:
 - `placement`: the offer that the instance runs on, with its region, hardware, and capabilities.
 - `price`: the price fixed when the instance was created.
 - `charged`: the amount charged so far in `total`, as of `asOf`.
-- `actions`: what you can do with the instance now: `rename`, `delete`, `update`, `logs`, and `events`.
+- `actions`: what you can do with the instance now: `rename`, `delete`, `update`, `reboot`, `logs`, `events`, `ports`, `price_raise_consent`, and `delete_at`.
+- `lastAction`: the latest async action (such as `reboot` or a port update) with its `status` (`pending`, `completed`, or `failed`) and `errorKind` when failed.
+- `deleteAt` and `priceRaiseConsent`: scheduled automatic deletion time and price-raise consent ceiling, when supported and set.
 - `createdVia`: `v3`, or `legacy` for instances created through the [legacy GPU API](#legacy-gpu-api).
 - `createdAt`, `activatedAt`, and `endedAt`: when the instance was created, started running, and ended.
 
@@ -250,11 +264,31 @@ To sort, set `sort` to `createdAt`, `name`, `status`, `pricePerHour`, or `activa
 `PATCH /v3/gpu/instances/{id}` changes:
 
 - `name`, at any time until the instance starts terminating.
+- `priceRaiseConsent`, when `actions` includes `price_raise_consent` (pass `null` to remove consent).
+- `deleteAt`, when `actions` includes `delete_at` (pass a future RFC 3339 timestamp to schedule automatic deletion, or `null` to remove it).
 - For a running container, if the offer supports updates: `container.image`, `container.environment`, `container.startupCommand`, and `container.registryCredentials`. Omitted fields stay as they are. `container.environment` replaces the whole list of variables. To keep a secret value, list its name with `secret: true` and no value.
 
 A container change answers `200` with `status: updating`. The instance returns to `running` when the provider applies the change. The same change sent again while it is applied returns the instance. A different change returns `update_in_progress`.
 
-Nothing else changes after creation: not the offer, price, workload, or ports, and not the OS image or SSH key of a VM or bare metal server. To change them, create a new instance and delete the old one.
+Container ports (`expose`) stay fixed after creation. On a running VM or bare metal server where `actions` includes `ports` and `capabilities.ports` is `true`, you can replace inbound ports with `POST /v3/gpu/instances/{id}/ports`. Requirements, price, workload kind, disk size, and a VM or bare metal server's OS image, SSH key, and `startupScript` do not change after creation. To change them, create a new instance and delete the old one.
+
+### Replace inbound ports on a VM or bare metal server
+
+`POST /v3/gpu/instances/{id}/ports` replaces the open inbound ports of a running VM or bare metal instance when `actions` includes `ports` and the offer's `capabilities.ports` is `true`.
+
+Send `{ "ports": [...] }` with at most 20 unique port and protocol entries. The list replaces every port opened earlier besides `22/tcp`, which stays open and cannot be closed.
+
+The endpoint returns `202` while the change runs. Repeating the same list while it runs returns the instance without starting a second change. Poll `GET /v3/gpu/instances/{id}` and read `lastAction` for the outcome. Billing and readiness do not change, and a failed change does not stop the instance. If the provider's rules cannot be confirmed, `lastAction.errorKind` is `ports_unconfirmed` after a refusal or `action_timeout` on timeout.
+
+### Reboot an instance
+
+`POST /v3/gpu/instances/{id}/reboot` reboots a running instance when `actions` includes `reboot`. The offer's `capabilities.reboot` shows the reboot kind:
+
+- `hard`: resets power.
+- `soft`: requests an OS shutdown (may force reset after a timeout).
+- `container`: recreates the container, loses files outside persistent directories, and assigns new external port numbers. Read `GET /v3/gpu/instances/{id}` again before reconnecting.
+
+Billing continues unchanged during a reboot. The endpoint returns `202` while the action runs; repeating the call while the reboot is open returns the instance without triggering a second reboot. Poll `GET /v3/gpu/instances/{id}` and check `lastAction` for the outcome. A failed action does not end the instance or its billing. Do not automatically retry a failed reboot, because an unavailable status check can fail the action even when the provider completed the reboot.
 
 ### Read logs and events
 

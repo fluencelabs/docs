@@ -56,7 +56,7 @@ In **Machine**, set where and on what the agent runs:
 
 - **Cluster**: where the machine is created. Sizes and prices depend on it. **Provider default** leaves the choice to Fluence.
 - **VM size**: the size of the machine. Each size shows its vCPU, RAM, disk, and hourly price. **Default** takes the default size of the cluster. The console shows the price that you pay while the machine runs.
-- **Idle hours**: whole hours without work before the machine shuts down and an idle agent on it is stopped. Enter 1 or more. An empty field takes the default.
+- **Idle hours**: whole hours without work before the machine shuts down and an idle agent on it is stopped. Enter 1 or more. An empty field takes the default. Through the Cloud Agents API and Fluence MCP, `config.idle_timeout` accepts a number of seconds or `"disabled"` to keep the machine running until you stop the agent.
 
 When you change the cluster, the console keeps the size if the new cluster also sells it. Otherwise it falls back to the default size of that cluster.
 
@@ -73,6 +73,8 @@ If a selected extension names a secret that the preset does not have, the consol
 In **Launch defaults**, optionally enter a **Repository URL** and a **Task**. The launch form opens with them filled in, and you can still change them for each launch.
 
 The repository URL is an `https://` address with a path and no credentials in it, for example `https://github.com/owner/repo`.
+
+Through the Cloud Agents API (`POST /v3/agents/presets` and `PATCH /v3/agents/presets/{id}`), a preset can also define a `preamble` that prepends fixed instructions before the first prompt of every launch from that preset. A preamble does not replace a prompt: either the preset or the launch request must still provide a prompt.
 
 ### Rename or delete a preset
 
