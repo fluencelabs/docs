@@ -22,7 +22,7 @@ The Fluence API lets you do from code what you do in the Fluence Console. You ca
 
 The GPU v3 endpoints have their own OpenAPI document: [api.fluence.dev/v3/gpu/openapi.json](https://api.fluence.dev/v3/gpu/openapi.json).
 
-The x402 and Tempo MPP top-up and wallet sign-in endpoints use `/v2/x402/...`, `/v1/auth/siwe...`, and `/v1/auth/mpp`. They are not in the API reference. See [Pay with x402 or MPP](./x402.md).
+The x402 and Tempo MPP top-up and wallet sign-in endpoints use `/v2/x402/...`, `/v1/auth/siwe...`, and `/v1/auth/mpp`. They are documented in the [API reference](https://api.fluence.dev/scalar) and walked through in [Pay with x402 or MPP](./x402.md).
 
 AI clients can also use the API through the Fluence MCP server. See [Connect an AI client through MCP](../../build_with_ai/mcp.md).
 
