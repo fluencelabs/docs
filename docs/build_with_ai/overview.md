@@ -1,5 +1,5 @@
 ---
-description: Connect AI clients to Fluence through MCP, let agents pay with a wallet over x402, and give the Fluence docs to LLMs as llms.txt and markdown.
+description: Connect AI clients to Fluence through MCP, let agents pay with a wallet over x402 or Tempo MPP, and give the Fluence docs to LLMs as llms.txt and markdown.
 ---
 
 # Build with AI
@@ -7,7 +7,7 @@ description: Connect AI clients to Fluence through MCP, let agents pay with a wa
 AI tools can work with Fluence in three ways:
 
 - An MCP client manages your CPU virtual machines with a Fluence API key.
-- An autonomous agent funds its own account with USDC and calls the Fluence API.
+- An autonomous agent funds its own account with USDC on Base or USDC.e on Tempo and calls the Fluence API.
 - An LLM reads these docs in machine-readable formats.
 
 ## Connect an MCP client
@@ -18,7 +18,7 @@ To set up a client, see [Connect an AI client through MCP](./mcp.md). For the to
 
 ## Let an agent pay with its own wallet
 
-An agent with an EVM wallet can top up a Fluence balance with USDC on Base over the x402 protocol, sign in with the same wallet, and rent compute through the API without a human. See [Pay with x402 (for agents)](../build/api/x402.md).
+An agent with an EVM or Tempo wallet can top up a Fluence balance over HTTP with USDC on Base (x402) or USDC.e on Tempo (MPP). It signs in with the same wallet and rents compute through the API without a human. See [Pay with x402 or MPP (for agents)](../build/api/x402.md).
 
 ## Give the docs to an LLM
 
@@ -29,7 +29,7 @@ The [`/llms.txt`](https://fluence.dev/llms.txt) file is the entry point for LLM 
 | File | Contents |
 |------|-------------|
 | [`/llms.txt`](https://fluence.dev/llms.txt) | Root index with links to all section indexes |
-| [`/docs/build/llms.txt`](https://fluence.dev/docs/build/llms.txt) | Build: renting and managing compute, the API, x402 |
+| [`/docs/build/llms.txt`](https://fluence.dev/docs/build/llms.txt) | Build: renting and managing compute, the API, x402 and Tempo MPP |
 | [`/docs/build_with_ai/llms.txt`](https://fluence.dev/docs/build_with_ai/llms.txt) | Build with AI: the MCP server and this page |
 | [`/docs/stake/llms.txt`](https://fluence.dev/docs/stake/llms.txt) | Stake: staking FLT and claiming tokens from the Fluence chain |
 | [`/docs/connect_servers/llms.txt`](https://fluence.dev/docs/connect_servers/llms.txt) | Connect Servers: provider onboarding |

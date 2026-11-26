@@ -18,5 +18,5 @@ After the first sign-in, the console asks for your name, last name, job role, an
 After you register, you can rent GPU and CPU compute. Rent is charged from a balance in USD, so top it up first. See [Payment and balance management](./balance.md).
 
 :::tip
-An AI agent or a script doesn't need to register. [Paying with x402](./api/x402.md) creates an account for the paying wallet.
+An AI agent or a script does not need to register. [Paying with x402 or MPP](./api/x402.md) creates an account for the paying wallet.
 :::
